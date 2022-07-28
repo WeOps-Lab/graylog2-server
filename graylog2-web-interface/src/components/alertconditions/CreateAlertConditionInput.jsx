@@ -85,7 +85,7 @@ const CreateAlertConditionInput = createReactClass({
     const { selectedStream } = this.state;
 
     if (!selectedStream) {
-      UserNotification.error('Please select the stream that the condition should check.', 'Could not save condition');
+      UserNotification.error('请选择需要告警的消息流.', '无法保存告警条件');
     }
 
     AlertConditionsActions.save(selectedStream.id, data).then(() => {
@@ -139,14 +139,14 @@ const CreateAlertConditionInput = createReactClass({
 
     return (
       <div>
-        <h2>Condition</h2>
-        <p className="description">Define the condition to evaluate when triggering a new alert.</p>
+        <h2>告警条件</h2>
+        <p className="description">定义触发告警时要具备的条件.</p>
 
         <Row>
           <Col md={6}>
             <form>
-              <Input id="stream-selector" label="Alert on stream" help="Select the stream that the condition will use to trigger alerts.">
-                <Select placeholder="Select a stream"
+              <Input id="stream-selector" label="消息流告警条件" help="选择一个消息流用于告警检查.">
+                <Select placeholder="选择一个消息流"
                         options={formattedStreams}
                         onChange={this._onStreamChange}
                         value={selectedStream ? selectedStream.id : undefined} />
@@ -157,15 +157,15 @@ const CreateAlertConditionInput = createReactClass({
                      value={type}
                      onChange={this._onChange}
                      disabled={!selectedStream}
-                     label="Condition type"
-                     help="Select the condition type that will be used.">
-                <option value={this.PLACEHOLDER} disabled>Select a condition type</option>
+                     label="告警条件类型"
+                     help="选择告警条件类型.">
+                <option value={this.PLACEHOLDER} disabled>选择告警条件类型</option>
                 {availableTypes}
               </Input>
               {conditionForm}
               {' '}
               <Button onClick={this._openForm} disabled={type === this.PLACEHOLDER} bsStyle="success">
-                Add alert condition
+                新增告警条件
               </Button>
             </form>
           </Col>

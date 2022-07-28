@@ -46,22 +46,22 @@ class AlertConditionSummary extends React.Component {
     const SummaryComponent = conditionPlugin.summaryComponent || GenericAlertConditionSummary;
 
     const description = (stream
-      ? <span>Alerting on stream <em>{stream.title}</em></span> : 'Not alerting on any stream');
+      ? <span>在消息流 <em>{stream.title}</em>触发告警</span> : '没有在任何消息流触发告警');
 
     const content = (
       <Col md={12}>
-        <strong>Configuration:</strong> <SummaryComponent alertCondition={condition} />
+        <strong>配置:</strong> <SummaryComponent alertCondition={condition} />
       </Col>
     );
 
     let title;
 
     if (this.props.isDetailsView) {
-      title = (condition.title ? condition.title : 'Untitled');
+      title = (condition.title ? condition.title : '无标题');
     } else {
       title = (
         <Link to={Routes.show_alert_condition(stream.id, condition.id)}>
-          {condition.title ? condition.title : 'Untitled'}
+          {condition.title ? condition.title : '无标题'}
         </Link>
       );
     }

@@ -64,8 +64,8 @@ class AlertConditionTestModal extends React.Component {
             testResults: {
               error: true,
               error_messages: [{
-                type: 'Unexpected error',
-                message: 'Could not test Condition, please try again or check your server logs for more information.',
+                type: '未知异常',
+                message: '无法测试告警条件,请重新尝试或者查看服务器上的日志以获得更多的信息.',
               }],
             },
           });
@@ -77,7 +77,7 @@ class AlertConditionTestModal extends React.Component {
   renderErroneousCondition = (testResults) => {
     return (
       <span>
-        <p><b>There was an error testing the Condition.</b></p>
+        <p><b>测试告警条件异常.</b></p>
         <p>
           <ul className={style.errorMessages}>
             {testResults.error_messages.map(({ message, type }) => (
@@ -93,8 +93,8 @@ class AlertConditionTestModal extends React.Component {
     return (
       <span>
         <Icon name="bell" className={style.testResultIcon} />
-        <p className={style.testResultText}>Condition was satisfied and an Alert would be triggered.<br />
-          <b>Details</b>: {testResults.description}
+        <p className={style.testResultText}>告警条件满足,告警将会触发.<br />
+          <b>详细信息</b>: {testResults.description}
         </p>
       </span>
     );
@@ -105,7 +105,7 @@ class AlertConditionTestModal extends React.Component {
       <div>
         <Icon name="bell-slash" className={style.testResultIcon} />
         <p className={style.testResultText}>
-          Condition was <b>not</b> satisfied and an Alert would <b>not</b> be triggered.
+          告警条件 <b>不</b> 满足,告警 <b>不</b> 会被触发.
         </p>
       </div>
     );
@@ -126,7 +126,7 @@ class AlertConditionTestModal extends React.Component {
     return (
       <BootstrapModalWrapper ref={(c) => { this.modal = c; }} bsSize="large">
         <Modal.Header closeButton>
-          <Modal.Title>Alert Condition <em>{condition.title}</em> test results</Modal.Title>
+          <Modal.Title>告警条件 <em>{condition.title}</em> 测试结果</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {testResults ? (
@@ -134,13 +134,13 @@ class AlertConditionTestModal extends React.Component {
               {this.renderTestResults(testResults)}
             </Alert>
           ) : (
-            <Spinner text="Testing alert condition, please wait..." />
+            <Spinner text="正在测试告警条件，请等待......" />
           )}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.close}>Close</Button>
           <Button bsStyle="primary" onClick={this.testCondition} disabled={isTesting}>
-            {isTesting ? 'Testing...' : 'Test again'}
+            {isTesting ? '测试中...' : '测试'}
           </Button>
         </Modal.Footer>
       </BootstrapModalWrapper>

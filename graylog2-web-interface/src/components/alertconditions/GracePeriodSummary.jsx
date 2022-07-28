@@ -24,10 +24,10 @@ class GracePeriodSummary extends React.Component {
 
   _formatTime = (time) => {
     if (time === 1) {
-      return '1 minute';
+      return '1 分钟';
     }
 
-    return `${time} minutes`;
+    return `${time} 分钟`;
   };
 
   render() {

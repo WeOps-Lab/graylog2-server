@@ -28,7 +28,7 @@ import { AlertConditionsActions } from 'stores/alertconditions/AlertConditionsSt
 import { CurrentUserStore } from 'stores/users/CurrentUserStore';
 
 const AlertCondition = createReactClass({
-  displayName: 'AlertCondition',
+  displayName: '告警条件',
 
   propTypes: {
     alertCondition: PropTypes.object.isRequired,
@@ -65,7 +65,7 @@ const AlertCondition = createReactClass({
     const { stream, alertCondition, onDelete } = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm('Really delete alert condition?')) {
+    if (window.confirm('确定删除告警条件?')) {
       AlertConditionsActions.delete(stream.id, alertCondition.id)
         .then(() => onDelete(stream.id, alertCondition.id));
     }
@@ -89,17 +89,17 @@ const AlertCondition = createReactClass({
       actions = [
         <Button key="test-button" bsStyle="info" onClick={this._openTestModal}>Test</Button>,
         <DropdownButton key="more-actions-button"
-                        title="More actions"
+                        title="更多操作"
                         pullRight
                         id={`more-actions-dropdown-${alertCondition.id}`}>
           {!isStreamView && (
             <LinkContainer to={Routes.stream_alerts(stream.id)}>
-              <MenuItem>Alerting overview for Stream</MenuItem>
+              <MenuItem>消息流告警概览</MenuItem>
             </LinkContainer>
           )}
-          <MenuItem onSelect={this._onEdit}>Edit</MenuItem>
+          <MenuItem onSelect={this._onEdit}>编辑</MenuItem>
           <MenuItem divider />
-          <MenuItem onSelect={this._onDelete}>Delete</MenuItem>
+          <MenuItem onSelect={this._onDelete}>删除</MenuItem>
         </DropdownButton>,
       ];
     }

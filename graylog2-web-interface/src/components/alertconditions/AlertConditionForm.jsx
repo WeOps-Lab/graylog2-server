@@ -68,8 +68,8 @@ const AlertConditionForm = createReactClass({
   },
 
   _formatTitle(alertCondition, name) {
-    const action = alertCondition ? 'Update' : 'Create new';
-    const conditionName = alertCondition ? <em>{alertCondition.title || 'Untitled'}</em> : name;
+    const action = alertCondition ?  '更新' : '创建';
+    const conditionName = alertCondition ? <em>{alertCondition.title || '无标题'}</em> : name;
 
     return <span>{action} {conditionName}</span>;
   },
@@ -87,10 +87,10 @@ const AlertConditionForm = createReactClass({
                          submitAction={this._onSubmit}
                          cancelAction={this._onCancel}
                          titleValue={alertCondition ? alertCondition.title : ''}
-                         helpBlock="The alert condition title"
+                         helpBlock="告警条件标题"
                          values={alertCondition ? alertCondition.parameters : {}}>
         <FormGroup>
-          <ControlLabel>{`${conditionType.name} description`}</ControlLabel>
+          <ControlLabel>{`${conditionType.name} 描述`}</ControlLabel>
           <FormControl.Static>{conditionType.human_name}</FormControl.Static>
         </FormGroup>
       </ConfigurationForm>

@@ -43,8 +43,8 @@ const StreamAlertConditions = createReactClass({
 
   render() {
     const alertConditions = this.props.alertConditions.sort((a1, a2) => {
-      const t1 = a1.title || 'Untitled';
-      const t2 = a2.title || 'Untitled';
+      const t1 = a1.title || '无标题';
+      const t2 = a2.title || '无标题';
 
       return naturalSort(t1.toLowerCase(), t2.toLowerCase());
     });
@@ -53,11 +53,11 @@ const StreamAlertConditions = createReactClass({
       <div>
         <div className="pull-right">
           <LinkContainer to={Routes.new_alert_condition_for_stream(this.props.stream.id)}>
-            <Button bsStyle="success">Add new condition</Button>
+            <Button bsStyle="success">新增告警条件</Button>
           </LinkContainer>
         </div>
-        <h2>Conditions</h2>
-        <p className="description">Alert Conditions define when an Alert should be triggered for this Stream.</p>
+        <h2>告警条件</h2>
+        <p className="description">告警条件定义了告警在消息流中如何触发.</p>
         <AlertConditionsList alertConditions={alertConditions}
                              availableConditions={this.props.availableConditions}
                              streams={[this.props.stream]}

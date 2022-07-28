@@ -33,14 +33,14 @@ class UnknownAlertCondition extends React.Component {
 
     const actions = [
       <DropdownButton key="actions-button" title="Actions" pullRight id={`more-actions-dropdown-${condition.id}`}>
-        <MenuItem onSelect={this.props.onDelete}>Delete</MenuItem>
+        <MenuItem onSelect={this.props.onDelete}>删除</MenuItem>
       </DropdownButton>,
     ];
 
     const content = (
       <Col md={12}>
         <Alert bsStyle="warning">
-          Could not resolve condition type. This is most likely caused by a missing plugin in your Graylog setup.
+          无法解析告警条件,这非常有可能是因为缺少了相关的插件.
         </Alert>
       </Col>
     );
@@ -49,7 +49,7 @@ class UnknownAlertCondition extends React.Component {
       <EntityListItem key={`entry-list-${condition.id}`}
                       title="Unknown condition"
                       titleSuffix={`(${condition.type})`}
-                      description={stream ? <span>Watching stream <em>{stream.title}</em></span> : 'Not watching any stream'}
+                      description={stream ? <span>监控消息流 <em>{stream.title}</em></span> : '没有对任何消息流进行告警配置'}
                       actions={actions}
                       contentRow={content} />
     );

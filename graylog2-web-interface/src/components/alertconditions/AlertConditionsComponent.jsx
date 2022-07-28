@@ -19,13 +19,13 @@ import createReactClass from 'create-react-class';
 import Reflux from 'reflux';
 import naturalSort from 'javascript-natural-sort';
 
-import { LinkContainer } from 'components/common/router';
-import { Button } from 'components/bootstrap';
-import { Spinner } from 'components/common';
-import { AlertConditionsList } from 'components/alertconditions';
+import {LinkContainer} from 'components/common/router';
+import {Button} from 'components/bootstrap';
+import {Spinner} from 'components/common';
+import {AlertConditionsList} from 'components/alertconditions';
 import Routes from 'routing/Routes';
-import { AlertConditionsStore, AlertConditionsActions } from 'stores/alertconditions/AlertConditionsStore';
-import { StreamsStore } from 'stores/streams/StreamsStore';
+import {AlertConditionsStore, AlertConditionsActions} from 'stores/alertconditions/AlertConditionsStore';
+import {StreamsStore} from 'stores/streams/StreamsStore';
 
 const AlertConditionsComponent = createReactClass({
   displayName: 'AlertConditionsComponent',
@@ -43,7 +43,7 @@ const AlertConditionsComponent = createReactClass({
 
   _loadData() {
     StreamsStore.listStreams().then((streams) => {
-      this.setState({ streams: streams });
+      this.setState({streams: streams});
     });
 
     AlertConditionsActions.listAll();
@@ -51,21 +51,21 @@ const AlertConditionsComponent = createReactClass({
   },
 
   _isLoading() {
-    const { streams, allAlertConditions, availableConditions } = this.state;
+    const {streams, allAlertConditions, availableConditions} = this.state;
 
     return !streams || !allAlertConditions || !availableConditions;
   },
 
   render() {
     if (this._isLoading()) {
-      return <Spinner />;
+      return <Spinner/>;
     }
 
-    const { streams, allAlertConditions, availableConditions } = this.state;
+    const {streams, allAlertConditions, availableConditions} = this.state;
 
     const alertConditions = allAlertConditions.sort((a1, a2) => {
-      const t1 = a1.title || 'Untitled';
-      const t2 = a2.title || 'Untitled';
+      const t1 = a1.title || '无标题';
+      const t2 = a2.title || '无标题';
 
       return naturalSort(t1.toLowerCase(), t2.toLowerCase());
     });
@@ -74,16 +74,16 @@ const AlertConditionsComponent = createReactClass({
       <div>
         <div className="pull-right">
           <LinkContainer to={Routes.LEGACY_ALERTS.NEW_CONDITION}>
-            <Button bsStyle="success">Add new condition</Button>
+            <Button bsStyle="success">创建告警条件</Button>
           </LinkContainer>
         </div>
-        <h2>Conditions</h2>
-        <p>These are all configured alert conditions.</p>
+        <h2>告警条件</h2>
+        <p>这是所有告警条件的配置.</p>
         <AlertConditionsList alertConditions={alertConditions}
                              availableConditions={availableConditions}
                              streams={streams}
                              onConditionUpdate={this._loadData}
-                             onConditionDelete={this._loadData} />
+                             onConditionDelete={this._loadData}/>
       </div>
     );
   },

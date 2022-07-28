@@ -49,8 +49,8 @@ const EditAlertConditionForm = createReactClass({
 
     return (
       <div>
-        <h2>Condition details</h2>
-        <p>Define the condition to evaluate when triggering a new alert.</p>
+        <h2>告警条件详情</h2>
+        <p>定义触发告警时要具备的条件.</p>
         <EntityList items={[
           <AlertCondition key={alertCondition.id}
                           stream={stream}

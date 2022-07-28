@@ -12,9 +12,9 @@ nbproject/*
 coverage
 build.xml
 nbactions.xml
-
+graylog.conf
 data/*
-
+.idea
 .DS_Store
 
 dependency-reduced-pom.xml

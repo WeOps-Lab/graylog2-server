@@ -24,21 +24,21 @@ class BacklogSummary extends React.Component {
 
   _formatMessageCount = (count) => {
     if (count === 0) {
-      return 'Not including any messages';
+      return '不包含任何消息';
     }
 
     if (count === 1) {
-      return 'Including last message';
+      return '包含最近一条消息';
     }
 
-    return `Including last ${count} messages`;
+    return `包含最近 ${count} 条消息`;
   };
 
   render() {
     const { backlog } = this.props.alertCondition.parameters;
 
     return (
-      <span>{this._formatMessageCount(backlog)} in alert notification.</span>
+      <span>{this._formatMessageCount(backlog)} 条消息在告警通知中.</span>
     );
   }
 }

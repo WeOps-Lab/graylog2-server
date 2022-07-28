@@ -34,18 +34,18 @@ class AlarmCallbackHistory extends React.Component {
     const type = this.props.types[configuration.type];
 
     const hadError = history.result.type === 'error';
-    const result = (hadError ? <Label bsStyle="danger">Error</Label> : <Label bsStyle="success">Sent</Label>);
+    const result = (hadError ? <Label bsStyle="danger">错误</Label> : <Label bsStyle="success">已发送</Label>);
 
     const title = (
       <span>
-        {type ? configuration.title || 'Untitled notification' : 'Unknown notification'}
+        {type ? configuration.title || '无标题通知类型' : '未知通知类型'}
         {' '}
         <small>({type ? type.name : configuration.type})</small>
       </span>
     );
     const description = (hadError
-      ? <span>Error sending notification at <Timestamp dateTime={history.created_at} />: {history.result.error}</span>
-      : <span>Notification was sent successfully at <Timestamp dateTime={history.created_at} />.</span>);
+      ? <span>在 <Timestamp dateTime={history.created_at} />发送告警通知失败:  {history.result.error}</span>
+      : <span>在 <Timestamp dateTime={history.created_at} />发送告警通知成功.</span>);
 
     let configurationWell;
     let configurationInfo;
@@ -55,7 +55,7 @@ class AlarmCallbackHistory extends React.Component {
     } else {
       configurationInfo = (
         <Alert bsStyle="warning">
-          The plugin required for this notification is not loaded. Not displaying its configuration.
+          没有找到适合此通知的插件，不加载其显示配置
         </Alert>
       );
     }
