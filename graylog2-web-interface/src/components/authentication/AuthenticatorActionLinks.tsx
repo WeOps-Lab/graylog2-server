@@ -25,7 +25,7 @@ const AuthenticatorActionLinks = () => (
     <LinkContainer to={Routes.SYSTEM.AUTHENTICATION.AUTHENTICATORS.EDIT}>
       <Button bsStyle="success"
               type="button">
-        Edit Authenticators
+        编辑
       </Button>
     </LinkContainer>
   </ButtonToolbar>

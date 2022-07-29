@@ -28,7 +28,7 @@ import type AuthenticationBackend from 'logic/authentication/AuthenticationBacke
 import SyncedUsersOverviewItem from './SyncedUsersOverviewItem';
 import SyncedUsersFilter from './SyncedUsersFilter';
 
-const TABLE_HEADERS = ['Username', 'Full Name', 'Roles', 'Actions'];
+const TABLE_HEADERS = ['用户名', '别名', '角色', '操作'];
 const DEFAULT_PAGINATION = {
   page: 1,
   perPage: 10,
@@ -74,20 +74,20 @@ const SyncedUsersSection = ({ roles, authenticationBackend }: Props) => {
   const _userOverviewItem = (user) => <SyncedUsersOverviewItem user={user} roles={roles} />;
 
   return (
-    <SectionComponent title="Synchronized Users" showLoading={loading}>
+    <SectionComponent title="已同步用户" showLoading={loading}>
       <p className="description">
-        Found {paginatedUsers.pagination.total} synchronized users.
+        找到 {paginatedUsers.pagination.total} 个已同步用户.
       </p>
       <PaginatedList activePage={page} totalItems={paginatedUsers.pagination.total} onChange={(newPage, newPerPage) => setPagination({ ...pagination, page: newPage, perPage: newPerPage })}>
         <DataTable className="table-hover"
                    customFilter={<SyncedUsersFilter onSearch={(newQuery) => setPagination({ ...pagination, query: newQuery, page: DEFAULT_PAGINATION.page })} />}
                    dataRowFormatter={_userOverviewItem}
                    filterKeys={[]}
-                   filterLabel="Filter Users"
+                   filterLabel="过滤"
                    headerCellFormatter={_headerCellFormatter}
                    headers={TABLE_HEADERS}
                    id="synced-users-overview"
-                   noDataText={<EmptyResult>No synchronized users have been found.</EmptyResult>}
+                   noDataText={<EmptyResult>未找到已同步用户.</EmptyResult>}
                    rowClassName="no-bm"
                    rows={users.toJS()}
                    sortByKey="username" />

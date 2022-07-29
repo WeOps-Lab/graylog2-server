@@ -50,16 +50,16 @@ class Alert extends React.Component {
       alertTitle = (
         <span>
           <Link to={Routes.show_alert(alert.id)}>
-            {alertCondition.title || 'Untitled alert'}
+            {alertCondition.title || '未命名的告警'}
           </Link>
           {' '}
-          <small>on stream <em>{stream.title}</em></small>
+          <small>在消息流 <em>{stream.title}</em></small>
         </span>
       );
     } else {
       alertTitle = (
         <span>
-          <Link to={Routes.show_alert(alert.id)}>Unknown alert</Link>
+          <Link to={Routes.show_alert(alert.id)}>未知的告警</Link>
         </span>
       );
     }
@@ -67,9 +67,9 @@ class Alert extends React.Component {
     let statusBadge;
 
     if (!alert.is_interval || alert.resolved_at) {
-      statusBadge = <Label bsStyle="success">Resolved</Label>;
+      statusBadge = <Label bsStyle="success">已解决</Label>;
     } else {
-      statusBadge = <Label bsStyle="danger">Unresolved</Label>;
+      statusBadge = <Label bsStyle="danger">未解决</Label>;
     }
 
     let alertTime = <Timestamp dateTime={alert.triggered_at} />;
@@ -77,16 +77,16 @@ class Alert extends React.Component {
     if (alert.is_interval) {
       alertTime = (
         <span>
-          Triggered at {alertTime},&nbsp;
+          在 {alertTime}触发,&nbsp;
           {alert.resolved_at
-            ? <span>resolved at <Timestamp dateTime={alert.resolved_at} />.</span>
-            : <span><strong>still ongoing</strong>.</span>}
+            ? <span>在<Timestamp dateTime={alert.resolved_at} /> 被解决.</span>
+            : <span><strong>持续中</strong>.</span>}
         </span>
       );
     } else {
       alertTime = (
         <span>
-          Triggered at {alertTime}
+          在 {alertTime} 触发
         </span>
       );
     }
@@ -94,10 +94,10 @@ class Alert extends React.Component {
     const content = (
       <Col md={12}>
         <dl className={`dl-horizontal ${styles.alertDescription}`}>
-          <dt>Reason:</dt>
+          <dt>原因:</dt>
           <dd>{alert.description}</dd>
-          <dt>Type:</dt>
-          <dd>{conditionType.name || 'Unknown type. This usually means that the alert condition was deleted since the alert was triggered.'}</dd>
+          <dt>类型:</dt>
+          <dd>{conditionType.name || '未知类型.这通常意味着告警条件在触发后被删除.'}</dd>
         </dl>
       </Col>
     );

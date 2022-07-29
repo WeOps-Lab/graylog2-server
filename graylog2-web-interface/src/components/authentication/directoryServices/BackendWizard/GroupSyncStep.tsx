@@ -63,7 +63,7 @@ const GroupSyncStep = ({
         <ButtonToolbar className="pull-right">
           <Button bsStyle="primary"
                   onClick={() => onSubmitAll(false)}>
-            Finish & Save Service
+            保存服务
           </Button>
         </ButtonToolbar>
       </>

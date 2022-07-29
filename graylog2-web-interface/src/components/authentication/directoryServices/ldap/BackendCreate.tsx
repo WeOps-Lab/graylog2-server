@@ -34,41 +34,41 @@ export const HELP = {
   // server config help
   systemUserDn: (
     <span>
-      The username for the initial connection to the LDAP server, e.g. <code>cn=admin,dc=example,dc=com</code>,
-      this might be optional depending on your LDAP server.
+     与 LDAP 服务器的初始连接的用户名，例如<code>cn=admin,dc=example,dc=com</code>,
+      这可能是可选的，具体取决于您的 LDAP 服务器
     </span>
   ),
-  systemUserPassword: 'The password for the initial connection to the LDAP server.',
+  systemUserPassword: '初始连接到 LDAP 服务器的密码.',
   // user sync help
   userSearchBase: (
     <span>
-      The base tree to limit the LDAP search query to, e.g. <code>cn=users,dc=example,dc=com</code>.
+      将 LDAP 搜索查询限制到的基础树，例如<code>cn=users,dc=example,dc=com</code>.
     </span>
   ),
   userSearchPattern: (
     <span>
-      For example <code className="text-nowrap">{'(&(uid={0})(objectClass=inetOrgPerson))'}</code>.{' '}
-      The string <code>{'{0}'}</code> will be replaced by the entered username.
+      例如 <code className="text-nowrap">{'(&(uid={0})(objectClass=inetOrgPerson))'}</code>.{' '}
+      字符串 <code>{'{0}'}</code> 将替换为输入的用户名.
     </span>
   ),
   userNameAttribute: (
     <span>
-      Which LDAP attribute to use for the username of the user in Graylog, e.g <code>uid</code>.<br />
-      Try to load a test user in the sidebar section <i>User Login Test</i>, if you are unsure which attribute to use.
+      在 DataInsight 中用于用户用户名的 LDAP 属性，例如 <code>uid</code>。<br />
+      如果您不确定要使用哪个属性，请尝试在侧边栏部分 <i>用户登录测试</i> 中加载测试用户
     </span>
   ),
   userFullNameAttribute: (
     <span>
-      Which LDAP attribute to use for the full name of a synchronized Graylog user, e.g. <code>cn</code>.<br />
+      哪个 LDAP 属性用于同步 DataInsight 用户的全名，例如<code>cn</code>.<br />
     </span>
   ),
   userUniqueIdAttribute: (
     <span>
-      Which LDAP attribute to use for the ID of a synchronized Graylog user, e.g. <code>entryUUID</code>.<br />
+      哪个 LDAP 属性用于同步 DataInsight 用户的 ID，例如<code>entryUUID</code>.<br />
     </span>
   ),
   defaultRoles: (
-    <span>The default Graylog roles synchronized user will obtain. All users need the <code>Reader</code> role, to use the Graylog web interface</span>
+    <span>同步用户将获得的默认 DataInsight 角色。所有用户都需要 <code>Reader</code> 角色，才能使用 DataInsight Web 界面</span>
   ),
 };
 
@@ -93,7 +93,7 @@ const BackendCreate = () => {
   const initialValues = { ...INITIAL_VALUES, ...initialGroupSyncValues };
 
   return (
-    <DocumentTitle title="Create LDAP Authentication Service">
+    <DocumentTitle title="创建LDAP鉴权服务">
       <WizardPageHeader />
       <BackendWizard onSubmit={handleCreate}
                      help={help}

@@ -28,7 +28,7 @@ import EditLinkButton from './EditLinkButton';
 import { STEP_KEY as USER_SYNC_KEY } from '../BackendWizard/UserSyncStep';
 
 const rolesList = (defaultRolesIds: Immutable.List<string>, roles: Immutable.List<Role>) => {
-  const defaultRolesNames = defaultRolesIds.map((roleId) => roles.find((role) => role.id === roleId)?.name ?? 'Role not found');
+  const defaultRolesNames = defaultRolesIds.map((roleId) => roles.find((role) => role.id === roleId)?.name ?? '未找到角色');
 
   return defaultRolesNames.join(', ');
 };
@@ -52,15 +52,15 @@ const UserSyncSection = ({ authenticationBackend, roles, excludedFields }: Props
   } = authenticationBackend;
 
   return (
-    <SectionComponent title="User Synchronization" headerActions={<EditLinkButton authenticationBackendId={authenticationBackend.id} stepKey={USER_SYNC_KEY} />}>
-      <ReadOnlyFormGroup label="Search Base DN" value={userSearchBase} />
-      <ReadOnlyFormGroup label="Search Pattern" value={userSearchPattern} />
-      <ReadOnlyFormGroup label="Name Attribute" value={userNameAttribute} />
-      <ReadOnlyFormGroup label="Full Name Attribute" value={userFullNameAttribute} />
+    <SectionComponent title="用户同步" headerActions={<EditLinkButton authenticationBackendId={authenticationBackend.id} stepKey={USER_SYNC_KEY} />}>
+      <ReadOnlyFormGroup label="搜索 Base DN" value={userSearchBase} />
+      <ReadOnlyFormGroup label="搜索模式" value={userSearchPattern} />
+      <ReadOnlyFormGroup label="名称字段" value={userNameAttribute} />
+      <ReadOnlyFormGroup label="全名字段" value={userFullNameAttribute} />
       {!excludedFields.userUniqueIdAttribute && (
-        <ReadOnlyFormGroup label="ID Attribute" value={userUniqueIdAttribute} />
+        <ReadOnlyFormGroup label="ID字段" value={userUniqueIdAttribute} />
       )}
-      <ReadOnlyFormGroup label="Default Roles" value={rolesList(defaultRoles, roles)} />
+      <ReadOnlyFormGroup label="默认角色" value={rolesList(defaultRoles, roles)} />
     </SectionComponent>
   );
 };

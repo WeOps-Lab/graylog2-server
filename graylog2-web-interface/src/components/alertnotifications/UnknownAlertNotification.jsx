@@ -30,24 +30,24 @@ class UnknownAlertNotification extends React.Component {
     const notification = this.props.alertNotification;
 
     const actions = [
-      <DropdownButton key="actions-button" title="Actions" pullRight id={`more-actions-dropdown-${notification.id}`}>
-        <MenuItem onSelect={this.props.onDelete}>Delete</MenuItem>
+      <DropdownButton key="actions-button" title="操作" pullRight id={`more-actions-dropdown-${notification.id}`}>
+        <MenuItem onSelect={this.props.onDelete}>删除</MenuItem>
       </DropdownButton>,
     ];
 
     const content = (
       <Col md={12}>
         <Alert bsStyle="warning">
-          Could not resolve notification type. This is most likely caused by a missing plugin in your Graylog setup.
+          无法解析告警通知，这非常有可能是因为缺少了相关的插件.
         </Alert>
       </Col>
     );
 
     return (
       <EntityListItem key={`entry-list-${notification.id}`}
-                      title="Unknown notification"
+                      title="未知的告警通知"
                       titleSuffix={`(${notification.type})`}
-                      description="Cannot be executed while the notification type is unknown"
+                      description="无法执行未知的告警通知"
                       actions={actions}
                       contentRow={content} />
     );

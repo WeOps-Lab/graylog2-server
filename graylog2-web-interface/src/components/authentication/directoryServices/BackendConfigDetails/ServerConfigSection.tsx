@@ -33,14 +33,14 @@ const ServerConfigSection = ({ authenticationBackend }: Props) => {
   const serverUrls = servers.map((server) => `${server.host}:${server.port}`).join(', ');
 
   return (
-    <SectionComponent title="Server Configuration" headerActions={<EditLinkButton authenticationBackendId={authenticationBackend.id} stepKey={SERVER_CONFIG_KEY} />}>
-      <ReadOnlyFormGroup label="Title" value={title} />
-      <ReadOnlyFormGroup label="Description" value={description} />
-      <ReadOnlyFormGroup label="Server Address" value={serverUrls} />
-      <ReadOnlyFormGroup label="System Username" value={systemUserDn} />
-      <ReadOnlyFormGroup label="System Password" value={systemUserPassword?.isSet ? '******' : null} />
-      <ReadOnlyFormGroup label="Transport Security" value={transportSecurity} />
-      <ReadOnlyFormGroup label="Verify Certificates" value={verifyCertificates} />
+    <SectionComponent title="服务器配置" headerActions={<EditLinkButton authenticationBackendId={authenticationBackend.id} stepKey={SERVER_CONFIG_KEY} />}>
+      <ReadOnlyFormGroup label="标题" value={title} />
+      <ReadOnlyFormGroup label="描述" value={description} />
+      <ReadOnlyFormGroup label="服务器地址" value={serverUrls} />
+      <ReadOnlyFormGroup label="用户名" value={systemUserDn} />
+      <ReadOnlyFormGroup label="密码" value={systemUserPassword?.isSet ? '******' : null} />
+      <ReadOnlyFormGroup label="传输安全" value={transportSecurity} />
+      <ReadOnlyFormGroup label="身份校验" value={verifyCertificates} />
     </SectionComponent>
   );
 };

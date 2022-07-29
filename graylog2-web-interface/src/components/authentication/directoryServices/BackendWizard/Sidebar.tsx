@@ -72,7 +72,7 @@ const Sidebar = ({ prepareSubmitPayload }: Props) => {
                       onSelect={setActiveKey}>
       <Panel eventKey={SERVER_CONFIG_KEY}>
         <Panel.Heading>
-          <Panel.Title toggle>Server Connection Check</Panel.Title>
+          <Panel.Title toggle>服务器连接检测</Panel.Title>
         </Panel.Heading>
         <Panel.Body collapsible>
           <ServerConnectionTest prepareSubmitPayload={prepareSubmitPayload} />
@@ -80,7 +80,7 @@ const Sidebar = ({ prepareSubmitPayload }: Props) => {
       </Panel>
       <Panel eventKey={USER_SYNC_KEY}>
         <Panel.Heading>
-          <Panel.Title toggle>User Login Test</Panel.Title>
+          <Panel.Title toggle>用户登录测试</Panel.Title>
         </Panel.Heading>
         <Panel.Body collapsible>
           <UserLoginTest prepareSubmitPayload={prepareSubmitPayload} />

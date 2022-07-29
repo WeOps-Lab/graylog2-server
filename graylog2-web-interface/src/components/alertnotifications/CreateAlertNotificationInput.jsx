@@ -86,7 +86,7 @@ const CreateAlertNotificationInput = createReactClass({
     const { selectedStream } = this.state;
 
     if (!selectedStream) {
-      UserNotification.error('Please select the stream that the condition should check.', 'Could not save condition');
+      UserNotification.error('请选择需要告警的消息流.', '无法保存告警条件');
     }
 
     AlarmCallbacksActions.save(selectedStream.id, data).then(
@@ -111,7 +111,7 @@ const CreateAlertNotificationInput = createReactClass({
       <ConfigurationForm ref={(configurationForm) => { this.configurationForm = configurationForm; }}
                          key="configuration-form-output"
                          configFields={typeDefinition.requested_configuration}
-                         title={`Create new ${typeDefinition.name}`}
+                         title={`创建新的 ${typeDefinition.name}`}
                          typeName={type}
                          submitAction={this._onSubmit}
                          cancelAction={this._resetForm} />
@@ -149,31 +149,31 @@ const CreateAlertNotificationInput = createReactClass({
 
     const notificationTypeHelp = (
       <span>
-        Select the notification type that will be used. You can find more types in the{' '}
-        <a href="https://marketplace.graylog.org/" target="_blank" rel="noopener noreferrer">Graylog Marketplace</a>.
+        选择告警通知类型. 你可以在{' '}
+        <a href="" target="_blank" rel="noopener noreferrer">DataInsight市场</a>查找更多告警通知类型.
       </span>
     );
 
     return (
       <div>
-        <ExternalLinkButton href="https://marketplace.graylog.org/"
+        <ExternalLinkButton href=""
                             bsStyle="info"
                             className="pull-right">
-          Find more notifications
+          查找更多告警通知
         </ExternalLinkButton>
 
-        <h2>Notification</h2>
+        <h2>告警通知</h2>
         <p className="description">
-          Define the notification that will be triggered from the alert conditions in a stream.
+          定义消息流告警触发时的通知方式.
         </p>
 
         <Row>
           <Col md={6}>
             <form>
               <Input id="stream-selector"
-                     label="Notify on stream"
-                     help="Select the stream that should use this notification when its alert conditions are triggered.">
-                <Select placeholder="Select a stream"
+                     label="消息流告警通知"
+                     help="选择一个消息流，当触发告警的时候，会采用对应的告警通知.">
+                <Select placeholder="选择一个消息流"
                         options={formattedStreams}
                         onChange={this._onStreamChange}
                         value={selectedStream ? selectedStream.id : undefined} />
@@ -184,15 +184,15 @@ const CreateAlertNotificationInput = createReactClass({
                      value={type}
                      onChange={this._onChange}
                      disabled={!selectedStream}
-                     label="Notification type"
+                     label="告警通知类型"
                      help={notificationTypeHelp}>
-                <option value={this.PLACEHOLDER} disabled>Select a notification type</option>
+                <option value={this.PLACEHOLDER} disabled>选择告警通知类型</option>
                 {availableTypes}
               </Input>
               {notificationForm}
               {' '}
               <Button onClick={this._openForm} disabled={type === this.PLACEHOLDER} bsStyle="success">
-                Add alert notification
+                新增告警通知
               </Button>
             </form>
           </Col>

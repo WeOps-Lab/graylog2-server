@@ -17,13 +17,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { LinkContainer } from 'components/common/router';
-import { Alert, Button } from 'components/bootstrap';
-import { PaginatedList, Spinner, Timestamp } from 'components/common';
+import {LinkContainer} from 'components/common/router';
+import {Alert, Button} from 'components/bootstrap';
+import {PaginatedList, Spinner, Timestamp} from 'components/common';
 import Routes from 'routing/Routes';
 import DateTime from 'logic/datetimes/DateTime';
 import UserNotification from 'util/UserNotification';
-import { UniversalSearchStore } from 'stores/search/UniversalSearchStore';
+import {UniversalSearchStore} from 'stores/search/UniversalSearchStore';
 
 class AlertMessages extends React.Component {
   static propTypes = {
@@ -49,7 +49,7 @@ class AlertMessages extends React.Component {
   };
 
   _getTo = () => {
-    const { alert } = this.props;
+    const {alert} = this.props;
     let momentTo;
 
     if (alert.is_interval) {
@@ -71,14 +71,14 @@ class AlertMessages extends React.Component {
     promise.then(
       (response) => {
         if (response.total_results > 0) {
-          this.setState({ messages: response.messages, totalMessages: response.total_results });
+          this.setState({messages: response.messages, totalMessages: response.total_results});
         } else {
-          this.setState({ messages: [], totalMessages: 0 });
+          this.setState({messages: [], totalMessages: 0});
         }
       },
       (error) => {
-        UserNotification.error(`Fetching messages during alert failed with error: ${error}`,
-          'Could not get messages during alert');
+        UserNotification.error(`获取告警条件错误: ${error}`,
+          '无法获取告警条件');
       },
     );
   };
@@ -96,7 +96,7 @@ class AlertMessages extends React.Component {
       .map((message) => {
         return (
           <tr key={`${message.index}-${message.id}`}>
-            <td><Timestamp dateTime={message.formatted_fields.timestamp} /></td>
+            <td><Timestamp dateTime={message.formatted_fields.timestamp}/></td>
             <td>{message.formatted_fields.message}</td>
           </tr>
         );
@@ -107,8 +107,8 @@ class AlertMessages extends React.Component {
     return (
       <span>
         (
-        <Timestamp dateTime={this._getFrom()} />&nbsp;&#8211;&nbsp;
-        <Timestamp dateTime={this._getTo()} />
+        <Timestamp dateTime={this._getFrom()}/>&nbsp;&#8211;&nbsp;
+        <Timestamp dateTime={this._getTo()}/>
         )
       </span>
     );
@@ -125,13 +125,13 @@ class AlertMessages extends React.Component {
       <div>
         <div className="pull-right">
           <LinkContainer to={Routes.stream_search(this.props.stream.id, '*', timeRange)}>
-            <Button bsStyle="info">Open in search page</Button>
+            <Button bsStyle="info">在搜索页面中查看</Button>
           </LinkContainer>
         </div>
-        <h2>Messages evaluated</h2>
+        <h2>消息</h2>
         <p>
-          These are the messages evaluated around the time of the alert {this._formatAlertTimeRange()} in stream{' '}
-          <em>{this.props.stream.title}</em>.
+          这些消息是 {this._formatAlertTimeRange()} 在消息流{' '}
+          <em>{this.props.stream.title}</em> 中触发的.
         </p>
       </div>
     );
@@ -140,18 +140,18 @@ class AlertMessages extends React.Component {
       return (
         <div>
           {title}
-          <Spinner />
+          <Spinner/>
         </div>
       );
     }
 
-    const { messages } = this.state;
+    const {messages} = this.state;
 
     if (messages.length === 0) {
       return (
         <div>
           {title}
-          <Alert bsStyle="info">No search results found during the time of the alert.</Alert>
+          <Alert bsStyle="info">在这个告警触发的时候没有包含任何日志消息.</Alert>
         </div>
       );
     }
@@ -166,13 +166,13 @@ class AlertMessages extends React.Component {
           <div className="table-responsive">
             <table className="table table-striped table-hover table-condensed">
               <thead>
-                <tr>
-                  <th>Timestamp</th>
-                  <th>Message</th>
-                </tr>
+              <tr>
+                <th>时间戳</th>
+                <th>消息</th>
+              </tr>
               </thead>
               <tbody>
-                {this._formatMessages(messages)}
+              {this._formatMessages(messages)}
               </tbody>
             </table>
           </div>

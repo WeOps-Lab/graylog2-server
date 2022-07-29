@@ -48,7 +48,7 @@ const AlertTimeline = createReactClass({
     if (this.state.histories.length === 0) {
       return [
         <dt key="history-title"><Timestamp dateTime={lastEventTime} /></dt>,
-        <dd key="history-desc">No notifications were configured for this alert</dd>,
+        <dd key="history-desc">没有触发任何告警通知</dd>,
       ];
     }
 
@@ -60,15 +60,15 @@ const AlertTimeline = createReactClass({
         let title;
 
         if (type) {
-          title = <span><em>{configuration.title || 'Untitled notification'}</em> ({type.name})</span>;
+          title = <span><em>{configuration.title || '未命名的告警通知'}</em> ({type.name})</span>;
         } else {
-          title = <span><em>Unknown notification</em> <small>({configuration.type})</small></span>;
+          title = <span><em>未知的告警通知</em> <small>({configuration.type})</small></span>;
         }
 
         formattedHistories.push(
           <dt key={`${history.id}-title`}><Timestamp dateTime={history.created_at} /></dt>,
           (<dd key={`${history.id}-desc`}>
-            Graylog {history.result.type === 'error' ? 'could not send' : 'sent'} {title} notification
+            Graylog {history.result.type === 'error' ?  '无法发送' : '发送'} {title} 通知
           </dd>),
         );
       });
@@ -83,25 +83,25 @@ const AlertTimeline = createReactClass({
       // Old alert without a resolution_at field
       formattedResolution.push(
         <dt key="resolution-title"><Timestamp dateTime={this.props.alert.triggered_at} /></dt>,
-        <dd key="resolution-desc">This alert does not support resolution. It was marked as resolved when triggered.</dd>,
+        <dd key="resolution-desc">这个告警不支持标记为已解决,当系统检测已解决的时候,会自动标记为已解决.</dd>,
       );
     } else if (this.props.alert.resolved_at) {
       formattedResolution.push(
         <dt key="resolution-title"><Timestamp dateTime={this.props.alert.resolved_at} /></dt>,
-        <dd key="resolution-desc">Condition is no longer satisfied, alert is marked as resolved</dd>,
+        <dd key="resolution-desc">当告警条件不满足的时候,标记告警为已解决</dd>,
       );
     } else {
       const conditionParameters = this.props.alert.condition_parameters || {};
       const repeatNotifications = conditionParameters.repeat_notifications || false;
       const notificationsText = (repeatNotifications
-        ? 'Condition is configured to repeat notifications, Graylog will send notifications when evaluating the condition until it is no longer satisfied'
-        : 'Condition is configured to not repeat notifications');
+        ? '告警方式配置为重复通知,DataInsight会在告警解决之前不断的发出通知.'
+        : '告警方式配置为不重复通知,仅会在告警已解决后再次触发时发出新通知');
 
       formattedResolution.push(
         <dt key="notifications-title"><Timestamp dateTime={new Date()} /></dt>,
         <dd key="notifications-desc">{notificationsText}</dd>,
         <dt key="resolution-title"><Timestamp dateTime={new Date()} /></dt>,
-        <dd key="resolution-desc">Condition is still satisfied, <strong>alert is unresolved</strong></dd>,
+        <dd key="resolution-desc">告警条件依然满足, <strong>告警未解决</strong></dd>,
       );
     }
 
@@ -121,19 +121,19 @@ const AlertTimeline = createReactClass({
 
     const title = (
       <span>
-        <em>{conditionExists ? condition.title || 'Untitled condition' : 'Unknown condition'}</em>{' '}
-        ({type.name || condition.type || 'Unknown condition type'})
+        <em>{conditionExists ? condition.title || '无标题的告警条件' : '未知的告警条件'}</em>{' '}
+        ({type.name || condition.type || '未知的告警条件类型'})
       </span>
     );
 
     return (
       <dl className={`dl-horizontal ${style.alertTimeline}`}>
         <dt>{triggeredAtTimestamp}</dt>
-        <dd>Graylog checks {title} condition on stream <em>{this.props.stream.title}</em></dd>
+        <dd>DataInsight在消息流  <em>{this.props.stream.title}</em> 中检查告警条件 {title}</dd>
         <dt>{triggeredAtTimestamp}</dt>
         <dd>{alert.description}</dd>
         <dt>{triggeredAtTimestamp}</dt>
-        <dd>Graylog triggers an alert for {title} and starts sending notifications</dd>
+        <dd>DataInsight触发了告警 {title} 并发出了告警通知</dd>
         {this._historiesTimeline(alert.triggered_at)}
         {this._resolutionTimeline()}
       </dl>

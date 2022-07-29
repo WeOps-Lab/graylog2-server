@@ -39,7 +39,7 @@ const GroupSyncSection = ({ authenticationBackend, roles, excludedFields }: Prop
 
   if (!GroupSyncSectionPlugin) {
     return (
-      <SectionComponent title="Group Synchronization"
+      <SectionComponent title="用户组同步"
                         headerActions={(
                           <EditLinkButton authenticationBackendId={authenticationBackend.id}
                                           stepKey={GROUP_SYNC_KEY} />

@@ -38,7 +38,7 @@ const _pageTitle = (authBackend, title) => {
     return <>Edit Authentication Service - <i>{backendTitle}</i></>;
   }
 
-  return title || 'Create LDAP Authentication Service';
+  return title || '创建LDAP鉴权服务';
 };
 
 const WizardPageHeader = ({ authenticationBackend: authBackend, title }: Props) => {
@@ -51,10 +51,10 @@ const WizardPageHeader = ({ authenticationBackend: authBackend, title }: Props) 
                   <BackendActionLinks activeBackend={activeBackend}
                                       finishedLoading={finishedLoading} />
                 )}>
-      <span>Configure Graylog&apos;s authentication services of this Graylog cluster.</span>
+      <span>配置 DataInsight 集群的鉴权服务.</span>
       <span>
-        Read more authentication in the <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
-                                                           text="documentation" />.
+        查看 <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
+                                                           text="文档" />.
       </span>
 
       <AuthenticationOverviewLinks />

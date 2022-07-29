@@ -79,7 +79,7 @@ const BackendEdit = ({ authenticationBackend, initialStepKey }: Props) => {
   );
 
   return (
-    <DocumentTitle title="Edit LDAP Authentication Service">
+    <DocumentTitle title="编辑LDAP鉴权服务">
       <WizardPageHeader authenticationBackend={authenticationBackend} />
       <BackendWizard {..._optionalWizardProps(initialStepKey)}
                      help={help}

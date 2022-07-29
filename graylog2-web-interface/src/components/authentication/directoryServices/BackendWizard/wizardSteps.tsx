@@ -56,7 +56,7 @@ const wizardSteps = ({
     title: (
       <>
         <StepTitleWarning invalidStepKeys={invalidStepKeys} stepKey={SERVER_CONFIG_KEY} />
-        Server Configuration
+        服务器配置
       </>
     ),
     component: (
@@ -73,7 +73,7 @@ const wizardSteps = ({
     title: (
       <>
         <StepTitleWarning invalidStepKeys={invalidStepKeys} stepKey={USER_SYNC_KEY} />
-        User Synchronization
+        用户同步
       </>
     ),
     component: (
@@ -92,7 +92,7 @@ const wizardSteps = ({
     title: (
       <>
         <StepTitleWarning invalidStepKeys={invalidStepKeys} stepKey={GROUP_SYNC_KEY} />
-        Group Synchronization (Opt.)
+        用户组同步
       </>
     ),
     component: (

@@ -19,14 +19,14 @@ import * as React from 'react';
 import type * as Immutable from 'immutable';
 import styled from 'styled-components';
 
-import { LinkContainer, Link } from 'components/common/router';
+import {LinkContainer, Link} from 'components/common/router';
 import StringUtils from 'util/StringUtils';
 import Routes from 'routing/Routes';
 import type Role from 'logic/roles/Role';
 import AuthenticationDomain from 'domainActions/authentication/AuthenticationDomain';
 import type AuthenticationBackend from 'logic/authentication/AuthenticationBackend';
-import { TextOverflowEllipsis } from 'components/common';
-import { Button, ButtonToolbar } from 'components/bootstrap';
+import {TextOverflowEllipsis} from 'components/common';
+import {Button, ButtonToolbar} from 'components/bootstrap';
 
 type Props = {
   authenticationBackend: AuthenticationBackend,
@@ -49,24 +49,37 @@ const rolesList = (defaultRolesIds: Immutable.List<string>, roles: Immutable.Lis
   return defaultRolesNames.join(', ');
 };
 
-const EditButton = ({ authenticationBackend }: { authenticationBackend: AuthenticationBackend }) => {
+const EditButton = ({authenticationBackend}: { authenticationBackend: AuthenticationBackend }) => {
   const link = Routes.SYSTEM.AUTHENTICATION.BACKENDS.edit(authenticationBackend.id);
 
   return (
     <LinkContainer to={link}>
       <Button bsStyle="info" bsSize="xs" type="button">
-        Edit
+        编辑
       </Button>
     </LinkContainer>
   );
 };
 
 const confirmMessage = (authBackendTitle: string, actionName: string) => {
-  return `Do you really want to ${actionName} the authentication service "${StringUtils.truncateWithEllipses(authBackendTitle, 30)}"`;
+  let actionDesc = ''
+  if (actionName == 'deactivate') {
+    actionDesc = '禁用'
+  }
+  if (actionName == 'activate') {
+    actionDesc = '启用'
+  }
+  if (actionName == 'delete') {
+    actionDesc = '删除'
+  }
+  return `你确定要 ${actionDesc} 认证服务 "${StringUtils.truncateWithEllipses(authBackendTitle, 30)}"`;
 };
 
-const ActionsCell = ({ isActive, authenticationBackend }: { authenticationBackend: AuthenticationBackend, isActive: boolean }) => {
-  const { title, id } = authenticationBackend;
+const ActionsCell = ({
+                       isActive,
+                       authenticationBackend
+                     }: { authenticationBackend: AuthenticationBackend, isActive: boolean }) => {
+  const {title, id} = authenticationBackend;
   const _setActiveBackend = (backendId) => AuthenticationDomain.setActiveBackend(backendId, title);
 
   const _deactivateBackend = () => {
@@ -93,18 +106,18 @@ const ActionsCell = ({ isActive, authenticationBackend }: { authenticationBacken
         {isActive ? (
           <>
             <Button onClick={_deactivateBackend} bsStyle="warning" bsSize="xs" type="button">
-              Deactivate
+              禁用
             </Button>
-            <EditButton authenticationBackend={authenticationBackend} />
+            <EditButton authenticationBackend={authenticationBackend}/>
           </>
         ) : (
           <>
             <Button onClick={_activateBackend} bsStyle="warning" bsSize="xs" type="button">
-              Activate
+              启用
             </Button>
-            <EditButton authenticationBackend={authenticationBackend} />
+            <EditButton authenticationBackend={authenticationBackend}/>
             <Button onClick={_deleteBackend} bsStyle="danger" bsSize="xs" type="button">
-              Delete
+              删除
             </Button>
           </>
         )}
@@ -113,8 +126,8 @@ const ActionsCell = ({ isActive, authenticationBackend }: { authenticationBacken
   );
 };
 
-const BackendsOverviewItem = ({ authenticationBackend, isActive, roles }: Props) => {
-  const { title, description, defaultRoles, id } = authenticationBackend;
+const BackendsOverviewItem = ({authenticationBackend, isActive, roles}: Props) => {
+  const {title, description, defaultRoles, id} = authenticationBackend;
   const detailsLink = isActive ? Routes.SYSTEM.AUTHENTICATION.BACKENDS.ACTIVE : Routes.SYSTEM.AUTHENTICATION.BACKENDS.show(id);
 
   return (
@@ -132,7 +145,7 @@ const BackendsOverviewItem = ({ authenticationBackend, isActive, roles }: Props)
       <td className="limited">
         {rolesList(defaultRoles, roles)}
       </td>
-      <ActionsCell authenticationBackend={authenticationBackend} isActive={isActive} />
+      <ActionsCell authenticationBackend={authenticationBackend} isActive={isActive}/>
     </tr>
   );
 };

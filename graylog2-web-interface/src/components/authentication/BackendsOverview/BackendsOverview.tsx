@@ -29,7 +29,7 @@ import { Col, Row } from 'components/bootstrap';
 import BackendsFilter from './BackendsFilter';
 import BackendsOverviewItem from './BackendsOverviewItem';
 
-const TABLE_HEADERS = ['Title', 'Description', 'Default Roles', 'Actions'];
+const TABLE_HEADERS = ['标题', '描述', '默认角色', '操作'];
 
 const DEFAULT_PAGINATION = {
   page: 1,
@@ -96,12 +96,12 @@ const BackendsOverview = () => {
   return (
     <Row className="content">
       <Col xs={12}>
-        <h2>Configured Authentication Services</h2>
+        <h2>配置鉴权服务</h2>
         <Header>
           {loading && <LoadingSpinner text="" delay={0} />}
         </Header>
         <p className="description">
-          Found {paginatedBackends.pagination.total} configured authentication services on the system.
+          找到 {paginatedBackends.pagination.total} 个已配置的鉴权服务.
         </p>
         <PaginatedList onChange={(newPage, newPerPage) => setPagination({ ...pagination, page: newPage, perPage: newPerPage })}
                        totalItems={paginatedBackends.pagination.total}
@@ -112,7 +112,7 @@ const BackendsOverview = () => {
                        <BackendsOverviewItem authenticationBackend={authBackend} isActive={authBackend.id === context?.activeBackend?.id} roles={paginatedRoles.list} />
                      )}
                      filterKeys={[]}
-                     filterLabel="Filter services"
+                     filterLabel="过滤"
                      headerCellFormatter={_headerCellFormatter}
                      headers={TABLE_HEADERS}
                      id="auth-backends-overview"

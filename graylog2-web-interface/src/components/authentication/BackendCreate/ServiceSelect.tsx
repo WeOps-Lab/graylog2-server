@@ -64,7 +64,7 @@ const BackendCreateSelect = () => {
                             inputProps={{ 'aria-label': 'Select a service' }}
                             onChange={(authService) => onChange({ target: { value: authService, name } })}
                             options={authServicesOptions}
-                            placeholder="Select a service"
+                            placeholder="选择一个服务"
                             value={value} />
                     <InputDescription error={error} />
                   </>
@@ -75,7 +75,7 @@ const BackendCreateSelect = () => {
             <Button bsStyle="success"
                     disabled={isSubmitting || !isValid}
                     type="submit">
-              Get started
+              开始配置
             </Button>
           </ElementsContainer>
         </StyledForm>

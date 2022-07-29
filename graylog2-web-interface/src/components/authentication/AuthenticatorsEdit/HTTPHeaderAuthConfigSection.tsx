@@ -29,7 +29,7 @@ import SectionComponent from 'components/common/Section/SectionComponent';
 const HTTPHeaderAuthConfigSection = () => {
   const [submitError, setSubmitError] = useState<string | undefined>();
   const [loadedConfig, setLoadedConfig] = useState<HTTPHeaderAuthConfig | undefined>();
-  const sectionTitle = 'Trusted Header Authentication';
+  const sectionTitle = 'HTTP 认证';
 
   const _onSubmit = (data) => {
     setSubmitError(undefined);
@@ -55,7 +55,7 @@ const HTTPHeaderAuthConfigSection = () => {
 
   return (
     <SectionComponent title={sectionTitle}>
-      <p>This authenticator enables you to login a user, based on a HTTP header without further interaction.</p>
+      <p>HTTP 认证.</p>
       <Formik onSubmit={_onSubmit}
               initialValues={loadedConfig.toJSON()}>
         {({ isSubmitting, isValid }) => (
@@ -63,21 +63,21 @@ const HTTPHeaderAuthConfigSection = () => {
             <Input id="enable-http-header-auth"
                    labelClassName="col-sm-3"
                    wrapperClassName="col-sm-9"
-                   label="Enabled">
-              <FormikFormGroup label="Enable single sign-on via HTTP header"
+                   label="启用">
+              <FormikFormGroup label="启用HTTP单点登录认证"
                                name="enabled"
                                formGroupClassName="form-group no-bm"
                                wrapperClassName="col-xs-12"
                                type="checkbox" />
             </Input>
-            <FormikFormGroup label="Username header"
+            <FormikFormGroup label="用户名Header"
                              name="username_header"
                              required
-                             help="HTTP header containing the implicitly trusted name of the Graylog user. (The header match is ignoring case sensitivity)" />
+                             help="包含用户名的HTTP Header（不区分大小写）" />
             <Row>
               <Col mdOffset={3} md={9}>
                 <Alert bsStyle="info">
-                  <Icon name="info-circle" /> Please configure the <code>trusted_proxies</code> setting in the Graylog server configuration file.
+                  <Icon name="info-circle" /> 请在配置文件中配置 <code>可信的</code> HTTP代理.
                 </Alert>
               </Col>
             </Row>
@@ -87,9 +87,9 @@ const HTTPHeaderAuthConfigSection = () => {
                 <div className="pull-right">
                   <Button bsStyle="success"
                           disabled={isSubmitting || !isValid}
-                          title="Update Config"
+                          title="更新配置"
                           type="submit">
-                    Update Config
+                    更新
                   </Button>
                 </div>
               </Col>

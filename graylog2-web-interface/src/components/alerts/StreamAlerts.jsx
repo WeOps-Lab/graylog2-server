@@ -90,10 +90,9 @@ const StreamAlerts = createReactClass({
 
     return (
       <div>
-        <h2>Unresolved Alerts</h2>
+        <h2>未解决的告警</h2>
         <p className="description">
-          These are the Alerts for this Stream that require your attention. Alerts will be resolved automatically
-          when the Condition that triggered them is no longer satisfied.
+          这里包含了你需要注意的告警,当告警恢复后,告警会被自动的标记为已解决.
         </p>
 
         <PaginatedList totalItems={this.state.alerts.total}
@@ -101,7 +100,7 @@ const StreamAlerts = createReactClass({
                        onChange={this._onChangePaginatedList}
                        showPageSizeSelect={false}>
           <EntityList bsNoItemsStyle="success"
-                      noItemsText="Good news! Currently there are no unresolved alerts on this stream."
+                      noItemsText="没有任何未解决的告警"
                       items={this.state.alerts.alerts.map((alert) => this._formatAlert(alert))} />
         </PaginatedList>
       </div>

@@ -65,8 +65,8 @@ const AlertNotificationsComponent = createReactClass({
     const { allNotifications, streams } = this.state;
 
     const notifications = allNotifications.sort((a1, a2) => {
-      const t1 = a1.title || 'Untitled';
-      const t2 = a2.title || 'Untitled';
+      const t1 = a1.title || '无标题';
+      const t2 = a2.title || '无标题';
 
       return naturalSort(t1.toLowerCase(), t2.toLowerCase());
     });
@@ -75,11 +75,11 @@ const AlertNotificationsComponent = createReactClass({
       <div>
         <div className="pull-right">
           <LinkContainer to={Routes.LEGACY_ALERTS.NEW_NOTIFICATION}>
-            <Button bsStyle="success">Add new notification</Button>
+            <Button bsStyle="success">新增告警通知</Button>
           </LinkContainer>
         </div>
-        <h2>Notifications</h2>
-        <p>These are all configured alert notifications.</p>
+        <h2>告警通知</h2>
+        <p>这是所有的告警通知列表.</p>
         <AlertNotificationsList alertNotifications={notifications}
                                 streams={streams}
                                 onNotificationUpdate={this._loadData}

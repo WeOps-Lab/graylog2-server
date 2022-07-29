@@ -24,13 +24,13 @@ const AuthenticationOverviewLinks = () => (
   <ButtonToolbar className="pull-right">
     <LinkContainer to={Routes.SYSTEM.AUTHENTICATION.BACKENDS.OVERVIEW}>
       <Button bsStyle="info">
-        Authentication Services
+        鉴权服务
       </Button>
     </LinkContainer>
     <LinkContainer to={Routes.SYSTEM.AUTHENTICATION.AUTHENTICATORS.SHOW}>
       <Button bsStyle="info"
               type="button">
-        Authenticators
+        身份验证器
       </Button>
     </LinkContainer>
   </ButtonToolbar>

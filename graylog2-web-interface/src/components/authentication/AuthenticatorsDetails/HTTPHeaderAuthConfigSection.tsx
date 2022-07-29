@@ -24,7 +24,7 @@ import SectionComponent from 'components/common/Section/SectionComponent';
 
 const HTTPHeaderAuthConfigSection = () => {
   const [loadedConfig, setLoadedConfig] = useState<HTTPHeaderAuthConfig | undefined>();
-  const sectionTitle = 'Trusted Header Authentication';
+  const sectionTitle = 'HTTP 认证';
 
   useEffect(() => {
     HTTPHeaderAuthConfigDomain.load().then(setLoadedConfig);
@@ -40,9 +40,9 @@ const HTTPHeaderAuthConfigSection = () => {
 
   return (
     <SectionComponent title={sectionTitle}>
-      <p>This authenticator enables you to login a user, based on a HTTP header without further interaction.</p>
-      <ReadOnlyFormGroup label="Enabled" value={loadedConfig.enabled} />
-      <ReadOnlyFormGroup label="Username header" value={loadedConfig.usernameHeader} />
+      <p>HTTP认证方式.</p>
+      <ReadOnlyFormGroup label="启用" value={loadedConfig.enabled} />
+      <ReadOnlyFormGroup label="用户名Header" value={loadedConfig.usernameHeader} />
     </SectionComponent>
   );
 };

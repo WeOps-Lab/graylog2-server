@@ -20,29 +20,29 @@ import { OverlayTrigger, Icon } from 'components/common';
 import { Popover, Table, Button } from 'components/bootstrap';
 
 const backendQueryHelperPopover = (
-  <Popover id="user-search-query-help" title="Search Syntax Help">
+  <Popover id="user-search-query-help" title="帮助">
     <p><strong>Available search fields</strong></p>
     <Table condensed>
       <thead>
         <tr>
-          <th>Field</th>
-          <th>Description</th>
+          <th>字段</th>
+          <th>描述</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>title</td>
-          <td>The title of a backend</td>
+          <td>标题</td>
+          <td>后端服务标题</td>
         </tr>
         <tr>
-          <td>description</td>
-          <td>The description of a backends.</td>
+          <td>描述</td>
+          <td>后端服务描述.</td>
         </tr>
       </tbody>
     </Table>
-    <p><strong>Examples</strong></p>
+    <p><strong>示例</strong></p>
     <p>
-      Find backends with a title containing LDAP:<br />
+      查找标题为LDAP的后端服务:<br />
       <kbd>title:LDAP</kbd><br />
     </p>
   </Popover>

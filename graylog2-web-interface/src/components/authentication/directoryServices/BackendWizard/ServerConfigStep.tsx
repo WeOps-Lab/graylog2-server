@@ -129,18 +129,18 @@ const ServerConfigStep = ({ formRef, help = {}, onSubmit, onSubmitAll, submitAll
       {({ isSubmitting, setFieldValue, values, validateForm }) => (
         <Form className="form form-horizontal">
           <FormikFormGroup help={help.title}
-                           label="Title"
+                           label="标题"
                            name="title"
-                           placeholder="Title" />
+                           placeholder="标题" />
 
           <FormikFormGroup help={help.description}
-                           label={<>Description <Opt /></>}
+                           label={<>描述 <Opt /></>}
                            type="textarea"
                            name="description"
-                           placeholder="Description" />
+                           placeholder="描述" />
 
           <Input id="uri-host"
-                 label="Server Address"
+                 label="服务器地址"
                  labelClassName="col-sm-3"
                  wrapperClassName="col-sm-9">
             <>
@@ -149,14 +149,14 @@ const ServerConfigStep = ({ formRef, help = {}, onSubmit, onSubmitAll, submitAll
                              name="serverHost"
                              id="serverHost"
                              error={backendValidationErrors?.serverHost}
-                             placeholder="Hostname"
+                             placeholder="主机名"
                              validate={validateField(FORM_VALIDATION.serverHost)} />
                 <span className="input-group-addon input-group-separator">:</span>
                 <FormikInput formGroupClassName=""
                              name="serverPort"
                              id="serverPort"
                              error={backendValidationErrors?.serverPort}
-                             placeholder="Port"
+                             placeholder="端口"
                              type="number"
                              validate={validateField(FORM_VALIDATION.serverPort)} />
               </ServerUrl>
@@ -168,7 +168,7 @@ const ServerConfigStep = ({ formRef, help = {}, onSubmit, onSubmitAll, submitAll
                       <Input defaultChecked={value === 'none'}
                              formGroupClassName=""
                              id={name}
-                             label="None"
+                             label="无"
                              onBlur={onBlur}
                              onChange={(e) => _onTransportSecurityChange(e, values, setFieldValue, onChange)}
                              type="radio"

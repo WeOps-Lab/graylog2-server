@@ -60,7 +60,7 @@ const SubmitAllError = ({ error, backendId }: { error: FetchError, backendId: st
   <Row>
     <Col xs={9} xsOffset={3}>
       <Alert bsStyle="danger" style={{ wordBreak: 'break-word' }}>
-        <b>Failed to {backendId ? 'edit' : 'create'} authentication service</b><br />
+        <b>无法 {backendId ? '编辑' : '创建'} 鉴权服务</b><br />
         {error?.message && <>{error.message}<br /><br /></>}
         {error?.additional?.res?.text}
       </Alert>
@@ -69,7 +69,7 @@ const SubmitAllError = ({ error, backendId }: { error: FetchError, backendId: st
 );
 
 const _formatBackendValidationErrors = (backendErrors: { [inputNameJSON: string]: string[] }) => {
-  const backendErrorStrings = mapValues(backendErrors, (errorArray) => `Server validation error: ${errorArray.join(' ')}`);
+  const backendErrorStrings = mapValues(backendErrors, (errorArray) => `服务器验证失败: ${errorArray.join(' ')}`);
   const formattedBackendErrors = mapKeys(backendErrorStrings, (value, key) => camelCase(key));
 
   return formattedBackendErrors;
@@ -208,7 +208,7 @@ const _onSubmitAll = (
 
   if (stepsState.authBackendMeta.backendGroupSyncIsActive && !formValues.synchronizeGroups) {
     // eslint-disable-next-line no-alert
-    if (window.confirm('Do you really want to remove the group synchronization config for this authentication service?')) {
+    if (window.confirm('您是否真的要删除此身份验证服务的组同步配置?')) {
       return _submit();
     }
 

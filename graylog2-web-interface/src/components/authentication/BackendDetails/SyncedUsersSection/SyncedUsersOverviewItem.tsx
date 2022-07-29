@@ -45,7 +45,7 @@ const SyncedUsersOverviewItem = ({
   roles,
 }: Props) => {
   const userRolesNames = userRolesIds.map((roleId) => {
-    return roles.find((role) => role.id === roleId)?.name ?? 'Role not found';
+    return roles.find((role) => role.id === roleId)?.name ?? '未找到角色';
   }).toSet();
 
   return (
@@ -61,7 +61,7 @@ const SyncedUsersOverviewItem = ({
         <ActionsWrapper>
           <LinkContainer to={Routes.SYSTEM.USERS.edit(id)}>
             <Button type="button" bsStyle="info" bsSize="xs">
-              Edit
+              编辑
             </Button>
           </LinkContainer>
         </ActionsWrapper>

@@ -31,7 +31,7 @@ const SyncedTeamsSection = ({ authenticationBackend }: Props) => {
 
   if (!EnterpriseSyncedTeamsSection) {
     return (
-      <SectionComponent title="Synchronized Teams">
+      <SectionComponent title="已同步的团队">
         <EnterprisePluginNotFound featureName="teams" />
       </SectionComponent>
     );

@@ -69,19 +69,19 @@ const UserLoginTest = ({ prepareSubmitPayload }: Props) => {
   return (
     <>
       <p>
-        Verify the settings by loading the entry for the given user name. If you omit the password, no authentication attempt will be made.
+        通过加载给定用户名的条目来验证设置。如果您省略密码，则不会进行身份验证尝试
       </p>
       <Formik onSubmit={_handleLoginTest} initialValues={{ password: '', username: '' }}>
         <Form className="form">
           <Row className="no-bm">
             <Col sm={6}>
-              <FormikInput label="Username"
+              <FormikInput label="用户名"
                            name="username"
                            id="user-login-username"
                            required />
             </Col>
             <Col sm={6}>
-              <FormikInput label="Password"
+              <FormikInput label="密码"
                            name="password"
                            type="password"
                            id="user-login-password"
@@ -89,15 +89,15 @@ const UserLoginTest = ({ prepareSubmitPayload }: Props) => {
             </Col>
           </Row>
           <Button type="submit">
-            {loading ? <Spinner delay={0} text="Test User Login" /> : 'Test User Login'}
+            {loading ? <Spinner delay={0} text="测试用户登录...." /> : '测试用户登录'}
           </Button>
           {(!hasErrors && testFinished) && (
             <NotificationContainer bsStyle={success ? 'success' : 'danger'}>
               <b>
-                {!result?.user_exists && 'User does not exist'}
+                {!result?.user_exists && '用户不存在'}
                 {result?.user_exists && (
                   <>
-                    {result?.login_success ? message : 'Login failed'}
+                    {result?.login_success ? message : '登录失败'}
                   </>
                 )}
               </b>
@@ -107,8 +107,8 @@ const UserLoginTest = ({ prepareSubmitPayload }: Props) => {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th>User Attribute</th>
-                        <th>Value</th>
+                        <th>用户属性</th>
+                        <th>值</th>
                       </tr>
                     </thead>
 

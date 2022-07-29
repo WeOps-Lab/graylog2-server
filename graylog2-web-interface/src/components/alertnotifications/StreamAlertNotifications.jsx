@@ -58,8 +58,8 @@ class StreamAlertNotifications extends React.Component {
     const { stream } = this.props;
 
     const notifications = this.state.conditionNotifications.sort((a1, a2) => {
-      const t1 = a1.title || 'Untitled';
-      const t2 = a2.title || 'Untitled';
+      const t1 = a1.title || '无标题';
+      const t2 = a2.title || '无标题';
 
       return naturalSort(t1.toLowerCase(), t2.toLowerCase());
     });
@@ -68,12 +68,12 @@ class StreamAlertNotifications extends React.Component {
       <div>
         <div className="pull-right">
           <LinkContainer to={Routes.new_alert_notification_for_stream(stream.id)}>
-            <Button bsStyle="success">Add new notification</Button>
+            <Button bsStyle="success">新增告警通知</Button>
           </LinkContainer>
         </div>
-        <h2>Notifications</h2>
+        <h2>告警通知</h2>
         <p className="description">
-          Alert Notifications will be executed when a Condition belonging to this Stream is satisfied.
+          告警通知将在告警条件触发时执行
         </p>
 
         <AlertNotificationsList alertNotifications={notifications}
