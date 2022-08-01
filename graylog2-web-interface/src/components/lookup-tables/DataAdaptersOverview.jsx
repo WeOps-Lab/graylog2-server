@@ -55,43 +55,43 @@ class DataAdaptersOverview extends React.Component {
 
   _helpPopover = () => {
     return (
-      <Popover id="search-query-help" className={Styles.popoverWide} title="Search Syntax Help">
-        <p><strong>Available search fields</strong></p>
+      <Popover id="search-query-help" className={Styles.popoverWide} title="搜索提示">
+        <p><strong>可用的搜索字段</strong></p>
         <Table condensed>
           <thead>
-            <tr>
-              <th>Field</th>
-              <th>Description</th>
-            </tr>
+          <tr>
+            <th>字段</th>
+            <th>描述</th>
+          </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>id</td>
-              <td>Data Adapter ID</td>
-            </tr>
-            <tr>
-              <td>title</td>
-              <td>The title of the data adapter</td>
-            </tr>
-            <tr>
-              <td>name</td>
-              <td>The reference name of the data adapter</td>
-            </tr>
-            <tr>
-              <td>description</td>
-              <td>The description of data adapter</td>
-            </tr>
+          <tr>
+            <td>id</td>
+            <td>数据源ID</td>
+          </tr>
+          <tr>
+            <td>title</td>
+            <td>数据源标题</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>数据源名称</td>
+          </tr>
+          <tr>
+            <td>description</td>
+            <td>数据源描述</td>
+          </tr>
           </tbody>
         </Table>
-        <p><strong>Example</strong></p>
+        <p><strong>示例</strong></p>
         <p>
-          Find data adapters by parts of their names:<br />
+          按名称进行搜索:<br />
           <kbd>name:geoip</kbd><br />
           <kbd>name:geo</kbd>
         </p>
         <p>
-          Searching without a field name matches against the <code>title</code> field:<br />
-          <kbd>geoip</kbd> <br />is the same as<br />
+          按<code>标题</code>搜索：<br />
+          <kbd>geoip</kbd> <br />等价于<br />
           <kbd>title:geoip</kbd>
         </p>
       </Popover>

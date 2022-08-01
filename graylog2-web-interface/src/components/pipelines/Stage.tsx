@@ -39,45 +39,45 @@ type Props = {
 const Stage = ({ stage, pipeline, isLastStage, onUpdate, onDelete }: Props) => {
   const { rules: allRules }: { rules: RuleType[] } = useStore(RulesStore);
 
-  const suffix = `Contains ${(stage.rules.length === 1 ? '1 rule' : `${stage.rules.length} rules`)}`;
+  const suffix = `包含${(stage.rules.length === 1 ? '1个规则' : `${stage.rules.length}个规则`)}`;
 
   const throughput = (
     <MetricContainer name={`org.graylog.plugins.pipelineprocessor.ast.Pipeline.${pipeline.id}.stage.${stage.stage}.executed`}>
-      <CounterRate showTotal={false} prefix="Throughput: " suffix="msg/s" />
+      <CounterRate showTotal={false} prefix="吞吐量:" suffix="消息/秒" />
     </MetricContainer>
   );
 
   const actions = [
-    <Button key={`delete-stage-${stage}`} bsStyle="primary" onClick={onDelete}>Delete</Button>,
+    <Button key={`delete-stage-${stage}`} bsStyle="primary" onClick={onDelete}>删除</Button>,
     <StageForm key={`edit-stage-${stage}`} pipeline={pipeline} stage={stage} save={onUpdate} />,
   ];
 
   let description;
 
   if (isLastStage) {
-    description = 'There are no further stages in this pipeline. Once rules in this stage are applied, the pipeline will have finished processing.';
+    description = '此流水线没有下一步的步骤.';
   } else {
     let matchText;
 
     switch (stage.match) {
       case 'ALL':
-        matchText = 'all rules';
+        matchText = '所有规则';
         break;
       case 'EITHER':
-        matchText = 'at least one rule';
+        matchText = '至少一条规则';
         break;
       case 'PASS':
-        matchText = 'none or more rules';
+        matchText = '没有规则';
         break;
       default:
-        matchText = 'UNKNOWN';
+        matchText = '未知';
         break;
     }
 
     description = (
       <span>
-        Messages satisfying <strong>{matchText}</strong>{' '}
-        in this stage, will continue to the next stage.
+        满足 <strong>{matchText}</strong>{' '} 的消息
+        在这个阶段，将持续到下一个阶段。
       </span>
     );
   }

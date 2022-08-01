@@ -160,8 +160,8 @@ const IndexMaintenanceStrategiesConfiguration = ({
       </StyledAlert>
       {shouldShowMaxRetentionWarning && (
       <StyledAlert bsStyle="warning">
-        <Icon name="exclamation-triangle" />{' '} The effective retention period value calculated from the <b>Rotation period</b> and the
-        <b> max number of indices</b> should not be greater than the <b>Max retention period</b> of <b>{maxRetentionPeriod}</b> set by the Administrator.
+        <Icon name="exclamation-triangle" />{' '} <b>轮换期</b>和
+        <b>最大索引数</b>不应大于管理员设置的<b>{maxRetentionPeriod}</b>的<b>最大保留期</b>。
       </StyledAlert>
       )}
       <Input id="strategy-select"

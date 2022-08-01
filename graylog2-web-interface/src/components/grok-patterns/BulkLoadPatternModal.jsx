@@ -46,7 +46,7 @@ class BulkLoadPatternModal extends React.Component {
       const request = loaded.target.result;
 
       GrokPatternsStore.bulkImport(request, importStrategy).then(() => {
-        UserNotification.success('Grok Patterns imported successfully', 'Success!');
+        UserNotification.success('Grok表达式导入成功', '成功!');
         this.modal.close();
         onSuccess();
       });
@@ -62,38 +62,38 @@ class BulkLoadPatternModal extends React.Component {
   render() {
     return (
       <span>
-        <Button bsStyle="info" style={{ marginRight: 5 }} onClick={() => this.modal.open()}>Import pattern file</Button>
+        <Button bsStyle="info" style={{ marginRight: 5 }} onClick={() => this.modal.open()}>导入文件</Button>
 
         <BootstrapModalForm ref={(modal) => { this.modal = modal; }}
-                            title="Import Grok patterns from file"
-                            submitButtonText="Upload"
+                            title="从文件中导入Grok表达式"
+                            submitButtonText="上传"
                             onModalClose={this._resetImportStrategy}
                             onSubmitForm={this._onSubmit}>
           <Input id="pattern-file"
                  type="file"
                  ref={(patternFile) => { this.patternFile = patternFile; }}
                  name="patterns"
-                 label="Pattern file"
-                 help="A file containing Grok patterns, one per line. Name and patterns should be separated by whitespace."
+                 label="表达式文件"
+                 help="一个包含Grok表达式的文件,每行一个表达式.名称和表达式应该由空格分隔."
                  required />
           <Input id="abort-on-conflicting-patterns-radio"
                  type="radio"
                  name="import-strategy"
                  value="ABORT_ON_CONFLICT"
-                 label="Abort import if a pattern with the same name already exists"
+                 label="如果已存在同名模式，则中止导入"
                  defaultChecked
                  onChange={(e) => this._onImportStrategyChange(e)} />
           <Input id="replace-conflicting-patterns-radio"
                  type="radio"
                  name="import-strategy"
                  value="REPLACE_ON_CONFLICT"
-                 label="Replace existing patterns with the same name"
+                 label="用相同名称替换现有模式"
                  onChange={(e) => this._onImportStrategyChange(e)} />
           <Input id="drop-existing-patterns-radio"
                  type="radio"
                  name="import-strategy"
                  value="DROP_ALL_EXISTING"
-                 label="Drop all existing patterns before import"
+                 label="导入前删除所有现有模式"
                  onChange={(e) => this._onImportStrategyChange(e)} />
         </BootstrapModalForm>
       </span>

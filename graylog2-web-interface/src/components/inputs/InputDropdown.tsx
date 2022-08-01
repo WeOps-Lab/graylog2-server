@@ -92,11 +92,11 @@ const InputDropdown = ({ disabled, inputs, onLoadMessage, preselectedInputId, ti
       <LoaderContainer>
         <StyledInputDropdown id="placeholder-select"
                              type="select"
-                             aria-label="server input select"
+                             aria-label="选择输入"
                              value={selectedInput}
                              onChange={onSelectedInputChange}
                              placeholder={PLACEHOLDER}>
-          <option value={PLACEHOLDER}>Select an Input</option>
+          <option value={PLACEHOLDER}>选择输入</option>
           {inputOptions.toArray()}
         </StyledInputDropdown>
 

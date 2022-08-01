@@ -21,28 +21,28 @@ import { Popover, Table, Button } from 'components/bootstrap';
 
 const RolesQueryHelperPopover = (
   <Popover id="role-search-query-help" title="Search Syntax Help">
-    <p><strong>Available search fields</strong></p>
+    <p><strong>可用搜索字段</strong></p>
     <Table condensed>
       <thead>
         <tr>
-          <th>Field</th>
-          <th>Description</th>
+          <th>字段</th>
+          <th>描述</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>name</td>
-          <td>The name of a role</td>
+          <td>名称</td>
+          <td>角色的名称</td>
         </tr>
         <tr>
-          <td>description</td>
-          <td>The description of a role</td>
+          <td>描述</td>
+          <td>角色的描述</td>
         </tr>
       </tbody>
     </Table>
-    <p><strong>Examples</strong></p>
+    <p><strong>示例</strong></p>
     <p>
-      Find role with a name containing manager:<br />
+      查找名称包含 manager 的角色:<br />
       <kbd>name:manager</kbd><br />
     </p>
   </Popover>

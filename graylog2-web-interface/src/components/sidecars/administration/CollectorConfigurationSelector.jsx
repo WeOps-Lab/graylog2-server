@@ -80,7 +80,7 @@ class CollectorConfigurationSelector extends React.Component {
               <CollectorIndicator collector={collector.name}
                                   operatingSystem={collector.node_operating_system} />
             )
-            : <em>Unknown collector</em>}
+            : <em>未知采集器</em>}
         </small>
       </span>
     );
@@ -98,22 +98,22 @@ class CollectorConfigurationSelector extends React.Component {
     let actionSummary;
 
     if (nextAssignedConfigurations.length === 0) {
-      actionSummary = <span>You are going to <b>remove</b> the configuration for collector {collectorIndicator} from:</span>;
+      actionSummary = <span>您将要从{collectorIndicator}的配置<b>移除</b>采集器:</span>;
     } else {
-      actionSummary = <span>You are going to <b>apply</b> the <em>{nextAssignedConfigurations[0].name}</em> configuration for collector {collectorIndicator} to:</span>;
+      actionSummary = <span>您将要为采集器{collectorIndicator}<b>应用</b>配置<em>{nextAssignedConfigurations[0].name}</em>:</span>;
     }
 
     const formattedSummary = selectedSidecarCollectorPairs.map(({ sidecar }) => sidecar.node_name).join(', ');
 
     return (
       <BootstrapModalConfirm ref={(c) => { this.modal = c; }}
-                             title="Configuration summary"
+                             title="配置概览"
                              onConfirm={this.confirmConfigurationChange}
                              onCancel={this.cancelConfigurationChange}>
         <div>
           <p>{actionSummary}</p>
           <p>{formattedSummary}</p>
-          <p>Are you sure you want to proceed with this action?</p>
+          <p>确定要继续此操作?</p>
         </div>
       </BootstrapModalConfirm>
     );
@@ -129,9 +129,9 @@ class CollectorConfigurationSelector extends React.Component {
     if (selectedLogCollectors.length > 1) {
       return (
         <SelectPopover id="status-filter"
-                       title="Apply configuration"
+                       title="应用配置"
                        triggerNode={<Button bsSize="small" bsStyle="link">Configure <span className="caret" /></Button>}
-                       items={[`Cannot change configurations of ${selectedLogCollectors.map((collector) => collector.name).join(', ')} collectors simultaneously`]}
+                       items={[`不能同时更改 ${selectedLogCollectors.map(collector => collector.name).join(', ')} 采集器的配置`]}
                        displayDataFilter={false}
                        disabled />
       );
@@ -145,9 +145,9 @@ class CollectorConfigurationSelector extends React.Component {
     if (configurationIds.length === 0) {
       return (
         <SelectPopover id="status-filter"
-                       title="Apply configuration"
+                       title="应用配置"
                        triggerNode={<Button bsSize="small" bsStyle="link">Configure <span className="caret" /></Button>}
-                       items={['No configurations available for the selected log collector']}
+                       items={['所选日志收集器没有可用的配置']}
                        displayDataFilter={false}
                        disabled />
       );
@@ -159,13 +159,13 @@ class CollectorConfigurationSelector extends React.Component {
     return (
       <span>
         <SelectPopover id="apply-configuration-action"
-                       title="Apply configuration"
-                       triggerNode={<Button bsSize="small" bsStyle="link">Configure <span className="caret" /></Button>}
+                       title="应用配置"
+                       triggerNode={<Button bsSize="small" bsStyle="link">配置 <span className="caret" /></Button>}
                        items={configurationIds}
                        itemFormatter={this.configurationFormatter}
                        onItemSelect={this.handleConfigurationSelect}
                        selectedItems={assignedConfigurations.map((config) => config.id)}
-                       filterPlaceholder="Filter by configuration" />
+                       filterPlaceholder="过滤配置" />
         {this.renderConfigurationSummary(nextAssignedConfigurations, selectedSidecarCollectorPairs)}
       </span>
     );

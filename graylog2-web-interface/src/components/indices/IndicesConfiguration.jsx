@@ -35,8 +35,8 @@ class IndicesConfiguration extends React.Component {
       return (
         <Row>
           <Col md={12}>
-            Index set is not writable and will not be included in index rotation and retention.
-            It is also not possible to assign it to a stream.
+            索引集不可写，不会包含在索引轮换和保留中。
+            也不可能将其分配给消息流。
           </Col>
         </Row>
       );

@@ -31,36 +31,36 @@ const Rule = ({ create, title }) => {
   let pageTitle;
 
   if (create) {
-    pageTitle = 'Create pipeline rule';
+    pageTitle = '创建流水线角色';
   } else {
-    pageTitle = <span>Pipeline rule <em>{title}</em></span>;
+    pageTitle = <span>流水线角色<em>{title}</em></span>;
   }
 
   return (
     <div>
       <PageHeader title={pageTitle}>
         <span>
-          Rules are a way of applying changes to messages in Graylog. A rule consists of a condition and a list{' '}
-          of actions.{' '}
-          Graylog evaluates the condition against a message and executes the actions if the condition is satisfied.
+          规则是对 DataInsight 中的消息应用更改的一种方式。规则由条件和列表组成{' '}
+          动作。{' '}
+          DataInsight 根据消息评估条件并在满足条件时执行操作。
         </span>
 
         <span>
-          Read more about Graylog pipeline rules in the <DocumentationLink page={DocsHelper.PAGES.PIPELINE_RULES}
-                                                                           text="documentation" />.
+          查看 <DocumentationLink page={DocsHelper.PAGES.PIPELINE_RULES}
+                                                                           text="文档" />.
         </span>
 
         <span>
           <LinkContainer to={Routes.SYSTEM.PIPELINES.OVERVIEW}>
-            <Button bsStyle="info">Manage pipelines</Button>
+            <Button bsStyle="info">管理流水线</Button>
           </LinkContainer>
             &nbsp;
           <LinkContainer to={Routes.SYSTEM.PIPELINES.RULES}>
-            <Button bsStyle="info">Manage rules</Button>
+            <Button bsStyle="info">管理角色</Button>
           </LinkContainer>
             &nbsp;
           <LinkContainer to={Routes.SYSTEM.PIPELINES.SIMULATOR}>
-            <Button bsStyle="info">Simulator</Button>
+            <Button bsStyle="info">模拟</Button>
           </LinkContainer>
         </span>
       </PageHeader>

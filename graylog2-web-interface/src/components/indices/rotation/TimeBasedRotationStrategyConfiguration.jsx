@@ -88,12 +88,12 @@ class TimeBasedRotationStrategyConfiguration extends React.Component {
     const { rotation_period: rotationPeriod, rotationLimit } = this.state;
     const maxRotationPeriodErrorMessage = rotationLimit ? ` and max ${moment.duration(rotationLimit).humanize()}` : '';
 
-    return this._isValidPeriod() ? moment.duration(rotationPeriod).humanize() : `invalid (min 1 hour${maxRotationPeriodErrorMessage})`;
+    return this._isValidPeriod() ? moment.duration(rotationPeriod).humanize() : `不合法 (min 1 hour${maxRotationPeriodErrorMessage})`;
   };
 
   render() {
     const { rotation_period: rotationPeriod, rotationLimit } = this.state;
-    const maxRotationPeriodHelpText = rotationLimit ? ` The max rotation period is set to ${moment.duration(rotationLimit).humanize()} by Administrator.` : '';
+    const maxRotationPeriodHelpText = rotationLimit ? ` 最大轮转周期被管理员设置为 ${moment.duration(rotationLimit).humanize()}.` : '';
 
     return (
       <div>
@@ -102,10 +102,10 @@ class TimeBasedRotationStrategyConfiguration extends React.Component {
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9"
                ref={(rotationPeriodRef) => { this.inputs.rotation_period = rotationPeriodRef; }}
-               label="Rotation period (ISO8601 Duration)"
+               label="轮换周期（ISO8601 持续时间）"
                onChange={this._onPeriodUpdate('rotation_period')}
                value={rotationPeriod}
-               help={`How long an index gets written to before it is rotated. (i.e. "P1D" for 1 day, "PT6H" for 6 hours).${maxRotationPeriodHelpText}`}
+               help={`索引在旋转之前被写入多长时间。 （即"P1D"为 1 天，"PT6H"为 6 小时）.${maxRotationPeriodHelpText}`}
                addonAfter={this._formatDuration()}
                bsStyle={this._validationState()}
                required />

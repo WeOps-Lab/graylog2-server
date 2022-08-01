@@ -27,19 +27,19 @@ PluginStore.register(new PluginManifest({}, {
   indexRetentionConfig: [
     {
       type: 'org.graylog2.indexer.retention.strategies.DeletionRetentionStrategy',
-      displayName: 'Delete Index',
+      displayName: '删除索引',
       configComponent: DeletionRetentionStrategyConfiguration,
       summaryComponent: DeletionRetentionStrategySummary,
     },
     {
       type: 'org.graylog2.indexer.retention.strategies.ClosingRetentionStrategy',
-      displayName: 'Close Index',
+      displayName: '关闭索引',
       configComponent: ClosingRetentionStrategyConfiguration,
       summaryComponent: ClosingRetentionStrategySummary,
     },
     {
       type: 'org.graylog2.indexer.retention.strategies.NoopRetentionStrategy',
-      displayName: 'Do nothing',
+      displayName: '不做任何操作',
       configComponent: NoopRetentionStrategyConfiguration,
       summaryComponent: NoopRetentionStrategySummary,
     },

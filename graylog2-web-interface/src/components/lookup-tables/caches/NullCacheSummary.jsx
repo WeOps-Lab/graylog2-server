@@ -23,7 +23,7 @@ class NullCacheSummary extends React.Component {
   };
 
   render() {
-    return (<p>This cache has no configuration.</p>);
+    return (<p>此节点没有配置缓存.</p>);
   }
 }
 

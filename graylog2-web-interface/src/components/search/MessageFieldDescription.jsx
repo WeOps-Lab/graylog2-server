@@ -76,7 +76,7 @@ class MessageFieldDescription extends React.Component {
         {this._shouldShowTerms()
         && (
         <Alert bsStyle="info" onDismiss={() => this.setState({ messageTerms: Immutable.Map() })}>
-          Field terms: &nbsp;{this._getFormattedTerms()}
+          词条: &nbsp;{this._getFormattedTerms()}
         </Alert>
         )}
       </dd>

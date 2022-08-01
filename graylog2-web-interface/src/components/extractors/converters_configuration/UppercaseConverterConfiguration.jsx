@@ -50,7 +50,7 @@ class UppercaseConverterConfiguration extends React.Component {
       <div className="xtrc-converter">
         <Input type="checkbox"
                id={`enable-${this.props.type}-converter`}
-               label="Transform value to uppercase"
+               label="转换值为大写"
                wrapperClassName="col-md-offset-2 col-md-10"
                defaultChecked
                onChange={this._toggleConverter} />

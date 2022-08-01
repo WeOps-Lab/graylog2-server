@@ -68,9 +68,9 @@ class EditOutputButton extends React.Component {
         <ConfigurationForm ref={(form) => { this.configurationForm = form; }}
                            key={`configuration-form-output-${output.id}`}
                            configFields={typeDefinition}
-                           title={`Editing Output ${output.title}`}
+                           title={`编辑输出 ${output.title}`}
                            typeName={output.type}
-                           helpBlock="Select a name of your new output that describes it."
+                           helpBlock="为新的输出选择用于描述它的一个名字."
                            submitAction={this._handleSubmit}
                            values={output.configuration}
                            titleValue={output.title} />
@@ -80,7 +80,7 @@ class EditOutputButton extends React.Component {
     return (
       <span>
         <Button disabled={disabled} bsStyle="info" onClick={this.handleClick}>
-          Edit
+          编辑
         </Button>
         {configurationForm}
       </span>

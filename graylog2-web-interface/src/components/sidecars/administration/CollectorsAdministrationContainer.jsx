@@ -124,7 +124,7 @@ const CollectorsAdministrationContainer = createReactClass({
     const { collectors, configurations, sidecars } = this.state;
 
     if (!collectors || !collectors.collectors || !sidecars || !sidecars.sidecars || !configurations || !configurations.configurations) {
-      return <Spinner text="Loading collector list..." />;
+      return <Spinner text="加载中..." />;
     }
 
     const sidecarCollectors = [];

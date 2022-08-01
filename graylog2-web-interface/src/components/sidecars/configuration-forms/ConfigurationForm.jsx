@@ -94,7 +94,7 @@ const ConfigurationForm = createReactClass({
       const nextValidation = lodash.clone(validation);
 
       if (checkForRequiredFields && !this._isTemplateSet(nextFormData.template)) {
-        nextValidation.errors.template = ['Please fill out the configuration field.'];
+        nextValidation.errors.template = ['请填写必要的配置信息.'];
         nextValidation.failed = true;
       }
 
@@ -177,7 +177,7 @@ const ConfigurationForm = createReactClass({
     nextFormData.collector_id = nextId;
 
     // eslint-disable-next-line no-alert
-    if (!nextFormData.template || window.confirm('Do you want to use the default template for the selected Configuration?')) {
+    if (!nextFormData.template || window.confirm('是否要为所选配置使用默认模板?')) {
       // Wait for the promise to resolve and then update the whole formData state
       defaultTemplatePromise.then((defaultTemplate) => {
         this._onTemplateChange(defaultTemplate);
@@ -194,7 +194,7 @@ const ConfigurationForm = createReactClass({
     const nextFormData = lodash.cloneDeep(formData);
 
     // eslint-disable-next-line no-alert
-    if (!nextFormData.template || window.confirm('Do you want to overwrite your current work with this Configuration?')) {
+    if (!nextFormData.template || window.confirm('是否要用此配置覆盖当前配置?')) {
       this._onTemplateChange(nextTemplate);
     }
   },
@@ -221,7 +221,7 @@ const ConfigurationForm = createReactClass({
   },
 
   _formatCollector(collector) {
-    return collector ? `${collector.name} on ${lodash.upperFirst(collector.node_operating_system)}` : 'Unknown collector';
+    return collector ? `${collector.name} on ${lodash.upperFirst(collector.node_operating_system)}` : '未知采集器';
   },
 
   _formatCollectorOptions() {
@@ -234,7 +234,7 @@ const ConfigurationForm = createReactClass({
         options.push({ value: collector.id, label: this._formatCollector(collector) });
       });
     } else {
-      options.push({ value: 'none', label: 'Loading collector list...', disable: true });
+      options.push({ value: 'none', label: '加载采集器列表中...', disable: true });
     }
 
     return options;
@@ -270,8 +270,7 @@ const ConfigurationForm = createReactClass({
         <span>
           <FormControl.Static>{this._formatCollector(collector)}</FormControl.Static>
           <HelpBlock bsClass="warning">
-            <b>Note:</b> Log Collector cannot change while the Configuration is in use. Clone the Configuration
-            to test it using another Collector.
+            <b>注意:</b> 配置正在使用时,日志采集器无法更改或克隆配置到另一个收集器中进行测试.
           </HelpBlock>
         </span>
       );

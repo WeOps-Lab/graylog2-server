@@ -70,7 +70,7 @@ const SurroundingSearchButton = ({ searchConfig, timestamp, id, messageFields }:
     ));
 
   return (
-    <DropdownButton title="Show surrounding messages" bsSize="small" id="surrounding-search-dropdown">
+    <DropdownButton title="显示附近的消息" bsSize="small" id="surrounding-search-dropdown">
       {menuItems}
     </DropdownButton>
   );

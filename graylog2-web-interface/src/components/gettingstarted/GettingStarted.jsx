@@ -145,7 +145,7 @@ class GettingStarted extends React.Component {
     if (!noDismissButton) {
       dismissButton = (
         <DismissButton bsStyle="default" bsSize="small" onClick={this._dismissGuide}>
-          <Icon name="times" /> Dismiss guide
+          <Icon name="times" /> 关闭指南
         </DismissButton>
       );
     }
@@ -158,9 +158,9 @@ class GettingStarted extends React.Component {
           <ContentHeadRow className="content">
             <Col mdPush={3} md={6} className="text-center" style={{ paddingBottom: '15px' }}>
               <span>
-                We could not load the{' '}
-                <a target="_blank" rel="noopener noreferrer" href="https://gettingstarted.graylog.org/assets/index.html">Graylog Getting Started Guide</a>.
-                Please open it directly with a browser that can access the public internet.
+                无法加载{' '}
+                <a target="_blank" rel="noopener noreferrer" href="https://gettingstarted.graylog.org/assets/index.html">DataInsight入门指南</a>.
+                请用可以直接访问互联网的浏览器打开它.
               </span>
             </Col>
           </ContentHeadRow>
@@ -182,7 +182,7 @@ class GettingStarted extends React.Component {
           <Grid>
             <ContentHeadRow className="content">
               <Col mdPush={3} md={6} className="text-center" style={{ paddingBottom: '15px' }}>
-                <Spinner text="Loading Graylog Getting started guide ..." />
+                <Spinner text="加载DataInsight入门指南中 ..." />
               </Col>
             </ContentHeadRow>
           </Grid>
@@ -198,7 +198,7 @@ class GettingStarted extends React.Component {
                                 frameBorder="0"
                                 scrolling="yes"
                                 title="getting-started-content">
-            <p>Sorry, no iframes</p>
+            <p>不支持IFrame</p>
           </GettingStartedIframe>
         </>
       );

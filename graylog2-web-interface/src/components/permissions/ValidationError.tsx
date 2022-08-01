@@ -51,7 +51,7 @@ const ValidationError = ({ validationResult, availableGrantees }: Props) => {
     <Container bsStyle="danger">
       <List>
         <li>
-          Removing the following owners will leave the entity ownerless: <br />
+          删除以下所有者将使实体无所有者：<br />
           {pastOwners.map((owner, key) => (
             <span key={owner?.id}>
               {capitalize(owner?.type)} <i>{owner?.title}</i>

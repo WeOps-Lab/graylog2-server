@@ -61,10 +61,10 @@ const NodesList = createReactClass({
       <Row className="content">
         <Col md={12}>
           <h2>
-            There <Pluralize value={nodesNo} singular="is" plural="are" /> {nodesNo} active <Pluralize value={nodesNo} singular="node" plural="nodes" />
+            共 <Pluralize value={nodesNo} singular="个" plural="个" /> {nodesNo} 活跃 <Pluralize value={nodesNo} singular="节点" plural="节点" />
           </h2>
           <EntityList bsNoItemsStyle="info"
-                      noItemsText="There are no active nodes."
+                      noItemsText="没有活跃的节点."
                       items={this._formatNodes(this.props.nodes, this.state.clusterOverview)} />
         </Col>
       </Row>

@@ -72,7 +72,7 @@ class IndexSetDeletionForm extends React.Component {
 
   _modalContent = () => {
     if (this._isLoading()) {
-      return <Spinner text="Loading assigned streams..." />;
+      return <Spinner text="加载指定消息流中..." />;
     }
 
     if (this.props.indexSet.default) {
@@ -80,7 +80,7 @@ class IndexSetDeletionForm extends React.Component {
         <Row>
           <Col md={12}>
             <Alert bsStyle="danger">
-              Unable to delete the index set because it is the default index set!
+              不能删除索引集,因为这是默认的索引集.
             </Alert>
           </Col>
         </Row>
@@ -97,13 +97,13 @@ class IndexSetDeletionForm extends React.Component {
           <Row>
             <Col md={12}>
               <Alert bsStyle="danger">
-                Unable to delete the index set because it has assigned streams. Remove stream assignments to be able to delete this index set.
+                无法删除关联了消息流的索引集.必须先删除关联的消息流才可删除该索引集.
               </Alert>
             </Col>
           </Row>
           <Row>
             <Col md={12}>
-              <h4>Assigned streams:</h4>
+              <h4>关联的消息流:</h4>
               <ul>
                 {assignedStreams}
               </ul>

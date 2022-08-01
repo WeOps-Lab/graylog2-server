@@ -48,18 +48,18 @@ const CloneMenuItem = ({ error, id, modalRef, name, onChange, onSave, onSelect }
     <span>
       <StyledMenuItem onSelect={onSelect}>Clone</StyledMenuItem>
       <BootstrapModalForm ref={modalRef}
-                          title="Clone"
+                          title="复制"
                           onSubmitForm={onSave}
                           submitButtonDisabled={!!error}
-                          submitButtonText="Done">
+                          submitButtonText="完成">
         <fieldset>
           <Input type="text"
                  id={id}
-                 label="Name"
+                 label="名称"
                  defaultValue={name}
                  onChange={onChange}
                  bsStyle={error ? 'error' : null}
-                 help={error || 'Type a name for the new collector'}
+                 help={error || '输入采集器的名称'}
                  autoFocus
                  required />
         </fieldset>

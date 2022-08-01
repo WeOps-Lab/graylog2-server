@@ -119,7 +119,7 @@ const SimulationChanges = createReactClass({
 
     return (
       <FieldResultWrap resultType="added">
-        <h4>Added fields</h4>
+        <h4>增加的字段</h4>
         <dl>
           {formattedFields}
         </dl>
@@ -143,7 +143,7 @@ const SimulationChanges = createReactClass({
 
     return (
       <FieldResultWrap resultType="removed">
-        <h4>Removed fields</h4>
+        <h4>移除的字段</h4>
         <dl>
           {formattedFields}
         </dl>
@@ -168,7 +168,7 @@ const SimulationChanges = createReactClass({
 
     return (
       <FieldResultWrap resultType="mutated">
-        <h4>Mutated fields</h4>
+        <h4>更改的字段</h4>
         <dl>
           {formattedFields}
         </dl>
@@ -191,7 +191,7 @@ const SimulationChanges = createReactClass({
     const formattedMutatedFields = this._formatMutatedFields(processedMessage.decoration_stats.changed_fields);
 
     if (!formattedAddedFields && !formattedRemovedFields && !formattedMutatedFields) {
-      return <p>Original message would be not be modified during processing.</p>;
+      return <p>处理过程中将删除原始消息.</p>;
     }
 
     return (
@@ -210,7 +210,7 @@ const SimulationChanges = createReactClass({
       <Row className="row-sm">
         <Col md={12}>
           <h3>
-            Changes in original message{' '}
+            原始消息{' '}
             <small><em>{originalMessage.id}</em></small>
           </h3>
           {this._getOriginalMessageChanges()}
@@ -231,12 +231,12 @@ const SimulationChanges = createReactClass({
     return (
       <Row className="row-sm">
         <Col md={12}>
-          <h3>Other changes</h3>
+          <h3>其它更改</h3>
           <p>
-            There would be {createdMessages.length}{' '}
-            <Pluralize singular="message" plural="messages" value={createdMessages.length} /> created.{' '}
-            Switch to the <em>Results preview</em> view option to see{' '}
-            <Pluralize singular="it" plural="them" value={createdMessages.length} />.
+            这里将有 {createdMessages.length}{' '}
+            <Pluralize singular="消息" plural="消息" value={createdMessages.length} /> 被创建.{' '}
+            切换到 <em>结果预览</em> 查看{' '}
+            <Pluralize singular="它们" plural="它们" value={createdMessages.length} />.
           </p>
         </Col>
       </Row>

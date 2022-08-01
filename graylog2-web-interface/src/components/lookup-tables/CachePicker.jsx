@@ -50,13 +50,13 @@ class CachePicker extends React.Component {
     return (
       <fieldset>
         <Input id="cache-select"
-               label="Cache"
+               label="缓存"
                required
                autoFocus
-               help="Select an existing cache"
+               help="选择缓存"
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9">
-          <Select placeholder="Select a cache"
+          <Select placeholder="选择缓存"
                   clearable={false}
                   options={sortedCaches}
                   matchProp="label"

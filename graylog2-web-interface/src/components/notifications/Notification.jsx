@@ -16,18 +16,18 @@
  */
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, {css} from 'styled-components';
 
-import { Alert, Button } from 'components/bootstrap';
-import { RelativeTime, Icon } from 'components/common';
+import {Alert, Button} from 'components/bootstrap';
+import {RelativeTime, Icon} from 'components/common';
 import NotificationsFactory from 'logic/notifications/NotificationsFactory';
-import { NotificationsActions } from 'stores/notifications/NotificationsStore';
+import {NotificationsActions} from 'stores/notifications/NotificationsStore';
 
 const StyledButton = styled(Button)`
   float: right;
 `;
 
-const StyledAlert = styled(Alert)(({ theme }) => css`
+const StyledAlert = styled(Alert)(({theme}) => css`
   margin-top: 10px;
 
   i {
@@ -43,7 +43,7 @@ const NotificationHead = styled.h3`
   margin-bottom: 5px;
 `;
 
-const NotificationTimestamp = styled.span(({ theme }) => css`
+const NotificationTimestamp = styled.span(({theme}) => css`
   margin-left: 3px;
   font-size: ${theme.fonts.size.small};
 `);
@@ -54,30 +54,30 @@ class Notification extends React.Component {
   };
 
   _onClose = () => {
-    const { notification } = this.props;
+    const {notification} = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm('Really delete this notification?')) {
+    if (window.confirm('确认删除此通知?')) {
       NotificationsActions.delete(notification.type);
     }
   };
 
   render() {
-    const { notification } = this.props;
+    const {notification} = this.props;
     const notificationView = NotificationsFactory.getForNotification(notification);
 
     return (
       <StyledAlert bsStyle="danger">
         <StyledButton className="delete-notification" bsStyle="link" onClick={this._onClose}>
-          <Icon name="times" />
+          <Icon name="times"/>
         </StyledButton>
 
         <NotificationHead>
-          <Icon name="bolt" />{' '}
+          <Icon name="bolt"/>{' '}
           {notificationView.title}{' '}
 
           <NotificationTimestamp>
-            (triggered <RelativeTime dateTime={notification.timestamp} />)
+            (在 <RelativeTime dateTime={notification.timestamp}/> 触发)
           </NotificationTimestamp>
         </NotificationHead>
         <div className="notification-description">

@@ -33,58 +33,58 @@ const _isActive = (requestPath, prefix) => {
 };
 
 const _systemTitle = (pathname) => {
-  const prefix = 'System';
+  const prefix = '系统';
 
   if (_isActive(pathname, '/system/overview')) {
-    return `${prefix} / Overview`;
+    return `${prefix} / 概览`;
   }
 
   if (_isActive(pathname, '/system/nodes')) {
-    return `${prefix} / Nodes`;
+    return `${prefix} / 节点`;
   }
 
   if (_isActive(pathname, '/system/inputs')) {
-    return `${prefix} / Inputs`;
+    return `${prefix} / 数据接收`;
   }
 
   if (_isActive(pathname, '/system/outputs')) {
-    return `${prefix} / Outputs`;
+    return `${prefix} / 数据输出`;
   }
 
   if (_isActive(pathname, '/system/indices')) {
-    return `${prefix} / Indices`;
+    return `${prefix} / 索引`;
   }
 
   if (_isActive(pathname, '/system/logging')) {
-    return `${prefix} / Logging`;
+    return `${prefix} / 日志级别`;
   }
 
   if (_isActive(pathname, '/system/authentication')) {
-    return `${prefix} / Authentication`;
+    return `${prefix} / 认证`;
   }
 
   if (_isActive(pathname, '/system/contentpacks')) {
-    return `${prefix} / Content Packs`;
+    return `${prefix} / 扩展包`;
   }
 
   if (_isActive(pathname, '/system/grokpatterns')) {
-    return `${prefix} / Grok Patterns`;
+    return `${prefix} / Grok表达式`;
   }
 
   if (_isActive(pathname, '/system/lookuptables')) {
-    return `${prefix} / Lookup Tables`;
+    return `${prefix} / 数据字典`;
   }
 
   if (_isActive(pathname, '/system/configurations')) {
-    return `${prefix} / Configurations`;
+    return `${prefix} / 配置`;
   }
 
   if (_isActive(pathname, '/system/pipelines')) {
-    return `${prefix} / Pipelines`;
+    return `${prefix} / 流水线`;
   }
 
   if (_isActive(pathname, '/system/sidecars')) {
-    return `${prefix} / Sidecars`;
+    return `${prefix} / 客户端`;
   }
 
   const pluginRoute = PluginStore.exports('systemnavigation').filter((route) => _isActive(pathname, route.path))[0];
@@ -112,54 +112,54 @@ const SystemMenu = ({ location }) => {
 
   return (
     <NavDropdown title={_systemTitle(location.pathname)} id="system-menu-dropdown">
-      <NavigationLink path={Routes.SYSTEM.OVERVIEW} description="Overview" />
+      <NavigationLink path={Routes.SYSTEM.OVERVIEW} description="概览" />
       <IfPermitted permissions={['clusterconfigentry:read']}>
-        <NavigationLink path={Routes.SYSTEM.CONFIGURATIONS} description="Configurations" />
+        <NavigationLink path={Routes.SYSTEM.CONFIGURATIONS} description="配置" />
       </IfPermitted>
       <HideOnCloud>
-        <NavigationLink path={Routes.SYSTEM.NODES.LIST} description="Nodes" />
+        <NavigationLink path={Routes.SYSTEM.NODES.LIST} description="节点" />
       </HideOnCloud>
       <HideOnCloud>
         <IfPermitted permissions={['inputs:read']}>
-          <NavigationLink path={Routes.SYSTEM.INPUTS} description="Inputs" />
+          <NavigationLink path={Routes.SYSTEM.INPUTS} description="数据接收" />
         </IfPermitted>
         <IfPermitted permissions={['outputs:read']}>
-          <NavigationLink path={Routes.SYSTEM.OUTPUTS} description="Outputs" />
+          <NavigationLink path={Routes.SYSTEM.OUTPUTS} description="数据输出" />
         </IfPermitted>
       </HideOnCloud>
       <IfPermitted permissions={['indices:read']}>
-        <NavigationLink path={Routes.SYSTEM.INDICES.LIST} description="Indices" />
+        <NavigationLink path={Routes.SYSTEM.INDICES.LIST} description="索引" />
       </IfPermitted>
       <HideOnCloud>
         <IfPermitted permissions={['loggers:read']}>
-          <NavigationLink path={Routes.SYSTEM.LOGGING} description="Logging" />
+          <NavigationLink path={Routes.SYSTEM.LOGGING} description="日志级别" />
         </IfPermitted>
       </HideOnCloud>
       <IfPermitted permissions={['users:list']} anyPermissions>
-        <NavigationLink path={Routes.SYSTEM.USERS.OVERVIEW} description="Users and Teams" />
+        <NavigationLink path={Routes.SYSTEM.USERS.OVERVIEW} description="用户" />
       </IfPermitted>
       <IfPermitted permissions={['roles:read']} anyPermissions>
-        <NavigationLink path={Routes.SYSTEM.AUTHZROLES.OVERVIEW} description="Roles" />
+        <NavigationLink path={Routes.SYSTEM.AUTHZROLES.OVERVIEW} description="角色" />
       </IfPermitted>
       <HideOnCloud>
         <IfPermitted permissions={['authentication:edit']} anyPermissions>
-          <NavigationLink path={Routes.SYSTEM.AUTHENTICATION.BACKENDS.ACTIVE} description="Authentication" />
+          <NavigationLink path={Routes.SYSTEM.AUTHENTICATION.BACKENDS.ACTIVE} description="认证" />
         </IfPermitted>
       </HideOnCloud>
       <IfPermitted permissions={['dashboards:create', 'inputs:create', 'streams:create']}>
-        <NavigationLink path={Routes.SYSTEM.CONTENTPACKS.LIST} description="Content Packs" />
+        <NavigationLink path={Routes.SYSTEM.CONTENTPACKS.LIST} description="扩展包" />
       </IfPermitted>
       <IfPermitted permissions={['inputs:read']}>
-        <NavigationLink path={Routes.SYSTEM.GROKPATTERNS} description="Grok Patterns" />
+        <NavigationLink path={Routes.SYSTEM.GROKPATTERNS} description="Grok表达式" />
       </IfPermitted>
       <IfPermitted permissions={['inputs:edit']}>
-        <NavigationLink path={Routes.SYSTEM.LOOKUPTABLES.OVERVIEW} description="Lookup Tables" />
+        <NavigationLink path={Routes.SYSTEM.LOOKUPTABLES.OVERVIEW} description="数据字典" />
       </IfPermitted>
       <IfPermitted permissions={['inputs:create']}>
-        <NavigationLink path={Routes.SYSTEM.PIPELINES.OVERVIEW} description="Pipelines" />
+        <NavigationLink path={Routes.SYSTEM.PIPELINES.OVERVIEW} description="流水线" />
       </IfPermitted>
       <IfPermitted permissions={['sidecars:read']}>
-        <NavigationLink path={Routes.SYSTEM.SIDECARS.OVERVIEW} description="Sidecars" />
+        <NavigationLink path={Routes.SYSTEM.SIDECARS.OVERVIEW} description="客户端管理" />
       </IfPermitted>
       {pluginSystemNavigations}
     </NavDropdown>

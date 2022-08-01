@@ -96,7 +96,7 @@ class ConfigurationVariablesHelper extends React.Component {
           <td>{configVar.description}</td>
           <td>
             <Button bsStyle="primary" bsSize="xsmall" onClick={this._handleDeleteCheck(configVar)}>
-              Delete
+              删除
             </Button>
             &nbsp;
             <EditConfigurationVariableModal id={configVar.id}
@@ -153,9 +153,9 @@ class ConfigurationVariablesHelper extends React.Component {
           <Table responsive>
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th className={ConfigurationHelperStyle.actionsColumn}>Actions</th>
+                <th>名称</th>
+                <th>描述</th>
+                <th className={ConfigurationHelperStyle.actionsColumn}>操作</th>
               </tr>
             </thead>
             <tbody>
@@ -166,27 +166,26 @@ class ConfigurationVariablesHelper extends React.Component {
 
         <BootstrapModalWrapper ref={(modal) => { this.errorModal = modal; }}>
           <Modal.Header>
-            <Modal.Title>Error deleting configuration variable <strong>$&#123;user.{variableToDelete.name}&#125;</strong></Modal.Title>
+            <Modal.Title>删除配置变量时出错：<strong>$&#123;user.{variableToDelete.name}&#125;</strong></Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Alert bsStyle="warning">
               <p>
-                Cannot delete this configuration variable as it is still in use. Please remove the variable from
-                the following configurations and try again.
+                无法删除此配置变量,因为它仍在使用中.请从下列配置中删除变量,然后重试.
                 {errorModalContent}
               </p>
             </Alert>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this._closeErrorModal}>Close</Button>
+            <Button onClick={this._closeErrorModal}>关闭</Button>
           </Modal.Footer>
         </BootstrapModalWrapper>
 
         <BootstrapModalConfirm ref={(c) => { this.deleteConfirmModal = c; }}
-                               title="Delete Configuration Variable?"
+                               title="删除配置变量?"
                                onConfirm={this._handleDeleteConfirm}
                                onCancel={this._closeErrorModal}>
-          <p>Are you sure you want to remove the configuration variable <strong>{variableToDelete.name}</strong>?</p>
+          <p>您确定要移除此配置的变量<strong>{variableToDelete.name}</strong>?</p>
         </BootstrapModalConfirm>
       </div>
     );

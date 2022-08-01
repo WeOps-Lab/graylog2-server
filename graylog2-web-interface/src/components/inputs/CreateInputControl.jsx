@@ -55,7 +55,7 @@ const CreateInputControl = createReactClass({
 
       options.sort((inputTypeA, inputTypeB) => inputTypeA.label.toLowerCase().localeCompare(inputTypeB.label.toLowerCase()));
     } else {
-      options.push({ value: 'none', label: 'No inputs available', disabled: true });
+      options.push({ value: 'none', label: '没有可用的接收器', disabled: true });
     }
 
     return options;
@@ -106,8 +106,8 @@ const CreateInputControl = createReactClass({
         <InputForm ref={(configurationForm) => { this.configurationForm = configurationForm; }}
                    key="configuration-form-input"
                    configFields={selectedInputDefinition.requested_configuration}
-                   title={<span>Launch new <em>{inputTypeName}</em> input</span>}
-                   helpBlock="Select a name of your new input that describes it."
+                   title={<span>启动新的 <em>{inputTypeName}</em> 接收器</span>}
+                   helpBlock="为新的接收器起个标题."
                    typeName={selectedInput}
                    submitAction={this._createInput} />
       );
@@ -118,18 +118,18 @@ const CreateInputControl = createReactClass({
         <Col md={12}>
           <form className="form-inline" onSubmit={this._openModal}>
             <div className="form-group" style={{ width: 300 }}>
-              <Select placeholder="Select input"
+              <Select placeholder="选择接收器"
                       options={this._formatSelectOptions()}
                       matchProp="label"
                       onChange={this._onInputSelect}
                       value={selectedInput} />
             </div>
             &nbsp;
-            <Button bsStyle="success" type="submit" disabled={!selectedInput}>Launch new input</Button>
-            <ExternalLinkButton href="https://marketplace.graylog.org/"
+            <Button bsStyle="success" type="submit" disabled={!selectedInput}>启动新的接收器</Button>
+            <ExternalLinkButton href="#"
                                 bsStyle="info"
                                 style={{ marginLeft: 10 }}>
-              Find more inputs
+              查找更多接收器
             </ExternalLinkButton>
           </form>
           {inputModal || customInputsComponent}

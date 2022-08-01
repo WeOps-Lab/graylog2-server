@@ -38,17 +38,17 @@ class VerboseMessageModal extends React.Component {
     return (
       <BootstrapModalWrapper ref={(c) => { this.sourceModal = c; }} bsSize="large">
         <Modal.Header closeButton>
-          <Modal.Title><span>Error Details for <em>{this.props.collectorName}</em></span></Modal.Title>
+          <Modal.Title><span><em>{this.props.collectorName}</em>的错误信息</span></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="configuration">
             <pre>
-              {this.props.collectorVerbose || '<no messages>'}
+              {this.props.collectorVerbose || '暂无信息'}
             </pre>
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" onClick={this.hide}>Close</Button>
+          <Button type="button" onClick={this.hide}>关闭</Button>
         </Modal.Footer>
       </BootstrapModalWrapper>
     );

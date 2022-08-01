@@ -52,11 +52,11 @@ class MaxmindAdapterFieldSet extends React.Component {
   render() {
     const { config } = this.props;
     const databaseTypes = [
-      { label: 'ASN database', value: 'MAXMIND_ASN' },
-      { label: 'City database', value: 'MAXMIND_CITY' },
-      { label: 'Country database', value: 'MAXMIND_COUNTRY' },
-      { label: 'IPinfo location database', value: 'IPINFO_STANDARD_LOCATION' },
-      { label: 'IPinfo ASN database', value: 'IPINFO_ASN' },
+      { label: 'ASN数据库', value: 'MAXMIND_ASN' },
+      { label: '城市数据库', value: 'MAXMIND_CITY' },
+      { label: '国家数据库', value: 'MAXMIND_COUNTRY' },
+      { label: 'IPinfo 地理数据库', value: 'IPINFO_STANDARD_LOCATION' },
+      { label: 'IPinfo ASN 数据库', value: 'IPINFO_ASN' },
     ];
 
     return (
@@ -64,31 +64,31 @@ class MaxmindAdapterFieldSet extends React.Component {
         <Input type="text"
                id="path"
                name="path"
-               label="File path"
+               label="文件路径"
                autoFocus
                required
                onChange={this.props.handleFormEvent}
-               help={this.props.validationMessage('path', 'The path to the Maxmind\u2122 database file.')}
+               help={this.props.validationMessage('path', 'Maxmind\u2122数据库文件的路径。')}
                bsStyle={this.props.validationState('path')}
                value={config.path}
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9" />
         <Input id="database-type-select"
-               label="Database type"
+               label="数据库类型"
                required
                autoFocus
-               help="Select the type of the database file"
+               help="选择数据库类型"
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9">
-          <Select placeholder="Select the type of database file"
+          <Select placeholder="选择数据库类型"
                   clearable={false}
                   options={databaseTypes}
                   matchProp="label"
                   onChange={this._onDbTypeSelect}
                   value={config.database_type} />
         </Input>
-        <TimeUnitInput label="Refresh file"
-                       help={'If enabled, the MaxMind\u2122 database file is checked for modifications and refreshed when it changed on disk.'}
+        <TimeUnitInput label="刷新文件"
+                       help={'如果启用，会监控Maxmind\u2122数据库文件的修改，当发生修改时会进行更新。'}
                        update={this.updateCheckInterval}
                        value={config.check_interval}
                        unit={config.check_interval_unit || 'MINUTES'}

@@ -38,7 +38,7 @@ class DataAdapterTableEntry extends React.Component {
     const { adapter } = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm(`Are you sure you want to delete data adapter "${adapter.title}"?`)) {
+    if (window.confirm(`确认要删除 "${adapter.title}"?`)) {
       LookupTableDataAdaptersActions.delete(adapter.id).then(() => LookupTableDataAdaptersActions.reloadPage());
     }
   };
@@ -50,22 +50,22 @@ class DataAdapterTableEntry extends React.Component {
       <tbody>
         <tr>
           <td>
-            {error && <ErrorPopover errorText={error} title="Lookup table problem" placement="right" />}
+            {error && <ErrorPopover errorText={error} title="数据字典异常" placement="right" />}
             <Link to={Routes.SYSTEM.LOOKUPTABLES.DATA_ADAPTERS.show(adapter.name)}>{adapter.title}</Link>
           </td>
           <td>{adapter.description}</td>
           <td>{adapter.name}</td>
           <td>
             <MetricContainer name={`org.graylog2.lookup.adapters.${adapter.id}.requests`}>
-              <CounterRate suffix="lookups/s" />
+              <CounterRate suffix="映射/秒" />
             </MetricContainer>
           </td>
           <td>
             <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.DATA_ADAPTERS.edit(adapter.name)}>
-              <Button bsSize="xsmall" bsStyle="info">Edit</Button>
+              <Button bsSize="xsmall" bsStyle="info">编辑</Button>
             </LinkContainer>
             &nbsp;
-            <Button bsSize="xsmall" bsStyle="primary" onClick={this._onDelete}>Delete</Button>
+            <Button bsSize="xsmall" bsStyle="primary" onClick={this._onDelete}>删除</Button>
           </td>
         </tr>
       </tbody>

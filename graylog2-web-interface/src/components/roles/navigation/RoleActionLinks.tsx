@@ -30,12 +30,12 @@ const RoleActionLinks = ({ roleId }: Props) => (
   <ButtonToolbar>
     <LinkContainer to={Routes.SYSTEM.AUTHZROLES.show(roleId)}>
       <Button bsStyle="success">
-        View Details
+        查看详情
       </Button>
     </LinkContainer>
     <LinkContainer to={Routes.SYSTEM.AUTHZROLES.edit(roleId)}>
       <Button bsStyle="success">
-        Edit Role
+        编辑角色
       </Button>
     </LinkContainer>
   </ButtonToolbar>

@@ -46,8 +46,8 @@ const defaultConfig: GeoIpConfigType = {
   enabled: false,
   enforce_graylog_schema: true,
   db_vendor_type: 'MAXMIND',
-  city_db_path: '/etc/graylog/server/GeoLite2-City.mmdb',
-  asn_db_path: '/etc/graylog/server/GeoLite2-ASN.mmdb',
+  city_db_path: '/etc/datainsight/server/GeoLite2-City.mmdb',
+  asn_db_path: '/etc/datainsight/server/GeoLite2-ASN.mmdb',
 };
 
 const GeoIpResolverConfig = ({ config = defaultConfig, updateConfig }: Props) => {
@@ -76,8 +76,8 @@ const GeoIpResolverConfig = ({ config = defaultConfig, updateConfig }: Props) =>
 
   const availableVendorTypes = (): OptionType[] => {
     return [
-      { value: 'MAXMIND', label: 'MaxMind GeoIP' },
-      { value: 'IPINFO', label: 'IPInfo Standard Location' },
+      { value: 'MAXMIND', label: 'MaxMind 数据库' },
+      { value: 'IPINFO', label: 'IPInfo 地理数据库' },
     ];
   };
 
@@ -87,26 +87,25 @@ const GeoIpResolverConfig = ({ config = defaultConfig, updateConfig }: Props) =>
 
   return (
     <div>
-      <h3>Geo-Location Processor</h3>
+      <h3>地理位置信息处理插件</h3>
 
       <p>
-        The Geo-Location Processor plugin scans all messages for fields containing <strong>exclusively</strong> an
-        IP address, and puts their geo-location information (coordinates, ISO country code, and city name) into
-        different fields. Read more in the <DocumentationLink page="geolocation" text="Graylog documentation" />.
+        该插件会解析所有包含<strong>IP地址</strong>的日志字段, 并且将他们的地理位置信息 (经纬度、国家、省份、城市) 存放在不同的字段中。
+        在<DocumentationLink page="geolocation.html" text="DataInsight文档" />查看更多信息。
       </p>
 
       <dl className="deflist">
-        <dt>Enabled:</dt>
-        <dd>{config.enabled === true ? 'Yes' : 'No'}</dd>
+        <dt>启用:</dt>
+        <dd>{config.enabled === true ? '是' : '否'}</dd>
         {config.enabled && (
           <>
-            <dt>Enforce default Graylog schema:</dt>
-            <dd>{config.enforce_graylog_schema === true ? 'Yes' : 'No'}</dd>
-            <dt>Database vendor type:</dt>
+            <dt>强制执行默认 DataInsight 架构:</dt>
+            <dd>{config.enforce_graylog_schema === true ? '是' : '否'}</dd>
+            <dt>数据库类型:</dt>
             <dd>{activeVendorType(config.db_vendor_type)}</dd>
-            <dt>City database path:</dt>
+            <dt>城市数据库路径:</dt>
             <dd>{config.city_db_path}</dd>
-            <dt>ASN database path:</dt>
+            <dt>ASN数据库路径:</dt>
             <dd>{config.asn_db_path}</dd>
           </>
         )}
@@ -127,20 +126,20 @@ const GeoIpResolverConfig = ({ config = defaultConfig, updateConfig }: Props) =>
             return (
               <Form>
                 <Modal.Header>
-                  <Modal.Title id="dialog_label">Update Geo-Location Processor Configuration</Modal.Title>
+                  <Modal.Title id="dialog_label">更新地理位置处理器配置</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                   <Row>
                     <Col sm={6}>
                       <FormikInput id="enabled"
                                    type="checkbox"
-                                   label="Enable Geo-Location processor"
+                                   label="启用地理信息处理插件"
                                    name="enabled" />
                     </Col>
                     <Col sm={6}>
                       <FormikInput id="enforce_graylog_schema"
                                    type="checkbox"
-                                   label="Enforce default Graylog schema"
+                                   label="强制执行默认 DataInsight 架构"
                                    name="enforce_graylog_schema" />
                     </Col>
                   </Row>
@@ -148,11 +147,11 @@ const GeoIpResolverConfig = ({ config = defaultConfig, updateConfig }: Props) =>
                          name="db_vendor_type_field">
                     {() => (
                       <Input id="db_vendor_type_input"
-                             label="Select the GeoIP database vendor">
+                             label="选择地理数据库类型">
                         <Select id="db_vendor_type"
                                 name="db_vendor_type"
                                 clearable={false}
-                                placeholder="Select the GeoIP database vendor"
+                                placeholder="选择地理数据库类型"
                                 required
                                 disabled={!values.enabled}
                                 options={availableVendorTypes()}
@@ -167,13 +166,13 @@ const GeoIpResolverConfig = ({ config = defaultConfig, updateConfig }: Props) =>
                   <FormikInput id="city_db_path"
                                type="text"
                                disabled={!values.enabled}
-                               label="Path to the city database"
+                               label="城市数据库路径"
                                name="city_db_path"
                                required />
                   <FormikInput id="asn_db_path"
                                type="text"
                                disabled={!values.enabled}
-                               label="Path to the ASN database"
+                               label="ASN数据库路径"
                                name="asn_db_path" />
 
                 </Modal.Body>
@@ -183,13 +182,13 @@ const GeoIpResolverConfig = ({ config = defaultConfig, updateConfig }: Props) =>
                           onClick={resetConfig}
                           disabled={isSubmitting}
                           aria-disabled={isSubmitting}>
-                    Close
+                    关闭
                   </Button>
                   <Button type="submit"
                           bsStyle="success"
                           disabled={isSubmitting}
                           aria-disabled={isSubmitting}>
-                    {isSubmitting ? 'Saving...' : 'Save'}
+                    {isSubmitting ? '保存中...' : '保存'}
                   </Button>
                 </Modal.Footer>
               </Form>

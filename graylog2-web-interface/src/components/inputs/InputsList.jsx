@@ -118,7 +118,7 @@ const InputsList = createReactClass({
   },
 
   _nodeAffix() {
-    return (this.props.node ? ' on this node' : '');
+    return (this.props.node ? ' 在此节点上' : '');
   },
 
   _onFilterInputs(filter, resetLoadingState) {
@@ -194,28 +194,28 @@ const InputsList = createReactClass({
             <SearchForm onSearch={this._onFilterInputs}
                         topMargin={0}
                         onReset={this._onFilterReset}
-                        searchButtonLabel="Filter"
-                        placeholder="Filter by title" />
+                        searchButtonLabel="过滤"
+                        placeholder="按标题过滤" />
             <br />
             <h2>
-              Global inputs
+              全局接收器
               &nbsp;
-              <small>{this.state.globalInputs.length} configured{this._nodeAffix()}</small>
+              <small>{this.state.globalInputs.length} 个接收器{this._nodeAffix()}</small>
             </h2>
             <EntityList bsNoItemsStyle="info"
-                        noItemsText={this.state.globalInputs.length <= 0 ? 'There are no global inputs.'
-                          : 'No global inputs match the filter'}
+                        noItemsText={this.state.globalInputs.length <= 0 ? '没有全局接收器.'
+                          : '没有全局接收器匹配过滤'}
                         items={this.state.filteredGlobalInputs.map((input) => this._formatInput(input))} />
             <br />
             <br />
             <h2>
-              Local inputs
+              本地接收器
               &nbsp;
-              <small>{this.state.localInputs.length} configured{this._nodeAffix()}</small>
+              <small>{this.state.localInputs.length} 个接收器{this._nodeAffix()}</small>
             </h2>
             <EntityList bsNoItemsStyle="info"
-                        noItemsText={this.state.localInputs.length <= 0 ? 'There are no local inputs.'
-                          : 'No local inputs match the filter'}
+                        noItemsText={this.state.localInputs.length <= 0 ? '没有任何本地输入.'
+                          : '没有本地接收器匹配过滤'}
                         items={this.state.filteredLocalInputs.map((input) => this._formatInput(input))} />
           </Col>
         </InputListRow>

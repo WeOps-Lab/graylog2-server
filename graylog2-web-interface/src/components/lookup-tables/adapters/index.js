@@ -34,21 +34,21 @@ PluginStore.register(new PluginManifest({}, {
   lookupTableAdapters: [
     {
       type: 'csvfile',
-      displayName: 'CSV File',
+      displayName: 'CSV文件',
       formComponent: CSVFileAdapterFieldSet,
       summaryComponent: CSVFileAdapterSummary,
       documentationComponent: CSVFileAdapterDocumentation,
     },
     {
       type: 'dnslookup',
-      displayName: 'DNS Lookup',
+      displayName: 'DNS查找',
       formComponent: DnsAdapterFieldSet,
       summaryComponent: DnsAdapterSummary,
       documentationComponent: DnsAdapterDocumentation,
     },
     {
       type: 'dsvhttp',
-      displayName: 'DSV File from HTTP',
+      displayName: 'HTTP DSV文件',
       formComponent: DSVHTTPAdapterFieldSet,
       summaryComponent: DSVHTTPAdapterSummary,
       documentationComponent: DSVHTTPAdapterDocumentation,

@@ -137,7 +137,7 @@ class Output extends React.Component {
 
     const { output } = this.props;
     const contentPack = (output.content_pack
-      ? <span title="Created from content pack"><Icon name="gift" /></span> : null);
+      ? <span title="从扩展包新建"><Icon name="gift" /></span> : null);
 
     let alert;
     let configurationWell;
@@ -145,8 +145,8 @@ class Output extends React.Component {
     if (this._typeNotAvailable()) {
       alert = (
         <Alert bsStyle="danger">
-          The plugin required for this output is not loaded. Editing it is not possible. Please load the plugin or
-          delete the output.
+          该插件所需输出的没有被加载.不能被编辑.
+          请加载插件或删除输出.
         </Alert>
       );
     } else {
@@ -166,7 +166,7 @@ class Output extends React.Component {
         <IfPermitted permissions="stream_outputs:delete">
           {' '}
           <Button bsStyle="info" onClick={this._onDeleteFromStream}>
-            Delete from stream
+            从消息流中删除
           </Button>
         </IfPermitted>
       );
@@ -183,7 +183,7 @@ class Output extends React.Component {
                 {output.title} {contentPack}
                 <small>ID: {output.id}</small>
               </h2>
-              Type: {output.type}
+              类型: {output.type}
             </Col>
             <Col md={6}>
               <NodeRowInfo className="text-right">
@@ -197,7 +197,7 @@ class Output extends React.Component {
                 <IfPermitted permissions="outputs:terminate">
                   {' '}
                   <Button bsStyle="primary" onClick={this._onDeleteGlobally}>
-                    Delete globally
+                    全局删除
                   </Button>
                 </IfPermitted>
               </NodeRowInfo>

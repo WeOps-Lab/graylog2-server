@@ -38,13 +38,13 @@ const ActionsWrapper = styled.div`
 `;
 
 const _deleteRole = (roleId: $PropertyType<Role, 'id'>, roleName: $PropertyType<Role, 'name'>, setDeleting: (boolean) => void) => {
-  let confirmMessage = `Do you really want to delete role "${roleName}"?`;
+  let confirmMessage = `你真的要删除角色“${roleName}”吗？`;
   const getOneUser = { page: 1, perPage: 1, query: '' };
   setDeleting(true);
 
   AuthzRolesDomain.loadUsersForRole(roleId, roleName, getOneUser).then((paginatedUsers) => {
     if (paginatedUsers.pagination.total >= 1) {
-      confirmMessage += `\n\nIt is still assigned to ${paginatedUsers.pagination.total} users.`;
+      confirmMessage += `\n\n它仍然分配给 ${paginatedUsers.pagination.total} 个用户。`;
     }
 
     // eslint-disable-next-line no-alert
@@ -67,7 +67,7 @@ const ActionsCell = ({ roleId, roleName, readOnly }: Props) => {
         <IfPermitted permissions={[`roles:edit:${roleName}`]}>
           <LinkContainer to={Routes.SYSTEM.AUTHZROLES.edit(encodeURIComponent(roleId))}>
             <Button id={`edit-role-${roleId}`} bsStyle="info" bsSize="xs" title={`Edit role ${roleName}`} type="button">
-              Edit
+              编辑
             </Button>
           </LinkContainer>
         </IfPermitted>
@@ -76,7 +76,7 @@ const ActionsCell = ({ roleId, roleName, readOnly }: Props) => {
           <>
             &nbsp;
             <Button id={`delete-role-${roleId}`} bsStyle="danger" bsSize="xs" title={`Delete role ${roleName}`} onClick={() => _deleteRole(roleId, roleName, setDeleting)} type="button">
-              {deleting ? <Spinner text="Deleting" delay={0} /> : 'Delete'}
+              {deleting ? <Spinner text="删除中..." delay={0} /> : '删除'}
             </Button>
           </>
         </IfPermitted>

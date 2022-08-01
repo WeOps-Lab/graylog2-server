@@ -39,7 +39,7 @@ const CollectorIndicator = createReactClass({
     return (
       <span>
         <OperatingSystemIcon operatingSystem={operatingSystem} /> {collector}
-        {operatingSystem && <span> on {lodash.upperFirst(operatingSystem)}</span>}
+        {operatingSystem && <span> 安装于 {lodash.upperFirst(operatingSystem)}</span>}
       </span>
     );
   },

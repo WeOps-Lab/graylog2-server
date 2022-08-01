@@ -76,19 +76,19 @@ const PipelineForm = ({ pipeline, create, modal, save, onCancel }: Props) => {
       <Input type="text"
              id="title"
              name="title"
-             label="Title"
+             label="名称"
              autoFocus
              required
              onChange={_onChange}
-             help="Pipeline name."
+             help="名称."
              value={nextPipeline.title} />
 
       <Input type="text"
              id="description"
              name="description"
-             label="Description"
+             label="描述"
              onChange={_onChange}
-             help="Pipeline description."
+             help="描述."
              value={nextPipeline.description} />
     </fieldset>
   );
@@ -98,12 +98,12 @@ const PipelineForm = ({ pipeline, create, modal, save, onCancel }: Props) => {
       <span>
         <Button onClick={_openModal}
                 bsStyle="success">
-          {create ? 'Add new pipeline' : 'Edit pipeline details'}
+          {create ? '新增流水线' : '编辑流水线'}
         </Button>
         <BootstrapModalForm ref={modalRef}
-                            title={`${create ? 'Add new' : 'Edit'} pipeline ${nextPipeline.title}`}
+                            title={`${create ? '新增' : '编辑'} 流水线 ${nextPipeline.title}`}
                             onSubmitForm={_handleSubmit}
-                            submitButtonText="Save">
+                            submitButtonText="保存">
           {content}
         </BootstrapModalForm>
       </span>
@@ -115,8 +115,8 @@ const PipelineForm = ({ pipeline, create, modal, save, onCancel }: Props) => {
       {content}
       <Row>
         <Col md={12}>
-          <SaveButton type="submit" bsStyle="primary">Save</SaveButton>
-          <Button type="button" onClick={onCancel}>Cancel</Button>
+          <SaveButton type="submit" bsStyle="primary">保存</SaveButton>
+          <Button type="button" onClick={onCancel}>取消</Button>
         </Col>
       </Row>
     </form>

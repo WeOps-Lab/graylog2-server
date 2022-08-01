@@ -36,15 +36,15 @@ class IndexSummary extends React.Component {
     const labels = [];
 
     if (index.is_deflector) {
-      labels.push(<Label key={`${this.props.name}-deflector-label`} bsStyle="primary">active write index</Label>);
+      labels.push(<Label key={`${this.props.name}-deflector-label`} bsStyle="primary">当前可写索引</Label>);
     }
 
     if (index.is_closed) {
-      labels.push(<Label key={`${this.props.name}-closed-label`} bsStyle="warning">closed</Label>);
+      labels.push(<Label key={`${this.props.name}-closed-label`} bsStyle="warning">关闭的</Label>);
     }
 
     if (index.is_reopened) {
-      labels.push(<Label key={`${this.props.name}-reopened-label`} bsStyle="success">reopened</Label>);
+      labels.push(<Label key={`${this.props.name}-reopened-label`} bsStyle="success">重新打开的索引</Label>);
     }
 
     return <span className="index-label">{labels}</span>;
@@ -62,32 +62,32 @@ class IndexSummary extends React.Component {
       const { deleted } = sizes;
 
       if (count === 0 || count - deleted === 0) {
-        return 'Index does not contain any messages.';
+        return '索引不包含任何日志消息.';
       }
     }
 
     if (!this.props.indexRange) {
-      return 'Time range of index is unknown, because index range is not available. Please recalculate index ranges manually.';
+      return '索引的时间范围是未知的,因为索引范围不可用.请重新手动计算索引范围.';
     }
 
     if (this.props.indexRange.begin === 0) {
-      return <span>Contains messages up to <RelativeTime dateTime={this.props.indexRange.end} /></span>;
+      return <span>包含 <Timestamp dateTime={this.props.indexRange.end} relative /> 的消息</span>;
     }
 
     return (
       <span>
-        Contains messages from <RelativeTime dateTime={this.props.indexRange.begin} /> up to{' '}
-        <RelativeTime dateTime={this.props.indexRange.end} />
+        包含从 <RelativeTime dateTime={this.props.indexRange.begin} /> 到{' '}
+        <RelativeTime dateTime={this.props.indexRange.end} />  的消息
       </span>
     );
   };
 
   _formatShowDetailsLink = () => {
     if (this.state.showDetails) {
-      return <span className="index-more-actions"><Icon name="caret-down" /> Hide Details / Actions</span>;
+      return <span className="index-more-actions"><Icon name="caret-down" /> 隐藏详细信息 / 操作</span>;
     }
 
-    return <span className="index-more-actions"><Icon name="caret-right" /> Show Details / Actions</span>;
+    return <span className="index-more-actions"><Icon name="caret-right" /> 隐藏详细信息 / 操作</span>;
   };
 
   _toggleShowDetails = (event) => {

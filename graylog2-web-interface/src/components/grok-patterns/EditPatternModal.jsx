@@ -71,7 +71,7 @@ class EditPatternModal extends React.Component {
     const name = event.target.value;
 
     if (!validPatternName(name)) {
-      this.setState({ name: name, error: true, error_message: 'Pattern with that name already exists!' });
+      this.setState({ name: name, error: true, error_message: '具有该名称的模式已存在!' });
     } else {
       this.setState({ name: name, error: false, error_message: '' });
     }
@@ -115,7 +115,7 @@ class EditPatternModal extends React.Component {
     const { testPattern } = this.props;
 
     if (name === '' || pattern === '') {
-      this.setState({ error: true, error_message: 'To test the pattern a name and a pattern must be given!' });
+      this.setState({ error: true, error_message: '要测试模式，必须给出名称和模式!' });
 
       return;
     }
@@ -144,9 +144,9 @@ class EditPatternModal extends React.Component {
     let triggerButtonContent;
 
     if (create) {
-      triggerButtonContent = 'Create pattern';
+      triggerButtonContent = '创建模式';
     } else {
-      triggerButtonContent = <span>Edit</span>;
+      triggerButtonContent = <span>编辑</span>;
     }
 
     return (
@@ -157,18 +157,18 @@ class EditPatternModal extends React.Component {
           {triggerButtonContent}
         </Button>
         <BootstrapModalForm ref={(modal) => { this.modal = modal; }}
-                            title={`${create ? 'Create' : 'Edit'} Grok Pattern ${name}`}
+                            title={`${create ? '创建' : '编辑'} Grok ${name}`}
                             bsSize="large"
                             onSubmitForm={this._save}
-                            submitButtonText="Save">
+                            submitButtonText="保存">
           <fieldset>
             <Input type="text"
                    id={this._getId('pattern-name')}
-                   label="Name"
+                   label="名称"
                    onChange={this._onNameChange}
                    value={name}
                    bsStyle={error ? 'error' : null}
-                   help={error ? errorMessage : "Under this name the pattern will be stored and can be used like: '%{THISNAME}' later on "}
+                   help={error ? errorMessage : "在此名称下，模式将被存储，以后可以像这样使用：'%{THISNAME}'"}
                    autoFocus
                    required />
             <GrokPatternInput onPatternChange={this._onPatternChange}
@@ -176,25 +176,25 @@ class EditPatternModal extends React.Component {
                               patterns={patterns} />
             {testError
               && (
-              <Panel bsStyle="danger" header="Grok Error">
+              <Panel bsStyle="danger" header="Grok 异常">
                 <code style={{ display: 'block', whiteSpace: 'pre-wrap' }}>{testError}</code>
               </Panel>
               )}
             <Input type="textarea"
                    id={this._getId('sampleData')}
-                   label="Sample Data"
-                   help="Here you can add sample data to test your pattern"
+                   label="样本数据"
+                   help="在这里您可以添加示例数据来测试您的模式"
                    onChange={this._onSampleDataChange}
                    value={sampleData} />
-            <Button bsStyle="info" onClick={this._testPattern}>Test with Sample Data</Button>
+            <Button bsStyle="info" onClick={this._testPattern}>使用样本数据进行测试</Button>
             <br />
             <br />
             <Input type="textarea"
                    id={this._getId('test_result')}
                    readOnly
                    rows={8}
-                   help="Will contain the result of your test in a JSON format"
-                   label="Test Result"
+                   help="将包含 JSON 格式的测试结果"
+                   label="测试结果"
                    value={testResult} />
           </fieldset>
         </BootstrapModalForm>

@@ -105,13 +105,13 @@ const MessageLoader = ({ hidden, hideText, onMessageLoaded, messageId: defaultMe
     <div className="message-loader">
       {hideText || (
         <p>
-          Wrong example? <Button bsSize="sm" onClick={toggleMessageForm}>Load another message</Button>
+          不是您想要的消息? <Button bsSize="sm" onClick={toggleMessageForm}>加载另一个消息</Button>
         </p>
       )}
       {isHidden || (
         <LoadMessageForm loading={loading} loadMessage={_loadMessage}>
-          <input ref={messageIdRef} type="text" className="form-control message-id-input" placeholder="Message ID" required value={messageId} onChange={onChangeMessageId} />
-          <input type="text" className="form-control" placeholder="Index" required value={index} onChange={onChangeIndex} />
+          <input ref={messageIdRef} type="text" className="form-control message-id-input" placeholder="消息 ID" required value={messageId} onChange={onChangeMessageId} />
+          <input type="text" className="form-control" placeholder="序号" required value={index} onChange={onChangeIndex} />
         </LoadMessageForm>
       )}
     </div>

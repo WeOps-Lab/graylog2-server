@@ -28,14 +28,14 @@ class IndicesMaintenanceDropdown extends React.Component {
   };
 
   _onRecalculateIndexRange = () => {
-    if (window.confirm('This will recalculate index ranges for this index set using a background system job. Do you want to proceed?')) {
+    if (window.confirm('这将使用后台系统作业重新计算此索引集的索引范围,你想继续吗?')) {
       const { indexSetId } = this.props;
       IndexRangesActions.recalculate(indexSetId);
     }
   };
 
   _onCycleDeflector = () => {
-    if (window.confirm('This will manually cycle the current active write index on this index set. Do you want to proceed?')) {
+    if (window.confirm('这将手动循环此索引集上的当前活动写入索引。你想继续吗?')) {
       const { indexSetId } = this.props;
 
       DeflectorActions.cycle(indexSetId).then(() => {
@@ -50,13 +50,13 @@ class IndicesMaintenanceDropdown extends React.Component {
     const { indexSet } = this.props;
 
     if (indexSet?.writable) {
-      cycleButton = <MenuItem eventKey="2" onClick={this._onCycleDeflector}>Rotate active write index</MenuItem>;
+      cycleButton = <MenuItem eventKey="2" onClick={this._onCycleDeflector}>创建新索引</MenuItem>;
     }
 
     return (
       <ButtonGroup>
         <DropdownButton bsStyle="info" title="Maintenance" id="indices-maintenance-actions" pullRight>
-          <MenuItem eventKey="1" onClick={this._onRecalculateIndexRange}>Recalculate index ranges</MenuItem>
+          <MenuItem eventKey="1" onClick={this._onRecalculateIndexRange}>更新索引范围</MenuItem>
           {cycleButton}
         </DropdownButton>
       </ButtonGroup>

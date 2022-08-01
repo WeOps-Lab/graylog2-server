@@ -36,7 +36,7 @@ class MetricsFilterInput extends React.Component {
       <FormControl type="text"
                    className="metrics-filter"
                    bsSize="large"
-                   placeholder="Type a metric name to filter&hellip;"
+                   placeholder="过滤"
                    value={filter}
                    onChange={this.handleChange} />
     );

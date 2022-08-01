@@ -33,7 +33,7 @@ class LUTTableEntry extends React.Component {
     const { cache } = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm(`Are you sure you want to delete cache "${cache.title}"?`)) {
+    if (window.confirm(`确定删除缓存 "${cache.title}"?`)) {
       LookupTableCachesActions.delete(cache.id).then(() => LookupTableCachesActions.reloadPage());
     }
   };
@@ -96,15 +96,15 @@ class LUTTableEntry extends React.Component {
           </td>
           <td>
             <MetricContainer name={`org.graylog2.lookup.caches.${cache.id}.requests`}>
-              <CounterRate suffix="lookups/s" />
+              <CounterRate suffix="映射/秒" />
             </MetricContainer>
           </td>
           <td>
             <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.CACHES.edit(cache.name)}>
-              <Button bsSize="xsmall" bsStyle="info">Edit</Button>
+              <Button bsSize="xsmall" bsStyle="info">编辑</Button>
             </LinkContainer>
             &nbsp;
-            <Button bsSize="xsmall" bsStyle="primary" onClick={this._onDelete}>Delete</Button>
+            <Button bsSize="xsmall" bsStyle="primary" onClick={this._onDelete}>删除</Button>
           </td>
         </tr>
       </tbody>

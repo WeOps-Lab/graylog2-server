@@ -113,7 +113,7 @@ const EntityShareSettings = ({
     <>
       <Section>
         <GranteesSelectorHeadline>
-          Add collaborator
+          添加协作者
         </GranteesSelectorHeadline>
         <p>
           {description}
@@ -130,7 +130,7 @@ const EntityShareSettings = ({
                       onDelete={_handleDeletion}
                       onCapabilityChange={_handleSelection}
                       selectedGrantees={selectedGrantees}
-                      title="Current collaborators" />
+                      title="当前的合作者" />
       </Section>
       {validationResults?.failed && (
         <Section>

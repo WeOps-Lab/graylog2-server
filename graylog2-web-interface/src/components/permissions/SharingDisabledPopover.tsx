@@ -29,8 +29,8 @@ const StyledHoverForHelp = styled((props) => <HoverForHelp {...props} />)`
 `;
 
 const SharingDisabledPopover = ({ type, description }: Props) => (
-  <StyledHoverForHelp title="Sharing not possible" pullRight={false}>
-    {description || `Only owners of this ${type} are allowed to share it.`}
+  <StyledHoverForHelp title="无法分享" pullRight={false}>
+    {description || `只允许此 ${type} 的所有者共享它.`}
   </StyledHoverForHelp>
 );
 

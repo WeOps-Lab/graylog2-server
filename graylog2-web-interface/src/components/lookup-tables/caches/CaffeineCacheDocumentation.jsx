@@ -23,33 +23,32 @@ class CaffeineCacheDocumentation extends React.Component {
   render() {
     return (
       <div>
-        <p>The in-memory cache maintains recently used values from data adapters.</p>
-        <p>Please make sure your Graylog servers have enough heap to accomodate the cached entries and monitor the cache efficiency.</p>
+        <p>内存缓存维护数据适配器中最近使用的值.</p>
+        <p>请确保您的DataInsight服务器有足够的堆来容纳缓存条目并监视缓存效率.</p>
 
         <Alert style={{ marginBottom: 10 }} bsStyle="info">
-          <h4 style={{ marginBottom: 10 }}>Implementation details</h4>
-          <p>The cache is local to each Graylog server, they do not share the entries.</p>
-          <p>For example, if you have two servers, they will maintain a completely independent cache from each other.</p>
+          <h4 style={{ marginBottom: 10 }}>实现细节</h4>
+          <p>缓存是每个DataInsight服务器的本地缓存,它们不共享条目.</p>
+          <p>例如,如果您有两台服务器,它们将彼此保持完全独立的缓存.</p>
         </Alert>
 
         <hr />
 
-        <h3 style={{ marginBottom: 10 }}>Cache size</h3>
-        <p>Every cache has a maximum number of entries, unbounded caches are not supported.</p>
+        <h3 style={{ marginBottom: 10 }}>缓存大小</h3>
+        <p>每个缓存都会有最大记录数.</p>
 
-        <h3 style={{ marginBottom: 10 }}>Time-based expiration</h3>
+        <h3 style={{ marginBottom: 10 }}>数据过期策略</h3>
 
-        <h5 style={{ marginBottom: 10 }}>Expire after access</h5>
+        <h5 style={{ marginBottom: 10 }}>访问超时过期</h5>
         <p style={{ marginBottom: 10, padding: 0 }}>
-          The cache will remove entries after a fixed time since they have been used the last time.<br />
-          This results in the cache behaving as a space limited least recently used cache.
+          数据字典将在最后一次被访问的若干时间后被移出缓存.
+          在超时时间内，你将可以永远在内存中访问数据字典
         </p>
 
-        <h5 style={{ marginBottom: 10 }}>Expire after write</h5>
+        <h5 style={{ marginBottom: 10 }}>写入超时过期</h5>
         <p style={{ marginBottom: 10, padding: 0 }}>
-          The cache will remove entries after a fixed time since they have been entered into the cache.<br />
-          This results in entries that are never older than the given time, which can be important for
-          regularly changing data, such as configuration state of external systems.
+          数据字典将在写入缓存的若干时间后被移出缓存.
+          下一次访问数据字典需要重新将数据加载到缓存.
         </p>
 
       </div>

@@ -138,8 +138,8 @@ const CollectorForm = createReactClass({
   _formatServiceTypes() {
     const options = [];
 
-    options.push({ value: 'exec', label: 'Foreground execution' });
-    options.push({ value: 'svc', label: 'Windows service' });
+    options.push({ value: 'exec', label: '前台执行' });
+    options.push({ value: 'svc', label: 'Windows服务' });
 
     return options;
   },
@@ -194,67 +194,67 @@ const CollectorForm = createReactClass({
           <fieldset>
             <Input type="text"
                    id="name"
-                   label="Name"
+                   label="名称"
                    onChange={this._onNameChange}
                    bsStyle={this._validationState('name')}
-                   help={this._formatValidationMessage('name', 'Name for this collector')}
+                   help={this._formatValidationMessage('name', '采集器名称')}
                    value={formData.name || ''}
                    autoFocus
                    required />
 
             <FormGroup controlId="service_type"
                        validationState={this._validationState('service_type')}>
-              <ControlLabel>Process management</ControlLabel>
+              <ControlLabel>进程管理</ControlLabel>
               <Select inputId="service_type"
                       options={this._formatServiceTypes()}
                       value={formData.service_type}
                       onChange={this._formDataUpdate('service_type')}
-                      placeholder="Service Type"
+                      placeholder="服务类型"
                       required />
-              <HelpBlock>{this._formatValidationMessage('service_type', 'Choose the service type this collector is meant for.')}</HelpBlock>
+              <HelpBlock>{this._formatValidationMessage('service_type', '选择此采集器要用于的服务类型.')}</HelpBlock>
             </FormGroup>
 
             <FormGroup controlId="node_operating_system"
                        validationState={this._validationState('node_operating_system')}>
-              <ControlLabel>Operating System</ControlLabel>
+              <ControlLabel>操作系统</ControlLabel>
               <Select inputId="node_operating_system"
                       options={this._formatOperatingSystems()}
                       value={formData.node_operating_system}
                       onChange={this._formDataUpdate('node_operating_system')}
-                      placeholder="Name"
+                      placeholder="名称"
                       required />
-              <HelpBlock>{this._formatValidationMessage('node_operating_system', 'Choose the operating system this collector is meant for.')}</HelpBlock>
+              <HelpBlock>{this._formatValidationMessage('node_operating_system', '选择此收集器要用于的操作系统.')}</HelpBlock>
             </FormGroup>
 
             <Input type="text"
                    id="executablePath"
-                   label="Executable Path"
+                   label="可执行路径"
                    onChange={this._onInputChange('executable_path')}
                    bsStyle={this._validationState('executable_path')}
-                   help={this._formatValidationMessage('executable_path', 'Path to the collector executable')}
+                   help={this._formatValidationMessage('executable_path', '采集器可执行路径')}
                    value={formData.executable_path || ''}
                    required />
 
             <Input type="text"
                    id="executeParameters"
-                   label={<span>Execute Parameters <small className="text-muted">(Optional)</small></span>}
+                   label={<span>执行参数 <small className="text-muted">(可选)</small></span>}
                    onChange={this._onInputChange('execute_parameters')}
-                   help={<span>Parameters the collector is started with.<strong> %s will be replaced by the path to the configuration file.</strong></span>}
+                   help={<span>采集器的执行参数.<strong> %s 将替换为配置文件的路径.</strong></span>}
                    value={executeParameters || ''} />
 
             <Input type="text"
                    id="validationParameters"
-                   label={<span>Parameters for Configuration Validation <small className="text-muted">(Optional)</small></span>}
+                   label={<span>校验配置参数 <small className="text-muted">(可选)</small></span>}
                    onChange={this._onInputChange('validation_parameters')}
-                   help={<span>Parameters that validate the configuration file. <strong> %s will be replaced by the path to the configuration file.</strong></span>}
+                   help={<span>校验配置文件的参数. <strong> %s 将替换为配置文件的路径.</strong></span>}
                    value={validationParameters || ''} />
 
             <FormGroup controlId="defaultTemplate">
-              <ControlLabel><span>Default Template <small className="text-muted">(Optional)</small></span></ControlLabel>
+              <ControlLabel><span>默认模板 <small className="text-muted">(可选)</small></span></ControlLabel>
               <SourceCodeEditor id="template"
                                 value={formData.default_template || ''}
                                 onChange={this._formDataUpdate('default_template')} />
-              <HelpBlock>The default Collector configuration.</HelpBlock>
+              <HelpBlock>采集器默认配置模板.</HelpBlock>
             </FormGroup>
           </fieldset>
 
@@ -263,10 +263,10 @@ const CollectorForm = createReactClass({
               <FormGroup>
                 <ButtonToolbar>
                   <Button type="submit" bsStyle="primary" disabled={this.hasErrors()}>
-                    {action === 'create' ? 'Create' : 'Update'}
+                    {action === 'create' ? '创建' : '更新'}
                   </Button>
                   <Button type="button" onClick={this._onCancel}>
-                    {action === 'create' ? 'Cancel' : 'Back'}
+                    {action === 'create' ? '取消' : '返回'}
                   </Button>
                 </ButtonToolbar>
               </FormGroup>

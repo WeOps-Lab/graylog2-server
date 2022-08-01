@@ -40,7 +40,7 @@ const CollectorList = createReactClass({
   },
 
   headerCellFormatter(header) {
-    const className = (header === 'Actions' ? style.actionsColumn : '');
+    const className = (header === '操作' ? style.actionsColumn : '');
 
     return <th className={className}>{header}</th>;
   },
@@ -59,7 +59,7 @@ const CollectorList = createReactClass({
   render() {
     const { collectors, pagination, query, total, onPageChange, onQueryChange } = this.props;
 
-    const headers = ['Name', 'Operating System', 'Actions'];
+    const headers = ['名称', '操作系统', '操作'];
 
     return (
       <div>
@@ -67,13 +67,13 @@ const CollectorList = createReactClass({
           <Col md={12}>
             <div className="pull-right">
               <LinkContainer to={Routes.SYSTEM.SIDECARS.NEW_COLLECTOR}>
-                <Button bsStyle="success" bsSize="small">Create Log Collector</Button>
+                <Button bsStyle="success" bsSize="small">创建采集器</Button>
               </LinkContainer>
             </div>
-            <h2>Log Collectors <small>{total} total</small></h2>
+            <h2>采集器共<small>{total}</small></h2>
           </Col>
           <Col md={12}>
-            <p>Manage Log Collectors that you can configure and supervise through Graylog Sidecar and Graylog Web Interface.</p>
+            <p>您可以通过DataInsight客户端和DataInsight Web界面配置和监控采集器.</p>
           </Col>
         </Row>
 
@@ -82,8 +82,8 @@ const CollectorList = createReactClass({
             <SearchForm query={query}
                         onSearch={onQueryChange}
                         onReset={onQueryChange}
-                        searchButtonLabel="Find"
-                        placeholder="Find collectors"
+                        searchButtonLabel="查找"
+                        placeholder="查找采集器"
                         wrapperClass={style.inline}
                         queryWidth={300}
                         topMargin={0}
@@ -101,7 +101,7 @@ const CollectorList = createReactClass({
                            headerCellFormatter={this.headerCellFormatter}
                            rows={collectors}
                            dataRowFormatter={this.collectorFormatter}
-                           noDataText="There are no log collectors to display, why don't you create one?"
+                           noDataText="没有任何采集器"
                            filterLabel=""
                            filterKeys={[]}
                            useResponsiveTable={false} />

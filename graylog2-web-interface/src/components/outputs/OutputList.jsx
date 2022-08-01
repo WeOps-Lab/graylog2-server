@@ -59,7 +59,7 @@ class OutputList extends React.Component {
       return (
         <Row className="content">
           <Col md={12}>
-            <Alert bsStyle="info">No outputs configured.</Alert>
+            <Alert bsStyle="info">没有配置输出类型.</Alert>
           </Col>
         </Row>
       );

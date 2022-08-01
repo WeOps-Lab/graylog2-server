@@ -179,7 +179,7 @@ const CollectorsAdministration = createReactClass({
         <Input ref={(c) => { this.selectAllInput = c; }}
                id="select-all-checkbox"
                type="checkbox"
-               label={selectedItems === 0 ? 'Select all' : `${selectedItems} selected`}
+               label={selectedItems === 0 ? '全选' : `${selectedItems} 被选中`}
                disabled={enabledCollectors.length === 0}
                checked={this.isAllSelected(enabledCollectors, selected)}
                onChange={this.toggleSelectAll}
@@ -228,7 +228,7 @@ const CollectorsAdministration = createReactClass({
           <Row>
             <Col md={12}>
               <span>
-                No collectors compatible with {sidecar.node_details.operating_system}
+                没有采集器匹配 {sidecar.node_details.operating_system}
               </span>
             </Col>
           </Row>
@@ -298,7 +298,7 @@ const CollectorsAdministration = createReactClass({
             <Col md={12}>
               <h4 className={`list-group-item-heading ${style.alignedInformation} ${!sidecar.active && commonStyle.greyedOut}`}>
                 {sidecar.node_name} <OperatingSystemIcon operatingSystem={sidecar.node_details.operating_system} />
-                &emsp;<small>{sidecar.node_id} {!sidecar.active && <b>&mdash; inactive</b>}</small>
+                &emsp;<small>{sidecar.node_id} {!sidecar.active && <b>&mdash; 不活跃</b>}</small>
               </h4>
             </Col>
           </Row>
@@ -334,7 +334,7 @@ const CollectorsAdministration = createReactClass({
     if (sidecarCollectorPairs.length === 0) {
       formattedCollectors = (
         <ControlledTableList.Item>
-          {sidecarCollectorPairs.length === 0 ? 'There are no collectors to display' : 'Filters do not match any collectors'}
+          {sidecarCollectorPairs.length === 0 ? '没有采集器' : '没有匹配过滤的采集器'}
         </ControlledTableList.Item>
       );
     } else {

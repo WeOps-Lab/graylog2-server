@@ -33,7 +33,7 @@ class ClosedIndexDetails extends React.Component {
   };
 
   _onDeleteIndex = () => {
-    if (window.confirm(`Really delete index ${this.props.indexName}?`)) {
+    if (window.confirm(`确定删除索引 ${this.props.indexName}?`)) {
       IndicesActions.delete(this.props.indexName);
     }
   };
@@ -44,14 +44,13 @@ class ClosedIndexDetails extends React.Component {
     return (
       <div className="index-info">
         <IndexRangeSummary indexRange={indexRange} />
-        <Alert bsStyle="info"><Icon name="info-circle" /> This index is closed. Index information is not available{' '}
-          at the moment, please reopen the index and try again.
+        <Alert bsStyle="info"><Icon name="info-circle" /> 此索引被关闭或已备份.索引信息目前不可用,请先恢复并开启索引以查看详情.
         </Alert>
 
         <hr style={{ marginBottom: '5', marginTop: '10' }} />
 
-        <Button bsStyle="warning" bsSize="xs" onClick={this._onReopen}>Reopen index</Button>{' '}
-        <Button bsStyle="danger" bsSize="xs" onClick={this._onDeleteIndex}>Delete index</Button>
+        <Button bsStyle="warning" bsSize="xs" onClick={this._onReopen}>重新打开索引</Button>{' '}
+        <Button bsStyle="danger" bsSize="xs" onClick={this._onDeleteIndex}>删除索引</Button>
       </div>
     );
   }

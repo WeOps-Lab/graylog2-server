@@ -54,43 +54,43 @@ class CachesOverview extends React.Component {
 
   _helpPopover = () => {
     return (
-      <Popover id="search-query-help" className={Styles.popoverWide} title="Search Syntax Help">
-        <p><strong>Available search fields</strong></p>
+      <Popover id="search-query-help" className={Styles.popoverWide} title="搜索语法帮助">
+        <p><strong>可用搜索字段</strong></p>
         <Table condensed>
           <thead>
-            <tr>
-              <th>Field</th>
-              <th>Description</th>
-            </tr>
+          <tr>
+            <th>字段</th>
+            <th>描述</th>
+          </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>id</td>
-              <td>Cache ID</td>
-            </tr>
-            <tr>
-              <td>title</td>
-              <td>The title of the cache</td>
-            </tr>
-            <tr>
-              <td>name</td>
-              <td>The reference name of the cache</td>
-            </tr>
-            <tr>
-              <td>description</td>
-              <td>The description of cache</td>
-            </tr>
+          <tr>
+            <td>id</td>
+            <td>缓存ID</td>
+          </tr>
+          <tr>
+            <td>title</td>
+            <td>缓存标题</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>缓存名称</td>
+          </tr>
+          <tr>
+            <td>description</td>
+            <td>缓存描述</td>
+          </tr>
           </tbody>
         </Table>
-        <p><strong>Examples</strong></p>
+        <p><strong>示例</strong></p>
         <p>
-          Find caches by parts of their names:<br />
+          按名称查找:<br />
           <kbd>name:guava</kbd><br />
           <kbd>name:gua</kbd>
         </p>
         <p>
-          Searching without a field name matches against the <code>title</code> field:<br />
-          <kbd>guava</kbd> <br />is the same as<br />
+          按 <code>标题</code> 查找：:<br />
+          <kbd>guava</kbd> <br />等价于<br />
           <kbd>title:guava</kbd>
         </p>
       </Popover>
@@ -101,7 +101,7 @@ class CachesOverview extends React.Component {
     const { caches, pagination } = this.props;
 
     if (!caches) {
-      return <Spinner text="Loading caches" />;
+      return <Spinner text="加载缓存中" />;
     }
 
     const cacheTableEntries = caches.map((cache) => {
@@ -116,15 +116,15 @@ class CachesOverview extends React.Component {
         <Row className="content">
           <Col md={12}>
             <h2>
-              Configured lookup Caches
+              配置缓存
               <span>&nbsp;
-                <small>{pagination.total} total</small>
+                <small>共 {pagination.total}</small>
               </span>
             </h2>
             <PaginatedList onChange={this._onPageChange} totalItems={pagination.total}>
               <SearchForm onSearch={this._onSearch} onReset={this._onReset} useLoadingState>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.CACHES.CREATE}>
-                  <Button bsStyle="success" style={{ marginLeft: 5 }}>Create cache</Button>
+                  <Button bsStyle="success" style={{ marginLeft: 5 }}>创建缓存</Button>
                 </LinkContainer>
                 <OverlayTrigger trigger="click" rootClose placement="right" overlay={this._helpPopover()}>
                   <Button bsStyle="link" className={Styles.searchHelpButton}><Icon name="question-circle" fixedWidth /></Button>
@@ -133,13 +133,13 @@ class CachesOverview extends React.Component {
               <Table condensed hover className={Styles.overviewTable}>
                 <thead>
                   <tr>
-                    <th className={Styles.rowTitle}>Title</th>
-                    <th className={Styles.rowDescription}>Description</th>
-                    <th className={Styles.rowName}>Name</th>
-                    <th>Entries</th>
-                    <th>Hit rate</th>
-                    <th>Throughput</th>
-                    <th className={Styles.rowActions}>Actions</th>
+                    <th className={Styles.rowTitle}>标题</th>
+                    <th className={Styles.rowDescription}>描述</th>
+                    <th className={Styles.rowName}>名称</th>
+                    <th>实体</th>
+                    <th>命中率</th>
+                    <th>吞吐量</th>
+                    <th className={Styles.rowActions}>操作</th>
                   </tr>
                 </thead>
                 {cacheTableEntries}

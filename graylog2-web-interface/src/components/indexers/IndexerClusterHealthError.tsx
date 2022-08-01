@@ -30,7 +30,7 @@ const IndexerClusterHealthError = ({ error }: { error: FetchError }) => {
   return (
     <ESClusterError bsStyle="danger">
       <Icon name="exclamation-triangle" /> &nbsp;
-      Could not retrieve Elasticsearch cluster health. Fetching Elasticsearch cluster health failed: {error.message}
+      无法检索 Elasticsearch 集群运行状况。获取 Elasticsearch 集群运行状况失败：{error.message}
     </ESClusterError>
   );
 };

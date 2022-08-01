@@ -90,12 +90,12 @@ const NodeLoggers = createReactClass({
                         className="trigger-log-level-metrics"
                         onClick={() => this.setState({ showDetails: !showDetails })}>
                   <Icon name="tachometer-alt" />{' '}
-                  {showDetails ? 'Hide' : 'Show'} log level metrics
+                  {showDetails ? '隐藏' : '显示'} 日志级别度量
                 </Button>
               </div>
               <h2>
                 <LinkToNode nodeId={nodeId} />
-                <small> Has written a total of <strong>{this._formatThroughput()} internal log messages.</strong></small>
+                <span style={{ fontSize: '12px' }}> 共记录了 <strong>{this._formatThroughput()} 条内部日志.</strong></span>
               </h2>
             </div>
             <div className="subsystems">

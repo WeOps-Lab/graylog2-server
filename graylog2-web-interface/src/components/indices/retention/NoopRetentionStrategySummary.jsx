@@ -20,8 +20,8 @@ const NoopRetentionStrategySummary = () => {
   return (
     <div>
       <dl>
-        <dt>Index retention strategy:</dt>
-        <dd>Do nothing</dd>
+        <dt>索引轮转阶段:</dt>
+        <dd>没有运行任何作业</dd>
       </dl>
     </div>
   );

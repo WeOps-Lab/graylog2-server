@@ -46,11 +46,11 @@ type InputSelectProps = {
 const ServerInputSelect = ({ inputs, selectedInputId, onInputSelect }: Subtract<InputSelectProps, {show}>) => {
   const _formatInputSelectOptions = () => {
     if (!inputs) {
-      return [{ value: 'none', label: 'Loading inputs...', disabled: true }];
+      return [{ value: 'none', label: '输入加载中...', disabled: true }];
     }
 
     if (inputs.size === 0) {
-      return [{ value: 'none', label: 'No inputs available' }];
+      return [{ value: 'none', label: '没有可用的输入' }];
     }
 
     const formattedInputs = [];
@@ -69,12 +69,12 @@ const ServerInputSelect = ({ inputs, selectedInputId, onInputSelect }: Subtract<
   return (
     <Input id="inputSelect"
            name="inputSelect"
-           label={<>Message input <small>(optional)</small></>}
-           help="Select the message input ID that should be assigned to the parsed message.">
+           label={<>消息输入 <small>(可选)</small></>}
+           help="选择应分配给已解析消息的消息输入 ID.">
       <Select inputId="inputSelect"
               name="inputSelect"
               aria-label="Message input"
-              placeholder="Select input"
+              placeholder="选择输入"
               options={_formatInputSelectOptions()}
               matchProp="label"
               onChange={onInputSelect}
@@ -89,9 +89,9 @@ const ForwarderInputSelect = ({ onInputSelect }: Pick<InputSelectProps, 'onInput
   return (
     <>
       <ForwarderInputDropdown onLoadMessage={onInputSelect}
-                              label="Forwarder Input selection (optional)"
+                              label="转发器输入选择（可选）"
                               autoLoadMessage />
-      <p className="description">Select an Input profile from the list below then select an then select an Input.</p>
+      <p className="description">从下面的列表中选择一个输入配置文件，然后选择一个然后选择一个输入.</p>
     </>
   );
 };
@@ -110,16 +110,16 @@ const InputSelect = ({ inputs, selectedInputId, onInputSelect, show }: InputSele
 
   return ForwarderInputDropdown ? (
     <fieldset>
-      <legend>Input selection (optional)</legend>
+      <legend>输入选择（可选）</legend>
       <Input id="inputTypeSelect"
              type="select"
-             label="Select an Input type (optional)"
-             help="Select the Input type you want to load the message from."
+             label="选择输入类型（可选）"
+             help="选择要从中加载消息的输入类型."
              value={selectedInputType ?? 'placeholder'}
              onChange={(e) => setSelectedInputType(e.target.value)}>
-        <option value="placeholder" disabled>Select an Input type</option>
-        <option value="server">Server Input</option>
-        <option value="forwarder">Forwarder Input</option>
+        <option value="placeholder" disabled>选择输入类型</option>
+        <option value="server">服务器输入</option>
+        <option value="forwarder">转发器输入</option>
       </Input>
 
       {selectedInputType === 'server' && (
@@ -193,13 +193,13 @@ const RawMessageLoader = ({ onMessageLoaded, inputIdSelector, codecTypes, inputs
 
   const _formatSelectOptions = () => {
     if (!codecTypes) {
-      return [{ value: 'none', label: 'Loading codec types...', disabled: true }];
+      return [{ value: 'none', label: '加载编解码器类型...', disabled: true }];
     }
 
     const codecTypesIds = Object.keys(codecTypes);
 
     if (codecTypesIds.length === 0) {
-      return [{ value: 'none', label: 'No codecs available' }];
+      return [{ value: 'none', label: '没有可用的编解码器' }];
     }
 
     return codecTypesIds
@@ -302,7 +302,7 @@ const RawMessageLoader = ({ onMessageLoaded, inputIdSelector, codecTypes, inputs
             <Input id="message"
                    name="message"
                    type="textarea"
-                   label="Raw message"
+                   label="原始消息"
                    value={message}
                    onChange={_onMessageChange}
                    rows={3}
@@ -310,8 +310,8 @@ const RawMessageLoader = ({ onMessageLoaded, inputIdSelector, codecTypes, inputs
             <Input id="remoteAddress"
                    name="remoteAddress"
                    type="text"
-                   label={<span>Source IP address <small>(optional)</small></span>}
-                   help={`Remote IP address to use as message source. Graylog will use ${DEFAULT_REMOTE_ADDRESS} by default.`}
+                   label={<span>源 IP 地址<small>（可选）</small></span>}
+                   help={`用作消息源的远程IP地址。 DataInsight 默认使用 ${DEFAULT_REMOTE_ADDRESS}。`}
                    value={remoteAddress}
                    onChange={_onRemoteAddressChange} />
           </fieldset>
@@ -323,12 +323,12 @@ const RawMessageLoader = ({ onMessageLoaded, inputIdSelector, codecTypes, inputs
             <legend>Codec configuration</legend>
             <Input id="codec"
                    name="codec"
-                   label="Message codec"
-                   help="Select the codec that should be used to decode the message."
+                   label="消息编解码器"
+                   help="选择应该用于解码消息的编解码器。"
                    required>
               <Select id="codec"
                       aria-label="Message codec"
-                      placeholder="Select codec"
+                      placeholder="选择编解码器"
                       options={_formatSelectOptions()}
                       matchProp="label"
                       onChange={_onCodecSelect}
@@ -337,7 +337,7 @@ const RawMessageLoader = ({ onMessageLoaded, inputIdSelector, codecTypes, inputs
             {codecConfigurationOptions}
           </fieldset>
           <Button type="submit" bsStyle="info" disabled={_isSubmitDisabled}>
-            {loading ? 'Loading message...' : 'Load message'}
+            {loading ? '加载中...' : '加载消息'}
           </Button>
         </form>
       </Col>

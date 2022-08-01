@@ -73,7 +73,7 @@ class LookupTableExtractorConfiguration extends React.Component {
 
     promise.then((result) => {
       if (result.error) {
-        UserNotification.warning(`We were not able to run the lookup: ${result.error_message}`);
+        UserNotification.warning(`无法打开数据字典: ${result.error_message}`);
 
         return;
       }
@@ -81,7 +81,7 @@ class LookupTableExtractorConfiguration extends React.Component {
       if (!result.empty) {
         this.props.onExtractorPreviewLoad(result.value);
       } else {
-        this.props.onExtractorPreviewLoad(`no lookup result for "${result.key}"`);
+        this.props.onExtractorPreviewLoad(`没有匹配 "${result.key}" 的信息`);
       }
     });
 
@@ -103,20 +103,20 @@ class LookupTableExtractorConfiguration extends React.Component {
 
     const helpMessage = (
       <span>
-        Lookup tables can be created <Link to={Routes.SYSTEM.LOOKUPTABLES.OVERVIEW}>here</Link>.
+        数据字典可以在<Link to={Routes.SYSTEM.LOOKUPTABLES.OVERVIEW}>这</Link>创建.
       </span>
     );
 
     return (
       <div>
         <Input id="lookup_table_name"
-               label="Lookup Table"
+               label="数据字典"
                labelClassName="col-md-2"
                wrapperClassName="col-md-10"
                help={helpMessage}>
           <Row className="row-sm">
             <Col md={11}>
-              <Select placeholder="Select a lookup table"
+              <Select placeholder="选择数据字典"
                       clearable={false}
                       options={lookupTables}
                       matchProp="label"
@@ -125,7 +125,7 @@ class LookupTableExtractorConfiguration extends React.Component {
             </Col>
             <Col md={1} className="text-right">
               <Button bsStyle="info" onClick={this._onTryClick} disabled={this._isTryButtonDisabled()}>
-                {this.state.trying ? <Icon name="spinner" spin /> : 'Try'}
+                {this.state.trying ? <Icon name="spinner" spin /> : '测试'}
               </Button>
             </Col>
           </Row>

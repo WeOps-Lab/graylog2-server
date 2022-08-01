@@ -65,7 +65,7 @@ const ShareableEntityURL = ({ entityGRN }: Props) => {
   return (
     <Container>
       <VerticalCenter>
-        <b>Sharable URL:</b>
+        <b>可分享的网址:</b>
       </VerticalCenter>
       <URLColumn>
         <FormGroup>
@@ -76,7 +76,7 @@ const ShareableEntityURL = ({ entityGRN }: Props) => {
                 {container.current && (
                   <StyledClipboardButton text={entityUrl}
                                          container={container.current}
-                                         buttonTitle="Copy parameter to clipboard"
+                                         buttonTitle="复制"
                                          title={<Icon name="copy" fixedWidth />} />
                 )}
               </span>
@@ -84,7 +84,7 @@ const ShareableEntityURL = ({ entityGRN }: Props) => {
           </InputGroup>
         </FormGroup>
         <div>
-          You or anyone authorized to view can access this link.
+          您或任何有权查看的人都可以访问此链接。
         </div>
       </URLColumn>
     </Container>

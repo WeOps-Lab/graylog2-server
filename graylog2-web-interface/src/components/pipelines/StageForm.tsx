@@ -94,8 +94,8 @@ const StageForm = ({ pipeline, stage, create, save }: Props) => {
 
   const rulesHelp = (
     <span>
-      Select the rules evaluated on this stage, or create one in the{' '}
-      <Link to={Routes.SYSTEM.PIPELINES.RULES}>Pipeline Rules page</Link>.
+      选择在此阶段评估的规则，或在{' '}中创建一个
+      <Link to={Routes.SYSTEM.PIPELINES.RULES}>规则</Link>.
     </span>
   );
 
@@ -103,25 +103,25 @@ const StageForm = ({ pipeline, stage, create, save }: Props) => {
     <span>
       <Button onClick={openModal}
               bsStyle={create ? 'success' : 'info'}>
-        {create ? 'Add new stage' : 'Edit'}
+        {create ? '新增' : '编辑'}
       </Button>
       <BootstrapModalForm ref={modalRef}
-                          title={`${create ? 'Add new' : 'Edit'} stage ${nextStage.stage}`}
+                          title={`${create ? '新增' : '编辑'} 阶段 ${nextStage.stage}`}
                           onSubmitForm={_handleSave}
-                          submitButtonText="Save">
+                          submitButtonText="保存">
         <fieldset>
           <Input type="number"
                  id="stage"
                  name="stage"
-                 label="Stage"
+                 label="阶段"
                  autoFocus
                  min={NumberUtils.JAVA_INTEGER_MIN_VALUE + 1}
                  max={NumberUtils.JAVA_INTEGER_MAX_VALUE}
                  onChange={_onChange}
                  bsStyle={isOverridingStage ? 'error' : null}
                  help={isOverridingStage
-                   ? 'Stage is already in use, please use another number or edit the existing stage.'
-                   : 'Stage priority. The lower the number, the earlier it will execute.'}
+                   ? '阶段已在使用中，请使用其他编号或编辑现有阶段.'
+                   : '阶段优先级别,数字越小，越早执行.'}
                  value={nextStage.stage} />
 
           <FormGroup>
@@ -132,7 +132,7 @@ const StageForm = ({ pipeline, stage, create, save }: Props) => {
                  id="match_all"
                  name="match"
                  value="ALL"
-                 label="All rules on this stage match the message"
+                 label="此阶段的所有规则都与消息匹配"
                  onChange={_onChange}
                  checked={nextStage.match === 'ALL'} />
 
@@ -140,7 +140,7 @@ const StageForm = ({ pipeline, stage, create, save }: Props) => {
                  id="match_any"
                  name="match"
                  value="EITHER"
-                 label="At least one of the rules on this stage matches the message"
+                 label="此阶段至少有一个规则与消息匹配"
                  onChange={_onChange}
                  checked={nextStage.match === 'EITHER'} />
 
@@ -148,12 +148,12 @@ const StageForm = ({ pipeline, stage, create, save }: Props) => {
                  id="match_pass"
                  name="match"
                  value="PASS"
-                 label="None or more rules on this stage match"
+                 label="此阶段没有或更多规则匹配"
                  onChange={_onChange}
                  checked={nextStage.match === 'PASS'} />
 
           <Input id="stage-rules-select"
-                 label="Stage rules"
+                 label="阶段规则"
                  help={rulesHelp}>
             <SelectableList options={_getFormattedOptions()}
                             isLoading={!rules}

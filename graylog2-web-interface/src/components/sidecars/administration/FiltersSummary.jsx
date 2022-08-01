@@ -39,7 +39,7 @@ class FiltersSummary extends React.Component {
       // Get collector name
       const collector = collectors.find((c) => c.id === value);
 
-      return `${collector.name} on ${collector.node_operating_system}`;
+      return `${collector.name} 安装于 ${collector.node_operating_system}`;
     }
 
     if (type === 'configuration') {
@@ -72,11 +72,11 @@ class FiltersSummary extends React.Component {
       <Row className="row-sm">
         <Col md={10}>
           <ul className="list-inline">
-            <li><b>Filters</b></li>
+            <li><b>过滤器</b></li>
             {this.formatFilters(filters)}
             <li>
               <Button bsStyle="link" bsSize="xsmall" className={style.deleteButton} onClick={onResetFilters}>
-                <Icon name="times" /> Clear all
+                <Icon name="times" /> 清空
               </Button>
             </li>
           </ul>

@@ -34,7 +34,7 @@ type Props = {
 const TitleWithLink = ({ to, title }: { to: string, title: string }) => <Link to={to}>{title}</Link>;
 
 const assertUnreachable = (type: 'error'): never => {
-  throw new Error(`Owner of entity has not supported type: ${type}`);
+  throw new Error(`实体所有者不支持类型: ${type}`);
 };
 
 const _getOwnerTitle = ({ type, id, title }: Grantee, userPermissions: List<string>) => {

@@ -112,12 +112,12 @@ const GranteesListItem = ({ availableCapabilities, currentGranteeState, grantee:
           </GranteeInfo>
           <StyledCapabilitySelect onChange={(newCapabilityId) => onCapabilityChange({ granteeId: id, capabilityId: newCapabilityId })}
                                   capabilities={availableCapabilities}
-                                  title={`Change the capability for ${title}`} />
+                                  title={`修改 ${title}`} />
           <Actions>
             {isDeleting ? (
               <Spinner text="" />
             ) : (
-              <IconButton name="trash" onClick={handleDelete} title={`Remove sharing for ${title}`} />
+              <IconButton name="trash" onClick={handleDelete} title={`取消共享 ${title}`} />
             )}
           </Actions>
         </Container>

@@ -70,23 +70,23 @@ class DnsAdapterFieldSet extends React.Component {
       validationState,
     } = this.props;
     const lookupTypes = [
-      { label: 'Resolve hostname to IPv4 address (A)', value: 'A' },
-      { label: 'Resolve hostname to IPv6 address (AAAA)', value: 'AAAA' },
-      { label: 'Resolve hostname to IPv4 and IPv6 addresses (A and AAAA)', value: 'A_AAAA' },
-      { label: 'Reverse lookup (PTR)', value: 'PTR' },
-      { label: 'Text lookup (TXT)', value: 'TXT' },
+      { label: '解析主机名到IPv4地址(A)', value: 'A' },
+      { label: '解析主机名到IPv6地址(AAAA)', value: 'AAAA' },
+      { label: '解析主机名到IPv4和IPv6地址(A 和 AAAA)', value: 'A_AAAA' },
+      { label: '反向查找(PTR)', value: 'PTR' },
+      { label: '文本数据字典(TXT)', value: 'TXT' },
     ];
 
     return (
       <fieldset>
-        <Input label="DNS Lookup Type"
+        <Input label="DNS数据字典"
                id="lookup-type"
                required
                autoFocus
-               help="Select the type of DNS lookup to perform."
+               help="选择一个DNS数据字典."
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9">
-          <Select placeholder="Select the type of DNS lookup"
+          <Select placeholder="选择DNS数据字典"
                   clearable={false}
                   options={lookupTypes}
                   matchProp="label"
@@ -96,11 +96,11 @@ class DnsAdapterFieldSet extends React.Component {
         <Input type="text"
                id="server_ips"
                name="server_ips"
-               label="DNS Server IP Address"
+               label="DNS服务器"
                onChange={handleFormEvent}
                help={validationMessage(
                  'server_ips',
-                 'An optional comma-separated list of DNS server IP addresses.',
+                 '逗号隔开的DNS服务器地址.',
                )}
                bsStyle={validationState('server_ips')}
                value={config.server_ips}
@@ -109,19 +109,19 @@ class DnsAdapterFieldSet extends React.Component {
         <Input type="number"
                id="request_timeout"
                name="request_timeout"
-               label="DNS Request Timeout"
+               label="DNS请求超时时间"
                required
                onChange={handleFormEvent}
                help={validationMessage(
                  'request_timeout',
-                 'DNS request timeout in milliseconds.',
+                 'DNS请求超时时间.',
                )}
                bsStyle={validationState('request_timeout')}
                value={config.request_timeout}
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9" />
-        <TimeUnitInput label="Cache TTL Override"
-                       help="If enabled, the cache TTL will be overridden with the specified value."
+        <TimeUnitInput label="覆盖缓存生命周期"
+                       help="如果启用,将覆盖缓存超时时间."
                        update={this.updateCacheTTLOverride}
                        value={config.cache_ttl_override}
                        unit={config.cache_ttl_override_unit || 'MINUTES'}

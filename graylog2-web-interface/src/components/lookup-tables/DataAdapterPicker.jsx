@@ -50,13 +50,13 @@ class DataAdapterPicker extends React.Component {
     return (
       <fieldset>
         <Input id="data-adapter-select"
-               label="Data Adapter"
+               label="数据源"
                required
                autoFocus
-               help="Select an existing data adapter"
+               help="选择数据源"
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9">
-          <Select placeholder="Select a data adapter"
+          <Select placeholder="选择数据源"
                   clearable={false}
                   options={sortedAdapters}
                   matchProp="label"

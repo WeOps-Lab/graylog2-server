@@ -65,8 +65,8 @@ class ImportsViewModal extends React.Component {
         (error) => {
           this.setState({ uploads: [], totalUploads: 0 });
 
-          UserNotification.error(`Fetching uploads failed with error: ${error}`,
-            'Could not get configuration uploads');
+          UserNotification.error(`获取配置失败: ${error}`,
+            '无法获取配置');
         },
       );
   };
@@ -93,7 +93,7 @@ class ImportsViewModal extends React.Component {
         <td><Timestamp dateTime={upload.created} /></td>
         <td>
           <Button bsStyle="info" bsSize="xsmall" onClick={() => this._onApplyButton(upload.rendered_configuration)}>
-            Apply
+            应用
           </Button>
         </td>
       </tr>
@@ -115,7 +115,7 @@ class ImportsViewModal extends React.Component {
       return (
         <Alert bsStyle="info">
           <Icon name="info-circle" />&nbsp;
-          There are no configuration uploads available. Please go to <strong>System -&gt; Collectors (legacy) -&gt; Details -&gt; Import Configuration</strong> and import your first configuration. You need at least Sidecar version 0.1.8 to make this feature available.
+          没有可用的配置.请到<strong>系统 -&gt; 采集器 (旧的) -&gt; 详情 -&gt; 导入配置</strong> 导入您的第一份配置.您的客户端版本至少要0.1.8才可用.
         </Alert>
       );
     }
@@ -127,7 +127,7 @@ class ImportsViewModal extends React.Component {
                      onChange={this._loadUploads}>
         <table className="table">
           <thead>
-            <tr><th>Sidecar</th><th>Collector</th><th>Created</th><th>Action</th></tr>
+            <tr><th>客户端</th><th>采集器</th><th>创建于</th><th>操作</th></tr>
           </thead>
           <tbody>
             {formattedUploads}
@@ -141,14 +141,14 @@ class ImportsViewModal extends React.Component {
     return (
       <BootstrapModalWrapper bsSize="large" ref={(c) => { this.uploadsModal = c; }}>
         <Modal.Header closeButton>
-          <Modal.Title><span>Imports from the old Collector system</span></Modal.Title>
-          Edit the imported configuration after pressing the Apply button by hand. Dynamic values like the node ID can be replaced with the variables system, e.g. <code>{this._buildVariableName('nodeId')}</code>
+          <Modal.Title><span>从旧的采集器导入</span></Modal.Title>
+          手动按下应用按钮后编辑导入的配置.像节点ID这样的动态值可以替换为变量系统.例如:<code>{this._buildVariableName('nodeId')}</code>
         </Modal.Header>
         <Modal.Body>
           {this._formatModalBody()}
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" onClick={this.hide}>Close</Button>
+          <Button type="button" onClick={this.hide}>关闭</Button>
         </Modal.Footer>
       </BootstrapModalWrapper>
     );

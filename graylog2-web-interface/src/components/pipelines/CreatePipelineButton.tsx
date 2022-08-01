@@ -23,7 +23,7 @@ import Routes from 'routing/Routes';
 const CreatePipelineButton = () => (
   <div className="pull-right">
     <LinkContainer to={Routes.SYSTEM.PIPELINES.PIPELINE('new')}>
-      <Button bsStyle="success">Add new pipeline</Button>
+      <Button bsStyle="success">创建流水线</Button>
     </LinkContainer>
   </div>
 );

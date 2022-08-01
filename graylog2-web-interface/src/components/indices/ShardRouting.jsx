@@ -28,7 +28,7 @@ class ShardRouting extends React.Component {
 
   render() {
     const { route } = this.props;
-    const tooltip = <Tooltip id="shard-route-state-tooltip">State: <i>{route.state}</i> on {route.node_hostname} ({route.node_name})</Tooltip>;
+    const tooltip = <Tooltip id="shard-route-state-tooltip">状态: <i>{route.state}</i>   {route.node_hostname} ({route.node_name})</Tooltip>;
 
     return (
       <li className={classNames('shard', `shard-${route.state}`, { 'shard-primary': route.primary })}>

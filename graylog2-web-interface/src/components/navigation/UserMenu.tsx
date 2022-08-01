@@ -37,8 +37,8 @@ const UserMenu = ({ fullName, readOnly = true, userId }: Props) => {
     ? Routes.SYSTEM.USERS.show(userId)
     : Routes.SYSTEM.USERS.edit(userId);
   const label = readOnly
-    ? 'Show profile'
-    : 'Edit profile';
+    ? '显示'
+    : '编辑';
 
   const onLogoutClicked = () => {
     SessionActions.logout().then(() => {
@@ -63,7 +63,7 @@ const UserMenu = ({ fullName, readOnly = true, userId }: Props) => {
       <LinkContainer to={route}>
         <MenuItem>{label}</MenuItem>
       </LinkContainer>
-      <MenuItem onSelect={onLogoutClicked}><Icon name="sign-out-alt" /> Log out</MenuItem>
+      <MenuItem onSelect={onLogoutClicked}><Icon name="sign-out-alt" /> 注销</MenuItem>
     </NavDropdown>
   );
 };

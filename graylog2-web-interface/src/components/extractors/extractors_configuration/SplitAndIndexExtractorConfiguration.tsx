@@ -16,16 +16,16 @@
  */
 import PropTypes from 'prop-types';
 import * as React from 'react';
-import { useCallback, useEffect, useState } from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
-import { Icon } from 'components/common';
-import { Col, Row, Button, Input } from 'components/bootstrap';
+import {Icon} from 'components/common';
+import {Col, Row, Button, Input} from 'components/bootstrap';
 import UserNotification from 'util/UserNotification';
 import ExtractorUtils from 'util/ExtractorUtils';
 import FormUtils from 'util/FormsUtils';
 import ToolsStore from 'stores/tools/ToolsStore';
 
-const DEFAULT_CONFIGURATION = { index: 1 };
+const DEFAULT_CONFIGURATION = {index: 1};
 
 const _getEffectiveConfiguration = (configuration) => ExtractorUtils.getEffectiveConfiguration(DEFAULT_CONFIGURATION, configuration);
 
@@ -37,9 +37,16 @@ type Props = {
   onExtractorPreviewLoad: (preview: React.ReactNode | string) => void,
 }
 
-const SplitAndIndexExtractorConfiguration = ({ configuration: initialConfiguration, exampleMessage, onChange, onExtractorPreviewLoad }: Props) => {
+const SplitAndIndexExtractorConfiguration = ({
+                                               configuration: initialConfiguration,
+                                               exampleMessage,
+                                               onChange,
+                                               onExtractorPreviewLoad
+                                             }: Props) => {
   const [configuration, setConfiguration] = useState(_getEffectiveConfiguration(initialConfiguration));
-  useEffect(() => { setConfiguration(_getEffectiveConfiguration(initialConfiguration)); }, [initialConfiguration]);
+  useEffect(() => {
+    setConfiguration(_getEffectiveConfiguration(initialConfiguration));
+  }, [initialConfiguration]);
 
   const [trying, setTrying] = useState(false);
 
@@ -60,7 +67,7 @@ const SplitAndIndexExtractorConfiguration = ({ configuration: initialConfigurati
 
     promise.then((result) => {
       if (!result.successful) {
-        UserNotification.warning('We were not able to run the split and index extraction. Please check your parameters.');
+        UserNotification.warning('无法运行拆分和索引提取,请检查您的参数.');
 
         return;
       }
@@ -75,16 +82,16 @@ const SplitAndIndexExtractorConfiguration = ({ configuration: initialConfigurati
 
   const splitByHelpMessage = (
     <span>
-      What character to split on. <strong>Example:</strong> A whitespace character will split{' '}
-      <em>foo bar baz</em> to <em>[foo,bar,baz]</em>.
+        用什么字符进行分隔. <strong>例如：</strong> 一个空格符将会把{' '}
+      <em>foo bar baz</em> 分隔成 <em>[foo,bar,baz]</em>.
     </span>
   );
 
   const indexHelpMessage = (
     <span>
-      What part of the split string to you want to use? <strong>Example:</strong> <em>2</em> selects <em>bar</em>{' '}
-      from <em>foo bar baz</em> when split by whitespace.
-    </span>
+        想要分隔字符串哪一部分?
+        <strong>例如:</strong> 用空格分隔后的 <em>foo bar baz</em> 的第 <em>2</em> 部分是 <em>bar</em>.
+      </span>
   );
 
   const isTryButtonDisabled = trying || configuration.split_by === '' || configuration.index === undefined || configuration.index < 1 || !exampleMessage;
@@ -93,29 +100,29 @@ const SplitAndIndexExtractorConfiguration = ({ configuration: initialConfigurati
     <div>
       <Input type="text"
              id="split_by"
-             label="Split by"
+             label="分隔符"
              labelClassName="col-md-2"
              wrapperClassName="col-md-10"
              defaultValue={configuration.split_by}
              onChange={_onChange('split_by')}
              required
-             help={splitByHelpMessage} />
+             help={splitByHelpMessage}/>
 
       <Input type="number"
              id="index"
-             label="Target index"
+             label="目标索引"
              labelClassName="col-md-2"
              wrapperClassName="col-md-10"
              defaultValue={configuration.index}
              onChange={_onChange('index')}
              min="1"
              required
-             help={indexHelpMessage} />
+             help={indexHelpMessage}/>
 
       <Row>
         <Col mdOffset={2} md={10}>
           <Button bsStyle="info" onClick={_onTryClick} disabled={isTryButtonDisabled}>
-            {trying ? <Icon name="spinner" spin /> : 'Try'}
+            {trying ? <Icon name="spinner" spin/> : '测试'}
           </Button>
         </Col>
       </Row>

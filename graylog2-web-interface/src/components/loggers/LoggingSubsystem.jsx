@@ -33,7 +33,7 @@ class LoggingSubsystem extends React.Component {
       <div className="subsystem-row">
         <Col md={6} className="subsystem" style={{ marginBottom: '10px' }}>
           <h3 className="u-light">
-            Subsystem: {lodash.capitalize(this.props.name)}
+            子系统: {lodash.capitalize(this.props.name)}
             <ButtonGroup className="pull-right">
               <LogLevelDropdown nodeId={this.props.nodeId} name={this.props.name} subsystem={this.props.subsystem} />
             </ButtonGroup>

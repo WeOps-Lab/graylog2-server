@@ -36,7 +36,7 @@ type Props = {
 };
 
 const StageRules = ({ pipeline, stage, rules }: Props) => {
-  const headers = ['Title', 'Description', 'Throughput', 'Errors'];
+  const headers = ['标题', '描述', '吞吐量', '异常'];
 
   const _ruleRowFormatter = (ruleArg, ruleIdx) => {
     let rule = ruleArg;
@@ -47,7 +47,7 @@ const StageRules = ({ pipeline, stage, rules }: Props) => {
     if (!rule) {
       rule = {
         id: `invalid-${ruleIdx}`,
-        description: `Rule ${stage.rules[ruleIdx]} has been renamed or removed. This rule will be skipped.`,
+        description: `规则 ${stage.rules[ruleIdx]} 已重命名或删除。此规则将被跳过。`,
       };
 
       ruleTitle = <span><Icon name="exclamation-triangle" className="text-danger" /> {stage.rules[ruleIdx]}</span>;
@@ -86,7 +86,7 @@ const StageRules = ({ pipeline, stage, rules }: Props) => {
                headerCellFormatter={(header) => (<th>{header}</th>)}
                rows={rules}
                dataRowFormatter={_ruleRowFormatter}
-               noDataText="This stage has no rules yet. Click on edit to add some."
+               noDataText="这个阶段还没有规则,点击编辑添加."
                filterLabel=""
                filterKeys={[]} />
   );

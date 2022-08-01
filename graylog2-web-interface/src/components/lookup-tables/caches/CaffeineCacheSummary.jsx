@@ -29,11 +29,11 @@ class CaffeineCacheSummary extends React.Component {
 
     return (
       <dl>
-        <dt>Maximum entries</dt>
+        <dt>最大实体数</dt>
         <dd>{config.max_size}</dd>
-        <dt>Expire after access</dt>
+        <dt>访问后过期</dt>
         <dd><TimeUnit value={config.expire_after_access} unit={config.expire_after_access_unit} /></dd>
-        <dt>Expire after write</dt>
+        <dt>写入后过期</dt>
         <dd><TimeUnit value={config.expire_after_write} unit={config.expire_after_write_unit} /></dd>
       </dl>
     );

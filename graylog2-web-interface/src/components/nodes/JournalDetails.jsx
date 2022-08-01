@@ -101,7 +101,7 @@ const JournalDetails = createReactClass({
 
   render() {
     if (this._isLoading()) {
-      return <Spinner text="Loading journal metrics..." />;
+      return <Spinner text="加载队列性能指标中..." />;
     }
 
     const { nodeId } = this.props;
@@ -112,7 +112,7 @@ const JournalDetails = createReactClass({
     if (!journalInformation.enabled) {
       return (
         <Alert bsStyle="warning">
-          <Icon name="exclamation-triangle" />&nbsp; The disk journal is disabled on this node.
+          <Icon name="exclamation-triangle" />&nbsp; 磁盘缓存不可用.
         </Alert>
       );
     }
@@ -122,7 +122,7 @@ const JournalDetails = createReactClass({
     if (Object.keys(metrics).length === 0) {
       return (
         <Alert bsStyle="warning">
-          <Icon name="exclamation-triangle" />&nbsp; Journal metrics unavailable.
+          <Icon name="exclamation-triangle" />&nbsp; 队列性能指标不可用.
         </Alert>
       );
     }
@@ -133,8 +133,8 @@ const JournalDetails = createReactClass({
     if (metrics.utilizationRatio >= 1) {
       overcommittedWarning = (
         <span>
-          <strong>Warning!</strong> The journal utilization is exceeding the maximum size defined.
-          {' '}<Link to={Routes.SYSTEM.OVERVIEW}>Click here</Link> for more information.<br />
+          <strong>警告!</strong> 队列使用已经达到了最大值.
+          {' '}<Link to={Routes.SYSTEM.OVERVIEW}>点击这里</Link> 获取更多的消息.<br />
         </span>
       );
     }
@@ -142,25 +142,25 @@ const JournalDetails = createReactClass({
     return (
       <Row className="row-sm">
         <Col md={6}>
-          <h3>Configuration</h3>
+          <h3>配置</h3>
           <dl className="system-journal">
-            <dt>Path:</dt>
+            <dt>路径:</dt>
             <dd>{journalInformation.journal_config.directory}</dd>
-            <dt>Earliest entry:</dt>
+            <dt>最早的条目:</dt>
             <dd><RelativeTime dateTime={oldestSegment} /></dd>
-            <dt>Maximum size:</dt>
+            <dt>最大长度:</dt>
             <dd>{NumberUtils.formatBytes(journalInformation.journal_config.max_size)}</dd>
-            <dt>Maximum age:</dt>
+            <dt>最大周期:</dt>
             <dd>{moment.duration(journalInformation.journal_config.max_age).format('d [days] h [hours] m [minutes]')}</dd>
-            <dt>Flush policy:</dt>
+            <dt>刷入规则:</dt>
             <dd>
-              Every {numeral(journalInformation.journal_config.flush_interval).format('0,0')} messages
+              每 {numeral(journalInformation.journal_config.flush_interval).format('0,0')} 条消息
               {' '}or {moment.duration(journalInformation.journal_config.flush_age).format('h [hours] m [minutes] s [seconds]')}
             </dd>
           </dl>
         </Col>
         <Col md={6}>
-          <h3>Utilization</h3>
+          <h3>使用率</h3>
 
           <JournalUsageProgressBar bars={[{
             value: metrics.utilizationRatio * 100,
@@ -169,11 +169,11 @@ const JournalDetails = createReactClass({
 
           {overcommittedWarning}
 
-          <strong>{numeral(metrics.entriesUncommitted).format('0,0')} unprocessed messages</strong>
-          {' '}are currently in the journal, in {metrics.segments} segments.<br />
-          <strong>{numeral(metrics.append).format('0,0')} messages</strong>
-          {' '}have been appended in the last second,{' '}
-          <strong>{numeral(metrics.read).format('0,0')} messages</strong> have been read in the last second.
+          <strong>{numeral(metrics.entriesUncommitted).format('0,0')} 条未处理的消息</strong>
+          {' '}目前在队列的第 {metrics.segments} 段.<br />
+          <strong>{numeral(metrics.append).format('0,0')} 消息</strong>
+          {' '}在最近一秒被追加,{' '}
+          <strong>{numeral(metrics.read).format('0,0')} 消息</strong> 在最近一秒被消费.
         </Col>
       </Row>
     );

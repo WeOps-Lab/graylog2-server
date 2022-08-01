@@ -22,6 +22,7 @@ import lodash from 'lodash';
 import { Button, Panel, BootstrapModalConfirm } from 'components/bootstrap';
 import { Pluralize, SelectPopover } from 'components/common';
 
+const MAPPING = { 'start' : '启动' , 'restart':'重启', 'stop':'暂停' };
 const PROCESS_ACTIONS = ['start', 'restart', 'stop'];
 
 const CollectorProcessControl = createReactClass({
@@ -67,30 +68,38 @@ const CollectorProcessControl = createReactClass({
   },
 
   renderSummaryContent(selectedAction, selectedSidecars) {
+    let actionName = ''
+    if (selectedAction === 'start') {
+      actionName = '启动'
+    } else if (selectedAction === 'restart') {
+      actionName = '重启'
+    } else {
+      actionName = '暂停'
+    }
+
     return (
       <>
         <p>
-          You are going to <strong>{selectedAction}</strong> log collectors in&nbsp;
-          <Pluralize singular="this sidecar" plural="these sidecars" value={selectedSidecars.length} />:
+          您将要<strong>{actionName}</strong>
+          <Pluralize singular="以下服务器" plural="以下服务器" value={selectedSidecars.length} />
+          的采集器:
         </p>
         <p>{selectedSidecars.join(', ')}</p>
-        <p>Are you sure you want to proceed with this action?</p>
+        <p>您是否确实要继续此操作?</p>
       </>
     );
   },
 
   renderConfigurationWarning(selectedAction) {
     return (
-      <Panel bsStyle="info" header="Collectors without Configuration">
+      <Panel bsStyle="info" header="未配置的采集器">
         <p>
-          At least one selected Collector is not configured yet. To start a new Collector, assign a
-          Configuration to it and the Sidecar will start the process for you.
+          至少有一个选定的采集器尚未配置.要启动一个新的采集器,请先为其分配一个配置,客户端将为您启动该过程.
         </p>
         <p>
-          {lodash.capitalize(selectedAction)}ing a Collector without Configuration will have no effect.
+          {lodash.capitalize(selectedAction)}个没有配置的采集器.
         </p>
-        <Button bsSize="xsmall" bsStyle="primary" onClick={this.hideConfigurationWarning}>Understood, continue
-          anyway
+        <Button bsSize="xsmall" bsStyle="primary" onClick={this.hideConfigurationWarning}>明白,继续
         </Button>
       </Panel>
     );
@@ -109,7 +118,7 @@ const CollectorProcessControl = createReactClass({
 
     return (
       <BootstrapModalConfirm ref={(c) => { this.modal = c; }}
-                             title="Process action summary"
+                             title="操作流程摘要"
                              confirmButtonDisabled={shouldShowConfigurationWarning}
                              onConfirm={this.confirmProcessAction}
                              onCancel={this.cancelProcessAction}>
@@ -126,15 +135,15 @@ const CollectorProcessControl = createReactClass({
     const { selectedSidecarCollectorPairs } = this.props;
     const { selectedAction } = this.state;
 
-    const actionFormatter = (action) => lodash.capitalize(action);
+    const actionFormatter = (action) => MAPPING[action];
 
     return (
       <span>
         <SelectPopover id="process-management-action"
-                       title="Manage collector processes"
+                       title="操作"
                        triggerNode={(
                          <Button bsSize="small"
-                                 bsStyle="link">Process <span className="caret" />
+                                 bsStyle="link">操作 <span className="caret" />
                          </Button>
 )}
                        items={PROCESS_ACTIONS}

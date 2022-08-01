@@ -53,7 +53,7 @@ PipelineConnectionsList.propTypes = {
 };
 
 PipelineConnectionsList.defaultProps = {
-  noConnectionsMessage: 'Pipeline not connected to any streams',
+  noConnectionsMessage: '流水线没有连接任何消息流',
 };
 
 export default PipelineConnectionsList;

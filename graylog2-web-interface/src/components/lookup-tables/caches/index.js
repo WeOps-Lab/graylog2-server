@@ -26,14 +26,14 @@ PluginStore.register(new PluginManifest({}, {
   lookupTableCaches: [
     {
       type: 'none',
-      displayName: 'Do not cache values',
+      displayName: '不缓存数据',
       formComponent: NullCacheFieldSet,
       summaryComponent: NullCacheSummary,
       documentationComponent: null,
     },
     {
       type: 'guava_cache', // old name kept for backwards compatibility
-      displayName: 'Node-local, in-memory cache',
+      displayName: '本地节点缓存',
       formComponent: CaffeineCacheFieldSet,
       summaryComponent: CaffeineCacheSummary,
       documentationComponent: CaffeineCacheDocumentation,

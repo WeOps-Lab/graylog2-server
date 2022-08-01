@@ -69,11 +69,11 @@ const IndexerClusterHealth = () => {
   return (
     <Row className="content">
       <Col md={12}>
-        <h2>Elasticsearch cluster</h2>
+        <h2>Elasticsearch集群</h2>
 
         <SmallSupportLink>
-          The possible Elasticsearch cluster states and more related information is available in the{' '}
-          <DocumentationLink page={DocsHelper.PAGES.CONFIGURING_ES} text="Graylog documentation" />.
+          Elasticsearch的集群状态.
+          在<DocumentationLink page={DocsHelper.PAGES.CONFIGURING_ES} text="DataInsight文档" />查看更多信息.
         </SmallSupportLink>
         {isSuccess && <IndexerClusterHealthSummary health={health} name={name} />}
         {loading && <p><Spinner /></p>}

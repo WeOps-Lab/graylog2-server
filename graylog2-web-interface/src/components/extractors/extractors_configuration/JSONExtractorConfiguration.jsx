@@ -105,74 +105,74 @@ const JSONExtractorConfiguration = createReactClass({
       <div>
         <Input type="checkbox"
                id="flatten"
-               label="Flatten structures"
+               label="扁平结果"
                wrapperClassName="col-md-offset-2 col-md-10"
                defaultChecked={this.state.configuration.flatten}
                onChange={this._onChange('flatten')}
-               help="Whether to flatten JSON objects into a single message field or to expand into multiple fields." />
+               help="无论是将JSON对象扁平化到单个日志消息字段,还是扩展到多个领域." />
 
         <Input type="text"
                id="list_separator"
-               label="List item separator"
+               label="分隔符"
                labelClassName="col-md-2"
                wrapperClassName="col-md-10"
                defaultValue={this.state.configuration.list_separator}
                required
                onChange={this._onChange('list_separator')}
-               help="What string to use to concatenate items of a JSON list." />
+               help="用什么字符串来连接一个JSON列表." />
 
         <Input type="text"
                id="key_separator"
-               label="Key separator"
+               label="键分隔符"
                labelClassName="col-md-2"
                wrapperClassName="col-md-10"
                defaultValue={this.state.configuration.key_separator}
                required
                onChange={this._onChange('key_separator')}
-               help={<span>What string to use to concatenate different keys of a nested JSON object (only used if <em>not</em> flattened).</span>} />
+               help={<span>用什么字符串去区分不同的JSON对象 (仅在 <em>非</em> 扁平结构中使用).</span>} />
 
         <Input type="text"
                id="kv_separator"
-               label="Key/value separator"
+               label="键/值分隔符"
                labelClassName="col-md-2"
                wrapperClassName="col-md-10"
                defaultValue={this.state.configuration.kv_separator}
                required
                onChange={this._onChange('kv_separator')}
-               help="What string to use when concatenating key/value pairs of a JSON object (only used if flattened)." />
+               help="串联JSON对象的键/值对时使用何种字符串 (仅在扁平结构中使用)." />
 
         <Input type="text"
                id="key_prefix"
-               label="Key prefix"
+               label="JSON键前缀"
                labelClassName="col-md-2"
                wrapperClassName="col-md-10"
                defaultValue={this.state.configuration.key_prefix}
                onChange={this._onChange('key_prefix')}
-               help="Text to prepend to each key extracted from the JSON object." />
+               help="JSON对象键的前缀." />
 
         <Input type="checkbox"
                id="replace_key_whitespace"
-               label="Replace whitespaces in keys"
+               label="替换Key为空的键值"
                wrapperClassName="col-md-offset-2 col-md-10"
                defaultChecked={this.state.configuration.replace_key_whitespace}
                onChange={this._onChange('replace_key_whitespace')}
-               help="Field keys containing whitespaces will be discarded when storing the extracted message. Check this box to replace whitespaces in JSON keys with another character." />
+               help="存储提取的消息时，将丢弃包含空白的字段键。选中此框可将JSON键中的空白替换为另一个字符." />
 
         <Input type="text"
                id="key_whitespace_replacement"
-               label="Key whitespace replacement"
+               label="键替换内容"
                labelClassName="col-md-2"
                wrapperClassName="col-md-10"
                defaultValue={this.state.configuration.key_whitespace_replacement}
                disabled={!this.state.configuration.replace_key_whitespace}
                required
                onChange={this._onChange('key_whitespace_replacement')}
-               help="What character to use when replacing whitespaces in message keys. Please ensure the replacement character is valid in Lucene, e.g. '-' or '_'." />
+               help="替换消息键中的空白时要使用的字符。请确保替换字符在Lucene中有效，例如-或\u" />
 
         <Row>
           <Col mdOffset={2} md={10}>
             <Button bsStyle="info" onClick={this._onTryClick} disabled={this._isTryButtonDisabled()}>
-              {this.state.trying ? <Icon name="spinner" spin /> : 'Try'}
+              {this.state.trying ? <Icon name="spinner" spin /> : '测试'}
             </Button>
           </Col>
         </Row>

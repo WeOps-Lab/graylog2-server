@@ -70,7 +70,7 @@ const ExtractorsList = createReactClass({
     if (this.state.extractors.length > 1) {
       sortExtractorsButton = (
         <Button bsSize="xsmall" bsStyle="primary" className="pull-right" onClick={this._openSortModal}>
-          Sort extractors
+          为提取器排序
         </Button>
       );
     }
@@ -86,14 +86,14 @@ const ExtractorsList = createReactClass({
           <Col md={12}>
             <Row className="row-sm">
               <Col md={8}>
-                <h2>Configured extractors</h2>
+                <h2>已配置的提取器</h2>
               </Col>
               <Col md={4}>
                 {sortExtractorsButton}
               </Col>
             </Row>
             <EntityList bsNoItemsStyle="info"
-                        noItemsText="This input has no configured extractors."
+                        noItemsText="此输入没有配置的提取器."
                         items={formattedExtractors} />
           </Col>
         </Row>

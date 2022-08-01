@@ -73,12 +73,12 @@ class SidecarList extends React.Component {
   formatSidecarList = (sidecars) => {
     const { onSortChange, sort } = this.props;
     const sidecarCollection = {
-      node_name: 'Name',
-      'node_details.status.status': 'Status',
-      'node_details.operating_system': 'Operating System',
-      last_seen: 'Last Seen',
-      node_id: 'Node Id',
-      sidecar_version: 'Sidecar Version',
+      node_name: '名称',
+      'node_details.status.status': '状态',
+      'node_details.operating_system': '操作系统',
+      last_seen: '最后活跃时间',
+      node_id: '节点ID',
+      sidecar_version: '版本',
     };
 
     return (
@@ -102,15 +102,15 @@ class SidecarList extends React.Component {
 
   formatEmptyListAlert = () => {
     const { onlyActive } = this.props;
-    const showInactiveHint = (onlyActive ? ' and/or click on "Include inactive sidecars"' : null);
+    const showInactiveHint = (onlyActive ? ' 或点击 "包含不活跃的客户端管理器"' : null);
 
-    return <Alert>There are no sidecars to show. Try adjusting your search filter{showInactiveHint}.</Alert>;
+    return <Alert>没有客户端.试着更改过滤项{showInactiveHint}.</Alert>;
   };
 
   render() {
     const { sidecars, onlyActive, pagination, query, onQueryChange, onPageChange, toggleShowInactive } = this.props;
     const sidecarRows = sidecars.map((sidecar) => <SidecarRow key={sidecar.node_id} sidecar={sidecar} />);
-    const showOrHideInactive = (onlyActive ? 'Include' : 'Hide');
+    const showOrHideInactive = (onlyActive ? '显示' : '隐藏');
     const sidecarList = (sidecarRows.length > 0 ? this.formatSidecarList(sidecarRows) : this.formatEmptyListAlert());
 
     return (

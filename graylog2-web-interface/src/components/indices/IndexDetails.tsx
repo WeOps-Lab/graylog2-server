@@ -48,7 +48,7 @@ const IndexDetails = ({ index, indexName, indexRange, indexSetId, isDeflector }:
   }
 
   const _onRecalculateIndex = () => {
-    if (window.confirm(`Really recalculate the index ranges for index ${indexName}?`)) {
+    if (window.confirm(`确定重新计算索引 ${indexName} 的索引范围？`)) {
       IndexRangesActions.recalculateIndex(indexName).then(() => {
         IndicesActions.list(indexSetId);
       });
@@ -56,7 +56,7 @@ const IndexDetails = ({ index, indexName, indexRange, indexSetId, isDeflector }:
   };
 
   const _onCloseIndex = () => {
-    if (window.confirm(`Really close index ${indexName}?`)) {
+    if (window.confirm(`确定关闭索引 ${indexName}?`)) {
       IndicesActions.close(indexName).then(() => {
         IndicesActions.list(indexSetId);
       });
@@ -64,7 +64,7 @@ const IndexDetails = ({ index, indexName, indexRange, indexSetId, isDeflector }:
   };
 
   const _onDeleteIndex = () => {
-    if (window.confirm(`Really delete index ${indexName}?`)) {
+    if (window.confirm(`确定删除索引 ${indexName}?`)) {
       IndicesActions.delete(indexName).then(() => {
         IndicesActions.list(indexSetId);
       });
@@ -75,17 +75,17 @@ const IndexDetails = ({ index, indexName, indexRange, indexSetId, isDeflector }:
     if (isDeflector) {
       return (
         <span>
-          <Button bsStyle="warning" bsSize="xs" disabled>Active write index cannot be closed</Button>{' '}
-          <Button bsStyle="danger" bsSize="xs" disabled>Active write index cannot be deleted</Button>
+          <Button bsStyle="warning" bsSize="xs" disabled>当前可写索引不能被关闭</Button>{' '}
+          <Button bsStyle="danger" bsSize="xs" disabled>当前可写索引不能被删除</Button>
         </span>
       );
     }
 
     return (
       <span>
-        <Button bsStyle="warning" bsSize="xs" onClick={_onRecalculateIndex}>Recalculate index ranges</Button>{' '}
-        <Button bsStyle="warning" bsSize="xs" onClick={_onCloseIndex}>Close index</Button>{' '}
-        <Button bsStyle="danger" bsSize="xs" onClick={_onDeleteIndex}>Delete index</Button>
+        <Button bsStyle="warning" bsSize="xs" onClick={_onRecalculateIndex}>重新计算索引范围</Button>{' '}
+        <Button bsStyle="warning" bsSize="xs" onClick={_onCloseIndex}>关闭索引</Button>{' '}
+        <Button bsStyle="danger" bsSize="xs" onClick={_onDeleteIndex}>删除索引</Button>
       </span>
     );
   };
@@ -100,10 +100,10 @@ const IndexDetails = ({ index, indexName, indexRange, indexSetId, isDeflector }:
         {index.all_shards.documents.deleted} deleted messages
         <Row style={{ marginBottom: '10' }}>
           <Col md={4} className="shard-meters">
-            <ShardMeter title="Primary shard operations" shardMeter={index.primary_shards} />
+            <ShardMeter title="主分片耗时" shardMeter={index.primary_shards} />
           </Col>
           <Col md={4} className="shard-meters">
-            <ShardMeter title="Total shard operations" shardMeter={index.all_shards} />
+            <ShardMeter title="总耗时" shardMeter={index.all_shards} />
           </Col>
         </Row>
         <ShardRoutingOverview routing={index.routing} indexName={indexName} />

@@ -40,8 +40,8 @@ const UsersSection = ({ role: { id, name } }: Props) => {
   }, [id, name]);
 
   return (
-    <SectionComponent title="Users" showLoading={loading}>
-      <PaginatedItemOverview noDataText="No selected users have been found." onLoad={_onLoad} />
+    <SectionComponent title="用户" showLoading={loading}>
+      <PaginatedItemOverview noDataText="未找到用户" onLoad={_onLoad} />
     </SectionComponent>
   );
 };

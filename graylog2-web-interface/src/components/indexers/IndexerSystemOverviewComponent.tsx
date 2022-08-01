@@ -24,7 +24,7 @@ import { EnterpriseActions } from 'stores/enterprise/EnterpriseStore';
 import IndexerFailuresComponent from './IndexerFailuresComponent';
 
 const IndexerSystemOverviewComponent = () => {
-  const [loadIndexerFailuresComponent, setLoadIndexerFailuresComponent] = useState(<Spinner text="Looking for Index Failures..." />);
+  const [loadIndexerFailuresComponent, setLoadIndexerFailuresComponent] = useState(<Spinner text="查找索引失败..." />);
 
   const pluginSystemOverview = usePluginEntities('systemOverview');
   const EnterpriseIndexerFailures = pluginSystemOverview?.[0]?.component;

@@ -40,7 +40,7 @@ class ConfigurationList extends React.Component {
   };
 
   _headerCellFormatter = (header) => {
-    const className = (header === 'Actions' ? style.actionsColumn : '');
+    const className = (header === '操作' ? style.actionsColumn : '');
 
     return <th className={className}>{header}</th>;
   };
@@ -61,7 +61,7 @@ class ConfigurationList extends React.Component {
 
   render() {
     const { configurations, pagination, query, total, onPageChange, onQueryChange } = this.props;
-    const headers = ['Configuration', 'Color', 'Collector', 'Actions'];
+    const headers = ['配置', '颜色', '采集器', '操作'];
 
     return (
       <div>
@@ -69,15 +69,14 @@ class ConfigurationList extends React.Component {
           <Col md={12}>
             <div className="pull-right">
               <LinkContainer to={Routes.SYSTEM.SIDECARS.NEW_CONFIGURATION}>
-                <Button onClick={this.openModal} bsStyle="success" bsSize="small">Create Configuration</Button>
+                <Button onClick={this.openModal} bsStyle="success" bsSize="small">创建配置</Button>
               </LinkContainer>
             </div>
-            <h2>Configurations <small>{total} total</small></h2>
+            <h2>共<small>{total}</small>份配置</h2>
           </Col>
           <Col md={12}>
             <p>
-              These are the Configurations to use in your Collectors. Remember to apply new configurations to
-              Collectors in the Administration page.
+              这里是采集器所使用的配置.
             </p>
           </Col>
         </Row>
@@ -87,8 +86,8 @@ class ConfigurationList extends React.Component {
             <SearchForm query={query}
                         onSearch={onQueryChange}
                         onReset={onQueryChange}
-                        searchButtonLabel="Find"
-                        placeholder="Find configurations"
+                        searchButtonLabel="查找"
+                        placeholder="查找配置"
                         wrapperClass={style.inline}
                         queryWidth={300}
                         topMargin={0}
@@ -107,7 +106,7 @@ class ConfigurationList extends React.Component {
                            rows={configurations}
                            rowClassName="row-sm"
                            dataRowFormatter={this._collectorConfigurationFormatter}
-                           noDataText="There are no configurations to display, try creating one or changing your query."
+                           noDataText="暂无任何配置."
                            filterLabel=""
                            filterKeys={[]}
                            useResponsiveTable={false} />

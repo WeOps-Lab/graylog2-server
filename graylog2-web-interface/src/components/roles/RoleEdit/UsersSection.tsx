@@ -65,7 +65,7 @@ const UsersSection = ({ role: { id, name }, role }: Props) => {
   const _onUnassignUser = (user) => {
     if ((role.name === 'Reader' || role.name === 'Admin')
       && (!user.roles.includes('Reader') || !user.roles.includes('Admin'))) {
-      setErrors(`User '${user.name}' needs at least a Reader or Admin role.`);
+      setErrors(`用户 '${user.name}' 至少包含Admin或Reader角色.`);
       _onLoad(DEFAULT_PAGINATION).then(setPaginatedUsers);
 
       return;
@@ -79,8 +79,8 @@ const UsersSection = ({ role: { id, name }, role }: Props) => {
   };
 
   return (
-    <SectionComponent title="Users" showLoading={loading}>
-      <h3>Assign Users</h3>
+    <SectionComponent title="用户" showLoading={loading}>
+      <h3>分配用户</h3>
       <Container>
         <UsersSelector onSubmit={_onAssignUser} role={role} />
       </Container>
@@ -89,7 +89,7 @@ const UsersSection = ({ role: { id, name }, role }: Props) => {
       </ErrorAlert>
       <h3>Selected Users</h3>
       <Container>
-        <PaginatedItemOverview noDataText="No selected users have been found."
+        <PaginatedItemOverview noDataText="暂无数据."
                                onLoad={_onLoad}
                                overrideList={paginatedUsers}
                                onDeleteItem={_onUnassignUser} />

@@ -69,8 +69,7 @@ class ExtractorExampleMessage extends React.Component {
     } else {
       messagePreview = (
         <NoExample className="alert alert-warning">
-          Could not load an example of field &lsquo;{field}&rsquo;. It is not possible to test
-          the extractor before updating it.
+          无法加载示例字段 &lsquo;{field}&rsquo;. 在更新提取器之前无法进行测试
         </NoExample>
       );
     }

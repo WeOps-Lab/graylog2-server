@@ -18,12 +18,12 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import numeral from 'numeral';
 
-import { LinkContainer } from 'components/common/router';
-import { Button, Row, Col, Well } from 'components/bootstrap';
+import {LinkContainer} from 'components/common/router';
+import {Button, Row, Col, Well} from 'components/bootstrap';
 import EntityListItem from 'components/common/EntityListItem';
 import ExtractorUtils from 'util/ExtractorUtils';
 import Routes from 'routing/Routes';
-import { ExtractorsActions } from 'stores/extractors/ExtractorsStore';
+import {ExtractorsActions} from 'stores/extractors/ExtractorsStore';
 
 class ExtractorsListItem extends React.Component {
   static propTypes = {
@@ -37,48 +37,48 @@ class ExtractorsListItem extends React.Component {
   };
 
   _toggleDetails = () => {
-    const { showDetails } = this.state;
+    const {showDetails} = this.state;
 
-    this.setState({ showDetails: !showDetails });
+    this.setState({showDetails: !showDetails});
   };
 
   _deleteExtractor = () => {
-    const { extractor, inputId } = this.props;
+    const {extractor, inputId} = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm(`Really remove extractor "${extractor.title}?"`)) {
+    if (window.confirm(`确定删除提取器 "${extractor.title}?"`)) {
       ExtractorsActions.delete.triggerPromise(inputId, extractor);
     }
   };
 
   _formatExtractorSubtitle = () => {
-    const { extractor } = this.props;
+    const {extractor} = this.props;
 
     return (
       <span>
-        Trying to extract data from <em>{extractor.source_field}</em> into{' '}
-        <em>{extractor.target_field}</em>,{' '}
-        {extractor.cursor_strategy === 'cut' && 'not'}{' '}
-        leaving the original intact.
+        尝试 {extractor.cursor_strategy === 'cut' && 'not'}
+        原封不动的从
+        <em>{extractor.source_field}</em>
+        提取数据到<em>{extractor.target_field}</em>，{' '}
       </span>
     );
   };
 
   _formatCondition = () => {
-    const { extractor } = this.props;
+    const {extractor} = this.props;
 
     if (extractor.condition_type === 'none') {
-      return <div />;
+      return <div/>;
     }
 
     return (
       <div className="configuration-section">
-        <h4>Condition</h4>
+        <h4>条件</h4>
         <ul>
           <li>
-            Will only attempt to run if the message{' '}
-            {extractor.condition_type === 'string' ? 'includes the string' : 'matches the regular expression'}{' '}
-            <em>{extractor.condition_value}</em>
+            只会当提取器{' '}
+            {extractor.condition_type === 'string' ? '包含字符串' : '匹配正则表达式'}{' '}时候才会执行
+            <em>{extractor.condition_value}</em>进行提取
           </li>
         </ul>
       </div>
@@ -87,18 +87,18 @@ class ExtractorsListItem extends React.Component {
 
   _formatActions = () => {
     const actions = [];
-    const { extractor, nodeId, inputId } = this.props;
+    const {extractor, nodeId, inputId} = this.props;
 
     actions.push(
       <Button key={`extractor-details-${extractor.id}`} bsStyle="info" onClick={this._toggleDetails}>
-        Details
+        详情
       </Button>,
     );
 
     actions.push(
       <LinkContainer key={`edit-extractor-${extractor.id}`}
                      to={Routes.edit_input_extractor(nodeId, inputId, extractor.id)}>
-        <Button bsStyle="info">Edit</Button>
+        <Button bsStyle="info">编辑</Button>
       </LinkContainer>,
     );
 
@@ -108,7 +108,7 @@ class ExtractorsListItem extends React.Component {
   };
 
   _formatOptions = (options) => {
-    const { extractor } = this.props;
+    const {extractor} = this.props;
 
     const attributes = Object.keys(options);
 
@@ -121,12 +121,12 @@ class ExtractorsListItem extends React.Component {
     let formattedOptions = this._formatOptions(extractorConfig);
 
     if (formattedOptions.length === 0) {
-      formattedOptions = <li>No configuration options</li>;
+      formattedOptions = <li>没有配置任何参数</li>;
     }
 
     return (
       <div className="configuration-section">
-        <h4>Configuration</h4>
+        <h4>配置</h4>
         <ul>
           {formattedOptions}
         </ul>
@@ -148,12 +148,12 @@ class ExtractorsListItem extends React.Component {
     const formattedConverters = converterKeys.map((converterKey) => this._formatConverter(converterKey, converters[converterKey]));
 
     if (formattedConverters.length === 0) {
-      return <div />;
+      return <div/>;
     }
 
     return (
       <div className="configuration-section">
-        <h4>Converters</h4>
+        <h4>转换器</h4>
         <ul>
           {formattedConverters}
         </ul>
@@ -164,25 +164,25 @@ class ExtractorsListItem extends React.Component {
   _formatTimingMetrics = (timing) => {
     return (
       <dl className="metric-def metric-timer">
-        <dt>95th percentile:</dt>
+        <dt>95%:</dt>
         <dd>{numeral(timing['95th_percentile']).format('0,0.[00]')}&#956;s</dd>
 
-        <dt>98th percentile:</dt>
+        <dt>98%:</dt>
         <dd>{numeral(timing['98th_percentile']).format('0,0.[00]')}&#956;s</dd>
 
-        <dt>99th percentile:</dt>
+        <dt>99%:</dt>
         <dd>{numeral(timing['99th_percentile']).format('0,0.[00]')}&#956;s</dd>
 
-        <dt>Standard deviation:</dt>
+        <dt>标准差:</dt>
         <dd>{numeral(timing.std_dev).format('0,0.[00]')}&#956;s</dd>
 
-        <dt>Mean:</dt>
+        <dt>平均值:</dt>
         <dd>{numeral(timing.mean).format('0,0.[00]')}&#956;s</dd>
 
-        <dt>Minimum:</dt>
+        <dt>最小值:</dt>
         <dd>{numeral(timing.min).format('0,0.[00]')}&#956;s</dd>
 
-        <dt>Maximum:</dt>
+        <dt>最大值:</dt>
         <dd>{numeral(timing.max).format('0,0.[00]')}&#956;s</dd>
       </dl>
     );
@@ -193,9 +193,9 @@ class ExtractorsListItem extends React.Component {
 
     if (metrics.total.rate) {
       totalRate = (
-        <div className="meter" style={{ marginBottom: 10 }}>
-          {numeral(metrics.total.rate.total).format('0,0')} total invocations since boot,{' '}
-          averages:{' '}
+        <div className="meter" style={{marginBottom: 10}}>
+          {numeral(metrics.total.rate.total).format('0,0')} 次调用,{' '}
+          平均:{' '}
           {numeral(metrics.total.rate.one_minute).format('0,0.[00]')},{' '}
           {numeral(metrics.total.rate.five_minute).format('0,0.[00]')},{' '}
           {numeral(metrics.total.rate.fifteen_minute).format('0,0.[00]')}.
@@ -204,9 +204,9 @@ class ExtractorsListItem extends React.Component {
     }
 
     const conditionCounts = (
-      <div className="meter" style={{ marginBottom: 10 }}>
-        {metrics.condition_hits} hits,{' '}
-        {metrics.condition_misses} misses
+      <div className="meter" style={{marginBottom: 10}}>
+        {metrics.condition_hits} 命中,{' '}
+        {metrics.condition_misses} 未命中
       </div>
     );
 
@@ -215,7 +215,7 @@ class ExtractorsListItem extends React.Component {
     if (metrics.total.time) {
       totalTime = this._formatTimingMetrics(metrics.total.time);
     } else {
-      totalTime = 'No message passed through here yet.';
+      totalTime = '没有消息经过这里.';
     }
 
     let conditionTime;
@@ -223,7 +223,7 @@ class ExtractorsListItem extends React.Component {
     if (metrics.condition.time) {
       conditionTime = this._formatTimingMetrics(metrics.condition.time);
     } else {
-      conditionTime = 'No message passed through here yet.';
+      conditionTime = '没有消息经过这里.';
     }
 
     let executionTime;
@@ -231,7 +231,7 @@ class ExtractorsListItem extends React.Component {
     if (metrics.execution.time) {
       executionTime = this._formatTimingMetrics(metrics.execution.time);
     } else {
-      executionTime = 'No message passed through here yet.';
+      executionTime = '没有消息经过这里.';
     }
 
     let convertersTime;
@@ -239,7 +239,7 @@ class ExtractorsListItem extends React.Component {
     if (metrics.converters.time) {
       convertersTime = this._formatTimingMetrics(metrics.converters.time);
     } else {
-      convertersTime = 'No message passed through here yet.';
+      convertersTime = '没有消息经过这里.';
     }
 
     return (
@@ -248,19 +248,19 @@ class ExtractorsListItem extends React.Component {
         {conditionCounts}
         <Row>
           <Col md={6}>
-            <h4 style={{ display: 'inline' }}>Total time</h4><br />
+            <h4 style={{display: 'inline'}}>总耗时</h4><br/>
             {totalTime}
           </Col>
           <Col md={6}>
-            <h4 style={{ display: 'inline' }}>Condition time</h4><br />
+            <h4 style={{display: 'inline'}}>条件判断时间</h4><br/>
             {conditionTime}
           </Col>
           <Col md={6}>
-            <h4 style={{ display: 'inline' }}>Execution time</h4><br />
+            <h4 style={{display: 'inline'}}>执行时间</h4><br/>
             {executionTime}
           </Col>
           <Col md={6}>
-            <h4 style={{ display: 'inline' }}>Converter time</h4><br />
+            <h4 style={{display: 'inline'}}>转换时间</h4><br/>
             {convertersTime}
           </Col>
         </Row>
@@ -269,7 +269,7 @@ class ExtractorsListItem extends React.Component {
   };
 
   _formatDetails = () => {
-    const { extractor } = this.props;
+    const {extractor} = this.props;
 
     return (
       <div>
@@ -282,7 +282,7 @@ class ExtractorsListItem extends React.Component {
         </Col>
         <Col md={4}>
           <div className="graylog-input-metrics">
-            <h3>Metrics</h3>
+            <h3>性能指标</h3>
             {this._formatMetrics(extractor.metrics)}
           </div>
         </Col>
@@ -291,8 +291,8 @@ class ExtractorsListItem extends React.Component {
   };
 
   render() {
-    const { extractor } = this.props;
-    const { showDetails } = this.state;
+    const {extractor} = this.props;
+    const {showDetails} = this.state;
 
     return (
       <EntityListItem key={`entry-list-${extractor.id}`}
@@ -300,7 +300,7 @@ class ExtractorsListItem extends React.Component {
                       titleSuffix={ExtractorUtils.getReadableExtractorTypeName(extractor.type)}
                       description={this._formatExtractorSubtitle()}
                       actions={this._formatActions()}
-                      contentRow={showDetails ? this._formatDetails() : null} />
+                      contentRow={showDetails ? this._formatDetails() : null}/>
     );
   }
 }

@@ -87,10 +87,9 @@ class ProcessorSimulator extends React.Component {
         <div>
           <Row className="row-sm">
             <Col md={8} mdOffset={2}>
-              <Panel bsStyle="danger" header="No streams found">
-                Pipelines operate on streams, but your system currently has no streams. Please{' '}
-                <Link to={Routes.STREAMS}>create a stream</Link>{' '}
-                and come back here later to test pipelines processing messages in your new stream.
+              <Panel bsStyle="danger" header="未找到消息流">
+                流水线运行在消息流上，但是您的系统当前没用消息流.
+                请<Link to={Routes.STREAMS}>创建消息流</Link>后回到这里，在新消息流中测试流水线处理消息.
               </Panel>
             </Col>
           </Row>
@@ -100,7 +99,7 @@ class ProcessorSimulator extends React.Component {
 
     const streamHelp = (
       <span>
-        Select a stream to use during simulation, the <em>{this.defaultStream.title}</em> stream is used by default.
+        选择模拟过程中使用的消息流,默认使用消息流<em>{this.defaultStream.title}</em>
       </span>
     );
 
@@ -108,17 +107,15 @@ class ProcessorSimulator extends React.Component {
       <div>
         <Row>
           <Col md={12}>
-            <h1>Load a message</h1>
+            <h1>加载一条消息</h1>
             <p>
-              Build an example message that will be used in the simulation.{' '}
-              <strong>No real messages stored in Graylog will be changed. All actions are purely simulated on the
-                temporary input you provide below.
-              </strong>
+              加载一条用于模拟处理的示例消息。{' '}
+              <strong>存储在DataInsight中的原始消息不会被更改.</strong>
             </p>
             <Row className="row-sm">
               <Col md={7}>
                 <FormGroup id="streamSelectorSimulation">
-                  <ControlLabel>Stream</ControlLabel>
+                  <ControlLabel>消息流</ControlLabel>
                   <Select options={this._getFormattedStreams(this.props.streams)}
                           onChange={this._onStreamSelect}
                           value={this.state.stream.id}

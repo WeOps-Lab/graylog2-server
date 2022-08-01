@@ -28,25 +28,25 @@ class TimerDetails extends React.Component {
 
     return (
       <dl className="metric-def metric-timer">
-        <dt>95th percentile:</dt>
+        <dt>95%:</dt>
         <dd><span>{numeral(timing['95th_percentile']).format('0,0.[00]')}</span>&#956;s</dd>
 
-        <dt>98th percentile:</dt>
+        <dt>98%:</dt>
         <dd><span>{numeral(timing['98th_percentile']).format('0,0.[00]')}</span>&#956;s</dd>
 
-        <dt>99th percentile:</dt>
+        <dt>99%:</dt>
         <dd><span>{numeral(timing['99th_percentile']).format('0,0.[00]')}</span>&#956;s</dd>
 
-        <dt>Standard deviation:</dt>
+        <dt>标准差:</dt>
         <dd><span>{numeral(timing.std_dev).format('0,0.[00]')}</span>&#956;s</dd>
 
-        <dt>Mean:</dt>
+        <dt>平均值:</dt>
         <dd><span>{numeral(timing.mean).format('0,0.[00]')}</span>&#956;s</dd>
 
-        <dt>Minimum:</dt>
+        <dt>最小值:</dt>
         <dd><span>{numeral(timing.min).format('0,0.[00]')}</span>&#956;s</dd>
 
-        <dt>Maximum:</dt>
+        <dt>最大值:</dt>
         <dd><span>{numeral(timing.max).format('0,0.[00]')}</span>&#956;s</dd>
       </dl>
     );

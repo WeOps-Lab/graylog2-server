@@ -35,7 +35,7 @@ class IndexMaintenanceStrategiesSummary extends React.Component {
     const strategy = this.props.pluginExports.filter((exportedStrategy) => exportedStrategy.type === activeStrategy)[0];
 
     if (!strategy || !strategy.summaryComponent) {
-      return (<Alert bsStyle="danger">Summary for strategy {activeStrategy} not found!</Alert>);
+      return (<Alert bsStyle="danger">未找到策略 {activeStrategy} 的摘要!</Alert>);
     }
 
     const element = React.createElement(strategy.summaryComponent, { config: this.props.config.config });

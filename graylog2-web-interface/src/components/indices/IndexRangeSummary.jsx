@@ -28,13 +28,13 @@ class IndexRangeSummary extends React.Component {
     const { indexRange } = this.props;
 
     if (!indexRange) {
-      return <span><i>No index range available.</i></span>;
+      return <span><i>没有可用的索引范围.</i></span>;
     }
 
     return (
-      <span>Range re-calculated{' '}
+      <span>索引范围重新计算于{' '}
         <RelativeTime dateTime={indexRange.calculated_at} />{' '}
-        in {indexRange.took_ms}ms.
+        耗时 {indexRange.took_ms}ms.
       </span>
     );
   }

@@ -28,7 +28,7 @@ class GaugeDetails extends React.Component {
 
     return (
       <dl className="metric-def metric-gauge">
-        <dt>Value:</dt>
+        <dt>值:</dt>
         <dd><span className="number-format">{numeral(gauge.value).format('0,0')}</span></dd>
       </dl>
     );

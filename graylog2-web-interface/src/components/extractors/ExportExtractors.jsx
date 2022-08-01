@@ -81,10 +81,10 @@ const ExportExtractors = createReactClass({
         <Col md={12}>
           <Row>
             <Col md={8}>
-              <h2>Extractors JSON</h2>
+              <h2>JSON提取器</h2>
             </Col>
             <Col md={4}>
-              <ClipboardButton title="Copy extractors" className="pull-right" target="#extractor-export-textarea" />
+              <ClipboardButton title="复制提取器" className="pull-right" target="#extractor-export-textarea" />
             </Col>
           </Row>
           <Row>

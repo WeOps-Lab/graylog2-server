@@ -33,44 +33,44 @@ class CSVFileAdapterDocumentation extends React.Component {
 
     return (
       <div>
-        <p>The CSV data adapter can read key value pairs from a CSV file.</p>
-        <p>Please make sure your CSV file is formatted according to your configuration settings.</p>
+        <p>CSV数据源能够从CSV文件中读取键值对.</p>
+        <p>请确保您的CSV文件格式是正确的.</p>
 
         <Alert style={{ marginBottom: 10 }} bsStyle="info">
-          <h4 style={{ marginBottom: 10 }}>CSV file requirements:</h4>
+          <h4 style={{ marginBottom: 10 }}>CSV格式必须满足:</h4>
           <ul className="no-padding">
-            <li>The first line in the CSV file needs to be a list of field/column names</li>
-            <li>The file uses <strong>utf-8</strong> encoding</li>
-            <li>The file is readable by <strong>every</strong> Graylog server node</li>
+            <li>第一行是列名</li>
+            <li>文件使用<strong>utf-8</strong>格式编码</li>
+            <li>对<strong>所有</strong>DataInsight服务器都是可读的</li>
           </ul>
         </Alert>
 
         <hr />
 
-        <h3 style={{ marginBottom: 10 }}>Example 1</h3>
+        <h3 style={{ marginBottom: 10 }}>示例 1</h3>
 
-        <h5 style={{ marginBottom: 10 }}>Configuration</h5>
+        <h5 style={{ marginBottom: 10 }}>配置</h5>
         <p style={{ marginBottom: 10, padding: 0 }}>
-          Separator: <code>,</code><br />
-          Quote character: <code>"</code><br />
-          Key column: <code>ipaddr</code><br />
-          Value column: <code>hostname</code>
+          分隔符: <code>,</code><br />
+          引号: <code>"</code><br />
+          字段列: <code>ipaddr</code><br />
+          字段值列: <code>hostname</code>
         </p>
 
-        <h5 style={{ marginBottom: 10 }}>CSV File</h5>
+        <h5 style={{ marginBottom: 10 }}>CSV文件</h5>
         <pre>{csvFile1}</pre>
 
-        <h3 style={{ marginBottom: 10 }}>Example 2</h3>
+        <h3 style={{ marginBottom: 10 }}>示例 2</h3>
 
-        <h5 style={{ marginBottom: 10 }}>Configuration</h5>
+        <h5 style={{ marginBottom: 10 }}>配置</h5>
         <p style={{ marginBottom: 10, padding: 0 }}>
-          Separator: <code>;</code><br />
-          Quote character: <code>'</code><br />
-          Key column: <code>ipaddr</code><br />
-          Value column: <code>hostname</code>
+          分隔符: <code>;</code><br />
+          引号: <code>'</code><br />
+          字段列: <code>ipaddr</code><br />
+          字段值列: <code>hostname</code>
         </p>
 
-        <h5 style={{ marginBottom: 10 }}>CSV File</h5>
+        <h5 style={{ marginBottom: 10 }}>CSV文件</h5>
         <pre>{csvFile2}</pre>
       </div>
     );

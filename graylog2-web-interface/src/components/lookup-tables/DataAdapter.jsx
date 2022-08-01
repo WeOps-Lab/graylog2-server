@@ -67,7 +67,7 @@ class DataAdapter extends React.Component {
     const plugin = plugins[dataAdapter.config.type];
 
     if (!plugin) {
-      return <p>Unknown data adapter type {dataAdapter.config.type}. Is the plugin missing?</p>;
+      return <p>未知的数据源类型 {dataAdapter.config.type}. 插件是否丢失?</p>;
     }
 
     const summary = plugin.summaryComponent;
@@ -82,37 +82,37 @@ class DataAdapter extends React.Component {
           </h2>
           <ConfigSummaryDefinitionListWrapper>
             <dl>
-              <dt>Description</dt>
-              <dd>{dataAdapter.description || <em>No description.</em>}</dd>
+              <dt>描述</dt>
+              <dd>{dataAdapter.description || <em>没有描述.</em>}</dd>
             </dl>
           </ConfigSummaryDefinitionListWrapper>
-          <h4>Configuration</h4>
+          <h4>配置</h4>
           <ConfigSummaryDefinitionListWrapper>
             {React.createElement(summary, { dataAdapter: dataAdapter })}
           </ConfigSummaryDefinitionListWrapper>
           <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.DATA_ADAPTERS.edit(dataAdapter.name)}>
-            <Button bsStyle="success">Edit</Button>
+            <Button bsStyle="success">编辑</Button>
           </LinkContainer>
         </Col>
         <Col md={6}>
-          <h3>Test lookup</h3>
-          <p>You can manually trigger the data adapter using this form. The data will be not cached.</p>
+          <h3>测试映射</h3>
+          <p>可以在这里测试映射,测试的数据不会被持久化.</p>
           <form onSubmit={this._lookupKey}>
             <fieldset>
               <Input type="text"
                      id="key"
                      name="key"
-                     label="Key"
+                     label="映射的键"
                      required
                      onChange={this._onChange}
-                     help="Key to look up a value for."
+                     help="映射的键."
                      value={lookupKey} />
-              <Button type="submit" bsStyle="success">Look up</Button>
+              <Button type="submit" bsStyle="success">映射</Button>
             </fieldset>
           </form>
           {lookupResult && (
             <div>
-              <h4>Lookup result</h4>
+              <h4>映射结果</h4>
               <pre>{JSON.stringify(lookupResult, null, 2)}</pre>
             </div>
           )}

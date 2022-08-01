@@ -54,12 +54,11 @@ const IndexerClusterHealthSummary = ({ health, name }: {
   };
 
   const formattedTextForHealth = useMemo(() => {
-    const text = `Elasticsearch cluster ${name?.name || ''} is ${formattedHealthStatus}.`;
-
+    const text = `Elasticsearch 状态为 ${health.status}.`;
     switch (formattedHealthStatus) {
-      case 'green': return text;
-      case 'yellow':
-      case 'red': return <strong>{text}</strong>;
+      case 'green': return 'Elasticsearch 状态为 健康';
+      case 'yellow':return <strong>Elasticsearch 状态为 不健康</strong>;
+      case 'red': return <strong> Elasticsearch 状态为 不可用</strong>;
       default: return text;
     }
   }, [formattedHealthStatus, name]);
@@ -76,12 +75,12 @@ const IndexerClusterHealthSummary = ({ health, name }: {
   return (
     <ESClusterStatus bsStyle={alertClassForHealth()}>
       <Icon name={iconNameForHealth()} /> &nbsp;{formattedTextForHealth}{' '}
-      Shards:{' '}
-      {health.shards.active} active,{' '}
-      {health.shards.initializing} initializing,{' '}
-      {health.shards.relocating} relocating,{' '}
-      {health.shards.unassigned} unassigned,{' '}
-      <DocumentationLink page={DocsHelper.PAGES.CLUSTER_STATUS_EXPLAINED} text="What does this mean?" />
+      分片:{' '}
+      {health.shards.active} 个活跃的分片,{' '}
+      {health.shards.initializing} 个初始化中的分片,{' '}
+      {health.shards.relocating} 个重新分配的分片,{' '}
+      {health.shards.unassigned} 个未分配的分片,{' '}
+      <DocumentationLink page={DocsHelper.PAGES.CLUSTER_STATUS_EXPLAINED} text="这代表什么意思?" />
     </ESClusterStatus>
   );
 };

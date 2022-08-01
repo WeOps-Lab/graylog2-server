@@ -52,7 +52,7 @@ class AssignOutputDropdown extends React.Component {
     const { selectedOutput } = this.state;
     const outputList = (outputs.length > 0
       ? outputs.map(this._formatOutput)
-      : <option disabled>No outputs available</option>);
+      : <option disabled>没有可用的输出</option>);
 
     return (
       <div className="output-add">
@@ -61,7 +61,7 @@ class AssignOutputDropdown extends React.Component {
                   name="outputId"
                   className="form-control"
                   onChange={this._handleUpdate}>
-            <option value={this.PLACEHOLDER} disabled>Select existing output</option>
+            <option value={this.PLACEHOLDER} disabled>选择输出</option>
             {outputList}
           </select>
           &nbsp;
@@ -70,7 +70,7 @@ class AssignOutputDropdown extends React.Component {
                   type="button"
                   disabled={selectedOutput === this.PLACEHOLDER}
                   onClick={this._handleClick}>
-            Assign existing Output
+            分配现有的输出
           </Button>
         </div>
       </div>

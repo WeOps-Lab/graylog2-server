@@ -36,7 +36,7 @@ class InputTypesDataTable extends React.Component {
         <td className="limited">{inputType.type}</td>
         <td className="limited" style={{ width: 150 }}>
           {inputType.link_to_docs
-          && <ExternalLink href={inputType.link_to_docs}>Documentation</ExternalLink>}
+          && <ExternalLink href={inputType.link_to_docs}>文档</ExternalLink>}
         </td>
       </tr>
     );
@@ -44,18 +44,18 @@ class InputTypesDataTable extends React.Component {
 
   render() {
     if (!this.props.inputDescriptions) {
-      return <Spinner text="Loading input types..." />;
+      return <Spinner text="加载接收器类型中..." />;
     }
 
     if (Object.keys(this.props.inputDescriptions).length === 0) {
       return (
         <Alert bsStyle="warning">
-          <Icon name="exclamation-triangle" />&nbsp; Input types are unavailable.
+          <Icon name="exclamation-triangle" />&nbsp; 接收器的类型不可用.
         </Alert>
       );
     }
 
-    const headers = ['Name', 'Type', 'Documentation'];
+    const headers = ['名称', '类型', '文档'];
 
     const rows = Object.keys(this.props.inputDescriptions).map((key) => this.props.inputDescriptions[key]);
 
@@ -68,7 +68,7 @@ class InputTypesDataTable extends React.Component {
                  sortByKey="name"
                  rows={rows}
                  dataRowFormatter={this._inputTypeFormatter}
-                 filterLabel="Filter"
+                 filterLabel="过滤"
                  filterKeys={[]} />
     );
   }

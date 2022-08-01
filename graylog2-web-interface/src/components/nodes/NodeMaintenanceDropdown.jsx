@@ -38,30 +38,30 @@ class NodeMaintenanceDropdown extends React.Component {
         <DropdownButton bsStyle="info" bsSize="lg" title="Actions" id="node-maintenance-actions" pullRight>
           <IfPermitted permissions="threads:dump">
             <LinkContainer to={Routes.SYSTEM.THREADDUMP(node.node_id)}>
-              <MenuItem>Get thread dump</MenuItem>
+              <MenuItem>获取线程转储</MenuItem>
             </LinkContainer>
           </IfPermitted>
 
           <IfPermitted permissions="processbuffer:dump">
             <LinkContainer to={Routes.SYSTEM.PROCESSBUFFERDUMP(node.node_id)}>
-              <MenuItem>Get process-buffer dump</MenuItem>
+              <MenuItem>获取进程转储</MenuItem>
             </LinkContainer>
           </IfPermitted>
 
           <LinkContainer to={Routes.SYSTEM.METRICS(node.node_id)}>
-            <MenuItem>Metrics</MenuItem>
+            <MenuItem>性能指标</MenuItem>
           </LinkContainer>
 
           <HideOnCloud>
             <IfPermitted permissions="loggers:read">
               <LinkContainer to={Routes.SYSTEM.LOGGING}>
-                <MenuItem>Configure internal logging</MenuItem>
+                <MenuItem>配置系统日志</MenuItem>
               </LinkContainer>
             </IfPermitted>
           </HideOnCloud>
 
           <MenuItem href={apiBrowserURI} target="_blank">
-            <ExternalLink>API Browser</ExternalLink>
+            <ExternalLink>API浏览</ExternalLink>
           </MenuItem>
         </DropdownButton>
       </ButtonGroup>

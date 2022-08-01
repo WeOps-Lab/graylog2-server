@@ -21,9 +21,9 @@ const DeletionRetentionStrategySummary = ({ config }) => {
   return (
     <div>
       <dl>
-        <dt>Index retention strategy:</dt>
-        <dd>Delete</dd>
-        <dt>Max number of indices:</dt>
+        <dt>索引轮换策略:</dt>
+        <dd>删除</dd>
+        <dt>最大索引数:</dt>
         <dd>{config.max_number_of_indices}</dd>
       </dl>
     </div>

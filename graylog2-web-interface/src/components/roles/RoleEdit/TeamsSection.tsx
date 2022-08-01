@@ -30,7 +30,7 @@ const TeamsSection = ({ role }: Props) => {
   const RoleTeamsAssignment = teamsPlugin?.[0]?.RoleTeamsAssignment;
 
   return (
-    <SectionComponent title="Teams">
+    <SectionComponent title="团队">
       {RoleTeamsAssignment ? <RoleTeamsAssignment role={role} /> : <EnterprisePluginNotFound featureName="teams" />}
     </SectionComponent>
   );

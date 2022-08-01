@@ -21,9 +21,9 @@ const MessageCountRotationStrategySummary = ({ config }) => {
   return (
     <div>
       <dl>
-        <dt>Index rotation strategy:</dt>
-        <dd>Message Count</dd>
-        <dt>Max docs per index:</dt>
+        <dt>索引轮换策略:</dt>
+        <dd>消息数量</dd>
+        <dt>每份索引的最大文档数:</dt>
         <dd>{config.max_docs_per_index}</dd>
       </dl>
     </div>

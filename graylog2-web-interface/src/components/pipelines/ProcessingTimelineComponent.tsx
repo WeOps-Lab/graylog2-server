@@ -79,7 +79,7 @@ const PipelineFilter = ({ query, onSearch }: { query: string, onSearch: (query: 
   <SearchForm query={query}
               onSearch={onSearch}
               queryWidth={400}
-              queryHelpComponent={<QueryHelper entityName="Pipeline" />}
+              queryHelpComponent={<QueryHelper entityName="流水线" />}
               wrapperClass="has-bm"
               onReset={() => onSearch('')}
               topMargin={0} />
@@ -135,7 +135,7 @@ const ProcessingTimelineComponent = () => {
   const _headerCellFormatter = (header) => {
     let className;
 
-    if (header === 'Actions') {
+    if (header === '操作') {
       className = 'actions';
     }
 
@@ -154,10 +154,10 @@ const ProcessingTimelineComponent = () => {
       .sort(naturalSort)
       .map((usedStage) => {
         if (stageNumbers.indexOf(usedStage) === -1) {
-          return <PipelineStage key={`${pipeline.id}-stage${usedStage}`} $idle>Idle</PipelineStage>;
+          return <PipelineStage key={`${pipeline.id}-stage${usedStage}`} $idle>闲置的</PipelineStage>;
         }
 
-        return <PipelineStage key={`${pipeline.id}-stage${usedStage}`}>Stage {usedStage}</PipelineStage>;
+        return <PipelineStage key={`${pipeline.id}-stage${usedStage}`}>阶段 {usedStage}</PipelineStage>;
       });
   };
 
@@ -165,7 +165,7 @@ const ProcessingTimelineComponent = () => {
     return () => {
       // TODO: Replace with ConfirmDialog components
       // eslint-disable-next-line no-alert
-      if (window.confirm(`Do you really want to delete pipeline "${pipeline.title}"? This action cannot be undone.`)) {
+      if (window.confirm(`您真的要删除流水线"${pipeline.title}"吗？此操作无法撤消。`)) {
         PipelinesActions.delete(pipeline.id).then(() => {
           if (count > 1) {
             _loadPipelines(pagination, setLoading, setPaginatedPipelines);
@@ -190,7 +190,7 @@ const ProcessingTimelineComponent = () => {
           {description}
           <br />
           <MetricContainer name={`org.graylog.plugins.pipelineprocessor.ast.Pipeline.${id}.executed`}>
-            <CounterRate prefix="Throughput:" suffix="msg/s" />
+            <CounterRate prefix="吞吐量:" suffix="msg/s" />
           </MetricContainer>
         </PipelineNameTD>
         <StreamListTD>
@@ -202,17 +202,17 @@ const ProcessingTimelineComponent = () => {
         </StreamListTD>
         <td>{_formatStages(pipeline, stages)}</td>
         <td>
-          <Button bsStyle="primary" bsSize="xsmall" onClick={_deletePipeline(pipeline)}>Delete</Button>
+          <Button bsStyle="primary" bsSize="xsmall" onClick={_deletePipeline(pipeline)}>删除</Button>
           &nbsp;
           <LinkContainer to={Routes.SYSTEM.PIPELINES.PIPELINE(id)}>
-            <Button bsStyle="info" bsSize="xsmall">Edit</Button>
+            <Button bsStyle="info" bsSize="xsmall">编辑</Button>
           </LinkContainer>
         </td>
       </tr>
     );
   };
 
-  const headers = ['Pipeline', 'Connected to Streams', 'Processing Timeline', 'Actions'];
+  const headers = ['流水线', '消息流', '处理步骤', '操作'];
 
   return (
     <div>
@@ -226,7 +226,7 @@ const ProcessingTimelineComponent = () => {
                    rows={pipelines.toJS()}
                    customFilter={searchFilter}
                    filterKeys={[]}
-                   filterLabel="Filter Pipelines"
+                   filterLabel="过滤"
                    dataRowFormatter={_pipelineFormatter} />
       </StyledPaginatedList>
     </div>

@@ -29,39 +29,39 @@ const DSVHTTPAdapterDocumentation = () => {
 
   return (
     <div>
-      <p>The DSV data adapter can read key value pairs (or check for the presence of a key) from a DSV file.</p>
-      <p>Please make sure your DSV file is formatted according to your configuration settings.</p>
+      <p> DSV数据源能够从来自URL的DSV文件中读取键值对.</p>
+      <p>请确保您的DSV文件格式是正确的.</p>
 
       <Alert style={{ marginBottom: 10 }} bsStyle="info">
-        <h4 style={{ marginBottom: 10 }}>CSV file requirements:</h4>
+        <h4 style={{ marginBottom: 10 }}>SV格式必须满足:</h4>
         <ul className="no-padding">
-          <li>The file uses <strong>utf-8</strong> encoding</li>
-          <li>The file is accessible using the same URL by <strong>every</strong> Graylog server node</li>
+          <li>文件使用 <strong>utf-8</strong> 格式编码</li>
+          <li>对<strong>所有</strong>DataInsight服务器节点可读</li>
         </ul>
       </Alert>
 
       <hr />
 
-      <h3 style={{ marginBottom: 10 }}>Example 1</h3>
+      <h3 style={{ marginBottom: 10 }}>示例 1</h3>
 
-      <h5 style={{ marginBottom: 10 }}>Configuration</h5>
+      <h5 style={{ marginBottom: 10 }}>配置</h5>
       <p style={{ marginBottom: 10, padding: 0 }}>
-        Separator: <code>,</code><br />
-        Quote character: <code>"</code><br />
+        分隔符: <code>,</code><br />
+        引号: <code>"</code><br />
       </p>
 
-      <h5 style={{ marginBottom: 10 }}>DSV File</h5>
+      <h5 style={{ marginBottom: 10 }}>DSV文件</h5>
       <pre>{csvFile1}</pre>
 
-      <h3 style={{ marginBottom: 10 }}>Example 2</h3>
+      <h3 style={{ marginBottom: 10 }}>示例 2</h3>
 
-      <h5 style={{ marginBottom: 10 }}>Configuration</h5>
+      <h5 style={{ marginBottom: 10 }}>配置</h5>
       <p style={{ marginBottom: 10, padding: 0 }}>
-        Separator: <code>;</code><br />
-        Quote character: <code>'</code><br />
+        分隔符: <code>;</code><br />
+        引号: <code>'</code><br />
       </p>
 
-      <h5 style={{ marginBottom: 10 }}>DSV File</h5>
+      <h5 style={{ marginBottom: 10 }}>DSV文件</h5>
       <pre>{csvFile2}</pre>
     </div>
   );

@@ -20,11 +20,11 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import Reflux from 'reflux';
 
-import { OverlayTrigger, LinkToNode, Spinner } from 'components/common';
-import { Label, Popover } from 'components/bootstrap';
+import {OverlayTrigger, LinkToNode, Spinner} from 'components/common';
+import {Label, Popover} from 'components/bootstrap';
 import InputStateComparator from 'logic/inputs/InputStateComparator';
-import { InputStatesStore } from 'stores/inputs/InputStatesStore';
-import { NodesStore } from 'stores/nodes/NodesStore';
+import {InputStatesStore} from 'stores/inputs/InputStatesStore';
+import {NodesStore} from 'stores/nodes/NodesStore';
 
 const InputStateBadge = createReactClass({
   displayName: 'InputStateBadge',
@@ -37,8 +37,8 @@ const InputStateBadge = createReactClass({
   comparator: new InputStateComparator(),
 
   _labelClassForState(sortedStates) {
-    const { input } = this.props;
-    const { nodes } = this.state;
+    const {input} = this.props;
+    const {nodes} = this.state;
     const nodesWithKnownState = sortedStates.reduce((numberOfNodes, state) => {
       return numberOfNodes + state.count;
     }, 0);
@@ -47,7 +47,7 @@ const InputStateBadge = createReactClass({
       return 'warning';
     }
 
-    const { state } = sortedStates[0];
+    const {state} = sortedStates[0];
 
     switch (state) {
       case 'RUNNING':
@@ -63,7 +63,7 @@ const InputStateBadge = createReactClass({
   },
 
   _textForState(sortedStates) {
-    const { input } = this.props;
+    const {input} = this.props;
 
     if (input.global) {
       return sortedStates.map((state) => `${state.count} ${state.state}`).join(', ');
@@ -73,24 +73,24 @@ const InputStateBadge = createReactClass({
   },
 
   _isLoading() {
-    const { inputStates, nodes } = this.state;
+    const {inputStates, nodes} = this.state;
 
     return !(inputStates && nodes);
   },
 
   render() {
     if (this._isLoading()) {
-      return <Spinner />;
+      return <Spinner/>;
     }
 
-    const { input } = this.props;
-    const { inputStates } = this.state;
+    const {input} = this.props;
+    const {inputStates} = this.state;
     const inputId = input.id;
     const sortedInputStates = {};
 
     if (inputStates[inputId]) {
       Object.keys(inputStates[inputId]).forEach((node) => {
-        const { state } = inputStates[inputId][node];
+        const {state} = inputStates[inputId][node];
 
         if (!sortedInputStates[state]) {
           sortedInputStates[state] = [];
@@ -101,17 +101,17 @@ const InputStateBadge = createReactClass({
     }
 
     const sorted = Object.keys(sortedInputStates).sort(this.comparator.compare.bind(this.comparator)).map((state) => {
-      return { state: state, count: sortedInputStates[state].length };
+      return {state: state, count: sortedInputStates[state].length};
     });
 
     if (sorted.length > 0) {
       const popOverText = sorted.map((state) => {
         return sortedInputStates[state.state].map((node) => {
-          return <small><LinkToNode nodeId={node} />: {state.state}<br /></small>;
+          return <small><LinkToNode nodeId={node}/>: {state.state}<br/></small>;
         });
       });
       const popover = (
-        <Popover id="inputstate-badge-details" title={`Input States for ${input.title}`}>
+        <Popover id="inputstate-badge-details" title={`${input.title} 的状态`}>
           {popOverText}
         </Popover>
       );
@@ -119,9 +119,9 @@ const InputStateBadge = createReactClass({
       return (
         <OverlayTrigger trigger="click" placement="bottom" overlay={popover} rootClose>
           <Label bsStyle={this._labelClassForState(sorted)}
-                 title="Click to show details"
+                 title="点击显示详情"
                  bsSize="xsmall"
-                 style={{ cursor: 'pointer' }}>{this._textForState(sorted)}
+                 style={{cursor: 'pointer'}}>{this._textForState(sorted)}
           </Label>
         </OverlayTrigger>
       );

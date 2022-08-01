@@ -33,15 +33,15 @@ const IndexSetDetails = ({ indexSet }: Props) => {
     <StyledIndexSetDetailsRow>
       <Col lg={3}>
         <dl>
-          <dt>Index prefix:</dt>
+          <dt>索引前缀:</dt>
           <dd>{indexSet.index_prefix}</dd>
           <HideOnCloud>
-            <dt>Shards:</dt>
+            <dt>主分片数:</dt>
             <dd>{indexSet.shards}</dd>
-            <dt>Replicas:</dt>
+            <dt>副本数:</dt>
             <dd>{indexSet.replicas}</dd>
           </HideOnCloud>
-          <dt>Field type refresh interval:</dt>
+          <dt>字段类型刷新间隔:</dt>
           <dd>{indexSet.field_type_refresh_interval / 1000.0} seconds</dd>
         </dl>
       </Col>

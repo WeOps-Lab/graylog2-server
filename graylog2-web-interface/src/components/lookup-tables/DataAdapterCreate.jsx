@@ -82,7 +82,7 @@ class DataAdapterCreate extends React.Component {
         // eslint-disable-next-line no-console
         console.error(`Plugin component for data adapter type ${typeItem.type} is missing - invalid or missing plugin?`);
 
-        return { value: typeItem.type, disabled: true, label: `${typeItem.type} - missing or invalid plugin` };
+        return { value: typeItem.type, disabled: true, label: `${typeItem.type} - 插件缺失或不合法` };
       }
 
       return { value: typeItem.type, label: adapterPlugins[typeItem.type].displayName };
@@ -94,13 +94,13 @@ class DataAdapterCreate extends React.Component {
           <Col lg={8}>
             <form className="form form-horizontal" onSubmit={() => {}}>
               <Input id="data-adapter-type-select"
-                     label="Data Adapter Type"
+                     label="数据源类型"
                      required
                      autoFocus
-                     help="The type of data adapter to configure."
+                     help="配置数据源的类型."
                      labelClassName="col-sm-3"
                      wrapperClassName="col-sm-9">
-                <Select placeholder="Select Data Adapter Type"
+                <Select placeholder="选择数据源类型"
                         clearable={false}
                         options={sortedAdapters}
                         matchProp="label"
@@ -116,7 +116,7 @@ class DataAdapterCreate extends React.Component {
             <DataAdapterForm dataAdapter={dataAdapter}
                              type={type}
                              create
-                             title="Configure Adapter"
+                             title="配置数据源"
                              validate={validate}
                              validationErrors={validationErrors}
                              saved={saved} />

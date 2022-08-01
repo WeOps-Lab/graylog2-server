@@ -88,23 +88,22 @@ const PipelineConnectionsForm = ({ pipeline, connections, streams, save }: Props
 
   const streamsHelp = (
     <span>
-      Select the streams you want to connect to this pipeline, or create one in the{' '}
-      <Link to={Routes.STREAMS}>Streams page</Link>.
+      选择需要绑定的消息流，或者在<Link to={Routes.STREAMS}>消息流页面</Link>创建一个。
     </span>
   );
 
   return (
     <span>
       <Button onClick={_openModal} bsStyle="info">
-        <span>Edit connections</span>
+        <span>编辑</span>
       </Button>
       <BootstrapModalForm ref={modalRef}
-                          title={<span>Edit connections for <em>{pipeline.title}</em></span>}
+                          title={<span>编辑 for <em>{pipeline.title} 的绑定配置</em></span>}
                           onSubmitForm={_save}
-                          submitButtonText="Save">
+                          submitButtonText="保存">
         <fieldset>
           <FormGroup id="streamsConnections">
-            <ControlLabel>Streams</ControlLabel>
+            <ControlLabel>消息流</ControlLabel>
             <SelectableList options={formatStreams(notConnectedStreams)}
                             onChange={_onStreamsChange}
                             selectedOptionsType="object"

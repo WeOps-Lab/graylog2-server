@@ -17,8 +17,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { DataTable } from 'components/common';
-import type { RuleType, MetricsConfigType, RulesContext } from 'stores/rules/RulesStore';
+import {DataTable} from 'components/common';
+import type {RuleType, MetricsConfigType, RulesContext} from 'stores/rules/RulesStore';
 
 import RuleListEntry from './RuleListEntry';
 
@@ -54,14 +54,14 @@ class RuleList extends React.Component<Props, State> {
   };
 
   _ruleInfoFormatter = (rule) => {
-    const { onDelete, rulesContext: { used_in_pipelines: usingPipelines } = {} } = this.props;
+    const {onDelete, rulesContext: {used_in_pipelines: usingPipelines} = {}} = this.props;
 
-    return <RuleListEntry key={rule.id} rule={rule} usingPipelines={usingPipelines[rule.id]} onDelete={onDelete} />;
+    return <RuleListEntry key={rule.id} rule={rule} usingPipelines={usingPipelines[rule.id]} onDelete={onDelete}/>;
   };
 
   render() {
-    const { rules, searchFilter } = this.props;
-    const headers = ['Title', 'Description', 'Created', 'Last modified', 'Throughput', 'Errors', 'Pipelines', 'Actions'];
+    const {rules, searchFilter} = this.props;
+    const headers = ['标题', '描述', '创建于', '最后修改于', '吞吐量', '失败数', '操作'];
 
     return (
       <DataTable id="rule-list"
@@ -72,7 +72,7 @@ class RuleList extends React.Component<Props, State> {
                  rows={rules}
                  customFilter={searchFilter}
                  dataRowFormatter={this._ruleInfoFormatter}
-                 filterKeys={[]} />
+                 filterKeys={[]}/>
     );
   }
 }

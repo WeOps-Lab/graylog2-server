@@ -34,7 +34,7 @@ const Cache = ({ cache }) => {
   const plugin = plugins[cache.config.type];
 
   if (!plugin) {
-    return <p>Unknown cache type {cache.config.type}. Is the plugin missing?</p>;
+    return <p>未知的缓存类型 {cache.config.type}. 是否缺少了插件?</p>;
   }
 
   const summary = plugin.summaryComponent;
@@ -49,16 +49,16 @@ const Cache = ({ cache }) => {
         </h2>
         <ConfigSummaryDefinitionListWrapper>
           <dl>
-            <dt>Description</dt>
-            <dd>{cache.description || <em>No description.</em>}</dd>
+            <dt>描述</dt>
+            <dd>{cache.description || <em>没有描述.</em>}</dd>
           </dl>
         </ConfigSummaryDefinitionListWrapper>
-        <h4>Configuration</h4>
+        <h4>配置</h4>
         <ConfigSummaryDefinitionListWrapper>
           {React.createElement(summary, { cache: cache })}
         </ConfigSummaryDefinitionListWrapper>
         <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.CACHES.edit(cache.name)}>
-          <Button bsStyle="success">Edit</Button>
+          <Button bsStyle="success">编辑</Button>
         </LinkContainer>
       </Col>
       <Col md={6} />

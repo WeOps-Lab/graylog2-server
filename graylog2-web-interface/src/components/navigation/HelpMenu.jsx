@@ -31,11 +31,11 @@ const HelpMenu = ({ active }) => (
                noCaret>
 
     <LinkContainer to={Routes.getting_started(true)}>
-      <MenuItem>Getting Started</MenuItem>
+      <MenuItem>开始使用</MenuItem>
     </LinkContainer>
 
     <MenuItem href={DocsHelper.versionedDocsHomePage()} target="_blank">
-      <ExternalLink>Documentation</ExternalLink>
+      <ExternalLink>文档</ExternalLink>
     </MenuItem>
   </NavDropdown>
 );

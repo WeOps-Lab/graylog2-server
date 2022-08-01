@@ -38,9 +38,9 @@ const RestApiOverview = ({ node }) => {
 
   return (
     <StyledDl>
-      <dt>Transport address:</dt>
+      <dt>传输地址:</dt>
       <dd>{transport_address}</dd>
-      <dt>Last seen:</dt>
+      <dt>最后上报时间:</dt>
       <dd><RelativeTime dateTime={last_seen} /></dd>
     </StyledDl>
   );

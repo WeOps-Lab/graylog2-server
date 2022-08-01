@@ -33,16 +33,16 @@ const NodeState = styled.dl`
   }
 `;
 
-export const SystemOverviewSummary = ({ information }) => {
+export const SystemOverviewSummary = ({information}) => {
   const lbStatus = information.lb_status.toUpperCase();
 
   return (
     <NodeState>
-      <dt>Current lifecycle state:</dt>
+      <dt>当前生命周期状态:</dt>
       <dd>{StringUtils.capitalizeFirstLetter(information.lifecycle)}</dd>
-      <dt>Message processing:</dt>
-      <dd>{information.is_processing ? 'Enabled' : 'Disabled'}</dd>
-      <dt>Load balancer indication:</dt>
+      <dt>消息处理:</dt>
+      <dd>{information.is_processing ? '启用' : '禁用'}</dd>
+      <dt>负载均衡器:</dt>
       <dd className={lbStatus === 'DEAD' ? 'text-danger' : ''}>{lbStatus}</dd>
     </NodeState>
   );

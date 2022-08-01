@@ -15,23 +15,22 @@
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
 import * as React from 'react';
-import { useContext } from 'react';
-import { useLocation } from 'react-router-dom';
+import {useContext} from 'react';
+import {useLocation} from 'react-router-dom';
 import naturalSort from 'javascript-natural-sort';
-import { PluginStore } from 'graylog-web-plugin/plugin';
+import {PluginStore} from 'graylog-web-plugin/plugin';
 
-import { LinkContainer } from 'components/common/router';
-import { appPrefixed } from 'util/URLUtils';
+import {LinkContainer} from 'components/common/router';
+import {appPrefixed} from 'util/URLUtils';
 import AppConfig from 'util/AppConfig';
-import { Navbar, Nav, NavItem, NavDropdown } from 'components/bootstrap';
-import { IfPermitted } from 'components/common';
-import { isPermitted } from 'util/PermissionsMixin';
+import {Navbar, Nav, NavItem, NavDropdown} from 'components/bootstrap';
+import {IfPermitted} from 'components/common';
+import {isPermitted} from 'util/PermissionsMixin';
 import CurrentUserContext from 'contexts/CurrentUserContext';
 import GlobalThroughput from 'components/throughput/GlobalThroughput';
-import Routes, { ENTERPRISE_ROUTE_DESCRIPTION, SECURITY_ROUTE_DESCRIPTION } from 'routing/Routes';
+import Routes from 'routing/Routes';
 
 import UserMenu from './UserMenu';
-import HelpMenu from './HelpMenu';
 import NavigationBrand from './NavigationBrand';
 import NotificationBadge from './NotificationBadge';
 import NavigationLink from './NavigationLink';
@@ -50,27 +49,28 @@ const _isActive = (requestPath, prefix) => {
  *
  * @param {string} description
  */
-function pluginMenuItemExists(description: string): boolean {
-  const pluginExports = PluginStore.exports('navigation');
+// function pluginMenuItemExists(description: string): boolean {
+//   const pluginExports = PluginStore.exports('navigation');
 
-  if (!pluginExports) return false;
+  // if (!pluginExports) return false;
+  //
+  // return !!pluginExports.find((value) => value.description?.toLowerCase() === description.toLowerCase());
+// }
 
-  return !!pluginExports.find((value) => value.description?.toLowerCase() === description.toLowerCase());
-}
+const formatSinglePluginRoute = ({description, path, permissions}, topLevel = false) => {
+    const link = <NavigationLink key={description} description={description} path={appPrefixed(path)}
+                                 topLevel={topLevel}/>;
 
-const formatSinglePluginRoute = ({ description, path, permissions }, topLevel = false) => {
-  const link = <NavigationLink key={description} description={description} path={appPrefixed(path)} topLevel={topLevel} />;
+    if (permissions) {
+      return <IfPermitted key={description} permissions={permissions}>{link}</IfPermitted>;
+    }
 
-  if (permissions) {
-    return <IfPermitted key={description} permissions={permissions}>{link}</IfPermitted>;
-  }
-
-  return link;
-};
+    return link;
+  };
 
 const formatPluginRoute = (pluginRoute, permissions, pathname) => {
   if (pluginRoute.children) {
-    const activeChild = pluginRoute.children.filter(({ path }) => (path && _isActive(pathname, path)));
+    const activeChild = pluginRoute.children.filter(({path}) => (path && _isActive(pathname, path)));
     const title = activeChild.length > 0 ? `${pluginRoute.description} / ${activeChild[0].description}` : pluginRoute.description;
     const isEmpty = !pluginRoute.children.some((child) => isPermitted(permissions, child.permissions));
 
@@ -92,32 +92,32 @@ type Props = {
   pathname: string,
 };
 
-const Navigation = React.memo(({ pathname }: Props) => {
+const Navigation = React.memo(({pathname}: Props) => {
   const currentUser = useContext(CurrentUserContext);
-  const { permissions, fullName, readOnly, id: userId } = currentUser || {};
+  const {permissions, fullName, readOnly, id: userId} = currentUser || {};
 
   const pluginExports = PluginStore.exports('navigation');
 
-  const enterpriseMenuIsMissing = !pluginMenuItemExists(ENTERPRISE_ROUTE_DESCRIPTION);
-  const securityMenuIsMissing = !pluginMenuItemExists(SECURITY_ROUTE_DESCRIPTION);
+  // const enterpriseMenuIsMissing = !pluginMenuItemExists(ENTERPRISE_ROUTE_DESCRIPTION);
+  // const securityMenuIsMissing = !pluginMenuItemExists(SECURITY_ROUTE_DESCRIPTION);
 
-  const isPermittedToEnterpriseOrSecurity = isPermitted(permissions, ['licenseinfos:read']);
+  // const isPermittedToEnterpriseOrSecurity = isPermitted(permissions, ['licenseinfos:read']);
 
-  if (enterpriseMenuIsMissing && isPermittedToEnterpriseOrSecurity) {
-    // no enterprise plugin menu, so we will add one
-    pluginExports.push({
-      path: Routes.SYSTEM.ENTERPRISE,
-      description: ENTERPRISE_ROUTE_DESCRIPTION,
-    });
-  }
+  // if (enterpriseMenuIsMissing && isPermittedToEnterpriseOrSecurity) {
+  //   // no enterprise plugin menu, so we will add one
+  //   pluginExports.push({
+  //     path: Routes.SYSTEM.ENTERPRISE,
+  //     description: ENTERPRISE_ROUTE_DESCRIPTION,
+  //   });
+  // }
 
-  if (securityMenuIsMissing && isPermittedToEnterpriseOrSecurity) {
-    // no security plugin menu, so we will add one
-    pluginExports.push({
-      path: Routes.SECURITY,
-      description: SECURITY_ROUTE_DESCRIPTION,
-    });
-  }
+  // if (securityMenuIsMissing && isPermittedToEnterpriseOrSecurity) {
+  //   // no security plugin menu, so we will add one
+  //   pluginExports.push({
+  //     path: Routes.SECURITY,
+  //     description: SECURITY_ROUTE_DESCRIPTION,
+  //   });
+  // }
 
   const pluginNavigations = pluginExports
     .sort((route1, route2) => naturalSort(route1.description.toLowerCase(), route2.description.toLowerCase()))
@@ -129,58 +129,58 @@ const Navigation = React.memo(({ pathname }: Props) => {
       <Navbar.Header>
         <Navbar.Brand>
           <LinkContainer to={Routes.STARTPAGE}>
-            <NavigationBrand />
+            <NavigationBrand/>
           </LinkContainer>
         </Navbar.Brand>
-        <Navbar.Toggle />
-        <DevelopmentHeaderBadge smallScreen />
-        {pluginItems.map(({ key, component: Item }) => <Item key={key} smallScreen />)}
+        <Navbar.Toggle/>
+        <DevelopmentHeaderBadge smallScreen/>
+        {pluginItems.map(({key, component: Item}) => <Item key={key} smallScreen/>)}
       </Navbar.Header>
 
       <Navbar.Collapse>
         <Nav navbar>
           <LinkContainer to={Routes.SEARCH}>
-            <NavItem to="search">Search</NavItem>
+            <NavItem to="search">搜索</NavItem>
           </LinkContainer>
 
           <LinkContainer to={Routes.STREAMS}>
-            <NavItem>Streams</NavItem>
+            <NavItem>消息流</NavItem>
           </LinkContainer>
 
           <LinkContainer to={Routes.ALERTS.LIST}>
-            <NavItem>Alerts</NavItem>
+            <NavItem>告警</NavItem>
           </LinkContainer>
 
           <LinkContainer to={Routes.DASHBOARDS}>
-            <NavItem>Dashboards</NavItem>
+            <NavItem>仪表盘</NavItem>
           </LinkContainer>
 
           {pluginNavigations}
 
-          <SystemMenu />
+          <SystemMenu/>
         </Nav>
 
-        <NotificationBadge />
+        <NotificationBadge/>
 
         <Nav navbar pullRight className="header-meta-nav">
           {AppConfig.isCloud() ? (
-            <GlobalThroughput disabled />
+            <GlobalThroughput disabled/>
           ) : (
             <LinkContainer to={Routes.SYSTEM.NODES.LIST}>
-              <GlobalThroughput />
+              <GlobalThroughput/>
             </LinkContainer>
           )}
 
           <InactiveNavItem className="dev-badge-wrap">
-            <DevelopmentHeaderBadge />
-            {pluginItems.map(({ key, component: Item }) => <Item key={key} />)}
+            <DevelopmentHeaderBadge/>
+            {pluginItems.map(({key, component: Item}) => <Item key={key}/>)}
           </InactiveNavItem>
 
-          <ScratchpadToggle />
+          <ScratchpadToggle/>
 
-          <HelpMenu active={_isActive(pathname, Routes.GETTING_STARTED)} />
+          {/*<HelpMenu active={_isActive(pathname, Routes.GETTING_STARTED)} />*/}
 
-          <UserMenu fullName={fullName} readOnly={readOnly} userId={userId} />
+          <UserMenu fullName={fullName} readOnly={readOnly} userId={userId}/>
         </Nav>
       </Navbar.Collapse>
     </StyledNavbar>
@@ -188,9 +188,9 @@ const Navigation = React.memo(({ pathname }: Props) => {
 });
 
 const NavigationContainer = () => {
-  const { pathname } = useLocation();
+  const {pathname} = useLocation();
 
-  return <Navigation pathname={pathname} />;
+  return <Navigation pathname={pathname}/>;
 };
 
 export default NavigationContainer;

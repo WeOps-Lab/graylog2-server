@@ -24,25 +24,25 @@ const DnsAdapterSummary = ({ dataAdapter }) => {
 
   // Allows enum > display label translation.
   const lookupType = {
-    A: 'Resolve hostname to IPv4 address (A)',
-    AAAA: 'Resolve hostname to IPv6 address (AAAA)',
-    A_AAAA: 'Resolve hostname to IPv4 and IPv6 address (A and AAAA)',
-    PTR: 'Reverse lookup (PTR)',
-    TXT: 'Text lookup (TXT)',
+    A: '解析主机名到IPv4地址(A)',
+    AAAA: '解析主机名到IPv6地址(AAAA)',
+    A_AAAA: '解析主机名到IPv4和IPv6地址(A 和 AAAA)',
+    PTR: '反向查找(PTR)',
+    TXT: '文本数据字典(TXT)',
   };
 
   return (
     <dl>
-      <dt>DNS Lookup Type</dt>
+      <dt>DNS查找类型</dt>
       <dd>{lookupType[config.lookup_type]}</dd>
 
-      <dt>DNS Server IP Address</dt>
+      <dt>DNS服务器</dt>
       <dd>{config.server_ips || 'n/a'}</dd>
 
-      <dt>DNS Request Timeout</dt>
+      <dt>DNS请求超时时间</dt>
       <dd>{config.request_timeout} ms</dd>
 
-      <dt>Cache TTL Override</dt>
+      <dt>覆盖缓存生命周期</dt>
       <dd>
         {!config.cache_ttl_override_enabled ? 'n/a' : <TimeUnit value={config.cache_ttl_override} unit={config.cache_ttl_override_unit} />}
       </dd>

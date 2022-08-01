@@ -27,20 +27,20 @@ class MaxmindAdapterSummary extends React.Component {
   render() {
     const { config } = this.props.dataAdapter;
     const databaseTypes = {
-      MAXMIND_ASN: 'ASN database',
-      MAXMIND_CITY: 'City database',
-      MAXMIND_COUNTRY: 'Country database',
-      IPINFO_STANDARD_LOCATION: 'IPinfo location database',
-      IPINFO_ASN: 'IPinfo ASN database',
+      MAXMIND_ASN: 'ASN数据库',
+      MAXMIND_CITY: '城市数据库',
+      MAXMIND_COUNTRY: '国家数据库',
+      IPINFO_STANDARD_LOCATION: 'IPinfo 地理数据库',
+      IPINFO_ASN: 'IPinfo ASN 数据库',
     };
 
     return (
       <dl>
-        <dt>Database file path</dt>
+        <dt>数据库文件路径</dt>
         <dd>{config.path}</dd>
-        <dt>Database type</dt>
+        <dt>数据库类型</dt>
         <dd>{databaseTypes[config.database_type]}</dd>
-        <dt>Check interval</dt>
+        <dt>检查周期</dt>
         <dd><TimeUnit value={config.check_interval} unit={config.check_interval_unit} /></dd>
       </dl>
     );

@@ -127,7 +127,7 @@ class GrokPatternFilter extends React.Component {
             <span className={GrokPatternFilterStyle.patternDisplay}>{displayedPattern.pattern}</span>
             <span className={GrokPatternFilterStyle.addButton}>
               <Button bsSize="xsmall" bsStyle="primary" onClick={() => { addToPattern(displayedPattern.name); }}>
-                Add
+                新增
               </Button>
             </span>
           </ListGroupItem>
@@ -138,7 +138,7 @@ class GrokPatternFilter extends React.Component {
       <>
         <Input type="text"
                id="pattern-selector"
-               label="Filter pattern"
+               label="过滤"
                onChange={this._onPatternFilterChange}
                autoComplete="off"
                formGroupClassName={GrokPatternFilterStyle.filterFormGroup}

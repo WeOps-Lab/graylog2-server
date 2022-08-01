@@ -17,8 +17,8 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Icon } from 'components/common';
-import { Row, Col, Button, Input } from 'components/bootstrap';
+import {Icon} from 'components/common';
+import {Row, Col, Button, Input} from 'components/bootstrap';
 import DocumentationLink from 'components/support/DocumentationLink';
 import DocsHelper from 'util/DocsHelper';
 import UserNotification from 'util/UserNotification';
@@ -48,19 +48,19 @@ class RegexExtractorConfiguration extends React.Component {
   };
 
   _onTryClick = () => {
-    this.setState({ trying: true });
+    this.setState({trying: true});
 
     const promise = ToolsStore.testRegex(this.props.configuration.regex_value, this.props.exampleMessage);
 
     promise.then((result) => {
       if (!result.matched) {
-        UserNotification.warning('Regular expression did not match.');
+        UserNotification.warning('正则表达式不匹配.');
 
         return;
       }
 
       if (!result.match) {
-        UserNotification.warning('Regular expression does not contain any matcher group to extract.');
+        UserNotification.warning('正则表达式不包含任何匹配组用于提取.');
 
         return;
       }
@@ -70,7 +70,7 @@ class RegexExtractorConfiguration extends React.Component {
       this.props.onExtractorPreviewLoad(preview);
     });
 
-    promise.finally(() => this.setState({ trying: false }));
+    promise.finally(() => this.setState({trying: false}));
   };
 
   _isTryButtonDisabled = () => {
@@ -80,15 +80,15 @@ class RegexExtractorConfiguration extends React.Component {
   render() {
     const helpMessage = (
       <span>
-        The regular expression used for extraction. First matcher group is used.{' '}
-        Learn more in the <DocumentationLink page={DocsHelper.PAGES.EXTRACTORS} text="documentation" />.
+        正则表达式用于提取，使用第一个匹配组。
+        在<DocumentationLink page={DocsHelper.PAGES.EXTRACTORS} text="文档"/>查看更多信息.
       </span>
     );
 
     return (
       <div>
         <Input id="regex-value-input"
-               label="Regular expression"
+               label="正则表达式"
                labelClassName="col-md-2"
                wrapperClassName="col-md-10"
                help={helpMessage}>
@@ -100,11 +100,11 @@ class RegexExtractorConfiguration extends React.Component {
                      defaultValue={this.props.configuration.regex_value}
                      placeholder="^.*string(.+)$"
                      onChange={this._onChange('regex_value')}
-                     required />
+                     required/>
             </Col>
             <Col md={1} className="text-right">
               <Button bsStyle="info" onClick={this._onTryClick} disabled={this._isTryButtonDisabled()}>
-                {this.state.trying ? <Icon name="spinner" spin /> : 'Try'}
+                {this.state.trying ? <Icon name="spinner" spin/> : '测试'}
               </Button>
             </Col>
           </Row>

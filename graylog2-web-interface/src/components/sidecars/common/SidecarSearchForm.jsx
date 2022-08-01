@@ -38,49 +38,49 @@ class SidecarSearchForm extends React.Component {
     const { query, onSearch, onReset, children } = this.props;
 
     const queryHelpPopover = (
-      <Popover id="search-query-help" className={style.popoverWide} title="Search Syntax Help">
-        <p><strong>Available search fields</strong></p>
+      <Popover id="search-query-help" className={style.popoverWide} title="搜索帮助">
+        <p><strong>可用的过滤字段</strong></p>
         <Table condensed>
           <thead>
-            <tr>
-              <th>Field</th>
-              <th>Description</th>
-            </tr>
+          <tr>
+            <th>字段</th>
+            <th>描述</th>
+          </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>name</td>
-              <td>Sidecar name</td>
-            </tr>
-            <tr>
-              <td>status</td>
-              <td>Status of the sidecar as it appears in the list, i.e. running, failing, or unknown</td>
-            </tr>
-            <tr>
-              <td>operating_system</td>
-              <td>Operating system the sidecar is running on</td>
-            </tr>
-            <tr>
-              <td>last_seen</td>
-              <td>Date and time when the sidecar last communicated with Graylog</td>
-            </tr>
-            <tr>
-              <td>node_id</td>
-              <td>Identifier of the sidecar</td>
-            </tr>
-            <tr>
-              <td>sidecar_version</td>
-              <td>Sidecar version</td>
-            </tr>
+          <tr>
+            <td>name</td>
+            <td>客户端名称</td>
+          </tr>
+          <tr>
+            <td>status</td>
+            <td>客户端状态</td>
+          </tr>
+          <tr>
+            <td>operating_system</td>
+            <td>操作系统</td>
+          </tr>
+          <tr>
+            <td>last_seen</td>
+            <td>与DataInsight最后一次通讯的时间</td>
+          </tr>
+          <tr>
+            <td>node_id</td>
+            <td>客户端ID</td>
+          </tr>
+          <tr>
+            <td>sidecar_version</td>
+            <td>客户端版本</td>
+          </tr>
           </tbody>
         </Table>
-        <p><strong>Examples</strong></p>
+        <p><strong>示例</strong></p>
         <p>
-          Find sidecars that did not communicate with Graylog since a date:<br />
+          查找自以下时间以来,未与DataInsight通讯的客户端:<br />
           <kbd>{'last_seen:<=2018-04-10'}</kbd><br />
         </p>
         <p>
-          Find sidecars with <code>failing</code> or <code>unknown</code> status:<br />
+          查找状态为<code>启动失败</code>或者<code>未知</code>的客户端:<br />
           <kbd>status:failing status:unknown</kbd><br />
         </p>
       </Popover>
@@ -96,8 +96,8 @@ class SidecarSearchForm extends React.Component {
       <SearchForm query={query}
                   onSearch={onSearch}
                   onReset={onReset}
-                  searchButtonLabel="Find"
-                  placeholder="Find sidecars"
+                  searchButtonLabel="搜索"
+                  placeholder="搜索客户端管理器"
                   queryWidth={400}
                   queryHelpComponent={queryHelp}
                   topMargin={0}

@@ -69,7 +69,7 @@ const _renderOption = ({ label }: { label: string }) => (
   <SelectOption>{label}</SelectOption>
 );
 
-const _isRequired = (field) => (value) => (!value ? `The ${field} is required` : undefined);
+const _isRequired = (field) => (value) => (!value ? `字段 ${field} 必填` : undefined);
 
 const UsersSelector = ({ role, onSubmit }: Props) => {
   const [users, setUsers] = useState<Immutable.List<UserOverview>>(Immutable.List.of());
@@ -102,7 +102,7 @@ const UsersSelector = ({ role, onSubmit }: Props) => {
     })));
 
     if (!userOverview) {
-      setError(`This is an exceptional error! Unable to find user with name ${user} in ${users.map((u) => u.username).join(', ')}`);
+      setError(`这是一个异常错误！无法在 ${users.map((u) => u.username).join(', ')} 中找到名为 ${user} 的用户`);
 
       return;
     }
@@ -135,22 +135,22 @@ const UsersSelector = ({ role, onSubmit }: Props) => {
             <FormElements>
               <Field name="user" validate={_isRequired('user')}>
                 {({ field: { name, value, onChange } }) => (
-                  <StyledSelect inputProps={{ 'aria-label': 'Search for users' }}
+                  <StyledSelect inputProps={{ 'aria-label': '搜索用户' }}
                                 onChange={(user) => {
                                   onChange({ target: { value: user, name } });
                                 }}
                                 optionRenderer={_renderOption}
                                 multi
                                 options={options}
-                                placeholder="Search for users"
+                                placeholder="搜索用户"
                                 value={value} />
                 )}
               </Field>
               <SubmitButton bsStyle="success"
                             disabled={isSubmitting || !isValid}
-                            title="Assign User"
+                            title="分配用户"
                             type="submit">
-                Assign User
+                分配用户
               </SubmitButton>
             </FormElements>
             {errors && (

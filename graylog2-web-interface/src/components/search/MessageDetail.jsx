@@ -47,7 +47,7 @@ class MessageDetail extends React.Component {
     const { inputs } = this.props;
     const input = inputs.get(inputId);
 
-    return input ? <span style={{ wordBreak: 'break-word' }}>{input.title}</span> : 'deleted input';
+    return input ? <span style={{ wordBreak: 'break-word' }}>{input.title}</span> : '已删除的输入';
   };
 
   _nodeName = (nodeId) => {
@@ -71,7 +71,7 @@ class MessageDetail extends React.Component {
         ? nodeContent
         : <a href={nodeURL}>{nodeContent}</a>;
     } else {
-      nodeInformation = <span style={{ wordBreak: 'break-word' }}>stopped node</span>;
+      nodeInformation = <span style={{ wordBreak: 'break-word' }}>已停止的节点</span>;
     }
 
     return nodeInformation;
@@ -88,9 +88,9 @@ class MessageDetail extends React.Component {
 
     return (
       <ButtonGroup className="pull-right" bsSize="small">
-        <Button href={messageUrl}>Permalink</Button>
+        <Button href={messageUrl}>链接</Button>
 
-        <ClipboardButton title="Copy ID" bsSize="small" text={message.id} />
+        <ClipboardButton title="复制 ID" bsSize="small" text={message.id} />
       </ButtonGroup>
     );
   };
@@ -112,25 +112,24 @@ class MessageDetail extends React.Component {
     const viaRadio = message.source_radio_id
       ? (
         <span>
-          via <em>{this._inputName(message.source_radio_input_id)}</em> on
-          radio {this._nodeName(message.source_radio_id)}
+          通过 <em>{this._inputName(message.source_radio_input_id)}</em> 来源于 {this._nodeName(message.source_radio_id)}
         </span>
       )
       : null;
 
     const rawTimestamp = message.fields.timestamp;
     const timestamp = [
-      <dt key={`dt-${rawTimestamp}`}>Timestamp</dt>,
+      <dt key={`dt-${rawTimestamp}`}>时间戳</dt>,
       <dd key={`dd-${rawTimestamp}`}><Timestamp dateTime={rawTimestamp} /></dd>,
     ];
 
     const receivedBy = message.source_input_id && message.source_node_id && nodes
       ? (
         <div>
-          <dt>Received by</dt>
+          <dt>来源</dt>
           <dd>
             <em>{this._inputName(message.source_input_id)}</em>{' '}
-            on {this._nodeName(message.source_node_id)}
+            节点 {this._nodeName(message.source_node_id)}
             {viaRadio && <br />}
             {viaRadio}
           </dd>
@@ -144,7 +143,7 @@ class MessageDetail extends React.Component {
           {message.id}
         </Link>
       )
-      : <span>{message.id} <Label bsStyle="warning">Not stored</Label></span>;
+      : <span>{message.id} <Label bsStyle="warning">未存储</Label></span>;
 
     return (
       <div>
@@ -164,10 +163,10 @@ class MessageDetail extends React.Component {
               {timestamp}
               {receivedBy}
 
-              <dt>Stored in index</dt>
-              <dd>{message.index ? message.index : 'Message is not stored'}</dd>
+              <dt>存储索引</dt>
+              <dd>{message.index ? message.index : '消息未存储'}</dd>
 
-              {streamIds.size > 0 && <dt>Routed into streams</dt>}
+              { streamIds.size > 0 && <dt>进入消息流</dt> }
               {streamIds.size > 0
             && (
             <dd className="stream-list">

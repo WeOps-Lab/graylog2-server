@@ -56,13 +56,13 @@ const _validateIndexPrefix = (value) => {
   let error;
 
   if (value.length === 0) {
-    error = 'Invalid index prefix: cannot be empty';
+    error = '不合法的索引前缀:不能为空';
   } else if (value.indexOf('_') === 0 || value.indexOf('-') === 0 || value.indexOf('+') === 0) {
-    error = 'Invalid index prefix: must start with a letter or number';
+    error = '不合法的索引前缀:必须以小写或数字开头';
   } else if (value.toLocaleLowerCase() !== value) {
-    error = 'Invalid index prefix: must be lower case';
+    error = '不合法的索引前缀:必须为小写字符';
   } else if (!value.match(/^[a-z0-9][a-z0-9_\-+]*$/)) {
-    error = 'Invalid index prefix: must only contain letters, numbers, \'_\', \'-\' and \'+\'';
+    error = '不合法的索引前缀:只能包含小写字符, 数字, \'_\', \'-\' 和 \'+\'';
   }
 
   return error;
@@ -134,10 +134,10 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
       };
 
       rotationConfig = (
-        <IndexMaintenanceStrategiesConfiguration title="Index Rotation Configuration"
+        <IndexMaintenanceStrategiesConfiguration title="索引轮转规则配置"
                                                  key="rotation"
-                                                 description="Graylog uses multiple indices to store documents in. You can configure the strategy it uses to determine when to rotate the currently active write index."
-                                                 selectPlaceholder="Select rotation strategy"
+                                                 description="DataInsight使用多个索引存储消息,在这里可以配置轮转策略."
+                                                 selectPlaceholder="选择索引轮转规则"
                                                  pluginExports={PluginStore.exports('indexRotationConfig')}
                                                  strategies={rotationStrategies}
                                                  activeConfig={activeConfig}
@@ -157,10 +157,10 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
       };
 
       retentionConfig = (
-        <IndexMaintenanceStrategiesConfiguration title="Index Retention Configuration"
+        <IndexMaintenanceStrategiesConfiguration title="索引操作配置"
                                                  key="retention"
-                                                 description="Graylog uses a retention strategy to clean up old indices."
-                                                 selectPlaceholder="Select retention strategy"
+                                                 description="DataInsight有多种索引策略可供配置."
+                                                 selectPlaceholder="选择索引操作策略"
                                                  pluginExports={PluginStore.exports('indexRetentionConfig')}
                                                  strategies={retentionStrategies}
                                                  retentionStrategiesContext={retentionStrategiesContext}
@@ -176,23 +176,23 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
     if (create) {
       const indexPrefixHelp = (
         <span>
-          A <strong>unique</strong> prefix used in Elasticsearch indices belonging to this index set.
-          The prefix must start with a letter or number, and can only contain letters, numbers, &apos;_&apos;, &apos;-&apos; and &apos;+&apos;.
+          ElasticSearch中只能有一个 <strong>唯一</strong> 的前缀
+          前缀只能以数字、小写字母开头，并且只能包含字符，数字， '_'， '-' 和 '+'
         </span>
       );
 
       readOnlyconfig = (
         <span>
           <FormikFormGroup type="text"
-                           label="Index prefix"
+                           label="索引前缀"
                            name="index_prefix"
                            help={indexPrefixHelp}
                            validate={_validateIndexPrefix}
                            required />
           <FormikFormGroup type="text"
-                           label="Analyzer"
+                           label="分词器"
                            name="index_analyzer"
-                           help="Elasticsearch analyzer for this index set."
+                           help="Elasticsearch分析分词器."
                            required />
         </span>
       );
@@ -208,32 +208,32 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                 <Row>
                   <Col md={12}>
                     <FormikFormGroup type="text"
-                                     label="Title"
+                                     label="标题"
                                      name="title"
-                                     help="Descriptive name of the index set."
+                                     help="索引集的标题."
                                      required />
                     <FormikFormGroup type="text"
-                                     label="Description"
+                                     label="描述"
                                      name="description"
-                                     help="Add a description of this index set."
+                                     help="索引集的描述."
                                      required />
                     {readOnlyconfig}
                     <HideOnCloud>
                       <FormikFormGroup type="number"
-                                       label="Index shards"
+                                       label="索引分片"
                                        name="shards"
-                                       help="Number of Elasticsearch shards used per index in this index set."
+                                       help="Elasticsearch分片数."
                                        required />
                       <FormikFormGroup type="number"
-                                       label="Index replicas"
+                                       label="索引副本"
                                        name="replicas"
-                                       help="Number of Elasticsearch replicas used per index in this index set."
+                                       help="Elasticsearch副本数."
                                        required />
                       <FormikFormGroup type="number"
-                                       label="Max. number of segments"
+                                       label="最大段数量"
                                        name="index_optimization_max_num_segments"
                                        minLength={1}
-                                       help="Maximum number of segments per Elasticsearch index after optimization (force merge)."
+                                       help="ElasticSearch强制合并的段数量."
                                        required />
                       <Input id="roles-selector-input"
                              labelClassName="col-sm-3"
@@ -241,9 +241,9 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                              label="Index optimization after rotation">
                         <FormikInput type="checkbox"
                                      id="index_optimization_disabled"
-                                     label="Disable index optimization after rotation"
+                                     label="轮转索引后禁用"
                                      name="index_optimization_disabled"
-                                     help="Disable Elasticsearch index optimization (force merge) after rotation." />
+                                     help="轮转索引后禁用该索引." />
                       </Input>
                     </HideOnCloud>
                     <Field name="field_type_refresh_interval">
@@ -258,10 +258,10 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                           <Input id="roles-selector-input"
                                  labelClassName="col-sm-3"
                                  wrapperClassName="col-sm-9"
-                                 label="Field type refresh interval">
+                                 label="字段类型刷新间隔">
                             <TimeUnitInput id="field-type-refresh-interval"
                                            type="number"
-                                           help="How often the field type information for the active write index will be updated."
+                                           help="多久刷新活跃索引的字段类型."
                                            value={moment.duration(value, 'milliseconds').as(fieldTypeRefreshIntervalUnit)}
                                            unit={fieldTypeRefreshIntervalUnit.toUpperCase()}
                                            units={['SECONDS', 'MINUTES']}
@@ -286,9 +286,9 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
 
                 <Row>
                   <Col md={12}>
-                    <StyledButton type="submit" bsStyle="primary" disabled={!isValid} style={{ marginRight: 10 }}>Save</StyledButton>
+                    <StyledButton type="submit" bsStyle="primary" disabled={!isValid} style={{ marginRight: 10 }}>保存</StyledButton>
                     <LinkContainer to={cancelLink}>
-                      <Button bsStyle="default">Cancel</Button>
+                      <Button bsStyle="default">取消</Button>
                     </LinkContainer>
                   </Col>
                 </Row>

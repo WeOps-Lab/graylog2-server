@@ -18,8 +18,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import lodash from 'lodash';
 
-import { Spinner } from 'components/common';
-import { Alert, BootstrapModalForm, Input } from 'components/bootstrap';
+import {Spinner} from 'components/common';
+import {Alert, BootstrapModalForm, Input} from 'components/bootstrap';
 import * as FormsUtils from 'util/FormsUtils';
 
 export default class RuleMetricsConfig extends React.Component {
@@ -31,7 +31,8 @@ export default class RuleMetricsConfig extends React.Component {
 
   static defaultProps = {
     config: undefined,
-    onClose: () => {},
+    onClose: () => {
+    },
   };
 
   constructor(props) {
@@ -43,8 +44,8 @@ export default class RuleMetricsConfig extends React.Component {
   }
 
   saveConfiguration = () => {
-    const { onChange } = this.props;
-    const { nextConfig } = this.state;
+    const {onChange} = this.props;
+    const {nextConfig} = this.state;
 
     onChange(nextConfig).then(this.closeModal);
   };
@@ -58,77 +59,66 @@ export default class RuleMetricsConfig extends React.Component {
   };
 
   propagateChange = (key, value) => {
-    const { config } = this.props;
+    const {config} = this.props;
     const nextConfig = lodash.cloneDeep(config);
 
     nextConfig[key] = value;
-    this.setState({ nextConfig });
+    this.setState({nextConfig});
   };
 
   handleChange = (event) => {
-    const { name } = event.target;
+    const {name} = event.target;
 
     this.propagateChange(name, FormsUtils.getValueFromInput(event.target));
   };
 
   render() {
-    const { config, onClose } = this.props;
-    const { nextConfig } = this.state;
+    const {config, onClose} = this.props;
+    const {nextConfig} = this.state;
 
     if (!config) {
-      return <p><Spinner text="Loading metrics config..." /></p>;
+      return <p><Spinner text="加载度量配置中..."/></p>;
     }
 
     return (
-      <BootstrapModalForm ref={(modal) => { this.modal = modal; }}
-                          title="Rule Metrics Configuration"
+      <BootstrapModalForm ref={(modal) => {
+        this.modal = modal;
+      }}
+                          title="配置度量规则"
                           onSubmitForm={this.saveConfiguration}
                           onModalClose={onClose}
                           show
-                          submitButtonText="Save">
+                          submitButtonText="保存">
         <Alert bsStyle="warning">
-          Rule metrics should only be enabled to debug a performance issue because collecting the
-          metrics will slow down message processing and increase memory usage.
+          规则度量只应该在调试性能的情况下启用
         </Alert>
         <fieldset>
           <Input type="radio"
                  id="metrics-enabled"
                  name="metrics_enabled"
                  value="true"
-                 label="Enable rule metrics"
+                 label="启用规则度量"
                  onChange={this.handleChange}
-                 checked={nextConfig.metrics_enabled} />
+                 checked={nextConfig.metrics_enabled}/>
 
           <Input type="radio"
                  id="metrics-disabled"
                  name="metrics_enabled"
                  value="false"
-                 label="Disable rule metrics"
+                 label="禁用规则度量"
                  onChange={this.handleChange}
-                 checked={!nextConfig.metrics_enabled} />
+                 checked={!nextConfig.metrics_enabled}/>
         </fieldset>
         <p>
-          When enabled the system metrics will update two timers for every rule execution.
+          当启用系统度量时,性能度量计时器会被执行两次
         </p>
-        <strong>Rule evaluation timer</strong>
+        <strong>规则执行计时器</strong>
         <p>
-          This timer measures the duration for the rule condition. (everything inside the <code>when</code> statement)
+          规则执行计时器会记录规则执行的时间
         </p>
+        <strong>规则执行计时器</strong>
         <p>
-          Example metric name with rule ID placeholder:<br />
-          <code>org.graylog.plugins.pipelineprocessor.ast.Rule.[rule-id].trace.evaluate.duration</code><br />
-          Example metric name with rule ID, pipeline ID and stage number placeholders:<br />
-          <code>org.graylog.plugins.pipelineprocessor.ast.Rule.[rule-id].[pipeline-id].[stage-num].trace.evaluate.duration</code>
-        </p>
-        <strong>Rule execution timer</strong>
-        <p>
-          This timer measures the duration for the rule execution. (everything inside the <code>then</code> statement)
-        </p>
-        <p>
-          Example metric name with rule ID placeholder:<br />
-          <code>org.graylog.plugins.pipelineprocessor.ast.Rule.[rule-id].trace.execute.duration</code><br />
-          Example metric name with rule ID, pipeline ID and stage number placeholders:<br />
-          <code>org.graylog.plugins.pipelineprocessor.ast.Rule.[rule-id].[pipeline-id].[stage-num].trace.execute.duration</code>
+          当启用系统度量时,性能度量计时器会被执行两次
         </p>
       </BootstrapModalForm>
     );

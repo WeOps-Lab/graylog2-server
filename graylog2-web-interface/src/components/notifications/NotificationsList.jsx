@@ -18,10 +18,10 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import Reflux from 'reflux';
 
-import { Alert, Row, Col } from 'components/bootstrap';
-import { Icon, Spinner } from 'components/common';
+import {Alert, Row, Col} from 'components/bootstrap';
+import {Icon, Spinner} from 'components/common';
 import Notification from 'components/notifications/Notification';
-import { NotificationsStore } from 'stores/notifications/NotificationsStore';
+import {NotificationsStore} from 'stores/notifications/NotificationsStore';
 
 const NotificationsList = createReactClass({
   displayName: 'NotificationsList',
@@ -29,19 +29,18 @@ const NotificationsList = createReactClass({
 
   _formatNotificationCount(count) {
     if (count === 0) {
-      return 'is no notification';
+      return '暂无通知';
     }
-
     if (count === 1) {
-      return 'is one notification';
+      return '您有一个通知';
     }
 
-    return `are ${count} notifications`;
+    return `您有${count}个通知`;
   },
 
   render() {
     if (!this.state.notifications) {
-      return <Spinner />;
+      return <Spinner/>;
     }
 
     const count = this.state.total;
@@ -50,19 +49,19 @@ const NotificationsList = createReactClass({
     let content;
 
     if (count === 0) {
-      title = 'No notifications';
+      title = '暂无通知';
 
       content = (
         <Alert bsStyle="success" className="notifications-none">
-          <Icon name="check-circle" />{' '}
-          &nbsp;No notifications
+          <Icon name="check-circle"/>{' '}
+          &nbsp;暂无通知
         </Alert>
       );
     } else {
-      title = `There ${this._formatNotificationCount(count)}`;
+      title = `${this._formatNotificationCount(count)}`;
 
       content = this.state.notifications.map((notification) => {
-        return <Notification key={`${notification.type}-${notification.timestamp}`} notification={notification} />;
+        return <Notification key={`${notification.type}-${notification.timestamp}`} notification={notification}/>;
       });
     }
 
@@ -71,8 +70,7 @@ const NotificationsList = createReactClass({
         <Col md={12}>
           <h2>{title}</h2>
           <p className="description">
-            Notifications are triggered by Graylog and indicate a situation you should act upon. Many notification
-            types will also provide a link to the Graylog documentation if you need more information or assistance.
+            DataInsight会发出通知,以便您进行处理.
           </p>
 
           {content}

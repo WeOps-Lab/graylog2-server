@@ -150,9 +150,9 @@ class EditConfigurationVariableModal extends React.Component {
     let triggerButtonContent;
 
     if (create) {
-      triggerButtonContent = 'Create Variable';
+      triggerButtonContent = '创建变量';
     } else {
-      triggerButtonContent = <span>Edit</span>;
+      triggerButtonContent = <span>编辑</span>;
     }
 
     return (
@@ -164,41 +164,41 @@ class EditConfigurationVariableModal extends React.Component {
           {triggerButtonContent}
         </Button>
         <BootstrapModalForm ref={(ref) => { this.modal = ref; }}
-                            title={<>{create ? 'Create' : 'Edit'} Variable $&#123;user.{formData.name}&#125;</>}
+                            title={<>{create ? '创建' : '编辑'} 变量 $&#123;user.{formData.name}&#125;</>}
                             onSubmitForm={this._save}
                             onModalClose={this._cleanState}
                             submitButtonDisabled={this._hasErrors()}
-                            submitButtonText="Save">
+                            submitButtonText="保存">
           <fieldset>
             <Input type="text"
                    id={this._getId('variable-name')}
-                   label="Name"
+                   label="名称"
                    name="name"
                    defaultValue={formData.name}
                    onChange={this._handleInputChange}
                    bsStyle={this._validationState('name')}
-                   help={this._formatValidationMessage('name', 'Type a name for this variable')}
+                   help={this._formatValidationMessage('name', '输入变量的名称')}
                    autoFocus
                    spellCheck={false}
                    required />
             <Input type="text"
                    id={this._getId('variable-description')}
-                   label={<span>Description <small className="text-muted">(Optional)</small></span>}
+                   label={<span>描述 <small className="text-muted">(可选)</small></span>}
                    name="description"
                    defaultValue={formData.description}
                    onChange={this._handleInputChange}
-                   help="Type a description for this variable"
+                   help="输入变量描述"
                    spellCheck={false} />
             <Input type="textarea"
                    id={this._getId('variable-content')}
-                   label="Content"
+                   label="内容"
                    name="content"
                    rows="10"
                    className={ConfigurationHelperStyle.monoSpaceFont}
                    defaultValue={formData.content}
                    onChange={this._handleInputChange}
                    bsStyle={this._validationState('content')}
-                   help={this._formatValidationMessage('content', 'Write your variable content')}
+                   help={this._formatValidationMessage('content', '写入变量内容')}
                    spellCheck={false}
                    required />
           </fieldset>

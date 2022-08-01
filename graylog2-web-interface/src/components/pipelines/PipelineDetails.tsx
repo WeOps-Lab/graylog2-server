@@ -64,20 +64,20 @@ const PipelineDetails = ({ pipeline, create, onChange, onCancel }: Props) => {
           <div className="pull-right">
             <PipelineForm pipeline={pipeline} save={onChange} />
           </div>
-          <h2>Details</h2>
+          <h2>详情</h2>
           <PipelineDl className="dl-horizontal">
-            <dt>Title</dt>
+            <dt>标题</dt>
             <dd>{pipeline.title}</dd>
-            <dt>Description</dt>
+            <dt>描述</dt>
             <dd>{pipeline.description}</dd>
-            <dt>Created</dt>
+            <dt>创建于</dt>
             <dd><RelativeTime dateTime={pipeline.created_at} /></dd>
-            <dt>Last modified</dt>
+            <dt>最后修改于</dt>
             <dd><RelativeTime dateTime={pipeline.modified_at} /></dd>
-            <dt>Current throughput</dt>
+            <dt>当前吞吐量</dt>
             <dd>
               <MetricContainer name={`org.graylog.plugins.pipelineprocessor.ast.Pipeline.${pipeline.id}.executed`}>
-                <CounterRate suffix="msg/s" />
+                <CounterRate suffix="消息/秒" />
               </MetricContainer>
             </dd>
           </PipelineDl>

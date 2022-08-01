@@ -104,7 +104,7 @@ const _initialCapabilityId = (capabilities: CapabilitiesList) => {
   return capabilities.find((capability) => capability.title === initialCapabilityTitle)?.id;
 };
 
-const _isRequired = (field) => (value) => (!value ? `The ${field} is required` : undefined);
+const _isRequired = (field) => (value) => (!value ? `字段 ${field} 必填` : undefined);
 
 const _renderGranteesSelectOption = ({ label, granteeType }: {label: string, granteeType: $PropertyType<Grantee, 'type'> }) => (
   <GranteesSelectOption>
@@ -132,11 +132,11 @@ const GranteesSelector = ({ availableGrantees, availableCapabilities, className,
               <StyledSelectGroup>
                 <Field name="granteeId" validate={_isRequired('grantee')}>
                   {({ field: { name, value, onChange } }) => (
-                    <GranteesSelect inputProps={{ 'aria-label': 'Search for users and teams' }}
+                    <GranteesSelect inputProps={{ 'aria-label': '搜索' }}
                                     onChange={(granteeId) => onChange({ target: { value: granteeId, name } })}
                                     optionRenderer={_renderGranteesSelectOption}
                                     options={granteesOptions}
-                                    placeholder="Search for users and teams"
+                                    placeholder="搜索"
                                     value={value} />
                   )}
                 </Field>
@@ -144,9 +144,9 @@ const GranteesSelector = ({ availableGrantees, availableCapabilities, className,
               </StyledSelectGroup>
               <SubmitButton bsStyle="success"
                             disabled={isSubmitting || !isValid}
-                            title="Add Collaborator"
+                            title="添加协作者"
                             type="submit">
-                Add Collaborator
+                添加协作者
               </SubmitButton>
             </FormElements>
             {errors && (

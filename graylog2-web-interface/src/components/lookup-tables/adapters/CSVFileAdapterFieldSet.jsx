@@ -37,11 +37,11 @@ class CSVFileAdapterFieldSet extends React.Component {
         <Input type="text"
                id="path"
                name="path"
-               label="File path"
+               label="文件路径"
                autoFocus
                required
                onChange={this.props.handleFormEvent}
-               help={this.props.validationMessage('path', 'The path to the CSV file.')}
+               help={this.props.validationMessage('path', 'CSV文件路径.')}
                bsStyle={this.props.validationState('path')}
                value={config.path}
                labelClassName="col-sm-3"
@@ -49,60 +49,60 @@ class CSVFileAdapterFieldSet extends React.Component {
         <Input type="number"
                id="check_interval"
                name="check_interval"
-               label="Check interval"
+               label="检查周期"
                required
                onChange={this.props.handleFormEvent}
-               help="The interval to check if the CSV file needs a reload. (in seconds)"
+               help="检查CSV更新的周期. (秒)"
                value={config.check_interval}
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9" />
         <Input type="text"
                id="separator"
                name="separator"
-               label="Separator"
+               label="分隔符"
                required
                onChange={this.props.handleFormEvent}
-               help="The delimiter to use for separating entries."
+               help="实体之间的分隔符."
                value={config.separator}
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9" />
         <Input type="text"
                id="quotechar"
                name="quotechar"
-               label="Quote character"
+               label="引号"
                required
                onChange={this.props.handleFormEvent}
-               help="The character to use for quoted elements."
+               help="引号的字符."
                value={config.quotechar}
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9" />
         <Input type="text"
                id="key_column"
                name="key_column"
-               label="Key column"
+               label="字段列"
                required
                onChange={this.props.handleFormEvent}
-               help="The column name that should be used for the key lookup."
+               help="用于映射的字段."
                value={config.key_column}
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9" />
         <Input type="text"
                id="value_column"
                name="value_column"
-               label="Value column"
+               label="字段值列"
                required
                onChange={this.props.handleFormEvent}
-               help="The column name that should be used as the value for a key."
+               help="映射的结果列."
                value={config.value_column}
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9" />
         <Input type="checkbox"
                id="case_insensitive_lookup"
                name="case_insensitive_lookup"
-               label="Allow case-insensitive lookups"
+               label="忽略大小写"
                checked={config.case_insensitive_lookup}
                onChange={this.props.handleFormEvent}
-               help="Enable if the key lookup should be case-insensitive."
+               help="是否启用忽略大小写的功能."
                wrapperClassName="col-md-offset-3 col-md-9" />
       </fieldset>
     );

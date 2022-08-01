@@ -79,15 +79,15 @@ const IndexSetsComponent = createReactClass({
     const actions = (
       <div>
         <LinkContainer to={Routes.SYSTEM.INDEX_SETS.CONFIGURATION(indexSet.id)}>
-          <Button bsStyle="info">Edit</Button>
+          <Button bsStyle="info">编辑</Button>
         </LinkContainer>
         {' '}
         <DropdownButton title="More Actions" id={`index-set-dropdown-${indexSet.id}`} pullRight>
           <MenuItem onSelect={this._onSetDefault(indexSet)}
-                    disabled={!indexSet.can_be_default || indexSet.default}>Set as default
+                    disabled={!indexSet.can_be_default || indexSet.default}>设置为默认
           </MenuItem>
           <MenuItem divider />
-          <MenuItem onSelect={this._onDelete(indexSet)}>Delete</MenuItem>
+          <MenuItem onSelect={this._onDelete(indexSet)}>删除</MenuItem>
         </DropdownButton>
       </div>
     );
@@ -106,12 +106,12 @@ const IndexSetsComponent = createReactClass({
       </Link>
     );
 
-    const isDefault = indexSet.default ? <Label key={`index-set-${indexSet.id}-default-label`} bsStyle="primary">default</Label> : '';
-    const isReadOnly = !indexSet.writable ? <Label key={`index-set-${indexSet.id}-readOnly-label`} bsStyle="info">read only</Label> : '';
+    const isDefault = indexSet.default ? <Label key={`index-set-${indexSet.id}-default-label`} bsStyle="primary">默认</Label> : '';
+    const isReadOnly = !indexSet.writable ? <Label key={`index-set-${indexSet.id}-readOnly-label`} bsStyle="info">只读</Label> : '';
     let { description } = indexSet;
 
     if (indexSet.default) {
-      description += `${description.endsWith('.') ? '' : '.'} Graylog will use this index set by default.`;
+      description += `${description.endsWith('.') ? '' : '.'} DataInsight会使用此索引为默认索引.`;
     }
 
     let statsString;
@@ -136,8 +136,8 @@ const IndexSetsComponent = createReactClass({
       return 'N/A';
     }
 
-    const indices = `${NumberUtils.formatNumber(stats.indices)} ${StringUtils.pluralize(stats.indices, 'index', 'indices')}`;
-    const documents = `${NumberUtils.formatNumber(stats.documents)} ${StringUtils.pluralize(stats.documents, 'document', 'documents')}`;
+    const indices = `${NumberUtils.formatNumber(stats.indices)} ${StringUtils.pluralize(stats.indices, '索引', '索引')}`;
+    const documents = `${NumberUtils.formatNumber(stats.documents)} ${StringUtils.pluralize(stats.documents, '文档', '文档')}`;
     const size = NumberUtils.formatBytes(stats.size);
 
     return `${indices}, ${documents}, ${size}`;
@@ -167,7 +167,7 @@ const IndexSetsComponent = createReactClass({
                        onChange={this._onChangePaginatedList}
                        showPageSizeSelect={false}>
           <EntityList bsNoItemsStyle="info"
-                      noItemsText="There are no index sets to display"
+                      noItemsText="暂无索引集"
                       items={indexSets.map((indexSet) => this._formatIndexSet(indexSet))} />
         </PaginatedList>
       </div>

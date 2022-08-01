@@ -62,7 +62,7 @@ const EntityShareModal = ({ description, entityId, entityType, entityTitle, enti
       const selectedGrantee = entityShareState?.availableGrantees.find((grantee) => grantee.id === selectedGranteeId);
 
       // eslint-disable-next-line no-alert
-      if (!window.confirm(`${selectedGrantee.title ? `"${selectedGrantee.title}"` : 'An entity (name not found)'} got selected but was never added as a collaborator. Do you want to continue anyway?`)) {
+      if (!window.confirm(`${selectedGrantee.title ? `"${selectedGrantee.title}"` : '实体（未找到名称）'} 被选中但从未被添加为合作者。你还想继续吗？`)) {
         setDisableSubmit(false);
 
         return;
@@ -77,12 +77,12 @@ const EntityShareModal = ({ description, entityId, entityType, entityTitle, enti
 
   return (
     <BootstrapModalConfirm confirmButtonDisabled={disableSubmit}
-                           confirmButtonText="Save"
-                           cancelButtonText="Discard changes"
+                           confirmButtonText="保存"
+                           cancelButtonText="取消"
                            onConfirm={_handleSave}
                            onModalClose={onClose}
                            showModal
-                           title={<>Sharing {entityTypeTitle ?? entityType}: <i>{entityTitle}</i></>}>
+                           title={<>共享 {entityTypeTitle ?? entityType}: <i>{entityTitle}</i></>}>
       <>
         {(entityShareState && entityShareState.entity === entityGRN) ? (
           <EntityShareSettings description={description}

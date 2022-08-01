@@ -99,7 +99,7 @@ const SubstringExtractorConfiguration = createReactClass({
 
       promise.then((result) => {
         if (!result.successful) {
-          UserNotification.warning('We were not able to run the substring extraction. Please check index boundaries.');
+          UserNotification.warning('无法执行子字符提取,请检查index的边界.');
 
           return;
         }
@@ -120,8 +120,8 @@ const SubstringExtractorConfiguration = createReactClass({
   render() {
     const endIndexHelpMessage = (
       <span>
-        Where to end extracting. (Exclusive){' '}
-        <strong>Example:</strong> <em>1,5</em> cuts <em>love</em> from the string <em>ilovelogs</em>.
+        提取到哪个位置结束。
+        <strong>例如:</strong> <em>1,5</em> 可以把分割 <em>ilovelogs</em> 切割为 <em>love</em>.
       </span>
     );
 
@@ -130,19 +130,19 @@ const SubstringExtractorConfiguration = createReactClass({
         <Input type="number"
                ref={(beginIndex) => { this.beginIndex = beginIndex; }}
                id="begin_index"
-               label="Begin index"
+               label="开始位置"
                labelClassName="col-md-2"
                wrapperClassName="col-md-10"
                defaultValue={this.state.configuration.begin_index}
                onChange={this._onChange('begin_index')}
                min="0"
                required
-               help="Character position from where to start extracting. (Inclusive)" />
+               help="从什么地方开始提取的字符" />
 
         <Input type="number"
                ref={(endIndex) => { this.endIndex = endIndex; }}
                id="end_index"
-               label="End index"
+               label="结束位置"
                labelClassName="col-md-2"
                wrapperClassName="col-md-10"
                defaultValue={this.state.configuration.end_index}
@@ -154,7 +154,7 @@ const SubstringExtractorConfiguration = createReactClass({
         <Row>
           <Col mdOffset={2} md={10}>
             <Button bsStyle="info" onClick={this._onTryClick} disabled={this._isTryButtonDisabled()}>
-              {this.state.trying ? <Icon name="spinner" spin /> : 'Try'}
+              {this.state.trying ? <Icon name="spinner" spin /> : '测试'}
             </Button>
           </Col>
         </Row>

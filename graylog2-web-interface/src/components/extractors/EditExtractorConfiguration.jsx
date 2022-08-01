@@ -117,7 +117,7 @@ class EditExtractorConfiguration extends React.Component {
 
         break;
       default:
-        console.warn(`Unsupported extractor type ${this.props.extractorType}`);
+        console.warn(`不支持的提取器类型 ${this.props.extractorType}`);
     }
 
     let extractorPreview;
@@ -126,8 +126,8 @@ class EditExtractorConfiguration extends React.Component {
       extractorPreview = (
         <div className="form-group">
           <Col md={10} mdOffset={2}>
-            <Panel header="Extractor preview" bsStyle="info">
-              {this.state.extractorPreview === '' ? <em>Nothing will be extracted</em> : this.state.extractorPreview}
+            <Panel header="提取器预览" bsStyle="info">
+              {this.state.extractorPreview === '' ? <em>不会提取任何内容</em> : this.state.extractorPreview}
             </Panel>
           </Col>
         </div>

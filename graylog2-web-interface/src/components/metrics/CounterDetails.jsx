@@ -28,7 +28,7 @@ class CounterDetails extends React.Component {
 
     return (
       <dl className="metric-def metric-counter">
-        <dt>Value:</dt>
+        <dt>值:</dt>
         <dd><span className="number-format">{numeral(metric.count).format('0,0')}</span></dd>
       </dl>
     );

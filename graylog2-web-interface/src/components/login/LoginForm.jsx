@@ -51,9 +51,9 @@ const LoginForm = ({ onErrorChange }) => {
 
     promise.catch((error) => {
       if (error.additional.status === 401) {
-        onErrorChange('Invalid credentials, please verify them and retry.');
+        onErrorChange('认证失败.');
       } else {
-        onErrorChange(`Error - the server returned: ${error.additional.status} - ${error.message}`);
+        onErrorChange(`异常 - 服务器返回: ${error.additional.status} - ${error.message}`);
       }
     });
 
@@ -69,19 +69,19 @@ const LoginForm = ({ onErrorChange }) => {
       <Input ref={(username) => { usernameInput = username; }}
              id="username"
              type="text"
-             placeholder="Username"
+             placeholder="用户名"
              autoFocus
              required />
 
       <Input ref={(password) => { passwordInput = password; }}
              id="password"
              type="password"
-             placeholder="Password"
+             placeholder="密码" />
              required />
 
       <StyledFormGroup>
         <Button type="submit" bsStyle="info" disabled={isLoading}>
-          {isLoading ? 'Signing in...' : 'Sign in'}
+          {isLoading ? '登录中...' : '登录'}
         </Button>
       </StyledFormGroup>
     </form>

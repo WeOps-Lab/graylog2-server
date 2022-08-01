@@ -76,13 +76,13 @@ const NodeOrGlobalSelect = ({ global = false, node, onChange }: Props) => {
   const nodeSelect = !globalState ? (
     <Input id="node-select"
            type="select"
-           label="Node"
+           label="节点"
            placeholder="placeholder"
            value={node}
-           help="On which node should this input start"
+           help="指定启动的节点"
            onChange={_onChangeNode}
            required>
-      <option key="placeholder" value="">Select Node</option>
+      <option key="placeholder" value="">选择节点</option>
       {options}
     </Input>
   ) : null;
@@ -91,8 +91,8 @@ const NodeOrGlobalSelect = ({ global = false, node, onChange }: Props) => {
     <span>
       <Input id="global-checkbox"
              type="checkbox"
-             label="Global"
-             help="Should this input start on all nodes"
+             label="全局启用"
+             help="是否在全节点启用"
              checked={globalState}
              onChange={_onChangeGlobal} />
       {nodeSelect}

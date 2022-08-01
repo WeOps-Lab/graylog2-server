@@ -18,13 +18,13 @@ import React from 'react';
 import numeral from 'numeral';
 import moment from 'moment';
 
-import { LinkContainer } from 'components/common/router';
-import { Alert, Col, Row, Button } from 'components/bootstrap';
-import { Icon, Spinner } from 'components/common';
+import {LinkContainer} from 'components/common/router';
+import {Alert, Col, Row, Button} from 'components/bootstrap';
+import {Icon, Spinner} from 'components/common';
 import DocsHelper from 'util/DocsHelper';
 import Routes from 'routing/Routes';
-import { SmallSupportLink, DocumentationLink } from 'components/support';
-import { IndexerFailuresStore } from 'stores/indexers/IndexerFailuresStore';
+import {SmallSupportLink, DocumentationLink} from 'components/support';
+import {IndexerFailuresStore} from 'stores/indexers/IndexerFailuresStore';
 
 class IndexerFailuresComponent extends React.Component {
   state = {};
@@ -33,18 +33,18 @@ class IndexerFailuresComponent extends React.Component {
     const since = moment().subtract(24, 'hours');
 
     IndexerFailuresStore.count(since).then((response) => {
-      this.setState({ total: response.count });
+      this.setState({total: response.count});
     });
   }
 
   _formatFailuresSummary = () => {
     return (
       <Alert bsStyle={this.state.total === 0 ? 'success' : 'danger'}>
-        <Icon name={this._iconForFailureCount(this.state.total)} /> {this._formatTextForFailureCount(this.state.total)}
+        <Icon name={this._iconForFailureCount(this.state.total)}/> {this._formatTextForFailureCount(this.state.total)}
 
         <LinkContainer to={Routes.SYSTEM.INDICES.FAILURES}>
           <Button bsStyle="info" bsSize="xs" className="pull-right">
-            Show errors
+            显示错误信息
           </Button>
         </LinkContainer>
       </Alert>
@@ -53,10 +53,9 @@ class IndexerFailuresComponent extends React.Component {
 
   _formatTextForFailureCount = (count) => {
     if (count === 0) {
-      return 'No failed indexing attempts in the last 24 hours.';
+      return '在过去的24小时内没有索引失败.';
     }
-
-    return <strong>There were {numeral(count).format('0,0')} failed indexing attempts in the last 24 hours.</strong>;
+    return <strong>过去24小时内共有{numeral(count).format('0,0')}次索引失败.</strong>;
   };
 
   _iconForFailureCount = (count) => {
@@ -71,7 +70,7 @@ class IndexerFailuresComponent extends React.Component {
     let content;
 
     if (this.state.total === undefined) {
-      content = <Spinner />;
+      content = <Spinner/>;
     } else {
       content = this._formatFailuresSummary();
     }
@@ -79,11 +78,11 @@ class IndexerFailuresComponent extends React.Component {
     return (
       <Row className="content">
         <Col md={12}>
-          <h2>Indexer failures</h2>
+          <h2>索引失败信息</h2>
 
           <SmallSupportLink>
-            Every message that was not successfully indexed will be logged as an indexer failure. You can learn more about this feature in the{' '}
-            <DocumentationLink page={DocsHelper.PAGES.INDEXER_FAILURES} text="Graylog documentation" />.
+            每个未成功索引的消息将会被记录为索引失败。
+            在<DocumentationLink page={DocsHelper.PAGES.INDEXER_FAILURES} text="DataInsight文档" />查看更多信息。
           </SmallSupportLink>
 
           {content}

@@ -28,15 +28,15 @@ class MeterDetails extends React.Component {
 
     return (
       <dl className="metric-def metric-meter">
-        <dt>Total:</dt>
+        <dt>总数:</dt>
         <dd><span className="number-format">{numeral(meter.rate.total).format('0,0')}</span> events</dd>
-        <dt>Mean:</dt>
+        <dt>平均值:</dt>
         <dd><span className="number-format">{numeral(meter.rate.mean).format('0,0.[00]')}</span> {meter.rate_unit}</dd>
-        <dt>1 minute avg:</dt>
+        <dt>1分钟平均值:</dt>
         <dd><span className="number-format">{numeral(meter.rate.one_minute).format('0,0.[00]')}</span> {meter.rate_unit}</dd>
-        <dt>5 minute avg:</dt>
+        <dt>5分钟平均值:</dt>
         <dd><span className="number-format">{numeral(meter.rate.five_minute).format('0,0.[00]')}</span> {meter.rate_unit}</dd>
-        <dt>15 minute avg:</dt>
+        <dt>15分钟平均值:</dt>
         <dd><span className="number-format">{numeral(meter.rate.fifteen_minute).format('0,0.[00]')}</span> {meter.rate_unit}</dd>
       </dl>
     );

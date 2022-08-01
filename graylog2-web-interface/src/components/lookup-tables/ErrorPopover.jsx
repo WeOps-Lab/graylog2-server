@@ -30,7 +30,7 @@ class ErrorPopover extends React.Component {
   };
 
   static defaultProps = {
-    title: 'Error',
+    title: '异常',
     placement: 'bottom',
   };
 

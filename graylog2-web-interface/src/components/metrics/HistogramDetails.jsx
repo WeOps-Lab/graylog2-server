@@ -28,21 +28,21 @@ class HistogramDetails extends React.Component {
 
     return (
       <dl className="metric-def metric-histogram">
-        <dt>95th percentile:</dt>
+        <dt>95%:</dt>
         <dd><span className="number-format">{numeral(histogram.time['95th_percentile']).format('0,0.[00]')}</span></dd>
-        <dt>98th percentile:</dt>
+        <dt>98%:</dt>
         <dd><span className="number-format">{numeral(histogram.time['98th_percentile']).format('0,0.[00]')}</span></dd>
-        <dt>99th percentile:</dt>
+        <dt>99%:</dt>
         <dd><span className="number-format">{numeral(histogram.time['99th_percentile']).format('0,0.[00]')}</span></dd>
-        <dt>Standard deviation:</dt>
+        <dt>标准差:</dt>
         <dd><span className="number-format">{numeral(histogram.time.std_dev).format('0,0.[00]')}</span></dd>
-        <dt>Mean:</dt>
+        <dt>平均值:</dt>
         <dd><span className="number-format">{numeral(histogram.time.mean).format('0,0.[00]')}</span></dd>
-        <dt>Minimum:</dt>
+        <dt>最小值:</dt>
         <dd><span className="number-format">{numeral(histogram.time.min).format('0,0.[00]')}</span></dd>
-        <dt>Maximum:</dt>
+        <dt>最大值:</dt>
         <dd><span className="number-format">{numeral(histogram.time.max).format('0,0.[00]')}</span></dd>
-        <dt>Count:</dt>
+        <dt>总数:</dt>
         <dd><span className="number-format">{numeral(histogram.count).format('0,0')}</span></dd>
       </dl>
     );

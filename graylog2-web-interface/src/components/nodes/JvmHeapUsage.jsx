@@ -123,11 +123,11 @@ const JvmHeapUsage = createReactClass({
     const extractedMetrics = this._extractMetricValues();
     const { usedPercentage, committedPercentage, usedMemory, committedMemory, maxMemory } = extractedMetrics;
     let progressBarConfig = [{ value: 0 }];
-    let detail = <p><Spinner text="Loading heap usage information..." /></p>;
+    let detail = <p><Spinner text="加载堆栈信息中..." /></p>;
 
     if (usedPercentage || committedPercentage) {
       if (Object.keys(extractedMetrics).length === 0) {
-        detail = <p>Heap information unavailable.</p>;
+        detail = <p>堆栈信息不可用.</p>;
       } else {
         progressBarConfig = [
           { value: usedPercentage, bsStyle: 'primary' },
@@ -136,13 +136,13 @@ const JvmHeapUsage = createReactClass({
 
         detail = (
           <p>
-            The JVM is using{' '}
+            JVM目前共有{' '}
             <Blob className="used-memory" />
             <strong> {NumberUtils.formatBytes(usedMemory)}</strong>
-            {' '}of{' '}
+            {' '}已占用{' '}
             <Blob className="committed-memory" />
             <strong> {NumberUtils.formatBytes(committedMemory)}</strong>
-            {' '}heap space and will not attempt to use more than{' '}
+            {' '}且对JVM的最大占用不会超过{' '}
             <Blob className="max-memory" />
             <strong> {NumberUtils.formatBytes(maxMemory)}</strong>
           </p>

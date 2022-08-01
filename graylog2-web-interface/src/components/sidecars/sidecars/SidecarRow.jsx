@@ -57,13 +57,15 @@ class SidecarRow extends React.Component {
   render() {
     const { showRelativeTime } = this.state;
     const { sidecar } = this.props;
-    const annotation = sidecar.active ? '' : ' (inactive)';
+    const annotation = sidecar.active ? '' : ' (不活跃)';
     let sidecarStatus = { status: null, message: null, id: null };
 
     if (sidecar.node_details.status && SidecarStatusEnum.isValidStatusCode(sidecar.node_details.status.status)) {
       sidecarStatus = {
         status: sidecar.node_details.status.status,
-        message: sidecar.node_details.status.message,
+        message: sidecar.node_details.status.message.replace('running', '运行')
+          .replace('stopped', '暂停')
+          .replace('failing', '失败'),
         id: sidecar.node_id,
       };
     }
@@ -104,10 +106,10 @@ class SidecarRow extends React.Component {
         <td>
           <ButtonToolbar>
             <LinkContainer to={`${Routes.SYSTEM.SIDECARS.ADMINISTRATION}?node_id=${sidecar.node_id}`}>
-              <Button bsSize="xsmall" bsStyle="info">Manage sidecar</Button>
+              <Button bsSize="xsmall" bsStyle="info">管理客户端</Button>
             </LinkContainer>
             <LinkContainer to={Routes.search_with_query(`gl2_source_collector:${sidecar.node_id}`, 'relative', 604800)}>
-              <Button bsSize="xsmall" bsStyle="info">Show messages</Button>
+              <Button bsSize="xsmall" bsStyle="info">查看消息</Button>
             </LinkContainer>
           </ButtonToolbar>
         </td>

@@ -62,9 +62,9 @@ class HTTPJSONPathAdapterFieldSet extends React.Component<Props> {
 
     return (
       <fieldset>
-        <URLWhiteListInput label="Lookup URL"
+        <URLWhiteListInput label="数据字典URL"
                            onChange={handleFormEvent}
-                           validationMessage={validationMessage('url', 'The URL for the lookup. (this is a template - see documentation)')}
+                           validationMessage={validationMessage('url', '查找的 URL。 （这是一个模板 - 请参阅文档）')}
                            validationState={validationState('url')}
                            url={config.url}
                            labelClassName="col-sm-3"
@@ -73,10 +73,10 @@ class HTTPJSONPathAdapterFieldSet extends React.Component<Props> {
         <Input type="text"
                id="single_value_jsonpath"
                name="single_value_jsonpath"
-               label="Single value JSONPath"
+               label="单值JSONPath"
                required
                onChange={handleFormEvent}
-               help={validationMessage('single_value_jsonpath', 'The JSONPath string to get the single value from the response.')}
+               help={validationMessage('single_value_jsonpath', '从响应中获取单个值的 JSONPath 字符串。')}
                bsStyle={validationState('single_value_jsonpath')}
                value={config.single_value_jsonpath}
                labelClassName="col-sm-3"
@@ -84,9 +84,9 @@ class HTTPJSONPathAdapterFieldSet extends React.Component<Props> {
         <Input type="text"
                id="multi_value_jsonpath"
                name="multi_value_jsonpath"
-               label="Multi value JSONPath"
+               label="多值JSONPath"
                onChange={handleFormEvent}
-               help={validationMessage('multi_value_jsonpath', 'The JSONPath string to get the multi value from the response. Needs to return a list or map. (optional)')}
+               help={validationMessage('multi_value_jsonpath', '从响应中获取多值的 JSONPath 字符串。需要返回列表或地图。 （可选的）')}
                bsStyle={validationState('multi_value_jsonpath')}
                value={config.multi_value_jsonpath}
                labelClassName="col-sm-3"
@@ -97,13 +97,13 @@ class HTTPJSONPathAdapterFieldSet extends React.Component<Props> {
                label="HTTP User-Agent"
                required
                onChange={handleFormEvent}
-               help="The User-Agent header to use for the HTTP request."
+               help="HTTP请求的User-Agent."
                value={config.user_agent}
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9" />
         <Input id="http_headers"
                label="HTTP Headers"
-               help="The custom HTTP headers to use for the HTTP request. Multiple values must be comma-separated."
+               help="自定义的HTTP请求头.多个值必须是逗号分隔的."
                labelClassName="col-sm-3"
                wrapperClassName="col-sm-9">
           <KeyValueTable pairs={config.headers || {}} editable onChange={this.onHTTPHeaderUpdate} />

@@ -127,7 +127,7 @@ class GrokPatterns extends React.Component {
 
   confirmedRemove = (pattern) => {
     // eslint-disable-next-line no-alert
-    if (window.confirm(`Really delete the grok pattern ${pattern.name}?\nIt will be removed from the system and unavailable for any extractor. If it is still in use by extractors those will fail to work.`)) {
+    if (window.confirm(`确认删除表达式${pattern.name}吗？\n它将从系统中删除.不可以再用于任何日志提取器.`)) {
       GrokPatternsStore.deletePattern(pattern, this.loadData);
     }
   };
@@ -136,10 +136,10 @@ class GrokPatterns extends React.Component {
     let formattedHeaderCell;
 
     switch (header.toLocaleLowerCase()) {
-      case 'name':
+      case '名称':
         formattedHeaderCell = <th className="name">{header}</th>;
         break;
-      case 'actions':
+      case '操作':
         formattedHeaderCell = <th className="actions">{header}</th>;
         break;
       default:
@@ -163,7 +163,7 @@ class GrokPatterns extends React.Component {
                     bsStyle="primary"
                     bsSize="xs"
                     onClick={() => this.confirmedRemove(pattern)}>
-              Delete
+              删除
             </Button>
             <EditPatternModal id={pattern.id}
                               name={pattern.name}
@@ -181,7 +181,7 @@ class GrokPatterns extends React.Component {
   };
 
   render() {
-    const headers = ['Name', 'Pattern', 'Actions'];
+    const headers = ['名称', '表达式', '操作'];
     const { pagination, patterns } = this.state;
 
     const queryHelperComponent = (
@@ -194,10 +194,10 @@ class GrokPatterns extends React.Component {
 
     return (
       <div>
-        <PageHeader title="Grok patterns">
+        <PageHeader title="Grok表达式">
           <span>
-            This is a list of grok patterns you can use in your Graylog grok extractors. You can add
-            your own manually or import a whole list of patterns from a so called pattern file.
+            这是在DataInsight日志提取器中可用的Grok表达式列表.
+            您可以手动添加Grok表达式,又或者通过导入表达式文件,添加一系列的Grok表达式.
           </span>
           {null}
           <IfPermitted permissions="inputs:edit">

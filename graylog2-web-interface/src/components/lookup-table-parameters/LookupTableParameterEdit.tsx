@@ -63,7 +63,7 @@ const LookupTableParameterEdit = ({
   const _handleInputChange = (attributeName: string) => ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => _handleChange(attributeName)(value);
 
   if (!lookupTables) {
-    return <Spinner text="Loading lookup tables" />;
+    return <Spinner text="数据字典加载中....." />;
   }
 
   const lookupTableOptions = lookupTables.sort((lt1, lt2) => naturalSortIgnoreCase(lt1.title, lt2.title))
@@ -73,12 +73,12 @@ const LookupTableParameterEdit = ({
     <>
       <Input id={`lookup-table-parameter-table-${identifier}`}
              name="query-param-table-name"
-             label="Lookup Table"
+             label="数据字典"
              bsStyle={validationState?.lookupTable?.[0]}
              error={validationState?.lookupTable?.[1]}
-             help="Select the lookup table Graylog should use to get the values.">
+             help="选择 DataInsight 应该用来获取值的数据字典.">
         <Select placeholder="Select lookup table"
-                inputProps={{ 'aria-label': 'Select lookup table' }}
+                inputProps={{ 'aria-label': '选择数据字典' }}
                 onChange={_handleChange('lookupTable')}
                 options={lookupTableOptions}
                 value={lookupTable}
@@ -88,20 +88,20 @@ const LookupTableParameterEdit = ({
       </Input>
       <Input type="text"
              id={`lookup-table-parameter-key-${identifier}`}
-             label="Lookup Table Key"
+             label="数据字典的Key"
              name="key"
              defaultValue={tableKey}
              onChange={_handleInputChange('key')}
              bsStyle={validationState?.key?.[0]}
-             help="Select the lookup table key"
+             help="选择数据字典的Key"
              error={validationState?.key?.[0] === 'error' ? validationState?.key?.[1] : undefined}
              spellCheck={false}
              required />
       <Input id={`lookup-table-parameter-default-value-${identifier}`}
              type="text"
              name="defaultValue"
-             label="Default Value"
-             help="Select a default value in case the lookup result is empty"
+             label="默认值"
+             help="选择默认值"
              defaultValue={defaultValue}
              spellCheck={false}
              onChange={_handleInputChange('defaultValue')} />
@@ -109,32 +109,32 @@ const LookupTableParameterEdit = ({
       <Panel id="lookup-table-parameter-help" defaultExpanded={defaultExpandHelp}>
         <Panel.Heading>
           <Panel.Title toggle>
-            How to use lookup table parameters
+            如何使用数据字典的参数
           </Panel.Title>
         </Panel.Heading>
         <Panel.Collapse>
           <Panel.Body>
-            <h5>General Usage</h5>
+            <h5>一般用法</h5>
             <p>
-              After declaring it, the parameter
+              声明后，参数
               <StyledInlineCode>{parameterSyntax}</StyledInlineCode>
-              in your query, will be replaced with the list of results from the lookup table.
-              The list of results will be presented in the form of a Lucene BooleanQuery. E.g.:
-              <StyledInlineCode>(&quot;foo&quot; OR &quot;bar&quot; OR &quot;baz&quot;)</StyledInlineCode>
+              在您的查询中，将替换为数据字典中的结果列表。
+              结果列表将以 Lucene BooleanQuery 的形式呈现。例如。：
+              <StyledInlineCode>(“foo”或“bar”或“baz”)</StyledInlineCode>
             </p>
-            <h5>Behaviour on empty lookup result list</h5>
+            <h5>空查找结果列表的行为</h5>
             <p>
-              The event definition query is only executed if a value for the parameter is present.
-              If the lookup result is empty, the execution will be skipped and treated as if the <i>Search Query</i> found
-              no messages. If an execution is desired a <i>Default Value</i> that yields the desired search result
-              needs to be provided. For example, (depending on the use case) a wildcard like
+              仅当存在参数值时才执行事件定义查询。
+              如果查找结果为空，则执行将被跳过并被视为找到 <i>Search Query</i>
+              没有消息。如果需要执行产生所需搜索结果的 <i>默认值</i>
+              需要提供。例如，（取决于用例）通配符如
               <StyledInlineCode>*</StyledInlineCode>
-              can be a meaningful Default Value.
+              可以是有意义的默认值。
             </p>
-            <h5>Limitations</h5>
+            <h5>限制</h5>
             <p>
-              Please note that maximum number of supported results is 1024. If the lookup table returns
-              more results, the query is not executed.
+              请注意，支持的最大结果数为 1024。如果数据字典返回
+              更多结果，则不执行查询。
             </p>
           </Panel.Body>
         </Panel.Collapse>

@@ -43,7 +43,7 @@ class ConfigurationRow extends React.Component {
     const { configuration, onDelete } = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm(`You are about to delete configuration "${configuration.name}". Are you sure?`)) {
+    if (window.confirm(`确定要删除配置 "${configuration.name}"?`)) {
       onDelete(configuration);
     }
   };
@@ -56,23 +56,23 @@ class ConfigurationRow extends React.Component {
         <td className={styles.name}>{configuration.name}</td>
         <td className={styles.color}><ColorLabel color={configuration.color} size="small" /></td>
         <td>
-          <CollectorIndicator collector={collector.name || 'Unknown collector'}
+          <CollectorIndicator collector={collector.name || '未知采集器'}
                               operatingSystem={collector.node_operating_system} />
         </td>
         <td className={styles.actions}>
           <ButtonToolbar>
             <LinkContainer to={Routes.SYSTEM.SIDECARS.EDIT_CONFIGURATION(configuration.id)}>
-              <Button onClick={this.openModal} bsStyle="info" bsSize="xsmall">Edit</Button>
+              <Button onClick={this.openModal} bsStyle="info" bsSize="xsmall">编辑</Button>
             </LinkContainer>
             <DropdownButton id={`more-actions-${configuration.id}`}
-                            title="More actions"
+                            title="更多操作"
                             bsSize="xsmall"
                             pullRight>
               <CopyConfigurationModal configuration={configuration}
                                       validateConfiguration={validateConfiguration}
                                       copyConfiguration={onCopy} />
               <MenuItem divider />
-              <MenuItem onSelect={this._handleDelete}>Delete</MenuItem>
+              <MenuItem onSelect={this._handleDelete}>删除</MenuItem>
             </DropdownButton>
           </ButtonToolbar>
         </td>

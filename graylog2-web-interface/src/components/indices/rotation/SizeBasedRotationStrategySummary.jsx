@@ -25,9 +25,9 @@ const SizeBasedRotationStrategySummary = ({ config }) => {
   return (
     <div>
       <dl>
-        <dt>Index rotation strategy:</dt>
-        <dd>Index Size</dd>
-        <dt>Max index size:</dt>
+        <dt>索引轮换策略:</dt>
+        <dd>索引大小</dd>
+        <dt>最大索引大小:</dt>
         <dd>{maxSize} bytes ({NumberUtils.formatBytes(maxSize)})</dd>
       </dl>
     </div>

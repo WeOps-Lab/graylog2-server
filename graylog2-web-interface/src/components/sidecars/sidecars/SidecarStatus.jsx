@@ -39,42 +39,42 @@ const SidecarStatus = createReactClass({
 
   formatNodeDetails(details) {
     if (!details) {
-      return <p>Node details are currently unavailable. Please wait a moment and ensure the sidecar is correctly connected to the server.</p>;
+      return <p>节点信息不可用.请稍候,并确保客户端已正确连接服务器.</p>;
     }
 
     const metrics = details.metrics || {};
 
     return (
       <dl className={`${commonStyles.deflist} ${commonStyles.topMargin}`}>
-        <dt>IP Address</dt>
-        <dd>{lodash.defaultTo(details.ip, 'Not available')}</dd>
-        <dt>Operating System</dt>
-        <dd>{lodash.defaultTo(details.operating_system, 'Not available')}</dd>
-        <dt>CPU Idle</dt>
-        <dd>{lodash.isNumber(metrics.cpu_idle) ? `${metrics.cpu_idle}%` : 'Not available'}</dd>
-        <dt>Load</dt>
-        <dd>{lodash.defaultTo(metrics.load_1, 'Not available')}</dd>
-        <dt>Volumes &gt; 75% full</dt>
+        <dt>IP地址</dt>
+        <dd>{lodash.defaultTo(details.ip, '不可用')}</dd>
+        <dt>操作系统</dt>
+        <dd>{lodash.defaultTo(details.operating_system, '不可用')}</dd>
+        <dt>CPU空闲</dt>
+        <dd>{lodash.isNumber(metrics.cpu_idle) ? `${metrics.cpu_idle}%` : '不可用' }</dd>
+        <dt>负载</dt>
+        <dd>{lodash.defaultTo(metrics.load_1, '不可用')}</dd>
+        <dt>容量 &gt; 75% </dt>
         {metrics.disks_75 === undefined
-          ? <dd>Not available</dd>
-          : <dd>{metrics.disks_75.length > 0 ? metrics.disks_75.join(', ') : 'None'}</dd>}
+          ? <dd>不可用</dd>
+          : <dd>{metrics.disks_75.length > 0 ? metrics.disks_75.join(', ') : '无'}</dd>}
       </dl>
     );
   },
 
   formatCollectorStatus(details, collectors) {
     if (!details || !collectors) {
-      return <p>Collectors status are currently unavailable. Please wait a moment and ensure the sidecar is correctly connected to the server.</p>;
+      return <p>采集器不可用.请稍候,并确保客户端已正确连接服务器.</p>;
     }
 
     if (!details.status) {
-      return <p>Did not receive collectors status, set the option <code>send_status: true</code> in the sidecar configuration to see this information.</p>;
+      return <p>没有接收到采集器状态,在配置中设置<code>send_status: true</code>查看这个信息.</p>;
     }
 
     const collectorStatuses = details.status.collectors;
 
     if (collectorStatuses.length === 0) {
-      return <p>There are no collectors configured in this sidecar.</p>;
+      return <p>客户端没有配置采集器.</p>;
     }
 
     const statuses = [];
@@ -89,7 +89,7 @@ const SidecarStatus = createReactClass({
 
       switch (status.status) {
         case SidecarStatusEnum.RUNNING:
-          statusMessage = 'Collector is running.';
+          statusMessage = '采集器运行中.';
           statusClass = 'text-success';
           statusBadge = <Icon name="play" fixedWidth />;
           break;
@@ -103,7 +103,7 @@ const SidecarStatus = createReactClass({
               <Button bsStyle="link"
                       bsSize="xs"
                       onClick={() => this._onShowVerbose(collector.name, status.verbose_message)}>
-                Show Details
+                查看详情
               </Button>
             );
           }
@@ -115,7 +115,7 @@ const SidecarStatus = createReactClass({
           statusBadge = <Icon name="stop" fixedWidth />;
           break;
         default:
-          statusMessage = 'Collector status is currently unknown.';
+          statusMessage = '采集器状态未知.';
           statusClass = 'text-info';
           statusBadge = <Icon name="question-circle" fixedWidth />;
       }
@@ -149,13 +149,13 @@ const SidecarStatus = createReactClass({
       <div>
         <Row className="content">
           <Col md={12}>
-            <h2>Node details</h2>
+            <h2>节点信息</h2>
             {this.formatNodeDetails(sidecar.node_details)}
           </Col>
         </Row>
         <Row className="content">
           <Col md={12}>
-            <h2>Collectors status</h2>
+            <h2>采集器状态</h2>
             <div className={commonStyles.topMargin}>
               {this.formatCollectorStatus(sidecar.node_details, this.props.collectors)}
             </div>
@@ -163,8 +163,8 @@ const SidecarStatus = createReactClass({
         </Row>
         <Row className="content" hidden={logFileList.length === 0}>
           <Col md={12}>
-            <h2>Log Files</h2>
-            <p className={commonStyles.topMargin}>Recently modified files will be highlighted in blue.</p>
+            <h2><文件></文件></h2>
+            <p className={commonStyles.topMargin}>最近修改的文件将以蓝色高亮显示.</p>
             <div>
               <SidecarStatusFileList files={logFileList} />
             </div>

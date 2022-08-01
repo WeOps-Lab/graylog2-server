@@ -57,9 +57,9 @@ class SimulationResults extends React.Component {
   };
 
   _getViewOptionsMenuItems = () => [
-    this._getViewOptionsMenuItem(VIEW_OPTIONS.SIMULATION_SUMMARY, 'Changes summary'),
-    this._getViewOptionsMenuItem(VIEW_OPTIONS.SIMULATION_PREVIEW, 'Results preview'),
-    this._getViewOptionsMenuItem(VIEW_OPTIONS.SIMULATION_TRACE, 'Simulation trace'),
+    this._getViewOptionsMenuItem(VIEW_OPTIONS.SIMULATION_SUMMARY, '变更概览'),
+    this._getViewOptionsMenuItem(VIEW_OPTIONS.SIMULATION_PREVIEW, '结果预览'),
+    this._getViewOptionsMenuItem(VIEW_OPTIONS.SIMULATION_TRACE, '模拟调试'),
   ];
 
   _getViewOptionsMenuItem = (option, text) => {
@@ -122,12 +122,11 @@ class SimulationResults extends React.Component {
     const errorMessage = error
       ? (
         <Alert bsStyle="danger">
-          <p><strong>Error simulating message processing</strong></p>
+          <p><strong>模拟消息处理器错误</strong></p>
           <p>
-            Could not simulate processing of message <em>{originalMessage.id}</em> in stream{' '}
-            <em>{stream.title}</em>.
+            无法模拟处理在<em>{this.props.stream.title}</em>消息流的消息<em>{this.props.originalMessage.id}</em>.
             <br />
-            Please try loading the message again, or use another message for the simulation.
+            请重新加载日志消息,或者为模拟提供另一条日志消息.
           </p>
         </Alert>
       )
@@ -139,8 +138,8 @@ class SimulationResults extends React.Component {
           <hr />
         </Col>
         <Col md={6}>
-          <h1>Original message</h1>
-          <p>This is the original message loaded from Graylog.</p>
+          <h1>原始消息</h1>
+          <p>这是DataInsight原始消息.</p>
           <div className="message-preview-wrapper">
             {originalMessagePreview}
           </div>
@@ -148,7 +147,7 @@ class SimulationResults extends React.Component {
         <Col md={6}>
           <div className="pull-right">
             <DropdownButton id="simulation-view-options"
-                            title="More results"
+                            title="更多结果"
                             onSelect={this._changeViewOptions}
                             bsStyle="default"
                             bsSize="small"
@@ -156,11 +155,11 @@ class SimulationResults extends React.Component {
               {this._getViewOptionsMenuItems()}
             </DropdownButton>
           </div>
-          <h1>Simulation results</h1>
+          <h1>模拟结果</h1>
           <p>
             {isLoading
-              ? 'Simulating message processing, please wait a moment.'
-              : `These are the results of processing the loaded message. Processing took ${NumberUtils.formatNumber(simulationResults?.took_microseconds)} µs.`}
+              ? '模拟消息处理中,请等待.'
+              : `这是处理完加载的消息的结果,处理耗时 ${NumberUtils.formatNumber(simulationResults.took_microseconds)} µs.`}
           </p>
           {errorMessage}
           {this._getViewComponent(streams)}

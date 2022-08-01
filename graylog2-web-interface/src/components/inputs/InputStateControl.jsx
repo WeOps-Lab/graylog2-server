@@ -77,14 +77,14 @@ const InputStateControl = createReactClass({
     if (this._isInputRunning()) {
       return (
         <Button bsStyle="primary" onClick={this._stopInput} disabled={this.state.loading}>
-          {this.state.loading ? 'Stopping...' : 'Stop input'}
+          {this.state.loading ? '停止中...' : '停止接收'}
         </Button>
       );
     }
 
     return (
       <Button bsStyle="success" onClick={this._startInput} disabled={this.state.loading}>
-        {this.state.loading ? 'Starting...' : 'Start input'}
+        {this.state.loading ? '启动中...' : '启动接收'}
       </Button>
     );
   },

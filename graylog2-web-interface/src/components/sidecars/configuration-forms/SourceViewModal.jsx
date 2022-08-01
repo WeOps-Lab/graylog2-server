@@ -74,7 +74,7 @@ class SourceViewModal extends React.Component {
             this.setState({ source: response.preview, name: 'preview' });
           },
           (error) => {
-            this.setState({ source: `Error rendering preview: ${error.responseMessage ? error.responseMessage : error}` });
+            this.setState({ source: `预览失败: ${error.responseMessage ? error.responseMessage : error}` });
           },
         );
     } else {
@@ -84,7 +84,7 @@ class SourceViewModal extends React.Component {
             this.setState({ source: configuration.template, name: configuration.name });
           },
           (error) => {
-            this.setState({ source: `Error fetching configuration: ${error.responseMessage || error}` });
+            this.setState({ source: `加载配置失败: ${error.responseMessage || error}` });
           },
         );
     }
@@ -94,7 +94,7 @@ class SourceViewModal extends React.Component {
     return (
       <BootstrapModalWrapper ref={(c) => { this.sourceModal = c; }}>
         <Modal.Header closeButton>
-          <Modal.Title><span>Configuration <em>{this.state.name}</em></span></Modal.Title>
+          <Modal.Title><span>配置 <em>{this.state.name}</em></span></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="configuration">
@@ -104,7 +104,7 @@ class SourceViewModal extends React.Component {
           </div>
         </Modal.Body>
         <Modal.Footer>
-          <Button type="button" onClick={this.hide}>Close</Button>
+          <Button type="button" onClick={this.hide}>关闭</Button>
         </Modal.Footer>
       </BootstrapModalWrapper>
     );

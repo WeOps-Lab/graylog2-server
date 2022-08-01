@@ -188,7 +188,7 @@ const Scratchpad = () => {
   if (!isScratchpadVisible) return null;
 
   return (
-    <InteractableModal title="Scratchpad"
+    <InteractableModal title="剪切板"
                        onClose={() => setScratchpadVisibility(false)}
                        onDrag={handleDrag}
                        onResize={handleSize}
@@ -198,10 +198,10 @@ const Scratchpad = () => {
         {!isSecurityWarningConfirmed && (
           <StyledAlert bsStyle="warning" bsSize="sm">
             <Icon name="exclamation-triangle" size="lg" />
-            <AlertNote>We recommend you do <strong>not</strong> store any sensitive information, such as passwords, in
-              this area.
+            <AlertNote>我们建议您<strong>不要</strong>将任何敏感信息（例如密码）存储在
+              这片区域。
             </AlertNote>
-            <Button bsStyle="link" bsSize="sm" onClick={handleGotIt}>Got It!</Button>
+            <Button bsStyle="link" bsSize="sm" onClick={handleGotIt}>了解!</Button>
           </StyledAlert>
         )}
 
@@ -216,9 +216,9 @@ const Scratchpad = () => {
                           trigger={['hover', 'focus']}
                           overlay={(
                             <Tooltip id="scratchpad-help" show>
-                              You can use this space to store personal notes and other information while interacting with
-                              Graylog, without leaving your browser window. For example, store timestamps, user IDs, or IP
-                              addresses you need in various investigations.
+                              您可以使用此空间来存储个人笔记和其他信息，同时与
+                              DataInsight，无需离开浏览器窗口。例如，存储时间戳、用户 ID 或 IP
+                              您在各种调查中需要的地址。
                             </Tooltip>
                           )}>
             <Button bsStyle="link">
@@ -234,10 +234,10 @@ const Scratchpad = () => {
             <Button data-clipboard-button
                     data-clipboard-target={`#${TEXTAREA_ID}`}
                     id="scratchpad-actions"
-                    title="Copy">
+                    title="复制">
               <Icon name="copy" />
             </Button>
-            <Button onClick={openConfirmClear} title="Clear">
+            <Button onClick={openConfirmClear} title="清除">
               <Icon name="trash-alt" />
             </Button>
           </ButtonGroup>
@@ -247,10 +247,10 @@ const Scratchpad = () => {
       </ContentArea>
 
       <BootstrapModalConfirm ref={confirmationModalRef}
-                             title="Are you sure?"
+                             title="确定?"
                              onConfirm={handleClearText}
                              onCancel={handleCancelClear}>
-        This will clear out your Scratchpad content, do you wish to proceed?
+        这将清除您的 剪切板 内容，您要继续吗？
       </BootstrapModalConfirm>
     </InteractableModal>
   );

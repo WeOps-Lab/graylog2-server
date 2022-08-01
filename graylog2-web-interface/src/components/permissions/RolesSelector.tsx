@@ -71,7 +71,7 @@ const _assignRole = (selectedRoleName, roles, onSubmit, setSelectedRoleName, set
   })));
 
   if (selectedRoles.size <= 0) {
-    setError(`Role assignment failed, because the roles ${selectedRoleName ?? '(undefined)'} does not exist`);
+    setError(`角色分配失败，因为角色 ${selectedRoleName ?? '(undefined)'} 不存在`);
 
     return;
   }
@@ -109,19 +109,19 @@ const RolesSelector = ({ assignedRolesIds, onSubmit, identifier }: Props) => {
   return (
     <div>
       <FormElements>
-        <StyledSelect inputProps={{ 'aria-label': 'Search for roles' }}
+        <StyledSelect inputProps={{ 'aria-label': '搜索' }}
                       onChange={setSelectedRoleName}
                       optionRenderer={_renderRoleOption}
                       options={options}
-                      placeholder="Search for roles"
+                      placeholder="搜索"
                       multi
                       value={selectedRoleName} />
         <SubmitButton bsStyle="success"
                       onClick={_onSubmit}
                       disabled={isSubmitting || !selectedRoleName}
-                      title="Assign Role"
+                      title="分配角色"
                       type="button">
-          Assign Role
+          分配角色
         </SubmitButton>
       </FormElements>
       <ErrorAlert runtimeError onClose={setError}>

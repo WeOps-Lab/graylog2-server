@@ -105,9 +105,9 @@ const OutputsComponent = createReactClass({
   },
 
   _removeOutputGlobally(outputId) {
-    if (window.confirm('Do you really want to terminate this output?')) {
+    if (window.confirm('您确认终止这个输出吗?')) {
       OutputsStore.remove(outputId, (response) => {
-        UserNotification.success('Output was terminated.', 'Success');
+        UserNotification.success('输出已终止.', '成功');
         this._handleUpdate();
 
         return response;
@@ -116,9 +116,9 @@ const OutputsComponent = createReactClass({
   },
 
   _removeOutputFromStream(outputId, streamId) {
-    if (window.confirm('Do you really want to remove this output from the stream?')) {
+    if (window.confirm('确认要删除从消息流这个输出?')) {
       StreamsStore.removeOutput(streamId, outputId, (response) => {
-        UserNotification.success('Output was removed from stream.', 'Success');
+        UserNotification.success('输出从消息流中删除成功.', '成功');
         this._handleUpdate();
 
         return response;

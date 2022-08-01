@@ -50,7 +50,7 @@ class LookupTablesOverview extends React.Component {
   };
 
   _lookupName = (id, map) => {
-    const empty = { title: 'None' };
+    const empty = { title: '无' };
 
     if (!map) {
       return empty;
@@ -75,43 +75,43 @@ class LookupTablesOverview extends React.Component {
 
   _helpPopover = () => {
     return (
-      <Popover id="search-query-help" className={Styles.popoverWide} title="Search Syntax Help">
-        <p><strong>Available search fields</strong></p>
+      <Popover id="search-query-help" className={Styles.popoverWide} title="搜索提示">
+        <p><strong>可用搜索字段</strong></p>
         <Table condensed>
           <thead>
-            <tr>
-              <th>Field</th>
-              <th>Description</th>
-            </tr>
+          <tr>
+            <th>字段</th>
+            <th>描述</th>
+          </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>id</td>
-              <td>Lookup Table ID</td>
-            </tr>
-            <tr>
-              <td>title</td>
-              <td>The title of the lookup table</td>
-            </tr>
-            <tr>
-              <td>name</td>
-              <td>The reference name of the lookup table</td>
-            </tr>
-            <tr>
-              <td>description</td>
-              <td>The description of lookup table</td>
-            </tr>
+          <tr>
+            <td>id</td>
+            <td>数据字典ID</td>
+          </tr>
+          <tr>
+            <td>title</td>
+            <td>标题</td>
+          </tr>
+          <tr>
+            <td>name</td>
+            <td>名称</td>
+          </tr>
+          <tr>
+            <td>description</td>
+            <td>描述</td>
+          </tr>
           </tbody>
         </Table>
-        <p><strong>Examples</strong></p>
+        <p><strong>示例</strong></p>
         <p>
-          Find lookup tables by parts of their names:<br />
+          按名称查找:<br />
           <kbd>name:geoip</kbd><br />
           <kbd>name:geo</kbd>
         </p>
         <p>
-          Searching without a field name matches against the <code>title</code> field:<br />
-          <kbd>geoip</kbd> <br />is the same as<br />
+          按<code>标题</code>查找：<br />
+          <kbd>geoip</kbd> <br />等价于<br />
           <kbd>title:geoip</kbd>
         </p>
       </Popover>
@@ -142,13 +142,13 @@ class LookupTablesOverview extends React.Component {
         <Row className="content">
           <Col md={12}>
             <h2>
-              Configured lookup tables
-              <span>&nbsp;<small>{this.props.pagination.total} total</small></span>
+              数据字典列表
+              <span>&nbsp;<small>共 {this.props.pagination.total}</small></span>
             </h2>
             <PaginatedList onChange={this._onPageChange} totalItems={this.props.pagination.total}>
               <SearchForm onSearch={this._onSearch} onReset={this._onReset} useLoadingState>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.CREATE}>
-                  <Button bsStyle="success" style={{ marginLeft: 5 }}>Create lookup table</Button>
+                  <Button bsStyle="success" style={{ marginLeft: 5 }}>创建数据字典</Button>
                 </LinkContainer>
                 <OverlayTrigger trigger="click" rootClose placement="right" overlay={this._helpPopover()}>
                   <Button bsStyle="link" className={Styles.searchHelpButton}><Icon name="question-circle" fixedWidth /></Button>
@@ -157,12 +157,12 @@ class LookupTablesOverview extends React.Component {
               <Table condensed hover className={Styles.overviewTable}>
                 <thead>
                   <tr>
-                    <th className={Styles.rowTitle}>Title</th>
-                    <th className={Styles.rowDescription}>Description</th>
-                    <th className={Styles.rowName}>Name</th>
-                    <th className={Styles.rowCache}>Cache</th>
-                    <th className={Styles.rowAdapter}>Data Adapter</th>
-                    <th className={Styles.rowActions}>Actions</th>
+                    <th className={Styles.rowTitle}>标题</th>
+                    <th className={Styles.rowDescription}>描述</th>
+                    <th className={Styles.rowName}>名称</th>
+                    <th className={Styles.rowCache}>数据缓存</th>
+                    <th className={Styles.rowAdapter}>数据源</th>
+                    <th className={Styles.rowActions}>操作</th>
                   </tr>
                 </thead>
                 {lookupTables}

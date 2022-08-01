@@ -56,9 +56,9 @@ const Pipeline = ({ pipeline, connections, streams, onConnectionsChange, onStage
     if (connections.length === 0) {
       return (
         <ConnectionWarning bsStyle="danger">
-          This pipeline is currently not connected to any streams. You have to connect a pipeline to at least one
-          stream to make it process incoming messages. Note that this is not required if you intend to use this
-          pipeline only for search result transformation using decorators.
+          此流水线当前未连接到任何流。您必须将流水线连接到至少一个
+          流以使其处理传入的消息。请注意，如果您打算使用它，则不需要
+          流水线仅用于使用装饰器进行搜索结果转换。
         </ConnectionWarning>
       );
     }
@@ -85,7 +85,7 @@ const Pipeline = ({ pipeline, connections, streams, onConnectionsChange, onStage
   const _deleteStage = useCallback((stage) => {
     return () => {
       // eslint-disable-next-line no-alert
-      if (window.confirm(`You are about to delete stage ${stage.stage}, are you sure you want to proceed?`)) {
+      if (window.confirm(`您即将删除阶段 ${stage.stage}，您确定要继续吗？`)) {
         const newStages = pipeline.stages.filter((s) => s.stage !== stage.stage);
 
         onStagesChange(newStages);
@@ -137,13 +137,13 @@ const Pipeline = ({ pipeline, connections, streams, onConnectionsChange, onStage
                                      streams={streams}
                                      save={onConnectionsChange} />
           </div>
-          <h2>Pipeline connections</h2>
+          <h2>流水线连接</h2>
           <StyledP>
             <PipelineConnectionsList pipeline={pipeline}
                                      connections={connections}
                                      streams={streams}
                                      streamsFormatter={_formatConnectedStreams}
-                                     noConnectionsMessage="Select streams that will be processed by this pipeline." />
+                                     noConnectionsMessage="选择将由该流水线处理的流." />
           </StyledP>
           <hr />
         </Col>
@@ -153,14 +153,14 @@ const Pipeline = ({ pipeline, connections, streams, onConnectionsChange, onStage
           <div className="pull-right">
             <StageForm key={stageKey} pipeline={pipeline} create save={_saveStage} />
           </div>
-          <h2>Pipeline Stages</h2>
+          <h2>流水线阶段</h2>
           <StyledP>
-            Stages are groups of conditions and actions which need to run in order, and provide the necessary{' '}
-            control flow to decide whether or not to run the rest of a pipeline.
+            阶段是需要按顺序运行的条件和动作组，并提供必要的{' '}
+            控制流来决定是否运行流水线的其余部分。
           </StyledP>
         </Col>
       </StyledRow>
-      <EntityList bsNoItemsStyle="info" noItemsText="There are no rules on this stage." items={formattedStages} />
+      <EntityList bsNoItemsStyle="info" noItemsText="这个阶段没有规则." items={formattedStages} />
     </div>
   );
 };

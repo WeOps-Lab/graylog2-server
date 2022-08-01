@@ -53,13 +53,13 @@ const ServerInputSelect = ({ selectedInputId, inputs, onChange, isLoading }: Ser
     <fieldset>
       <Description>
         {selectedInputId
-          ? 'Click on "Load Message" to load the most recent message received by this input within the last hour.'
-          : 'Select an Input from the list below and click "Load Message" to load the most recent message received by this input within the last hour.'}
+          ? '单击“加载消息”以加载此输入在过去一小时内收到的最新消息。'
+          : '从下面的列表中选择一个输入，然后单击“加载消息”以加载该输入在过去一小时内收到的最新消息。'}
       </Description>
       <InputDropdown inputs={inputs}
                      preselectedInputId={selectedInputId}
                      onLoadMessage={onChange}
-                     title={isLoading ? 'Loading message...' : 'Load Message'}
+                     title={isLoading ? '加载中...' : '加载消息'}
                      disabled={isLoading} />
     </fieldset>
   );
@@ -77,13 +77,13 @@ const ForwarderInputSelect = ({ selectedInputId, onChange, isLoading }: Forwader
   return (
     <fieldset>
       <Description>
-        Select an Input profile from the list below then select an then select an Input and click
-        on &quot;Load message&quot; to load most recent message received by this input within the last hour.
+        从下面的列表中选择一个输入配置文件，然后选择一个然后选择一个输入并单击
+        在“加载消息”上加载此输入在过去一小时内收到的最新消息。
       </Description>
       <Row>
         <Col md={8}>
           <ForwarderInputDropdown onLoadMessage={onChange}
-                                  title={isLoading ? 'Loading message...' : 'Load Message'}
+                                  title={isLoading ? '加载中...' : '加载消息'}
                                   preselectedInputId={selectedInputId}
                                   loadButtonDisabled={isLoading} />
         </Col>
@@ -115,8 +115,8 @@ const RecentMessageLoader = ({ inputs, onMessageLoaded, selectedInputId }: Props
     const input = inputs && inputs.get(inputId);
 
     if (selectedInputType === 'server' && !input) {
-      UserNotification.error(`Invalid input selected: ${inputId}`,
-        `Could not load message from invalid Input ${inputId}`);
+      UserNotification.error(`选择的输入无效: ${inputId}`,
+        `无法从无效输入加载消息 ${inputId}`);
 
       return;
     }
@@ -128,7 +128,7 @@ const RecentMessageLoader = ({ inputs, onMessageLoaded, selectedInputId }: Props
       if (response.total_results > 0) {
         onMessageLoaded(response.messages[0]);
       } else {
-        UserNotification.error('Input did not return a recent message.');
+        UserNotification.error('输入未返回最近的消息.');
         onMessageLoaded(undefined);
       }
     });
@@ -151,7 +151,7 @@ const RecentMessageLoader = ({ inputs, onMessageLoaded, selectedInputId }: Props
           <>
             <fieldset>
               <Description>
-                Select the Input type you want to load the message from.
+                选择要从中加载消息的输入类型。
               </Description>
               <StyledSelect id="inputTypeSelect"
                             aria-label="input type select"
@@ -159,9 +159,9 @@ const RecentMessageLoader = ({ inputs, onMessageLoaded, selectedInputId }: Props
                             value={selectedInputType ?? 'placeholder'}
                             disabled={!!selectedInputId}
                             onChange={(e) => setSelectedInputType(e.target.value)}>
-                <option value="placeholder" disabled>Select an Input type</option>
-                <option value="server">Server Input</option>
-                <option value="forwarder">Forwarder Input</option>
+                <option value="placeholder" disabled>选择输入类型</option>
+                <option value="server">服务器输入</option>
+                <option value="forwarder">转发器输入</option>
               </StyledSelect>
             </fieldset>
 

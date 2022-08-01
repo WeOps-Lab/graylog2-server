@@ -46,14 +46,14 @@ class PluginsDataTable extends React.Component {
 
   render() {
     if (!this.props.plugins) {
-      return <Spinner text="Loading plugins on this node..." />;
+      return <Spinner text="加载此节点上的插件中..." />;
     }
 
     if (this.props.plugins.length === 0) {
-      return <Alert bsStyle="info"><Icon name="info-circle" />&nbsp; This node has not any installed plugins.</Alert>;
+      return <Alert bsStyle="info"><Icon name="info-circle" />&nbsp; 此节点没有安装任何插件.</Alert>;
     }
 
-    const headers = ['Name', 'Version', 'Author', 'Description'];
+    const headers = ['名称', '版本', '作者', '描述'];
 
     return (
       <DataTable id="plugin-list"
@@ -64,7 +64,7 @@ class PluginsDataTable extends React.Component {
                  sortByKey="name"
                  rows={this.props.plugins}
                  dataRowFormatter={this._pluginInfoFormatter}
-                 filterLabel="Filter"
+                 filterLabel="过滤"
                  filterKeys={[]} />
     );
   }

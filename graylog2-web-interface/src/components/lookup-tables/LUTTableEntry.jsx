@@ -41,7 +41,7 @@ class LUTTableEntry extends React.Component {
 
   _onDelete = () => {
     // eslint-disable-next-line no-alert
-    if (window.confirm(`Are you sure you want to delete lookup table "${this.props.table.title}"?`)) {
+    if (window.confirm(`确定删除 "${this.props.table.title}"?`)) {
       LookupTablesActions.delete(this.props.table.id).then(() => LookupTablesActions.reloadPage());
     }
   };
@@ -51,25 +51,25 @@ class LUTTableEntry extends React.Component {
       <tbody>
         <tr>
           <td>
-            {this.props.errors.table && (<ErrorPopover placement="right" errorText={this.props.errors.table} title="Lookup Table problem" />)}
+            {this.props.errors.table && (<ErrorPopover placement="right" errorText={this.props.errors.table} title="数据字典问题" />) }
             <Link to={Routes.SYSTEM.LOOKUPTABLES.show(this.props.table.name)}>{this.props.table.title}</Link>
           </td>
           <td>{this.props.table.description}</td>
           <td>{this.props.table.name}</td>
           <td>
-            {this.props.errors.cache && (<ErrorPopover placement="bottom" errorText={this.props.errors.cache} title="Cache problem" />)}
+            {this.props.errors.cache && (<ErrorPopover placement="bottom" errorText={this.props.errors.cache} title="缓存问题" />) }
             <Link to={Routes.SYSTEM.LOOKUPTABLES.CACHES.show(this.props.cache.name)}>{this.props.cache.title}</Link>
           </td>
           <td>
-            {this.props.errors.dataAdapter && (<ErrorPopover placement="bottom" errorText={this.props.errors.dataAdapter} title="Data adapter problem" />)}
+            {this.props.errors.dataAdapter && (<ErrorPopover placement="bottom" errorText={this.props.errors.dataAdapter} title="数据源问题" />) }
             <Link to={Routes.SYSTEM.LOOKUPTABLES.DATA_ADAPTERS.show(this.props.dataAdapter.name)}>{this.props.dataAdapter.title}</Link>
           </td>
           <td>
             <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.edit(this.props.table.name)}>
-              <Button bsSize="xsmall" bsStyle="info">Edit</Button>
+              <Button bsSize="xsmall" bsStyle="info">编辑</Button>
             </LinkContainer>
           &nbsp;
-            <Button bsSize="xsmall" bsStyle="primary" onClick={this._onDelete}>Delete</Button>
+            <Button bsSize="xsmall" bsStyle="primary" onClick={this._onDelete}>删除</Button>
           </td>
         </tr>
       </tbody>

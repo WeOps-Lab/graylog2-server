@@ -70,13 +70,13 @@ class MetricsComponent extends React.Component {
               <Icon name="exclamation-triangle" />&nbsp;
               {error ? (
                 <span>
-                  Could not fetch metrics from node: server returned <em>{error.responseMessage || ''}</em>{' '}
-                  with a {error.status} status code.
+                  无法从节点获取指标：服务器返回 <em>{error.responseMessage || ''}</em>{' '}
+                  带有 {error.status} 状态码。
                 </span>
               ) : (
-                <span>There was a problem fetching node metrics.</span>
+                <span>获取节点指标时出现问题。</span>
               )}
-              {' '}Graylog will keep trying to get them in the background.
+              {' '}DataInsight 将继续尝试让它们进入后台。
             </Alert>
           </Col>
         </Row>
@@ -100,8 +100,8 @@ class MetricsComponent extends React.Component {
             {error && (
               <>
                 <Icon name="exclamation-triangle" />&nbsp;
-                Could not fetch metrics from node: server returned <em>{error.responseMessage || ''}</em>{' '}
-                with a {error.status} status code. Displaying last metrics available.
+                无法从节点获取指标：服务器返回 <em>{error.responseMessage || ''}</em>{' '}
+                带有 {error.status} 状态码。显示最后可用的指标。
               </>
             )}
           </StyledWarningDiv>

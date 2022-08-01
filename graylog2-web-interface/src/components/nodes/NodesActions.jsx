@@ -36,7 +36,7 @@ class NodesActions extends React.Component {
     const { systemOverview, node } = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm(`You are about to ${systemOverview.is_processing ? 'pause' : 'resume'} message processing in this node. Are you sure?`)) {
+    if (confirm(`确定 ${this.props.systemOverview.is_processing ? '暂停' : '恢复'} 此节点的消息处理器?`)) {
       if (systemOverview.is_processing) {
         SystemProcessingStore.pause(node.node_id);
       } else {
@@ -48,7 +48,7 @@ class NodesActions extends React.Component {
   _changeLBStatus = (status) => {
     return () => {
       // eslint-disable-next-line no-alert
-      if (window.confirm(`You are about to change the load balancer status for this node to ${status}. Are you sure?`)) {
+      if (confirm(`将要更改此节点的负载均衡器的状态为 ${status}. 确定?`)) {
         const { node } = this.props;
         SystemLoadBalancerStore.override(node.node_id, status);
       }
@@ -62,28 +62,28 @@ class NodesActions extends React.Component {
     return (
       <div className="item-actions">
         <LinkContainer to={Routes.SYSTEM.NODES.SHOW(node.node_id)}>
-          <Button bsStyle="info">Details</Button>
+          <Button bsStyle="info">详细信息</Button>
         </LinkContainer>
 
         <LinkContainer to={Routes.SYSTEM.METRICS(node.node_id)}>
-          <Button bsStyle="info">Metrics</Button>
+          <Button bsStyle="info">性能指标</Button>
         </LinkContainer>
 
         <ExternalLinkButton bsStyle="info" href={apiBrowserURI}>
-          API browser
+          API浏览
         </ExternalLinkButton>
 
-        <DropdownButton title="More actions" id={`more-actions-dropdown-${node.node_id}`} pullRight>
+        <DropdownButton title="更多操作" id={`more-actions-dropdown-${node.node_id}`} pullRight>
           <IfPermitted permissions="processing:changestate">
             <MenuItem onSelect={this._toggleMessageProcessing}>
-              {systemOverview.is_processing ? 'Pause' : 'Resume'} message processing
+              {systemOverview.is_processing ? '暂停' : '恢复'} 消息处理进程
             </MenuItem>
           </IfPermitted>
 
           <IfPermitted permissions="lbstatus:change">
-            <DropdownSubmenu title="Override LB status" left>
-              <MenuItem onSelect={this._changeLBStatus('ALIVE')}>ALIVE</MenuItem>
-              <MenuItem onSelect={this._changeLBStatus('DEAD')}>DEAD</MenuItem>
+            <DropdownSubmenu title="负载均衡状态" left>
+              <MenuItem onSelect={this._changeLBStatus('ALIVE')}>活跃</MenuItem>
+              <MenuItem onSelect={this._changeLBStatus('DEAD')}>不活跃</MenuItem>
             </DropdownSubmenu>
           </IfPermitted>
 
@@ -96,18 +96,18 @@ class NodesActions extends React.Component {
           <HideOnCloud>
             <IfPermitted permissions="inputs:read">
               <LinkContainer to={Routes.node_inputs(node.node_id)}>
-                <MenuItem>Local message inputs</MenuItem>
+                <MenuItem>本地消息输入</MenuItem>
               </LinkContainer>
             </IfPermitted>
           </HideOnCloud>
           <IfPermitted permissions="threads:dump">
             <LinkContainer to={Routes.SYSTEM.THREADDUMP(node.node_id)}>
-              <MenuItem>Get thread dump</MenuItem>
+              <MenuItem>获取线程转储</MenuItem>
             </LinkContainer>
           </IfPermitted>
           <IfPermitted permissions="processbuffer:dump">
             <LinkContainer to={Routes.SYSTEM.PROCESSBUFFERDUMP(node.node_id)}>
-              <MenuItem>Get process-buffer dump</MenuItem>
+              <MenuItem>获取进程转储</MenuItem>
             </LinkContainer>
           </IfPermitted>
         </DropdownButton>

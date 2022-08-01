@@ -57,7 +57,7 @@ class SidecarStatusFileList extends React.Component {
 
   render() {
     const filterKeys = [];
-    const headers = ['Modified', 'Size', 'Path'];
+    const headers = ['已修改的', '大小', '路径'];
 
     return (
       <div>
@@ -67,7 +67,7 @@ class SidecarStatusFileList extends React.Component {
                    headerCellFormatter={this._headerCellFormatter}
                    rows={this.props.files}
                    dataRowFormatter={this._fileListFormatter}
-                   filterLabel="Filter Files"
+                   filterLabel="过滤"
                    filterKeys={filterKeys} />
       </div>
     );
