@@ -17,13 +17,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import lodash from 'lodash';
-import { PluginStore } from 'graylog-web-plugin/plugin';
+import {PluginStore} from 'graylog-web-plugin/plugin';
 import moment from 'moment';
 import {} from 'moment-duration-format';
 import naturalSort from 'javascript-natural-sort';
 
-import { Alert, Col, Row } from 'components/bootstrap';
-import { isPermitted } from 'util/PermissionsMixin';
+import {Alert, Col, Row} from 'components/bootstrap';
+import {isPermitted} from 'util/PermissionsMixin';
 import EventDefinitionPriorityEnum from 'logic/alerts/EventDefinitionPriorityEnum';
 
 // Import built-in plugins
@@ -60,23 +60,23 @@ class EventDefinitionSummary extends React.Component {
   }
 
   showValidation = () => {
-    const { showValidation } = this.state;
+    const {showValidation} = this.state;
 
     if (!showValidation) {
-      this.setState({ showValidation: true });
+      this.setState({showValidation: true});
     }
   };
 
   renderDetails = (eventDefinition) => {
     return (
       <>
-        <h3 className={commonStyles.title}>Details</h3>
+        <h3 className={commonStyles.title}>详情</h3>
         <dl>
-          <dt>Title</dt>
-          <dd>{eventDefinition.title || 'No title given'}</dd>
-          <dt>Description</dt>
-          <dd>{eventDefinition.description || 'No description given'}</dd>
-          <dt>Priority</dt>
+          <dt>标题</dt>
+          <dd>{eventDefinition.title || '无标题'}</dd>
+          <dt>描述</dt>
+          <dd>{eventDefinition.description || '无描述'}</dd>
+          <dt>优先级</dt>
           <dd>{lodash.upperFirst(EventDefinitionPriorityEnum.properties[eventDefinition.priority].name)}</dd>
         </dl>
       </>
@@ -92,14 +92,14 @@ class EventDefinitionSummary extends React.Component {
   };
 
   renderCondition = (config) => {
-    const { currentUser } = this.props;
+    const {currentUser} = this.props;
     const conditionPlugin = this.getPlugin('eventDefinitionTypes', config.type);
     const component = (conditionPlugin.summaryComponent
-      ? React.createElement(conditionPlugin.summaryComponent, {
-        config: config,
-        currentUser: currentUser,
-      })
-      : <p>Condition plugin <em>{config.type}</em> does not provide a summary.</p>
+        ? React.createElement(conditionPlugin.summaryComponent, {
+          config: config,
+          currentUser: currentUser,
+        })
+        : <p>条件插件 <em>{config.type}</em> 没有提供摘要.</p>
     );
 
     return (
@@ -111,24 +111,24 @@ class EventDefinitionSummary extends React.Component {
   };
 
   renderField = (fieldName, config, keys) => {
-    const { currentUser } = this.props;
+    const {currentUser} = this.props;
 
     if (!config.providers || config.providers.length === 0) {
-      return <span key={fieldName}>No field value provider configured.</span>;
+      return <span key={fieldName}>未配置字段值提供程序.</span>;
     }
 
     const provider = config.providers[0] || {};
     const fieldProviderPlugin = this.getPlugin('fieldValueProviders', provider.type);
 
     return (fieldProviderPlugin.summaryComponent
-      ? React.createElement(fieldProviderPlugin.summaryComponent, {
-        fieldName: fieldName,
-        config: config,
-        keys: keys,
-        key: fieldName,
-        currentUser: currentUser,
-      })
-      : <p key={fieldName}>Provider plugin <em>{provider.type}</em> does not provide a summary.</p>
+        ? React.createElement(fieldProviderPlugin.summaryComponent, {
+          fieldName: fieldName,
+          config: config,
+          keys: keys,
+          key: fieldName,
+          currentUser: currentUser,
+        })
+        : <p key={fieldName}>Provider 插件 <em>{provider.type}</em> 不提供摘要。</p>
     );
   };
 
@@ -136,8 +136,8 @@ class EventDefinitionSummary extends React.Component {
     return (
       <>
         <dl>
-          <dt>Keys</dt>
-          <dd>{keys.length > 0 ? keys.join(', ') : 'No Keys configured for Events based on this Definition.'}</dd>
+          <dt>键值</dt>
+          <dd>{keys.length > 0 ? keys.join(', ') : '没有为基于此定义的事件配置密钥.'}</dd>
         </dl>
         {fieldNames.sort(naturalSort).map((fieldName) => this.renderField(fieldName, fields[fieldName], keys))}
       </>
@@ -149,16 +149,16 @@ class EventDefinitionSummary extends React.Component {
 
     return (
       <>
-        <h3 className={commonStyles.title}>Fields</h3>
+        <h3 className={commonStyles.title}>字段</h3>
         {fieldNames.length === 0
-          ? <p>No Fields configured for Events based on this Definition.</p>
+          ? <p>没有配置任何字段定义.</p>
           : this.renderFieldList(fieldNames, fields, keys)}
       </>
     );
   };
 
   renderNotification = (definitionNotification) => {
-    const { notifications } = this.props;
+    const {notifications} = this.props;
     const notification = notifications.find((n) => n.id === definitionNotification.notification_id);
 
     let content;
@@ -167,17 +167,17 @@ class EventDefinitionSummary extends React.Component {
       const notificationPlugin = this.getPlugin('eventNotificationTypes', notification.config.type);
 
       content = (notificationPlugin.summaryComponent
-        ? React.createElement(notificationPlugin.summaryComponent, {
-          type: notificationPlugin.displayName,
-          notification: notification,
-          definitionNotification: definitionNotification,
-        })
-        : <p>Notification plugin <em>{notification.config.type}</em> does not provide a summary.</p>
+          ? React.createElement(notificationPlugin.summaryComponent, {
+            type: notificationPlugin.displayName,
+            notification: notification,
+            definitionNotification: definitionNotification,
+          })
+          : <p>通知插件<em>{notification.config.type}</em> 没有提供摘要.</p>
       );
     } else {
       content = (
         <p>
-          Could not find information for Notification <em>{definitionNotification.notification_id}</em>.
+          找不到通知 <em>{definitionNotification.notification_id}</em>的信息.
         </p>
       );
     }
@@ -191,19 +191,19 @@ class EventDefinitionSummary extends React.Component {
 
   renderNotificationSettings = (notificationSettings) => {
     const formattedDuration = moment.duration(notificationSettings.grace_period_ms)
-      .format('d [days] h [hours] m [minutes] s [seconds]', { trim: 'all' });
+      .format('d [days] h [hours] m [minutes] s [seconds]', {trim: 'all'});
 
     const formattedGracePeriod = (notificationSettings.grace_period_ms
-      ? `Grace Period is set to ${formattedDuration}`
-      : 'Grace Period is disabled');
+      ? `宽限期设置为 ${formattedDuration}`
+      : '宽限期已禁用');
 
     const formattedBacklogSize = (notificationSettings.backlog_size
-      ? `Notifications will include ${notificationSettings.backlog_size} messages`
-      : 'Notifications will not include any messages.');
+      ? `通知将包括 ${notificationSettings.backlog_size} 消息`
+      : '通知将不包括任何消息.');
 
     return (
       <>
-        <h4>Settings</h4>
+        <h4>配置</h4>
         <dl>
           <dd>{formattedGracePeriod}</dd>
           <dd>{formattedBacklogSize}</dd>
@@ -213,7 +213,7 @@ class EventDefinitionSummary extends React.Component {
   };
 
   renderNotifications = (definitionNotifications, notificationSettings) => {
-    const { currentUser } = this.props;
+    const {currentUser} = this.props;
 
     const effectiveDefinitionNotifications = definitionNotifications
       .filter((n) => isPermitted(currentUser.permissions, `eventnotifications:read:${n.notification_id}`));
@@ -222,7 +222,7 @@ class EventDefinitionSummary extends React.Component {
     const warning = notificationsWithMissingPermissions.length > 0
       ? (
         <Alert bsStyle="warning">
-          Missing Notifications Permissions for:<br />
+          此事件未配置任何通知:<br/>
           {notificationsWithMissingPermissions.map((n) => n.notification_id).join(', ')}
         </Alert>
       )
@@ -230,12 +230,12 @@ class EventDefinitionSummary extends React.Component {
 
     return (
       <>
-        <h3 className={commonStyles.title}>Notifications</h3>
+        <h3 className={commonStyles.title}>事件总览</h3>
         <p>
           {warning}
         </p>
         {effectiveDefinitionNotifications.length === 0 && notificationsWithMissingPermissions.length <= 0
-          ? <p>This Event is not configured to trigger any Notifications.</p>
+          ? <p>此事件未配置为触发任何通知.</p>
           : (
             <>
               {this.renderNotificationSettings(notificationSettings)}
@@ -247,14 +247,14 @@ class EventDefinitionSummary extends React.Component {
   };
 
   render() {
-    const { eventDefinition, validation } = this.props;
-    const { showValidation } = this.state;
+    const {eventDefinition, validation} = this.props;
+    const {showValidation} = this.state;
 
     return (
       <Row className={styles.eventSummary}>
         <Col md={12}>
-          <h2 className={commonStyles.title}>Event Summary</h2>
-          {showValidation && <EventDefinitionValidationSummary validation={validation} />}
+          <h2 className={commonStyles.title}>活动摘要</h2>
+          {showValidation && <EventDefinitionValidationSummary validation={validation}/>}
           <Row>
             <Col md={5}>
               {this.renderDetails(eventDefinition)}

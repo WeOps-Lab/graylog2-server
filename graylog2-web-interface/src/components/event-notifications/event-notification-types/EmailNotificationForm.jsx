@@ -24,26 +24,26 @@ import { getValueFromInput } from 'util/FormsUtils';
 import HideOnCloud from 'util/conditional/HideOnCloud';
 
 // TODO: Default body template should come from the server
-const DEFAULT_BODY_TEMPLATE = `--- [Event Definition] ---------------------------
-Title:       \${event_definition_title}
-Description: \${event_definition_description}
-Type:        \${event_definition_type}
---- [Event] --------------------------------------
-Timestamp:            \${event.timestamp}
-Message:              \${event.message}
-Source:               \${event.source}
-Key:                  \${event.key}
-Priority:             \${event.priority}
-Alert:                \${event.alert}
-Timestamp Processing: \${event.timestamp}
-Timerange Start:      \${event.timerange_start}
-Timerange End:        \${event.timerange_end}
-Fields:
+const DEFAULT_BODY_TEMPLATE = `--- [事件定义] ---------------------------
+标题:       \${event_definition_title}
+描述: \${event_definition_description}
+类型:        \${event_definition_type}
+--- [事件] --------------------------------------
+时间戳:            \${event.timestamp}
+消息:              \${event.message}
+来源:               \${event.source}
+键:                  \${event.key}
+优先级:             \${event.priority}
+告警:                \${event.alert}
+处理时间: \${event.timestamp}
+开始时间:      \${event.timerange_start}
+结束时间:        \${event.timerange_end}
+字段:
 \${foreach event.fields field}  \${field.key}: \${field.value}
 \${end}
 \${if backlog}
---- [Backlog] ------------------------------------
-Last messages accounting for this alert:
+--- [其他] ------------------------------------
+导致此警报的最后消息:
 \${foreach backlog message}
 \${message}
 \${end}
@@ -51,28 +51,28 @@ Last messages accounting for this alert:
 `;
 
 const DEFAULT_HTML_BODY_TEMPLATE = `<table width="100%" border="0" cellpadding="10" cellspacing="0" style="background-color:#f9f9f9;border:none;line-height:1.2"><tbody>
-<tr style="line-height:1.5"><th colspan="2" style="background-color:#e6e6e6">Event Definition</th></tr>
-<tr><td width="200px">Title</td><td>\${event_definition_title}</td></tr>
-<tr><td>Description</td><td>\${event_definition_description}</td></tr>
-<tr><td>Type</td><td>\${event_definition_type}</td></tr>
+<tr style="line-height:1.5"><th colspan="2" style="background-color:#e6e6e6">事件定义</th></tr>
+<tr><td width="200px">标题</td><td>\${event_definition_title}</td></tr>
+<tr><td>描述</td><td>\${event_definition_description}</td></tr>
+<tr><td>类型</td><td>\${event_definition_type}</td></tr>
 </tbody></table>
 <br /><table width="100%" border="0" cellpadding="10" cellspacing="0" style="background-color:#f9f9f9;border:none;line-height:1.2"><tbody>
-<tr><th colspan="2" style="background-color:#e6e6e6;line-height:1.5">Event</th></tr>
-<tr><td width="200px">Timestamp</td><td>\${event.timestamp}</td></tr>
-<tr><td>Message</td><td>\${event.message}</td></tr>
-<tr><td>Source</td><td>\${event.source}</td></tr>
-<tr><td>Key</td><td>\${event.key}</td></tr>
-<tr><td>Priority</td><td>\${event.priority}</td></tr>
-<tr><td>Alert</td><td>\${event.alert}</td></tr>
-<tr><td>Timestamp Processing</td><td>\${event.timestamp}</td></tr>
-<tr><td>Timerange Start</td><td>\${event.timerange_start}</td></tr>
-<tr><td>Timerange End</td><td>\${event.timerange_end}</td></tr>
-<tr><td>Source Streams</td><td>\${event.source_streams}</td></tr>
-<tr><td>Fields</td><td><ul style="list-style-type:square;">\${foreach event.fields field}<li>\${field.key}:\${field.value}</li>\${end}<ul></td></tr>
+<tr><th colspan="2" style="background-color:#e6e6e6;line-height:1.5">事件</th></tr>
+<tr><td width="200px">时间戳</td><td>\${event.timestamp}</td></tr>
+<tr><td>消息</td><td>\${event.message}</td></tr>
+<tr><td>来源</td><td>\${event.source}</td></tr>
+<tr><td>键值</td><td>\${event.key}</td></tr>
+<tr><td>优先级</td><td>\${event.priority}</td></tr>
+<tr><td>告警</td><td>\${event.alert}</td></tr>
+<tr><td>处理时间</td><td>\${event.timestamp}</td></tr>
+<tr><td>开始时间</td><td>\${event.timerange_start}</td></tr>
+<tr><td>结束时间</td><td>\${event.timerange_end}</td></tr>
+<tr><td>消息流</td><td>\${event.source_streams}</td></tr>
+<tr><td>字段</td><td><ul style="list-style-type:square;">\${foreach event.fields field}<li>\${field.key}:\${field.value}</li>\${end}<ul></td></tr>
 </tbody></table>
 \${if backlog}
 <br /><table width="100%" border="0" cellpadding="10" cellspacing="0" style="background-color:#f9f9f9;border:none;line-height:1.2"><tbody>
-<tr><th style="background-color:#e6e6e6;line-height:1.5">Backlog (Last messages accounting for this alert)</th></tr>
+<tr><th style="background-color:#e6e6e6;line-height:1.5">[其他]导致此警报的最后消息</th></tr>
 \${foreach backlog message}
 <tr><td>\${message}</td></tr>
 \${end}
@@ -91,7 +91,7 @@ class EmailNotificationForm extends React.Component {
   static defaultConfig = {
     sender: '', // TODO: Default sender should come from the server. The default should be empty or the address configured in the email server settings
     // eslint-disable-next-line no-template-curly-in-string
-    subject: 'Graylog event notification: ${event_definition_title}', // TODO: Default subject should come from the server
+    subject: 'DataInsight 事件通知: ${event_definition_title}', // TODO: Default subject should come from the server
     body_template: DEFAULT_BODY_TEMPLATE, // TODO: Default body template should come from the server
     html_body_template: DEFAULT_HTML_BODY_TEMPLATE,
     user_recipients: [],
@@ -140,53 +140,53 @@ class EmailNotificationForm extends React.Component {
       <>
         <Input id="notification-subject"
                name="subject"
-               label="Subject"
+               label="发送者"
                type="text"
                bsStyle={validation.errors.subject ? 'error' : null}
-               help={lodash.get(validation, 'errors.subject[0]', 'The subject that should be used for the email notification.')}
+               help={lodash.get(validation, 'errors.subject[0]', '应用作通知发件人的电子邮件地址.')}
                value={config.subject || ''}
                onChange={this.handleChange}
                required />
         <HideOnCloud>
           <Input id="notification-sender"
                  name="sender"
-                 label={<ControlLabel>Sender <small className="text-muted">(Optional)</small></ControlLabel>}
+                 label={<ControlLabel>主题 <small className="text-muted">(可选)</small></ControlLabel>}
                  type="text"
                  bsStyle={validation.errors.sender ? 'error' : null}
-                 help={lodash.get(validation, 'errors.sender[0]', 'The email address that should be used as the notification sender. Leave it empty to use the default sender address.')}
+                 help={lodash.get(validation, 'errors.sender[0]', '应用于电子邮件通知的主题.')}
                  value={config.sender || ''}
                  onChange={this.handleChange} />
         </HideOnCloud>
         <FormGroup controlId="notification-user-recipients"
                    validationState={validation.errors.recipients ? 'error' : null}>
-          <ControlLabel>User recipient(s) <small className="text-muted">(Optional)</small></ControlLabel>
+          <ControlLabel>User recipient(s) <small className="text-muted">(可选)</small></ControlLabel>
           <MultiSelect id="notification-user-recipients"
                        value={Array.isArray(config.user_recipients) ? config.user_recipients.join(',') : ''}
                        placeholder="Select user(s)..."
                        options={this.formatUsers(users)}
                        onChange={this.handleRecipientsChange('user_recipients')} />
           <HelpBlock>
-            {lodash.get(validation, 'errors.recipients[0]', 'Select Graylog users that will receive this Notification.')}
+            {lodash.get(validation, 'errors.recipients[0]', '选择将接收此通知的DataInsight用户.')}
           </HelpBlock>
         </FormGroup>
 
         <FormGroup controlId="notification-email-recipients"
                    validationState={validation.errors.recipients ? 'error' : null}>
-          <ControlLabel>Email recipient(s) <small className="text-muted">(Optional)</small></ControlLabel>
+          <ControlLabel>Email recipient(s) <small className="text-muted">(可选)</small></ControlLabel>
           <MultiSelect id="notification-email-recipients"
                        value={Array.isArray(config.email_recipients) ? config.email_recipients.join(',') : ''}
-                       addLabelText={'Add email "{label}"?'}
-                       placeholder="Type email address"
+                       addLabelText={'新增邮箱 "{label}"?'}
+                       placeholder="输入邮箱地址"
                        options={[]}
                        onChange={this.handleRecipientsChange('email_recipients')}
                        allowCreate />
           <HelpBlock>
-            {lodash.get(validation, 'errors.recipients[0]', 'Add email addresses that will receive this Notification.')}
+            {lodash.get(validation, 'errors.recipients[0]', '新增接收通知的邮箱地址.')}
           </HelpBlock>
         </FormGroup>
         <Input id="notification-time-zone"
-               help="Time zone used for timestamps in the email body."
-               label={<>Time zone for date/time values <small className="text-muted">(Optional)</small></>}>
+               help="时区."
+               label={<>时区 <small className="text-muted">(可选)</small></>}>
           <TimezoneSelect className="timezone-select"
                           name="time_zone"
                           value={config.time_zone}
@@ -194,26 +194,26 @@ class EmailNotificationForm extends React.Component {
         </Input>
         <FormGroup controlId="notification-body-template"
                    validationState={validation.errors.body ? 'error' : null}>
-          <ControlLabel>Body Template</ControlLabel>
+          <ControlLabel>内容模板</ControlLabel>
           <SourceCodeEditor id="notification-body-template"
                             mode="text"
                             theme="light"
                             value={config.body_template || ''}
                             onChange={this.handleBodyTemplateChange} />
           <HelpBlock>
-            {lodash.get(validation, 'errors.body[0]', 'The template that will be used to generate the email body.')}
+            {lodash.get(validation, 'errors.body[0]', '用于生成邮件内容的模板.')}
           </HelpBlock>
         </FormGroup>
         <FormGroup controlId="notification-body-template"
                    validationState={validation.errors.body ? 'error' : null}>
-          <ControlLabel>HTML Body Template</ControlLabel>
+          <ControlLabel>HTML邮件模板</ControlLabel>
           <SourceCodeEditor id="notification-html-body-template"
                             mode="text"
                             theme="light"
                             value={config.html_body_template || ''}
                             onChange={this.handleHtmlBodyTemplateChange} />
           <HelpBlock>
-            {lodash.get(validation, 'errors.body[0]', 'The template that will be used to generate the email HTML body.')}
+            {lodash.get(validation, 'errors.body[0]', '用于生成邮件内容的HTML模板.')}
           </HelpBlock>
         </FormGroup>
       </>

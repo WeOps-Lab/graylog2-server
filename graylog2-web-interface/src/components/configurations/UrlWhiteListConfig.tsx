@@ -61,7 +61,7 @@ class UrlWhiteListConfig extends React.Component<Props, State> {
           <td>{idx + 1}</td>
           <td>{urlConfig.title}</td>
           <td>{urlConfig.value}</td>
-          <td>{urlConfig.type === literal ? 'Exact match' : 'Regex'}</td>
+          <td>{urlConfig.type === literal ? '完整匹配' : '正则'}</td>
         </tr>
       );
     });
@@ -109,19 +109,17 @@ class UrlWhiteListConfig extends React.Component<Props, State> {
 
     return (
       <div>
-        <h2>URL Whitelist Configuration  {disabled ? <small>(Disabled)</small> : <small>(Enabled)</small>}</h2>
+        <h2>URL白名单配置  {disabled ? <small>(禁用)</small> : <small>(启用)</small> }</h2>
         <p>
-          When enabled, outgoing HTTP requests from Graylog servers, such as event notifications or HTTP-based data adapter requests, are validated against the whitelists configured here.
-          Because the HTTP requests are made from the Graylog servers, they might be able to reach more sensitive systems than an external user would have access to, including AWS EC2 metadata, which can contain keys and other secrets, Elasticsearch and others.
-          Whitelist administrative access is separate from data adapters and event notification configuration.
+          启用后,DataInsight所发出的HTTP请求将会经过白名单校验
         </p>
         <Table striped bordered condensed className="top-margin">
           <thead>
             <tr>
               <th>#</th>
-              <th>Title</th>
+              <th>标题</th>
               <th>URL</th>
-              <th>Type</th>
+              <th>类型</th>
             </tr>
           </thead>
           <tbody>
@@ -129,16 +127,16 @@ class UrlWhiteListConfig extends React.Component<Props, State> {
           </tbody>
         </Table>
         <IfPermitted permissions="urlwhitelist:write">
-          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>Update</Button>
+          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>更新</Button>
         </IfPermitted>
         <BootstrapModalForm ref={(configModal) => { this.configModal = configModal; }}
                             bsSize="lg"
-                            title="Update Whitelist Configuration"
+                            title="更新白名单配置"
                             onSubmitForm={this._saveConfig}
                             onModalClose={this._resetConfig}
                             submitButtonDisabled={!isValid}
-                            submitButtonText="Save">
-          <h3>Whitelist URLs</h3>
+                            submitButtonText="保存">
+          <h3>白名单地址</h3>
           <UrlWhiteListForm urls={entries} disabled={disabled} onUpdate={this._update} />
         </BootstrapModalForm>
       </div>

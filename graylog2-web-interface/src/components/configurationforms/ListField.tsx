@@ -59,7 +59,7 @@ const ListField = ({ autoFocus, field, onChange, title, typeName, value }: Props
                    autoFocus={autoFocus}
                    options={formattedOptions}
                    value={selectValue}
-                   placeholder={`${allowCreate ? 'Add' : 'Select'} ${field.human_name}`}
+                   placeholder={`${allowCreate ? '新增' : '选择'} ${field.human_name}`}
                    onChange={handleChange}
                    allowCreate={allowCreate} />
     </Input>

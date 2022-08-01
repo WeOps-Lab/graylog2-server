@@ -17,8 +17,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Panel, Table } from 'components/bootstrap';
-import { Spinner } from 'components/common';
+import {Panel, Table} from 'components/bootstrap';
+import {Spinner} from 'components/common';
 import HelpPanel from 'components/event-definitions/common/HelpPanel';
 
 import styles from './FilterPreview.css';
@@ -39,7 +39,7 @@ class FilterPreview extends React.Component {
   };
 
   renderMessages = (messages) => {
-    return messages.map(({ index, message }) => {
+    return messages.map(({index, message}) => {
       return (
         <tr key={`${index}-${message._id}`}>
           <td>{message.timestamp}</td>
@@ -51,47 +51,45 @@ class FilterPreview extends React.Component {
 
   renderSearchResult = (searchResult = {}) => {
     if (!searchResult.messages || searchResult.messages.length === 0) {
-      return <p>Could not find any messages with the current search criteria.</p>;
+      return <p>找不到任何符合当前搜索条件的邮件。</p>;
     }
 
     return (
       <Table striped condensed bordered>
         <thead>
-          <tr>
-            <th>Timestamp</th>
-            <th>Message</th>
-          </tr>
+        <tr>
+          <th>时间戳</th>
+          <th>消息</th>
+        </tr>
         </thead>
         <tbody>
-          {this.renderMessages(searchResult.messages)}
+        {this.renderMessages(searchResult.messages)}
         </tbody>
       </Table>
     );
   };
 
   render() {
-    const { isFetchingData, searchResult, errors, displayPreview } = this.props;
+    const {isFetchingData, searchResult, errors, displayPreview} = this.props;
 
-    const renderedResults = isFetchingData ? <Spinner text="Loading filter preview..." /> : this.renderSearchResult(searchResult);
+    const renderedResults = isFetchingData ?
+      <Spinner text="加载中..."/> : this.renderSearchResult(searchResult);
 
     return (
       <>
         <HelpPanel collapsible
                    defaultExpanded={!displayPreview}
-                   title="How many Events will Filter & Aggregation create?">
+                   title="过滤和聚合会创建多少个事件？">
           <p>
-            The Filter & Aggregation Condition will generate different number of Events, depending on how it is
-            configured:
+            过滤和聚合条件会生成事件的数量取决于如何配置 :
           </p>
           <ul>
-            <li><b>Filter:</b>&emsp;One Event per message matching the filter</li>
+            <li><b>过滤:</b>&emsp;每条满足过滤条件的消息都会被创建成一个事件</li>
             <li>
-              <b>Aggregation without groups:</b>&emsp;One Event every time the aggregation result satisfies
-              the condition
+              <b>不使用分组聚合:</b>&emsp;每当满足过滤条件都会产生一条事件
             </li>
             <li>
-              <b>Aggregation with groups:</b>&emsp;One Event per group whose aggregation result satisfies
-              the condition
+              <b>使用分组条件:</b>&emsp;每个分组条件满足条件都会创建一个事件
             </li>
           </ul>
         </HelpPanel>
@@ -99,7 +97,7 @@ class FilterPreview extends React.Component {
         {displayPreview && (
           <Panel className={styles.filterPreview} bsStyle="default">
             <Panel.Heading>
-              <Panel.Title>Filter Preview</Panel.Title>
+              <Panel.Title>过滤预览</Panel.Title>
             </Panel.Heading>
             <Panel.Body>
               {errors.length > 0 ? <p className="text-danger">{errors[0].description}</p> : renderedResults}

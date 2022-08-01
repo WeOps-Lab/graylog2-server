@@ -117,7 +117,7 @@ const MessageProcessorsConfig = createReactClass({
     if (this._hasNoActiveProcessor()) {
       return (
         <Alert bsStyle="danger">
-          <strong>ERROR:</strong> No active message processor!
+          <strong>异常:</strong> 没有活跃的消息处理器!
         </Alert>
       );
     }
@@ -129,7 +129,7 @@ const MessageProcessorsConfig = createReactClass({
     const { config } = this.state;
 
     return config.processor_order.map((processor, idx) => {
-      const status = config.disabled_processors.filter((p) => p === processor.class_name).length > 0 ? 'disabled' : 'active';
+      const status = config.disabled_processors.filter((p) => p === processor.class_name).length > 0 ? '禁用' : '启用';
 
       return (
         // eslint-disable-next-line react/no-array-index-key
@@ -174,15 +174,15 @@ const MessageProcessorsConfig = createReactClass({
   render() {
     return (
       <div>
-        <h2>Message Processors Configuration</h2>
-        <p>The following message processors are executed in order. Disabled processors will be skipped.</p>
+        <h2>消息处理器配置</h2>
+        <p>下面的列表展示了日志消息处理器的顺序,被禁用的处理器会被跳过.</p>
 
         <Table striped bordered condensed className="top-margin">
           <thead>
             <tr>
               <th>#</th>
-              <th>Processor</th>
-              <th>Status</th>
+              <th>处理器</th>
+              <th>状态</th>
             </tr>
           </thead>
           <tbody>
@@ -191,25 +191,25 @@ const MessageProcessorsConfig = createReactClass({
         </Table>
 
         <IfPermitted permissions="clusterconfigentry:edit">
-          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>Update</Button>
+          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>更新</Button>
         </IfPermitted>
 
         <BootstrapModalForm ref={(configModal) => { this.configModal = configModal; }}
-                            title="Update Message Processors Configuration"
+                            title="更新消息处理器配置"
                             onSubmitForm={this._saveConfig}
                             onModalClose={this._resetConfig}
-                            submitButtonText="Save">
-          <h3>Order</h3>
-          <p>Use drag and drop to change the execution order of the message processors.</p>
+                            submitButtonText="保存">
+          <h3>排序</h3>
+          <p>使用拖拽的方式对消息处理器进行排序.</p>
           <SortableList items={this._sortableItems()} onMoveItem={this._updateSorting} displayOverlayInPortal />
 
-          <h3>Status</h3>
-          <p>Change the checkboxes to change the status of a message processor.</p>
+          <h3>状态</h3>
+          <p>勾选复选框启用或禁用消息处理器.</p>
           <Table striped bordered condensed className="top-margin">
             <thead>
               <tr>
-                <th>Processor</th>
-                <th>Enabled</th>
+                <th>消息处理器</th>
+                <th>启用</th>
               </tr>
             </thead>
             <tbody>

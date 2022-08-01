@@ -311,14 +311,14 @@ class Wizard extends React.Component<Props, State> {
                 <Button onClick={this._onPrevious}
                         bsSize="small"
                         bsStyle="info"
-                        disabled={this._disableButton('previous')}>Previous
+                        disabled={this._disableButton('previous')}>上一步
                 </Button>
               </Col>
               <Col className="text-right" xs={6}>
                 <Button onClick={this._onNext}
                         bsSize="small"
                         bsStyle="info"
-                        disabled={this._disableButton('next')}>Next
+                        disabled={this._disableButton('next')}>下一步
                 </Button>
               </Col>
             </Row>

@@ -35,11 +35,11 @@ const EventNotificationDetails = ({ notification }) => {
   const DetailsComponent = notificationPlugin?.detailsComponent;
 
   return (
-    <SectionComponent title="Details">
-      <ReadOnlyFormGroup label="Title" value={notification.title} />
-      <ReadOnlyFormGroup label="Description" value={notification.description} />
-      <ReadOnlyFormGroup label="Notification Type" value={notification.config.type} />
-      {DetailsComponent ? <DetailsComponent notification={notification} /> : <Alert bsStyle="danger">Notification type not supported</Alert>}
+    <SectionComponent title="详情">
+      <ReadOnlyFormGroup label="标题" value={notification.title} />
+      <ReadOnlyFormGroup label="描述" value={notification.description} />
+      <ReadOnlyFormGroup label="通知类型" value={notification.config.type} />
+      {DetailsComponent ? <DetailsComponent notification={notification} /> : <Alert bsStyle="danger">没有支持的通知类型</Alert>}
     </SectionComponent>
   );
 };

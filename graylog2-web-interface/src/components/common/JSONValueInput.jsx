@@ -29,12 +29,12 @@ import {
 } from 'components/bootstrap';
 
 const OPTIONS = [
-  { value: 'STRING', label: 'string' },
-  { value: 'NUMBER', label: 'number' },
-  { value: 'OBJECT', label: 'object' },
-  { value: 'ARRAY', label: 'array' },
-  { value: 'BOOLEAN', label: 'boolean' },
-  { value: 'NULL', label: 'null' },
+  { value: 'STRING', label: '字符串' },
+  { value: 'NUMBER', label: '数值' },
+  { value: 'OBJECT', label: '对象' },
+  { value: 'ARRAY', label: '数组' },
+  { value: 'BOOLEAN', label: '布尔值' },
+  { value: 'NULL', label: '空值' },
 ];
 
 class JSONValueInput extends React.Component {
@@ -52,7 +52,7 @@ class JSONValueInput extends React.Component {
       const errors = [];
 
       if (!(props[propName] instanceof Array)) {
-        return new Error(`Invalid prop ${propName} supplied to ${componentName}. Expected an array but got ${props[propName]}`);
+        return new Error(`不合法的属性 ${propName} 指向 ${componentName}. 期望是数组，但是接受为 ${props[propName]}`);
       }
 
       props[propName].forEach((p) => {
@@ -62,7 +62,7 @@ class JSONValueInput extends React.Component {
       });
 
       if (errors.length > 0) {
-        return new Error(`Invalid prop ${propName} supplied to ${componentName}. Expected array of ${values} but got invalid ${errors}`);
+        return new Error(`不合法的属性 ${propName} 指向 ${componentName}. 期望是 ${values} 类型的数据，但是 ${errors}`);
       }
 
       return null;

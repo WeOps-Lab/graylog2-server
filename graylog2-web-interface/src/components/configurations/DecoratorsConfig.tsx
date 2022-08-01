@@ -54,8 +54,8 @@ const DecoratorsConfig = () => {
 
   const onSave = (newDecorators) => DecoratorsUpdater(newDecorators, decorators)
     .then(
-      () => UserNotification.success('Updated decorators configuration.', 'Success!'),
-      (error) => UserNotification.error(`Unable to save new decorators: ${error}`, 'Saving decorators failed'),
+      () => UserNotification.success('更新装饰器配置', '成功！'),
+      (error) => UserNotification.error(`无法保存新的装饰器：${error}`, '保存装饰器失败'),
     )
     .then(DecoratorsActions.list)
     .then(setDecorators)
@@ -72,12 +72,12 @@ const DecoratorsConfig = () => {
 
   return (
     <div>
-      <h2>Decorators Configuration</h2>
-      <p>Select the stream for which you want to see the set of default decorators.</p>
+      <h2>装饰器配置</h2>
+      <p>选择要查看默认装饰器集的流。</p>
       <StreamSelect streams={streamOptions} onChange={setCurrentStream} value={currentStream} />
       <DecoratorList decorators={readOnlyDecoratorItems} disableDragging />
       <IfPermitted permissions="decorators:edit">
-        <Button bsStyle="info" bsSize="xs" onClick={openModal}>Update</Button>
+        <Button bsStyle="info" bsSize="xs" onClick={openModal}>更新</Button>
       </IfPermitted>
       <DecoratorsConfigUpdate ref={configModal}
                               streams={streams}

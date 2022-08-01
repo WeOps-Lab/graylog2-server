@@ -57,7 +57,7 @@ class EventDefinitionsContainer extends React.Component {
 
   handleDelete = (definition) => {
     return () => {
-      if (window.confirm(`Are you sure you want to delete "${definition.title}"?`)) {
+      if (window.confirm(`您确定要删除 "${definition.title}"?`)) {
         EventDefinitionsActions.delete(definition);
       }
     };
@@ -65,7 +65,7 @@ class EventDefinitionsContainer extends React.Component {
 
   handleEnable = (definition) => {
     return () => {
-      if (window.confirm(`Are you sure you want to enable "${definition.title}"?`)) {
+      if (window.confirm(`您确定要启用 "${definition.title}"?`)) {
         EventDefinitionsActions.enable(definition);
       }
     };
@@ -73,7 +73,7 @@ class EventDefinitionsContainer extends React.Component {
 
   handleDisable = (definition) => {
     return () => {
-      if (window.confirm(`Are you sure you want to disable "${definition.title}"?`)) {
+      if (window.confirm(`您确定要禁用 "${definition.title}"?`)) {
         EventDefinitionsActions.disable(definition);
       }
     };
@@ -83,7 +83,7 @@ class EventDefinitionsContainer extends React.Component {
     const { eventDefinitions } = this.props;
 
     if (!eventDefinitions.eventDefinitions) {
-      return <Spinner text="Loading Event Definitions information..." />;
+      return <Spinner text="加载事件中..." />;
     }
 
     return (

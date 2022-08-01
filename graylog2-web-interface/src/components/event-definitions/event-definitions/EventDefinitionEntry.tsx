@@ -75,10 +75,10 @@ const EventDefinitionEntry = ({
   const [showEntityShareModal, setShowEntityShareModal] = useState(false);
   const isScheduled = lodash.get(context, `scheduler.${eventDefinition.id}.is_scheduled`, true);
 
-  let toggle = <MenuItem onClick={onDisable(eventDefinition)}>Disable</MenuItem>;
+  let toggle = <MenuItem onClick={onDisable(eventDefinition)}>禁用</MenuItem>;
 
   if (!isScheduled) {
-    toggle = <MenuItem onClick={onEnable(eventDefinition)}>Enable</MenuItem>;
+    toggle = <MenuItem onClick={onEnable(eventDefinition)}>启用</MenuItem>;
   }
 
   const actions = (
@@ -86,16 +86,16 @@ const EventDefinitionEntry = ({
       <IfPermitted permissions={`eventdefinitions:edit:${eventDefinition.id}`}>
         <LinkContainer to={Routes.ALERTS.DEFINITIONS.edit(eventDefinition.id)}>
           <Button bsStyle="info">
-            <Icon name="edit" /> Edit
+            <Icon name="edit" /> 编辑
           </Button>
         </LinkContainer>
       </IfPermitted>
       <ShareButton entityId={eventDefinition.id} entityType="event_definition" onClick={() => setShowEntityShareModal(true)} />
       <IfPermitted permissions={`eventdefinitions:delete:${eventDefinition.id}`}>
-        <DropdownButton id="more-dropdown" title="More" pullRight>
+        <DropdownButton id="more-dropdown" title="更多" pullRight>
           {toggle}
           <MenuItem divider />
-          <MenuItem onClick={onDelete(eventDefinition)}>Delete</MenuItem>
+          <MenuItem onClick={onDelete(eventDefinition)}>删除</MenuItem>
         </DropdownButton>
       </IfPermitted>
     </React.Fragment>
@@ -105,7 +105,7 @@ const EventDefinitionEntry = ({
   let titleSuffix = <>{plugin?.displayName ?? eventDefinition.config.type}</>;
 
   if (!isScheduled) {
-    titleSuffix = (<span>{titleSuffix} <Label bsStyle="warning">disabled</Label></span>);
+    titleSuffix = (<span>{titleSuffix} <Label bsStyle="warning">禁用</Label></span>);
   }
 
   const linkTitle = <Link to={Routes.ALERTS.DEFINITIONS.show(eventDefinition.id)}>{eventDefinition.title}</Link>;
@@ -122,7 +122,7 @@ const EventDefinitionEntry = ({
                           entityType="event_definition"
                           entityTypeTitle="event definition"
                           entityTitle={eventDefinition.title}
-                          description="Search for a User or Team to add as collaborator on this event definition."
+                          description="搜索要添加为此事件定义的协作者的用户或团队."
                           onClose={() => setShowEntityShareModal(false)} />
       )}
     </>

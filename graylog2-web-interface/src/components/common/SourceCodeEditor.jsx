@@ -242,7 +242,7 @@ class SourceCodeEditor extends React.Component {
       value,
     } = this.props;
     const validCssWidth = lodash.isFinite(width) ? width : '100%';
-    const overlay = <StyledTooltip id="paste-button-tooltip" className="in">Press Ctrl+V (&#8984;V in macOS) or select Edit&thinsp;&rarr;&thinsp;Paste to paste from clipboard.</StyledTooltip>;
+    const overlay = <StyledTooltip id="paste-button-tooltip" className="in">使用 Ctrl+V (&#8984;V macOS) 或者编辑&thinsp;&rarr;&thinsp;复制内容.</StyledTooltip>;
 
     return (
       <div>
@@ -256,10 +256,10 @@ class SourceCodeEditor extends React.Component {
                                  bsSize="sm"
                                  onSuccess={this.focusEditor}
                                  text={selectedText}
-                                 buttonTitle="Copy (Ctrl+C / &#8984;C)"
+                                 buttonTitle="复制 (Ctrl+C / &#8984;C)"
                                  disabled={this.isCopyDisabled()} />
                 <OverlayTrigger placement="top" trigger="click" overlay={overlay} rootClose container={this.overlayContainerRef.current}>
-                  <Button bsStyle="link" bsSize="sm" title="Paste (Ctrl+V / &#8984;V)" disabled={this.isPasteDisabled()}>
+                  <Button bsStyle="link" bsSize="sm" title="粘贴 (Ctrl+V / &#8984;V)" disabled={this.isPasteDisabled()}>
                     <Icon name="clipboard" fixedWidth />
                   </Button>
                 </OverlayTrigger>
@@ -268,14 +268,14 @@ class SourceCodeEditor extends React.Component {
                 <Button bsStyle="link"
                         bsSize="sm"
                         onClick={this.handleUndo}
-                        title="Undo (Ctrl+Z / &#8984;Z)"
+                        title="撤销 (Ctrl+Z / &#8984;Z)"
                         disabled={this.isUndoDisabled()}>
                   <Icon name="undo" fixedWidth />
                 </Button>
                 <Button bsStyle="link"
                         bsSize="sm"
                         onClick={this.handleRedo}
-                        title="Redo (Ctrl+Shift+Z / &#8984;&#8679;Z)"
+                        title="重做 (Ctrl+Shift+Z / &#8984;&#8679;Z)"
                         disabled={this.isRedoDisabled()}>
                   <Icon name="redo" fixedWidth />
                 </Button>

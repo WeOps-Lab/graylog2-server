@@ -61,7 +61,7 @@ const URLWhiteListInput = ({ label, onChange, validationMessage, validationState
         if (!result.is_whitelisted && validationState === null) {
           setCurrentValidationState('error');
           onValidationChange('error');
-          const message = isValidURL(url) ? `URL ${url} is not whitelisted` : `URL ${url} is not a valid URL.`;
+          const message = isValidURL(url) ? `URL ${url} 不在白名单内` : `URL ${url} 不合法.`;
 
           setOwnValidationMessage(message);
         } else {

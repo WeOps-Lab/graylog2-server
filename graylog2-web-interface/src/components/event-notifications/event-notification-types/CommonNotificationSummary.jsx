@@ -52,14 +52,14 @@ class CommonNotificationSummary extends React.Component {
           <dd>
             <Button bsStyle="link" className="btn-text" bsSize="xsmall" onClick={this.toggleDisplayDetails}>
               <Icon name={`caret-${displayDetails ? 'down' : 'right'}`} />&nbsp;
-              {displayDetails ? 'Less details' : 'More details'}
+              {displayDetails ? '简略信息' : '详细信息'}
             </Button>
             {displayDetails && (
             <Table condensed hover className={styles.fixedTable}>
               <tbody>
                 <tr>
                   <td>Description</td>
-                  <td>{notification.description || 'No description given'}</td>
+                  <td>{notification.description || '暂无描述'}</td>
                 </tr>
                 {children}
               </tbody>

@@ -53,10 +53,10 @@ class LegacyNotificationSummary extends React.Component {
     } else {
       content = (
         <tr className="danger">
-          <td>Type</td>
+          <td>类型</td>
           <td>
-            Unknown legacy alarm callback type: <code>{callbackType}</code>.
-            Please make sure the plugin is installed.
+            未知的告警回调类型: <code>{callbackType}</code>.
+            请确定已安装了对应的插件.
           </td>
         </tr>
       );
@@ -66,8 +66,8 @@ class LegacyNotificationSummary extends React.Component {
       <>
         {!typeData && (
           <Alert bsStyle="danger" className={commonStyles.legacyNotificationAlert}>
-            Error in {notification.title || 'Legacy Alarm Callback'}: Unknown type <code>{callbackType}</code>,
-            please ensure the plugin is installed.
+            {notification.title || '旧版告警回调异常'}: 未知类型 <code>{callbackType}</code>,
+            请确定插件已经安装.
           </Alert>
         )}
         <CommonNotificationSummary {...this.props}>

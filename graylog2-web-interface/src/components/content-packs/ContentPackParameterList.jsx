@@ -78,7 +78,7 @@ class ContentPackParameterList extends React.Component {
   _parameterRowFormatter = (parameter) => {
     const { onDeleteParameter, readOnly } = this.props;
     const parameterApplied = this._parameterApplied(parameter.name);
-    const buttonTitle = parameterApplied ? 'Still in use' : 'Delete Parameter';
+    const buttonTitle = parameterApplied ? '使用中' : '删除参数';
     const icon = parameterApplied ? 'check' : 'times';
     const bsStyle = parameterApplied ? 'success' : 'failure';
 
@@ -99,7 +99,7 @@ class ContentPackParameterList extends React.Component {
                     title={buttonTitle}
                     disabled={parameterApplied}
                     onClick={() => { onDeleteParameter(parameter); }}>
-              Delete
+              删除
             </Button>{this._parameterModal(parameter)}
           </ButtonToolbar>
         </td>

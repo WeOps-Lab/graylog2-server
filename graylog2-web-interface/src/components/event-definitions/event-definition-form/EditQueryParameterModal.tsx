@@ -19,9 +19,9 @@ import lodash from 'lodash';
 import React from 'react';
 
 import LookupTableParameterEdit from 'components/lookup-table-parameters/LookupTableParameterEdit';
-import { Button, BootstrapModalForm } from 'components/bootstrap';
-import type { LookupTable } from 'logic/lookup-tables/types';
-import type { LookupTableParameterJson } from 'views/logic/parameters/LookupTableParameter';
+import {Button, BootstrapModalForm} from 'components/bootstrap';
+import type {LookupTable} from 'logic/lookup-tables/types';
+import type {LookupTableParameterJson} from 'views/logic/parameters/LookupTableParameter';
 import type LookupTableParameter from 'views/logic/parameters/LookupTableParameter';
 
 type Props = {
@@ -54,7 +54,7 @@ class EditQueryParameterModal extends React.Component<Props, State> {
   constructor(props) {
     super(props);
 
-    const { queryParameter } = this.props;
+    const {queryParameter} = this.props;
 
     this.state = {
       queryParameter,
@@ -67,7 +67,7 @@ class EditQueryParameterModal extends React.Component<Props, State> {
   };
 
   _saved = () => {
-    const { queryParameter } = this.state;
+    const {queryParameter} = this.state;
 
     if (!this._validate(queryParameter)) {
       return;
@@ -78,19 +78,19 @@ class EditQueryParameterModal extends React.Component<Props, State> {
   };
 
   _cleanState = () => {
-    const { queryParameter } = this.props;
+    const {queryParameter} = this.props;
 
-    this.setState({ queryParameter });
+    this.setState({queryParameter});
   };
 
   propagateChanges = () => {
-    const { queryParameters, onChange, queryParameter: prevQueryParameter } = this.props;
-    const { queryParameter } = this.state;
+    const {queryParameters, onChange, queryParameter: prevQueryParameter} = this.props;
+    const {queryParameter} = this.state;
     const newQueryParameters = [...queryParameters];
     const index = queryParameters.findIndex((p) => p.name === prevQueryParameter.name);
 
     if (index < 0) {
-      throw new Error(`Query parameter "${queryParameter.name}" not found`);
+      throw new Error(`未找到查询参数“${queryParameter.name}”`);
     }
 
     newQueryParameters[index] = queryParameter.toJSON();
@@ -98,31 +98,31 @@ class EditQueryParameterModal extends React.Component<Props, State> {
   };
 
   handleParameterChange = (key, value) => {
-    const { queryParameter } = this.state;
+    const {queryParameter} = this.state;
     const nextQueryParameter = queryParameter.toBuilder()[key](value).build();
 
-    this.setState({ queryParameter: nextQueryParameter });
+    this.setState({queryParameter: nextQueryParameter});
   };
 
   _validate = (queryParameter) => {
     const newValidation: State['validation'] = {};
 
     if (!queryParameter.lookupTable) {
-      newValidation.lookupTable = 'Cannot be empty';
+      newValidation.lookupTable = '不能为空';
     }
 
     if (!queryParameter.key) {
-      newValidation.key = 'Cannot be empty';
+      newValidation.key = '不能为空';
     }
 
-    this.setState({ validation: newValidation });
+    this.setState({validation: newValidation});
 
     return lodash.isEmpty(newValidation);
   };
 
   render() {
-    const { lookupTables, embryonic } = this.props;
-    const { queryParameter, validation } = this.state;
+    const {lookupTables, embryonic} = this.props;
+    const {queryParameter, validation} = this.state;
 
     const validationState: {
       lookupTable?: [string, string],
@@ -140,16 +140,18 @@ class EditQueryParameterModal extends React.Component<Props, State> {
           {queryParameter.name}{embryonic && ': undeclared'}
         </Button>
 
-        <BootstrapModalForm ref={(ref) => { this.modal = ref; }}
-                            title={`Declare Query Parameter "${queryParameter.name}" from Lookup Table`}
+        <BootstrapModalForm ref={(ref) => {
+          this.modal = ref;
+        }}
+                            title={`定义数据字典中的查询参数 "${queryParameter.name}"`}
                             onSubmitForm={this._saved}
                             onModalClose={this._cleanState}
-                            submitButtonText="Save">
+                            submitButtonText="保存">
           <LookupTableParameterEdit validationState={validationState}
                                     identifier={queryParameter.name}
                                     parameter={queryParameter}
                                     onChange={this.handleParameterChange}
-                                    lookupTables={lookupTables} />
+                                    lookupTables={lookupTables}/>
         </BootstrapModalForm>
       </>
     );

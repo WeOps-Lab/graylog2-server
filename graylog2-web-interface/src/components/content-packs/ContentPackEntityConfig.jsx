@@ -50,7 +50,7 @@ class ContentPackEntityConfig extends React.Component {
     return (configKey) => {
       const path = paths[configKey];
       const parameter = this._getParameterForConfigKey(configKey);
-      const type = parameter ? (<b>{`parameter (${parameter.type})`}</b>) : path.getValueType();
+      const type = parameter ? (<b>{`参数 (${parameter.type})`}</b>) : path.getValueType();
       const value = parameter ? (<b>{parameter.name}</b>) : path.getValue();
 
       return (
@@ -71,7 +71,7 @@ class ContentPackEntityConfig extends React.Component {
     return (
       <div>
         <DataTable id="entiy-config-list"
-                   headers={['Config Key', 'Type', 'Value']}
+                   headers={['配置名称', '数据类型', '值']}
                    filterKeys={[]}
                    rows={configKeys}
                    dataRowFormatter={this._configKeyRowFormatter(configPaths)} />

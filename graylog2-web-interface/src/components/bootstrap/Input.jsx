@@ -98,7 +98,7 @@ class Input extends React.Component {
     const { type } = this.props;
 
     if (!type) {
-      throw new Error('Cannot use getValue without specifying input type.');
+      throw new Error('请指定组件类型.');
     }
 
     switch (type) {
@@ -211,7 +211,7 @@ class Input extends React.Component {
         return this._renderRadioGroup(id, bsStyle, formGroupClassName, wrapperClassName, label, error, help, controlProps);
       default:
         // eslint-disable-next-line no-console
-        console.warn(`Unsupported input type ${type}`);
+        console.warn(`不支持的输入类型 ${type}`);
     }
 
     return null;

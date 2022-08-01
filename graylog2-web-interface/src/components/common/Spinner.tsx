@@ -53,7 +53,7 @@ Spinner.propTypes = {
 
 Spinner.defaultProps = {
   name: 'spinner',
-  text: 'Loading...',
+  text: '加载中...',
   delay: 200,
 };
 

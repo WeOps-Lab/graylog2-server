@@ -25,7 +25,7 @@ const formatDecorator = (
   decoratorTypes: { [key: string]: DecoratorType },
   updateFn?: (newDecorators: Array<Decorator>) => unknown,
 ) => {
-  const typeDefinition = decoratorTypes[decorator.type] || { requested_configuration: {}, name: `Unknown type: ${decorator.type}` } as DecoratorType;
+  const typeDefinition = decoratorTypes[decorator.type] || { requested_configuration: {}, name: `未知类型: ${decorator.type}` } as DecoratorType;
 
   const onUpdate = updateFn
     ? (id: string, updatedDecorator: Decorator) => updateFn(decorators.map((curDecorator) => (curDecorator.id === id ? updatedDecorator : curDecorator)))

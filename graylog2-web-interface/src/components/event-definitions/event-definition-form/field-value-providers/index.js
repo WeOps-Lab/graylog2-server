@@ -26,7 +26,7 @@ PluginStore.register(new PluginManifest({}, {
   fieldValueProviders: [
     {
       type: TemplateFieldValueProviderForm.type,
-      displayName: 'Template',
+      displayName: '模板',
       formComponent: TemplateFieldValueProviderForm,
       summaryComponent: TemplateFieldValueProviderSummary,
       defaultConfig: TemplateFieldValueProviderForm.defaultConfig,
@@ -34,7 +34,7 @@ PluginStore.register(new PluginManifest({}, {
     },
     {
       type: LookupTableFieldValueProviderForm.type,
-      displayName: 'Lookup Table',
+      displayName: '数据字典',
       formComponent: LookupTableFieldValueProviderFormContainer,
       summaryComponent: LookupTableFieldValueProviderSummary,
       defaultConfig: LookupTableFieldValueProviderForm.defaultConfig,

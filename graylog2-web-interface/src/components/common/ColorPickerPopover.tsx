@@ -105,7 +105,7 @@ ColorPickerPopover.propTypes = {
 
 ColorPickerPopover.defaultProps = {
   placement: 'bottom',
-  title: 'Pick a color',
+  title: '选择颜色',
   colors: undefined, // Use default color palette.
 };
 

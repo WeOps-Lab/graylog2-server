@@ -57,7 +57,7 @@ const EntityList = ({ bsNoItemsStyle, items, noItemsText }: Props) => {
 
 EntityList.defaultProps = {
   bsNoItemsStyle: 'info',
-  noItemsText: 'No items available',
+  noItemsText: '暂无数据',
 };
 
 EntityList.propTypes = {

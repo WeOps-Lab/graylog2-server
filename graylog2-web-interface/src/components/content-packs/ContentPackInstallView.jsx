@@ -33,13 +33,13 @@ const ContentPackInstallView = (props) => {
     <div>
       <Row>
         <Col smOffset={1} sm={10}>
-          <h3>General information</h3>
+          <h3>基本信息</h3>
           <dl className="deflist">
-            <dt>Comment:</dt>
+            <dt>备注:</dt>
             <dd>{comment}</dd>
-            <dt>Installed by:</dt>
+            <dt>安装者:</dt>
             <dd>{createdBy}&nbsp;</dd>
-            <dt>Installed at:</dt>
+            <dt>安装于:</dt>
             <dd><Timestamp dateTime={createdAt} /></dd>
           </dl>
         </Col>

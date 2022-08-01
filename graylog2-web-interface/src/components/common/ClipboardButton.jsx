@@ -97,7 +97,7 @@ class ClipboardButton extends React.Component {
   _onSuccess = (event) => {
     const { onSuccess } = this.props;
 
-    this.setState({ tooltipMessage: 'Copied!' });
+    this.setState({ tooltipMessage: '已复制!' });
 
     onSuccess(event);
 

@@ -52,7 +52,7 @@ const TimeUnit = createReactClass({
 
   render() {
     if (this.props.value === 0 && this.props.zeroIsNever) {
-      return <span>Never</span>;
+      return <span>从不</span>;
     }
 
     return (

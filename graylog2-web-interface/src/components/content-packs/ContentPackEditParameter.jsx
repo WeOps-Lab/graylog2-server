@@ -91,7 +91,7 @@ class ContentPackEditParameter extends React.Component {
     const param = this.state.newParameter;
 
     if (!param.name) {
-      this.setState({ nameError: 'Name must be set.' });
+      this.setState({ nameError: '名称不能为空.' });
 
       return false;
     }
@@ -99,7 +99,7 @@ class ContentPackEditParameter extends React.Component {
     this.setState({ nameError: undefined });
 
     if (!param.title) {
-      this.setState({ titleError: 'Title must be set.' });
+      this.setState({ titleError: '标题不能为空.' });
 
       return false;
     }
@@ -107,7 +107,7 @@ class ContentPackEditParameter extends React.Component {
     this.setState({ titleError: undefined });
 
     if (!param.description) {
-      this.setState({ descrError: 'Description must be set.' });
+      this.setState({ descrError: '描述不能为空.' });
 
       return false;
     }
@@ -121,14 +121,14 @@ class ContentPackEditParameter extends React.Component {
     const value = this.state.newParameter.name;
 
     if (value.match(/\W/)) {
-      this.setState({ nameError: 'The parameter name must only contain A-Z, a-z, 0-9 and _' });
+      this.setState({ nameError: '名称必须只包含A-Z, a-z, 0-9 和 _ ' });
 
       return false;
     }
 
     if ((this.props.parameterToEdit || {}).name !== value
       && this.props.parameters.findIndex((parameter) => { return parameter.name === value; }) >= 0) {
-      this.setState({ nameError: 'The parameter name must be unique.' });
+      this.setState({ nameError: '参数名称必须唯一.' });
 
       return false;
     }
@@ -145,7 +145,7 @@ class ContentPackEditParameter extends React.Component {
       switch (this.state.newParameter.type) {
         case 'integer': {
           if (`${parseInt(value, 10)}` !== value) {
-            this.setState({ defaultValueError: 'This is not an integer value.' });
+            this.setState({ defaultValueError: '该值不是整数类型.' });
 
             return false;
           }
@@ -155,7 +155,7 @@ class ContentPackEditParameter extends React.Component {
 
         case 'double': {
           if (isNaN(value)) {
-            this.setState({ defaultValueError: 'This is not a double value.' });
+            this.setState({ defaultValueError: '该值不是浮点类型.' });
 
             return false;
           }
@@ -165,7 +165,7 @@ class ContentPackEditParameter extends React.Component {
 
         case 'boolean': {
           if (value !== 'true' && value !== 'false') {
-            this.setState({ defaultValueError: 'This is not a boolean value. It must be either true or false.' });
+            this.setState({ defaultValueError: '该值不是布尔类型.值必须是true或者false.' });
 
             return false;
           }
@@ -184,7 +184,7 @@ class ContentPackEditParameter extends React.Component {
   };
 
   render() {
-    const header = this.props.parameterToEdit ? 'Edit parameter' : 'Create parameter';
+    const header = this.props.parameterToEdit ? '编辑参数' : '创建参数';
     const disableType = !!this.props.parameterToEdit;
 
     return (
@@ -201,9 +201,9 @@ class ContentPackEditParameter extends React.Component {
                    value={this.state.newParameter.title}
                    onChange={this._bindValue}
                    bsStyle={this.state.titleError ? 'error' : null}
-                   label="Title"
+                   label="标题"
                    help={this.state.titleError ? this.state.titleError
-                     : 'Give a descriptive title for this content pack.'}
+                     : '输入扩展包的标题.'}
                    required />
             <Input name="name"
                    id="name"
@@ -212,9 +212,9 @@ class ContentPackEditParameter extends React.Component {
                    bsStyle={this.state.nameError ? 'error' : null}
                    value={this.state.newParameter.name}
                    onChange={this._bindValue}
-                   label="Name"
+                   label="名称"
                    help={this.state.nameError ? this.state.nameError
-                     : 'This is used as the parameter reference and must not contain a space.'}
+                     : '每个扩展包内容可用来替换的参数名称,不能包含空格.'}
                    required />
             <Input name="description"
                    id="description"
@@ -223,9 +223,9 @@ class ContentPackEditParameter extends React.Component {
                    maxLength={250}
                    value={this.state.newParameter.description}
                    onChange={this._bindValue}
-                   label="Description"
+                   label="描述"
                    help={this.state.descrError ? this.state.descrError
-                     : 'Give a description explaining what will be done with this parameter.'}
+                     : '描述参数的用法.'}
                    required />
             <Input name="type"
                    id="type"
@@ -233,13 +233,13 @@ class ContentPackEditParameter extends React.Component {
                    disabled={disableType}
                    value={this.state.newParameter.type}
                    onChange={this._bindValue}
-                   label="Value Type"
-                   help="Give the type of the parameter."
+                   label="参数的值类型"
+                   help="参数的数据类型."
                    required>
-              <option value="string">String</option>
-              <option value="integer">Integer</option>
-              <option value="double">Double</option>
-              <option value="boolean">Boolean</option>
+              <option value="string">字符串</option>
+              <option value="integer">整型</option>
+              <option value="double">浮点型</option>
+              <option value="boolean">布尔型</option>
             </Input>
             <Input name="default_value"
                    id="default_value"
@@ -248,9 +248,9 @@ class ContentPackEditParameter extends React.Component {
                    bsStyle={this.state.defaultValueError ? 'error' : null}
                    value={this.state.newParameter.default_value}
                    onChange={this._bindValue}
-                   label="Default value"
+                   label="默认值"
                    help={this.state.defaultValueError ? this.state.defaultValueError
-                     : 'Give a default value if the parameter is not optional.'} />
+                     : '参数的默认值'} />
           </fieldset>
         </form>
       </div>

@@ -64,7 +64,7 @@ EmptyEntity.propTypes = {
 };
 
 EmptyEntity.defaultProps = {
-  title: 'Looks like there is nothing here, yet!',
+  title: '暂无数据!',
 };
 
 export default EmptyEntity;

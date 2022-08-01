@@ -151,7 +151,7 @@ class EventNotificationFormContainer extends React.Component {
       .then(
         (response) => {
           testResult.error = false;
-          testResult.message = 'Notification was executed successfully.';
+          testResult.message = '通知执行成功.';
 
           return response;
         },
@@ -160,10 +160,10 @@ class EventNotificationFormContainer extends React.Component {
           const { body } = errorResponse.additional;
 
           if (errorResponse.status === 400 && body && body.failed) {
-            testResult.message = 'Validation failed, please correct any errors in the form before continuing.';
+            testResult.message = '校验失败.';
             this.setState({ validation: body });
           } else {
-            testResult.message = errorResponse.responseMessage || 'Unknown error, please check your Graylog server logs.';
+            testResult.message = errorResponse.responseMessage || '未知错误.';
           }
         },
       )
@@ -180,7 +180,7 @@ class EventNotificationFormContainer extends React.Component {
     return (
       <>
         {!embedded && isDirty && (
-          <ConfirmLeaveDialog question="Do you really want to abandon this page and lose your changes? This action cannot be undone." />
+          <ConfirmLeaveDialog question="确认要放弃此页的修改." />
         )}
         <EventNotificationForm action={action}
                                notification={notification}

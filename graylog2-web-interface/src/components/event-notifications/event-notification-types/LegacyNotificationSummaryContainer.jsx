@@ -44,7 +44,7 @@ class LegacyNotificationSummaryContainer extends React.Component {
     const { allLegacyTypes } = notifications;
 
     if (!allLegacyTypes) {
-      return <p><Spinner text="Loading legacy notification information..." /></p>;
+      return <p><Spinner text="加载旧版告警信息中..." /></p>;
     }
 
     return <LegacyNotificationSummary {...this.props} legacyTypes={allLegacyTypes} />;

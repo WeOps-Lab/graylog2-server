@@ -33,16 +33,16 @@ class TemplateFieldValueProviderSummary extends React.Component {
       <CommonFieldValueProviderSummary {...this.props}>
         <>
           <tr>
-            <td>Value source</td>
-            <td>Template</td>
+            <td>数据源</td>
+            <td>模板</td>
           </tr>
           <tr>
-            <td>Template</td>
+            <td>模板</td>
             <td>{config.providers[0].template}</td>
           </tr>
           <tr>
-            <td>Validate that all Template values are set</td>
-            <td>{config.providers[0].require_values ? 'Yes' : 'No'}</td>
+            <td>校验设置所有模板值</td>
+            <td>{config.providers[0].require_values ? '是' : '否'}</td>
           </tr>
         </>
       </CommonFieldValueProviderSummary>

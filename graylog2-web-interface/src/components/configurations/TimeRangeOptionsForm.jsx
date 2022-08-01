@@ -37,7 +37,7 @@ class TimeRangeOptionsForm extends React.Component {
 
   static defaultProps = {
     options: [],
-    addButtonTitle: 'Add option',
+    addButtonTitle: '添加选项',
     validator: () => true,
   };
 
@@ -110,7 +110,7 @@ class TimeRangeOptionsForm extends React.Component {
               <div className="input-group">
                 <input type="text"
                        className="form-control"
-                       placeholder="Add description..."
+                       placeholder="添加描述..."
                        value={description}
                        onChange={this._onChange(idx, 'description')} />
                 <span className="input-group-addon">

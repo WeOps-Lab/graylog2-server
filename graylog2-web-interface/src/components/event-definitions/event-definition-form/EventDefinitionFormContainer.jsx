@@ -22,12 +22,12 @@ import history from 'util/History';
 import Routes from 'routing/Routes';
 import connect from 'stores/connect';
 import EventDefinitionPriorityEnum from 'logic/alerts/EventDefinitionPriorityEnum';
-import { ConfirmLeaveDialog, Spinner } from 'components/common';
-import { AvailableEventDefinitionTypesStore } from 'stores/event-definitions/AvailableEventDefinitionTypesStore';
-import { ConfigurationsActions } from 'stores/configurations/ConfigurationsStore';
-import { CurrentUserStore } from 'stores/users/CurrentUserStore';
-import { EventDefinitionsActions } from 'stores/event-definitions/EventDefinitionsStore';
-import { EventNotificationsActions, EventNotificationsStore } from 'stores/event-notifications/EventNotificationsStore';
+import {ConfirmLeaveDialog, Spinner} from 'components/common';
+import {AvailableEventDefinitionTypesStore} from 'stores/event-definitions/AvailableEventDefinitionTypesStore';
+import {ConfigurationsActions} from 'stores/configurations/ConfigurationsStore';
+import {CurrentUserStore} from 'stores/users/CurrentUserStore';
+import {EventDefinitionsActions} from 'stores/event-definitions/EventDefinitionsStore';
+import {EventNotificationsActions, EventNotificationsStore} from 'stores/event-notifications/EventNotificationsStore';
 
 import EventDefinitionForm from './EventDefinitionForm';
 
@@ -64,7 +64,8 @@ class EventDefinitionFormContainer extends React.Component {
       alert: false,
     },
     entityTypes: undefined,
-    onEventDefinitionChange: () => {},
+    onEventDefinitionChange: () => {
+    },
   };
 
   constructor(props) {
@@ -90,7 +91,7 @@ class EventDefinitionFormContainer extends React.Component {
   };
 
   fetchClusterConfig = () => {
-    ConfigurationsActions.listEventsClusterConfig().then((config) => this.setState({ eventsClusterConfig: config }));
+    ConfigurationsActions.listEventsClusterConfig().then((config) => this.setState({eventsClusterConfig: config}));
   };
 
   handleChange = (key, value) => {
@@ -98,11 +99,11 @@ class EventDefinitionFormContainer extends React.Component {
       const nextEventDefinition = lodash.cloneDeep(state.eventDefinition);
 
       nextEventDefinition[key] = value;
-      const { onEventDefinitionChange } = this.props;
+      const {onEventDefinitionChange} = this.props;
 
       onEventDefinitionChange(nextEventDefinition);
 
-      return { eventDefinition: nextEventDefinition, isDirty: true };
+      return {eventDefinition: nextEventDefinition, isDirty: true};
     });
   };
 
@@ -111,15 +112,15 @@ class EventDefinitionFormContainer extends React.Component {
   };
 
   handleSubmitSuccessResponse = () => {
-    this.setState({ isDirty: false }, () => history.push(Routes.ALERTS.DEFINITIONS.LIST));
+    this.setState({isDirty: false}, () => history.push(Routes.ALERTS.DEFINITIONS.LIST));
   };
 
   handleSubmitFailureResponse = (errorResponse) => {
-    const { body } = errorResponse.additional;
+    const {body} = errorResponse.additional;
 
     if (errorResponse.status === 400) {
       if (body && body.failed) {
-        this.setState({ validation: body });
+        this.setState({validation: body});
 
         return;
       }
@@ -130,7 +131,7 @@ class EventDefinitionFormContainer extends React.Component {
           || body.message.includes('org.graylog.events.processor.aggregation.AggregationSeries')) {
           this.setState({
             validation: {
-              errors: { conditions: ['Aggregation condition is not valid'] },
+              errors: {conditions: ['聚合条件不合法']},
             },
           });
 
@@ -140,7 +141,7 @@ class EventDefinitionFormContainer extends React.Component {
         if (body.message.includes('embryonic')) {
           this.setState({
             validation: {
-              errors: { query_parameters: ['Query parameters must be declared'] },
+              errors: {query_parameters: ['查询参数不可为空']},
             },
           });
         }
@@ -149,8 +150,8 @@ class EventDefinitionFormContainer extends React.Component {
   };
 
   handleSubmit = () => {
-    const { action } = this.props;
-    const { eventDefinition } = this.state;
+    const {action} = this.props;
+    const {eventDefinition} = this.state;
 
     if (action === 'create') {
       EventDefinitionsActions.create(eventDefinition)
@@ -162,20 +163,21 @@ class EventDefinitionFormContainer extends React.Component {
   };
 
   render() {
-    const { action, entityTypes, notifications, currentUser } = this.props;
-    const { isDirty, eventDefinition, eventsClusterConfig, validation } = this.state;
+    const {action, entityTypes, notifications, currentUser} = this.props;
+    const {isDirty, eventDefinition, eventsClusterConfig, validation} = this.state;
     const isLoading = !entityTypes || !notifications.all || !eventsClusterConfig;
 
     if (isLoading) {
-      return <Spinner text="Loading Event information..." />;
+      return <Spinner text="加载事件信息..."/>;
     }
 
-    const defaults = { default_backlog_size: eventsClusterConfig.events_notification_default_backlog };
+    const defaults = {default_backlog_size: eventsClusterConfig.events_notification_default_backlog};
 
     return (
       <>
         {isDirty && (
-          <ConfirmLeaveDialog question="Do you really want to abandon this page and lose your changes? This action cannot be undone." />
+          <ConfirmLeaveDialog
+            question="确实要放弃此页并丢失更改?此操作无法撤消." />
         )}
         <EventDefinitionForm action={action}
                              eventDefinition={eventDefinition}
@@ -186,7 +188,7 @@ class EventDefinitionFormContainer extends React.Component {
                              defaults={defaults}
                              onChange={this.handleChange}
                              onCancel={this.handleCancel}
-                             onSubmit={this.handleSubmit} />
+                             onSubmit={this.handleSubmit}/>
       </>
     );
   }
@@ -196,7 +198,7 @@ export default connect(EventDefinitionFormContainer, {
   entityTypes: AvailableEventDefinitionTypesStore,
   notifications: EventNotificationsStore,
   currentUser: CurrentUserStore,
-}, ({ currentUser, ...otherProps }) => ({
+}, ({currentUser, ...otherProps}) => ({
   ...otherProps,
   currentUser: currentUser.currentUser,
 }));

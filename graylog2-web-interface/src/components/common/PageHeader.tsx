@@ -48,8 +48,8 @@ const ActionsSM = styled.div`
 `;
 
 const LIFECYCLE_DEFAULT_MESSAGES = {
-  experimental: 'This Graylog feature is new and should be considered experimental.',
-  legacy: 'This feature has been discontinued and will be removed in a future Graylog version.',
+  experimental: '这个是新特性,不建议投入生产使用.',
+  legacy: '这个特性将会在未来的版本中被移除.',
 };
 
 type Props = {

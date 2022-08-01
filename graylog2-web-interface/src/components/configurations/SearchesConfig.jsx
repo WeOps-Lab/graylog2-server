@@ -15,11 +15,11 @@
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
 import PropTypes from 'prop-types';
-import React, { createRef } from 'react';
+import React, {createRef} from 'react';
 import moment from 'moment';
 
-import { Button, Row, Col, BootstrapModalForm, Input } from 'components/bootstrap';
-import { IfPermitted, ISODurationInput } from 'components/common';
+import {Button, Row, Col, BootstrapModalForm, Input} from 'components/bootstrap';
+import {IfPermitted, ISODurationInput} from 'components/common';
 import ObjectUtils from 'util/ObjectUtils';
 
 import 'moment-duration-format';
@@ -60,7 +60,7 @@ class SearchesConfig extends React.Component {
 
     this.searchesConfigModal = createRef();
 
-    const { config } = props;
+    const {config} = props;
 
     const queryTimeRangeLimit = config?.query_time_range_limit;
     const relativeTimerangeOptions = config?.relative_timerange_options;
@@ -81,38 +81,38 @@ class SearchesConfig extends React.Component {
       surroundingTimeRangeOptionsUpdate: undefined,
     };
 
-    this.defaultState = { ...this.state };
+    this.defaultState = {...this.state};
   }
 
   _onUpdate = (field) => {
     return (newOptions) => {
-      const { config } = this.state;
+      const {config} = this.state;
       const update = ObjectUtils.clone(config);
 
       update[field] = newOptions;
 
-      this.setState({ config: update });
+      this.setState({config: update});
     };
   };
 
   _onRelativeTimeRangeOptionsUpdate = (data) => {
-    this.setState({ relativeTimeRangeOptionsUpdate: data });
+    this.setState({relativeTimeRangeOptionsUpdate: data});
   };
 
   _onSurroundingTimeRangeOptionsUpdate = (data) => {
-    this.setState({ surroundingTimeRangeOptionsUpdate: data });
+    this.setState({surroundingTimeRangeOptionsUpdate: data});
   };
 
   _onFilterFieldsUpdate = (e) => {
-    this.setState({ surroundingFilterFields: e.target.value });
+    this.setState({surroundingFilterFields: e.target.value});
   };
 
   _onAnalysisDisabledFieldsUpdate = (e) => {
-    this.setState({ analysisDisabledFields: e.target.value });
+    this.setState({analysisDisabledFields: e.target.value});
   };
 
   _onChecked = () => {
-    const { config: origConfig, limitEnabled } = this.state;
+    const {config: origConfig, limitEnabled} = this.state;
     const config = ObjectUtils.clone(origConfig);
 
     if (limitEnabled) {
@@ -123,12 +123,18 @@ class SearchesConfig extends React.Component {
       config.query_time_range_limit = 'P30D';
     }
 
-    this.setState({ config: config, limitEnabled: !limitEnabled });
+    this.setState({config: config, limitEnabled: !limitEnabled});
   };
 
   _saveConfig = () => {
-    const { updateConfig } = this.props;
-    const { analysisDisabledFields, config, relativeTimeRangeOptionsUpdate, surroundingTimeRangeOptionsUpdate, surroundingFilterFields } = this.state;
+    const {updateConfig} = this.props;
+    const {
+      analysisDisabledFields,
+      config,
+      relativeTimeRangeOptionsUpdate,
+      surroundingTimeRangeOptionsUpdate,
+      surroundingFilterFields
+    } = this.state;
     const update = ObjectUtils.clone(config);
 
     if (relativeTimeRangeOptionsUpdate) {
@@ -138,7 +144,7 @@ class SearchesConfig extends React.Component {
         update.relative_timerange_options[entry.period] = entry.description;
       });
 
-      this.setState({ relativeTimeRangeOptionsUpdate: undefined });
+      this.setState({relativeTimeRangeOptionsUpdate: undefined});
     }
 
     if (surroundingTimeRangeOptionsUpdate) {
@@ -148,18 +154,18 @@ class SearchesConfig extends React.Component {
         update.surrounding_timerange_options[entry.period] = entry.description;
       });
 
-      this.setState({ surroundingTimeRangeOptionsUpdate: undefined });
+      this.setState({surroundingTimeRangeOptionsUpdate: undefined});
     }
 
     // Make sure to update filter fields
     if (surroundingFilterFields) {
       update.surrounding_filter_fields = _splitStringList(surroundingFilterFields);
-      this.setState({ surroundingFilterFields: undefined });
+      this.setState({surroundingFilterFields: undefined});
     }
 
     if (analysisDisabledFields) {
       update.analysis_disabled_fields = _splitStringList(analysisDisabledFields);
-      this.setState({ analysisDisabledFields: undefined });
+      this.setState({analysisDisabledFields: undefined});
     }
 
     updateConfig(update).then(() => {
@@ -180,10 +186,14 @@ class SearchesConfig extends React.Component {
     this.searchesConfigModal.current.close();
   };
 
+  _isEnabled() {
+    return this.state.limitEnabled;
+  };
+
   render() {
     const _buildTimeRangeOptions = (options) => {
       return Object.keys(options).map((key) => {
-        return { period: key, description: options[key] };
+        return {period: key, description: options[key]};
       });
     };
 
@@ -196,7 +206,9 @@ class SearchesConfig extends React.Component {
       analysisDisabledFields,
     } = this.state;
     const duration = moment.duration(config.query_time_range_limit);
-    const limit = limitEnabled ? `${config.query_time_range_limit} (${duration.humanize()})` : 'disabled';
+    const limit = this._isEnabled() ? `${config.query_time_range_limit} (${moment.duration(duration.asMilliseconds()).format(function () {
+      return this.duration.asSeconds() > 0 ? 'd [天] h [小时] m [分钟] s [秒]' : '0 秒'
+    }, {trim: 'all'})})` : '已禁用';
 
     let filterFields;
     let filterFieldsString;
@@ -216,33 +228,32 @@ class SearchesConfig extends React.Component {
 
     return (
       <div>
-        <h2>Search Configuration</h2>
+        <h2>查询配置</h2>
 
         <dl className="deflist">
-          <dt>Query time range limit</dt>
+          <dt>查询时间范围限制</dt>
           <dd>{limit}</dd>
-          <dd>The maximum time users can query data in the past. This prevents users from accidentally creating queries which
-            span a lot of data and would need a long time and many resources to complete (if at all).
+          <dd>限制用户最多能查询多少天前的数据,这用于避免用户一次查询特别多的数据.
           </dd>
         </dl>
 
         <Row>
           <Col md={6}>
-            <strong>Relative time range options</strong>
-            <TimeRangeOptionsSummary options={config.relative_timerange_options} />
+            <strong>相对时间范围选项</strong>
+            <TimeRangeOptionsSummary options={config.relative_timerange_options}/>
           </Col>
           <Col md={6}>
-            <strong>Surrounding time range options</strong>
-            <TimeRangeOptionsSummary options={config.surrounding_timerange_options} />
+            <strong>环绕时间范围选项</strong>
+            <TimeRangeOptionsSummary options={config.surrounding_timerange_options}/>
           </Col>
           <Col md={6}>
 
-            <strong>Surrounding search filter fields</strong>
+            <strong>环绕查询过滤字段</strong>
             <ul>
               {filterFields}
             </ul>
 
-            <strong>UI analysis disabled for fields</strong>
+            <strong>禁用的分析的字段</strong>
             <ul>
               {analysisDisabledFieldsListItems}
             </ul>
@@ -251,57 +262,61 @@ class SearchesConfig extends React.Component {
 
         </Row>
         <IfPermitted permissions="clusterconfigentry:edit">
-          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>Update</Button>
+          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>更新</Button>
         </IfPermitted>
 
         <BootstrapModalForm ref={this.searchesConfigModal}
-                            title="Update Search Configuration"
+                            title="更新搜索配置"
                             onSubmitForm={this._saveConfig}
                             onModalClose={this._resetConfig}
-                            submitButtonText="Save">
+                            submitButtonText="保存">
           <fieldset>
-            <label htmlFor="query-limit-checkbox">Relative Timerange Options</label>
+            <label htmlFor="query-limit-checkbox">相对时间范围选项</label>
             <Input id="query-limit-checkbox"
                    type="checkbox"
-                   label="Enable query limit"
+                   label="启用查询限制"
                    name="enabled"
                    checked={limitEnabled}
-                   onChange={this._onChecked} />
+                   onChange={this._onChecked}/>
             {limitEnabled && (
               <ISODurationInput id="query-timerange-limit-field"
                                 duration={config.query_time_range_limit}
                                 update={this._onUpdate('query_time_range_limit')}
-                                label="Query time range limit (ISO8601 Duration)"
-                                help={'The maximum time range for searches. (i.e. "P30D" for 30 days, "PT24H" for 24 hours)'}
+                                label="查询时间范围限制（ISO8601 格式）"
+                                help={'搜索的最大时间范围。 （即“P30D”为 30 天，"PT24H" 为 24 小时）'}
                                 validator={_queryTimeRangeLimitValidator}
-                                required />
+                                required/>
             )}
-            <TimeRangeOptionsForm options={relativeTimeRangeOptionsUpdate || _buildTimeRangeOptions(config.relative_timerange_options)}
-                                  update={this._onRelativeTimeRangeOptionsUpdate}
-                                  validator={_relativeTimeRangeValidator}
-                                  title="Relative Timerange Options"
-                                  help={<span>Configure the available options for the <strong>relative</strong> time range selector as <strong>ISO8601 duration</strong></span>} />
-            <TimeRangeOptionsForm options={surroundingTimeRangeOptionsUpdate || _buildTimeRangeOptions(config.surrounding_timerange_options)}
-                                  update={this._onSurroundingTimeRangeOptionsUpdate}
-                                  validator={_surroundingTimeRangeValidator}
-                                  title="Surrounding Timerange Options"
-                                  help={<span>Configure the available options for the <strong>surrounding</strong> time range selector as <strong>ISO8601 duration</strong></span>} />
+            <TimeRangeOptionsForm
+              options={relativeTimeRangeOptionsUpdate || _buildTimeRangeOptions(config.relative_timerange_options)}
+              update={this._onRelativeTimeRangeOptionsUpdate}
+              validator={_relativeTimeRangeValidator}
+              title="相对时间范围选项"
+              help={
+                <span>将<strong>相对</strong>时间范围选择器的可用选项配置为<strong>ISO8601持续时间</strong></span>}/>
+            <TimeRangeOptionsForm
+              options={surroundingTimeRangeOptionsUpdate || _buildTimeRangeOptions(config.surrounding_timerange_options)}
+              update={this._onSurroundingTimeRangeOptionsUpdate}
+              validator={_surroundingTimeRangeValidator}
+              title="周边时间范围选项"
+              help={
+                <span>将<strong>周围</strong>时间范围选择器的可用选项配置为<strong>ISO8601持续时间</strong></span>}/>
 
             <Input id="filter-fields-input"
                    type="text"
-                   label="Surrounding search filter fields"
+                   label="周边搜索过滤字段"
                    onChange={this._onFilterFieldsUpdate}
                    value={surroundingFilterFields || filterFieldsString}
-                   help="A ',' separated list of message fields that will be used as filter for the surrounding messages query."
-                   required />
+                   help="',' 分隔的消息字段列表，将用作周围消息查询的过滤器。"
+                   required/>
 
             <Input id="disabled-fields-input"
                    type="text"
-                   label="Disabled analysis fields"
+                   label="禁用分析字段"
                    onChange={this._onAnalysisDisabledFieldsUpdate}
                    value={analysisDisabledFields || analysisDisabledFieldsString}
-                   help="A ',' separated list of message fields for which analysis features like QuickValues will be disabled in the web UI."
-                   required />
+                   help="',' 分隔的消息字段列表，在 Web UI 中将禁用 快速分析 等分析功能"
+                   required/>
           </fieldset>
         </BootstrapModalForm>
       </div>

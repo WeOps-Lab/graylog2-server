@@ -26,13 +26,13 @@ import ErrorPage from 'components/errors/ErrorPage';
  */
 const PageErrorOverview = ({ errors }) => {
   const formattedErrors = errors ? errors.map((error) => <li key={`key-${error.toString()}`}>{error.toString()}</li>) : [];
-  const description = <p>We had trouble fetching some data required to build this page, so here is a picture instead.</p>;
+  const description = <p>我们在获取构建此页面所需的一些数据时遇到了问题</p>;
 
   return (
-    <ErrorPage title="Error getting data" description={description} displayPageLayout={false}>
+    <ErrorPage title="加载数据出错" description={description} displayPageLayout={false}>
       <ul>
         {formattedErrors}
-        <li>Check your Graylog logs for more information.</li>
+        <li>检查DataInsight日志获取更多的信息.</li>
       </ul>
     </ErrorPage>
   );

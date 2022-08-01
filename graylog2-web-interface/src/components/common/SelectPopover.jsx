@@ -86,8 +86,8 @@ class SelectPopover extends React.Component {
     multiple: false,
     selectedItems: [],
     displayDataFilter: true,
-    filterPlaceholder: 'Type to filter',
-    clearSelectionText: 'Clear selection',
+    filterPlaceholder: '过滤',
+    clearSelectionText: '清除',
     disabled: false,
   };
 

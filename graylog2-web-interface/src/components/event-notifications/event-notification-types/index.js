@@ -33,7 +33,7 @@ PluginStore.register(new PluginManifest({}, {
   eventNotificationTypes: [
     {
       type: 'email-notification-v1',
-      displayName: 'Email Notification',
+      displayName: '邮件通知',
       formComponent: EmailNotificationFormContainer,
       summaryComponent: EmailNotificationSummary,
       detailsComponent: EmailNotificationDetails,
@@ -41,7 +41,7 @@ PluginStore.register(new PluginManifest({}, {
     },
     {
       type: 'http-notification-v1',
-      displayName: 'HTTP Notification',
+      displayName: 'HTTP通知',
       formComponent: HttpNotificationForm,
       summaryComponent: HttpNotificationSummary,
       detailsComponent: HttpNotificationDetails,
@@ -49,7 +49,7 @@ PluginStore.register(new PluginManifest({}, {
     },
     {
       type: 'legacy-alarm-callback-notification-v1',
-      displayName: 'Legacy Alarm Callbacks',
+      displayName: '旧版告警回调',
       formComponent: LegacyNotificationFormContainer,
       summaryComponent: LegacyNotificationSummaryContainer,
       detailsComponent: LegacyNotificationDetails,

@@ -50,10 +50,10 @@ class NotificationList extends React.Component {
     if (notification.missing) {
       return (
         <tr>
-          <td colSpan={2}>Could not find information for Notification <em>{notification.title}</em></td>
+          <td colSpan={2}>找不到通知信息 <em>{notification.title}</em></td>
           <td className="actions">
             <Button bsStyle="info" bsSize="xsmall" onClick={this.handleRemoveClick(notification.title)}>
-              Remove from Event
+              从事件移除
             </Button>
           </td>
         </tr>
@@ -68,7 +68,7 @@ class NotificationList extends React.Component {
         <td>{plugin.displayName || notification.config.type}</td>
         <td className="actions">
           <Button bsStyle="info" bsSize="xsmall" onClick={this.handleRemoveClick(notification.id)}>
-            Remove from Event
+            从事件移除
           </Button>
         </td>
       </tr>
@@ -87,7 +87,7 @@ class NotificationList extends React.Component {
       });
     const addNotificationButton = (
       <Button bsStyle="success" onClick={onAddNotificationClick}>
-        Add Notification
+        新增通知
       </Button>
     );
 
@@ -95,7 +95,7 @@ class NotificationList extends React.Component {
       return (
         <>
           <p>
-            This Event is not configured to trigger any Notifications yet.
+            此事件未配置任何通知.
           </p>
           {addNotificationButton}
         </>
@@ -106,7 +106,7 @@ class NotificationList extends React.Component {
       <>
         <DataTable id="event-definition-notifications"
                    className="table-striped table-hover"
-                   headers={['Notification', 'Type', 'Actions']}
+                   headers={['通知', '类型', '操作']}
                    sortByKey="title"
                    rows={definitionNotifications}
                    dataRowFormatter={this.notificationFormatter}

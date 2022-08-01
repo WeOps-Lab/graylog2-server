@@ -18,8 +18,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { Button, Panel } from 'components/bootstrap';
-import { Icon } from 'components/common';
+import {Button, Panel} from 'components/bootstrap';
+import {Icon} from 'components/common';
 
 import AggregationConditionSummary from './AggregationConditionSummary';
 
@@ -33,22 +33,22 @@ const StyledButton = styled(Button)`
 `;
 
 const AggregationConditionsFormSummary = (props) => {
-  const { conditions, series, expressionValidation, showInlineValidation, toggleShowValidation } = props;
+  const {conditions, series, expressionValidation, showInlineValidation, toggleShowValidation} = props;
 
   return (
     <div>
-      <StyledPanel header="Condition summary">
+      <StyledPanel header="条件描述">
         {expressionValidation.isValid
-          ? <p className="text-success"><Icon name="check-square" />&nbsp;Condition is valid</p>
+          ? <p className="text-success"><Icon name="check-square"/>&nbsp;条件合法</p>
           : (
             <p className="text-danger">
-              <Icon name="exclamation-triangle" />&nbsp;Condition is not valid
+              <Icon name="exclamation-triangle"/>&nbsp;条件不合法
               <StyledButton bsSize="xsmall" onClick={toggleShowValidation}>
-                {showInlineValidation ? 'Hide errors' : 'Show errors'}
+                {showInlineValidation ? '隐藏异常' : '显示异常'}
               </StyledButton>
             </p>
           )}
-        <b>Preview:</b> <AggregationConditionSummary series={series} conditions={conditions} />
+        <b>预览:</b> <AggregationConditionSummary series={series} conditions={conditions}/>
       </StyledPanel>
     </div>
   );
@@ -63,7 +63,7 @@ AggregationConditionsFormSummary.propTypes = {
 };
 
 AggregationConditionsFormSummary.defaultProps = {
-  expressionValidation: { isValid: true },
+  expressionValidation: {isValid: true},
   showInlineValidation: false,
 };
 

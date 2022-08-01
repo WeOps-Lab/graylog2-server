@@ -61,7 +61,7 @@ LoadingIndicator.propTypes = {
 };
 
 LoadingIndicator.defaultProps = {
-  text: 'Loading...',
+  text: '加载中...',
 };
 
 export default LoadingIndicator;

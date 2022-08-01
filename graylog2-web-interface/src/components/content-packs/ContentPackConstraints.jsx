@@ -45,7 +45,7 @@ class ContentPackConstraints extends React.Component {
     const constraint = item.constraint || item;
 
     constraint.fulfilled = isFulfilled || constraint.fulfilled;
-    const name = constraint.type === 'server-version' ? 'Graylog' : constraint.plugin;
+    const name = constraint.type === 'server-version' ? 'DataInsight' : constraint.plugin;
 
     return (
       <tr key={constraint.id}>
@@ -63,7 +63,7 @@ class ContentPackConstraints extends React.Component {
 
   render() {
     const { constraints: unfilteredConstraints } = this.props;
-    const headers = ['Name', 'Type', 'Version', 'Fulfilled'];
+    const headers = ['名称', '类型', '版本', '版本要求'];
     let constraints = unfilteredConstraints.map((constraint) => {
       const newConstraint = constraint.constraint || constraint;
 
@@ -78,7 +78,7 @@ class ContentPackConstraints extends React.Component {
 
     return (
       <div>
-        <h2>Constraints</h2>
+        <h2>约束</h2>
         <br />
         <br />
         <DataTable id="content-packs-constraints"

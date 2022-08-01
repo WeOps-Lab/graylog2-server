@@ -64,11 +64,11 @@ class FilterAggregationSummary extends React.Component {
     const { streams } = this.props;
 
     if ((!streamIds || streamIds.length === 0) && streamIdsWithMissingPermission.length <= 0) {
-      return 'No Streams selected, searches in all Streams';
+      return '没有选择任何消息流,使用所有消息流进行检索';
     }
 
     const warning = streamIdsWithMissingPermission.length > 0
-      ? <Alert bsStyle="warning">Missing Stream Permissions for:<br />{streamIdsWithMissingPermission.join(', ')}</Alert>
+      ? <Alert bsStyle="warning">缺少以下消息流权限：<br />{streamIdsWithMissingPermission.join(', ')}</Alert>
       : null;
 
     const renderedStreams = streamIds
@@ -92,7 +92,7 @@ class FilterAggregationSummary extends React.Component {
 
       return (
         <Alert bsStyle="danger">
-          <Icon name="exclamation-triangle" />&nbsp;There are undeclared query parameters: {undeclaredParameters}
+          <Icon name="exclamation-triangle" />&nbsp;有未声明的查询参数：{undeclaredParameters}
         </Alert>
       );
     }
@@ -126,30 +126,30 @@ class FilterAggregationSummary extends React.Component {
 
     return (
       <dl>
-        <dt>Type</dt>
+        <dt>类型</dt>
         <dd>{lodash.upperFirst(conditionType)}</dd>
-        <dt>Search Query</dt>
+        <dt>查询语句</dt>
         <dd>{query || '*'}</dd>
         {queryParameters.length > 0 && this.renderQueryParameters(queryParameters)}
-        <dt>Streams</dt>
+        <dt>消息流</dt>
         <dd className={styles.streamList}>{this.renderStreams(effectiveStreamIds, streamIdsWithMissingPermission)}</dd>
-        <dt>Search within</dt>
+        <dt>查询范围</dt>
         <dd>{searchWithin.duration} {searchWithin.unit.toLowerCase()}</dd>
-        <dt>Execute search every</dt>
+        <dt>查询周期</dt>
         <dd>{executeEvery.duration} {executeEvery.unit.toLowerCase()}</dd>
-        <dt>Enable scheduling</dt>
-        <dd>{isScheduled ? 'yes' : 'no'}</dd>
+        <dt>启用自动检查</dt>
+        <dd>{isScheduled ? '是' : '否'}</dd>
         {conditionType === 'aggregation' && (
           <>
-            <dt>Group by Field(s)</dt>
-            <dd>{groupBy && groupBy.length > 0 ? groupBy.join(', ') : 'No Group by configured'}</dd>
-            <dt>Create Events if</dt>
+            <dt>分组字段</dt>
+            <dd>{groupBy && groupBy.length > 0 ? groupBy.join(', ') : '没有配置分组条件'}</dd>
+            <dt>创建事件</dt>
             <dd>
               {validationResults.isValid
                 ? <AggregationConditionSummary series={series} conditions={conditions} />
                 : (
                   <Alert bsSize="small" bsStyle="danger"><Icon name="exclamation-triangle" />&nbsp;
-                    Condition is not valid: {validationResults.errors.join(', ')}
+                    条件不合法: {validationResults.errors.join(', ')}
                   </Alert>
                 )}
             </dd>

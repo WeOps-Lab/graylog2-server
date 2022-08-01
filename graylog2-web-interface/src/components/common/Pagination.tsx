@@ -140,7 +140,7 @@ const Pagination = ({
 
   if (currentPage > totalPages) {
     // eslint-disable-next-line no-console
-    console.warn('Graylog Pagination: `currentPage` prop should not be larger than `totalPages` prop.');
+    console.warn('`currentPage` 属性不应大于 `totalPages` 属性.');
 
     return null;
   }

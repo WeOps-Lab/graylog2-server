@@ -26,7 +26,7 @@ const PluginList = createReactClass({
   displayName: 'PluginList',
 
   ENTERPRISE_PLUGINS: {
-    'graylog-plugin-enterprise': 'Graylog Plugin Enterprise',
+    'graylog-plugin-enterprise': 'DataInsight 企业级插件',
   },
 
   _formatPlugin(pluginName) {
@@ -35,7 +35,7 @@ const PluginList = createReactClass({
     return (
       <li key={pluginName} className={plugin ? 'text-success' : 'text-danger'}>
         <Icon name={plugin ? 'check-circle' : 'minus-circle'} />&nbsp;
-        {this.ENTERPRISE_PLUGINS[pluginName]} is {plugin ? 'installed' : 'not installed'}
+        {this.ENTERPRISE_PLUGINS[pluginName]}  {plugin ? '已安装' : '未安装'}
       </li>
     );
   },
@@ -45,7 +45,7 @@ const PluginList = createReactClass({
 
     return (
       <>
-        <p>This is the status of Graylog Enterprise modules in this cluster:</p>
+        <p>这是此集群中 DataInsight 企业级 模块的状态:</p>
         <ul className={style.enterprisePlugins}>
           {enterprisePluginList}
         </ul>

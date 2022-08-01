@@ -54,7 +54,7 @@ class ContentPackApplyParameter extends React.Component {
     const enableClear = findIndex(this.props.appliedParameter,
       { paramName: paramMap.paramName, configKey: paramMap.configKey, readOnly: true }) < 0;
     const lastCol = enableClear
-      ? <td><Button bsStyle="info" bsSize="small" onClick={() => { this._parameterClear(paramMap.configKey); }}>Clear</Button></td>
+      ? <td><Button bsStyle="info" bsSize="small" onClick={() => { this._parameterClear(paramMap.configKey); }}>清除</Button></td>
       : <td />;
 
     return (
@@ -113,9 +113,9 @@ class ContentPackApplyParameter extends React.Component {
         }) < 0;
       });
     const emptyOption = (name) => { return (<option key="EMPTY" value="">{name}</option>); };
-    const configOptions = [emptyOption('Choose Config Key')].concat(configKeys.map((key) => <option key={key} value={key}>{key}</option>));
+    const configOptions = [emptyOption('选择配置名称')].concat(configKeys.map((key) => <option key={key} value={key}>{key}</option>));
     let { parameters } = this.props;
-    let emptyName = parameters.length <= 0 ? 'Create a parameter first' : 'Choose...';
+    let emptyName = parameters.length <= 0 ? '请先创建参数' : '选择...';
 
     if (this.state.config_key !== '' && parameters.length > 0) {
       const configKeyType = configPaths[this.state.config_key].getValueType();
@@ -124,7 +124,7 @@ class ContentPackApplyParameter extends React.Component {
         parameters = parameters.filter((parameter) => parameter.type === configKeyType);
       }
 
-      emptyName = parameters.length <= 0 ? `No parameter from type ${configKeyType}` : 'Choose...';
+      emptyName = parameters.length <= 0 ? `${configKeyType} 没有配置参数` : '选择...';
     }
 
     const parameterOptions = [emptyOption(emptyName)]
@@ -140,7 +140,7 @@ class ContentPackApplyParameter extends React.Component {
                      type="select"
                      value={this.state.config_key}
                      onChange={this._bindValue}
-                     label="Config Key"
+                     label="配置名称"
                      required>
                 {configOptions}
               </Input>
@@ -151,7 +151,7 @@ class ContentPackApplyParameter extends React.Component {
                      type="select"
                      value={this.state.parameter}
                      onChange={this._bindValue}
-                     label="Parameter"
+                     label="参数"
                      required>
                 {parameterOptions}
               </Input>
@@ -160,14 +160,14 @@ class ContentPackApplyParameter extends React.Component {
           </Row>
           <Row>
             <Col smOffset={10} sm={2}>
-              <Button bsStyle="primary" disabled={!this._valuesSelected()} type="submit">Apply</Button>
+              <Button bsStyle="primary" disabled={!this._valuesSelected()} type="submit">应用</Button>
             </Col>
           </Row>
         </form>
         <Row>
           <Col smOffset={1} sm={10}>
             <DataTable id="config-key-list"
-                       headers={['Config Key', 'Parameter', 'Action']}
+                       headers={['配置名称', '参数', '操作']}
                        filterKeys={[]}
                        rows={this.props.appliedParameter}
                        dataRowFormatter={this._configKeyRowFormatter} />

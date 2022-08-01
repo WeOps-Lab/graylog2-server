@@ -28,14 +28,13 @@ class EventKeyHelpPopover extends React.Component {
     const { id, ...otherProps } = this.props;
 
     return (
-      <Popover id={id} title="More about Event Keys" {...otherProps}>
+      <Popover id={id} title="更多关于Event Keys的介绍" {...otherProps}>
         <p>
-          Event Keys are Fields used to arrange Events into groups. A group is created for each unique Key, so
-          Graylog will generate as many Events as unique Keys are found. Example:
+          Event Keys是用于将事件分组的字段.为每个唯一键创建一个组,所以DataInsight将生成尽可能多的能找到唯一键的事件.例如：
         </p>
         <p>
-          <b>No Event Keys:</b> One Event for each <em>Login failure</em> message.<br />
-          <b>Event Key <code>username</code>:</b> One Event for each username with a <em>Login failure</em> message.
+          <b>没有Event Keys:</b> 每个事件一个 <em>登录失败</em> 的消息.<br />
+          <b>有Event Key <code>username</code>:</b> 按用户名分组,每个用户名一个 <em>登录失败</em> 的消息.
         </p>
       </Popover>
     );

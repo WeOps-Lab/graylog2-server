@@ -55,15 +55,15 @@ class EventDefinitionDescription extends React.Component {
   };
 
   static renderSchedulingInformation = (definition) => {
-    let schedulingInformation = 'Not scheduled.';
+    let schedulingInformation = '未执行.';
 
     if (definition.config.search_within_ms && definition.config.execute_every_ms) {
       const executeEveryFormatted = moment.duration(definition.config.execute_every_ms)
-        .format('d [days] h [hours] m [minutes] s [seconds]', { trim: 'all', usePlural: false });
+        .format('d [天] h [小时] m [分钟] s [秒]', { trim: 'all', usePlural: false });
       const searchWithinFormatted = moment.duration(definition.config.search_within_ms)
-        .format('d [days] h [hours] m [minutes] s [seconds]', { trim: 'all' });
+        .format('d [天] h [小时] m [分钟] s [秒]]', { trim: 'all' });
 
-      schedulingInformation = `Runs every ${executeEveryFormatted}, searching within the last ${searchWithinFormatted}.`;
+      schedulingInformation = `每 ${executeEveryFormatted} 自动执行, 检索最近 ${searchWithinFormatted} 的消息.`;
     }
 
     return schedulingInformation;
@@ -76,7 +76,7 @@ class EventDefinitionDescription extends React.Component {
       notificationsInformation = (
         <span>
           Triggers {definition.notifications.length}{' '}
-          <Pluralize singular="Notification" plural="Notifications" value={definition.notifications.length} />.
+          <Pluralize singular="通知" plural="通知" value={definition.notifications.length} />.
         </span>
       );
     }
@@ -87,7 +87,7 @@ class EventDefinitionDescription extends React.Component {
   static clearNotifications = (definition) => {
     return () => {
       // eslint-disable-next-line no-alert
-      if (window.confirm(`Are you sure you want to clear queued notifications for "${definition.title}"?`)) {
+      if (window.confirm(`你确定要清除 "${definition.title}" 的排队通知吗？`)) {
         EventDefinitionsActions.clearNotificationQueue(definition);
       }
     };
@@ -111,7 +111,7 @@ class EventDefinitionDescription extends React.Component {
     const scheduleCtx = lodash.get(context, `scheduler.${definition.id}`, null);
 
     if (!scheduleCtx.is_scheduled) {
-      return (<p>Event definition is not scheduled, no details available.</p>);
+      return (<p>事件未启动自动检查,没有可用的详细信息.</p>);
     }
 
     let timerange = null;
@@ -122,7 +122,7 @@ class EventDefinitionDescription extends React.Component {
 
       timerange = (
         <>
-          <DetailTitle>Next timerange:</DetailTitle>
+          <DetailTitle>下一个时间范围:</DetailTitle>
           <DetailValue><Timestamp dateTime={from} /> <Icon name="arrow-circle-right" /> <Timestamp dateTime={to} /></DetailValue>
         </>
       );
@@ -132,26 +132,26 @@ class EventDefinitionDescription extends React.Component {
       <Row>
         <Col md={6}>
           <DetailsList>
-            <DetailTitle>Status:</DetailTitle>
+            <DetailTitle>状态:</DetailTitle>
             <DetailValue>{scheduleCtx.status}</DetailValue>
             {scheduleCtx.triggered_at && (
               <>
-                <DetailTitle>Last execution:</DetailTitle>
+                <DetailTitle>最后执行时间:</DetailTitle>
                 <DetailValue><Timestamp dateTime={scheduleCtx.triggered_at} /></DetailValue>
               </>
             )}
             {scheduleCtx.next_time && (
               <>
-                <DetailTitle>Next execution:</DetailTitle>
+                <DetailTitle>下一次执行时间:</DetailTitle>
                 <DetailValue><Timestamp dateTime={scheduleCtx.next_time} /></DetailValue>
               </>
             )}
             {timerange}
-            <DetailTitle>Queued notifications:</DetailTitle>
+            <DetailTitle>排队通知:</DetailTitle>
             <DetailValue>{scheduleCtx.queued_notifications}
               {scheduleCtx.queued_notifications > 0 && (
                 <Button bsStyle="link" bsSize="xsmall" onClick={EventDefinitionDescription.clearNotifications(definition)}>
-                  clear
+                  清除
                 </Button>
               )}
             </DetailValue>
@@ -177,7 +177,7 @@ class EventDefinitionDescription extends React.Component {
         <p>
           {EventDefinitionDescription.renderSchedulingInformation(definition)} {EventDefinitionDescription.renderNotificationsInformation(definition)}
           <Button bsStyle="link" bsSize="xsmall" onClick={this.handleDetailsToggle}>
-            {showDetails ? 'Hide' : 'Show'} details
+            {showDetails ? '隐藏' : '显示'} 详情
           </Button>
         </p>
         {this.renderDetails(definition, context)}

@@ -30,7 +30,7 @@ import { isPermitted } from 'util/PermissionsMixin';
 import EventsSearchBar from './EventsSearchBar';
 import EventDetails from './EventDetails';
 
-const HEADERS = ['Description', 'Key', 'Type', 'Event Definition', 'Timestamp'];
+const HEADERS = ['描述', '键', '类型', '事件定义', '时间戳'];
 
 const ExpandedTR = styled.tr(({ theme }) => css`
   > td {
@@ -175,8 +175,8 @@ class Events extends React.Component {
             &nbsp;
             {event.message}
           </td>
-          <td>{event.key || <em>none</em>}</td>
-          <td>{event.alert ? <Label bsStyle="warning">Alert</Label> : <Label bsStyle="info">Event</Label>}</td>
+          <td>{event.key || <em>无</em>}</td>
+          <td>{event.alert ? <Label bsStyle="warning">告警</Label> : <Label bsStyle="info">事件</Label>}</td>
           <td>
             {this.renderLinkToEventDefinition(event, eventDefinitionContext)}
           </td>
@@ -197,14 +197,13 @@ class Events extends React.Component {
     return (
       <Row>
         <Col md={6} mdOffset={3} lg={4} lgOffset={4}>
-          <EmptyEntity title="Looks like you didn't define any Events yet">
+          <EmptyEntity title="没有定义任何事件">
             <p>
-              Create Event Definitions that are able to search, aggregate or correlate Messages and other
-              Events, allowing you to record significant Events in Graylog and alert on them.
+              创建能够搜索、聚合或关联消息和其他事件的事件定义,允许您在DataInsight中记录重要事件并发出告警.
             </p>
             <IfPermitted permissions="eventdefinitions:create">
               <LinkContainer to={Routes.ALERTS.DEFINITIONS.CREATE}>
-                <Button bsStyle="success">Get Started!</Button>
+                <Button bsStyle="success">开始使用!</Button>
               </LinkContainer>
             </IfPermitted>
           </EmptyEntity>
@@ -233,8 +232,8 @@ class Events extends React.Component {
     }
 
     const filter = parameters.filter.alerts;
-    const excludedFile = filter === 'exclude' ? 'Events' : 'Alerts & Events';
-    const entity = (filter === 'only' ? 'Alerts' : excludedFile);
+    const excludedFile = filter === 'exclude' ? '事件' : '告警 & 事件';
+    const entity = (filter === 'only' ? '告警' : excludedFile);
 
     return (
       <Row>
@@ -253,7 +252,7 @@ class Events extends React.Component {
                          totalItems={totalEvents}
                          onChange={onPageChange}>
             {eventList.length === 0 ? (
-              <Alert bsStyle="info">No {entity} found for the current search criteria.</Alert>
+              <Alert bsStyle="info">没有 {entity} 被检索.</Alert>
             ) : (
               <EventsTable id="events-table">
                 <thead>

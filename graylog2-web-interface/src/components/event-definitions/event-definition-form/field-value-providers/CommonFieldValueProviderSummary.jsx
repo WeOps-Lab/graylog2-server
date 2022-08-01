@@ -50,17 +50,17 @@ class CommonFieldValueProviderSummary extends React.Component {
         <dd>
           <Button bsStyle="link" className="btn-text" bsSize="xsmall" onClick={this.toggleDisplayDetails}>
             <Icon name={`caret-${displayDetails ? 'down' : 'right'}`} />&nbsp;
-            {displayDetails ? 'Less details' : 'More details'}
+            {displayDetails ? '简略信息' : '详细信息'}
           </Button>
           {displayDetails && (
             <Table condensed hover className={styles.fixedTable}>
               <tbody>
                 <tr>
-                  <td>Is Key?</td>
-                  <td>{keys.includes(fieldName) ? 'Yes' : 'No'}</td>
+                  <td>是一个Key?</td>
+                  <td>{keys.includes(fieldName) ? '是' : '否'}</td>
                 </tr>
                 <tr>
-                  <td>Data Type</td>
+                  <td>数据类型</td>
                   <td>{config.data_type}</td>
                 </tr>
                 {children}

@@ -42,7 +42,7 @@ class ContentPackPreview extends React.Component {
     return (
       <a download={filename} href={href}>
         <Button id="download" bsStyle="info" onClick={this.props.onSave}>
-          Create and Download
+          创建并下载
         </Button>
       </a>
     );

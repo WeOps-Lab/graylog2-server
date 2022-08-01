@@ -72,7 +72,7 @@ class EventNotificationsContainer extends React.Component {
 
   handleDelete = (definition) => {
     return () => {
-      if (window.confirm(`Are you sure you want to delete "${definition.title}"?`)) {
+      if (window.confirm(`确定要删除 "${definition.title}"?`)) {
         EventNotificationsActions.delete(definition);
       }
     };
@@ -96,7 +96,7 @@ class EventNotificationsContainer extends React.Component {
               isLoading: false,
               id: definition.id,
               error: false,
-              message: 'Notification was executed successfully.',
+              message: '通知已成功执行.',
             };
 
             return response;
@@ -105,7 +105,7 @@ class EventNotificationsContainer extends React.Component {
             testResult = { isLoading: false, id: definition.id, error: true };
 
             if (errorResponse.status !== 400 || !errorResponse.additional.body || !errorResponse.additional.body.failed) {
-              testResult.message = errorResponse.responseMessage || 'Unknown errorResponse, please check your Graylog server logs.';
+              testResult.message = errorResponse.responseMessage || '未知错误响应，请检查您的 DataInsight 服务器日志.';
             }
 
             return errorResponse;
@@ -123,7 +123,7 @@ class EventNotificationsContainer extends React.Component {
     const { testResult } = this.state;
 
     if (!notifications.notifications) {
-      return <Spinner text="Loading Notifications information..." />;
+      return <Spinner text="加载通知信息..." />;
     }
 
     return (

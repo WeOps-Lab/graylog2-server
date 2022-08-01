@@ -94,7 +94,7 @@ class ContentPacksList extends React.Component {
     const modal = (
       <BootstrapModalWrapper ref={(node) => { modalRef = node; }} bsSize="large">
         <Modal.Header closeButton>
-          <Modal.Title>Install</Modal.Title>
+          <Modal.Title>安装</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ContentPackInstall ref={(node) => { installRef = node; }}
@@ -104,8 +104,8 @@ class ContentPacksList extends React.Component {
         <Modal.Footer>
           <div className="pull-right">
             <ButtonToolbar>
-              <Button bsStyle="primary" onClick={onInstall}>Install</Button>
-              <Button onClick={closeModal}>Close</Button>
+              <Button bsStyle="primary" onClick={onInstall}>安装</Button>
+              <Button onClick={closeModal}>关闭</Button>
             </ButtonToolbar>
           </div>
         </Modal.Footer>
@@ -134,13 +134,13 @@ class ContentPacksList extends React.Component {
       const metadata = contentPackMetadata[item.id] || {};
       const installed = Object.keys(metadata).find((rev) => metadata[rev].installation_count > 0);
       const states = installed ? ['installed'] : [];
-      const updateButton = states.includes('updatable') ? <Button bsSize="small" bsStyle="primary">Update</Button> : '';
+      const updateButton = states.includes('updatable') ? <Button bsSize="small" bsStyle="primary">更新</Button> : '';
 
       return (
         <ControlledTableList.Item key={item.id}>
           <Row className="row-sm">
             <Col md={9}>
-              <h3><Link to={Routes.SYSTEM.CONTENTPACKS.show(item.id)}>{item.name}</Link> <small>Latest Version: {item.rev} <ContentPackStatus contentPackId={item.id} states={states} /> </small>
+              <h3><Link to={Routes.SYSTEM.CONTENTPACKS.show(item.id)}>{item.name}</Link> <small>最新版本: {item.rev} <ContentPackStatus contentPackId={item.id} states={states} /> </small>
               </h3>
             </Col>
             <Col md={3} className="text-right">
@@ -151,14 +151,14 @@ class ContentPacksList extends React.Component {
               &nbsp;
               <DropdownButton id={`more-actions-${item.id}`} title="More Actions" bsSize="small" pullRight>
                 <LinkContainer to={Routes.SYSTEM.CONTENTPACKS.show(item.id)}>
-                  <MenuItem>Show</MenuItem>
+                  <MenuItem>查看</MenuItem>
                 </LinkContainer>
                 <LinkContainer to={Routes.SYSTEM.CONTENTPACKS.edit(encodeURIComponent(item.id), encodeURIComponent(item.rev))}>
-                  <MenuItem>Create New Version</MenuItem>
+                  <MenuItem>创建新版本</MenuItem>
                 </LinkContainer>
-                <MenuItem onSelect={() => { downloadRef.open(); }}>Download</MenuItem>
+                <MenuItem onSelect={() => { downloadRef.open(); }}>下载</MenuItem>
                 <MenuItem divider />
-                <MenuItem onSelect={() => { onDeletePack(item.id); }}>Delete All Versions</MenuItem>
+                <MenuItem onSelect={() => { onDeletePack(item.id); }}>删除所有版本</MenuItem>
               </DropdownButton>
               {downloadModal}
             </Col>

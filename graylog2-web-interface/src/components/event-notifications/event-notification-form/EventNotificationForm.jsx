@@ -119,7 +119,7 @@ class EventNotificationForm extends React.Component {
       })
       : null;
 
-    const testButtonText = testResult.isLoading ? <Spinner text="Testing..." /> : 'Execute Test Notification';
+    const testButtonText = testResult.isLoading ? <Spinner text="测试中..." /> : '发送测试通知';
 
     return (
       <Row>
@@ -127,25 +127,25 @@ class EventNotificationForm extends React.Component {
           <form onSubmit={this.handleSubmit} id={formId}>
             <Input id="notification-title"
                    name="title"
-                   label="Title"
+                   label="标题"
                    type="text"
                    bsStyle={validation.errors.title ? 'error' : null}
-                   help={lodash.get(validation, 'errors.title[0]', 'Title to identify this Notification.')}
+                   help={lodash.get(validation, 'errors.title[0]', '标识此通知的标题.')}
                    value={notification.title}
                    onChange={this.handleChange}
                    required />
 
             <Input id="notification-description"
                    name="description"
-                   label={<span>Description <small className="text-muted">(Optional)</small></span>}
+                   label={<span>描述 <small className="text-muted">(可选)</small></span>}
                    type="textarea"
-                   help="Longer description for this Notification."
+                   help="此通知的描述."
                    value={notification.description}
                    onChange={this.handleChange}
                    rows={2} />
 
             <FormGroup controlId="notification-type" validationState={validation.errors.config ? 'error' : null}>
-              <ControlLabel>Notification Type</ControlLabel>
+              <ControlLabel>通知类型</ControlLabel>
               <Select id="notification-type"
                       options={formattedEventNotificationTypes()}
                       value={notification.config.type}
@@ -153,7 +153,7 @@ class EventNotificationForm extends React.Component {
                       clearable={false}
                       required />
               <HelpBlock>
-                {lodash.get(validation, 'errors.config[0]', 'Choose the type of Notification to create.')}
+                {lodash.get(validation, 'errors.config[0]', '选择创建的通知类型.')}
               </HelpBlock>
             </FormGroup>
 
@@ -161,7 +161,7 @@ class EventNotificationForm extends React.Component {
 
             {notificationFormComponent && (
               <FormGroup>
-                <ControlLabel>Test Notification <small className="text-muted">(Optional)</small></ControlLabel>
+                <ControlLabel>测试通知 <small className="text-muted">(可选)</small></ControlLabel>
                 <FormControl.Static>
                   <Button bsStyle="info"
                           bsSize="small"
@@ -172,20 +172,20 @@ class EventNotificationForm extends React.Component {
                 </FormControl.Static>
                 {testResult.message && (
                   <Alert bsStyle={testResult.error ? 'danger' : 'success'}>
-                    <b>{testResult.error ? 'Error: ' : 'Success: '}</b>
+                    <b>{testResult.error ? '失败: ' : '成功: '}</b>
                     {testResult.message}
                   </Alert>
                 )}
                 <HelpBlock>
-                  Execute this Notification with a test Alert.
+                  发送测试告警通知.
                 </HelpBlock>
               </FormGroup>
             )}
 
             {!embedded && (
               <ButtonToolbar>
-                <Button bsStyle="primary" type="submit" disabled={!isSubmitEnabled}>{action === 'create' ? 'Create' : 'Update'}</Button>
-                <Button onClick={onCancel}>Cancel</Button>
+                <Button bsStyle="primary" type="submit" disabled={!isSubmitEnabled}>{action === 'create' ? '创建' : '更新'}</Button>
+                <Button onClick={onCancel}>取消</Button>
               </ButtonToolbar>
             )}
           </form>

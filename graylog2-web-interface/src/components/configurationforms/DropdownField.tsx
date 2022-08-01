@@ -46,7 +46,7 @@ const DropdownField = ({ autoFocus, field, onChange, title, typeName, value, add
   const options = Object.entries(field.additional_info.values).map(([k, v]) => formatOption(k, v));
 
   if (addPlaceholder) {
-    options.unshift(formatOption('', `Select ${field.human_name || title}`, true));
+    options.unshift(formatOption('', `选择 ${field.human_name || title}`, true));
   }
 
   const label = <>{field.human_name} {optionalMarker(field)}</>;

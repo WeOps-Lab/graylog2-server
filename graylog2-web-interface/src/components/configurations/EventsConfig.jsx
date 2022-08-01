@@ -140,7 +140,12 @@ const EventsConfig = createReactClass({
   },
 
   _titleCase(str) {
-    return lodash.capitalize(str);
+    const MAPPING = {
+      'HOURS': '小时',
+      'MINUTES': '分钟',
+      'SECONDS': '秒',
+    }
+    return MAPPING[str];
   },
 
   render() {
@@ -152,68 +157,68 @@ const EventsConfig = createReactClass({
 
     return (
       <div>
-        <h2>Events System</h2>
+        <h2>事件系统</h2>
 
         <dl className="deflist">
-          <dt>Search Timeout:</dt>
+          <dt>搜索超时时间:</dt>
           <dd>{eventsSearchTimeout.duration} {this._titleCase(eventsSearchTimeout.unit)}</dd>
-          <dt>Notification Retry:</dt>
+          <dt>通知重试间隔:</dt>
           <dd>{eventsNotificationRetryPeriod.duration} {this._titleCase(eventsNotificationRetryPeriod.unit)}</dd>
-          <dt>Notification Backlog:</dt>
+          <dt>通知消息:</dt>
           <dd>{eventsNotificationDefaultBacklog}</dd>
-          <dt>Catch Up Window:</dt>
+          <dt>捕获窗口:</dt>
           <dd>{eventsCatchupWindow.duration > 0 ? eventsCatchupWindow.duration : 'disabled'} {eventsCatchupWindow.duration > 0 ? this._titleCase(eventsCatchupWindow.unit) : ''}</dd>
         </dl>
 
         <IfPermitted permissions="clusterconfigentry:edit">
-          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>Update</Button>
+          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>更新</Button>
         </IfPermitted>
 
         <BootstrapModalForm ref={(modal) => { this.modal = modal; }}
-                            title="Update Events System Configuration"
+                            title="更新事件系统配置"
                             onSubmitForm={this._saveConfig}
                             onModalClose={this._resetConfig}
-                            submitButtonText="Save">
+                            submitButtonText="保存">
           <fieldset>
             <FormGroup controlId="search-timeout-field">
-              <TimeUnitInput label="Search Timeout"
+              <TimeUnitInput label="搜索超时时间"
                              update={this._onSearchTimeoutUpdate}
                              value={eventsSearchTimeout.duration}
                              unit={eventsSearchTimeout.unit}
                              units={TIME_UNITS}
                              required />
               <HelpBlock>
-                Amount of time after which an Elasticsearch query is interrupted. (Minimum timeout is 1s)
+                ElasticSearch查询超时时间。（最小超时为1s）
               </HelpBlock>
             </FormGroup>
             <FormGroup controlId="notifications-retry-field">
-              <TimeUnitInput label="Notifications retry period"
+              <TimeUnitInput label="通知重试间隔"
                              update={this._onRetryPeriodUpdate}
                              value={eventsNotificationRetryPeriod.duration}
                              unit={eventsNotificationRetryPeriod.unit}
                              units={TIME_UNITS}
                              required />
               <HelpBlock>
-                Amount of time after which a failed notification is resend. (Minimum is 0 or immediate retry)
+                重新发送失败通知的间隔。（最小值为0或立即重试）
               </HelpBlock>
             </FormGroup>
             <Input id="notification-backlog-field"
                    type="number"
                    onChange={this._onBacklogUpdate}
-                   label="Default notifications backlog size"
-                   help="Amount of log messages included in a notification by default."
+                   label="通知消息量"
+                   help="通知中默认包含的消息."
                    value={eventsNotificationDefaultBacklog}
                    min="0"
                    required />
             <FormGroup controlId="catch-up-window">
-              <TimeUnitInput label="Catch up window size"
+              <TimeUnitInput label="捕获窗口大小"
                              update={this._onCatchUpWindowUpdate}
                              value={eventsCatchupWindow.duration}
                              unit={eventsCatchupWindow.unit}
                              enabled={eventsCatchupWindow.duration > 0}
                              units={TIME_UNITS} />
-              <HelpBlock>If Event processor execution is behind schedule, queries on older data will be run with this window size to speed up processing.
-                (If the &quot;search within the last&quot; setting of an event definiton is greater, this setting will be ignored)
+              <HelpBlock>如果事件处理器执行落后于计划，将使用此窗口大小运行对旧数据的查询，以加快处理速度。
+                （如果&quot;最后一次搜索&quot;事件定义的设置更大，则此配置将被忽略。)
               </HelpBlock>
             </FormGroup>
           </fieldset>

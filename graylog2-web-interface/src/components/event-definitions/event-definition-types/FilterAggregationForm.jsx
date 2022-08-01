@@ -136,20 +136,20 @@ class FilterAggregationForm extends React.Component {
                         onChange={this.propagateChange} />
 
             <FormGroup>
-              <ControlLabel>Create Events for Definition if...</ControlLabel>
+              <ControlLabel>当满足条件时创建事件</ControlLabel>
               <Radio id="filter-type"
                      name="conditionType"
                      value={conditionTypes.FILTER}
                      checked={conditionType === conditionTypes.FILTER}
                      onChange={this.handleTypeChange}>
-                Filter has results
+                过滤器包含结果
               </Radio>
               <Radio id="aggregation-type"
                      name="conditionType"
                      value={conditionTypes.AGGREGATION}
                      checked={conditionType === conditionTypes.AGGREGATION}
                      onChange={this.handleTypeChange}>
-                Aggregation of results reaches a threshold
+                聚合结果达到阈值
               </Radio>
             </FormGroup>
           </Col>

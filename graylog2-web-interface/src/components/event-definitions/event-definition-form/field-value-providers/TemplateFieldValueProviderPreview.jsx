@@ -16,7 +16,7 @@
  */
 import React from 'react';
 
-import { Panel } from 'components/bootstrap';
+import {Panel} from 'components/bootstrap';
 
 import styles from './TemplateFieldValueProviderPreview.css';
 
@@ -27,16 +27,16 @@ class TemplateFieldValueProviderPreview extends React.Component {
     return (
       <Panel className={styles.templatePreview} header={<h3>Available Fields in Template</h3>}>
         <p>
-          Graylog lets you enrich generated Events with dynamic values. You can access Fields from the Event context{' '}
+          DataInsight允许您使用动态值丰富生成的事件.您可以从事件上下文访问字段,如:{' '}
           {/* eslint-disable-next-line no-template-curly-in-string */}
           with <code>{'${source.<fieldName>}'}</code>.
-          <br />
-          Available Fields in the Template depend on the condition that created the Event:
+          <br/>
+          模板中的可用字段取决于创建事件的条件:
         </p>
         <ul>
-          <li><b>Filter:</b> All Fields in the original log message</li>
-          <li><b>Aggregation:</b> Fields set in Group By with their original names</li>
-          <li><b>Correlation:</b> All Fields in the last matched and non-negated Event</li>
+          <li><b>过滤:</b> 原始日志消息中的所有字段</li>
+          <li><b>聚合:</b> 按原始名称分组的字段</li>
+          <li><b>相关性:</b> 上一个匹配且非否定事件中的所有字段</li>
         </ul>
       </Panel>
     );

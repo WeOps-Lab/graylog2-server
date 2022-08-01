@@ -91,7 +91,7 @@ class EventDefinitionForm extends React.Component {
         <div className="pull-right">
           <ButtonToolbar>
             <Button onClick={onCancel}>Cancel</Button>
-            <Button bsStyle="primary" onClick={this.handleSubmit}>Done</Button>
+            <Button bsStyle="primary" onClick={this.handleSubmit}>完成</Button>
           </ButtonToolbar>
         </div>
       );
@@ -106,12 +106,12 @@ class EventDefinitionForm extends React.Component {
         <Button bsStyle="info"
                 onClick={() => this.handleStepChange(previousStep)}
                 disabled={activeStepIndex === 0}>
-          Previous
+          上一步
         </Button>
         <div className="pull-right">
           <Button bsStyle="info"
                   onClick={() => this.handleStepChange(nextStep)}>
-            Next
+            下一步
           </Button>
         </div>
       </div>
@@ -146,27 +146,27 @@ class EventDefinitionForm extends React.Component {
     const steps = [
       {
         key: STEP_KEYS[0],
-        title: 'Event Details',
+        title: '事件详情',
         component: <EventDetailsForm {...defaultStepProps} />,
       },
       {
         key: STEP_KEYS[1],
-        title: lodash.defaultTo(eventDefinitionType.displayName, 'Condition'),
+        title: lodash.defaultTo(eventDefinitionType.displayName, '条件'),
         component: <EventConditionForm {...defaultStepProps} />,
       },
       {
         key: STEP_KEYS[2],
-        title: 'Fields',
+        title: '字段',
         component: <FieldsForm {...defaultStepProps} />,
       },
       {
         key: STEP_KEYS[3],
-        title: 'Notifications',
+        title: '通知',
         component: <NotificationsForm {...defaultStepProps} notifications={notifications} defaults={defaults} />,
       },
       {
         key: STEP_KEYS[4],
-        title: 'Summary',
+        title: '总览',
         component: (
           <EventDefinitionSummary action={action}
                                   eventDefinition={eventDefinition}

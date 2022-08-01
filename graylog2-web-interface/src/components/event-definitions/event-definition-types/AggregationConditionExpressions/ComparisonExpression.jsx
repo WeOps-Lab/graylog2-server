@@ -50,7 +50,7 @@ const ComparisonExpression = (props) => {
             {renderLabel && <ControlLabel>Is</ControlLabel>}
             <Select id="aggregation-condition"
                     matchProp="label"
-                    placeholder="Select Condition"
+                    placeholder="选择条件"
                     onChange={handleExpressionOperatorChange}
                     options={[
                       { label: '<', value: '<' },

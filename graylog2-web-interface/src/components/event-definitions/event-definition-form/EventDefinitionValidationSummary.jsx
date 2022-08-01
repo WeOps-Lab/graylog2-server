@@ -38,8 +38,8 @@ class EventDefinitionValidationSummary extends React.Component {
       <Row>
         <Col md={12}>
           <Alert bsStyle="danger" className={commonStyles.validationSummary}>
-            <h4>We found some errors!</h4>
-            <p>Please correct the following errors before saving this Event Definition:</p>
+            <h4>异常!</h4>
+            <p>保存此事件定义之前，请更正以下错误:</p>
             <ul>
               {fieldsWithErrors.map((field) => {
                 return validation.errors[field].map((error) => {

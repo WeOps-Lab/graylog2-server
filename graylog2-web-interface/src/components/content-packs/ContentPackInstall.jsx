@@ -98,7 +98,7 @@ class ContentPackInstall extends React.Component {
 
       const newResult = result;
 
-      newResult[parameter.name] = 'Needs to be filled.';
+      newResult[parameter.name] = '不可为空.';
 
       return newResult;
     }, {});
@@ -138,7 +138,7 @@ class ContentPackInstall extends React.Component {
       <div>
         <Row>
           <Col smOffset={1} sm={10}>
-            <h2>Install comment</h2>
+            <h2>安装备注</h2>
             <br />
             <br />
             <Input name="comment"
@@ -149,14 +149,14 @@ class ContentPackInstall extends React.Component {
                    onChange={this._getComment}
                    labelClassName="col-sm-3"
                    wrapperClassName="col-sm-7"
-                   label="Comment" />
+                   label="备注" />
           </Col>
         </Row>
         {parameterInput.length > 0
       && (
       <Row>
         <Col smOffset={1} sm={10}>
-          <h2>Configure Parameter</h2>
+          <h2>配置参数</h2>
           <br />
           <br />
           {parameterInput}

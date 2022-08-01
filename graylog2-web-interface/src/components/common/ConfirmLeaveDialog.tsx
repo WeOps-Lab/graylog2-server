@@ -61,7 +61,7 @@ ConfirmLeaveDialog.propTypes = {
 };
 
 ConfirmLeaveDialog.defaultProps = {
-  question: 'Are you sure?',
+  question: '确定?',
 };
 
 /** @component */

@@ -107,16 +107,15 @@ class FieldsForm extends React.Component {
     return (
       <Row>
         <Col md={12}>
-          <h2 className={commonStyles.title}>Event Fields <small>(optional)</small></h2>
+          <h2 className={commonStyles.title}>事件字段 <small>(可选)</small></h2>
           <p>
-            Include additional information in Events generated from this Event Definition by adding custom Fields. That
-            can help you search Events or having more context when receiving Notifications.
+            通过添加自定义字段,此事件定义生成的事件中可以包含其它附加信息.在接收通知时这可以帮助您搜索事件或具有更多上下文.
           </p>
 
           {errors.length > 0 && (
             <Alert bsStyle="danger" className={commonStyles.validationSummary}>
-              <h4>Fields with errors</h4>
-              <p>Please correct the following errors before saving this Event Definition:</p>
+              <h4>字段错误</h4>
+              <p>保存此事件定义之前,请更正以下错误:</p>
               <ul>
                 {errors.map((error) => {
                   return <li key={error}>{error}</li>;
@@ -135,7 +134,7 @@ class FieldsForm extends React.Component {
                   <Button bsStyle="link" bsSize="xsmall"><Icon name="question-circle" /></Button>
                 </OverlayTrigger>
               </dt>
-              <dd>{eventDefinition.key_spec.length > 0 ? eventDefinition.key_spec.join(', ') : 'No Keys configured yet.'}</dd>
+              <dd>{eventDefinition.key_spec.length > 0 ? eventDefinition.key_spec.join(', ') : '未配置键.'}</dd>
             </dl>
           )}
           <FieldsList fields={eventDefinition.field_spec}

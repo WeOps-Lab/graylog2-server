@@ -17,7 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Well } from 'components/bootstrap';
+import {Well} from 'components/bootstrap';
 
 import CommonNotificationSummary from './CommonNotificationSummary';
 import styles from './EmailNotificationSummary.css';
@@ -34,42 +34,42 @@ class EmailNotificationSummary extends React.Component {
   };
 
   render() {
-    const { notification } = this.props;
+    const {notification} = this.props;
 
     return (
       <CommonNotificationSummary {...this.props}>
         <>
           <tr>
-            <td>Sender</td>
+            <td>发送者</td>
             <td>{notification.config.sender}</td>
           </tr>
           <tr>
-            <td>Subject</td>
+            <td>主题</td>
             <td>{notification.config.subject}</td>
           </tr>
           <tr>
-            <td>User recipients</td>
-            <td>{notification.config.user_recipients.join(', ') || 'No users will receive this notification.'}</td>
+            <td>接收用户</td>
+            <td>{notification.config.user_recipients.join(', ') || '没有用户接收此通知.'}</td>
           </tr>
           <tr>
-            <td>Email recipients</td>
+            <td>邮件接收者</td>
             <td>
-              {notification.config.email_recipients.join(', ') || 'No email addresses are configured to receive this notification.'}
+              {notification.config.email_recipients.join(', ') || '没有配置邮箱地址接收此通知.'}
             </td>
           </tr>
           <tr>
-            <td>Email Body</td>
+            <td>邮件内容</td>
             <td>
               <Well bsSize="small" className={styles.bodyPreview}>
-                {notification.config.body_template || <em>Empty body</em>}
+                {notification.config.body_template || <em>暂无数据</em>}
               </Well>
             </td>
           </tr>
           <tr>
-            <td>Email HTML Body</td>
+            <td>HTML邮件内容</td>
             <td>
               <Well bsSize="small" className={styles.bodyPreview}>
-                {notification.config.html_body_template || <em>Empty HTML body</em>}
+                {notification.config.html_body_template || <em>暂无数据</em>}
               </Well>
             </td>
           </tr>

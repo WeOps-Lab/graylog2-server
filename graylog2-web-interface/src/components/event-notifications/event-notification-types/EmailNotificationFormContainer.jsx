@@ -60,7 +60,7 @@ class EmailNotificationFormContainer extends React.Component {
     const { users } = this.state;
 
     if (!users) {
-      return <p><Spinner text="Loading Notification information..." /></p>;
+      return <p><Spinner text="加载通知信息中..." /></p>;
     }
 
     return <EmailNotificationForm {...this.props} users={users} />;

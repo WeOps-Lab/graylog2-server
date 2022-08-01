@@ -51,7 +51,7 @@ const PageSizeSelect = ({ pageSizes, pageSize, onChange, className }: Props) => 
     <Input id="page-size"
            type="select"
            bsSize="small"
-           label="Show"
+           label="显示"
            value={pageSize}
            onChange={onChange}
            formGroupClassName="page-size-select">

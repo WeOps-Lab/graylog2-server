@@ -96,21 +96,21 @@ class LookupTableFieldValueProviderForm extends React.Component {
           <FormGroup controlId="lookup-provider-table" validationState={validation.errors.table_name ? 'error' : null}>
             <ControlLabel>Select Lookup Table</ControlLabel>
             <Select name="event-field-table-name"
-                    placeholder="Select Lookup Table"
+                    placeholder="选择数据字典"
                     onChange={this.handleSelectChange('table_name')}
                     options={this.formatLookupTables(lookupTables)}
                     value={provider.table_name}
                     matchProp="label"
                     required />
             <HelpBlock>
-              {validation.errors.table_name || 'Select the Lookup Table Graylog should use to get the value.'}
+              {validation.errors.table_name || '选择DataInsight用来获取值的数据字典.'}
             </HelpBlock>
           </FormGroup>
 
           <FormGroup controlId="lookup-provider-table" validationState={validation.errors.key_field ? 'error' : null}>
-            <ControlLabel>Lookup Table Key Field</ControlLabel>
+            <ControlLabel>数据字典键属性</ControlLabel>
             <Select name="lookup-provider-key"
-                    placeholder="Select Field"
+                    placeholder="选择字段"
                     onChange={this.handleSelectChange('key_field')}
                     options={this.formatMessageFields(allFieldTypes)}
                     value={provider.key_field}
@@ -118,7 +118,7 @@ class LookupTableFieldValueProviderForm extends React.Component {
                     allowCreate
                     required />
             <HelpBlock>
-              {validation.errors.key_field || 'Message Field name whose value will be used as Lookup Table Key.'}
+              {validation.errors.key_field || '消息字段名,其值将用作数据字典键.'}
             </HelpBlock>
           </FormGroup>
         </Col>

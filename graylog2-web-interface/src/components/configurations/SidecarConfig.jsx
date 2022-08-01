@@ -116,69 +116,69 @@ const SidecarConfig = createReactClass({
   render() {
     return (
       <div>
-        <h2>Sidecars System</h2>
+        <h2>客户端系统</h2>
 
         <dl className="deflist">
-          <dt>Inactive threshold:</dt>
+          <dt>非活跃阈值:</dt>
           <dd>{this.state.config.sidecar_inactive_threshold}</dd>
-          <dt>Expiration threshold:</dt>
+          <dt>过期阈值:</dt>
           <dd>{this.state.config.sidecar_expiration_threshold}</dd>
-          <dt>Update interval:</dt>
+          <dt>更新间隔:</dt>
           <dd>{this.state.config.sidecar_update_interval}</dd>
-          <dt>Send status:</dt>
+          <dt>发送状态:</dt>
           <dd>{StringUtils.capitalizeFirstLetter(this.state.config.sidecar_send_status.toString())}</dd>
-          <dt>Override configuration:</dt>
+          <dt>覆盖配置:</dt>
           <dd>{StringUtils.capitalizeFirstLetter(this.state.config.sidecar_configuration_override.toString())}</dd>
         </dl>
 
         <IfPermitted permissions="clusterconfigentry:edit">
-          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>Update</Button>
+          <Button bsStyle="info" bsSize="xs" onClick={this._openModal}>更新</Button>
         </IfPermitted>
 
         <BootstrapModalForm ref="configModal"
-                            title="Update Sidecars System Configuration"
+                            title="更新客户端系统配置"
                             onSubmitForm={this._saveConfig}
                             onModalClose={this._resetConfig}
-                            submitButtonText="Save">
+                            submitButtonText="保存">
           <fieldset>
             <ISODurationInput id="inactive-threshold-field"
                               duration={this.state.config.sidecar_inactive_threshold}
                               update={this._onUpdate('sidecar_inactive_threshold')}
-                              label="Inactive threshold (as ISO8601 Duration)"
-                              help="Amount of time of inactivity after which Sidecars are flagged as inactive."
+                              label="非活跃阈值(ISO8601格式)"
+                              help="在客户端被标记为非活跃状态之后的非活跃时间."
                               validator={this._inactiveThresholdValidator}
-                              errorText="invalid (min: 1 second)"
+                              errorText="不合法(最少1秒)"
                               required />
 
             <ISODurationInput id="sidecar-expiration-field"
                               duration={this.state.config.sidecar_expiration_threshold}
                               update={this._onUpdate('sidecar_expiration_threshold')}
-                              label="Expiration threshold (as ISO8601 Duration)"
-                              help="Amount of time after which inactive Sidecars are purged from the database."
+                              label="过期阈值(ISO8601格式)"
+                              help="从数据库中清除非活跃客户端的时间."
                               validator={this._expirationThresholdValidator}
-                              errorText="invalid (min: 1 minute)"
+                              errorText="不合法(最少1分钟)"
                               required />
             <ISODurationInput id="sidecar-update-field"
                               duration={this.state.config.sidecar_update_interval}
                               update={this._onUpdate('sidecar_update_interval')}
-                              label="Update interval (as ISO8601 Duration)"
-                              help="Time between Sidecar update requests."
+                              label="更新间隔(ISO8601格式)"
+                              help="客户端更新间隔."
                               validator={this._updateIntervalValidator}
-                              errorText="invalid (min: 1 second, lower: inactive/expiration threshold)"
+                              errorText="不合法(最少1秒)"
                               required />
           </fieldset>
           <Input type="checkbox"
                  id="send-status-updates-checkbox"
-                 label="Send status updates"
+                 label="发送状态更新"
                  checked={this.state.config.sidecar_send_status}
                  onChange={this._onUpdate('sidecar_send_status')}
-                 help="Send Sidecar status and host metrics from each client" />
+                 help="发送客户端状态和主机指标" />
           <Input type="checkbox"
                  id="override-sidecar-config-checkbox"
-                 label="Override Sidecar configuration"
+                 label="覆盖客户端配置"
                  checked={this.state.config.sidecar_configuration_override}
                  onChange={this._onUpdate('sidecar_configuration_override')}
-                 help="Override configuration file settings for all Sidecars" />
+                 help="覆盖所有客户端的配置文件设置" />
         </BootstrapModalForm>
       </div>
     );

@@ -191,7 +191,7 @@ class AggregationConditionExpression extends React.Component {
                   <ButtonToolbar>
                     <Button bsSize="sm" onClick={this.handleDeleteExpression}><Icon name="minus" fixedWidth /></Button>
                     <Button bsSize="sm" onClick={this.handleAddExpression}><Icon name="plus" fixedWidth /></Button>
-                    <Button bsSize="sm" onClick={this.handleAddGroup}>Add Group</Button>
+                    <Button bsSize="sm" onClick={this.handleAddGroup}>添加分组</Button>
                   </ButtonToolbar>
                 </div>
               </FormGroup>

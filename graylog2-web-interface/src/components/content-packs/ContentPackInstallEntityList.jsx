@@ -24,8 +24,8 @@ import 'components/content-packs/ContentPackDetails.css';
 
 const ContentPackInstallEntityList = (props) => {
   const rowFormatter = (entity) => (<tr><td>{entity.title}</td><td>{entity.type.name}</td></tr>);
-  const headers = ['Title', 'Type'];
-  const headerTitle = props.uninstall ? 'Entites to be uninstalled' : 'Installed Entities';
+  const headers = ['标题', '类型'];
+  const headerTitle = props.uninstall ? '要卸载的实体' : '已安装的实体';
 
   if (!props.entities) {
     return <Spinner />;

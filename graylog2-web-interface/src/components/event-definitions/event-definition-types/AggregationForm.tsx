@@ -69,15 +69,14 @@ const AggregationForm = ({ aggregationFunctions, eventDefinition, validation, on
 
   return (
     <fieldset>
-      <h2 className={commonStyles.title}>Aggregation</h2>
+      <h2 className={commonStyles.title}>聚合</h2>
       <p>
-        Summarize log messages matching the Filter defined above by using a function. You can optionally group the
-        Filter results by identical field values.
+        使用函数聚合与上面定义的筛选器匹配的消息.您可以选择按相同的字段值筛选结果。
       </p>
       <Row>
         <Col lg={7}>
           <FormGroup controlId="group-by">
-            <ControlLabel>Group by Field(s) <small className="text-muted">(Optional)</small></ControlLabel>
+            <ControlLabel>分组字段 <small className="text-muted">(可选)</small></ControlLabel>
             <MultiSelect id="group-by"
                          matchProp="label"
                          onChange={handleGroupByChange}
@@ -86,12 +85,11 @@ const AggregationForm = ({ aggregationFunctions, eventDefinition, validation, on
                          value={lodash.defaultTo(eventDefinition.config.group_by, []).join(',')}
                          allowCreate />
             <HelpBlock>
-              Select Fields that Graylog should use to group Filter results when they have identical values.
-              {' '}<b>Example:</b><br />
-              Assuming you created a Filter with all failed log-in attempts in your network, Graylog could alert you
-              when there are more than 5 failed log-in attempts overall. Now, add <code>username</code> as Group by
-              Field and Graylog will alert you <em>for each <code>username</code></em> with more than 5 failed
-              log-in attempts.
+              选择DataInsight应用于在筛选结果具有相同值时对其进行分组的字段.
+              {' '}<b>示例:</b><br />
+              假设您创建了一个过滤器，其中包含网络中所有失败的登录尝试，则DataInsight可能会在总的登录尝试失败次数超过5次时
+              发出告警.添加 <code>username</code> 作为分组字段,那么DataInsight将会在
+              <em>每个 <code>username</code></em> 登录次数超过5次时发出告警.
             </HelpBlock>
           </FormGroup>
         </Col>

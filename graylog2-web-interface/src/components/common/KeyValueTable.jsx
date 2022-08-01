@@ -46,7 +46,7 @@ class KeyValueTable extends React.Component {
   };
 
   static defaultProps = {
-    headers: ['Name', 'Value', 'Actions'],
+    headers: ['名称', '值', '操作'],
     editable: false,
     actionsSize: 'xsmall',
     className: '',
@@ -82,7 +82,7 @@ class KeyValueTable extends React.Component {
 
   _deleteRow = (key) => {
     return () => {
-      if (window.confirm(`Are you sure you want to delete property '${key}'?`)) {
+      if (window.confirm(`确定删除 '${key}'?`)) {
         const newPairs = ObjectUtils.clone(this.props.pairs);
 
         delete newPairs[key];
@@ -121,7 +121,7 @@ class KeyValueTable extends React.Component {
 
         actions.push(
           <Button key={`delete-${key}`} bsStyle="danger" bsSize={this.props.actionsSize} onClick={this._deleteRow(key)}>
-            Delete
+            删除
           </Button>,
         );
 
@@ -168,7 +168,7 @@ class KeyValueTable extends React.Component {
                  onChange={this._bindValue} />
         </td>
         <td>
-          <Button bsStyle="success" bsSize="small" onClick={this._addRow} disabled={addRowDisabled}>Add</Button>
+          <Button bsStyle="success" bsSize="small" onClick={this._addRow} disabled={addRowDisabled}>新增</Button>
         </td>
       </tr>
     );

@@ -23,7 +23,7 @@ export const hasAttribute = (array: Array<string>, attribute: string): boolean =
 };
 
 export const optionalMarker = (field: ConfigurationField): React.ReactNode | null => {
-  return field.is_optional && field.type !== 'boolean' ? <span className="configuration-field-optional">(optional)</span> : null;
+  return field.is_optional && field.type !== 'boolean' ? <span className="configuration-field-optional">(可选)</span> : null;
 };
 
 export default {

@@ -76,7 +76,7 @@ type Props = {
 const UrlWhiteListForm = ({ urls, onUpdate, disabled, newEntryId }: Props) => {
   const literal = 'literal';
   const regex = 'regex';
-  const options = [{ value: literal, label: 'Exact match' }, { value: regex, label: 'Regex' }];
+  const options = [{ value: literal, label: '完整匹配' }, { value: regex, label: '正则' }];
   // eslint-disable-next-line prefer-const
   let inputs = {};
   const [config, setConfig] = useState<WhiteListConfig>({ entries: urls, disabled });
@@ -143,7 +143,7 @@ const UrlWhiteListForm = ({ urls, onUpdate, disabled, newEntryId }: Props) => {
   };
 
   const _getErrorMessage = (type: string) => {
-    return type === regex ? 'Not a valid Java regular expression' : 'Not a valid URL';
+    return type === regex ? '不合法的正则表达式' : '不合法的URL地址';
   };
 
   const _getSummary = () => {
@@ -180,7 +180,7 @@ const UrlWhiteListForm = ({ urls, onUpdate, disabled, newEntryId }: Props) => {
               <Select clearable={false}
                       options={options}
                       matchProp="label"
-                      placeholder="Select url type"
+                      placeholder="选择URL类型"
                       onChange={(option: string) => _onUpdateType(idx, option)}
                       value={url.type} />
             </Input>
@@ -188,7 +188,7 @@ const UrlWhiteListForm = ({ urls, onUpdate, disabled, newEntryId }: Props) => {
           <td>
             <Button onClick={(event) => _onRemove(event, idx)}>
               <Icon name="trash-alt" />
-              <span className="sr-only">Delete entry</span>
+              <span className="sr-only">删除</span>
             </Button>
           </td>
         </tr>
@@ -226,26 +226,26 @@ const UrlWhiteListForm = ({ urls, onUpdate, disabled, newEntryId }: Props) => {
     <>
       <Input type="checkbox"
              id="whitelist-disabled"
-             label="Disable Whitelist"
+             label="禁用白名单"
              checked={config.disabled}
              onChange={() => setConfig({ ...config, disabled: !config.disabled })}
-             help="Disable the whitelist functionality. Warning: Disabling this option will allow users to enter any URL in Graylog entities, which may pose a security risk." />
-      <Button bsSize="sm" onClick={(event) => _onAdd(event)}>Add Url</Button>
+             help="禁用白名单功能." />
+      <Button bsSize="sm" onClick={(event) => _onAdd(event)}>添加URL</Button>
       <StyledTable striped bordered>
         <thead>
           <tr>
             <th>#</th>
-            <th>Title</th>
+            <th>标题</th>
             <th>URL</th>
-            <th>Type</th>
-            <th>Actions</th>
+            <th>匹配方式</th>
+            <th>操作</th>
           </tr>
         </thead>
         <tbody>
           {_getSummary()}
         </tbody>
       </StyledTable>
-      <Button bsSize="sm" onClick={(event) => _onAdd(event)}>Add Url</Button>
+      <Button bsSize="sm" onClick={(event) => _onAdd(event)}>添加Url</Button>
     </>
   );
 };

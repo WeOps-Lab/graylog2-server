@@ -34,7 +34,7 @@ const NumberExpression = ({ expression, onChange, renderLabel, validation }) => 
     <Col md={3}>
       <Input id="aggregation-threshold"
              name="threshold"
-             label={renderLabel ? 'Threshold' : ''}
+             label={renderLabel ? '阈值' : ''}
              type="number"
              value={lodash.get(expression, 'value')}
              bsStyle={validation.message ? 'error' : null}

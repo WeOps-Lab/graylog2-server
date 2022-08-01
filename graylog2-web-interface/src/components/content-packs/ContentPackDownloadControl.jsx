@@ -50,23 +50,23 @@ class ContentPackDownloadControl extends React.Component {
   }
 
   render() {
-    const infoText = 'Please right click the download link below and choose "Save Link As..." to download the JSON file.';
+    const infoText = '请右击下方下载链接，选择"将链接另存为..."下载JSON文件';
 
     return (
       <BootstrapModalWrapper ref={(node) => { this.downloadModal = node; }} bsSize="large">
         <Modal.Header closeButton>
-          <Modal.Title>Download Content Pack</Modal.Title>
+          <Modal.Title>下载内容包</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>{infoText}</p>
           <p>
             <a href={this._getDownloadUrl()} target="_blank" rel="noopener noreferrer">
-              <Icon name="cloud-download-alt" />{' '}Download
+              <Icon name="cloud-download-alt" />{' '}下载
             </a>
           </p>
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this._closeModal}>Close</Button>
+          <Button onClick={this._closeModal}>关闭</Button>
         </Modal.Footer>
       </BootstrapModalWrapper>
     );

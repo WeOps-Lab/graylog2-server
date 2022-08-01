@@ -28,8 +28,8 @@ import UnauthorizedErrorPage from 'pages/UnauthorizedErrorPage';
 import StreamPermissionErrorPage from 'pages/StreamPermissionErrorPage';
 
 const FallbackErrorPage = ({ reportedError }: { reportedError: ReportedError }) => (
-  <ErrorPage title="Something went wrong"
-             description={<p>An unkown error has occured. Please have a look at the following message and the graylog server log for more information.</p>}>
+  <ErrorPage title="系统异常"
+             description={<p>系统未知异常</p>}>
     <pre>
       {JSON.stringify(reportedError)}
     </pre>

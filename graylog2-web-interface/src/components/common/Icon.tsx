@@ -36,7 +36,7 @@ const updateLegacyName = (icon: string) => {
   const iconName = (v4icon && v4icon.v5) || icon;
 
   if (v4icon) {
-    deprecationNotice(`You have used a deprecated \`Icon\` name. \`${icon}\` should be \`${iconName}\``);
+    deprecationNotice(`你使用了启用的图标. \`${icon}\` 应该为 \`${iconName}\``);
   }
 
   return iconName;

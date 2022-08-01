@@ -47,7 +47,7 @@ export default function withStreams(WrappedComponent, hiddenStreams = []) {
       const { streams } = this.state;
 
       if (!streams) {
-        return <Spinner text="Loading Streams Information..." />;
+        return <Spinner text="加载消息流信息中..." />;
       }
 
       return <WrappedComponent streams={streams} {...this.props} />;

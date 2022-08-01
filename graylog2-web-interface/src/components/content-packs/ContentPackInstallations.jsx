@@ -49,13 +49,13 @@ class ContentPackInstallations extends React.Component {
     const showModal = (
       <BootstrapModalWrapper ref={(node) => { showModalRef = node; }} bsSize="large">
         <Modal.Header closeButton>
-          <Modal.Title>View Installation</Modal.Title>
+          <Modal.Title>查看安装</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <ContentPackInstallationView install={item} />
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={closeShowModal}>Close</Button>
+          <Button onClick={closeShowModal}>关闭</Button>
         </Modal.Footer>
       </BootstrapModalWrapper>
     );
@@ -72,12 +72,12 @@ class ContentPackInstallations extends React.Component {
               <Button bsStyle="primary"
                       bsSize="small"
                       onClick={() => { onUninstall(item.content_pack_id, item._id); }}>
-                Uninstall
+                卸载
               </Button>
               <Button bsStyle="info"
                       bsSize="small"
                       onClick={openShowModal}>
-                View
+                安装
               </Button>
               {showModal}
             </ButtonToolbar>
@@ -88,7 +88,7 @@ class ContentPackInstallations extends React.Component {
   };
 
   headerFormater = (header) => {
-    if (header === 'Action') {
+    if (header === '操作') {
       return (<th className="text-right">{header}</th>);
     }
 
@@ -102,7 +102,7 @@ class ContentPackInstallations extends React.Component {
       return (<Spinner />);
     }
 
-    const headers = ['Comment', 'Version', 'Action'];
+    const headers = ['备注', '版本', '操作'];
 
     return (
       <DataTable id="content-packs-versions"

@@ -59,13 +59,12 @@ class ContentPackUploadControls extends React.Component {
       ContentPacksActions.create.triggerPromise(request)
         .then(
           () => {
-            UserNotification.success('Content pack imported successfully', 'Success!');
+            UserNotification.success('扩展包导入成功', '成功!');
             ContentPacksActions.list();
           },
           (response) => {
-            const message = 'Error importing content pack, please ensure it is a valid JSON file. Check your '
-              + 'Graylog logs for more information.';
-            const title = 'Could not import content pack';
+            const message = '扩展包导入失败,请确认是有效的json文件.在DataInsight日志中查看更多信息.';
+            const title = '无法导入扩展包';
             let smallMessage = '';
 
             if (response.additional && response.additional.body && response.additional.body.message) {
@@ -95,13 +94,13 @@ class ContentPackUploadControls extends React.Component {
         <BootstrapModalForm onModalClose={() => { this.setState({ isOpen: false }); }}
                             ref={(node) => { this.uploadModal = node; }}
                             onSubmitForm={this._save}
-                            title="Upload Content Pack"
-                            submitButtonText="Upload">
+                            title="上传扩展包"
+                            submitButtonText="上传">
           <Input ref={(node) => { this.uploadInput = node; }}
                  id="upload-content-pack"
-                 label="Choose File"
+                 label="选择文件"
                  type="file"
-                 help="Choose Content Pack from disk" />
+                 help="选择本地的扩展包" />
         </BootstrapModalForm>
       </span>
     );

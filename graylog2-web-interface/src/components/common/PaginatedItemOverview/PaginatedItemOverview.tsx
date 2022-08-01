@@ -109,11 +109,11 @@ const PaginatedItemOverview = ({
                    pageSizes={pageSizes}
                    activePage={pagination.page}>
       <SearchForm onSearch={(newQuery) => setPagination({ ...pagination, page: INITIAL_PAGE, query: newQuery })}
-                  label="Filter"
+                  label="过滤"
                   wrapperClass="has-bm"
-                  placeholder="Enter query to filter"
+                  placeholder="过滤条件"
                   queryHelpComponent={queryHelper}
-                  searchButtonLabel="Filter" />
+                  searchButtonLabel="过滤" />
       <ResultsWrapperComponent isEmptyResult={!itemList}>
         {itemList ?? emptyResult}
       </ResultsWrapperComponent>
@@ -124,7 +124,7 @@ const PaginatedItemOverview = ({
 PaginatedItemOverview.defaultProps = {
   onDeleteItem: undefined,
   overrideList: undefined,
-  noDataText: 'No items found to display.',
+  noDataText: '未找到数据.',
   queryHelper: undefined,
   resultsWrapperComponent: ({ children }) => <div>{children}</div>,
   overrideItemComponent: undefined,

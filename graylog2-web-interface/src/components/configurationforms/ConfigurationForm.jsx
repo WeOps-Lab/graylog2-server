@@ -215,7 +215,7 @@ class ConfigurationForm extends React.Component {
                         title={title}
                         onCancel={this._closeModal}
                         onSubmitForm={this._save}
-                        submitButtonText="Save">
+                        submitButtonText="保存">
         <fieldset>
           <input type="hidden" name="type" value={typeName} />
           {children}

@@ -138,7 +138,7 @@ class EventsContainer extends React.Component {
     const isLoading = !events.events || !eventDefinitions.eventDefinitions;
 
     if (isLoading) {
-      return <Spinner text="Loading Events information..." />;
+      return <Spinner text="加载事件信息..." />;
     }
 
     return (

@@ -226,7 +226,7 @@ class FilterForm extends React.Component {
     if (!this._userCanViewLookupTables()) {
       return (
         <Alert bsStyle="info">
-          This account lacks permission to declare Query Parameters from Lookup Tables.
+          此帐户没有从数据字段声明查询参数的权限。
         </Alert>
       );
     }
@@ -251,7 +251,7 @@ class FilterForm extends React.Component {
 
     return (
       <FormGroup validationState={validation.errors.query_parameters ? 'error' : null}>
-        <ControlLabel>Query Parameters</ControlLabel>
+        <ControlLabel>查询参数</ControlLabel>
         <Alert bsStyle={hasEmbryonicParameters ? 'danger' : 'info'}>
           <ButtonToolbar>
             {parameterButtons}
@@ -261,7 +261,7 @@ class FilterForm extends React.Component {
           <HelpBlock>
             {validation.errors.query_parameters
               ? lodash.get(validation, 'errors.query_parameters[0]')
-              : 'Please declare missing query parameters by clicking on the buttons above.'}
+              : '请通过单击上面的按钮声明缺少的查询参数。'}
           </HelpBlock>
         )}
       </FormGroup>
@@ -278,16 +278,16 @@ class FilterForm extends React.Component {
 
     return (
       <fieldset>
-        <h2 className={commonStyles.title}>Filter</h2>
-        <p>Add information to filter the log messages that are relevant for this Event Definition.</p>
+        <h2 className={commonStyles.title}>过滤</h2>
+        <p>添加信息以过滤与此事件定义相关的日志消息。</p>
         <Input id="filter-query"
                name="query"
-               label="Search Query"
+               label="查询语句"
                type="text"
                help={(
                  <span>
-                   Search query that Messages should match. You can use the same syntax as in the Search page,
-                   including declaring Query Parameters from Lookup Tables by using the <code>$newParameter$</code> syntax.
+                   搜索消息应匹配的查询。您可以使用与搜索页面中相同的语法，
+                   包括使用 <code>$newParameter$</code> 语法从查找表中声明查询参数。
                  </span>
                )}
                value={lodash.defaultTo(eventDefinition.config.query, '')}
@@ -296,17 +296,17 @@ class FilterForm extends React.Component {
         {this.renderQueryParameters()}
 
         <FormGroup controlId="filter-streams">
-          <ControlLabel>Streams <small className="text-muted">(Optional)</small></ControlLabel>
+          <ControlLabel>消息流 <small className="text-muted">（可选）</small></ControlLabel>
           <MultiSelect id="filter-streams"
                        matchProp="label"
                        onChange={(selected) => this.handleStreamsChange(selected === '' ? [] : selected.split(','))}
                        options={formattedStreams}
                        value={lodash.defaultTo(eventDefinition.config.streams, []).join(',')} />
-          <HelpBlock>Select streams the search should include. Searches in all streams if empty.</HelpBlock>
+          <HelpBlock>选择搜索应包括的流。如果为空，则在所有流中搜索。</HelpBlock>
         </FormGroup>
 
         <FormGroup controlId="search-within" validationState={validation.errors.search_within_ms ? 'error' : null}>
-          <TimeUnitInput label="Search within the last"
+          <TimeUnitInput label="最近的搜索"
                          update={this.handleTimeRangeChange('search_within_ms')}
                          value={searchWithinMsDuration}
                          unit={searchWithinMsUnit}
@@ -319,7 +319,7 @@ class FilterForm extends React.Component {
         </FormGroup>
 
         <FormGroup controlId="execute-every" validationState={validation.errors.execute_every_ms ? 'error' : null}>
-          <TimeUnitInput label="Execute search every"
+          <TimeUnitInput label="执行搜索周期"
                          update={this.handleTimeRangeChange('execute_every_ms')}
                          value={executeEveryMsDuration}
                          unit={executeEveryMsUnit}
@@ -333,8 +333,8 @@ class FilterForm extends React.Component {
         <Input id="schedule-checkbox"
                type="checkbox"
                name="_is_scheduled"
-               label="Enable"
-               help="Should this event definition be executed automatically?"
+               label="启用"
+               help="这个事件定义应该自动执行吗"
                checked={lodash.defaultTo(eventDefinition.config._is_scheduled, true)}
                onChange={this.handleConfigChange} />
       </fieldset>

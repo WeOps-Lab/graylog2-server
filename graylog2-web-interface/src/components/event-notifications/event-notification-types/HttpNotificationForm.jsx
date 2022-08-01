@@ -60,7 +60,7 @@ class HttpNotificationForm extends React.Component {
       <URLWhiteListInput label="URL"
                          onChange={this.handleChange}
                          validationState={validation.errors.url ? 'error' : null}
-                         validationMessage={lodash.get(validation, 'errors.url[0]', 'The URL to POST to when an Event occurs.')}
+                         validationMessage={lodash.get(validation, 'errors.url[0]', '当事件发生时触发的URL.')}
                          onValidationChange={this.onValidationChange}
                          url={config.url} />
     );

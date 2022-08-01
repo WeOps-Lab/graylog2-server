@@ -34,7 +34,7 @@ EmptyResult.propTypes = {
 };
 
 EmptyResult.defaultProps = {
-  children: 'No data available.',
+  children: '暂无数据.',
   className: undefined,
 };
 

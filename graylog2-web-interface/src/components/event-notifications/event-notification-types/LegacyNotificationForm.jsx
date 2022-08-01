@@ -53,7 +53,7 @@ class LegacyNotificationForm extends React.Component {
 
   formatLegacyTypes = (legacyTypes) => {
     return Object.keys(legacyTypes)
-      .map((typeName) => ({ label: `Legacy ${legacyTypes[typeName].name}`, value: typeName }));
+      .map((typeName) => ({ label: `回调 ${legacyTypes[typeName].name}`, value: typeName }));
   };
 
   getDefaultConfiguration = (legacyNotificationType) => {
@@ -115,7 +115,7 @@ class LegacyNotificationForm extends React.Component {
     } else if (callbackType) {
       content = (
         <Alert bsStyle="danger" className={commonStyles.legacyNotificationAlert}>
-          Unknown legacy alarm callback type: <strong>{callbackType}</strong> Please make sure the plugin is installed.
+          未知的告警回调类型: <strong>{callbackType}</strong> 请确定已经安装对应的插件.
         </Alert>
       );
     }
@@ -125,21 +125,21 @@ class LegacyNotificationForm extends React.Component {
         <fieldset>
           <FormGroup controlId="notification-legacy-select"
                      validationState={validation.errors.callback_type ? 'error' : null}>
-            <ControlLabel>Choose Legacy Notification</ControlLabel>
+            <ControlLabel>选择旧版告警回调</ControlLabel>
             <Select id="notification-legacy-select"
                     matchProp="label"
-                    placeholder="Select Legacy Notification"
+                    placeholder="选择旧版告警回调"
                     onChange={this.handleSelectNotificationChange}
                     options={this.formatLegacyTypes(legacyTypes)}
                     value={callbackType} />
             <HelpBlock>
-              {lodash.get(validation, 'errors.callback_type[0]', 'Select a Legacy Notification to use on this Event Definition.')}
+              {lodash.get(validation, 'errors.callback_type[0]', '选择用于此事件定义的旧版告警回调.')}
             </HelpBlock>
           </FormGroup>
         </fieldset>
 
         <Alert bsStyle="danger" className={commonStyles.legacyNotificationAlert}>
-          Legacy alarm callbacks are deprecated and will be removed in Graylog 4.1. Please switch to the new notification types as soon as possible!
+          旧版告警回调已弃用.请尽快切换到新的通知类型!
         </Alert>
 
         {content}

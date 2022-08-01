@@ -60,7 +60,7 @@ const LocaleSelect = createReactClass({
         return 0;
       });
 
-    return [{ value: 'und', label: 'Default locale' }].concat(sortedLocales);
+    return [{ value: 'und', label: '默认地区' }].concat(sortedLocales);
   },
 
   _renderOption(option) {
@@ -77,7 +77,7 @@ const LocaleSelect = createReactClass({
     return (
       <Select ref={(locale) => { this.locale = locale; }}
               {...this.props}
-              placeholder="Pick a locale"
+              placeholder="选择地区"
               options={locales}
               optionRenderer={this._renderOption} />
     );

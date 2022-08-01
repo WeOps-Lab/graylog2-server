@@ -44,24 +44,24 @@ const ContentPackDetails = (props) => {
     <Row>
       <Col smOffset={offset} sm={9}>
         <div id="content-pack-details">
-          <h2>Details</h2>
+          <h2>详情</h2>
           <br />
           <div>
             <dl className="deflist">
-              <dt>Version:</dt> <dd>{contentPack.rev}</dd>
-              <dt>Name:</dt> <dd>{contentPack.name}&nbsp;</dd>
-              <dt>Summary:</dt> <dd>{contentPack.summary}&nbsp;</dd>
-              <dt>Vendor:</dt> <dd>{contentPack.vendor}&nbsp;</dd>
+              <dt>版本号:</dt> <dd>{contentPack.rev}</dd>
+              <dt>名称:</dt> <dd>{contentPack.name}&nbsp;</dd>
+              <dt>摘要:</dt> <dd>{contentPack.summary}&nbsp;</dd>
+              <dt>作者:</dt> <dd>{contentPack.vendor}&nbsp;</dd>
               <dt>URL:</dt> <dd>{contentPackAnchor}&nbsp;</dd>
               {contentPack.id && (<span><dt>ID:</dt> <dd><code>{contentPack.id}</code></dd></span>)}
-              {contentPack.parameters && !verbose && (<span><dt>Parameters:</dt> <dd>{contentPack.parameters.length}</dd></span>)}
-              {contentPack.entities && !verbose && (<span><dt>Entities:</dt> <dd>{contentPack.entities.length}</dd></span>)}
+              {contentPack.parameters && !verbose && (<span><dt>参数:</dt> <dd>{contentPack.parameters.length}</dd></span>)}
+              {contentPack.entities && !verbose && (<span><dt>实体:</dt> <dd>{contentPack.entities.length}</dd></span>)}
             </dl>
           </div>
           {contentPack.description
           && (
           <div>
-            <h2>Description</h2>
+            <h2>描述</h2>
             <br />
             <Well>
               {/* eslint-disable-next-line react/no-danger */}

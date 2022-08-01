@@ -21,11 +21,11 @@ import { OverlayTrigger, Icon } from 'components/common';
 import { Popover, Table, Button } from 'components/bootstrap';
 
 const COMMON_FIELD_MAP = {
-  id: (entityName) => `Id of the ${entityName}, which is a unique reference.`,
-  title: (entityName) => `Title of the ${entityName}.`,
-  name: (entityName) => `Name of the ${entityName}.`,
-  description: (entityName) => `Short description of the ${entityName}.`,
-  summary: (entityName) => `Long summary of the ${entityName}.`,
+  id: (entityName) => `${entityName} 的 ID，它是唯一的引用`,
+  title: (entityName) => `${entityName} 的标题`,
+  name: (entityName) => `${entityName} 的名称`,
+  description: (entityName) => `${entityName} 的简短描述`,
+  summary: (entityName) => `${entityName} 的详细摘要`,
 };
 
 type CommonFields = keyof typeof COMMON_FIELD_MAP;
@@ -55,11 +55,11 @@ const row = (field, description) => (
 const defaultExample = (
   <>
     <p>
-      Find entities with a description containing security:<br />
+      查找描述中包含安全性的实体：<br />
       <code>description:security</code><br />
     </p>
     <p>
-      Find a entities with the id 5f4dfb9c69be46153b9a9a7b:<br />
+      查找 id 为 5f4dfb9c69be46153b9a9a7b 的实体：<br />
       <code>id:5f4dfb9c69be46153b9a9a7b</code><br />
     </p>
   </>
@@ -67,12 +67,12 @@ const defaultExample = (
 
 const queryHelpPopover = (commonFields, fieldMap, example, entityName) => (
   <WidePopover id="team-search-query-help" title="Search Syntax Help">
-    <p><strong>Available search fields</strong></p>
+    <p><strong>可用的搜索字段</strong></p>
     <Table condensed>
       <thead>
         <tr>
-          <th>Field</th>
-          <th>Description</th>
+          <th>字段</th>
+          <th>描述</th>
         </tr>
       </thead>
       <tbody>
@@ -80,7 +80,7 @@ const queryHelpPopover = (commonFields, fieldMap, example, entityName) => (
         {Object.keys(fieldMap).map((field) => row(field, fieldMap[field]))}
       </tbody>
     </Table>
-    <p><strong>Examples</strong></p>
+    <p><strong>示例</strong></p>
     {example || defaultExample}
   </WidePopover>
 );

@@ -17,13 +17,13 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import naturalSort from 'javascript-natural-sort';
-import { cloneDeep } from 'lodash';
+import {cloneDeep} from 'lodash';
 
-import { ExpandableList, ExpandableListItem, Icon, SearchForm } from 'components/common';
-import { Col, HelpBlock, Panel, Row, Input } from 'components/bootstrap';
-import { getValueFromInput } from 'util/FormsUtils';
+import {ExpandableList, ExpandableListItem, Icon, SearchForm} from 'components/common';
+import {Col, HelpBlock, Panel, Row, Input} from 'components/bootstrap';
+import {getValueFromInput} from 'util/FormsUtils';
 import Entity from 'logic/content-packs/Entity';
-import { hasAcceptedProtocol } from 'util/URLUtils';
+import {hasAcceptedProtocol} from 'util/URLUtils';
 
 import style from './ContentPackSelection.css';
 
@@ -38,7 +38,8 @@ class ContentPackSelection extends React.Component {
 
   static defaultProps = {
     edit: false,
-    onStateChange: () => {},
+    onStateChange: () => {
+    },
     entities: {},
     selectedEntities: {},
   };
@@ -52,7 +53,7 @@ class ContentPackSelection extends React.Component {
   constructor(props) {
     super(props);
 
-    const { entities, contentPack } = this.props;
+    const {entities, contentPack} = this.props;
 
     this.state = {
       contentPack: contentPack,
@@ -64,8 +65,8 @@ class ContentPackSelection extends React.Component {
   }
 
   UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({ filteredEntities: nextProps.entities, contentPack: nextProps.contentPack });
-    const { filter, isFiltered } = this.state;
+    this.setState({filteredEntities: nextProps.entities, contentPack: nextProps.contentPack});
+    const {filter, isFiltered} = this.state;
 
     if (isFiltered) {
       this._filterEntities(filter);
@@ -73,25 +74,25 @@ class ContentPackSelection extends React.Component {
   }
 
   _updateField = (name, value) => {
-    const { contentPack } = this.state;
-    const { onStateChange } = this.props;
+    const {contentPack} = this.state;
+    const {onStateChange} = this.props;
     const updatedPack = contentPack.toBuilder()[name](value).build();
 
-    onStateChange({ contentPack: updatedPack });
-    this.setState({ contentPack: updatedPack }, this._validate);
+    onStateChange({contentPack: updatedPack});
+    this.setState({contentPack: updatedPack}, this._validate);
   };
 
   _validate = (newSelection) => {
     const mandatoryFields = ['name', 'summary', 'vendor'];
-    const { contentPack } = this.state;
-    const { selectedEntities: prevSelectedEntities } = this.props;
+    const {contentPack} = this.state;
+    const {selectedEntities: prevSelectedEntities} = this.props;
     const selectedEntities = newSelection || prevSelectedEntities;
 
     const errors = mandatoryFields.reduce((acc, field) => {
       const newErrors = acc;
 
       if (!contentPack[field] || contentPack[field].length <= 0) {
-        newErrors[field] = 'Must be filled out.';
+        newErrors[field] = '不可为空.';
       }
 
       return newErrors;
@@ -100,21 +101,23 @@ class ContentPackSelection extends React.Component {
     if (contentPack.url) {
       try {
         if (!hasAcceptedProtocol(contentPack.url)) {
-          errors.url = 'Must use a URL starting with http or https.';
+          errors.url = '必须使用以 http 或 https 开头的 URL.';
         }
       } catch (e) {
-        errors.url = 'Invalid URL';
+        errors.url = '无效的网址';
       }
     }
 
     const selectionEmpty = Object.keys(selectedEntities)
-      .reduce((acc, entityGroup) => { return acc + selectedEntities[entityGroup].length; }, 0) <= 0;
+      .reduce((acc, entityGroup) => {
+        return acc + selectedEntities[entityGroup].length;
+      }, 0) <= 0;
 
     if (selectionEmpty) {
-      errors.selection = 'Select at least one entity.';
+      errors.selection = '选择至少一个实体.';
     }
 
-    this.setState({ errors });
+    this.setState({errors});
   };
 
   _bindValue = (event) => {
@@ -122,12 +125,14 @@ class ContentPackSelection extends React.Component {
   };
 
   _updateSelectionEntity = (entity) => {
-    const { selectedEntities, onStateChange } = this.props;
+    const {selectedEntities, onStateChange} = this.props;
     const typeName = entity.type.name;
     const newSelection = cloneDeep(selectedEntities);
 
     newSelection[typeName] = (newSelection[typeName] || []);
-    const index = newSelection[typeName].findIndex((e) => { return e.id === entity.id; });
+    const index = newSelection[typeName].findIndex((e) => {
+      return e.id === entity.id;
+    });
 
     if (index < 0) {
       newSelection[typeName].push(entity);
@@ -136,12 +141,12 @@ class ContentPackSelection extends React.Component {
     }
 
     this._validate(newSelection);
-    onStateChange({ selectedEntities: newSelection });
+    onStateChange({selectedEntities: newSelection});
   };
 
   _updateSelectionGroup = (type) => {
-    const { selectedEntities, entities, onStateChange } = this.props;
-    const { isFiltered, filteredEntities } = this.state;
+    const {selectedEntities, entities, onStateChange} = this.props;
+    const {isFiltered, filteredEntities} = this.state;
 
     const newSelection = cloneDeep(selectedEntities);
 
@@ -158,33 +163,35 @@ class ContentPackSelection extends React.Component {
     }
 
     this._validate(newSelection);
-    onStateChange({ selectedEntities: newSelection });
+    onStateChange({selectedEntities: newSelection});
   };
 
   _isUndetermined = (type) => {
-    const { selectedEntities, entities } = this.props;
+    const {selectedEntities, entities} = this.props;
 
     if (!selectedEntities[type]) {
       return false;
     }
 
     return !(selectedEntities[type].length === entities[type].length
-       || selectedEntities[type].length === 0);
+      || selectedEntities[type].length === 0);
   };
 
   _isSelected = (entity) => {
-    const { selectedEntities } = this.props;
+    const {selectedEntities} = this.props;
     const typeName = entity.type.name;
 
     if (!selectedEntities[typeName]) {
       return false;
     }
 
-    return selectedEntities[typeName].findIndex((e) => { return e.id === entity.id; }) >= 0;
+    return selectedEntities[typeName].findIndex((e) => {
+      return e.id === entity.id;
+    }) >= 0;
   };
 
   _isGroupSelected = (type) => {
-    const { selectedEntities, entities } = this.props;
+    const {selectedEntities, entities} = this.props;
 
     if (!selectedEntities[type]) {
       return false;
@@ -202,11 +209,11 @@ class ContentPackSelection extends React.Component {
   };
 
   _filterEntities = (filterArg) => {
-    const { entities } = this.props;
+    const {entities} = this.props;
     const filter = filterArg;
 
     if (filter.length <= 0) {
-      this.setState({ filteredEntities: cloneDeep(entities), isFiltered: false, filter: filter });
+      this.setState({filteredEntities: cloneDeep(entities), isFiltered: false, filter: filter});
 
       return;
     }
@@ -223,20 +230,20 @@ class ContentPackSelection extends React.Component {
       return filteredEntities;
     }, {});
 
-    this.setState({ filteredEntities: filtered, isFiltered: true, filter: filter });
+    this.setState({filteredEntities: filtered, isFiltered: true, filter: filter});
   };
 
   _entityItemHeader = (entity) => {
     if (entity instanceof Entity) {
-      return <span><Icon name="archive" className={style.contentPackEntity} />{' '}<span>{entity.title}</span></span>;
+      return <span><Icon name="archive" className={style.contentPackEntity}/>{' '}<span>{entity.title}</span></span>;
     }
 
-    return <span><Icon name="server" />{' '}<span>{entity.title}</span></span>;
+    return <span><Icon name="server"/>{' '}<span>{entity.title}</span></span>;
   };
 
   render() {
-    const { filteredEntities = {}, errors, isFiltered, contentPack } = this.state;
-    const { edit } = this.props;
+    const {filteredEntities = {}, errors, isFiltered, contentPack} = this.state;
+    const {edit} = this.props;
 
     const entitiesComponent = Object.keys(filteredEntities)
       .sort((a, b) => naturalSort(a, b))
@@ -252,7 +259,7 @@ class ContentPackSelection extends React.Component {
                                 checked={checked}
                                 expandable={false}
                                 padded={false}
-                                header={header} />
+                                header={header}/>
           );
         });
 
@@ -281,8 +288,10 @@ class ContentPackSelection extends React.Component {
         <Row>
           <Col smOffset={1} lg={8}>
             <h2>General Information</h2>
-            <br />
-            <form className="content-selection-form" id="content-selection-form" onSubmit={(e) => { e.preventDefault(); }}>
+            <br/>
+            <form className="content-selection-form" id="content-selection-form" onSubmit={(e) => {
+              e.preventDefault();
+            }}>
               <fieldset>
                 <Input name="name"
                        id="name"
@@ -290,38 +299,38 @@ class ContentPackSelection extends React.Component {
                        maxLength={250}
                        value={contentPack.name}
                        onChange={this._bindValue}
-                       label="Name"
-                       help="Required. Give a descriptive name for this content pack."
+                       label="名称"
+                       help={errors.name ? errors.name : '必填,为此扩展包提供描述性名称.'}
                        error={errors.name}
-                       required />
+                       required/>
                 <Input name="summary"
                        id="summary"
                        type="text"
                        maxLength={250}
                        value={contentPack.summary}
                        onChange={this._bindValue}
-                       label="Summary"
-                       help="Required. Give a short summary of the content pack."
+                       label="摘要"
+                       help={errors.summary ? errors.summary : '必填,给出扩展包的简短摘要.'}
                        error={errors.summary}
-                       required />
+                       required/>
                 <Input name="description"
                        id="description"
                        type="textarea"
                        value={contentPack.description}
                        onChange={this._bindValue}
                        rows={6}
-                       label="Description"
-                       help="Give a long description of the content pack in markdown." />
+                       label="描述"
+                       help="扩展包的描述."/>
                 <Input name="vendor"
                        id="vendor"
                        type="text"
                        maxLength={250}
                        value={contentPack.vendor}
                        onChange={this._bindValue}
-                       label="Vendor"
-                       help="Required. Who did this content pack and how can they be reached, e.g. Name and email."
+                       label="作者"
+                       help="必填,谁制作了此内容包以及如何联系到他们，例如姓名和电子邮件."
                        error={errors.vendor}
-                       required />
+                       required/>
                 <Input name="url"
                        id="url"
                        type="text"
@@ -329,19 +338,19 @@ class ContentPackSelection extends React.Component {
                        value={contentPack.url}
                        onChange={this._bindValue}
                        label="URL"
-                       help="Where can I find the content pack. e.g. github url"
-                       error={errors.url} />
+                       help="在哪里可以找到扩展包;例如github地址"
+                       error={errors.url}/>
               </fieldset>
             </form>
           </Col>
         </Row>
         <Row>
           <Col smOffset={1} lg={8}>
-            <h2>Content Pack selection</h2>
+            <h2>扩展包描述</h2>
             {edit && (
-            <HelpBlock>You can select between installed entities from the server (<Icon name="server" />) or
-              entities from the former content pack revision (<Icon name="archive" className={style.contentPackEntity} />).
-            </HelpBlock>
+              <HelpBlock>你可以选择把这些实体从服务器中安装 (<Icon name="server"/>) 或
+                从扩展包中安装 (<Icon name="archive" className={style.contentPackEntity}/>).
+              </HelpBlock>
             )}
           </Col>
         </Row>
@@ -350,7 +359,7 @@ class ContentPackSelection extends React.Component {
             <SearchForm id="filter-input"
                         onSearch={this._onSetFilter}
                         onReset={this._onClearFilter}
-                        searchButtonLabel="Filter" />
+                        searchButtonLabel="过滤"/>
           </Col>
         </Row>
         <Row>

@@ -95,7 +95,7 @@ class NotificationSettingsForm extends React.Component {
         <h3 className={commonStyles.title}>Notification Settings</h3>
         <fieldset>
           <FormGroup controlId="grace-period">
-            <TimeUnitInput label="Grace Period"
+            <TimeUnitInput label="宽限期"
                            update={this.handleGracePeriodChange}
                            defaultEnabled={gracePeriodDuration !== 0}
                            value={gracePeriodDuration}
@@ -103,14 +103,12 @@ class NotificationSettingsForm extends React.Component {
                            units={TIME_UNITS}
                            clearable />
             <HelpBlock>
-              Graylog sends Notifications for Alerts every time they occur. Set a Grace Period to control how long
-              Graylog should wait before sending Notifications again. Note that Events with keys will have a Grace
-              Period for each different key value.
+              每次警报出现时,DataInsight都会发送通知.设置宽限期以控制在再次发送通知之前,DataInsight应等待多长时间.注意,带有键的事件对于每个不同的键值都有一个宽限期.
             </HelpBlock>
           </FormGroup>
 
           <FormGroup>
-            <ControlLabel>Message Backlog</ControlLabel>
+            <ControlLabel>消息量</ControlLabel>
             <InputGroup>
               <InputGroup.Addon>
                 <input id="toggle_backlog_size"
@@ -125,7 +123,7 @@ class NotificationSettingsForm extends React.Component {
                            value={backlogSize}
                            disabled={!isBacklogSizeEnabled} />
             </InputGroup>
-            <HelpBlock>Number of messages to be included in Notifications.</HelpBlock>
+            <HelpBlock>包含在通知中的消息量.</HelpBlock>
           </FormGroup>
         </fieldset>
       </>

@@ -80,15 +80,15 @@ class EventDetails extends React.Component {
           <dl>
             <dt>ID</dt>
             <dd>{event.id}</dd>
-            <dt>Priority</dt>
+            <dt>优先级</dt>
             <dd>
               {lodash.capitalize(EventDefinitionPriorityEnum.properties[event.priority].name)}
             </dd>
-            <dt>Timestamp</dt>
+            <dt>时间戳</dt>
             <dd>
               <Timestamp dateTime={event.timestamp} />
             </dd>
-            <dt>Event Definition</dt>
+            <dt>事件定义</dt>
             <dd>
               {this.renderLinkToEventDefinition(event, eventDefinitionContext)}
               &emsp;
@@ -100,7 +100,7 @@ class EventDetails extends React.Component {
           <dl>
             {event.timerange_start && event.timerange_end && (
               <>
-                <dt>Aggregation time range</dt>
+                <dt>聚合范围</dt>
                 <dd>
                   <Timestamp dateTime={event.timerange_start} />
                   &ensp;&mdash;&ensp;
@@ -108,15 +108,15 @@ class EventDetails extends React.Component {
                 </dd>
               </>
             )}
-            <dt>Event Key</dt>
-            <dd>{event.key || 'No Key set for this Event.'}</dd>
-            <dt>Additional Fields</dt>
+            <dt>事件键</dt>
+            <dd>{event.key || '未配置键.'}</dd>
+            <dt>附加字段</dt>
             {lodash.isEmpty(event.fields)
-              ? <dd>No additional Fields added to this Event.</dd>
+              ? <dd>未配置附加字段.</dd>
               : this.renderEventFields(event.fields)}
-            <dt>Group-By Fields</dt>
+            <dt>分组字段</dt>
             {lodash.isEmpty(event.group_by_fields)
-              ? <dd>No group-by fields on this Event.</dd>
+              ? <dd>未配置分组字段.</dd>
               : this.renderEventFields(event.group_by_fields)}
           </dl>
         </Col>

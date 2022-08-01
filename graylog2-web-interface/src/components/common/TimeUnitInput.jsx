@@ -42,6 +42,17 @@ const unitValues = [
   'HOURS',
   'DAYS',
 ];
+
+const MAPPING = {
+  'NANOSECONDS' : '纳秒',
+  'MICROSECONDS' : '微秒',
+  'MILLISECONDS' : '毫秒',
+  'SECONDS' : '秒',
+  'MINUTES' : '分',
+  'HOURS' : '时',
+  'DAYS' : '天',
+}
+
 const unitType = PropTypes.oneOf(unitValues);
 
 /**
@@ -164,7 +175,7 @@ const TimeUnitInput = createReactClass({
   _getUnitOptions(units) {
     return unitValues
       .filter((value) => units.includes(value))
-      .map((value) => ({ value: value, label: value.toLowerCase() }));
+      .map((value) => ({ value: value, label: MAPPING[value] }));
   },
 
   _isChecked() {

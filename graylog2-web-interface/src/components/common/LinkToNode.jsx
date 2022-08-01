@@ -55,7 +55,7 @@ const LinkToNode = createReactClass({
     if (node) {
       const iconName = node.is_leader ? 'star' : 'code-branch';
       const iconClass = node.is_leader ? 'leader-node' : '';
-      const iconTitle = node.is_leader ? 'This is the leader node in the cluster' : '';
+      const iconTitle = node.is_leader ? '这是集群中的主节点' : '';
 
       const content = (
         <>
@@ -74,7 +74,7 @@ const LinkToNode = createReactClass({
       );
     }
 
-    return <i>Unknown Node</i>;
+    return <i>未知节点</i>;
   },
 });
 

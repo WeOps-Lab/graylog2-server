@@ -135,7 +135,7 @@ PaginatedDataTable.defaultProps = {
   displayKey: undefined,
   filterBy: undefined,
   filterKeys: undefined,
-  filterLabel: 'Filter',
+  filterLabel: '过滤',
   headerCellFormatter: undefined,
   noDataText: undefined,
   pagination: DEFAULT_PAGINATION,

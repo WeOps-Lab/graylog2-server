@@ -57,7 +57,7 @@ const LookupTableFieldValueProviderFormContainer = ({ currentUser, ...otherProps
     return (
       <Row>
         <Col md={6} lg={5}>
-          <p>No Lookup Tables found.</p>
+          <p>没有数据字典.</p>
         </Col>
       </Row>
     );
@@ -66,7 +66,7 @@ const LookupTableFieldValueProviderFormContainer = ({ currentUser, ...otherProps
   const isLoading = !fieldTypes || !lookupTables.tables;
 
   if (isLoading) {
-    return <Spinner text="Loading Field Provider information..." />;
+    return <Spinner text="加载字段提供者信息..." />;
   }
 
   return (

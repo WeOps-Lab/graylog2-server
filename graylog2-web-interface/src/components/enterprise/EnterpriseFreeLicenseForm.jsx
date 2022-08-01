@@ -53,10 +53,10 @@ export default class EnterpriseFreeLicenseForm extends React.Component {
 
   validatePhone = (key, value) => {
     if (isEmpty(value.replace(' ', ''))) {
-      return 'Valid phone number  w/ country code is required.';
+      return '需要有效的电话号码和国家代码。';
     }
 
-    return PHONE_PATTERN.test(value) ? null : 'Invalid phone number';
+    return PHONE_PATTERN.test(value) ? null : '无效的电话号码';
   };
 
   handleInput = (key, validator) => {
@@ -132,36 +132,36 @@ export default class EnterpriseFreeLicenseForm extends React.Component {
           <Col md={12}>
             <Input type="text"
                    id="firstName"
-                   label="First Name"
+                   label="姓"
                    value={firstName}
                    required
                    onChange={this.handleInput('firstName')} />
             <Input type="text"
                    id="lastName"
-                   label="Last Name"
+                   label="名"
                    value={lastName}
                    required
                    onChange={this.handleInput('lastName')} />
             <Input type="text"
                    id="company"
-                   label="Company"
+                   label="企业"
                    value={company}
                    required
                    onChange={this.handleInput('company')} />
             <Input type="email"
                    id="email"
-                   label="Email Address"
+                   label="邮箱地址"
                    value={email}
-                   placeholder="Please provide a valid email address to send the license key to"
-                   title="Please provide a valid email address to send the license key to"
+                   placeholder="请提供有效的电子邮件地址以将许可证密钥发送至"
+                   title="请提供有效的电子邮件地址以将许可证密钥发送至"
                    required
                    onChange={this.handleInput('email')} />
             <Input type="tel"
                    id="phone"
-                   label="Phone Number"
+                   label="电话"
                    value={phone}
-                   placeholder="Please provide your phone number w/ country code"
-                   title="Please provide your phone number w/ country code"
+                   placeholder="请提供您的电话号码和国家代码"
+                   title="请提供您的电话号码和国家代码"
                    help={this.validationMessage('phone')}
                    bsStyle={this.validationState('phone')}
                    required
@@ -176,12 +176,12 @@ export default class EnterpriseFreeLicenseForm extends React.Component {
                       type="submit"
                       bsSize="small"
                       bsStyle="primary">
-                UPGRADE NOW
+                现在升级
               </Button>
               <Button id="clear-entry"
                       onClick={this.resetForm}
                       bsSize="small">
-                Clear form
+                清除表格
               </Button>
             </ButtonToolbar>
           </Col>

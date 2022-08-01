@@ -60,9 +60,9 @@ const ClusterInfo = () => {
 
   return (
     <StyledDl className="system-dl">
-      <dt>Cluster ID:</dt>
-      <dd>{clusterId || 'Not available'}</dd>
-      <dt>Number of nodes:</dt>
+      <dt>集群ID:</dt>
+      <dd>{clusterId || '不可用'}</dd>
+      <dt>节点数量:</dt>
       <dd>{nodeCount}</dd>
     </StyledDl>
   );
@@ -109,7 +109,7 @@ const GraylogClusterTrafficGraph = () => {
   if (traffic) {
     const bytesOut = reduce(traffic.output, (result, value) => result + value);
 
-    sumOutput = <small>Last 30 days: {NumberUtils.formatBytes(bytesOut)}</small>;
+    sumOutput = <small>最近30天: {NumberUtils.formatBytes(bytesOut)}</small>;
 
     const unixTraffic = formatTrafficData(traffic.output);
 
@@ -121,7 +121,7 @@ const GraylogClusterTrafficGraph = () => {
 
   return (
     <>
-      <StyledH3 ref={containerRef}>Outgoing traffic {sumOutput}</StyledH3>
+      <StyledH3 ref={containerRef}>输出流量 {sumOutput}</StyledH3>
       {trafficGraph}
     </>
   );

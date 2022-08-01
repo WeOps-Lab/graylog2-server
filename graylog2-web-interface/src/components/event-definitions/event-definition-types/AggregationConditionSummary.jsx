@@ -17,10 +17,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AggregationConditionSummary = ({ conditions, series }) => {
+const AggregationConditionSummary = ({conditions, series}) => {
   const renderExpression = (expression) => {
     if (!expression) {
-      return 'No condition configured';
+      return '没有配置任何条件';
     }
 
     switch (expression.expr) {
@@ -57,7 +57,7 @@ const AggregationConditionSummary = ({ conditions, series }) => {
           </>
         );
       default:
-        return 'No condition configured';
+        return '未配置条件';
     }
   };
 

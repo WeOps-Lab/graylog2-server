@@ -101,17 +101,17 @@ class FieldForm extends React.Component {
 
     requiredFields.forEach((requiredField) => {
       if (!lodash.get(this.state, requiredField)) {
-        errors[requiredField] = 'Field cannot be empty.';
+        errors[requiredField] = '字段不可为空.';
       }
     });
 
     if (isKey && (!lodash.isNumber(keyPosition) || Number(keyPosition) < 1)) {
-      errors.key_position = 'Field must be a positive number.';
+      errors.key_position = '字段必须为数值.';
     }
 
     pluginRequiredFields.forEach((requiredField) => {
       if (!lodash.get(config, `providers[0].${requiredField}`)) {
-        errors[requiredField] = 'Field cannot be empty.';
+        errors[requiredField] = '字段不可为空.';
       }
     });
 
@@ -207,7 +207,7 @@ class FieldForm extends React.Component {
       <Row>
         <Col md={7} lg={6}>
           <h2 className={commonStyles.title}>
-            {prevFieldName ? `Custom Field "${fieldName}"` : 'New Custom Field'}
+            {prevFieldName ? `自定义字段 "${fieldName}"` : '新的自定义字段'}
           </h2>
 
           <Input id="field-name"
@@ -217,12 +217,12 @@ class FieldForm extends React.Component {
                  value={fieldName}
                  onChange={this.handleFieldNameChange}
                  bsStyle={validation.errors.fieldName ? 'error' : null}
-                 help={validation.errors.fieldName || 'Name for this Field.'}
+                 help={validation.errors.fieldName || '字段的名称.'}
                  required />
 
           <FormGroup validationState={validation.errors.key_position ? 'error' : null}>
             <ControlLabel>
-              Use Field as Event Key&emsp;
+              使用字段作为事件键&emsp;
               <OverlayTrigger placement="right"
                               trigger={['click', 'focus']}
                               overlay={<EventKeyHelpPopover id="key-popover" />}>
@@ -241,28 +241,28 @@ class FieldForm extends React.Component {
                            disabled={!isKey} />
             </InputGroup>
             <HelpBlock>
-              {validation.errors.key_position || 'Indicates if this Field should be a Key and its order.'}
+              {validation.errors.key_position || '指示此字段是否应为键及其顺序.'}
             </HelpBlock>
           </FormGroup>
 
           <FormGroup>
-            <ControlLabel>Field Data Type</ControlLabel>
-            <FormControl.Static>String</FormControl.Static>
+            <ControlLabel>字段数据类型</ControlLabel>
+            <FormControl.Static>字符串</FormControl.Static>
           </FormGroup>
 
           <FormGroup controlId="event-field-provider"
                      validationState={validation.errors['config.providers[0].type'] ? 'error' : null}>
-            <ControlLabel>Set Value From</ControlLabel>
+            <ControlLabel>设置值</ControlLabel>
             <Select name="event-field-provider"
                     ignoreAccents={false}
-                    placeholder="Select Value Source"
+                    placeholder="选择数据源"
                     onChange={this.handleProviderTypeChange}
                     options={this.formatFieldValueProviders()}
                     value={this.getConfigProviderType(config, '')}
                     matchProp="label"
                     required />
             <HelpBlock>
-              {validation.errors['config.providers[0].type'] || 'Select a source for the value of this Field.'}
+              {validation.errors['config.providers[0].type'] || '选择此字段的数据源.'}
             </HelpBlock>
           </FormGroup>
         </Col>
@@ -273,8 +273,8 @@ class FieldForm extends React.Component {
 
         <Col md={12}>
           <ButtonToolbar>
-            <Button bsStyle="primary" onClick={this.handleSubmit}>Done</Button>
-            <Button onClick={onCancel}>Cancel</Button>
+            <Button bsStyle="primary" onClick={this.handleSubmit}>完成</Button>
+            <Button onClick={onCancel}>取消</Button>
           </ButtonToolbar>
         </Col>
       </Row>

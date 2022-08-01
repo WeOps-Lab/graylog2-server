@@ -65,8 +65,8 @@ class BootstrapModalConfirm extends React.Component {
 
   static defaultProps = {
     showModal: false,
-    cancelButtonText: 'Cancel',
-    confirmButtonText: 'Confirm',
+    cancelButtonText: '取消',
+    confirmButtonText: '确认',
     cancelButtonDisabled: false,
     confirmButtonDisabled: false,
     onCancel: () => {},

@@ -70,7 +70,7 @@ class AddNotificationForm extends React.Component {
 
     if (hasCreationPermissions) {
       formattedNotifications.unshift({
-        label: 'Create New Notification...',
+        label: '创建告警通知...',
         value: 'create',
       });
     }
@@ -82,26 +82,25 @@ class AddNotificationForm extends React.Component {
     const { notifications, onCancel } = this.props;
     const { displayNewNotificationForm, selectedNotification } = this.state;
     const doneButton = displayNewNotificationForm
-      ? <Button bsStyle="primary" type="submit" form="new-notification-form">Done</Button>
-      : <Button bsStyle="primary" onClick={this.handleSubmit}>Done</Button>;
+      ? <Button bsStyle="primary" type="submit" form="new-notification-form">完成</Button>
+      : <Button bsStyle="primary" onClick={this.handleSubmit}>完成</Button>;
 
     return (
       <Row>
         <Col md={7} lg={6}>
-          <h2 className={commonStyles.title}>Add Notification</h2>
+          <h2 className={commonStyles.title}>新增告警通知</h2>
 
           <fieldset>
             <FormGroup controlId="notification-select">
               <ControlLabel>Choose Notification</ControlLabel>
               <Select id="notification-select"
                       matchProp="label"
-                      placeholder="Select Notification"
+                      placeholder="选择告警通知"
                       onChange={this.handleSelectNotificationChange}
                       options={this.formatNotifications(notifications)}
                       value={selectedNotification} />
               <HelpBlock>
-                Select a Notification to use on Alerts of this kind or create a new Notification that you can
-                later use in other Alerts.
+                选择要在此类告警上使用的通知,或创建新的通知,以便以后在其他告警中使用.
               </HelpBlock>
             </FormGroup>
 
@@ -115,7 +114,7 @@ class AddNotificationForm extends React.Component {
 
           <ButtonToolbar>
             {doneButton}
-            <Button onClick={onCancel}>Cancel</Button>
+            <Button onClick={onCancel}>取消</Button>
           </ButtonToolbar>
         </Col>
       </Row>

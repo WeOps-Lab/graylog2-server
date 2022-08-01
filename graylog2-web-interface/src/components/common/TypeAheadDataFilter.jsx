@@ -238,16 +238,16 @@ class TypeAheadDataFilter extends React.Component {
                           ref={(typeAheadInput) => { this.typeAheadInput = typeAheadInput; }}
                           onSuggestionSelected={this._onFilterAdded}
                           formGroupClassName=""
-                          suggestionText={`Filter by ${filterBy}: `}
+                          suggestionText={`按 ${filterBy} 过滤: `}
                           suggestions={suggestions}
                           label={label}
                           displayKey={displayKey} />
-          <Button type="submit" style={{ marginLeft: 5 }}>Filter</Button>
+          <Button type="submit" style={{ marginLeft: 5 }}>过滤</Button>
           <Button type="button"
                   style={{ marginLeft: 5 }}
                   onClick={this._resetFilters}
                   disabled={filters.count() === 0 && filterText === ''}>
-            Reset
+            重置
           </Button>
         </form>
         <ul className="pill-list">
