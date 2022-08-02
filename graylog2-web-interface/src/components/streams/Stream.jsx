@@ -16,24 +16,24 @@
  */
 import PropTypes from 'prop-types';
 import React from 'react';
-import styled, { css } from 'styled-components';
+import styled, {css} from 'styled-components';
 
 import EntityShareModal from 'components/permissions/EntityShareModal';
-import { Link, LinkContainer } from 'components/common/router';
-import { Button, Tooltip } from 'components/bootstrap';
-import { Icon, OverlayElement, ShareButton } from 'components/common';
+import {Link, LinkContainer} from 'components/common/router';
+import {Button, Tooltip} from 'components/bootstrap';
+import {Icon, OverlayElement, ShareButton} from 'components/common';
 import StreamRuleForm from 'components/streamrules/StreamRuleForm';
-import { isAnyPermitted, isPermitted } from 'util/PermissionsMixin';
+import {isAnyPermitted, isPermitted} from 'util/PermissionsMixin';
 import UserNotification from 'util/UserNotification';
 import Routes from 'routing/Routes';
 import StreamsStore from 'stores/streams/StreamsStore';
-import { StreamRulesStore } from 'stores/streams/StreamRulesStore';
+import {StreamRulesStore} from 'stores/streams/StreamRulesStore';
 
 import StreamMetaData from './StreamMetaData';
 import StreamControls from './StreamControls';
 import StreamStateBadge from './StreamStateBadge';
 
-const StreamListItem = styled.li(({ theme }) => css`
+const StreamListItem = styled.li(({theme}) => css`
   display: block;
   padding: 15px 0;
 
@@ -98,26 +98,26 @@ class Stream extends React.Component {
   }
 
   _closeStreamRuleForm = () => {
-    this.setState({ showStreamRuleForm: false });
+    this.setState({showStreamRuleForm: false});
   };
 
   _openStreamRuleForm = () => {
-    this.setState({ showStreamRuleForm: true });
+    this.setState({showStreamRuleForm: true});
   };
 
   _closeEntityShareModal = () => {
-    this.setState({ showEntityShareModal: false });
+    this.setState({showEntityShareModal: false});
   };
 
   _openEntityShareModal = () => {
-    this.setState({ showEntityShareModal: true });
+    this.setState({showEntityShareModal: true});
   };
 
   _onDelete = (stream) => {
     // eslint-disable-next-line no-alert
-    if (window.confirm('Do you really want to remove this stream?')) {
+    if (window.confirm('确认要删除此消息流?')) {
       StreamsStore.remove(stream.id, (response) => {
-        UserNotification.success(`Stream '${stream.title}' was deleted successfully.`, 'Success');
+        UserNotification.success(`消息流'${stream.title}'删除成功`, '成功');
 
         return response;
       });
@@ -125,17 +125,17 @@ class Stream extends React.Component {
   };
 
   _onResume = () => {
-    const { stream } = this.props;
+    const {stream} = this.props;
 
-    this.setState({ loading: true });
+    this.setState({loading: true});
 
     StreamsStore.resume(stream.id, (response) => response)
-      .finally(() => this.setState({ loading: false }));
+      .finally(() => this.setState({loading: false}));
   };
 
   _onUpdate = (streamId, stream) => {
     StreamsStore.update(streamId, stream, (response) => {
-      UserNotification.success(`Stream '${stream.title}' was updated successfully.`, 'Success');
+      UserNotification.success(`消息流 '${stream.title}' 更新成功.`, '成功');
 
       return response;
     });
@@ -143,38 +143,38 @@ class Stream extends React.Component {
 
   _onClone = (streamId, stream) => {
     StreamsStore.cloneStream(streamId, stream, (response) => {
-      UserNotification.success(`Stream was successfully cloned as '${stream.title}'.`, 'Success');
+      UserNotification.success(`消息流复制成功 '${stream.title}'.`, '成功');
 
       return response;
     });
   };
 
   _onPause = () => {
-    const { stream } = this.props;
+    const {stream} = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm(`Do you really want to pause stream '${stream.title}'?`)) {
-      this.setState({ loading: true });
+    if (window.confirm(`确定暂停消息流 '${stream.title}'?`)) {
+      this.setState({loading: true});
 
       StreamsStore.pause(stream.id, (response) => response)
-        .finally(() => this.setState({ loading: false }));
+        .finally(() => this.setState({loading: false}));
     }
   };
 
   _onSaveStreamRule = (streamRuleId, streamRule) => {
-    const { stream } = this.props;
+    const {stream} = this.props;
 
-    StreamRulesStore.create(stream.id, streamRule, () => UserNotification.success('Stream rule was created successfully.', 'Success'));
+    StreamRulesStore.create(stream.id, streamRule, () => UserNotification.success('消息流创建成功.', '成功'));
   };
 
   render() {
-    const { indexSets, stream, permissions, streamRuleTypes, user } = this.props;
-    const { loading, showStreamRuleForm, showEntityShareModal } = this.state;
+    const {indexSets, stream, permissions, streamRuleTypes, user} = this.props;
+    const {loading, showStreamRuleForm, showEntityShareModal} = this.state;
 
     const isDefaultStream = stream.is_default;
     const isNotEditable = !stream.is_editable;
     const defaultStreamTooltip = isDefaultStream
-      ? <Tooltip id="default-stream-tooltip">Action not available for the default stream</Tooltip> : null;
+      ? <Tooltip id="default-stream-tooltip">操作在默认消息流上不可用</Tooltip> : null;
 
     let editRulesLink;
     let manageAlertsLink;
@@ -184,7 +184,7 @@ class Stream extends React.Component {
         <OverlayElement overlay={defaultStreamTooltip} placement="top" useOverlay={isDefaultStream}>
           <LinkContainer disabled={isDefaultStream || isNotEditable} to={Routes.stream_edit(stream.id)}>
             <Button bsStyle="info">
-              <Icon name="stream" /> Manage Rules
+              <Icon name="stream"/> 管理规则
             </Button>
           </LinkContainer>
         </OverlayElement>
@@ -193,7 +193,7 @@ class Stream extends React.Component {
       manageAlertsLink = (
         <LinkContainer to={Routes.stream_alerts(stream.id)}>
           <Button bsStyle="info">
-            <Icon name="bell" /> Manage Alerts
+            <Icon name="bell"/> 管理告警
           </Button>
         </LinkContainer>
       );
@@ -208,7 +208,7 @@ class Stream extends React.Component {
             <ToggleButton bsStyle="success"
                           onClick={this._onResume}
                           disabled={isDefaultStream || loading || isNotEditable}>
-              <Icon name="play" /> {loading ? 'Starting...' : 'Start Stream'}
+              <Icon name="play"/> {loading ? '启动中...' : '启动消息流'}
             </ToggleButton>
           </OverlayElement>
         );
@@ -218,7 +218,7 @@ class Stream extends React.Component {
             <ToggleButton bsStyle="primary"
                           onClick={this._onPause}
                           disabled={loading || isNotEditable}>
-              <Icon name="pause" /> {loading ? 'Pausing...' : 'Pause Stream'}
+              <Icon name="pause"/> {loading ? '暂停中...' : '暂停消息流'}
             </ToggleButton>
           </OverlayElement>
         );
@@ -226,7 +226,7 @@ class Stream extends React.Component {
     }
 
     const createdFromContentPack = (stream.content_pack
-      ? <Icon name="cube" title="Created from content pack" /> : null);
+      ? <Icon name="cube" title="从扩展包新建"/> : null);
 
     const streamControls = (
       <OverlayElement overlay={defaultStreamTooltip} placement="top">
@@ -239,19 +239,20 @@ class Stream extends React.Component {
                         onQuickAdd={this._openStreamRuleForm}
                         indexSets={indexSets}
                         isDefaultStream={isDefaultStream}
-                        disabled={isNotEditable} />
+                        disabled={isNotEditable}/>
       </OverlayElement>
     );
 
     const indexSet = indexSets.find((is) => is.id === stream.index_set_id) || indexSets.find((is) => is.is_default);
-    const indexSetDetails = isPermitted(permissions, ['indexsets:read']) && indexSet ? <span>index set <em>{indexSet.title}</em> &nbsp;</span> : null;
+    const indexSetDetails = isPermitted(permissions, ['indexsets:read']) && indexSet ?
+      <span>index set <em>{indexSet.title}</em> &nbsp;</span> : null;
 
     return (
       <StreamListItem>
         <div className="stream-actions pull-right">
           {editRulesLink}{' '}
           {manageAlertsLink}{' '}
-          <ShareButton entityId={stream.id} entityType="stream" onClick={this._openEntityShareModal} />
+          <ShareButton entityId={stream.id} entityType="stream" onClick={this._openEntityShareModal}/>
           {toggleStreamLink}{' '}
 
           {streamControls}
@@ -260,7 +261,7 @@ class Stream extends React.Component {
         <h2>
           <Link to={Routes.stream_search(stream.id)}>{stream.title}</Link>
           {' '}
-          <small>{indexSetDetails}<StreamStateBadge stream={stream} /></small>
+          <small>{indexSetDetails}<StreamStateBadge stream={stream}/></small>
         </h2>
 
         <div className="stream-data">
@@ -272,20 +273,20 @@ class Stream extends React.Component {
           <StreamMetaData stream={stream}
                           streamRuleTypes={streamRuleTypes}
                           permissions={permissions}
-                          isDefaultStream={isDefaultStream} />
+                          isDefaultStream={isDefaultStream}/>
         </div>
         {showStreamRuleForm && (
           <StreamRuleForm onClose={this._closeStreamRuleForm}
-                          title="New Stream Rule"
+                          title="新建消息流规则"
                           onSubmit={this._onSaveStreamRule}
-                          streamRuleTypes={streamRuleTypes} />
+                          streamRuleTypes={streamRuleTypes}/>
         )}
         {showEntityShareModal && (
           <EntityShareModal entityId={stream.id}
                             entityType="stream"
                             entityTitle={stream.title}
-                            description="Search for a User or Team to add as collaborator on this stream."
-                            onClose={this._closeEntityShareModal} />
+                            description="搜索要添加为此消息流协作者的用户或团队."
+                            onClose={this._closeEntityShareModal}/>
         )}
       </StreamListItem>
     );

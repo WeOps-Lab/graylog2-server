@@ -25,13 +25,13 @@ const ColumnPivotConfiguration = ({ onClose, onRollupChange, rollup }) => (
     <Input type="checkbox"
            id="rollup"
            name="rollup"
-           label="Rollup"
+           label="汇总"
            autoFocus
            onChange={(e) => onRollupChange(e.target.checked)}
-           help="When rollup is enabled, an additional trace totalling individual subtraces will be included."
+           help="启用汇总后，将包括一个总计单个子跟踪的附加跟踪."
            checked={rollup} />
     <div className="pull-right" style={{ marginBottom: '10px' }}>
-      <Button bsStyle="success" onClick={onClose}>Done</Button>
+      <Button bsStyle="success" onClick={onClose}>完成</Button>
     </div>
   </div>
 );

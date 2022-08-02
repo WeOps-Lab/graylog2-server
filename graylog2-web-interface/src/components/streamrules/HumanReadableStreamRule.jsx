@@ -84,13 +84,13 @@ class HumanReadableStreamRule extends React.Component {
 
     if (String(streamRule.type) === String(this.ALWAYS_MATCH_RULE_TYPE)) {
       return (
-        <span>Rule always matches</span>
+        <span>规则总是匹配</span>
       );
     }
 
     return (
       <span>
-        <em>{this._formatRuleField(streamRule)}</em> <strong>must {negation}</strong>{longDesc} <em>{this._formatRuleValue(streamRule)}</em>
+        <span>字段<em>{this._formatRuleField(streamRule)}</em>必须{negation}{longDesc} <em>{this._formatRuleValue(streamRule)}</em></span>
       </span>
     );
   }

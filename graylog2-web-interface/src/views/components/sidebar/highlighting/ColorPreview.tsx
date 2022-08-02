@@ -60,7 +60,7 @@ const ColorPreview = React.forwardRef<HTMLDivElement, ColorPreviewProps>(({ colo
     return <GradientColorPreview ref={ref} onClick={onClick} gradient={(color as GradientColor).gradient} />;
   }
 
-  throw new Error(`Invalid highlighting color type: ${color}`);
+  throw new Error(`无效的突出显示颜色类型: ${color}`);
 });
 
 ColorPreview.propTypes = {

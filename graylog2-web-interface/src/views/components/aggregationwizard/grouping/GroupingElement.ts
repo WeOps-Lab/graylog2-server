@@ -44,26 +44,26 @@ const validateDateGrouping = (grouping: DateGrouping): GroupByError => {
   const groupByError = {} as GroupByError;
 
   if (!grouping.field?.field) {
-    groupByError.field = 'Field is required.';
+    groupByError.field = '必填字段.';
   }
 
   if (grouping.interval.type === 'auto') {
     if (!grouping.interval.scaling) {
-      groupByError.interval = 'Scaling is required.';
+      groupByError.interval = '需要缩放.';
     }
 
     if (grouping.interval.scaling && (grouping.interval.scaling <= 0 || grouping.interval.scaling >= 10)) {
-      groupByError.interval = 'Must be greater than 0 and smaller or equals 10.';
+      groupByError.interval = '必须大于 0 且小于或等于 10';
     }
   }
 
   if (grouping.interval.type === 'timeunit') {
     if (!grouping.interval.value) {
-      groupByError.interval = 'Value is required.';
+      groupByError.interval = '值是必需的.';
     }
 
     if (grouping.interval.value && grouping.interval.value <= 0) {
-      groupByError.interval = 'Must be greater than 0.';
+      groupByError.interval = '必须大于 0.';
     }
   }
 
@@ -74,15 +74,15 @@ const validateValuesGrouping = (grouping: ValuesGrouping): GroupByError => {
   const groupByError: GroupByError = {};
 
   if (!grouping.field?.field) {
-    groupByError.field = 'Field is required.';
+    groupByError.field = '必填字段.';
   }
 
   if (!grouping.limit) {
-    groupByError.limit = 'Limit is required.';
+    groupByError.limit = '限制是必需的.';
   }
 
   if (grouping.limit && grouping.limit <= 0) {
-    groupByError.limit = 'Must be greater than 0.';
+    groupByError.limit = '必须大于 0.';
   }
 
   return groupByError;
@@ -150,7 +150,7 @@ const pivotToGroupings = (pivot: Pivot, direction: GroupingDirection): GroupByFo
     return valuesPivotToGrouping(pivot, direction);
   }
 
-  throw new Error(`Widget has not supported pivot type "${pivot.type}"`);
+  throw new Error(`小部件不支持枢轴类型 "${pivot.type}"`);
 };
 
 const pivotsToGrouping = (config: AggregationWidgetConfig) => {
@@ -187,8 +187,8 @@ export const createEmptyGrouping: () => ValuesGrouping = () => addRandomId<Value
 });
 
 const GroupByElement: AggregationElement = {
-  sectionTitle: 'Group By',
-  title: 'Grouping',
+  sectionTitle: '分组',
+  title: '分组',
   key: 'groupBy',
   order: 1,
   allowCreate: () => true,

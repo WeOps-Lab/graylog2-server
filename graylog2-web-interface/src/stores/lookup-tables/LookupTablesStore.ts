@@ -177,7 +177,7 @@ export const LookupTablesStore = singletonStore(
         this.caches = response.caches;
         this.dataAdapters = response.data_adapters;
         this.propagateChanges();
-      }, this._errorHandler('Fetching lookup tables failed', 'Could not retrieve the lookup tables'));
+      }, this._errorHandler('加载数据字典失败', '无法加载数据字典'));
 
       LookupTablesActions.searchPaginated.promise(promise);
 
@@ -196,8 +196,8 @@ export const LookupTablesStore = singletonStore(
         this.cache = response.caches[lookupTable.cache_id];
         this.dataAdapter = response.data_adapters[lookupTable.data_adapter_id];
         this.propagateChanges();
-      }, this._errorHandler(`Fetching lookup table ${idOrName} failed`,
-        'Could not retrieve lookup table'));
+      }, this._errorHandler(`加载数据字典 ${idOrName} 失败`,
+        '无法加载数据字典'));
 
       LookupTablesActions.get.promise(promise);
 
@@ -208,7 +208,7 @@ export const LookupTablesStore = singletonStore(
       const url = this._url('tables');
       const promise = fetch('POST', url, table);
 
-      promise.catch(this._errorHandler('Creating lookup table failed', `Could not create lookup table "${table.name}"`));
+      promise.catch(this._errorHandler('创建数据字典失败', `无法创建数据字典 "${table.name}"`));
 
       LookupTablesActions.create.promise(promise);
 
@@ -219,7 +219,7 @@ export const LookupTablesStore = singletonStore(
       const url = this._url(`tables/${table.id}`);
       const promise = fetch('PUT', url, table);
 
-      promise.catch(this._errorHandler('Updating lookup table failed', `Could not update lookup table "${table.name}"`));
+      promise.catch(this._errorHandler('更新数据字典失败', `无法更新数据字典 "${table.name}"`));
 
       LookupTablesActions.update.promise(promise);
 
@@ -230,7 +230,7 @@ export const LookupTablesStore = singletonStore(
       const url = this._url(`tables/${idOrName}`);
       const promise = fetch('DELETE', url);
 
-      promise.catch(this._errorHandler('Deleting lookup table failed', `Could not delete lookup table "${idOrName}"`));
+      promise.catch(this._errorHandler('删除数据字典失败', `无法删除数据字典 "${idOrName}"`));
 
       LookupTablesActions.delete.promise(promise);
 
@@ -266,7 +266,7 @@ export const LookupTablesStore = singletonStore(
         };
 
         this.propagateChanges();
-      }, this._errorHandler('Fetching lookup table error state failed.', 'Could not error states'));
+      }, this._errorHandler('加载数据字典失败.', '无法加载数据字典'));
 
       LookupTablesActions.getErrors.promise(promise);
 
@@ -279,7 +279,7 @@ export const LookupTablesStore = singletonStore(
       promise.then((response) => {
         this.lookupResult = response;
         this.propagateChanges();
-      }, this._errorHandler('Lookup failed', `Could not lookup value for key "${key}" in lookup table "${tableName}"`));
+      }, this._errorHandler('映射失败', `无法在"${tableName}"中映射"${key}"`));
 
       LookupTablesActions.lookup.promise(promise);
 
@@ -290,8 +290,8 @@ export const LookupTablesStore = singletonStore(
       const promise = fetch('POST', this._urlClusterWise(`tables/${table.id}/purge?key=${encodeURIComponent(key)}`));
 
       promise.then(() => {
-        UserNotification.success(`Purging cache key "${key}" for lookup table "${table.name}"`, 'Success!');
-      }, this._errorHandler(`Could not purge cache for key "${key}" in lookup table "${table.name}"`, 'Failed!'));
+        UserNotification.success(`清空"${table.name}"的缓存 "${key}"`, '成功!');
+      }, this._errorHandler(`无法清空"${table.name}"的缓存"${key}"`, '失败!'));
 
       LookupTablesActions.purgeKey.promise(promise);
 
@@ -302,8 +302,8 @@ export const LookupTablesStore = singletonStore(
       const promise = fetch('POST', this._urlClusterWise(`tables/${table.id}/purge`));
 
       promise.then(() => {
-        UserNotification.success(`Purging cache for lookup table "${table.name}"`, 'Success!');
-      }, this._errorHandler(`Could not purge cache for lookup table "${table.name}"`, 'Failed!'));
+        UserNotification.success(`清空缓存 "${table.name}" 成功`, '成功!');
+      }, this._errorHandler(`无法清空缓存 "${table.name}"`, '失败!'));
 
       LookupTablesActions.purgeAll.promise(promise);
 
@@ -317,7 +317,7 @@ export const LookupTablesStore = singletonStore(
       promise.then((response) => {
         this.validationErrors = response.errors;
         this.propagateChanges();
-      }, this._errorHandler('Lookup table validation failed', `Could not validate lookup table "${table.name}"`));
+      }, this._errorHandler('数据字典校验失败', `无法校验数据字典 "${table.name}"`));
 
       LookupTablesActions.validate.promise(promise);
 

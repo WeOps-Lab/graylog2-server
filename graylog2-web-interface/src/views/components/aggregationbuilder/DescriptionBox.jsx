@@ -72,7 +72,7 @@ class DescriptionBox extends React.Component {
       <Portal>
         <Position placement="bottom"
                   target={this.target}>
-          <Popover title="Config options" id="config-popover">
+          <Popover title="配置选项" id="config-popover">
             {configurableElement}
           </Popover>
         </Position>

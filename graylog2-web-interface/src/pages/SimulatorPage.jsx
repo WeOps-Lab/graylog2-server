@@ -54,28 +54,28 @@ class SimulatorPage extends React.Component {
     const content = this._isLoading() ? <Spinner /> : <ProcessorSimulator streams={streams} />;
 
     return (
-      <DocumentTitle title="Simulate processing">
+      <DocumentTitle title="模拟处理">
         <div>
-          <PageHeader title="Simulate processing">
+          <PageHeader title="模拟处理">
             <span>
-              Processing messages can be complex. Use this page to simulate the result of processing an incoming
-              message using your current set of pipelines and rules.
+              流水线处理日志的规则可能会很复杂，可以在这个页面进行消息的模拟处理
             </span>
+
             <span>
-              Read more about Graylog pipelines in the <DocumentationLink page={DocsHelper.PAGES.PIPELINES} text="documentation" />.
+              在<DocumentationLink page={DocsHelper.PAGES.PIPELINES} text="文档"/>中查看更多关于流水线的信息。
             </span>
 
             <span>
               <LinkContainer to={Routes.SYSTEM.PIPELINES.OVERVIEW}>
-                <Button bsStyle="info">Manage pipelines</Button>
+                <Button bsStyle="info">管理流水线</Button>
               </LinkContainer>
               &nbsp;
               <LinkContainer to={Routes.SYSTEM.PIPELINES.RULES}>
-                <Button bsStyle="info">Manage rules</Button>
+                <Button bsStyle="info">管理规则</Button>
               </LinkContainer>
               &nbsp;
               <LinkContainer to={Routes.SYSTEM.PIPELINES.SIMULATOR}>
-                <Button bsStyle="info">Simulator</Button>
+                <Button bsStyle="info">模拟</Button>
               </LinkContainer>
             </span>
           </PageHeader>

@@ -334,17 +334,17 @@ const exports: PluginExports = {
   creators: [
     {
       type: 'preset',
-      title: 'Message Count',
+      title: '消息总数',
       func: AddMessageCountActionHandler,
     },
     {
       type: 'preset',
-      title: 'Message Table',
+      title: '消息',
       func: AddMessageTableActionHandler,
     },
     {
       type: 'generic',
-      title: 'Aggregation',
+      title: '聚合',
       func: CreateCustomAggregation,
     },
   ],
@@ -363,14 +363,14 @@ const exports: PluginExports = {
   'views.export.formats': [
     {
       type: 'csv',
-      displayName: () => 'Comma-Separated Values (CSV)',
+      displayName: () => 'CSV',
       mimeType: 'text/csv',
       fileExtension: 'csv',
     },
   ],
   'views.components.widgets.messageTable.previewOptions': [
     {
-      title: 'Show message in new row',
+      title: '在新行中显示消息',
       isChecked: (config) => config.showMessageRow,
       isDisabled: () => false,
       onChange: (config, onConfigChange) => {

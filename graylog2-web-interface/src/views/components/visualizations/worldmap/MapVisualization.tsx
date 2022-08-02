@@ -114,15 +114,15 @@ class MapVisualization extends React.Component<MapVisualizationProps> {
                     opacity={0.8}>
         <Popup>
           <dl>
-            <dt>Name</dt>
+            <dt>名称</dt>
             <dd>{name}</dd>
             {markerKeys}
-            <dt>Coordinates:</dt>
+            <dt>坐标:</dt>
             <dd>{coordinates}</dd>
             {value
               && (
               <>
-                <dt>Value:</dt>
+                <dt>值:</dt>
                 <dd>{value}</dd>
               </>
               )}

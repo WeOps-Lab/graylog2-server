@@ -26,28 +26,22 @@ import ConfigurationListContainer from 'components/sidecars/configurations/Confi
 import CollectorListContainer from 'components/sidecars/configurations/CollectorListContainer';
 
 const SidecarConfigurationPage = () => (
-  <DocumentTitle title="Collectors Configuration">
+  <DocumentTitle title="采集器配置">
     <span>
-      <PageHeader title="Collectors Configuration">
+      <PageHeader title="采集器配置">
         <span>
-          The Collector Sidecar runs next to your favourite log collector and configures it for you. Here you can
-          manage the Sidecar configurations.
-        </span>
-
-        <span>
-          Read more about the collector sidecar in the{' '}
-          <DocumentationLink page={DocsHelper.PAGES.COLLECTOR_SIDECAR} text="Graylog documentation" />.
+          客户端会管理并配置您使用的日志采集器。在这里你可以管理采集器的配置。
         </span>
 
         <ButtonToolbar>
           <LinkContainer to={Routes.SYSTEM.SIDECARS.OVERVIEW}>
-            <Button bsStyle="info">Overview</Button>
+            <Button bsStyle="info">概览</Button>
           </LinkContainer>
           <LinkContainer to={Routes.SYSTEM.SIDECARS.ADMINISTRATION}>
-            <Button bsStyle="info">Administration</Button>
+            <Button bsStyle="info">客户端管理</Button>
           </LinkContainer>
           <LinkContainer to={Routes.SYSTEM.SIDECARS.CONFIGURATION}>
-            <Button bsStyle="info">Configuration</Button>
+            <Button bsStyle="info">采集器配置</Button>
           </LinkContainer>
         </ButtonToolbar>
       </PageHeader>

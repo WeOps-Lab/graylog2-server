@@ -28,7 +28,7 @@ const EventListConfiguration = ({ enabled, onChange }: Props) => {
   return (
     <Checkbox onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(event.target.checked)}
               checked={enabled}>
-      Enable Event Annotation
+      启用事件注释
     </Checkbox>
   );
 };

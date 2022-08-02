@@ -119,7 +119,7 @@ class LUTDataAdaptersPage extends React.Component {
 
     if (isShowing || isEditing) {
       if (!dataAdapter) {
-        content = <Spinner text="Loading data adapter" />;
+        content = <Spinner text="加载数据源中" />;
       } else if (isEditing) {
         content = (
           <Row className="content">
@@ -127,7 +127,7 @@ class LUTDataAdaptersPage extends React.Component {
               <DataAdapterForm dataAdapter={dataAdapter}
                                type={dataAdapter.config.type}
                                create={false}
-                               title="Data Adapter"
+                               title="数据源"
                                saved={this._saved}
                                validate={this._validateAdapter}
                                validationErrors={validationErrors} />
@@ -139,7 +139,7 @@ class LUTDataAdaptersPage extends React.Component {
       }
     } else if (this._isCreating(this.props)) {
       if (!types) {
-        content = <Spinner text="Loading data adapter types" />;
+        content = <Spinner text="加载数据源类型中" />;
       } else {
         content = (
           <DataAdapterCreate types={types}
@@ -149,7 +149,7 @@ class LUTDataAdaptersPage extends React.Component {
         );
       }
     } else if (!dataAdapters) {
-      content = <Spinner text="Loading data adapters" />;
+      content = <Spinner text="加载数据源中" />;
     } else {
       content = (
         <DataAdaptersOverview dataAdapters={dataAdapters}
@@ -159,21 +159,21 @@ class LUTDataAdaptersPage extends React.Component {
     }
 
     return (
-      <DocumentTitle title="Lookup Tables - Data Adapters">
+      <DocumentTitle title="数据字典 - 数据源">
         <span>
-          <PageHeader title="Data adapters for Lookup Tables">
-            <span>Data adapters provide the actual values for lookup tables</span>
+          <PageHeader title="数据源">
+            <span>数据源为数据字典提供实际值</span>
             {null}
             <span>
               <ButtonToolbar>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.OVERVIEW}>
-                  <Button bsStyle="info">Lookup Tables</Button>
+                  <Button bsStyle="info">数据字典</Button>
                 </LinkContainer>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.CACHES.OVERVIEW}>
-                  <Button bsStyle="info">Caches</Button>
+                  <Button bsStyle="info">数据缓存</Button>
                 </LinkContainer>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.DATA_ADAPTERS.OVERVIEW}>
-                  <Button bsStyle="info">Data Adapters</Button>
+                  <Button bsStyle="info">数据源</Button>
                 </LinkContainer>
               </ButtonToolbar>
             </span>

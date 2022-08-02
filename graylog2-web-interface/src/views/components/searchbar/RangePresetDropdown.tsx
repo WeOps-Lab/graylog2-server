@@ -17,6 +17,7 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+moment.locale('zh-cn');
 import styled, { css } from 'styled-components';
 
 import { Icon, IfPermitted } from 'components/common';
@@ -45,12 +46,11 @@ const RangePresetDropdown = ({ disabled, onChange, onToggle, className, displayT
   const { config } = useSearchConfiguration();
   const availableOptions = config?.relative_timerange_options;
   const timeRangeLimit = moment.duration(config?.query_time_range_limit);
-  const title = displayTitle && (availableOptions ? 'Preset Times' : 'Loading Ranges...');
+  const title = displayTitle && (availableOptions ? '预设时间' : '加载中...');
   let options;
 
   if (availableOptions) {
     let all = null;
-
     options = Object.keys(availableOptions).map((key) => {
       const seconds = moment.duration(key).asSeconds();
 
@@ -75,7 +75,7 @@ const RangePresetDropdown = ({ disabled, onChange, onToggle, className, displayT
       options.push(all);
     }
   } else {
-    options = (<MenuItem eventKey="300" disabled>Loading...</MenuItem>);
+    options = (<MenuItem eventKey="300" disabled>加载中...</MenuItem>);
   }
 
   const _onChange = (range) => {
@@ -87,7 +87,7 @@ const RangePresetDropdown = ({ disabled, onChange, onToggle, className, displayT
   return (
     <DropdownButton title={title}
                     id="relative-timerange-selector"
-                    aria-label="Open time range preset select"
+                    aria-label="打开时间范围预设选择"
                     bsSize={bsSize}
                     className={className}
                     onToggle={onToggle}
@@ -98,7 +98,7 @@ const RangePresetDropdown = ({ disabled, onChange, onToggle, className, displayT
       {options}
       <IfPermitted permissions="clusterconfigentry:edit">
         <MenuItem divider />
-        <AdminMenuItem href="/system/configurations" target="_blank">Configure Ranges <ExternalIcon name="external-link-alt" /></AdminMenuItem>
+        <AdminMenuItem href="/system/configurations" target="_blank">配置范围 <ExternalIcon name="external-link-alt" /></AdminMenuItem>
       </IfPermitted>
     </DropdownButton>
   );

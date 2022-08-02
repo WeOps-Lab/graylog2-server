@@ -71,10 +71,10 @@ export const IndexRangesStore = singletonStore(
       const promise = fetch('POST', url);
 
       promise
-        .then(UserNotification.success('Index ranges will be recalculated shortly'))
+        .then(UserNotification.success('索引范围将会被重新计算'))
         .catch((error) => {
-          UserNotification.error(`Could not create a job to start index ranges recalculation, reason: ${error}`,
-            'Error starting index ranges recalculation');
+          UserNotification.error(`无法重新计算索引范围, 原因: ${error}`,
+            '无法重新计算索引范围');
         });
 
       IndexRangesActions.recalculate.promise(promise);
@@ -84,10 +84,10 @@ export const IndexRangesStore = singletonStore(
       const promise = fetch('POST', url);
 
       promise
-        .then(UserNotification.success(`Index ranges for ${indexName} will be recalculated shortly`))
+        .then(UserNotification.success(`索引 ${indexName} 将会重新计算索引范围`))
         .catch((error) => {
-          UserNotification.error(`Could not create a job to start index ranges recalculation for ${indexName}, reason: ${error}`,
-            `Error starting index ranges recalculation for ${indexName}`);
+          UserNotification.error(`无法重新计算 ${indexName} 的索引范围, 原因: ${error}`,
+            `无法重新计算索引范围 ${indexName}`);
         });
 
       IndexRangesActions.recalculateIndex.promise(promise);

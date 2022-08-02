@@ -18,20 +18,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Reflux from 'reflux';
 import createReactClass from 'create-react-class';
-import { cloneDeep, groupBy } from 'lodash';
+import {cloneDeep, groupBy} from 'lodash';
 
-import { LinkContainer } from 'components/common/router';
+import {LinkContainer} from 'components/common/router';
 import Routes from 'routing/Routes';
-import { Button } from 'components/bootstrap';
+import {Button} from 'components/bootstrap';
 import history from 'util/History';
 import UserNotification from 'util/UserNotification';
-import { DocumentTitle, PageHeader } from 'components/common';
+import {DocumentTitle, PageHeader} from 'components/common';
 import ValueReferenceData from 'util/ValueReferenceData';
 import ContentPackEdit from 'components/content-packs/ContentPackEdit';
 import Entity from 'logic/content-packs/Entity';
 import withParams from 'routing/withParams';
-import { CatalogActions, CatalogStore } from 'stores/content-packs/CatalogStore';
-import { ContentPacksActions, ContentPacksStore } from 'stores/content-packs/ContentPacksStore';
+import {CatalogActions, CatalogStore} from 'stores/content-packs/CatalogStore';
+import {ContentPacksActions, ContentPacksStore} from 'stores/content-packs/ContentPacksStore';
 
 const EditContentPackPage = createReactClass({
   displayName: 'EditContentPackPage',
@@ -52,14 +52,14 @@ const EditContentPackPage = createReactClass({
   },
 
   componentDidMount() {
-    const { params } = this.props;
+    const {params} = this.props;
 
     ContentPacksActions.get(params.contentPackId).then((result) => {
-      const { contentPackRevisions } = result;
+      const {contentPackRevisions} = result;
       const originContentPackRev = params.contentPackRev;
       const newContentPack = contentPackRevisions.createNewVersionFromRev(originContentPackRev);
 
-      this.setState({ contentPack: newContentPack, contentPackEntities: cloneDeep(newContentPack.entities) });
+      this.setState({contentPack: newContentPack, contentPackEntities: cloneDeep(newContentPack.entities)});
 
       CatalogActions.showEntityIndex().then(() => {
         this._createEntityCatalog();
@@ -70,7 +70,7 @@ const EditContentPackPage = createReactClass({
   },
 
   _createEntityCatalog() {
-    const { contentPack, contentPackEntities, entityIndex } = this.state;
+    const {contentPack, contentPackEntities, entityIndex} = this.state;
 
     if (!contentPack || !entityIndex) {
       return;
@@ -85,11 +85,11 @@ const EditContentPackPage = createReactClass({
         return result;
       }, {});
 
-    this.setState({ entityCatalog });
+    this.setState({entityCatalog});
   },
 
   _getSelectedEntities() {
-    const { contentPack, entityCatalog, entityIndex } = this.state;
+    const {contentPack, entityCatalog, entityIndex} = this.state;
 
     if (!contentPack || !entityIndex) {
       return;
@@ -97,7 +97,9 @@ const EditContentPackPage = createReactClass({
 
     const selectedEntities = contentPack.entities.reduce((result, entity) => {
       if (entityCatalog[entity.type.name]
-        && entityCatalog[entity.type.name].findIndex((fetchedEntity) => { return fetchedEntity.id === entity.id; }) >= 0) {
+        && entityCatalog[entity.type.name].findIndex((fetchedEntity) => {
+          return fetchedEntity.id === entity.id;
+        }) >= 0) {
         const newResult = result;
 
         newResult[entity.type.name] = result[entity.type.name] || [];
@@ -109,11 +111,11 @@ const EditContentPackPage = createReactClass({
       return result;
     }, {});
 
-    this.setState({ selectedEntities: selectedEntities });
+    this.setState({selectedEntities: selectedEntities});
   },
 
   _getAppliedParameter() {
-    const { contentPack } = this.state;
+    const {contentPack} = this.state;
 
     const appliedParameter = contentPack.entities.reduce((result, entity) => {
       const entityData = new ValueReferenceData(entity.data);
@@ -122,7 +124,7 @@ const EditContentPackPage = createReactClass({
       const paramMap = Object.keys(configPaths).filter((path) => {
         return configPaths[path].isValueParameter();
       }).map((path) => {
-        return { configKey: path, paramName: configPaths[path].getValue(), readOnly: true };
+        return {configKey: path, paramName: configPaths[path].getValue(), readOnly: true};
       });
       const newResult = result;
 
@@ -133,11 +135,11 @@ const EditContentPackPage = createReactClass({
       return newResult;
     }, {});
 
-    this.setState({ appliedParameter: appliedParameter });
+    this.setState({appliedParameter: appliedParameter});
   },
 
   _onStateChanged(newState) {
-    const { contentPack, selectedEntities, appliedParameter } = this.state;
+    const {contentPack, selectedEntities, appliedParameter} = this.state;
 
     this.setState({
       contentPack: newState.contentPack || contentPack,
@@ -147,18 +149,17 @@ const EditContentPackPage = createReactClass({
   },
 
   _onSave() {
-    const { contentPack } = this.state;
+    const {contentPack} = this.state;
 
     ContentPacksActions.create.triggerPromise(contentPack.toJSON())
       .then(
         () => {
-          UserNotification.success('Content pack imported successfully', 'Success!');
+          UserNotification.success('扩展包导入成功.', '成功');
           history.push(Routes.SYSTEM.CONTENTPACKS.LIST);
         },
         (response) => {
-          const message = 'Error importing content pack, please ensure it is a valid JSON file. Check your '
-            + 'Graylog logs for more information.';
-          const title = 'Could not import content pack';
+          const message = '扩展包导入失败, 请确认是有效的json文件.在DataInsight日志中查看更多信息.';
+          const title = '不能导入扩展包';
           let smallMessage = '';
 
           if (response.additional && response.additional.body && response.additional.body.message) {
@@ -171,7 +172,7 @@ const EditContentPackPage = createReactClass({
   },
 
   _getEntities(selectedEntities) {
-    const { contentPack } = this.state;
+    const {contentPack} = this.state;
 
     CatalogActions.getSelectedEntities(selectedEntities).then((result) => {
       const contentPackEntities = Object.keys(selectedEntities)
@@ -184,29 +185,28 @@ const EditContentPackPage = createReactClass({
         .entities(entities)
         .build();
 
-      this.setState({ contentPack: builtContentPack, fetchedEntities: builtContentPack.entities });
+      this.setState({contentPack: builtContentPack, fetchedEntities: builtContentPack.entities});
     });
   },
 
   render() {
-    const { contentPack, fetchedEntities, selectedEntities, entityCatalog, appliedParameter } = this.state;
+    const {contentPack, fetchedEntities, selectedEntities, entityCatalog, appliedParameter} = this.state;
 
     return (
-      <DocumentTitle title="Content packs">
+      <DocumentTitle title="扩展包">
         <span>
-          <PageHeader title="Edit content pack">
+          <PageHeader title="编辑扩展包">
             <span>
-              Content packs accelerate the set up process for a specific data source. A content pack can include inputs/extractors, streams, and dashboards.
+              扩展包可以加快特定数据源的设置过程.一个扩展包可以包括接收器、提取器、消息流、仪表盘等资源.
             </span>
 
             <span>
-              Find more content packs in {' '}
-              <a href="https://marketplace.graylog.org/" target="_blank" rel="noopener noreferrer">the Graylog Marketplace</a>.
+              在<a href="" target="_blank" rel="noopener noreferrer">DataInsight市场</a>查找更多扩展包。
             </span>
 
             <div>
               <LinkContainer to={Routes.SYSTEM.CONTENTPACKS.LIST}>
-                <Button bsStyle="info">Content Packs</Button>
+                <Button bsStyle="info">扩展包</Button>
               </LinkContainer>
             </div>
           </PageHeader>
@@ -218,7 +218,7 @@ const EditContentPackPage = createReactClass({
                            entityIndex={entityCatalog}
                            appliedParameter={appliedParameter}
                            edit
-                           onSave={this._onSave} />
+                           onSave={this._onSave}/>
         </span>
       </DocumentTitle>
     );

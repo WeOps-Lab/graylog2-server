@@ -17,6 +17,7 @@
 import React from 'react';
 import numeral from 'numeral';
 import moment from 'moment';
+moment.locale('zh-cn');
 
 import {LinkContainer} from 'components/common/router';
 import {Alert, Col, Row, Button} from 'components/bootstrap';

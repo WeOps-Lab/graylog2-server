@@ -68,9 +68,9 @@ const PermissionsConfig = ({ config, updateConfig }: Props) => {
       {!config ? <Spinner /> : (
         <>
           <StyledDefList>
-            <dt>Share with everyone:</dt>
+            <dt>分享给所有人:</dt>
             <dd>{config.allow_sharing_with_everyone ? '启用' : '禁用'}</dd>
-            <dt>Share with users:</dt>
+            <dt>分享给用户:</dt>
             <dd>{config.allow_sharing_with_users ? '启用' : '禁用'}</dd>
           </StyledDefList>
 

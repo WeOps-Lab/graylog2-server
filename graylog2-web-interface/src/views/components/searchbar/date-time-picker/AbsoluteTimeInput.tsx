@@ -19,7 +19,7 @@ import { useRef } from 'react';
 import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { Icon } from 'components/common';
 import { Button, FormGroup, InputGroup, FormControl } from 'components/bootstrap';
 import DateTime from 'logic/datetimes/DateTime';
@@ -231,15 +231,15 @@ const AbsoluteTimeInput = ({ dateTime, range, onChange }) => {
   return (
     <SetTimeOption>
       <FormGroupGrid>
-        <label htmlFor={`${range}-time-hours`} title={`${range} hours label`}>HH</label>
-        <label htmlFor={`${range}-time-minutes`} title={`${range} minutes label`}>mm</label>
-        <label htmlFor={`${range}-time-seconds`} title={`${range} seconds label`}>ss</label>
+        <label htmlFor={`${range}-time-hours`} title={`${range} 小时`}>HH</label>
+        <label htmlFor={`${range}-time-minutes`} title={`${range} 分钟`}>mm</label>
+        <label htmlFor={`${range}-time-seconds`} title={`${range} 秒`}>ss</label>
         <GridInputGroup>
           <StyledInputAddon>
             <StyledButton bsStyle="link"
                           bsSize="small"
                           onClick={_onClickHourToggle}
-                          title="Toggle between beginning and end of day">
+                          title="开始时间与结束时间">
               <Icon name={hourIcon.current} />
             </StyledButton>
           </StyledInputAddon>
@@ -270,7 +270,7 @@ const AbsoluteTimeInput = ({ dateTime, range, onChange }) => {
             <StyledButton bsStyle="link"
                           bsSize="small"
                           onClick={_onClickTimeNow}
-                          title="Set to current local time">
+                          title="设置为当前当地时间">
               <Icon name="magic" />
             </StyledButton>
           </StyledInputAddon>

@@ -45,7 +45,7 @@ const NodesPage = createReactClass({
     if (this._hasExternalURI()) {
       return (
         <ExternalLinkButton bsStyle="info" href={URLUtils.qualifyUrl(GLOBAL_API_BROWSER_URL)}>
-          Cluster Global API browser
+          全局集群API浏览器
         </ExternalLinkButton>
       );
     }
@@ -65,15 +65,13 @@ const NodesPage = createReactClass({
     const { nodes, currentUser } = this.state;
 
     return (
-      <DocumentTitle title="Nodes">
+      <DocumentTitle title="节点">
         <div>
-          <PageHeader title="Nodes">
-            <span>This page provides a real-time overview of the nodes in your Graylog cluster.</span>
+          <PageHeader title="节点">
+            <span>这个页面提供了DataInsight所有节点的实时信息.</span>
 
             <span>
-              You can pause message processing at any time. The process buffers will not accept any new messages until
-              you resume it. If the message journal is enabled for a node, which it is by default, incoming messages
-              will be persisted to disk, even when processing is disabled.
+              您可以随时停止处理消息.停止后,消息处理队列将不会处理任何信息.如果节点的消息队列启用了,默认情况下,即使消息处理器被停止,消息也会被持久化到磁盘中
             </span>
             <span>
               {this._renderGlobalAPIButton()}

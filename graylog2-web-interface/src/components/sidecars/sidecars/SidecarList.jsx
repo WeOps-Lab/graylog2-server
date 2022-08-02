@@ -102,7 +102,7 @@ class SidecarList extends React.Component {
 
   formatEmptyListAlert = () => {
     const { onlyActive } = this.props;
-    const showInactiveHint = (onlyActive ? ' 或点击 "包含不活跃的客户端管理器"' : null);
+    const showInactiveHint = (onlyActive ? ' 或点击 "显示 不活跃的客户端管理器"' : null);
 
     return <Alert>没有客户端.试着更改过滤项{showInactiveHint}.</Alert>;
   };
@@ -122,7 +122,7 @@ class SidecarList extends React.Component {
             <Button bsStyle="primary"
                     onClick={toggleShowInactive}
                     className={style.inactiveSidecarsButton}>
-              {showOrHideInactive} inactive sidecars
+              {showOrHideInactive} 不活跃的客户端
             </Button>
           </SidecarSearchForm>
         </div>

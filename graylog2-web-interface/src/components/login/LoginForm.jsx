@@ -76,7 +76,7 @@ const LoginForm = ({ onErrorChange }) => {
       <Input ref={(password) => { passwordInput = password; }}
              id="password"
              type="password"
-             placeholder="密码" />
+             placeholder="密码"
              required />
 
       <StyledFormGroup>

@@ -29,20 +29,20 @@ const AuthenticationCreatePage = () => {
   const { finishedLoading, activeBackend } = useActiveBackend();
 
   return (
-    <DocumentTitle title="Create Authentication Service">
-      <PageHeader title="Create Authentication Service"
+    <DocumentTitle title="创建身份验证服务">
+      <PageHeader title="创建身份验证服务"
                   subactions={(
                     <BackendActionLinks activeBackend={activeBackend}
                                         finishedLoading={finishedLoading} />
                   )}>
-        <span>Configure Graylog&apos;s authentication services of this Graylog cluster.</span>
-        <span>Read more authentication in the <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
-                                                                 text="documentation" />.
+        <span>配置此 DataInsight 集群的身份验证服务。</span>
+        <span>查看 <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
+                                                                 text="文档" />.
         </span>
         <AuthenticationOverviewLinks />
       </PageHeader>
 
-      <GettingStarted title="Create New Authentication Service" />
+      <GettingStarted title="创建新的身份验证服务" />
     </DocumentTitle>
   );
 };

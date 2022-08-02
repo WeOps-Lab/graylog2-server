@@ -24,8 +24,8 @@ const TimezoneFormGroup = () => (
   <FastField name="timezone">
     {({ field: { name, value, onChange } }) => (
       <Input id="timezone-select"
-             label="Time Zone"
-             help="Choose your local time zone or leave it as it is to use the system's default."
+             label="时区"
+             help="选择您当地的时区或保持原样使用系统默认时区."
              labelClassName="col-sm-3"
              wrapperClassName="col-sm-9">
         <TimezoneSelect className="timezone-select"

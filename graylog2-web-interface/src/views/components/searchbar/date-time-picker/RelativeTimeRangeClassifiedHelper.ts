@@ -15,7 +15,7 @@
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { RELATIVE_RANGE_TYPES, RELATIVE_ALL_TIME } from 'views/Constants';
 import type {
   RelativeTimeRange,

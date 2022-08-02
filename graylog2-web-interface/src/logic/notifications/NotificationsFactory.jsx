@@ -16,7 +16,7 @@
  */
 import React from 'react';
 
-import { Link } from 'components/common/router';
+import {Link} from 'components/common/router';
 import Routes from 'routing/Routes';
 import DocsHelper from 'util/DocsHelper';
 import DocumentationLink from 'components/support/DocumentationLink';
@@ -27,101 +27,98 @@ class NotificationsFactory {
     switch (notification.type) {
       case 'check_server_clocks':
         return {
-          title: 'Check the system clocks of your Graylog server nodes.',
+          title: '检测服务端的系统时间.',
           description: (
             <span>
-              A Graylog server node detected a condition where it was deemed to be inactive immediately after being active.
-              This usually indicates either a significant jump in system time, e.g. via NTP, or that a second Graylog server node
-              is active on a system that has a different system time. Please make sure that the clocks of graylog2 systems are synchronized.
+              DataInsight服务器节点检测到一种情况,即它在激活后立即被视为不活动.
+              这通常表示系统时间的显著差异,例如通过NTP,或者第二个DataInsight服务器节点
+              在具有不同系统时间的系统上处于活动状态.请确保DataInsight2系统的时钟同步.
             </span>
           ),
         };
 
       case 'deflector_exists_as_index':
         return {
-          title: 'Deflector exists as an index and is not an alias.',
+          title: '导向器存在于所以但不是一个别名.',
           description: (
             <span>
-              The deflector is meant to be an alias but exists as an index. Multiple failures of infrastructure can lead
-              to this. Your messages are still indexed but searches and all maintenance tasks will fail or produce incorrect
-              results. It is strongly recommend that you act as soon as possible.
+              导向器本应是别名,但作为索引存在.基础设施的多次故障可能导致
+              这个问题.您的消息仍被编入索引,但搜索和所有维护任务都将失败或产生不正确的结果结果.强烈建议你尽快采取行动.
             </span>
           ),
         };
 
       case 'email_transport_configuration_invalid':
         return {
-          title: 'Email Transport Configuration is missing or invalid!',
+          title: '邮件配置缺失或不合法!',
           description: (
             <span>
-              The configuration for the email transport subsystem has shown to be missing or invalid.
-              Please check the related section of your Graylog server configuration file.
-              This is the detailed error message: {notification.details.exception}
+              电子邮件传输子系统的配置已显示为丢失或无效.
+              请检查DataInsight服务器配置文件的相关部分.
+              详细信息: {notification.details.exception}
             </span>
           ),
         };
 
       case 'email_transport_failed':
         return {
-          title: 'An error occurred while trying to send an email!',
+          title: '尝试发送电子邮件时出错!',
           description: (
             <span>
-              The Graylog server encountered an error while trying to send an email.
-              This is the detailed error message: {notification.details.exception}
+              尝试发送电子邮件时出错.
+              详细信息: {notification.details.exception}
             </span>
           ),
         };
 
       case 'es_cluster_red':
         return {
-          title: 'Elasticsearch cluster unhealthy (RED)',
+          title: 'Elasticsearch 集群不健康 (RED)',
           description: (
             <span>
-              The Elasticsearch cluster state is RED which means shards are unassigned.
-              This usually indicates a crashed and corrupt cluster and needs to be investigated. Graylog will write
-              into the local disk journal. Read how to fix this in {' '}
-              <DocumentationLink page={DocsHelper.PAGES.ES_CLUSTER_STATUS_RED} text="the Elasticsearch setup documentation." />
+              Elasticsearch群集状态为红色,表示碎片未分配.
+              这通常表示集群崩溃和损坏,需要进行调查.DataInsight将写入
+              在本地磁盘日志中. 查看修复{' '}
+              <DocumentationLink page={DocsHelper.PAGES.ES_CLUSTER_STATUS_RED} text="文档."/>
             </span>
           ),
         };
 
       case 'es_open_files':
         return {
-          title: 'Elasticsearch nodes with too low open file limit',
+          title: 'Elasticsearch 节点文件打开数过小',
           description: (
             <span>
-              There are Elasticsearch nodes in the cluster that have a too low open file limit (current limit:{' '}
-              <em>{notification.details.max_file_descriptors}</em> on <em>{notification.details.hostname}</em>;
-              should be at least 64000) This will be causing problems
-              that can be hard to diagnose. Read how to raise the maximum number of open files in {' '}
-              <DocumentationLink page={DocsHelper.PAGES.ES_OPEN_FILE_LIMITS} text="the Elasticsearch setup documentation" />.
+              Elasticsearch 节点文件打开数过小 (当前节点 <em>{notification.details.hostname}</em>限制:{' '}
+              <em>{notification.details.max_file_descriptors}</em>  ;
+              至少为 64000) 这会导致问题很难被诊断.查看 {' '}
+              <DocumentationLink page={DocsHelper.PAGES.ES_OPEN_FILE_LIMITS} text="文档"/>.
             </span>
           ),
         };
 
       case 'es_unavailable':
         return {
-          title: 'Elasticsearch cluster unavailable',
+          title: 'Elasticsearch集群不可用',
           description: (
             <span>
-              Graylog could not successfully connect to the Elasticsearch cluster. If you are using multicast, check that
-              it is working in your network and that Elasticsearch is accessible. Also check that the cluster name setting
-              is correct. Read how to fix this in {' '}
+              DataInsight无法成功连接到Elasticsearch集群.如果使用多播,请检查
+              它在您的网络中工作,并且Elasticsearch是可访问的.还要检查群集名称设置
+              是正确的. 查看 {' '}
               <DocumentationLink page={DocsHelper.PAGES.ES_CLUSTER_UNAVAILABLE}
-                                 text="the Elasticsearch setup documentation." />
+                                 text="文档."/>
             </span>
           ),
         };
 
       case 'gc_too_long':
         return {
-          title: 'Nodes with too long GC pauses',
+          title: '节点GC时间过长',
           description: (
             <span>
-              There are Graylog nodes on which the garbage collector runs too long.
-              Garbage collection runs should be as short as possible. Please check whether those nodes are healthy.
-              (Node: <em>{notification.node_id}</em>, GC duration: <em>{notification.details.gc_duration_ms} ms</em>,
-              GC threshold: <em>{notification.details.gc_threshold_ms} ms</em>)
+              节点GC时间过长
+              (节点: <em>{notification.node_id}</em>, GC时间: <em>{notification.details.gc_duration_ms} ms</em>,
+              GC 阈值: <em>{notification.details.gc_threshold_ms} ms</em>)
             </span>
           ),
         };
@@ -137,7 +134,7 @@ class NotificationsFactory {
           title: notification.details.title,
           description: (
             <span>
-              {notification.details.description}<br />
+              {notification.details.description}<br/>
               {notification.details.blockDetails?.length > 0 && (
                 <ul>
                   {notification.details.blockDetails.map((line) => (
@@ -151,25 +148,24 @@ class NotificationsFactory {
 
       case 'index_ranges_recalculation':
         return {
-          title: 'Index ranges recalculation required',
+          title: '索引范围需要重新计算',
           description: (
             <span>
-              The index ranges are out of sync. Please go to System/Indices and trigger a index range recalculation from
-              the Maintenance menu of {notification.details.index_sets ? (`the following index sets: ${notification.details.index_sets}`) : 'all index sets'}
+              索引范围未同步.请重新计算
+              {notification.details.index_sets ? (`以下索引集: ${notification.details.index_sets}`) : '所有索引集'}的索引范围
             </span>
           ),
         };
 
       case 'input_failed_to_start':
         return {
-          title: 'An input has failed to start',
+          title: '接收器启动失败',
           description: (
             <span>
-              Input {notification.details.input_id} has failed to start on node {notification.node_id} for this reason:
-              »{notification.details.reason}«. This means that you are unable to receive any messages from this input.
-              This is mostly an indication for a misconfiguration or an error.
+              接收器 {notification.details.input_id} 在节点 {notification.node_id} 启动失败,原因:
+              »{notification.details.reason}«.点击
               <HideOnCloud>
-                You can click <Link to={Routes.SYSTEM.INPUTS}>here</Link> to solve this.
+                <Link to={Routes.SYSTEM.INPUTS}>这里</Link> 解决问题.
               </HideOnCloud>
             </span>
           ),
@@ -177,191 +173,183 @@ class NotificationsFactory {
 
       case 'input_failure_shutdown':
         return {
-          title: 'An input has shut down due to failures',
+          title: '未提交的消息从队列中移除',
           description: (
             <span>
-              Input {notification.details.input_title} has shut down on node {notification.node_id} for this reason:
-              »{notification.details.reason}«. This means that you are unable to receive any messages from this input.
-              This is often an indication of persistent network failures.
-              You can click {' '} <Link to={Routes.SYSTEM.INPUTS}>here</Link> to see the input.
+              存在未提交的消息从队列中移除,建议提高节点<em>{notification.node_id}</em>的队列长度
             </span>
           ),
         };
 
       case 'journal_uncommitted_messages_deleted':
         return {
-          title: 'Uncommited messages deleted from journal',
+          title: '队列使用率过高',
           description: (
             <span>
-              Some messages were deleted from the Graylog journal before they could be written to Elasticsearch. Please
-              verify that your Elasticsearch cluster is healthy and fast enough. You may also want to review your Graylog
-              journal settings and set a higher limit. (Node: <em>{notification.node_id}</em>)
+              队列使用率过高,建议提高节点<em>{notification.node_id}</em>的队列长度
             </span>
           ),
         };
 
       case 'journal_utilization_too_high':
         return {
-          title: 'Journal utilization is too high',
+          title: '存在多个主检点',
           description: (
             <span>
-              Journal utilization is too high and may go over the limit soon. Please verify that your Elasticsearch cluster
-              is healthy and fast enough. You may also want to review your Graylog journal settings and set a higher limit.
-              (Node: <em>{notification.node_id}</em>)
+              在DataInsight群集中有多个配置为主服务器的DataInsight服务器实例.集群处理
+              如果已经有一个主节点,则自动将新节点作为从节点启动,但仍应修复此问题.
+              检查每个节点的配置文件,确保只有一个实例的is_master设置为true.关闭此
+              如果您认为您解决了问题,请通知.如果再次启动第二个主节点.它将弹出.
             </span>
           ),
         };
 
       case 'multi_leader':
         return {
-          title: 'Multiple Graylog server leaders in the cluster',
+          title: '存在没有运行任何接收器的节点.',
           description: (
             <span>
-              There were multiple Graylog server instances configured as leader in your Graylog cluster. The cluster handles
-              this automatically by launching new nodes as followers if there already is a leader but you should still fix this.
-              Check the graylog.conf of every node and make sure that only one instance has is_leader set to true. Close this
-              notification if you think you resolved the problem. It will pop back up if you start a second leader node again.
+              存在没有运行任何接收器的节点.点击<Link to={Routes.SYSTEM.INPUTS}>这里</Link>添加接收器
             </span>
           ),
         };
 
       case 'no_input_running':
         return {
-          title: 'There is a node without any running inputs.',
+          title: '未找到任何主节点.',
           description: (
             <span>
-              There is a node without any running inputs. This means that you are not receiving any messages from this
-              node at this point in time. This is most probably an indication of an error or misconfiguration.
-              <HideOnCloud>
-                You can click <Link to={Routes.SYSTEM.INPUTS}>here</Link> to solve this.
-              </HideOnCloud>
+              为找到任何主节点
             </span>
           ),
         };
 
       case 'no_leader':
         return {
-          title: 'There was no leader Graylog server node detected in the cluster.',
+          title: '正在运行的版本过旧.',
           description: (
             <span>
-              Certain operations of Graylog server require the presence of a leader node, but no such leader was started.
-              Please ensure that one of your Graylog server nodes contains the setting <code>is_leader = true</code> in its
-              configuration and that it is running. Until this is resolved index cycling will not be able to run, which
-              means that the index retention mechanism is also not running, leading to increased index sizes. Certain
-              maintenance functions as well as a variety of web interface pages (e.g. Dashboards) are unavailable.
+              正在运行的版本过旧.
             </span>
           ),
         };
 
       case 'outdated_version':
         return {
-          title: 'You are running an outdated Graylog version.',
+          title: '输出被禁用',
           description: (
             <span>
-              The most recent stable Graylog version is <em>{notification.details.current_version}</em>.
-              Get it from <a href="https://www.graylog.org/" target="_blank" rel="noreferrer">https://www.graylog.org/</a>.
+              消息流"{notification.details.streamTitle}(id: {notification.details.streamId})"的输出 {notification.details.outputId}
+              由于在{notification.details.faultPenaltySeconds}秒内出现{notification.details.faultCount}次处理失败被禁用
+              (节点: <em>{notification.node_id}</em>, 失败阈值: <em>{notification.details.faultCountThreshold}</em>)
             </span>
           ),
         };
 
       case 'output_disabled':
         return {
-          title: 'Output disabled',
+          title: '处理消息超时导致消息流被禁用.',
           description: (
             <span>
-              The output with the id {notification.details.outputId} in stream &quot;{notification.details.streamTitle}&quot;
-              (id: {notification.details.streamId}) has been disabled for {notification.details.faultPenaltySeconds}
-              seconds because there were {notification.details.faultCount} failures.
-              (Node: <em>{notification.node_id}</em>, Fault threshold: <em>{notification.details.faultCountThreshold}</em>)
+              消息流<em>{notification.details.stream_title} ({notification.details.stream_id})</em>
+              处理消息超时{' '}
+              {notification.details.fault_count} 次.自动禁用此消息流.
             </span>
           ),
         };
 
       case 'output_failing':
         return {
-          title: 'Output failing',
+          title: '输出失败',
           description: (
             <span>
-              The output &quot;{notification.details.outputTitle}&quot; (id: {notification.details.outputId})
-              in stream &quot;{notification.details.streamTitle}&quot; (id: {notification.details.streamId})
-              is unable to send messages to the configured destination.
-              <br />
-              The error message from the output is: <em>{notification.details.errorMessage}</em>
+              输出"{notification.details.outputTitle}" (id: {notification.details.outputId})
+              在流"{notification.details.streamTitle}" 中(id: {notification.details.streamId})
+              无法将消息发送到配置的目标。
+              <br/>
+              输出的错误消息是：<em>{notification.details.errorMessage}</em>
             </span>
           ),
         };
 
       case 'stream_processing_disabled':
         return {
-          title: 'Processing of a stream has been disabled due to excessive processing time.',
+          title: '由于处理时间过长，已禁用流处理.',
           description: (
             <span>
-              The processing of stream <em>{notification.details.stream_title} ({notification.details.stream_id})</em> has taken too long for{' '}
-              {notification.details.fault_count} times. To protect the stability of message processing,
-              this stream has been disabled. Please correct the stream rules and reenable the stream.
-              Check <DocumentationLink page={DocsHelper.PAGES.STREAM_PROCESSING_RUNTIME_LIMITS} text="the documentation" />{' '}
-              for more details.
+              流 <em>{notification.details.stream_title} ({notification.details.stream_id})</em> 的处理时间过长{' '}
+              {notification.details.fault_count} 次。为保障消息处理的稳定性，
+              此流已被禁用。请更正直播规则并重新启用直播。
+              检查 <DocumentationLink page={DocsHelper.PAGES.STREAM_PROCESSING_RUNTIME_LIMITS}
+                                    text="文档"/>{' '}
+              更多细节。
             </span>
           ),
         };
 
       case 'es_node_disk_watermark_low':
         return {
-          title: 'Elasticsearch nodes disk usage above low watermark',
+          title: 'Elasticsearch 节点磁盘使用率高于低水位线',
           description: (
             <span>
-              There are Elasticsearch nodes in the cluster running out of disk space, their disk usage is above the low watermark.{' '}
-              For this reason Elasticsearch will not allocate new shards to the affected nodes.{' '}
-              The affected nodes are: [{notification.details.nodes}]{' '}
-              Check <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html" target="_blank" rel="noreferrer">https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html</a>{' '}
-              for more details.
+              集群中有 Elasticsearch 节点的磁盘空间不足，它们的磁盘使用率高于低水位线。{' '}
+              由于这个原因，Elasticsearch 不会为受影响的节点分配新的分片。{' '}
+              受影响的节点是：[{notification.details.nodes}]{' '}
+              检查 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html"
+                    target="_blank"
+                    rel="noreferrer">https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html</a>{' '}
+              更多细节。
             </span>
           ),
         };
 
       case 'es_node_disk_watermark_high':
         return {
-          title: 'Elasticsearch nodes disk usage above high watermark',
+          title: 'Elasticsearch 节点磁盘使用率高于高水位线',
           description: (
             <span>
-              There are Elasticsearch nodes in the cluster with almost no free disk, their disk usage is above the high watermark.{' '}
-              For this reason Elasticsearch will attempt to relocate shards away from the affected nodes.{' '}
-              The affected nodes are: [{notification.details.nodes}]{' '}
-              Check <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html" target="_blank" rel="noreferrer">https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html</a>{' '}
-              for more details.
+              集群中有 Elasticsearch 节点几乎没有空闲磁盘，它们的磁盘使用率高于高水位线。{' '}
+              出于这个原因，Elasticsearch 将尝试将分片从受影响的节点移开。{' '}
+              受影响的节点是：[{notification.details.nodes}]{' '}
+              检查 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html"
+                    target="_blank"
+                    rel="noreferrer">https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html</a>{' '}
+              更多细节。
             </span>
           ),
         };
 
       case 'es_node_disk_watermark_flood_stage':
         return {
-          title: 'Elasticsearch nodes disk usage above flood stage watermark',
+          title: 'Elasticsearch 节点磁盘使用量高于洪水阶段水印',
           description: (
             <span>
-              There are Elasticsearch nodes in the cluster without free disk, their disk usage is above the flood stage watermark.{' '}
-              For this reason Elasticsearch enforces a read-only index block on all indexes having any of their shards in any of the{' '}
-              affected nodes. The affected nodes are: [{notification.details.nodes}]{' '}
-              Check <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html" target="_blank" rel="noreferrer">https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html</a>{' '}
-              for more details.
+              集群中有 Elasticsearch 节点没有空闲磁盘，它们的磁盘使用率高于洪水阶段水位线。{' '}
+              出于这个原因，Elasticsearch 对所有在任何 {' '} 中具有任何分片的索引强制执行只读索引块
+              受影响的节点。受影响的节点是：[{notification.details.nodes}]{' '}
+              检查 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html"
+                    target="_blank"
+                    rel="noreferrer">https://www.elastic.co/guide/en/elasticsearch/reference/master/disk-allocator.html</a>{' '}
+              更多细节。
             </span>
           ),
         };
 
       case 'es_version_mismatch': {
-        const { initial_version: initialVersion, current_version: currentVersion } = notification.details;
+        const {initial_version: initialVersion, current_version: currentVersion} = notification.details;
 
         return {
-          title: 'Elasticsearch version is incompatible',
+          title: 'Elasticsearch 版本不兼容',
           description: (
             <span>
-              The Elasticsearch version which is currently running ({currentVersion}) has a different major version than
-              the one the Graylog leader node was started with ({initialVersion}).{' '}
-              This will most probably result in errors during indexing or searching. Graylog requires a full restart after an
-              Elasticsearch upgrade from one major version to another.
-              <br />
-              For details, please see our notes about{' '}
-              <DocumentationLink page={DocsHelper.PAGES.ROLLING_ES_UPGRADE}
-                                 text="rolling Elasticsearch upgrades." />
+             当前运行的 Elasticsearch 版本 ({currentVersion}) 的主要版本不同于
+              Graylog 领导节点以 ({initialVersion}) 启动的那个。{' '}
+              这很可能会在索引或搜索期间导致错误。 Graylog 需要在
+              Elasticsearch 从一个主要版本升级到另一个。
+              <br/>
+              有关详细信息，请参阅我们关于 {' '} 的说明
+              <DocumentationLink 页面={DocsHelper.PAGES.ROLLING_ES_UPGRADE}
+                                 text="滚动 Elasticsearch 升级。"/>
 
             </span>
           ),
@@ -369,25 +357,25 @@ class NotificationsFactory {
       }
 
       case 'legacy_ldap_config_migration': {
-        const { auth_service_id: authServiceId } = notification.details;
-        const authServiceLink = <Link to={Routes.SYSTEM.AUTHENTICATION.BACKENDS.show(authServiceId)}>Authentication Service</Link>;
+        const {auth_service_id: authServiceId} = notification.details;
+        const authServiceLink = <Link to={Routes.SYSTEM.AUTHENTICATION.BACKENDS.show(authServiceId)}>鉴权服务</Link>;
 
         return {
-          title: 'Legacy LDAP/Active Directory configuration has been migrated to an Authentication Service',
+          title: '旧 LDAP/Active Directory 配置已迁移到身份验证服务',
           description: (
             <span>
-              The legacy LDAP/Active Directory configuration of this system has been upgraded to a new {authServiceLink}.
-              Since the new {authServiceLink} requires some information that is not present in the legacy
-              configuration, the {authServiceLink} <strong>requires a manual review</strong>!
-              <br />
-              <br />
-              <strong>After reviewing the {authServiceLink} it must be enabled to allow LDAP or Active Directory users
-                to log in again!
+              此系统的旧 LDAP/Active Directory 配置已升级到新的 {authServiceLink}。
+              由于新的 {authServiceLink} 需要一些旧版中不存在的信息
+              配置，{authServiceLink} <strong>需要人工审核</strong>！
+              <br/>
+              <br/>
+              <strong>查看 {authServiceLink} 后，必须启用它以允许 LDAP 或 Active Directory 用户
+                再次登录！
               </strong>
-              <br />
-              <br />
-              Please check the <DocumentationLink page={DocsHelper.PAGES.UPGRADE_GUIDE} text="upgrade guide" />
-              for more details.
+              <br/>
+              <br/>
+              请检查 <DocumentationLink page={DocsHelper.PAGES.UPGRADE_GUIDE} text="升级指南"/>
+              更多细节。
             </span>
           ),
         };
@@ -395,14 +383,14 @@ class NotificationsFactory {
 
       case 'archiving_summary':
         return {
-          title: 'The following indices could not be archived yet',
+          title: '以下索引尚未归档',
           description: (
             <span>
-              There was an error while archiving some indices. Graylog will continue trying to archive those
-              indices and will retain all indices until they are successfully archived.
-              <br />
-              Please check the following error messages as your assistance may be necessary to resolve the issue:
-              <br />
+              归档某些索引时出错。 DataInsight 将继续尝试归档这些
+              索引并将保留所有索引，直到它们成功存档。
+              <br/>
+              请检查以下错误消息，因为可能需要您的帮助来解决问题：
+              <br/>
               <ul>
                 {/* eslint-disable-next-line react/no-array-index-key */}
                 {notification.details.archiveErrors.map((error, idx) => <li key={idx}>{error}</li>)}
@@ -412,7 +400,7 @@ class NotificationsFactory {
         };
 
       default:
-        return { title: `unknown (${notification.type})`, description: 'unknown' };
+        return {title: `未知 (${notification.type})`, description: '未知'};
     }
   }
 }

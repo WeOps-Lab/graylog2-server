@@ -22,14 +22,14 @@ import PageHeader from 'components/common/PageHeader';
 import PageContentLayout from 'components/layout/PageContentLayout';
 
 const UserHasNoStreamAccess = () => (
-  <DocumentTitle title="No stream permissions.">
+  <DocumentTitle title="没有消息流权限.">
     <PageContentLayout>
-      <PageHeader title="No stream permissions." />
+      <PageHeader title="没有消息流权限." />
       <Row className="content">
         <Col md={12}>
           <Alert bsStyle="warning">
-            <Icon name="info-circle" />&nbsp;We cannot start a search right now, because you are not allowed to access any stream.
-            If you feel this is an error, please contact your administrator.
+            <Icon name="info-circle" />&nbsp;我们现在无法开始搜索，因为您无权访问任何消息流。
+            如果您认为这是一个错误，请联系您的管理员。
           </Alert>
         </Col>
       </Row>

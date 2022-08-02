@@ -32,7 +32,7 @@ import BackendDetails from 'components/authentication/BackendDetails';
 import DocumentationLink from 'components/support/DocumentationLink';
 
 const _pageTitle = (activeBackend: AuthenticationBackend | undefined | null, returnString?: boolean) => {
-  const pageName = 'Active Authentication Service';
+  const pageName = '主动认证服务';
 
   if (activeBackend) {
     const backendTitle = StringUtils.truncateWithEllipses(activeBackend.title, 30);
@@ -76,9 +76,9 @@ const AuthenticationPage = () => {
                       <BackendActionLinks activeBackend={activeBackend}
                                           finishedLoading={finishedLoading} />
                     )}>
-          <span>Configure Graylog&apos;s authentication services of this Graylog cluster.</span>
-          <span>Read more authentication in the <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
-                                                                   text="documentation" />.
+          <span>配置此 DataInsight 集群的身份验证服务。</span>
+          <span>查看 <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
+                                                                   text="文档" />.
           </span>
           <AuthenticationOverviewLinks />
         </PageHeader>

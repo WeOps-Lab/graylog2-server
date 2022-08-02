@@ -18,13 +18,13 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import Reflux from 'reflux';
 
-import { Col, Row } from 'components/bootstrap';
-import { AlertsComponent, AlertsHeaderToolbar } from 'components/alerts';
+import {Col, Row} from 'components/bootstrap';
+import {AlertsComponent, AlertsHeaderToolbar} from 'components/alerts';
 import DocumentationLink from 'components/support/DocumentationLink';
-import { DocumentTitle, PageHeader } from 'components/common';
+import {DocumentTitle, PageHeader} from 'components/common';
 import Routes from 'routing/Routes';
 import DocsHelper from 'util/DocsHelper';
-import { CurrentUserStore } from 'stores/users/CurrentUserStore';
+import {CurrentUserStore} from 'stores/users/CurrentUserStore';
 
 const AlertsPage = createReactClass({
   displayName: 'AlertsPage',
@@ -32,26 +32,25 @@ const AlertsPage = createReactClass({
 
   render() {
     return (
-      <DocumentTitle title="Alerts">
+      <DocumentTitle title="告警">
         <div>
-          <PageHeader title="Alerts overview">
+          <PageHeader title="告警概览">
             <span>
-              Alerts are triggered when conditions you define are satisfied. Graylog will automatically mark alerts as
-              resolved once the status of your conditions change.
+              告警将在满足您定义的条件时触发。当告警恢复时，DataInsight会自动将告警标记为已解决。
             </span>
 
             <span>
-              Read more about alerting in the <DocumentationLink page={DocsHelper.PAGES.ALERTS} text="documentation" />.
+              在<DocumentationLink page={DocsHelper.PAGES.ALERTS} text="文档"/>中查看更多关于告警的信息。
             </span>
 
             <span>
-              <AlertsHeaderToolbar active={Routes.LEGACY_ALERTS.LIST} />
+              <AlertsHeaderToolbar active={Routes.LEGACY_ALERTS.LIST}/>
             </span>
           </PageHeader>
 
           <Row className="content">
             <Col md={12}>
-              <AlertsComponent />
+              <AlertsComponent/>
             </Col>
           </Row>
         </div>

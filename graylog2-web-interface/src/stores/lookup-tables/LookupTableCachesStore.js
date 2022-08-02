@@ -99,7 +99,7 @@ export const LookupTableCachesStore = singletonStore(
 
         this.caches = response.caches;
         this.propagateChanges();
-      }, this._errorHandler('Fetching lookup table caches failed', 'Could not retrieve the lookup caches'));
+      }, this._errorHandler('无法获取数据字典缓存信息', '无法获取数据字典缓存信息'));
 
       LookupTableCachesActions.searchPaginated.promise(promise);
 
@@ -113,7 +113,7 @@ export const LookupTableCachesStore = singletonStore(
       promise.then((response) => {
         this.cache = response;
         this.propagateChanges();
-      }, this._errorHandler(`Fetching lookup table cache ${idOrName} failed`, 'Could not retrieve lookup table cache'));
+      }, this._errorHandler(`加载数据字典缓存 ${idOrName} 失败`, '无法获得数据字典缓存'));
 
       LookupTableCachesActions.get.promise(promise);
 
@@ -127,7 +127,7 @@ export const LookupTableCachesStore = singletonStore(
       promise.then((response) => {
         this.cache = response;
         this.propagateChanges();
-      }, this._errorHandler('Creating lookup table cache failed', `Could not create lookup table cache "${cache.name}"`));
+      }, this._errorHandler('创建数据字典缓存失败', `无法创建数据字典缓存 "${cache.name}"`));
 
       LookupTableCachesActions.create.promise(promise);
 
@@ -141,7 +141,7 @@ export const LookupTableCachesStore = singletonStore(
       promise.then((response) => {
         this.cache = response;
         this.propagateChanges();
-      }, this._errorHandler('Updating lookup table cache failed', `Could not update lookup table cache "${cache.name}"`));
+      }, this._errorHandler('更新数据字典缓存失败', `无法更新数据字典缓存 "${cache.name}"`));
 
       LookupTableCachesActions.update.promise(promise);
 
@@ -155,7 +155,7 @@ export const LookupTableCachesStore = singletonStore(
       promise.then((response) => {
         this.types = response;
         this.propagateChanges();
-      }, this._errorHandler('Fetching available types failed', 'Could not fetch the available lookup table cache types'));
+      }, this._errorHandler('加载可用类型失败', '无法加载可用类型'));
 
       LookupTableCachesActions.getTypes.promise(promise);
 
@@ -166,7 +166,7 @@ export const LookupTableCachesStore = singletonStore(
       const url = this._url(`caches/${idOrName}`);
       const promise = fetch('DELETE', url);
 
-      promise.catch(this._errorHandler('Deleting lookup table cache failed', `Could not delete lookup table cache "${idOrName}"`));
+      promise.catch(this._errorHandler('删除数据字典失败', `无法删除数据字典 "${idOrName}"`));
 
       LookupTableCachesActions.delete.promise(promise);
 
@@ -180,7 +180,7 @@ export const LookupTableCachesStore = singletonStore(
       promise.then((response) => {
         this.validationErrors = response.errors;
         this.propagateChanges();
-      }, this._errorHandler('Lookup table cache validation failed', `Could not validate lookup table cache "${cache.name}"`));
+      }, this._errorHandler('数据字典校验失败', `无法校验数据字典 "${cache.name}"`));
 
       LookupTableCachesActions.validate.promise(promise);
 

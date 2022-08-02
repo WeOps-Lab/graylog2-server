@@ -108,7 +108,7 @@ type MessageFields = {
 
 const ShowMessagePage = ({ params: { index, messageId } }: Props) => {
   if (!index || !messageId) {
-    throw new Error('index and messageId need to be specified!');
+    throw new Error('index 和 messageId 需要指定!');
   }
 
   const { streams, allStreams } = useStreams();

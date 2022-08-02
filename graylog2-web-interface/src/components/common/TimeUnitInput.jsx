@@ -20,7 +20,7 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import lodash from 'lodash';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import {
   ControlLabel,
   DropdownButton,

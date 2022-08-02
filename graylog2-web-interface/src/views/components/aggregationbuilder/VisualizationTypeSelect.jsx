@@ -27,7 +27,7 @@ const VisualizationTypeSelect = ({ onChange, value }) => {
     .map((viz) => ({ label: viz.displayName, value: viz.type }));
 
   return (
-    <Select placeholder="Visualization type"
+    <Select placeholder="图表类型"
             options={visualizationTypes}
             onChange={onChange}
             clearable={false}

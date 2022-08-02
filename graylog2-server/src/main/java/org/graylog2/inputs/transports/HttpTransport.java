@@ -73,12 +73,12 @@ public class HttpTransport extends AbstractTcpTransport {
                          LocalMetricRegistry localRegistry,
                          TLSProtocolsConfiguration tlsConfiguration) {
         super(configuration,
-              throughputCounter,
-              localRegistry,
-              eventLoopGroup,
-              eventLoopGroupFactory,
-              nettyTransportConfiguration,
-              tlsConfiguration);
+                throughputCounter,
+                localRegistry,
+                eventLoopGroup,
+                eventLoopGroupFactory,
+                nettyTransportConfiguration,
+                tlsConfiguration);
 
         this.enableBulkReceiving = configuration.getBoolean(CK_ENABLE_BULK_RECEIVING);
         this.enableCors = configuration.getBoolean(CK_ENABLE_CORS);
@@ -135,24 +135,24 @@ public class HttpTransport extends AbstractTcpTransport {
         public ConfigurationRequest getRequestedConfiguration() {
             final ConfigurationRequest r = super.getRequestedConfiguration();
             r.addField(new BooleanField(CK_ENABLE_BULK_RECEIVING,
-                    "Enable Bulk Receiving",
+                    "启用批量处理",
                     false,
-                    "Enables bulk receiving of messages separated by newlines (\\n or \\r\\n)"));
+                    "启用批量处理,分隔符为 (\\n or \\r\\n)"));
             r.addField(new BooleanField(CK_ENABLE_CORS,
-                                        "Enable CORS",
-                                        true,
-                                        "Input sends CORS headers to satisfy browser security policies"));
+                    "启用 CORS",
+                    true,
+                    "添加CORS header"));
             r.addField(new NumberField(CK_MAX_CHUNK_SIZE,
-                                        "Max. HTTP chunk size",
-                                        DEFAULT_MAX_CHUNK_SIZE,
-                                        "The maximum HTTP chunk size in bytes (e. g. length of HTTP request body)",
-                                        ConfigurationField.Optional.OPTIONAL));
+                    "HTTP返回的最大长度",
+                    DEFAULT_MAX_CHUNK_SIZE,
+                    "HTTP返回的最大长度",
+                    ConfigurationField.Optional.OPTIONAL));
             r.addField(new NumberField(CK_IDLE_WRITER_TIMEOUT,
-                                        "Idle writer timeout",
-                                        DEFAULT_IDLE_WRITER_TIMEOUT,
-                                        "The server closes the connection after the given time in seconds after the last client write request. (use 0 to disable)",
-                                        ConfigurationField.Optional.OPTIONAL,
-                                        NumberField.Attribute.ONLY_POSITIVE));
+                    "超时等待时间",
+                    DEFAULT_IDLE_WRITER_TIMEOUT,
+                    "超时等待时间",
+                    ConfigurationField.Optional.OPTIONAL,
+                    NumberField.Attribute.ONLY_POSITIVE));
             return r;
         }
     }

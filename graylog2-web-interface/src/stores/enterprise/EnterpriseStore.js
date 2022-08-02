@@ -72,7 +72,7 @@ export const EnterpriseStore = singletonStore(
         (error) => {
           const errorMessage = lodash.get(error, 'additional.body.message', error.message);
 
-          UserNotification.error(`Couldn't load license information: ${errorMessage}`, 'Error');
+          UserNotification.error(`无法获取License信息: ${errorMessage}`, '异常');
         },
       );
 
@@ -92,7 +92,7 @@ export const EnterpriseStore = singletonStore(
 
       promise.then(
         (response) => {
-          UserNotification.success('Your free Graylog Enterprise license should be on the way.', 'Success!');
+          UserNotification.success('您的免费许可证已发送.', '成功!');
           this.refresh();
 
           return response;
@@ -100,7 +100,7 @@ export const EnterpriseStore = singletonStore(
         (error) => {
           const errorMessage = lodash.get(error, 'additional.body.message', error.message);
 
-          UserNotification.error(`Requesting a free Graylog Enterprise license failed: ${errorMessage}`, 'Error');
+          UserNotification.error(`获取License失败: ${errorMessage}`, '异常');
         },
       );
 

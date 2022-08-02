@@ -30,7 +30,7 @@ const AuthenticationBackendCreatePage = ({ params: { name } }: Props) => {
   const authService = getAuthServicePlugin(name);
 
   if (!authService) {
-    return <>{`No authentication service plugin configured for type "${name}"`}</>;
+    return <>{`没有为类型配置身份验证服务插件 "${name}"`}</>;
   }
 
   const { createComponent: BackendCreate } = authService;

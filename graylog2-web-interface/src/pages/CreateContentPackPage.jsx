@@ -63,13 +63,13 @@ const CreateContentPackPage = createReactClass({
     ContentPacksActions.create.triggerPromise(contentPack.toJSON())
       .then(
         () => {
-          UserNotification.success('Content pack imported successfully', 'Success!');
+          UserNotification.success('扩展包导入成功', '成功！');
           history.push(Routes.SYSTEM.CONTENTPACKS.LIST);
         },
         (response) => {
-          const message = 'Error importing content pack, please ensure it is a valid JSON file. Check your '
-            + 'Graylog logs for more information.';
-          const title = 'Could not import content pack';
+          const message = '导入扩展包时出错，请确保它是有效的 JSON 文件。检查你的 '
+            + 'DataInsight 日志以获取更多信息。';
+          const title = '无法导入扩展包';
           let smallMessage = '';
 
           if (response.additional && response.additional.body && response.additional.body.message) {
@@ -99,21 +99,21 @@ const CreateContentPackPage = createReactClass({
     const { contentPack, fetchedEntities, selectedEntities, appliedParameter, entityIndex } = this.state;
 
     return (
-      <DocumentTitle title="Content packs">
+      <DocumentTitle title="扩展包">
         <span>
-          <PageHeader title="Create content packs">
+          <PageHeader title="创建扩展包">
             <span>
-              Content packs accelerate the set up process for a specific data source. A content pack can include inputs/extractors, streams, and dashboards.
+              扩展包可加速特定数据源的设置过程。扩展包可以包括输入/​​提取器、流和仪表板。
             </span>
 
             <span>
-              Find more content packs in {' '}
-              <a href="https://marketplace.graylog.org/" target="_blank" rel="noopener noreferrer">the Graylog Marketplace</a>.
+              查看 {' '}
+              <a href="https://marketplace.graylog.org/" target="_blank" rel="noopener noreferrer">文档</a>.
             </span>
 
             <div>
               <LinkContainer to={Routes.SYSTEM.CONTENTPACKS.LIST}>
-                <Button bsStyle="info">Content Packs</Button>
+                <Button bsStyle="info">扩展包</Button>
               </LinkContainer>
             </div>
           </PageHeader>

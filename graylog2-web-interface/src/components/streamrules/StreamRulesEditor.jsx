@@ -134,21 +134,21 @@ class StreamRulesEditor extends React.Component {
       if (matchData.matches) {
         return (
           <>
-            <MatchIcon matches name="check" /> This message would be routed to this stream!
+            <MatchIcon matches name="check" /> 这条消息会被路由到该消息流!
           </>
         );
       }
 
       return (
         <>
-          <MatchIcon name="times" /> This message would not be routed to this stream.
+          <MatchIcon name="remove" /> 这条消息消息不会被路由到该消息流.
         </>
       );
     }
 
     return (
       <>
-        <MatchIcon empty name="exclamation-circle" /> Please load a message in Step 1 above to check if it would match against these rules.
+        <MatchIcon empty name="exclamation-circle" /> 请加载消息用于检查规则是否匹配并且能路由到该消息流.
       </>
     );
   };
@@ -162,7 +162,7 @@ class StreamRulesEditor extends React.Component {
       return (
         <Row className="content">
           <Col md={12} className="streamrule-sample-message">
-            <h2>1. Load a message to test rules</h2>
+            <h2>1. 请加载一条日志信息,以测试消息流规则</h2>
 
             <div className="stream-loader">
               <LoaderTabs messageId={messageId}
@@ -176,17 +176,17 @@ class StreamRulesEditor extends React.Component {
               <Button bsStyle="success"
                       className="show-stream-rule"
                       onClick={this._onAddStreamRule}>
-                Add stream rule
+                添加消息流规则
               </Button>
               {showStreamRuleForm && (
-                <StreamRuleForm title="New Stream Rule"
+                <StreamRuleForm title="新建消息流规则"
                                 onClose={() => this.setState({ showStreamRuleForm: false })}
                                 streamRuleTypes={streamRuleTypes}
                                 onSubmit={this._onStreamRuleFormSubmit} />
               )}
             </div>
 
-            <h2>2. Manage stream rules</h2>
+            <h2>2. 管理消息流规则</h2>
 
             <MatchingTypeSwitcher stream={stream} onChange={this.loadData} />
             <Panel bsStyle={styles}>
@@ -199,7 +199,7 @@ class StreamRulesEditor extends React.Component {
 
             <p>
               <LinkContainer to={Routes.STREAMS}>
-                <Button bsStyle="success">I&apos;m done!</Button>
+                <Button bsStyle="success">完成!</Button>
               </LinkContainer>
             </p>
           </Col>

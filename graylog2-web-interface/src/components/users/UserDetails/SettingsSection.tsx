@@ -35,7 +35,7 @@ const _sessionTimeout = (sessionTimeout) => {
     return `${sessionTimeout.value} ${sessionTimeout.unitString}`;
   }
 
-  return 'Sessions do not timeout';
+  return '会话不会超时';
 };
 
 const StartpageValue = ({ type, id }: { type: string | null | undefined, id: string | null | undefined }) => {
@@ -72,11 +72,11 @@ const SettingsSection = ({
     startpage,
   },
 }: Props) => (
-  <SectionComponent title="Settings">
-    <ReadOnlyFormGroup label="Sessions Timeout" value={_sessionTimeout(sessionTimeout)} />
-    <ReadOnlyFormGroup label="Service Account" value={serviceAccount} />
-    <ReadOnlyFormGroup label="Timezone" value={timezone} />
-    <ReadOnlyFormGroup label="Startpage" value={<StartpageValue type={startpage?.type} id={startpage?.id} />} />
+  <SectionComponent title="设置">
+    <ReadOnlyFormGroup label="会话超时" value={_sessionTimeout(sessionTimeout)} />
+    <ReadOnlyFormGroup label="服务账户" value={serviceAccount} />
+    <ReadOnlyFormGroup label="时区" value={timezone} />
+    <ReadOnlyFormGroup label="起始页" value={<StartpageValue type={startpage?.type} id={startpage?.id} />} />
   </SectionComponent>
 );
 

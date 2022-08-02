@@ -154,7 +154,7 @@ const PlotLegend = ({ children, config, chartData, labelMapper = defaultLabelMap
     return (
       <LegendCell key={value}>
         <LegendEntry>
-          <ColorHint aria-label="Color Hint" onClick={_onOpenColorPicker(value)} color={colors.get(value, defaultColor)} />
+          <ColorHint aria-label="颜色提示" onClick={_onOpenColorPicker(value)} color={colors.get(value, defaultColor)} />
           <ValueContainer>
             {val}
           </ValueContainer>
@@ -183,7 +183,7 @@ const PlotLegend = ({ children, config, chartData, labelMapper = defaultLabelMap
                    placement="top"
                    target={colorPickerConfig.target}>
             <Popover id="legend-config"
-                     title={`Configuration for ${colorPickerConfig.name}`}>
+                     title={`配置 ${colorPickerConfig.name}`}>
               <ColorPicker color={colors.get(colorPickerConfig.name)}
                            colors={defaultColors}
                            onChange={(newColor) => _onColorSelect(colorPickerConfig.name, newColor)} />

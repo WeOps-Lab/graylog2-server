@@ -66,7 +66,7 @@ class SystemJobsList extends React.Component {
       return (
         <StyledAlert bsStyle="info">
           <Icon name="info-circle" />{' '}
-          &nbsp;No active system jobs.
+          &nbsp;暂无系统任务.
         </StyledAlert>
       );
     }

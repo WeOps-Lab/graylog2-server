@@ -26,22 +26,22 @@ import DocumentationLink from 'components/support/DocumentationLink';
 import UserOverviewLinks from 'components/users/navigation/UserOverviewLinks';
 
 const UserCreatePage = () => (
-  <DocumentTitle title="Create New User">
-    <PageHeader title="Create New User"
+  <DocumentTitle title="创建新用户">
+    <PageHeader title="创建新用户"
                 subactions={(
                   <LinkContainer to={Routes.SYSTEM.USERS.CREATE}>
-                    <Button bsStyle="success">Create User</Button>
+                    <Button bsStyle="success">创建用户</Button>
                   </LinkContainer>
                 )}>
       <span>
-        Use this page to create new Graylog users. The users and their permissions created here are not limited
-        to the web interface but valid and required for the REST APIs of your Graylog server nodes, too.
+        使用此页面创建新的 DataInsight 用户。此处创建的用户及其权限不受限制
+        到 Web 界面，但对 DataInsight 服务器节点的 REST API 也是有效且必需的。
       </span>
 
       <span>
-        Learn more in the{' '}
+        查看{' '}
         <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
-                           text="documentation" />
+                           text="文档" />
       </span>
 
       <UserOverviewLinks />

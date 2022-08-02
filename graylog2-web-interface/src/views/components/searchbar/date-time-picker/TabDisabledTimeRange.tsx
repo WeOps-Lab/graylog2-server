@@ -28,8 +28,8 @@ const Wrapper = styled.div`
 
 const TabDisabledTimeRange = () => (
   <Wrapper>
-    <h5>No Date/Time Override chosen.</h5>
-    <p>Use the tabs above to choose a Date & Time Range to Search.</p>
+    <h5>未选择日期/时间覆盖。</h5>
+    <p>使用上面的选项卡选择要搜索的日期和时间范围。</p>
   </Wrapper>
 );
 

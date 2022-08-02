@@ -25,6 +25,6 @@ export default (view: View) => {
   return ViewManagementActions.create(view)
     .then(() => ViewActions.load(view))
     .then((state) => loadDashboard(state.view.id))
-    .then(() => UserNotification.success(`Saving view "${view.title}" was successful!`, 'Success!'))
-    .catch((error) => UserNotification.error(`Saving view failed: ${error}`, 'Error!'));
+    .then(() => UserNotification.success(`保存视图 "${view.title}" 成功!`, '成功!'))
+    .catch((error) => UserNotification.error(`保存视图失败：${error}`, 'Error!'));
 };

@@ -45,7 +45,7 @@ const componentForType = (type: string) => {
     case 'select': return SelectField;
     case 'boolean': return BooleanField;
     case 'numeric': return NumericField;
-    default: throw new Error(`Invalid configuration field type: ${type}`);
+    default: throw new Error(`配置字段类型无效: ${type}`);
   }
 };
 
@@ -56,7 +56,7 @@ const titleForField = (field: ConfigurationField) => {
     ? (
       <TitleLabelWithHelp>
         {field.title}
-        <TitleHoverForHelp title={`Help for ${field.title}`} placement="top">
+        <TitleHoverForHelp title={` ${field.title} 帮助`} placement="top">
           <HelpComponent />
         </TitleHoverForHelp>
       </TitleLabelWithHelp>

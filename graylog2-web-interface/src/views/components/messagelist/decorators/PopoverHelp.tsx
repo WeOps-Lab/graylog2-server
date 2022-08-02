@@ -27,21 +27,21 @@ const PopoverHelp = () => {
   const popoverHelp = (
     <Popover id="decorators-help" className={DecoratorStyles.helpPopover}>
       <p className="description">
-        Decorators can modify messages shown in the search results on the fly. These changes are not stored, but only
-        shown in the search results. Decorator config is stored <strong>per stream</strong>.
+        装饰者可以即时修改搜索结果中显示的消息。这些更改不会被存储，而只是
+        显示在搜索结果中。装饰器配置存储<strong>每个流</strong>。
       </p>
       <p className="description">
-        Use drag and drop to modify the order in which decorators are processed.
+        使用拖放来修改装饰器的处理顺序。
       </p>
       <p>
-        Read more about message decorators in the <DocumentationLink page={DocsHelper.PAGES.DECORATORS} text="documentation" />.
+        在 <DocumentationLink page={DocsHelper.PAGES.DECORATORS} text="文档" /> 中阅读有关消息装饰器的更多信息。
       </p>
     </Popover>
   );
 
   return (
     <OverlayTrigger trigger="click" rootClose placement="right" overlay={popoverHelp}>
-      <Button bsStyle="link" className={DecoratorStyles.helpLink}>What are message decorators?</Button>
+      <Button bsStyle="link" className={DecoratorStyles.helpLink}>什么是消息装饰器?</Button>
     </OverlayTrigger>
   );
 };

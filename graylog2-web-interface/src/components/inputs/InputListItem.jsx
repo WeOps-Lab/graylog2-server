@@ -80,7 +80,7 @@ const InputListItem = createReactClass({
       actions.push(
         <LinkContainer key={`received-messages-${this.props.input.id}`}
                        to={Routes.search(`gl2_source_input:${this.props.input.id}`, { relative: 0 })}>
-          <Button bsStyle="info">Show received messages</Button>
+          <Button bsStyle="info">显示收到的消息</Button>
         </LinkContainer>,
       );
     }
@@ -96,7 +96,7 @@ const InputListItem = createReactClass({
 
       actions.push(
         <LinkContainer key={`manage-extractors-${this.props.input.id}`} to={extractorRoute}>
-          <Button bsStyle="info">Manage extractors</Button>
+          <Button bsStyle="info">管理提取器</Button>
         </LinkContainer>,
       );
 
@@ -115,28 +115,28 @@ const InputListItem = createReactClass({
 
     actions.push(
       <DropdownButton key={`more-actions-${this.props.input.id}`}
-                      title="More actions"
+                      title="更多操作"
                       id={`more-actions-dropdown-${this.props.input.id}`}
                       pullRight>
         <IfPermitted permissions={`inputs:edit:${this.props.input.id}`}>
           <MenuItem key={`edit-input-${this.props.input.id}`}
                     onSelect={this._editInput}
                     disabled={definition === undefined}>
-            Edit input
+            编辑输入
           </MenuItem>
         </IfPermitted>
 
         {showMetricsMenuItem}
 
         <IfPermitted permissions={`inputs:edit:${this.props.input.id}`}>
-          <MenuItem key={`add-static-field-${this.props.input.id}`} onSelect={this._openStaticFieldForm}>Add static field</MenuItem>
+          <MenuItem key={`add-static-field-${this.props.input.id}`} onSelect={this._openStaticFieldForm}>添加静态字段</MenuItem>
         </IfPermitted>
 
         <IfPermitted permissions="inputs:terminate">
           <MenuItem key={`divider-${this.props.input.id}`} divider />
         </IfPermitted>
         <IfPermitted permissions="inputs:terminate">
-          <MenuItem key={`delete-input-${this.props.input.id}`} onSelect={this._deleteInput}>Delete input</MenuItem>
+          <MenuItem key={`delete-input-${this.props.input.id}`} onSelect={this._deleteInput}>删除输入</MenuItem>
         </IfPermitted>
       </DropdownButton>,
     );
@@ -146,7 +146,7 @@ const InputListItem = createReactClass({
     if (!this.props.input.global && this.props.input.node) {
       subtitle = (
         <span>
-          On node{' '}<LinkToNode nodeId={this.props.input.node} />
+          节点{' '}<LinkToNode nodeId={this.props.input.node} />
         </span>
       );
     }
@@ -158,7 +158,7 @@ const InputListItem = createReactClass({
                    globalValue={input.global}
                    nodeValue={input.node}
                    configFields={definition.requested_configuration}
-                   title={`Editing Input ${input.title}`}
+                   title={`编辑输入 ${input.title}`}
                    titleValue={input.title}
                    typeName={input.type}
                    includeTitleField

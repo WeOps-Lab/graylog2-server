@@ -21,30 +21,30 @@ import { OverlayTrigger, Icon } from 'components/common';
 
 const userQueryHelperPopover = (
   <Popover id="user-search-query-help" title="Search Syntax Help">
-    <p><strong>Available search fields</strong></p>
+    <p><strong>可用的搜索字段</strong></p>
     <Table condensed>
       <thead>
         <tr>
-          <th>Field</th>
-          <th>Description</th>
+          <th>字段</th>
+          <th>描述</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>full_name</td>
-          <td>The full name of a user</td>
+          <td>用户的全名</td>
         </tr>
         <tr>
           <td>username</td>
-          <td>The users login username.</td>
+          <td>用户登录用户名.</td>
         </tr>
         <tr>
           <td>email</td>
-          <td>The users email.</td>
+          <td>用户电子邮件.</td>
         </tr>
       </tbody>
     </Table>
-    <p><strong>Examples</strong></p>
+    <p><strong>示例</strong></p>
     <p>
       Find users with a email containing example.com:<br />
       <kbd>email:example.com</kbd><br />

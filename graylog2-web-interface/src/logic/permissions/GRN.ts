@@ -30,7 +30,7 @@ export const getValuesFromGRN = (grn: GRN) => {
 };
 
 const assertUnreachable = (grn: string, type: 'global'): never => {
-  throw new Error(`Can't find route for grn ${grn} of type: ${type ?? '(undefined)'}`);
+  throw new Error(`找不到 grn ${grn} 类型的路线：${type ?? '（不明确的）'}`);
 };
 
 export const getShowRouteFromGRN = (grn: string) => {

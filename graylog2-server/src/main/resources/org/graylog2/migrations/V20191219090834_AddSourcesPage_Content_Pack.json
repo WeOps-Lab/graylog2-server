@@ -2,9 +2,9 @@
   "v": 1,
   "id": "04fcf179-49e0-4e8f-9c02-0ff13062efbe",
   "rev": 1,
-  "name": "Sources Page Dashboard",
-  "summary": "A predefined dashboard showing the statistics of all sources.",
-  "description": "This is a list of all sources that sent in messages to _Graylog_. You can narrow the time range by zooming in on the message histogram, or you can increase the time range by specifying a broader one in the controls at the top. You can also specify filters to limit the results you are seeing. You can also add additional widgets to this dashboard, or adapt the appearance of existing widgets to suit your needs.",
+  "name": "数据来源",
+  "summary": "数据来源.",
+  "description": "数据来源.",
   "vendor": "Graylog <hello@graylog.com> ",
   "url": "https://github.com/Graylog2/graylog2-server ",
   "parameters": [],
@@ -19,7 +19,7 @@
       "data": {
         "summary": {
           "@type": "string",
-          "@value": "This is a list of all sources that sent in messages to Graylog."
+          "@value": "这是向服务器发送消息的所有的来源列表."
         },
         "search": {
           "queries": [
@@ -45,7 +45,7 @@
                   "series": [
                     {
                       "type": "count",
-                      "id": "Message count",
+                      "id": "消息总数",
                       "field": null
                     }
                   ],
@@ -77,7 +77,7 @@
                   "series": [
                     {
                       "type": "count",
-                      "id": "Message count",
+                      "id": "消息总数",
                       "field": null
                     }
                   ],
@@ -112,7 +112,7 @@
                   "series": [
                     {
                       "type": "count",
-                      "id": "Message count",
+                      "id": "消息总数",
                       "field": null
                     }
                   ],
@@ -152,12 +152,12 @@
             "static_message_list_id": null,
             "titles": {
               "tab": {
-                "title": "Sources Overview"
+                "title": "来源概览"
               },
               "widget": {
-                "6c127c5d-be75-4157-b43f-ac0194ac0586": "Selected sources",
-                "92d63811-e4dd-47db-bd3b-db03c8a9bd53": "Messages per Source",
-                "00637e63-d728-4b3e-932b-7c8696b4855d": "Messages over time"
+                "6c127c5d-be75-4157-b43f-ac0194ac0586": "选择来源",
+                "92d63811-e4dd-47db-bd3b-db03c8a9bd53": "按来源分组",
+                "00637e63-d728-4b3e-932b-7c8696b4855d": "随时间变化的消息"
               }
             },
             "widgets": [
@@ -186,7 +186,7 @@
                   "series": [
                     {
                       "config": {
-                        "name": "Message count"
+                        "name": "消息总数"
                       },
                       "function": "count()"
                     }
@@ -232,7 +232,7 @@
                   "series": [
                     {
                       "config": {
-                        "name": "Message count"
+                        "name": "消息总数"
                       },
                       "function": "count()"
                     }
@@ -269,7 +269,7 @@
                   "series": [
                     {
                       "config": {
-                        "name": "Message count"
+                        "name": "消息总数"
                       },
                       "function": "count()"
                     }
@@ -331,12 +331,12 @@
         "owner": "admin",
         "title": {
           "@type": "string",
-          "@value": "Sources"
+          "@value": "来源"
         },
         "type": "DASHBOARD",
         "description": {
           "@type": "string",
-          "@value": "This is a list of all sources that sent in messages to Graylog. You can narrow the timerange by zooming in on the message histogram, or you can increase the time range by specifying a broader one in the controls at the top. You can also specify filters to limit the results you are seeing. You can also add additional widgets to this dashboard, or adapt the appearance of existing widgets to suit your needs."
+          "@value": "发送消息的来源的列表。可以通过放大消息直方图来缩小时间范围，也可以通过在顶部的控件中指定更宽的时间范围来增大时间范围。您还可以指定过滤器来限制所看到的结果。您还可以将其他小部件添加到此仪表板，或者调整现有小部件的外观以满足您的需要."
         }
       },
       "constraints": [

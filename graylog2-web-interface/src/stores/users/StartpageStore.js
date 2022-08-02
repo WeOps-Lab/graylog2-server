@@ -41,11 +41,11 @@ export const StartpageStore = singletonStore(
         .then(
           (response) => {
             this.trigger();
-            UserNotification.success('Your start page was changed successfully');
+            UserNotification.success('更新起始页成功');
 
             return response;
           },
-          (error) => UserNotification.error(`Changing your start page failed with error: ${error}`, 'Could not change your start page'),
+          (error) => UserNotification.error(`更新起始页失败: ${error}`, '无法更新起始页'),
         );
     },
   }),

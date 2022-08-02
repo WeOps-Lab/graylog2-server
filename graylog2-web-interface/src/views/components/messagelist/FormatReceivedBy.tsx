@@ -27,7 +27,7 @@ type Inputs = Immutable.Map<string, Input>;
 const _inputName = (inputs: Inputs, inputId: string) => {
   const input = inputs.get(inputId);
 
-  return input ? <span style={{ wordBreak: 'break-word' }}>{input.title}</span> : 'deleted input';
+  return input ? <span style={{ wordBreak: 'break-word' }}>{input.title}</span> : '已删除的输入';
 };
 
 const FormatReceivedBy = ({ isLocalNode, inputs, sourceInputId, sourceNodeId }: {isLocalNode: boolean, inputs: Inputs, sourceNodeId: string, sourceInputId: string }) => {

@@ -28,26 +28,22 @@ const SidecarNewCollectorPage = createReactClass({
 
   render() {
     return (
-      <DocumentTitle title="New Log Collector">
+      <DocumentTitle title="新的采集器">
         <span>
-          <PageHeader title="New Log Collector">
+          <PageHeader title="新的采集器">
             <span>
-              Some words about log collectors.
-            </span>
-
-            <span>
-              Read more about the Graylog Sidecar in the documentation.
+              指定采集器的运行方式、所在操作系统、路径、执行参数等。
             </span>
 
             <ButtonToolbar>
               <LinkContainer to={Routes.SYSTEM.SIDECARS.OVERVIEW}>
-                <Button bsStyle="info">Overview</Button>
+                <Button bsStyle="info">概览</Button>
               </LinkContainer>
               <LinkContainer to={Routes.SYSTEM.SIDECARS.ADMINISTRATION}>
-                <Button bsStyle="info">Administration</Button>
+                <Button bsStyle="info">客户端管理</Button>
               </LinkContainer>
               <LinkContainer to={Routes.SYSTEM.SIDECARS.CONFIGURATION}>
-                <Button bsStyle="info" className="active">Configuration</Button>
+                <Button bsStyle="info" className="active">采集器配置</Button>
               </LinkContainer>
             </ButtonToolbar>
           </PageHeader>

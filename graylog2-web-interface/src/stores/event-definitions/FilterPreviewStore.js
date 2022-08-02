@@ -132,7 +132,7 @@ export const FilterPreviewStore = singletonStore(
 
               return result;
             },
-            () => UserNotification.error('Could not execute search'),
+            () => UserNotification.error('执行查询异常'),
           );
 
         FilterPreviewActions.execute.promise(this.executePromise);
@@ -140,7 +140,7 @@ export const FilterPreviewStore = singletonStore(
         return this.executePromise;
       }
 
-      throw new Error('Unable to execute search if no search was created before!');
+      throw new Error('执行查询异常!');
     },
 
     search(searchRequest, executionState) {

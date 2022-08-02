@@ -76,8 +76,8 @@ public class FieldContentValueAlertCondition extends AbstractAlertCondition {
         @Override
         public ConfigurationRequest getRequestedConfiguration() {
             final ConfigurationRequest configurationRequest = ConfigurationRequest.createWithFields(
-                    new TextField("field", "Field", "", "Field name that should be checked", ConfigurationField.Optional.NOT_OPTIONAL),
-                    new TextField("value", "Value", "", "Value that the field should be checked against", ConfigurationField.Optional.NOT_OPTIONAL)
+                    new TextField("field", "字段", "", "用于检查告警的字段", ConfigurationField.Optional.NOT_OPTIONAL),
+                    new TextField("value", "值", "", "用于检查告警的值", ConfigurationField.Optional.NOT_OPTIONAL)
             );
             configurationRequest.addFields(AbstractAlertCondition.getDefaultConfigurationFields());
 
@@ -88,9 +88,9 @@ public class FieldContentValueAlertCondition extends AbstractAlertCondition {
     public static class Descriptor extends AlertCondition.Descriptor {
         public Descriptor() {
             super(
-                "Field Content Alert Condition",
-                "https://www.graylog.org/",
-                "This condition is triggered when the content of messages is equal to a defined value."
+                    "关键字告警",
+                    "",
+                    "当指定的字段包含指定的关键字的时候进行告警."
             );
         }
     }
@@ -120,19 +120,19 @@ public class FieldContentValueAlertCondition extends AbstractAlertCondition {
         boolean backlogEnabled = false;
         int searchLimit = 1;
 
-        if(backlogSize != null && backlogSize > 0) {
+        if (backlogSize != null && backlogSize > 0) {
             backlogEnabled = true;
             searchLimit = backlogSize;
         }
 
         try {
             SearchResult result = searches.search(
-                query,
-                filter,
-                RelativeRange.create(configuration.getAlertCheckInterval()),
-                searchLimit,
-                0,
-                new Sorting(Message.FIELD_TIMESTAMP, Sorting.Direction.DESC)
+                    query,
+                    filter,
+                    RelativeRange.create(configuration.getAlertCheckInterval()),
+                    searchLimit,
+                    0,
+                    new Sorting(Message.FIELD_TIMESTAMP, Sorting.Direction.DESC)
             );
 
             final List<MessageSummary> summaries;
@@ -148,9 +148,8 @@ public class FieldContentValueAlertCondition extends AbstractAlertCondition {
 
             final long count = result.getTotalResults();
 
-            final String resultDescription = "Stream received messages matching <" + query + "> "
-                + "(Current grace time: " + grace + " minutes)";
-
+            final String resultDescription = "日志流接收到的消息匹配 <" + query + "> "
+                    + "(当前的宽限时间为: " + grace + " 分)";
             if (count > 0) {
                 LOG.debug("Alert check <{}> found [{}] messages.", id, count);
                 return new CheckResult(true, this, resultDescription, Tools.nowUTC(), summaries);
@@ -167,9 +166,9 @@ public class FieldContentValueAlertCondition extends AbstractAlertCondition {
 
     @Override
     public String getDescription() {
-        return "field: " + field
-                + ", value: " + value
-                + ", grace: " + grace
-                + ", repeat notifications: " + repeatNotifications;
+        return "字段: " + field
+                + ", 值: " + value
+                + ", 宽限时间: " + grace
+                + ", 重复提醒: " + repeatNotifications;
     }
 }

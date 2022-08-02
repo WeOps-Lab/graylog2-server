@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+moment.locale('zh-cn');
 import {} from 'moment-duration-format';
 import lodash from 'lodash';
 import styled, { css } from 'styled-components';

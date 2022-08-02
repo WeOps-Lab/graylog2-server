@@ -27,35 +27,35 @@ type NumberVisualizationConfigFormValues = {
 
 const singleNumber: VisualizationType<typeof NumberVisualization.type, NumberVisualizationConfig, NumberVisualizationConfigFormValues> = {
   type: NumberVisualization.type,
-  displayName: 'Single Number',
+  displayName: '单值',
   component: NumberVisualization,
   config: {
     fromConfig: (config: NumberVisualizationConfig | undefined) => ({ trend: config?.trend, trend_preference: config?.trendPreference }),
     toConfig: ({ trend = false, trend_preference }: NumberVisualizationConfigFormValues) => NumberVisualizationConfig.create(trend, trend_preference),
     fields: [{
       name: 'trend',
-      title: 'Trend',
+      title: '趋势',
       type: 'boolean',
-      description: 'Show trend information for this number.',
+      description: '显示此值的趋势信息.',
       helpComponent: () => (
         <>
           <p>
-            If the user enables trending, a separate box is shown below the current value, indicating the direction of the change
-            by an icon as well as the absolute and the relative differences between the current value and the previous one.
+            如果用户启用趋势，当前值下方会显示一个单独的框，指示变化的方向
+            通过图标以及当前值与前一个值之间的绝对和相对差异。
           </p>
 
           <p>
-            The previous value is calculated by performing two searches in the background, which are completely identical besides
-            the timerange. The timerange of the first search is identical to the one configured for this query/this widget,
-            the second one is the same timerange, but with an offset of the timerange length shifted to the past.
+            之前的值是在后台执行两次搜索计算出来的，除此之外完全一致
+            时间范围。第一次搜索的时间范围与为此查询/此小部件配置的时间范围相同，
+            第二个是相同的时间范围，但时间范围长度的偏移量转移到过去。
           </p>
         </>
       ),
     }, {
       name: 'trend_preference',
-      title: 'Trend Preference',
+      title: '趋势',
       type: 'select',
-      options: [['Lower', 'LOWER'], ['Neutral', 'NEUTRAL'], ['Higher', 'HIGHER']],
+      options: [['越小越好', 'LOWER'], ['普通', 'NEUTRAL'], ['越大越好', 'HIGHER']],
       required: true,
       isShown: (formValues: NumberVisualizationConfigFormValues) => formValues?.trend === true,
     }],

@@ -72,13 +72,12 @@ export const CollectorsStore = singletonStore(
       const promise = fetch('GET', URLUtils.qualifyUrl(`${this.sourceUrl}/collectors/${collectorId}`));
 
       promise.catch((error) => {
-        let errorMessage = `Fetching Collector failed with status: ${error}`;
-
+        let errorMessage = `获取采集器配置失败: ${error}`;
         if (error.status === 404) {
-          errorMessage = `Unable to find a collector with ID <${collectorId}>, please ensure it was not deleted.`;
+          errorMessage = `无法获取采集器配置 <${collectorId}>.`;
         }
 
-        UserNotification.error(errorMessage, 'Could not retrieve Collector');
+        UserNotification.error(errorMessage, '无法获取采集器配置');
       });
 
       CollectorsActions.getCollector.promise(promise);
@@ -108,8 +107,8 @@ export const CollectorsStore = singletonStore(
             return response.collectors;
           },
           (error) => {
-            UserNotification.error(`Fetching collectors failed with status: ${error}`,
-              'Could not retrieve collectors');
+            UserNotification.error(`获取采集器失败: ${error}`,
+              '无法获取采集器');
           },
         );
 
@@ -138,8 +137,8 @@ export const CollectorsStore = singletonStore(
             return response.collectors;
           },
           (error) => {
-            UserNotification.error(`Fetching collectors failed with status: ${error}`,
-              'Could not retrieve collectors');
+            UserNotification.error(`获取采集器失败: ${error}`,
+              '无法获取采集器');
           },
         );
 
@@ -156,15 +155,15 @@ export const CollectorsStore = singletonStore(
       promise
         .then(
           (response) => {
-            UserNotification.success('', 'Collector successfully created');
+            UserNotification.success('', '采集器创建成功');
             this.collectors = response.collectors;
             this.propagateChanges();
 
             return this.collectors;
           },
           (error) => {
-            UserNotification.error(`Fetching collectors failed with status: ${error}`,
-              'Could not retrieve collectors');
+            UserNotification.error(`采集器创建失败: ${error}`,
+              '无法获取采集器');
           },
         );
 
@@ -177,15 +176,15 @@ export const CollectorsStore = singletonStore(
       promise
         .then(
           (response) => {
-            UserNotification.success('', 'Collector successfully updated');
+            UserNotification.success('', '采集器更新成功');
             this.collectors = response.collectors;
             this.propagateChanges();
 
             return this.collectors;
           },
           (error) => {
-            UserNotification.error(`Fetching collectors failed with status: ${error}`,
-              'Could not retrieve collectors');
+            UserNotification.error(`无法更新采集器: ${error}`,
+              '无法更新采集器');
           },
         );
 
@@ -198,13 +197,13 @@ export const CollectorsStore = singletonStore(
 
       promise
         .then((response) => {
-          UserNotification.success('', `Collector "${collector.name}" successfully deleted`);
+          UserNotification.success('', `删除采集器 "${collector.name}" 成功`);
           this.refreshList();
 
           return response;
         }, (error) => {
-          UserNotification.error(`Deleting Collector failed: ${error.status === 400 ? error.responseMessage : error.message}`,
-            `Could not delete Collector "${collector.name}"`);
+          UserNotification.error(`删除采集器失败: ${error.status === 400 ? error.responseMessage : error.message}`,
+            `删除采集器 "${collector.name}" 失败`);
         });
 
       CollectorsActions.delete.promise(promise);
@@ -218,13 +217,13 @@ export const CollectorsStore = singletonStore(
 
       promise
         .then((response) => {
-          UserNotification.success('', `Collector "${name}" successfully copied`);
+          UserNotification.success('', `采集器 "${name}" 复制成功`);
           this.refreshList();
 
           return response;
         }, (error) => {
-          UserNotification.error(`Saving collector "${name}" failed with status: ${error.message}`,
-            'Could not save Collector');
+          UserNotification.error(`保存采集器 "${name}" 失败: ${error.message}`,
+            '无法保存采集器');
         });
 
       CollectorsActions.copy.promise(promise);
@@ -247,8 +246,8 @@ export const CollectorsStore = singletonStore(
         .then(
           (response) => response,
           (error) => (
-            UserNotification.error(`Validating collector "${payload.name}" failed with status: ${error.message}`,
-              'Could not validate collector')
+            UserNotification.error(`校验采集器 "${payload.name}" 失败: ${error.message}`,
+              '无法校验采集器')
           ),
         );
 

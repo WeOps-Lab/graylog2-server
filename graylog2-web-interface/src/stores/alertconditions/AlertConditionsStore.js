@@ -65,14 +65,14 @@ export const AlertConditionsStore = singletonStore(
 
     delete(streamId, alertConditionId) {
       const failCallback = (error) => {
-        UserNotification.error(`Removing Alert Condition failed with status: ${error}`,
-          'Could not remove Alert Conditions');
+        UserNotification.error(`删除告警条件失败：${error}`,
+          '无法删除告警条件');
       };
 
       const url = URLUtils.qualifyUrl(ApiRoutes.StreamAlertsApiController.delete(streamId, alertConditionId).url);
       const promise = fetch('DELETE', url).then(() => {
         AlertConditionsActions.listAll();
-        UserNotification.success('Condition deleted successfully');
+        UserNotification.success('告警条件删除成功');
       }, failCallback);
 
       AlertConditionsActions.delete.promise(promise);
@@ -90,8 +90,8 @@ export const AlertConditionsStore = singletonStore(
           return this.allAlertConditions;
         },
         (error) => {
-          UserNotification.error(`Fetching alert conditions failed with status: ${error}`,
-            'Could not get alert conditions');
+          UserNotification.error(`获取告警条件失败：${error}`,
+            '无法获取告警条件');
         },
       );
 
@@ -100,8 +100,8 @@ export const AlertConditionsStore = singletonStore(
 
     list(streamId) {
       const failCallback = (error) => {
-        UserNotification.error(`Fetching Alert Conditions failed with status: ${error}`,
-          'Could not retrieve Alert Conditions');
+        UserNotification.error(`获取告警条件失败：${error}`,
+          '无法获取告警条件');
       };
 
       const url = URLUtils.qualifyUrl(ApiRoutes.StreamAlertsApiController.list(streamId).url);
@@ -125,13 +125,13 @@ export const AlertConditionsStore = singletonStore(
     },
     save(streamId, alertCondition) {
       const failCallback = (error) => {
-        UserNotification.error(`Saving Alert Condition failed with status: ${error}`,
-          'Could not save Alert Condition');
+        UserNotification.error(`保存告警条件失败：${error}`,
+          '无法保存告警条件');
       };
 
       const url = URLUtils.qualifyUrl(ApiRoutes.StreamAlertsApiController.create(streamId).url);
       const promise = fetch('POST', url, alertCondition).then((response) => {
-        UserNotification.success('Condition created successfully');
+        UserNotification.success('告警条件创建成功');
 
         return response.alert_condition_id;
       }, failCallback);
@@ -142,13 +142,13 @@ export const AlertConditionsStore = singletonStore(
     },
     update(streamId, alertConditionId, request) {
       const failCallback = (error) => {
-        UserNotification.error(`Saving Alert Condition failed with status: ${error}`,
-          'Could not save Alert Condition');
+        UserNotification.error(`保存告警条件失败：${error}`,
+          '无法保存告警条件');
       };
 
       const url = URLUtils.qualifyUrl(ApiRoutes.StreamAlertsApiController.update(streamId, alertConditionId).url);
       const promise = fetch('PUT', url, request).then((response) => {
-        UserNotification.success('Condition updated successfully');
+        UserNotification.success('告警条件更新成功');
 
         return response;
       }, failCallback);
@@ -159,8 +159,8 @@ export const AlertConditionsStore = singletonStore(
     },
     get(streamId, conditionId, failureCallback) {
       const failCallback = (error) => {
-        UserNotification.error(`Fetching Alert Condition ${conditionId} failed with status: ${error}`,
-          'Could not retrieve Alert Condition');
+        UserNotification.error(`获取告警条件${conditionId}失败：${error}`,
+          '无法获取告警条件');
       };
 
       const url = URLUtils.qualifyUrl(ApiRoutes.StreamAlertsApiController.get(streamId, conditionId).url);

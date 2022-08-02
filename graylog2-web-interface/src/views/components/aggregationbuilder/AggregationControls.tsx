@@ -181,24 +181,24 @@ export default class AggregationControls extends React.Component<Props, State> {
             </DescriptionBox>
           </Col>
           <Col md={3} style={{ paddingLeft: '2px', paddingRight: '2px' }}>
-            <DescriptionBox description="Rows" help="Values from these fields generate new rows.">
+            <DescriptionBox description="行" help="这些字段的值生成新行.">
               <RowPivotSelect fields={formattedFieldsOptions} rowPivots={rowPivots} onChange={this._onRowPivotChange} />
             </DescriptionBox>
           </Col>
           <Col md={3} style={{ paddingLeft: '2px', paddingRight: '2px' }}>
-            <DescriptionBox description="Columns"
-                            help="Values from these fields generate new subcolumns."
+            <DescriptionBox description="列"
+                            help="这些字段的值生成新的子列."
                             configurableOptions={<ColumnPivotConfiguration rollup={rollup} onRollupChange={this._onRollupChange} />}>
               <ColumnPivotSelect fields={formattedFieldsOptions} columnPivots={columnPivots} onChange={this._onColumnPivotChange} />
             </DescriptionBox>
           </Col>
           <Col md={2} style={{ paddingLeft: '2px', paddingRight: '2px' }}>
-            <DescriptionBox description="Sorting">
+            <DescriptionBox description="排序">
               <SortSelect pivots={rowPivots} series={series} sort={sort} onChange={this._onSortChange} />
             </DescriptionBox>
           </Col>
           <Col md={2} style={{ paddingLeft: '2px', paddingRight: '10px' }}>
-            <DescriptionBox description="Direction">
+            <DescriptionBox description="方向">
               <SortDirectionSelect disabled={!sort || sort.length === 0}
                                    direction={sortDirection && sortDirection.direction}
                                    onChange={this._onSortDirectionChange} />
@@ -207,17 +207,17 @@ export default class AggregationControls extends React.Component<Props, State> {
         </TopRow>
         <BottomRow>
           <Col md={2} style={{ paddingRight: '2px', paddingLeft: '10px', height: '100%', overflowY: 'auto' }}>
-            <DescriptionBox description="Metrics" help="The unit which is tracked for every row and subcolumn." style={{ marginTop: 0 }}>
+            <DescriptionBox description="指标" help="每行和子列跟踪的单元." style={{ marginTop: 0 }}>
               <SeriesSelect onChange={this._onSeriesChange} series={series} suggester={suggester} />
             </DescriptionBox>
             {showEventConfiguration && (
-              <DescriptionBox description="Event Annotations"
-                              help="Configuration to render event annotations to a timebased widget">
+              <DescriptionBox description="事件注释"
+                              help="将事件注释呈现到基于时间的小部件的配置">
                 <EventListConfiguration enabled={config.eventAnnotation} onChange={this._onSetEventAnnotation} />
               </DescriptionBox>
             )}
             {VisualizationConfigComponent && (
-              <DescriptionBox description="Visualization config" help="Configuration specifically for the selected visualization type.">
+              <DescriptionBox description="可视化配置" help="专门针对所选可视化类型的配置.">
                 <VisualizationConfigComponent onChange={this._onVisualizationConfigChange}
                                               config={visualizationConfig} />
               </DescriptionBox>

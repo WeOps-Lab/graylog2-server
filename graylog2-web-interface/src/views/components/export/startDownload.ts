@@ -34,7 +34,7 @@ const getFilename = (view, selectedWidget) => {
 
     filename = `${widgetTitle}-${filename}`;
   } else {
-    const viewTitle = view.title || `Untitled ${ViewTypeLabel({ type: view.type, capitalize: true })}`;
+    const viewTitle = view.title || `无标题 ${ViewTypeLabel({ type: view.type, capitalize: true })}`;
 
     filename = `${viewTitle}-${filename}`;
   }

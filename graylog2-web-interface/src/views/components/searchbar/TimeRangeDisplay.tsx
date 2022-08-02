@@ -111,13 +111,13 @@ const TimeRangeDisplay = ({ timerange, toggleDropdownShow }: Props) => {
   }, [dateTested, timerange]);
 
   return (
-    <TimeRangeWrapper aria-label="Search Time Range, Opens Time Range Selector On Click" role="button" onClick={toggleDropdownShow}>
+    <TimeRangeWrapper aria-label="搜索时间范围，点击时打开时间范围选择器" role="button" onClick={toggleDropdownShow}>
       {!(timerange && 'type' in timerange)
-        ? <span><code>No Override</code></span>
+        ? <span><code>无覆盖</code></span>
         : (
           <>
-            <span data-testid="from"><strong>From</strong>: <code>{from}</code></span>
-            <span data-testid="to"><strong>Until</strong>: <code>{until}</code></span>
+            <span data-testid="from"><strong>从</strong>: <code>{from}</code></span>
+            <span data-testid="to"><strong>到</strong>: <code>{until}</code></span>
           </>
         )}
     </TimeRangeWrapper>

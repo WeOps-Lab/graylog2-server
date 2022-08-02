@@ -14,16 +14,16 @@
  * along with this program. If not, see
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 
-import { Col, Row } from 'components/bootstrap';
-import { Spinner } from 'components/common';
+import {Col, Row} from 'components/bootstrap';
+import {Spinner} from 'components/common';
 import connect from 'stores/connect';
-import { SystemJobsList } from 'components/systemjobs';
-import { SystemJobsActions, SystemJobsStore } from 'stores/systemjobs/SystemJobsStore';
+import {SystemJobsList} from 'components/systemjobs';
+import {SystemJobsActions, SystemJobsStore} from 'stores/systemjobs/SystemJobsStore';
 
-const SystemJobsComponent = ({ jobs }) => {
+const SystemJobsComponent = ({jobs}) => {
   useEffect(() => {
     SystemJobsActions.list();
     const interval = setInterval(SystemJobsActions.list, 2000);
@@ -34,7 +34,7 @@ const SystemJobsComponent = ({ jobs }) => {
   }, []);
 
   if (!jobs) {
-    return <Spinner />;
+    return <Spinner/>;
   }
 
   const jobList = Object.keys(jobs)
@@ -44,13 +44,12 @@ const SystemJobsComponent = ({ jobs }) => {
   return (
     <Row className="content">
       <Col md={12}>
-        <h2>System jobs</h2>
+        <h2>系统任务</h2>
         <p className="description">
-          A system job is a long-running task a graylog-server node executes for maintenance reasons. Some jobs
-          provide progress information or can be stopped.
+          系统任务是节点运行的一个长期任务,部分任务提供了进度信息并可以被停止.
         </p>
 
-        <SystemJobsList jobs={jobList} />
+        <SystemJobsList jobs={jobList}/>
       </Col>
     </Row>
   );
@@ -69,5 +68,5 @@ SystemJobsComponent.defaultProps = {
 };
 
 export default connect(SystemJobsComponent,
-  { systemJobsStore: SystemJobsStore },
-  ({ systemJobsStore }) => ({ jobs: systemJobsStore.jobs }));
+  {systemJobsStore: SystemJobsStore},
+  ({systemJobsStore}) => ({jobs: systemJobsStore.jobs}));

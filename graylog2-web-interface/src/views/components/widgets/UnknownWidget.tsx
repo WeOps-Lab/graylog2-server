@@ -56,27 +56,26 @@ const UnknownWidget: React.ComponentType<WidgetComponentProps & EditWidgetCompon
     </IconContainer>
     <Description>
       <Row>
-        <strong>Unknown Widget: {type}</strong>
+        <strong>未知组件: {type}</strong>
       </Row>
       <Row>
-        Unfortunately we are not able to render this widget, because we do not know how to handle widgets of
-        type <strong>{type}</strong>. This might be caused by one of these situations:
+        未知的小组件<strong>{type}</strong>.可能由于以下原因导致:
       </Row>
 
       <Row>
         <OrderedList>
-          <li>You created this widget using a plugin that is now missing.</li>
-          <li>This widget was part of a legacy dashboard and created by a plugin that is not available anymore.</li>
+          <li>创建了一个缺失的小组件.</li>
+          <li>这个小部件是遗留仪表板的一部分，由不再可用的插件创建.</li>
         </OrderedList>
       </Row>
 
       <Row>
-        What can you do about it? You can load the plugin again, contact the original plugin author for a plugin that
-        works with Graylog 3.2+, or remove the widget if you do not need it anymore.
+        你能怎么办？您可以再次加载插件，请与原始插件作者联系以获取
+        使用DataInsight3.2+，如果不再需要，则删除该小部件。
       </Row>
       <Row>
-        Either way, you can copy the widget&rsquo;s config to the
-        clipboard: <ClipboardButton title={<Icon name="copy" size="sm" />} text={JSON.stringify(config, null, 2)} bsSize="xsmall" />
+        获取你可以复制此小组件配置到粘贴板:
+        <ClipboardButton title={<Icon name="copy" size="sm" />} text={JSON.stringify(config, null, 2)} bsSize="xsmall" />
       </Row>
     </Description>
   </Container>

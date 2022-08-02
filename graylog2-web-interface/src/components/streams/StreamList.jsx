@@ -71,7 +71,7 @@ const StreamList = createReactClass({
 
     return (
       <Alert bsStyle="info">
-        <Icon name="info-circle" />&nbsp;No streams match your search filter.
+        <Icon name="info-circle" />&nbsp;没有消息流匹配过滤条件.
       </Alert>
     );
   },

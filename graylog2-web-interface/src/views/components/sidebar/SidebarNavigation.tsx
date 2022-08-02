@@ -79,7 +79,7 @@ const SidebarNavigation = ({ sections, activeSection, selectSidebarSection, side
       <NavItem icon={toggleIcon}
                onClick={toggleSidebar}
                showTitleOnHover={false}
-               title={`${activeSection ? 'Close' : 'Open'} sidebar`}
+               title={`${activeSection ? '关闭' : '打开'} 侧边栏`}
                sidebarIsPinned={sidebarIsPinned} />
       <HorizontalRuleWrapper><hr /></HorizontalRuleWrapper>
       <SectionList>

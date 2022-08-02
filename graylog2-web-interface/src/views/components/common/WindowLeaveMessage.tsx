@@ -24,7 +24,7 @@ const WindowLeaveMessage = () => {
   const dirty = useStore(ViewStore, (state) => state.dirty);
 
   return dirty
-    ? <ConfirmLeaveDialog question="Are you sure you want to leave the page? Any unsaved changes will be lost." />
+    ? <ConfirmLeaveDialog question="您确定要离开该页面吗？任何未保存的更改都将丢失." />
     : null;
 };
 

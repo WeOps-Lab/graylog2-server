@@ -79,7 +79,7 @@ export const updateWidgetAggregationElements = (formValues: WidgetConfigFormValu
     const toConfig = toConfigByKey[key] ?? ((_values, prevConfig) => prevConfig);
 
     if (!toConfig) {
-      throw new Error(`Aggregation element with key ${key} is missing toConfig.`);
+      throw new Error(`缺少键 ${key} 的聚合元素 toConfig.`);
     }
 
     return toConfig;

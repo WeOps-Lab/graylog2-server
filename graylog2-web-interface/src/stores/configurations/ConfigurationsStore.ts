@@ -182,12 +182,12 @@ export const ConfigurationsStore = singletonStore(
         (response) => {
           this.configuration = { ...this.configuration, [configType]: response };
           this.propagateChanges();
-          UserNotification.success('Configuration updated successfully');
+          UserNotification.success('配置更新成功');
 
           return response;
         },
         (error) => {
-          UserNotification.error(`Search config update failed: ${error}`, `Could not update search config: ${configType}`);
+          UserNotification.error(`搜索配置更新失败：${error}`, `无法更新搜索配置：${configType}`);
         },
       );
 
@@ -201,12 +201,12 @@ export const ConfigurationsStore = singletonStore(
         () => {
           this.configuration = { ...this.configuration, [configType]: config };
           this.propagateChanges();
-          UserNotification.success('Url Whitelist Configuration updated successfully');
+          UserNotification.success('Url白名单配置更新成功');
 
           return config;
         },
         (error) => {
-          UserNotification.error(`Url Whitelist config update failed: ${error}`, `Could not update Url Whitelist: ${configType}`);
+          UserNotification.error(`Url白名单配置更新失败: ${error}`, `无法更新URL白名单: ${configType}`);
         },
       );
 
@@ -220,12 +220,12 @@ export const ConfigurationsStore = singletonStore(
         (response) => {
           this.configuration = { ...this.configuration, [configType]: response };
           this.propagateChanges();
-          UserNotification.success('Configuration updated successfully');
+          UserNotification.success('配置更新成功');
 
           return response;
         },
         (error) => {
-          UserNotification.error(`Message processors config update failed: ${error}`, `Could not update config: ${configType}`);
+          UserNotification.error(`消息处理器配置更新失败: ${error}`, `无法更新配置: ${configType}`);
         },
       );
 

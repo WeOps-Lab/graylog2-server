@@ -236,7 +236,7 @@ const AdaptableQueryTabs = ({ maxWidth, queries, titles, selectedQueryId, onRemo
                    title={<Icon name="ellipsis-h" />}
                    className="query-tabs-more"
                    id="query-tabs-more"
-                   aria-label="More Dashboard Tabs"
+                   aria-label="更多仪表板选项卡"
                    noCaret
                    pullRight
                    active={openedMore}
@@ -249,7 +249,7 @@ const AdaptableQueryTabs = ({ maxWidth, queries, titles, selectedQueryId, onRemo
 
       <NavItem key="new"
                eventKey="new"
-               title="Create New Tab"
+               title="创建新标签"
                onClick={() => onSelect('new')}
                className="query-tabs-new">
         <Icon name="plus" />

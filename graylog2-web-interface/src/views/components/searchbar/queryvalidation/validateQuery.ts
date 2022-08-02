@@ -89,7 +89,7 @@ export const validateQuery = ({
 
     return undefined;
   }).catch((error) => {
-    UserNotification.error(`Validating search query failed with status: ${error}`);
+    UserNotification.error(`验证搜索查询失败并显示状态: ${error}`);
 
     return ({
       status: 'OK',

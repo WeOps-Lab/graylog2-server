@@ -16,7 +16,7 @@
  */
 import Reflux from 'reflux';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import * as URLUtils from 'util/URLUtils';
 import ApiRoutes from 'routing/ApiRoutes';
 import fetch from 'logic/rest/FetchProvider';

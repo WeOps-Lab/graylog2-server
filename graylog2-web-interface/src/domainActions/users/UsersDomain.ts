@@ -21,17 +21,17 @@ import notifyingAction from '../notifyingAction';
 const create = notifyingAction({
   action: UsersActions.create,
   success: (user) => ({
-    message: `User "${user?.first_name} ${user?.last_name}" was created successfully`,
+    message: `用户"${user?.first_name} ${user?.last_name}"创建成功`,
   }),
   error: (error, user) => ({
-    message: `Creating user "${user?.first_name} ${user?.last_name}" failed with status: ${error}`,
+    message: `创建用户"${user?.first_name} ${user?.last_name}"失败，状态为：${error}`,
   }),
 });
 
 const load = notifyingAction({
   action: UsersActions.load,
   error: (error, userId) => ({
-    message: `Loading user with id "${userId}" failed with status: ${error}`,
+    message: `加载 ID 为"${userId}"的用户失败，状态为：${error}`,
   }),
   notFoundRedirect: true,
 });
@@ -39,7 +39,7 @@ const load = notifyingAction({
 const loadByUsername = notifyingAction({
   action: UsersActions.loadByUsername,
   error: (error, username) => ({
-    message: `Loading user with username "${username}" failed with status: ${error}`,
+    message: `使用用户名"${username}"加载用户失败，状态为：${error}`,
   }),
   notFoundRedirect: true,
 });
@@ -47,81 +47,81 @@ const loadByUsername = notifyingAction({
 const update = notifyingAction({
   action: UsersActions.update,
   success: (userId, payload, fullName) => ({
-    message: `User "${fullName}" was updated successfully`,
+    message: `用户"${fullName}"已成功更新`,
   }),
   error: (error, userId, payload, fullName) => ({
-    message: `Updating user "${fullName}" failed with status: ${error}`,
+    message: `更新用户"${fullName}"失败，状态为：${error}`,
   }),
 });
 
 const deleteAction = notifyingAction({
   action: UsersActions.delete,
   success: (userId, fullName) => ({
-    message: `User "${fullName}" was deleted successfully`,
+    message: `用户"${fullName}"已成功删除`,
   }),
   error: (error, userId, fullName) => ({
-    message: `Deleting user "${fullName}" failed with status: ${error}`,
+    message: `删除用户"${fullName}"失败，状态为：${error}`,
   }),
 });
 
 const changePassword = notifyingAction({
   action: UsersActions.changePassword,
   success: () => ({
-    message: 'Password was changed successfully ',
+    message: '密码已成功更改 ',
   }),
   error: (error, userId) => ({
-    message: `Changing password for user with id "${userId}" failed with status: ${error}`,
+    message: `更改 ID 为"${userId}"的用户的密码失败，状态为：${error}`,
   }),
 });
 
 const createToken = notifyingAction({
   action: UsersActions.createToken,
   success: (userId, tokenName) => ({
-    message: `Token "${tokenName}" created successfully`,
+    message: `令牌"${tokenName}"创建成功`,
   }),
   error: (error, userId, tokenName) => ({
-    message: `Creating token "${tokenName}" for user with id "${userId}" failed with status: ${error}`,
+    message: `为 ID 为"${userId}"的用户创建令牌"${tokenName}"失败，状态为：${error}`,
   }),
 });
 
 const loadTokens = notifyingAction({
   action: UsersActions.loadTokens,
   error: (error, userId) => ({
-    message: `Loading tokens for user with id "${userId}" failed with status: ${error}`,
+    message: `为 ID 为"${userId}"的用户加载令牌失败，状态为：${error}`,
   }),
 });
 
 const deleteToken = notifyingAction({
   action: UsersActions.deleteToken,
   success: (userId, tokenId, tokenName) => ({
-    message: `Token "${tokenName}" deleted successfully`,
+    message: `令牌"${tokenName}"已成功删除`,
   }),
   error: (error, userId, tokenId, tokenName) => ({
-    message: `Deleting token "${tokenName}" for user with id "${userId}" failed with status: ${error}`,
+    message: `为 ID 为"${userId}"的用户删除令牌"${tokenName}"失败，状态为：${error}`,
   }),
 });
 
 const loadUsers = notifyingAction({
   action: UsersActions.loadUsers,
   error: (error) => ({
-    message: `Loading users failed with status: ${error}`,
+    message: `加载用户失败，状态为：${error}`,
   }),
 });
 
 const loadUsersPaginated = notifyingAction({
   action: UsersActions.loadUsersPaginated,
   error: (error) => ({
-    message: `Loading users failed with status: ${error}`,
+    message: `加载用户失败，状态为：${error}`,
   }),
 });
 
 const setStatus = notifyingAction({
   action: UsersActions.setStatus,
   success: (userId, accountStatus) => ({
-    message: `User "${userId}" was set to ${accountStatus}`,
+    message: `用户"${userId}"设置为 ${accountStatus}`,
   }),
   error: (error, userId, accountStatus) => ({
-    message: `Updating user ("${userId}") to ${accountStatus} failed with status: ${error}`,
+    message: `将用户 ("${userId}") 更新到 ${accountStatus} 失败，状态为：${error}`,
   }),
 });
 

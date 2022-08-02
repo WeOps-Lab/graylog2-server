@@ -38,7 +38,7 @@ type Props = {
 };
 
 const _pageTitle = (authBackendTitle, returnString = false) => {
-  const pageName = 'Authentication Service Details';
+  const pageName = '认证服务详情';
   const backendTitle = StringUtils.truncateWithEllipses(authBackendTitle, 30);
 
   if (returnString) {
@@ -67,13 +67,13 @@ const AuthenticationBackendDetailsPage = ({ params: { backendId } }: Props) => {
                       <LinkContainer to={Routes.SYSTEM.AUTHENTICATION.BACKENDS.edit(authBackend?.id)}>
                         <Button bsStyle="success"
                                 type="button">
-                          Edit Service
+                          编辑服务
                         </Button>
                       </LinkContainer>
                   )}>
-          <span>Configure Graylog&apos;s authentication services of this Graylog cluster.</span>
-          <span>Read more authentication in the <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
-                                                                   text="documentation" />.
+          <span>配置此 DataInsight 集群的身份验证服务。</span>
+          <span>查看 <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
+                                                                   text="文档" />.
           </span>
           <AuthenticationOverviewLinks />
         </PageHeader>

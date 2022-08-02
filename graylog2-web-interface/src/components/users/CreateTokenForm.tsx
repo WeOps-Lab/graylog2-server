@@ -51,7 +51,7 @@ const CreateTokenForm = ({ creatingToken, onCreate }: Props) => {
       <FormGroup controlId="create-token-input">
         <ControlLabel>Token Name</ControlLabel>
         <FormControl type="text"
-                     placeholder="What is this token for?"
+                     placeholder="这个令牌的用途?"
                      value={tokenName}
                      onChange={(event) => setTokenName(event.target.value)} />
       </FormGroup>
@@ -59,7 +59,7 @@ const CreateTokenForm = ({ creatingToken, onCreate }: Props) => {
               disabled={tokenName === '' || creatingToken}
               type="submit"
               bsStyle="primary">
-        {(creatingToken ? <Spinner text="Creating..." /> : 'Create Token')}
+        {(creatingToken ? <Spinner text="创建中..." /> : '创建令牌')}
       </Button>
     </StyledForm>
   );

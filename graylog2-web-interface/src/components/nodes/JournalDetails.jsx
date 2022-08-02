@@ -21,6 +21,7 @@ import createReactClass from 'create-react-class';
 import Reflux from 'reflux';
 import numeral from 'numeral';
 import moment from 'moment';
+moment.locale('zh-cn');
 import {} from 'moment-duration-format';
 import styled from 'styled-components';
 

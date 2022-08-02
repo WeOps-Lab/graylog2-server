@@ -88,7 +88,7 @@ const onDelete = (e, savedSearches, deleteSavedSearch, selectedSavedSearchId) =>
 
   if (savedSearches) {
     // eslint-disable-next-line no-alert
-    if (window.confirm(`You are about to delete saved search: "${selectedSavedSearch.title}". Are you sure?`)) {
+    if (window.confirm(`确定删除搜索: "${selectedSavedSearch.title}"?`)) {
       deleteSavedSearch(selectedSavedSearch);
     }
   }
@@ -101,8 +101,8 @@ const _loadSavesSearches = (pagination, setLoading, setPaginatedSavedSearches) =
     setPaginatedSavedSearches(paginatedSavedSearches);
     setLoading(false);
   }).catch((error) => {
-    UserNotification.error(`Fetching saved searches failed with status: ${error}`,
-      'Could not retrieve saved searches');
+    UserNotification.error(`加载数据异常: ${error}`,
+      '加载数据异常');
   });
 };
 
@@ -137,7 +137,7 @@ const SavedSearchList = ({ toggleModal, deleteSavedSearch, activeSavedSearchId }
           <ListContainer>
             {!loading && total === 0 && (
               <NoSavedSearches>
-                No saved searches found.
+                未找到任何数据.
               </NoSavedSearches>
             )}
             {savedSearches?.length > 0 && (
@@ -151,7 +151,7 @@ const SavedSearchList = ({ toggleModal, deleteSavedSearch, activeSavedSearchId }
                         {savedSearch.summary}
                         <DeleteButton onClick={(e) => onDelete(e, savedSearches, deleteSavedSearch, savedSearch.id)}
                                       role="button"
-                                      title={`Delete search ${savedSearch.title}`}
+                                      title={`删除 ${savedSearch.title}`}
                                       tabIndex={0}>
                           <Icon name="trash-alt" />
                         </DeleteButton>
@@ -165,7 +165,7 @@ const SavedSearchList = ({ toggleModal, deleteSavedSearch, activeSavedSearchId }
         </PaginatedList>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={toggleModal}>Cancel</Button>
+        <Button onClick={toggleModal}>取消</Button>
       </Modal.Footer>
     </Modal>
   );

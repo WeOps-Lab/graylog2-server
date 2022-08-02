@@ -18,7 +18,7 @@
 import * as React from 'react';
 import { render } from 'wrappedTestingLibrary';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { DATE_TIME_FORMATS } from 'util/DateTime';
 import { alice } from 'fixtures/users';
 import UserDateTimeProvider from 'contexts/UserDateTimeProvider';

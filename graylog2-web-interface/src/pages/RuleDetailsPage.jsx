@@ -43,7 +43,7 @@ const RuleDetailsPage = ({ params, rule, pipelines }) => {
 
   const isNewRule = params.ruleId === 'new';
   const title = filteredRule?.title || '';
-  const pageTitle = isNewRule ? 'New pipeline rule' : `Pipeline rule ${title}`;
+  const pageTitle = isNewRule ? '新建流水线规则' : `流水线规则 ${title}`;
 
   const pipelinesUsingRule = isNewRule ? [] : filterPipelines(pipelines, title);
 
@@ -68,7 +68,7 @@ const RuleDetailsPage = ({ params, rule, pipelines }) => {
   }, [filteredRule, isNewRule, params.ruleId, pipelines]);
 
   if (isLoading) {
-    return <Spinner text="Loading Rule Details..." />;
+    return <Spinner text="加载规则中..." />;
   }
 
   return (

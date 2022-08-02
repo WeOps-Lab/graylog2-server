@@ -48,7 +48,7 @@ const AbsoluteDateInput = ({ name, disabled, onChange, value, hasError }) => {
              buttonAfter={(
                <Button disabled={disabled}
                        onClick={_onSetTimeToNow}
-                       title="Insert current date">
+                       title="当前日期">
                  <Icon name="magic" />
                </Button>
              )}

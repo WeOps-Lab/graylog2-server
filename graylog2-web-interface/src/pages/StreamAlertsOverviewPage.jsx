@@ -47,34 +47,33 @@ class StreamAlertsOverviewPage extends React.Component {
     const isLoading = !stream;
 
     if (isLoading) {
-      return <DocumentTitle title="Stream Alerts Overview"><Spinner /></DocumentTitle>;
+      return <DocumentTitle title="消息流告警概览"><Spinner /></DocumentTitle>;
     }
 
     return (
-      <DocumentTitle title={`Alerting overview for Stream ${stream.title}`}>
+      <DocumentTitle title={`${stream.title}告警概览`}>
         <div>
-          <PageHeader title={<span>Alerting overview for Stream &raquo;{stream.title}&laquo;</span>}>
+          <PageHeader title={<span> &raquo;{stream.title}&laquo;告警概览</span>}>
             <span>
-              This is an overview of alerts, conditions, and notifications belonging to the Stream{' '}
-              <em>{stream.title}</em>.
+              这是<em>{stream.title}</em>的告警、告警条件和告警通知的概览。
             </span>
 
             <span>
-              Read more about alerting in the <DocumentationLink page={DocsHelper.PAGES.ALERTS} text="documentation" />.
+              在<DocumentationLink page={DocsHelper.PAGES.ALERTS} text="文档" />中查看更多关于告警的信息。
             </span>
 
             <ButtonToolbar>
               <LinkContainer to={Routes.STREAMS}>
-                <Button bsStyle="info">Streams</Button>
+                <Button bsStyle="info">消息流</Button>
               </LinkContainer>
               <LinkContainer to={Routes.LEGACY_ALERTS.LIST}>
-                <Button bsStyle="info">All Alerts</Button>
+                <Button bsStyle="info">告警概览</Button>
               </LinkContainer>
               <LinkContainer to={Routes.LEGACY_ALERTS.CONDITIONS}>
-                <Button bsStyle="info">All Conditions</Button>
+                <Button bsStyle="info">告警条件</Button>
               </LinkContainer>
               <LinkContainer to={Routes.LEGACY_ALERTS.NOTIFICATIONS}>
-                <Button bsStyle="info">All Notifications</Button>
+                <Button bsStyle="info">告警通知</Button>
               </LinkContainer>
             </ButtonToolbar>
           </PageHeader>

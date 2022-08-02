@@ -19,7 +19,7 @@ import PropTypes from 'prop-types';
 import lodash from 'lodash';
 import uuid from 'uuid/v4';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { MultiSelect, TimeUnitInput } from 'components/common';
 import connect from 'stores/connect';
 import Query from 'views/logic/queries/Query';

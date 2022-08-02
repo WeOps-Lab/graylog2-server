@@ -16,7 +16,7 @@
  */
 import moment from 'moment';
 import naturalSort from 'javascript-natural-sort';
-
+moment.locale('zh-cn');
 // sortOrder: "asc"|"desc"
 export function sortByDate(d1, d2, sortOrder) {
   const effectiveSortOrder = sortOrder || 'asc';

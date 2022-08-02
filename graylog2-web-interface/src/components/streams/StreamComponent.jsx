@@ -129,7 +129,7 @@ class StreamComponent extends React.Component {
         <CreateStreamButton bsSize="small"
                             bsStyle="link"
                             className="btn-text"
-                            buttonText="Create one now"
+                            buttonText="创建"
                             indexSets={indexSets}
                             onSave={onStreamSave} />
       </IfPermitted>
@@ -137,7 +137,7 @@ class StreamComponent extends React.Component {
 
     const noStreams = (
       <Alert bsStyle="warning">
-        <Icon name="info-circle" />&nbsp;No streams found. {createStreamButton}
+        <Icon name="info-circle" />&nbsp;没有配置的消息流. {createStreamButton}
       </Alert>
     );
 

@@ -197,22 +197,22 @@ export default class User {
 
     const _estimateUnit = (value): [number, string] => {
       if (value === 0) {
-        return [MS_SECOND, 'Seconds'];
+        return [MS_SECOND, '毫秒'];
       }
 
       if (value % MS_DAY === 0) {
-        return [MS_DAY, 'Days'];
+        return [MS_DAY, '天'];
       }
 
       if (value % MS_HOUR === 0) {
-        return [MS_HOUR, 'Hours'];
+        return [MS_HOUR, '小时'];
       }
 
       if (value % MS_MINUTE === 0) {
-        return [MS_MINUTE, 'Minutes'];
+        return [MS_MINUTE, '分'];
       }
 
-      return [MS_SECOND, 'Seconds'];
+      return [MS_SECOND, '秒'];
     };
 
     const unit = _estimateUnit(this.sessionTimeoutMs);

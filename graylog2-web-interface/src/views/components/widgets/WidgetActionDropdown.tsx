@@ -24,7 +24,7 @@ type Props = {
 };
 
 const WidgetActionDropdown = ({ children }: Props) => {
-  const widgetActionDropdownCaret = <IconButton data-testid="widgetActionDropDown" name="chevron-down" title="Open actions dropdown" />;
+  const widgetActionDropdownCaret = <IconButton data-testid="widgetActionDropDown" name="chevron-down" title="打开下拉菜单" />;
 
   return (
     <ActionDropdown element={widgetActionDropdownCaret}>

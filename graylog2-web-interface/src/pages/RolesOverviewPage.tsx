@@ -25,31 +25,30 @@ import { PageHeader, DocumentTitle, Icon } from 'components/common';
 import DocumentationLink from 'components/support/DocumentationLink';
 
 const RolesOverviewPage = () => (
-  <DocumentTitle title="Roles Overview">
-    <PageHeader title="Roles Overview">
-      <span>Overview of Graylog&apos;s roles. Roles allow granting capabilities to users, like creating dashboards or event definitions.</span>
+  <DocumentTitle title="角色概览">
+    <PageHeader title="角色概览">
+      <span>DataInsight 的角色概述, 角色允许向用户授予功能，例如创建仪表板或事件定义。</span>
 
       <span>
-        Learn more in the{' '}
+        查看{' '}
         <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
-                           text="documentation" />
+                           text="文档" />
       </span>
 
       <LinkContainer to={Routes.SYSTEM.AUTHZROLES.OVERVIEW}>
-        <Button bsStyle="info">Roles Overview</Button>
+        <Button bsStyle="info">角色概览</Button>
       </LinkContainer>
     </PageHeader>
 
     <Row className="content">
       <Col xs={12}>
         <Alert bsStyle="info">
-          <Icon name="info-circle" />{' '}<b>Granting Permissions</b><br />
-          With Graylog 4.0, we&apos;ve updated the permissions system and changed the purpose of roles.
-          The built-in roles still allow granting capabilities to users, like creating dashboards or viewing the archive catalog.
-          But they no longer grant permissions for a specific dashboard or stream. It is also not possible to create an own role.
-          Granting permissions for a specific entity can now be done by using its <b><Icon name="user-plus" /> Share</b> button. You can find the button e.g. on the entities overview page.
-          If you want to grant permissions for an entity to multiple users at once, you can use teams.
-          Learn more in the <DocumentationLink page={DocsHelper.PAGES.PERMISSIONS} text="documentation" />.
+          <Icon name="info-circle" />{' '}<b>授予权限</b><br />
+          内置角色仍然允许向用户授予功能，例如创建仪表板或查看存档目录。
+          但他们不再授予特定仪表板或流的权限。也无法创建自己的角色。
+          现在可以通过使用其<b><Icon name="user-plus" /> 分享 </b> 按钮来授予特定实体的权限。您可以找到按钮，例如在实体概览页面上。
+          如果您想一次将一个实体的权限授予多个用户，您可以使用团队。
+          在 <DocumentationLink page={DocsHelper.PAGES.PERMISSIONS} text="文档" /> 中了解更多信息.
         </Alert>
       </Col>
     </Row>

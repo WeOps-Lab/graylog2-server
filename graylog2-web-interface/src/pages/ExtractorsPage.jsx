@@ -78,27 +78,23 @@ const ExtractorsPage = createReactClass({
     const { node, input } = this.state;
 
     return (
-      <DocumentTitle title={`Extractors of ${input.title}`}>
+      <DocumentTitle title={`${input.title} 的提取器`}>
         <div>
-          <PageHeader title={<span>Extractors of <em>{input.title}</em></span>}>
+          <PageHeader title={<span><em>{input.title}</em> 的提取器</span>}>
             <span>
-              Extractors are applied on every message that is received by this input. Use them to extract and transform{' '}
-              any text data into fields that allow you easy filtering and analysis later on.{' '}
-              Example: Extract the HTTP response code from a log message, transform it to a numeric field and attach it{' '}
-              as <em>http_response_code</em> to the message.
+              日志提取器将会应用在这个接收器上的每一条日志消息.使用日志提取器,可以将任意的文本数据进行提取及转换到特定的字段,便于稍后筛选及分析.例子:从日志消息中提取 HTTP返回码,将其转换成数字字段<em>http_response_code</em>,并附加到日志上.
             </span>
 
             <span>
-              Find more information about extractors in the
-              {' '}<DocumentationLink page={DocsHelper.PAGES.EXTRACTORS} text="documentation" />.
+              在<DocumentationLink page={DocsHelper.PAGES.EXTRACTORS} text="文档"/>中查看更多关于提取器的信息。
             </span>
 
-            <DropdownButton bsStyle="info" bsSize="large" id="extractor-actions-dropdown" title="Actions" pullRight>
+            <DropdownButton bsStyle="info" bsSize="large" id="extractor-actions-dropdown" title="操作" pullRight>
               <LinkContainer to={Routes.import_extractors(node.node_id, input.id)}>
-                <MenuItem>Import extractors</MenuItem>
+                <MenuItem>导入提取器</MenuItem>
               </LinkContainer>
               <LinkContainer to={Routes.export_extractors(node.node_id, input.id)}>
-                <MenuItem>Export extractors</MenuItem>
+                <MenuItem>导出提取器</MenuItem>
               </LinkContainer>
             </DropdownButton>
           </PageHeader>

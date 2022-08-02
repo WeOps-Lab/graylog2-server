@@ -42,10 +42,10 @@ const SelectedWidgetInfo = ({ selectedWidget, view }: { selectedWidget: Widget, 
     <Row>
       <i>
         <IfSearch>
-          {selectedWidget && `The following settings are based on the message table: ${selectedWidgetTitle}`}<br />
+          {selectedWidget && `以下设置基于消息表格: ${selectedWidgetTitle}`}<br />
         </IfSearch>
         <IfDashboard>
-          {selectedWidget && `You are currently exporting the search results for the message table: ${selectedWidgetTitle}`}<br />
+          {selectedWidget && `您当前正在导出消息表格的搜索结果: ${selectedWidgetTitle}`}<br />
         </IfDashboard>
       </i>
     </Row>
@@ -66,22 +66,22 @@ const ExportSettings = ({
       {selectedWidget && <SelectedWidgetInfo selectedWidget={selectedWidget} view={view} />}
       <Row>
         <p>
-          Define the fields for your file. You can change the field order with drag and drop.<br />
+          定义文件的字段。您可以通过拖放更改字段顺序。<br />
         </p>
         {selectedWidget && (
           <p>
-            The export supports fields created by decorators which are part of the message table, but they currently do not appear in the field list. If you want to export a decorated field, just enter its name.
+            导出支持由装饰器创建的字段，这些字段是消息表的一部分，但它们目前不出现在字段列表中。如果要导出修饰字段，只需输入其名称即可。
           </p>
         )}
         <p>
-          When you&apos;ve finished the configuration, click on <q>Start Download</q>.
+          完成配置后，单击<q>开始下载</q>。
         </p>
       </Row>
       <Row>
         <Field name="selectedFields">
           {({ field: { name, value, onChange } }) => (
             <>
-              <label htmlFor={name}>Fields to export</label>
+              <label htmlFor={name}>要导出的字段</label>
               <FieldSelect fields={fields}
                            onChange={(newFields) => {
                              const newFieldsValue = newFields.map(({ value: field }) => ({ field }));
@@ -99,7 +99,7 @@ const ExportSettings = ({
         <Field name="limit">
           {({ field: { name, value, onChange } }) => (
             <>
-              <label htmlFor={name}>Messages limit</label>
+              <label htmlFor={name}>消息限制</label>
               <Input type="number"
                      id={name}
                      name={name}
@@ -108,7 +108,7 @@ const ExportSettings = ({
                      step={1}
                      value={value} />
               <HelpBlock>
-                Messages are loaded in chunks. If a limit is defined, all chunks up to the one where the limit is reached will be retrieved. Which means the total number of delivered messages can be higher than the defined limit.
+                消息以块的形式加载。如果定义了限制，则将检索直到达到限制的所有块。这意味着传递的消息总数可能高于定义的限制。
               </HelpBlock>
             </>
           )}

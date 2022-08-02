@@ -69,10 +69,10 @@ const ViewEventDefinitionPage = ({ params }: Props) => {
 
   if (!eventDefinition || !notifications) {
     return (
-      <DocumentTitle title="View Event Definition">
+      <DocumentTitle title="查看事件规则">
         <span>
-          <PageHeader title="View Event Definition">
-            <Spinner text="Loading Event Definition..." />
+          <PageHeader title="查看事件规则">
+            <Spinner text="加载中..." />
             <></>
           </PageHeader>
         </span>
@@ -81,28 +81,28 @@ const ViewEventDefinitionPage = ({ params }: Props) => {
   }
 
   return (
-    <DocumentTitle title={`View "${eventDefinition.title}" Event Definition`}>
+    <DocumentTitle title={`查看 "${eventDefinition.title}" 事件规则`}>
       <span>
-        <PageHeader title={`View "${eventDefinition.title}" Event Definition`}>
+        <PageHeader title={`查看 "${eventDefinition.title}" 事件规则`}>
           <span>
-            Event Definitions allow you to create Events from different Conditions and alert on them.
+            事件规则允许您从不同的条件创建事件并对其发出警报。
           </span>
 
           <span>
-            Graylog&apos;s new Alerting system let you define more flexible and powerful rules. Learn more in the{' '}
+            查看
             <DocumentationLink page={DocsHelper.PAGES.ALERTS}
-                               text="documentation" />
+                               text="文档" />
           </span>
 
           <ButtonToolbar>
             <LinkContainer to={Routes.ALERTS.LIST}>
-              <Button bsStyle="info">Alerts & Events</Button>
+              <Button bsStyle="info">告警 & 事件</Button>
             </LinkContainer>
             <LinkContainer to={Routes.ALERTS.DEFINITIONS.LIST}>
-              <Button bsStyle="info">Event Definitions</Button>
+              <Button bsStyle="info">事件规则</Button>
             </LinkContainer>
             <LinkContainer to={Routes.ALERTS.NOTIFICATIONS.LIST}>
-              <Button bsStyle="info">Notifications</Button>
+              <Button bsStyle="info">通知</Button>
             </LinkContainer>
           </ButtonToolbar>
         </PageHeader>

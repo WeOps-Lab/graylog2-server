@@ -54,8 +54,8 @@ public class MessageCountAlertCondition extends AbstractAlertCondition {
 
     enum ThresholdType {
 
-        MORE("more than"),
-        LESS("less than");
+        MORE("大于"),
+        LESS("小于");
 
         private final String description;
 
@@ -91,15 +91,15 @@ public class MessageCountAlertCondition extends AbstractAlertCondition {
         @Override
         public ConfigurationRequest getRequestedConfiguration() {
             final ConfigurationRequest configurationRequest = ConfigurationRequest.createWithFields(
-                    new NumberField("time", "Time Range", 5, "Evaluate the condition for all messages received in the given number of minutes", ConfigurationField.Optional.NOT_OPTIONAL),
+                    new NumberField("time", "时间范围(分)", 5, "检查在给定的分钟数内接收到的所有消息的条件", ConfigurationField.Optional.NOT_OPTIONAL),
                     new DropdownField(
                             "threshold_type",
-                            "Threshold Type",
+                            "阈值类型",
                             ThresholdType.MORE.toString(),
                             Arrays.stream(ThresholdType.values()).collect(Collectors.toMap(Enum::toString, ThresholdType::getDescription)),
-                            "Select condition to trigger alert: when there are more or less messages than the threshold",
+                            "选择一种阈值类型:当大于或小于阈值的时候告警",
                             ConfigurationField.Optional.NOT_OPTIONAL),
-                    new NumberField("threshold", "Threshold", 0.0, "Value which triggers an alert if crossed", ConfigurationField.Optional.NOT_OPTIONAL)
+                    new NumberField("threshold", "阈值", 0.0, "超过此阈值则告警", ConfigurationField.Optional.NOT_OPTIONAL)
             );
             configurationRequest.addFields(AbstractAlertCondition.getDefaultConfigurationFields());
 
@@ -110,9 +110,9 @@ public class MessageCountAlertCondition extends AbstractAlertCondition {
     public static class Descriptor extends AlertCondition.Descriptor {
         public Descriptor() {
             super(
-                "Message Count Alert Condition",
-                "https://www.graylog.org/",
-                "This condition is triggered when the number of messages is higher/lower than a defined threshold in a given time range."
+                    "日志消息计数告警",
+                    "",
+                    "当日志消息的计数大于或小于阈值的时候进行告警."
             );
         }
     }
@@ -158,11 +158,11 @@ public class MessageCountAlertCondition extends AbstractAlertCondition {
 
     @Override
     public String getDescription() {
-        return "time: " + time
-            + ", threshold_type: " + thresholdType.toString().toLowerCase(Locale.ENGLISH)
-            + ", threshold: " + threshold
-            + ", grace: " + grace
-            + ", repeat notifications: " + repeatNotifications;
+        return "时间: " + time
+                + ", 阈值类型: " + thresholdType.toString().toLowerCase(Locale.ENGLISH)
+                + ", 阈值: " + threshold
+                + ", 宽限时间: " + grace
+                + ", 重复提醒: " + repeatNotifications;
     }
 
     @Override
@@ -198,16 +198,20 @@ public class MessageCountAlertCondition extends AbstractAlertCondition {
                 final List<MessageSummary> summaries = Lists.newArrayList();
                 if (getBacklog() > 0) {
                     final SearchResult backlogResult = searches.search("*", filter,
-                        range, getBacklog(), 0, new Sorting(Message.FIELD_TIMESTAMP, Sorting.Direction.DESC));
+                            range, getBacklog(), 0, new Sorting(Message.FIELD_TIMESTAMP, Sorting.Direction.DESC));
                     for (ResultMessage resultMessage : backlogResult.getResults()) {
                         final Message msg = resultMessage.getMessage();
                         summaries.add(new MessageSummary(resultMessage.getIndex(), msg));
                     }
                 }
 
-                final String resultDescription = "Stream had " + count + " messages in the last " + time
-                    + " minutes with trigger condition " + thresholdType.toString().toLowerCase(Locale.ENGLISH)
-                    + " than " + threshold + " messages. " + "(Current grace time: " + grace + " minutes)";
+                final String resultDescription =
+                        "日志流在最近的" + time
+                                + "分钟内搜索到" + count + "条日志消息,"
+                                + "阈值为"
+                                + thresholdType.getDescription()
+                                + threshold
+                                + "(宽限时间为: " + grace + " 分钟)";
                 return new CheckResult(true, this, resultDescription, Tools.nowUTC(), summaries);
             } else {
                 return new NegativeCheckResult();

@@ -17,6 +17,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
+moment.locale('zh-cn');
 import styled from 'styled-components';
 
 import { Timestamp } from 'components/common';

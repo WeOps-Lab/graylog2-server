@@ -49,7 +49,7 @@ class DecoratorSidebar extends React.Component<Props> {
     const { decorators, decoratorTypes, onChange } = this.props;
     const typeDefinition = decoratorTypes[decorator.type] || {
       requested_configuration: {},
-      name: `Unknown type: ${decorator.type}`,
+      name: `未知类型: ${decorator.type}`,
     };
     const deleteDecorator = (decoratorId) => onChange(decorators.filter((_decorator) => _decorator.id !== decoratorId));
     const updateDecorator = (id, updatedDecorator) => onChange(decorators.map((_decorator) => (_decorator.id === id ? updatedDecorator : _decorator)));

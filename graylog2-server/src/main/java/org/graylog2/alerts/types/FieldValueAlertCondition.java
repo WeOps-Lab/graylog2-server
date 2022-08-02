@@ -54,7 +54,7 @@ public class FieldValueAlertCondition extends AbstractAlertCondition {
     private static final Logger LOG = LoggerFactory.getLogger(FieldValueAlertCondition.class);
 
     enum CheckType {
-        MEAN("mean value"), MIN("min value"), MAX("max value"), SUM("sum"), STDDEV("standard deviation");
+        MEAN("平均值"), MIN("最小值"), MAX("最大值"), SUM("合计值"), STDDEV("标准差");
 
         private final String description;
 
@@ -79,8 +79,10 @@ public class FieldValueAlertCondition extends AbstractAlertCondition {
                                         @Assisted("userid") String creatorUserId,
                                         Map<String, Object> parameters,
                                         @Assisted("title") @Nullable String title);
+
         @Override
         Config config();
+
         @Override
         Descriptor descriptor();
     }
@@ -92,22 +94,22 @@ public class FieldValueAlertCondition extends AbstractAlertCondition {
         @Override
         public ConfigurationRequest getRequestedConfiguration() {
             final ConfigurationRequest configurationRequest = ConfigurationRequest.createWithFields(
-                    new TextField("field", "Field", "", "Field name that should be checked", ConfigurationField.Optional.NOT_OPTIONAL),
-                    new NumberField("time", "Time Range", 5, "Evaluate the condition for all messages received in the given number of minutes", ConfigurationField.Optional.NOT_OPTIONAL),
+                    new TextField("field", "字段", "", "需要检查的字段名称", ConfigurationField.Optional.NOT_OPTIONAL),
+                    new NumberField("time", "时间范围(分)", 5, "检查在给定的分钟数内接收到的所有消息的条件", ConfigurationField.Optional.NOT_OPTIONAL),
                     new DropdownField(
                             "threshold_type",
-                            "Threshold Type",
+                            "阈值类型",
                             ThresholdType.HIGHER.toString(),
                             DropdownField.ValueTemplates.valueMapFromEnum(ThresholdType.class, thresholdType -> thresholdType.name().toLowerCase(Locale.ENGLISH)),
-                            "Select condition to trigger alert: when value is higher or lower than the threshold",
+                            "选择一种阈值类型:当大于或小于阈值的时候告警",
                             ConfigurationField.Optional.NOT_OPTIONAL),
-                    new NumberField("threshold", "Threshold", 0.0, "Value which triggers an alert if crossed", ConfigurationField.Optional.NOT_OPTIONAL),
+                    new NumberField("threshold", "阈值", 0.0, "超过此阈值则告警", ConfigurationField.Optional.NOT_OPTIONAL),
                     new DropdownField(
                             "type",
-                            "Aggregation Type",
+                            "统计方式",
                             CheckType.MAX.toString(),
                             Arrays.stream(CheckType.values()).collect(Collectors.toMap(Enum::toString, CheckType::getDescription)),
-                            "Select statistical function to use in the aggregation",
+                            "选择一种统计方式",
                             ConfigurationField.Optional.NOT_OPTIONAL)
             );
             configurationRequest.addFields(AbstractAlertCondition.getDefaultConfigurationFields());
@@ -119,10 +121,9 @@ public class FieldValueAlertCondition extends AbstractAlertCondition {
     public static class Descriptor extends AlertCondition.Descriptor {
         public Descriptor() {
             super(
-                "Field Aggregation Alert Condition",
-                "https://www.graylog.org/",
-                "This condition is triggered when the aggregated value of a field is higher/lower than a defined "
-                        + "threshold for a given time range."
+                    "字段统计告警",
+                    "",
+                    "当指定的字段值经过统计后大于或小于阈值的时候进行告警."
             );
         }
     }
@@ -159,13 +160,13 @@ public class FieldValueAlertCondition extends AbstractAlertCondition {
 
     @Override
     public String getDescription() {
-        return "time: " + time
-            + ", field: " + field
-            + ", check type: " + type.toString().toLowerCase(Locale.ENGLISH)
-            + ", threshold_type: " + thresholdType.toString().toLowerCase(Locale.ENGLISH)
-            + ", threshold: " + decimalFormat.format(threshold)
-            + ", grace: " + grace
-            + ", repeat notifications: " + repeatNotifications;
+        return "时间: " + time
+                + ", 字段: " + field
+                + ", 检查类型: " + type.toString().toLowerCase(Locale.ENGLISH)
+                + ", 统计类型: " + thresholdType.toString().toLowerCase(Locale.ENGLISH)
+                + ", 阈值: " + decimalFormat.format(threshold)
+                + ", 宽限时间: " + grace
+                + ", 重复提醒: " + repeatNotifications;
     }
 
 
@@ -175,7 +176,7 @@ public class FieldValueAlertCondition extends AbstractAlertCondition {
             final String filter = buildQueryFilter(stream.getId(), query);
             // TODO we don't support cardinality yet
             final FieldStatsResult fieldStatsResult = searches.fieldStats(field, "*", filter,
-                RelativeRange.create(time * 60), false, true, false);
+                    RelativeRange.create(time * 60), false, true, false);
 
             if (fieldStatsResult.count() == 0) {
                 LOG.debug("Alert check <{}> did not match any messages. Returning not triggered.", type);
@@ -213,22 +214,26 @@ public class FieldValueAlertCondition extends AbstractAlertCondition {
             }
 
             final boolean triggered;
+            String humanOperationDesc = "";
             switch (thresholdType) {
                 case HIGHER:
                     triggered = result > threshold.doubleValue();
+                    humanOperationDesc = "大于";
                     break;
                 case LOWER:
                     triggered = result < threshold.doubleValue();
+                    humanOperationDesc = "小于";
                     break;
                 default:
                     triggered = false;
             }
 
             if (triggered) {
-                final String resultDescription = "Field " + field + " had a " + type + " of "
-                    + decimalFormat.format(result) + " in the last " + time + " minutes with trigger condition "
-                    + thresholdType + " than " + decimalFormat.format(threshold) + ". "
-                    + "(Current grace time: " + grace + " minutes)";
+                final String resultDescription = "字段 " + field + " 在最近的"
+                        + time + "分钟的" + type.getDescription() + "为"
+                        + decimalFormat.format(result) + "，"
+                        + humanOperationDesc + "阈值 " + decimalFormat.format(threshold) + "。 "
+                        + "(宽限时间为: " + grace + " 分钟)";
 
                 final List<MessageSummary> summaries;
                 if (getBacklog() > 0) {

@@ -24,7 +24,7 @@ import org.joda.time.DateTime;
 import java.util.Map;
 
 public class DummyAlertCondition extends AbstractAlertCondition {
-    final String description = "Dummy alert to test notifications";
+    final String description = "测试告警";
 
     public DummyAlertCondition(Stream stream, String id, DateTime createdAt, String creatorUserId, Map<String, Object> parameters, String title) {
         super(stream, id, Type.DUMMY.toString(), createdAt, creatorUserId, parameters, title);

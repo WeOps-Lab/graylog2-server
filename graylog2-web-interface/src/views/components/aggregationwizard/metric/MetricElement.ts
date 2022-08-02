@@ -45,17 +45,17 @@ const validateMetrics = (values: WidgetConfigFormValues) => {
     const metricError: MetricError = {};
 
     if (!metric.function) {
-      metricError.function = 'Function is required.';
+      metricError.function = '功能是必需的.';
     }
 
     const isFieldRequired = metric.function && metric.function !== 'count';
 
     if (isFieldRequired && !metric.field) {
-      metricError.field = `Field is required for function ${metric.function}.`;
+      metricError.field = `函数必填字段 ${metric.function}.`;
     }
 
     if (metric.function === 'percentile' && !metric.percentile) {
-      metricError.percentile = 'Percentile is required.';
+      metricError.percentile = '百分位数是必需的.';
     }
 
     return metricError;
@@ -92,8 +92,8 @@ const seriesToMetrics = (series: Array<Series>) => series.map((s: Series) => {
 });
 
 const MetricElement: AggregationElement = {
-  sectionTitle: 'Metrics',
-  title: 'Metric',
+  sectionTitle: '度量',
+  title: '度量',
   key: 'metrics',
   order: 2,
   allowCreate: () => true,

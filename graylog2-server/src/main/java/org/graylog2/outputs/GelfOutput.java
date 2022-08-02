@@ -279,17 +279,17 @@ public class GelfOutput implements MessageOutput {
                     "TCP+TLS", "TCP+TLS",
                     "UDP", "UDP");
             final ConfigurationRequest configurationRequest = new ConfigurationRequest();
-            configurationRequest.addField(new TextField(CK_HOSTNAME, "Destination host", "", "This is the hostname of the destination", ConfigurationField.Optional.NOT_OPTIONAL));
-            configurationRequest.addField(new NumberField(CK_PORT, "Destination port", 12201, "This is the port of the destination", ConfigurationField.Optional.NOT_OPTIONAL, NumberField.Attribute.IS_PORT_NUMBER));
-            configurationRequest.addField(new DropdownField(CK_PROTOCOL, "Protocol", "TCP", protocols, "The protocol used to connect", ConfigurationField.Optional.NOT_OPTIONAL));
-            configurationRequest.addField(new NumberField(CK_CONNECT_TIMEOUT, "TCP Connect Timeout", 1000, "Connection timeout for TCP connections in milliseconds", ConfigurationField.Optional.OPTIONAL, NumberField.Attribute.ONLY_POSITIVE));
-            configurationRequest.addField(new NumberField(CK_RECONNECT_DELAY, "TCP Reconnect Delay", 500, "Time to wait between reconnects in milliseconds", ConfigurationField.Optional.OPTIONAL, NumberField.Attribute.ONLY_POSITIVE));
-            configurationRequest.addField(new BooleanField(CK_TCP_NO_DELAY, "TCP No Delay", false, "Whether to use Nagle's algorithm for TCP connections"));
-            configurationRequest.addField(new BooleanField(CK_TCP_KEEP_ALIVE, "TCP Keep Alive", false, "Whether to send TCP keep alive packets"));
-            configurationRequest.addField(new BooleanField(CK_TLS_VERIFICATION_ENABLED, "TLS verification", false, "Whether to verify peers when using TLS"));
-            configurationRequest.addField(new TextField(CK_TLS_TRUST_CERT_CHAIN, "TLS Trust Certificate Chain", "", "Local file which contains the trust certificate chain", ConfigurationField.Optional.OPTIONAL));
-            configurationRequest.addField(new NumberField(CK_QUEUE_SIZE, "Internal buffer size", 512, "Buffer size to support asynchronous writes", ConfigurationField.Optional.OPTIONAL, NumberField.Attribute.ONLY_POSITIVE));
-            configurationRequest.addField(new NumberField(CK_MAX_INFLIGHT_SENDS, "Concurrent network requests", 512, "Maximum number of concurrent network operations until spinning", ConfigurationField.Optional.OPTIONAL, NumberField.Attribute.ONLY_POSITIVE));
+            configurationRequest.addField(new TextField(CK_HOSTNAME, "目标地址", "", "目标IP或者主机名", ConfigurationField.Optional.NOT_OPTIONAL));
+            configurationRequest.addField(new NumberField(CK_PORT, "目标端口", 12201, "目标主机端口，默认是12201", ConfigurationField.Optional.NOT_OPTIONAL, NumberField.Attribute.IS_PORT_NUMBER));
+            configurationRequest.addField(new DropdownField(CK_PROTOCOL, "通讯协议", "TCP", protocols, "通讯连接的协议", ConfigurationField.Optional.NOT_OPTIONAL));
+            configurationRequest.addField(new NumberField(CK_CONNECT_TIMEOUT, "TCP连接超时时间", 1000, "TCP连接超时时间(ms)", ConfigurationField.Optional.OPTIONAL, NumberField.Attribute.ONLY_POSITIVE));
+            configurationRequest.addField(new NumberField(CK_RECONNECT_DELAY, "TCP重连延迟时间", 500, "TCP重连延迟时间(ms)", ConfigurationField.Optional.OPTIONAL, NumberField.Attribute.ONLY_POSITIVE));
+            configurationRequest.addField(new BooleanField(CK_TCP_NO_DELAY, "TCP 无延迟算法", false, "TCP连接时是否使用Nagle算法"));
+            configurationRequest.addField(new BooleanField(CK_TCP_KEEP_ALIVE, "TCP Keepalive检测", false, "TCP连接时是否发送keep alive数据包"));
+            configurationRequest.addField(new BooleanField(CK_TLS_VERIFICATION_ENABLED, "TLS验证", false, "是否使用TLS验证"));
+            configurationRequest.addField(new TextField(CK_TLS_TRUST_CERT_CHAIN, "TLS证书", "", "指定保存在本地的证书", ConfigurationField.Optional.OPTIONAL));
+            configurationRequest.addField(new NumberField(CK_QUEUE_SIZE, "内部缓存大小", 512, "异步写时支持的缓存大小", ConfigurationField.Optional.OPTIONAL, NumberField.Attribute.ONLY_POSITIVE));
+            configurationRequest.addField(new NumberField(CK_MAX_INFLIGHT_SENDS, "最大网络请求数", 512, "允许同时进行的网络操作的最大数量", ConfigurationField.Optional.OPTIONAL, NumberField.Attribute.ONLY_POSITIVE));
 
             return configurationRequest;
         }
@@ -297,7 +297,7 @@ public class GelfOutput implements MessageOutput {
 
     public static class Descriptor extends MessageOutput.Descriptor {
         public Descriptor() {
-            super("GELF Output", false, "", "An output sending GELF over TCP or UDP");
+            super("GELF 输出", false, "", "使用TCP或UDP发送GELF数据");
         }
     }
 }

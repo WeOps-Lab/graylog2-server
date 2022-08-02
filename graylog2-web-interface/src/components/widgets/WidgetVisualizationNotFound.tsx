@@ -32,8 +32,8 @@ const WidgetVisualizationNotFound = ({ widgetClassName }: Props) => {
 
   return (
     <Alert bsStyle="danger">
-      <Icon name="exclamation-circle" /> Widget Visualization (<i>{widgetClassName}</i>) not found.
-      It looks like the plugin supplying this widget is not loaded.
+      <Icon name="exclamation-circle" /> 可视化组件 (<i>{widgetClassName}</i>) 未找到.
+      看起来提供此小部件的插件未加载。
     </Alert>
   );
 };

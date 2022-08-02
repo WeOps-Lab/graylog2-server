@@ -125,6 +125,6 @@ export default class EditableTitle extends React.Component<Props, State> {
                        onChange={this._onChange} />
         </form>
       </span>
-    ) : <StyledStaticSpan onDoubleClick={this._toggleEditing} title={`${value} - Double click the title to edit it.`}>{value}</StyledStaticSpan>;
+    ) : <StyledStaticSpan onDoubleClick={this._toggleEditing} title={`${value} - 双击标题进行编辑.`}>{value}</StyledStaticSpan>;
   }
 }

@@ -45,7 +45,7 @@ export const exportSearchMessages = (exportPayload: ExportPayload, searchId: str
   return fetchFile('POST', qualifyUrl(url), exportPayload, mimeType)
     .then((result: string) => downloadFile(result, filename))
     .catch(() => {
-      UserNotification.error('Export failed');
+      UserNotification.error('导出失败');
     });
 };
 
@@ -55,6 +55,6 @@ export const exportSearchTypeMessages = (exportPayload: ExportPayload, searchId:
   return fetchFile('POST', qualifyUrl(url), exportPayload, mimeType)
     .then((result: string) => downloadFile(result, filename))
     .catch(() => {
-      UserNotification.error('Export for widget failed');
+      UserNotification.error('导出组件失败');
     });
 };

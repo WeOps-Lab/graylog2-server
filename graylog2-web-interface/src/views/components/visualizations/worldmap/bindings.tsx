@@ -33,7 +33,7 @@ const DEFAULT_FORM_VALUES = {
 
 const worldMap: VisualizationType<typeof WorldMapVisualization.type> = {
   type: WorldMapVisualization.type,
-  displayName: 'World Map',
+  displayName: '世界地图',
   component: WorldMapVisualization,
   config: {
     createConfig: () => DEFAULT_FORM_VALUES,
@@ -52,20 +52,20 @@ const worldMap: VisualizationType<typeof WorldMapVisualization.type> = {
     fields: [
       {
         name: 'zoom',
-        title: 'Zoom',
+        title: '缩放',
         type: 'numeric',
         required: true,
       },
       {
         name: 'centerX',
-        title: 'Latitude',
+        title: '纬度',
         type: 'numeric',
         required: true,
         step: 'any',
       },
       {
         name: 'centerY',
-        title: 'Longitude',
+        title: '经度',
         type: 'numeric',
         required: true,
         step: 'any',

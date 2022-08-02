@@ -21,7 +21,7 @@ import { FieldList, PivotList } from './AggregationBuilderPropTypes';
 import PivotSelect from './PivotSelect';
 
 const ColumnPivotSelect = ({ columnPivots, fields, onChange }) => (
-  <PivotSelect placeholder="None: click to add fields"
+  <PivotSelect placeholder="无：点击添加字段"
                onChange={onChange}
                options={fields}
                value={columnPivots} />

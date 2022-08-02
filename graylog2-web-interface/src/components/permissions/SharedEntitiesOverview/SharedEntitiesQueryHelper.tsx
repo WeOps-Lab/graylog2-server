@@ -20,7 +20,7 @@ import { Popover, Table, Button } from 'components/bootstrap';
 import { OverlayTrigger, Icon } from 'components/common';
 
 const sharedEntitiesQueryHelperPopover = (
-  <Popover id="shared-entities-search-query-help" title="Search Syntax Help">
+  <Popover id="shared-entities-search-query-help" title="搜索帮助">
     <p><strong>可用的搜索字段</strong></p>
     <Table condensed>
       <thead>

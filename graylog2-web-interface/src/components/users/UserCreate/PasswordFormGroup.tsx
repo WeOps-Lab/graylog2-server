@@ -25,14 +25,14 @@ export const validatePasswords = (errors: { [name: string]: string }, password: 
   const newErrors = { ...errors };
 
   if (password && password.length < PASSWORD_MIN_LENGTH) {
-    newErrors.password = `Password must be at least ${PASSWORD_MIN_LENGTH} characters long`;
+    newErrors.password = `密码长度至少为 ${PASSWORD_MIN_LENGTH}`;
   }
 
   if (password && passwordRepeat) {
     const passwordMatches = password === passwordRepeat;
 
     if (!passwordMatches) {
-      newErrors.password_repeat = 'Passwords do not match';
+      newErrors.password_repeat = '密码不匹配';
     }
   }
 

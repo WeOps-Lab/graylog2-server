@@ -98,27 +98,27 @@ public class RandomMessageTransport extends GeneratorTransport {
             final ConfigurationRequest c = super.getRequestedConfiguration();
             c.addField(new NumberField(
                     CK_SLEEP,
-                    "Sleep time",
+                    "休眠时间",
                     25,
-                    "How many milliseconds to sleep between generating messages.",
+                    "每次生成随机日志之后休眠多长时间.",
                     ConfigurationField.Optional.NOT_OPTIONAL,
                     NumberField.Attribute.ONLY_POSITIVE
             ));
 
             c.addField(new NumberField(
                     CK_SLEEP_DEVIATION_PERCENT,
-                    "Maximum random sleep time deviation",
+                    "随机睡眠时间的最大偏差",
                     30,
-                    "The deviation is used to generate a more realistic and non-steady message flow.",
+                    "此偏差用于产生更加实际且不稳定的事件流.",
                     ConfigurationField.Optional.NOT_OPTIONAL,
                     NumberField.Attribute.ONLY_POSITIVE
             ));
 
             c.addField(new TextField(
                     CK_SOURCE,
-                    "Source name",
+                    "事件源名称",
                     "example.org",
-                    "What to use as source of the generate messages.",
+                    "随机日志的事件源名称.",
                     ConfigurationField.Optional.NOT_OPTIONAL
             ));
 

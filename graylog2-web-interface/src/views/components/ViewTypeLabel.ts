@@ -15,22 +15,24 @@
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
 
-import StringUtils from 'util/StringUtils';
-import type { ViewType } from 'views/logic/views/View';
+import type {ViewType} from 'views/logic/views/View';
 
 type Props = {
   type: ViewType | undefined | null;
   capitalize?: boolean;
 }
 
-const ViewTypeLabel = ({ type, capitalize = false }: Props) => {
+const ViewTypeLabel = ({type, capitalize = false}: Props) => {
   if (!type) {
     return '';
   }
-
-  const typeLabel = type.toLowerCase();
-
-  return capitalize ? StringUtils.capitalizeFirstLetter(typeLabel) : typeLabel;
+  if (type == 'SEARCH') {
+    return "搜索"
+  }
+  if (type == 'DASHBOARD') {
+    return "仪表盘"
+  }
+  return "仪表盘"
 };
 
 export default ViewTypeLabel;

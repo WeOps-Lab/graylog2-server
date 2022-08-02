@@ -33,16 +33,15 @@ const AlertConditionsPage = createReactClass({
 
   render() {
     return (
-      <DocumentTitle title="Alert conditions">
+      <DocumentTitle title="告警条件">
         <div>
-          <PageHeader title="Manage alert conditions">
+          <PageHeader title="管理告警条件">
             <span>
-              Alert conditions define situations that require your attention. Graylog will check those conditions
-              periodically and notify you when their statuses change.
+              告警条件定义了您需要告警的场景.DataInsight会定期检查告警条件并在满足告警条件的时候通知您.
             </span>
 
             <span>
-              Read more about alerting in the <DocumentationLink page={DocsHelper.PAGES.ALERTS} text="documentation" />.
+              在<DocumentationLink page={DocsHelper.PAGES.ALERTS} text="文档" />中查看更多关于告警的信息.
             </span>
 
             <span>

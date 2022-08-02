@@ -75,7 +75,7 @@ const WidgetTimeRangeOverride = ({ value, onReset }: Props) => {
       <TimeRangeInfo>
         <TimeRangeString title={internalTime}>{localTimeWithMS}</TimeRangeString>
         <ResetButton bsSize="xs" bsStyle="primary" onClick={onReset} data-testid="reset-global-time-range">
-          Reset Global Override
+          重置全局覆盖
         </ResetButton>
       </TimeRangeInfo>
     </Wrapper>

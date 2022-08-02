@@ -40,7 +40,7 @@ import QueryTabs from './QueryTabs';
 const onTitleChange = (queryId, newTitle) => TitlesActions.set('tab', 'title', newTitle);
 
 // eslint-disable-next-line no-alert
-const defaultConfirm = async () => window.confirm('Do you really want to delete this dashboard page?');
+const defaultConfirm = async () => window.confirm('是否真的要删除此仪表板页面?');
 
 const onCloseTab = async (dashboardId: string, queryId: string, currentQuery: string, queries: Immutable.OrderedSet<string>, widgetIds: Immutable.Map<string, Immutable.List<string>>, setDashboardPage: (page: string) => void) => {
   if (queries.size === 1) {

@@ -38,15 +38,15 @@ const NewAlertNotificationPage = createReactClass({
     const streamId = this.props.location.query.stream_id;
 
     return (
-      <DocumentTitle title="New alert notification">
+      <DocumentTitle title="新的告警通知">
         <div>
-          <PageHeader title="New alert notification">
+          <PageHeader title="新的告警通知">
             <span>
-              Create a new notification that you can use to not miss any of your alerts.
+              创建新的告警通知，让您在告警的时候能得到对应的通知
             </span>
 
             <span>
-              Remember to assign the notifications to use in the alert conditions page.
+              请记得要在告警条件页面中分配通知。
             </span>
 
             <span>

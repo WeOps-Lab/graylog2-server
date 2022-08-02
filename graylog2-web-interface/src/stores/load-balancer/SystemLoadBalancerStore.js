@@ -32,11 +32,11 @@ export const SystemLoadBalancerStore = singletonStore(
         .then(
           () => {
             this.trigger({});
-            UserNotification.success(`Load balancer status successfully changed do '${status}' in node '${nodeId}'`);
+            UserNotification.success(`加载节点‘${nodeId}’负载均衡状态，成功更改为’${status}‘。`);
           },
           (error) => {
-            UserNotification.error(`Changing load balancer status in '${nodeId}' failed: ${error}`,
-              `Could not change load balancer status to '${status}' in node '${nodeId}'`);
+            UserNotification.error(`更改节点‘${nodeId}’负载均衡状态失败：${error}`,
+              `无法更改节点‘${nodeId}’负载均衡状态`);
           },
         );
     },

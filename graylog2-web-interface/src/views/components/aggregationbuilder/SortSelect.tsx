@@ -76,7 +76,7 @@ const SortSelect = ({ pivots, series, onChange, sort }: Props) => {
   };
 
   return (
-    <Select placeholder="None: click to add fields"
+    <Select placeholder="无：单击可添加字段"
             onChange={_onChange}
             options={options}
             isClearable

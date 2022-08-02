@@ -71,7 +71,7 @@ const updateColor = (rule: Rule, newColor: HighlightingColor, hidePopover: () =>
 
 const onDelete = (rule) => {
   // eslint-disable-next-line no-alert
-  if (window.confirm('Do you really want to remove this highlighting?')) {
+  if (window.confirm('你真的要删除这个突出显示?')) {
     HighlightingRulesActions.remove(rule);
   }
 };
@@ -99,7 +99,7 @@ const RuleColorPreview = ({ color, onChange }: RuleColorPreviewProps) => {
     return <ColorPreview color={color} />;
   }
 
-  throw new Error(`Invalid highlighting color: ${color}`);
+  throw new Error(`无效的突出显示颜色: ${color}`);
 };
 
 const HighlightingRule = ({ rule }: Props) => {
@@ -116,8 +116,8 @@ const HighlightingRule = ({ rule }: Props) => {
           <strong>{field}</strong> {ConditionLabelMap[condition]} <i>&quot;{String(value)}&quot;</i>.
         </RuleContainer>
         <ButtonContainer>
-          <IconButton title="Edit this Highlighting Rule" name="edit" onClick={() => setShowForm(true)} />
-          <IconButton title="Remove this Highlighting Rule" name="trash-alt" onClick={() => onDelete(rule)} />
+          <IconButton title="编辑此突出显示规则" name="edit" onClick={() => setShowForm(true)} />
+          <IconButton title="删除此突出显示规则" name="trash-alt" onClick={() => onDelete(rule)} />
         </ButtonContainer>
       </HighlightingRuleGrid>
       {showForm && <HighlightForm onClose={() => setShowForm(false)} rule={rule} />}

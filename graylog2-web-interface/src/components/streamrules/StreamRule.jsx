@@ -51,13 +51,13 @@ const StreamRule = ({ matchData, permissions, stream, streamRule, streamRuleType
 
     /* TODO: Replace with custom confirmation dialog */
     // eslint-disable-next-line no-alert
-    if (window.confirm('Do you really want to delete this stream rule?')) {
+    if (window.confirm('确定删除此消息流规则?')) {
       StreamRulesStore.remove(stream.id, streamRule.id, () => {
         if (onDelete) {
           onDelete(streamRule.id);
         }
 
-        UserNotification.success('Stream rule has been successfully deleted.', 'Success');
+        UserNotification.success('消息流规则删除成功.', '成功');
       });
     }
   };
@@ -68,7 +68,7 @@ const StreamRule = ({ matchData, permissions, stream, streamRule, streamRuleType
         onSubmit(streamRuleId, data);
       }
 
-      UserNotification.success('Stream rule has been successfully updated.', 'Success');
+      UserNotification.success('消息流规则更新成功.', '成功');
     });
   };
 
@@ -102,7 +102,7 @@ const StreamRule = ({ matchData, permissions, stream, streamRule, streamRuleType
         <StreamRuleForm streamRule={streamRule}
                         onClose={() => setShowStreamRuleForm(false)}
                         streamRuleTypes={streamRuleTypes}
-                        title="Edit Stream Rule"
+                        title="编辑消息流规则"
                         onSubmit={_onSubmit} />
       )}
       {description}

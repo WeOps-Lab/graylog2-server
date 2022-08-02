@@ -19,6 +19,7 @@ import PropTypes from 'prop-types';
 import lodash from 'lodash';
 import {PluginStore} from 'graylog-web-plugin/plugin';
 import moment from 'moment';
+moment.locale('zh-cn');
 import {} from 'moment-duration-format';
 import naturalSort from 'javascript-natural-sort';
 

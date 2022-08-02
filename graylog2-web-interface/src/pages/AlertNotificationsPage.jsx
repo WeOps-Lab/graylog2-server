@@ -31,16 +31,15 @@ const AlertNotificationsPage = createReactClass({
 
   render() {
     return (
-      <DocumentTitle title="Alert notifications">
+      <DocumentTitle title="告警通知">
         <div>
-          <PageHeader title="Manage alert notifications">
+          <PageHeader title="管理告警通知">
             <span>
-              Notifications let you be aware of changes in your alert conditions status any time. Graylog can send
-              notifications directly to you or to other systems you use for that purpose.
+              告警通知让您随时了解告警状态的变化。DataInsight可以将告警信息发送给您或您指定的第三方平台。
             </span>
 
             <span>
-              Remember to assign the notifications to use in the alert conditions page.
+              请记得要在告警条件页面中分配通知。
             </span>
 
             <span>

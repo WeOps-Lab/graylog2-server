@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
 import {} from 'moment-duration-format';
-
+moment.locale('zh-cn');
 class TimeBasedRotationStrategySummary extends React.Component {
   static propTypes = {
     config: PropTypes.object.isRequired,

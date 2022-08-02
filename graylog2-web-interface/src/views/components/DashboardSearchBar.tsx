@@ -19,6 +19,7 @@ import { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'formik';
 import moment from 'moment';
+moment.locale('zh-cn');
 import styled, { css } from 'styled-components';
 
 import connect from 'stores/connect';
@@ -158,7 +159,7 @@ const DashboardSearchBar = ({ config, globalOverride, disableSearch = false, onE
                                 {({ warnings }) => (
                                   <QueryInput value={value}
                                               timeRange={values?.timerange}
-                                              placeholder="Apply filter to all widgets"
+                                              placeholder="将过滤器应用于所有小部件"
                                               onChange={(newQuery) => {
                                                 onChange({ target: { value: newQuery, name } });
 

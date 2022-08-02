@@ -46,18 +46,18 @@ const validateSorts = (values: WidgetConfigFormValues) => {
     const sortError: SortError = {};
 
     if (!sort.field || sort.field === '') {
-      sortError.field = 'Field is required.';
+      sortError.field = '必填字段.';
     }
 
     if (!sort.direction) {
-      sortError.direction = 'Direction is required.';
+      sortError.direction = '排序类型是必需的.';
     }
 
     const timeRowExists = !!values.groupBy?.groupings.find((g) => g.direction === 'row' && g.field.type === 'time');
     const nonDataTableVisExists = values.visualization && values.visualization.type !== 'table';
 
     if (timeRowExists && nonDataTableVisExists) {
-      sortError.field = 'Sort on non data table with time based row grouping does not work.';
+      sortError.field = '使用基于时间的行分组对非数据表进行排序不起作用.';
     }
 
     return sortError;
@@ -75,7 +75,7 @@ const configTypeToFormValueType = (type: 'pivot' | 'series') => {
   switch (type) {
     case 'pivot': return 'groupBy';
     case 'series': return 'metric';
-    default: throw new Error(`Invalid sort type: ${type}`);
+    default: throw new Error(`无效的排序类型: ${type}`);
   }
 };
 
@@ -83,7 +83,7 @@ const formValueTypeToConfigType = (type: 'groupBy' | 'metric') => {
   switch (type) {
     case 'groupBy': return 'pivot';
     case 'metric': return 'series';
-    default: throw new Error(`Invalid sort type: ${type}`);
+    default: throw new Error(`无效的排序类型: ${type}`);
   }
 };
 

@@ -27,27 +27,22 @@ import CollectorsAdministrationContainer from 'components/sidecars/administratio
 import withLocation from 'routing/withLocation';
 
 const SidecarAdministrationPage = ({ location: { query: { node_id: nodeId } } }) => (
-  <DocumentTitle title="Collectors Administration">
+  <DocumentTitle title="客户端管理">
     <span>
-      <PageHeader title="Collectors Administration">
+      <PageHeader title="客户端管理">
         <span>
-          The Graylog collectors can reliably forward contents of log files or Windows EventLog from your servers.
-        </span>
-
-        <span>
-          Read more about collectors and how to set them up in the
-          {' '}<DocumentationLink page={DocsHelper.PAGES.COLLECTOR_SIDECAR} text="Graylog documentation" />.
+          DataInsight的客户端可以将您的应用系统日志文件或者Windows事件日志转发到系统中
         </span>
 
         <ButtonToolbar>
           <LinkContainer to={Routes.SYSTEM.SIDECARS.OVERVIEW}>
-            <Button bsStyle="info">Overview</Button>
+            <Button bsStyle="info">概览</Button>
           </LinkContainer>
           <LinkContainer to={Routes.SYSTEM.SIDECARS.ADMINISTRATION}>
-            <Button bsStyle="info">Administration</Button>
+            <Button bsStyle="info">客户端管理</Button>
           </LinkContainer>
           <LinkContainer to={Routes.SYSTEM.SIDECARS.CONFIGURATION}>
-            <Button bsStyle="info">Configuration</Button>
+            <Button bsStyle="info">采集器配置</Button>
           </LinkContainer>
         </ButtonToolbar>
       </PageHeader>

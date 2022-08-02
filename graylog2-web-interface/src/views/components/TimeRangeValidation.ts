@@ -15,7 +15,7 @@
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import type {
   TimeRange,
   NoTimeRangeOverride,
@@ -26,10 +26,10 @@ import type {
 import DateTime from 'logic/datetimes/DateTime';
 import { isTypeAbsolute, isTypeRelativeWithEnd, isTypeKeyword } from 'views/typeGuards/timeRange';
 
-const invalidDateFormatError = 'Format must be: YYYY-MM-DD [HH:mm:ss[.SSS]].';
-const rangeLimitError = 'Range is outside limit duration.';
-const dateLimitError = 'Date is outside limit duration.';
-const timeRangeError = 'The "Until" date must come after the "From" date.';
+const invalidDateFormatError = '格式必须是：YYYY-MM-DD [HH:mm:ss[.SSS]].';
+const rangeLimitError = '范围超出限制持续时间。';
+const dateLimitError = '日期超出限制持续时间。';
+const timeRangeError = '"开始"日期必须在"结束"日期之后。';
 
 const exceedsDuration = (timeRange, limitDuration) => {
   if (limitDuration === 0) {
@@ -89,11 +89,11 @@ const validateRelativeTimeRangeWithEnd = (timeRange: RelativeTimeRangeWithEnd, l
   }
 
   if (timeRange.from === null) {
-    errors = { ...errors, from: 'Cannot be empty.' };
+    errors = { ...errors, from: '不能为空.' };
   }
 
   if (timeRange.from && timeRange.to === null) {
-    errors = { ...errors, to: 'Cannot be empty.' };
+    errors = { ...errors, to: '不能为空y.' };
   }
 
   if (timeRange.from && timeRange.from <= timeRange.to) {

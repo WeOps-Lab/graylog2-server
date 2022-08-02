@@ -51,7 +51,7 @@ const GettingStartedPage = ({ system, location }: Props) => {
   const _onDismiss = () => history.push(Routes.STARTPAGE);
 
   return (
-    <DocumentTitle title="Getting started">
+    <DocumentTitle title="起始页">
       <StyledRow>
         <GettingStarted clusterId={clusterId}
                         masterOs={operatingSystem}

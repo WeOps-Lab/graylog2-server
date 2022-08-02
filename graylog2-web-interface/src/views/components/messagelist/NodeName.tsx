@@ -48,7 +48,7 @@ const NodeName = ({ nodeId }: Props) => {
     );
   }
 
-  return <span style={{ wordBreak: 'break-word' }}>stopped node</span>;
+  return <span style={{ wordBreak: 'break-word' }}>停止的节点</span>;
 };
 
 NodeName.propTypes = {

@@ -22,13 +22,11 @@ import { LoggerOverview } from 'components/loggers';
 class LoggersPage extends React.Component {
   render() {
     return (
-      <DocumentTitle title="Logging">
+      <DocumentTitle title="日志级别">
         <span>
-          <PageHeader title="Logging">
+          <PageHeader title="日志级别">
             <span>
-              This section controls logging of the Graylog architecture and allows you to change log
-              levels on the fly. Note that log levels are reset to their defaults after you restart
-              the affected service.
+              这里控制DataInsight架构的日志,并允许您动态更改日志级别.请注意,受影响的服务重新启动后,日志级别将重置为其默认值.
             </span>
           </PageHeader>
           <LoggerOverview />

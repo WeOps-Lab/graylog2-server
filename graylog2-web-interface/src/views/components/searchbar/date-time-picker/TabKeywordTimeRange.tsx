@@ -87,7 +87,7 @@ const TabKeywordTimeRange = ({ defaultValue, disabled, setValidatingKeyword }: P
       setValidatingKeyword(true);
 
       return trim(keyword) === ''
-        ? Promise.resolve('Keyword must not be empty!')
+        ? Promise.resolve('关键字不能为空!')
         : ToolsStore.testNaturalDate(keyword)
           .then((response) => {
             if (mounted.current) _setSuccessfullPreview(response);
@@ -132,7 +132,7 @@ const TabKeywordTimeRange = ({ defaultValue, disabled, setValidatingKeyword }: P
                        style={{ marginRight: 5, width: '100%', marginBottom: 0 }}
                        validationState={error ? 'error' : null}>
 
-              <p><strong>Specify the time frame for the search in natural language.</strong></p>
+              <p><strong>指定自然语言搜索的时间范围.</strong></p>
               <KeywordInput type="text"
                             className="input-sm mousetrap"
                             name={name}
@@ -151,17 +151,17 @@ const TabKeywordTimeRange = ({ defaultValue, disabled, setValidatingKeyword }: P
       <Col sm={7}>
         <Panel>
           <Panel.Body>
-            <p><code>last month</code> searches between one month ago and now</p>
+            <p><code>上个月</code> 一个月前和现在之间的搜索</p>
 
-            <p><code>4 hours ago</code> searches between four hours ago and now</p>
+            <p><code>4 小时前</code> 4 小时前和现在之间的搜索</p>
 
-            <p><code>1st of april to 2 days ago</code> searches between 1st of April and 2 days ago</p>
+            <p><code>4 月 1 日至 2 天前</code> 4 月 1 日至 2 天前之间的搜索</p>
 
-            <p><code>yesterday midnight +0200 to today midnight +0200</code> searches between yesterday midnight and today midnight in timezone +0200 - will be 22:00 in UTC</p>
+            <p><code>昨天午夜 +0200 到今天午夜 +0200</code> 在时区 +0200 中搜索昨天午夜和今天午夜之间 - UTC 时间为 22:00</p>
 
-            <p>Please consult the <DocumentationLink page={DocsHelper.PAGES.TIME_FRAME_SELECTOR}
-                                                     title="Keyword Time Range Documentation"
-                                                     text="documentation" /> for more details.
+            <p>查看 <DocumentationLink page={DocsHelper.PAGES.TIME_FRAME_SELECTOR}
+                                                     title="时间范围格式"
+                                                     text="文档" /> .
             </p>
           </Panel.Body>
         </Panel>

@@ -17,7 +17,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { Icon } from 'components/common';
+import {Icon} from 'components/common';
 
 import DocumentationLink from './DocumentationLink';
 
@@ -31,24 +31,23 @@ const SourcesList = styled.ul`
 
 const SupportSources = () => (
   <div className="support-sources">
-    <h2>Need help?</h2>
+    <h2>需要帮助?</h2>
     <p>
-      Do not hesitate to consult the Graylog community if your questions are not answered in the{' '}
-      <DocumentationLink page={DocsHelper.PAGES.WELCOME} text="documentation" />.
+      如果您的问题在<DocumentationLink page={DocsHelper.PAGES.WELCOME} text="文档"/>没有答案,请咨询DataInsight社区.
     </p>
 
     <SourcesList>
       <li>
-        <Icon name="users" />&nbsp;
-        <a href="https://www.graylog.org/community-support/" target="_blank" rel="noopener noreferrer">Community support</a>
+        <Icon name="group"/>&nbsp;
+        <a href="https://www.graylog.org/community-support/" target="_blank" rel="noopener noreferrer">社区支持</a>
       </li>
       <li>
-        <Icon name="github-alt" type="brand" />&nbsp;&nbsp;
-        <a href="https://github.com/Graylog2/graylog2-server/issues" target="_blank" rel="noopener noreferrer">Issue tracker</a>
+        <Icon name={{prefix: 'fab', iconName: 'github-alt'}}/>&nbsp;
+        <a href="https://github.com/Graylog2/graylog2-server/issues" target="_blank" rel="noopener noreferrer">问题跟踪</a>
       </li>
       <li>
-        <Icon name="heart" />&nbsp;
-        <a href="https://www.graylog.org/professional-support" target="_blank" rel="noopener noreferrer">Professional support</a>
+        <Icon name="heart"/>&nbsp;
+        <a href="https://www.graylog.org/professional-support" target="_blank" rel="noopener noreferrer">专业支持</a>
       </li>
     </SourcesList>
   </div>

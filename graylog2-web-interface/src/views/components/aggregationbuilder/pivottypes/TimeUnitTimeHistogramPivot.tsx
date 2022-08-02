@@ -55,7 +55,7 @@ const TimeUnitTimeHistogramPivot = ({ interval, onChange }: Props) => (
         {Object.keys(TimeUnits).map((unit) => <MenuItem key={unit} onSelect={() => _changeUnit(unit, interval, onChange)}>{TimeUnits[unit]}</MenuItem>)}
       </DropdownButton>
     </InputGroup>
-    <HelpBlock>The size of the buckets for this timestamp type.</HelpBlock>
+    <HelpBlock>此时间戳类型的存储桶大小.</HelpBlock>
   </>
 );
 

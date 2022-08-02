@@ -53,7 +53,7 @@ const Metric = ({ index }: Props) => {
       <Field name={`metrics.${index}.function`}>
         {({ field: { name, value, onChange }, meta: { error } }) => (
           <Input id="metric-function-select"
-                 label="Function"
+                 label="函数"
                  error={error}
                  labelClassName="col-sm-3"
                  wrapperClassName="col-sm-9">
@@ -61,7 +61,7 @@ const Metric = ({ index }: Props) => {
                     clearable={false}
                     name={name}
                     value={value}
-                    aria-label="Select a function"
+                    aria-label="选择一个函数"
                     size="small"
                     menuPortalTarget={document.body}
                     onChange={(newValue) => {
@@ -73,20 +73,20 @@ const Metric = ({ index }: Props) => {
       <Field name={`metrics.${index}.field`}>
         {({ field: { name, value, onChange }, meta: { error } }) => (
           <FieldSelect id="metric-field-select"
-                       label="Field"
+                       label="字段"
                        onChange={onChange}
                        error={error}
                        clearable={!isFieldRequired}
                        name={name}
                        value={value}
-                       ariaLabel="Select a field" />
+                       ariaLabel="选择一个字段" />
         )}
       </Field>
       {isPercentile && (
         <Field name={`metrics.${index}.percentile`}>
           {({ field: { name, value, onChange }, meta: { error } }) => (
             <Input id="metric-percentile-select"
-                   label="Percentile"
+                   label="百分位数"
                    error={error}
                    labelClassName="col-sm-3"
                    wrapperClassName="col-sm-9">
@@ -94,7 +94,7 @@ const Metric = ({ index }: Props) => {
                       clearable={false}
                       name={name}
                       value={value}
-                      aria-label="Select percentile"
+                      aria-label="选择百分位数"
                       size="small"
                       menuPortalTarget={document.body}
                       onChange={(newValue) => onChange({ target: { name, value: newValue } })} />
@@ -105,7 +105,7 @@ const Metric = ({ index }: Props) => {
       <FormikInput id="name"
                    label={<>Name <Opt /></>}
                    bsSize="small"
-                   placeholder="Specify display name"
+                   placeholder="指定显示名称"
                    name={`metrics.${index}.name`}
                    labelClassName="col-sm-3"
                    wrapperClassName="col-sm-9" />

@@ -102,8 +102,8 @@ export const SidecarsStore = singletonStore(
           return response;
         },
         (error) => {
-          UserNotification.error(error.status === 400 ? error.responseMessage : `Fetching Sidecars failed with status: ${error.message}`,
-            'Could not retrieve Sidecars');
+          UserNotification.error(error.status === 400 ? error.responseMessage : `获取客户端失败: ${error.message}`,
+            '无法获取客户端');
         },
       );
 
@@ -114,13 +114,11 @@ export const SidecarsStore = singletonStore(
       const promise = fetchPeriodically('GET', URLUtils.qualifyUrl(`${this.sourceUrl}/${sidecarId}`));
 
       promise.catch((error) => {
-        let errorMessage = `Fetching Sidecar failed with status: ${error}`;
-
+        let errorMessage = `获取客户端失败: ${error}`;
         if (error.status === 404) {
-          errorMessage = `Unable to find a sidecar with ID <${sidecarId}>, maybe it was inactive for too long.`;
+          errorMessage = `无法获取客户端 <${sidecarId}>.`;
         }
-
-        UserNotification.error(errorMessage, 'Could not retrieve Sidecar');
+        UserNotification.error(errorMessage, '无法获取客户端');
       });
 
       SidecarsActions.getSidecar.promise(promise);
@@ -137,8 +135,8 @@ export const SidecarsStore = singletonStore(
       promise
         .catch(
           (error) => {
-            UserNotification.error(`Restarting Sidecar failed with status: ${error}`,
-              'Could not restart Sidecar');
+            UserNotification.error(`重启客户端失败: ${error}`,
+              '无法重启客户端');
           },
         );
 
@@ -151,8 +149,8 @@ export const SidecarsStore = singletonStore(
       promise
         .catch(
           (error) => {
-            UserNotification.error(`Fetching Sidecar actions failed with status: ${error}`,
-              'Could not retrieve Sidecar actions');
+            UserNotification.error(`获取客户端状态失败: ${error}`,
+              '无法获取客户端状态');
           },
         );
 
@@ -185,13 +183,13 @@ export const SidecarsStore = singletonStore(
       promise
         .then(
           (response) => {
-            UserNotification.success('', `Configuration change for ${sidecars.length} collectors requested`);
+            UserNotification.success('', `${sidecars.length} 个客户端配置变更`);
 
             return response;
           },
           (error) => {
-            UserNotification.error(`Fetching Sidecar actions failed with status: ${error}`,
-              'Could not retrieve Sidecar actions');
+            UserNotification.error(`获取客户端操作失败: ${error}`,
+              '无法获取客户端');
           },
         );
 

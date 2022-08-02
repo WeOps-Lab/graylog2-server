@@ -100,7 +100,7 @@ export const IndexerOverviewStore = singletonStore(
           if (error.additional && error.additional.status === 503) {
             const errorMessage = (error.additional.body && error.additional.body.message
               ? error.additional.body.message
-              : 'Elasticsearch is unavailable. Check your configuration and logs for more information.');
+              : 'Elasticsearch不可用.');
 
             this.trigger({ indexerOverviewError: errorMessage });
           }

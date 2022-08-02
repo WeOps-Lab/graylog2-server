@@ -85,14 +85,14 @@ const RolesSection = ({ user, onSubmit }: Props) => {
       onRolesUpdate({ roles: newUserRoles });
       setErrors(undefined);
     } else {
-      setErrors('Roles must at least contain Admin or Reader role.');
+      setErrors('角色必须至少包含管理员或读者角色.');
       _onLoad().then(setPaginatedRoles);
     }
   };
 
   return (
-    <SectionComponent title="Roles" showLoading={loading}>
-      <h3>Assign Roles</h3>
+    <SectionComponent title="角色" showLoading={loading}>
+      <h3>分配角色</h3>
       <Container>
         <RolesSelector onSubmit={_onAssignRole} assignedRolesIds={user.roles} identifier={(role) => role.name} />
       </Container>
@@ -102,7 +102,7 @@ const RolesSection = ({ user, onSubmit }: Props) => {
       </ErrorAlert>
       <h3>Selected Roles</h3>
       <Container>
-        <PaginatedItemOverview noDataText="No selected roles have been found."
+        <PaginatedItemOverview noDataText="未找到选定的角色."
                                onLoad={_onLoad}
                                overrideList={paginatedRoles}
                                onDeleteItem={onDeleteRole}

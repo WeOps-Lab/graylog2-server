@@ -37,7 +37,7 @@ const createEvent = (name: string, value: any) => ({ target: { name, value } }) 
 
 const SelectField = ({ name, field, title, error, value, onChange }: FieldComponentProps) => {
   if (field.type !== 'select') {
-    throw new Error('Invalid field type passed!');
+    throw new Error('传递了无效的字段类型!');
   }
 
   return (

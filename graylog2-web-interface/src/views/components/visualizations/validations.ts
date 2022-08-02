@@ -20,5 +20,5 @@ export const areAtLeastNMetricsConfigured = (formValues: WidgetConfigFormValues,
 export const areAtLeastNGroupingsConfigured = (formValues: WidgetConfigFormValues, minimumGroupings: number) => formValues.groupBy?.groupings?.length >= minimumGroupings;
 
 export const hasAtLeastOneMetric = (name: string) => (formValues: WidgetConfigFormValues) => (!areAtLeastNMetricsConfigured(formValues, 1)
-  ? { type: `${name} requires at least one metric` }
+  ? { type: `${name} 至少需要一个指标` }
   : {});

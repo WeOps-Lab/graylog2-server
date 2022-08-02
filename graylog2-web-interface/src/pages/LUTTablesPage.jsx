@@ -124,12 +124,12 @@ class LUTTablesPage extends React.Component {
 
     if (isShowing || isEditing) {
       if (!table) {
-        content = <Spinner text="Loading lookup table" />;
+        content = <Spinner text="加载数据字典中" />;
       } else if (isEditing) {
         content = (
           <Row className="content">
             <Col lg={8}>
-              <h2>Lookup Table</h2>
+              <h2>数据字典</h2>
               <LookupTableForm table={table}
                                create={false}
                                saved={this._saved}
@@ -152,7 +152,7 @@ class LUTTablesPage extends React.Component {
                            validationErrors={validationErrors} />
       );
     } else if (!tables) {
-      content = <Spinner text="Loading lookup tables" />;
+      content = <Spinner text="加载数据字典中" />;
     } else {
       content = (
         <LookupTablesOverview tables={tables}
@@ -164,21 +164,21 @@ class LUTTablesPage extends React.Component {
     }
 
     return (
-      <DocumentTitle title="Lookup Tables">
+      <DocumentTitle title="数据字典">
         <span>
-          <PageHeader title="Lookup Tables">
-            <span>Lookup tables can be used in extractors, converters and processing pipelines to translate message fields or to enrich messages.</span>
+          <PageHeader title="数据字典">
+            <span>数据字典可用于提取器、转换器和流水线，以转换消息字段或丰富消息。</span>
             {null}
             <span>
               <ButtonToolbar>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.OVERVIEW}>
-                  <Button bsStyle="info">Lookup Tables</Button>
+                  <Button bsStyle="info">数据字典</Button>
                 </LinkContainer>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.CACHES.OVERVIEW}>
-                  <Button bsStyle="info">Caches</Button>
+                  <Button bsStyle="info">数据缓存</Button>
                 </LinkContainer>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.DATA_ADAPTERS.OVERVIEW}>
-                  <Button bsStyle="info">Data Adapters</Button>
+                  <Button bsStyle="info">数据源</Button>
                 </LinkContainer>
               </ButtonToolbar>
             </span>

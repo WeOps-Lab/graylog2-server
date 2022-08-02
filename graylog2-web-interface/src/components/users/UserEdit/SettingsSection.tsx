@@ -44,7 +44,7 @@ const SettingsSection = ({
   },
   onSubmit,
 }: Props) => (
-  <SectionComponent title="Settings">
+  <SectionComponent title="设定">
     <Formik onSubmit={onSubmit}
             initialValues={{ timezone, session_timeout_ms: sessionTimeoutMs, startpage, service_account: serviceAccount }}>
       {({ isSubmitting, isValid }) => (
@@ -63,9 +63,9 @@ const SettingsSection = ({
               <div className="pull-right">
                 <Button bsStyle="success"
                         disabled={isSubmitting || !isValid}
-                        title="Update Settings"
+                        title="更新"
                         type="submit">
-                  Update Settings
+                  更新
                 </Button>
               </div>
             </Col>

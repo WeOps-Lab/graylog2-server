@@ -94,17 +94,15 @@ const CreateExtractorsPage = createReactClass({
     const stringifiedExampleMessage = StringUtils.stringify(exampleMessage.fields[field]);
 
     return (
-      <DocumentTitle title={`New extractor for input ${input.title}`}>
+      <DocumentTitle title={`新建消息提取器 ${input.title}`}>
         <div>
-          <PageHeader title={<span>New extractor for input <em>{input.title}</em></span>}>
+          <PageHeader title={<span>新建输入 <em>{input.title}</em> 消息提取器</span>}>
             <span>
-              Extractors are applied on every message that is received by an input. Use them to extract and
-              transform any text data into fields that allow you easy filtering and analysis later on.
+              日志提取器将会应用在接收器中的每条信息.使用日志提取器后,将会有助于分析时进行过滤及字段搜索.
             </span>
 
             <span>
-              Find more information about extractors in the
-              {' '}<DocumentationLink page={DocsHelper.PAGES.EXTRACTORS} text="documentation" />.
+              在<DocumentationLink page={DocsHelper.PAGES.EXTRACTORS} text="文档" />中查看更多关于提取器的信息.
             </span>
           </PageHeader>
           <EditExtractor action="create"

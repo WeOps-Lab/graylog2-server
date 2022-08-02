@@ -17,7 +17,7 @@
 import _ from 'lodash';
 import moment from 'moment';
 import crossfilter from 'crossfilter';
-
+moment.locale('zh-cn');
 type Traffic = {
    [key: string]: number,
 }

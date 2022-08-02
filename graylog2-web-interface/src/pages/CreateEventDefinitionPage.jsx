@@ -17,9 +17,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { LinkContainer } from 'components/common/router';
-import { ButtonToolbar, Col, Row, Button } from 'components/bootstrap';
-import { DocumentTitle, IfPermitted, PageHeader } from 'components/common';
+import {LinkContainer} from 'components/common/router';
+import {ButtonToolbar, Col, Row, Button} from 'components/bootstrap';
+import {DocumentTitle, IfPermitted, PageHeader} from 'components/common';
 import EventDefinitionFormContainer
   from 'components/event-definitions/event-definition-form/EventDefinitionFormContainer';
 import DocumentationLink from 'components/support/DocumentationLink';
@@ -28,7 +28,7 @@ import DocsHelper from 'util/DocsHelper';
 import connect from 'stores/connect';
 import PermissionsMixin from 'util/PermissionsMixin';
 import history from 'util/History';
-import { CurrentUserStore } from 'stores/users/CurrentUserStore';
+import {CurrentUserStore} from 'stores/users/CurrentUserStore';
 
 class CreateEventDefinitionPage extends React.Component {
   static propTypes = {
@@ -44,18 +44,18 @@ class CreateEventDefinitionPage extends React.Component {
   }
 
   handleEventDefinitionChange = (eventDefinition) => {
-    const { eventDefinitionTitle } = this.state;
+    const {eventDefinitionTitle} = this.state;
 
     if (eventDefinition.title !== eventDefinitionTitle) {
-      this.setState({ eventDefinitionTitle: eventDefinition.title });
+      this.setState({eventDefinitionTitle: eventDefinition.title});
     }
   };
 
   render() {
-    const { eventDefinitionTitle } = this.state;
-    const pageTitle = eventDefinitionTitle ? `New Event Definition "${eventDefinitionTitle}"` : 'New Event Definition';
+    const {eventDefinitionTitle} = this.state;
+    const pageTitle = eventDefinitionTitle ? `新建事件定义 "${eventDefinitionTitle}"` : '新建事件定义';
 
-    const { currentUser } = this.props;
+    const {currentUser} = this.props;
 
     if (!PermissionsMixin.isPermitted(currentUser.permissions, 'eventdefinitions:create')) {
       history.push(Routes.NOTFOUND);
@@ -66,27 +66,25 @@ class CreateEventDefinitionPage extends React.Component {
         <span>
           <PageHeader title={pageTitle}>
             <span>
-              Event Definitions allow you to create Alerts from different Conditions and alert on them.
+              事件定义允许您使用不同的条件创建告警并在触发时发出告警.
             </span>
 
             <span>
-              Graylog&apos;s new Alerting system let you define more flexible and powerful rules. Learn more in the{' '}
-              <DocumentationLink page={DocsHelper.PAGES.ALERTS}
-                                 text="documentation" />
+              在<DocumentationLink page={DocsHelper.PAGES.ALERTS} text="文档"/>中查看更多关于告警的信息
             </span>
 
             <ButtonToolbar>
               <LinkContainer to={Routes.ALERTS.LIST}>
-                <Button bsStyle="info">Alerts & Events</Button>
+                 <Button bsStyle="info">告警 & 事件</Button>
               </LinkContainer>
               <IfPermitted permissions="eventdefinitions:read">
                 <LinkContainer to={Routes.ALERTS.DEFINITIONS.LIST}>
-                  <Button bsStyle="info">Event Definitions</Button>
+                  <Button bsStyle="info">事件规则</Button>
                 </LinkContainer>
               </IfPermitted>
               <IfPermitted permissions="eventnotifications:read">
                 <LinkContainer to={Routes.ALERTS.NOTIFICATIONS.LIST}>
-                  <Button bsStyle="info">Notifications</Button>
+                 <Button bsStyle="info">通知</Button>
                 </LinkContainer>
               </IfPermitted>
             </ButtonToolbar>
@@ -95,7 +93,7 @@ class CreateEventDefinitionPage extends React.Component {
           <Row className="content">
             <Col md={12}>
               <EventDefinitionFormContainer action="create"
-                                            onEventDefinitionChange={this.handleEventDefinitionChange} />
+                                            onEventDefinitionChange={this.handleEventDefinitionChange}/>
             </Col>
           </Row>
         </span>
@@ -106,4 +104,4 @@ class CreateEventDefinitionPage extends React.Component {
 
 export default connect(CreateEventDefinitionPage, {
   currentUser: CurrentUserStore,
-}, ({ currentUser }) => ({ currentUser: currentUser.currentUser }));
+}, ({currentUser}) => ({currentUser: currentUser.currentUser}));

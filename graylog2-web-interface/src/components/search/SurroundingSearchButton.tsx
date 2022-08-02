@@ -18,6 +18,7 @@ import * as React from 'react';
 import { useContext } from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+moment.locale('zh-cn');
 import naturalSort from 'javascript-natural-sort';
 
 import { DropdownButton, MenuItem } from 'components/bootstrap';

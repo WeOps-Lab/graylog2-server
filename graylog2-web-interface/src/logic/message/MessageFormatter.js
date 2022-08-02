@@ -15,7 +15,7 @@
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import MessageFieldsFilter from 'logic/message/MessageFieldsFilter';
 
 const MessageFormatter = {

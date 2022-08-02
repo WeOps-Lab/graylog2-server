@@ -64,7 +64,7 @@ const ElementsConfiguration = ({ aggregationElementsByKey, config, onConfigChang
           const aggregationElement = aggregationElementsByKey[elementKey];
 
           if (!aggregationElement) {
-            throw new Error(`Aggregation element with key ${elementKey} is missing but configured for this widget.`);
+            throw new Error(`缺少键为 ${elementKey} 的聚合元素，但已为此小部件配置。`);
           }
 
           const ConfigurationSection = aggregationElement.component;

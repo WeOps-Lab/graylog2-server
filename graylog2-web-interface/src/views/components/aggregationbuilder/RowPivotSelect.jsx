@@ -17,14 +17,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { FieldList, PivotList } from './AggregationBuilderPropTypes';
+import {FieldList, PivotList} from './AggregationBuilderPropTypes';
 import PivotSelect from './PivotSelect';
 
-const RowPivotSelect = ({ fields, onChange, rowPivots }) => (
-  <PivotSelect placeholder="None: click to add fields"
+const RowPivotSelect = ({fields, onChange, rowPivots}) => (
+  <PivotSelect placeholder="无：单击可添加字段"
                onChange={onChange}
                options={fields}
-               value={rowPivots} />
+               value={rowPivots}/>
 );
 
 RowPivotSelect.propTypes = {

@@ -31,7 +31,7 @@ class CreateStreamButton extends React.Component {
   };
 
   static defaultProps = {
-    buttonText: 'Create Stream',
+    buttonText: '创建消息流',
     bsSize: undefined,
     bsStyle: undefined,
     className: undefined,
@@ -53,7 +53,7 @@ class CreateStreamButton extends React.Component {
           {buttonText}
         </Button>
         <StreamForm ref={(streamForm) => { this.streamForm = streamForm; }}
-                    title="Creating Stream"
+                    title="创建消息流"
                     indexSets={indexSets}
                     onSubmit={onSave} />
       </span>

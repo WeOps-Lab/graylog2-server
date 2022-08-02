@@ -17,7 +17,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { Input } from 'components/bootstrap';
 
 const _validationLimit = (durationInMilliseconds, rotationLimit) => {

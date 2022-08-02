@@ -74,7 +74,7 @@ const ViewActionsMenu = ({ view, isNewView, metadata }) => {
     <>
       <MenuItem divider />
       <MenuItem onSelect={() => setDebugOpen(true)}>
-        <Icon name="code" /> Debug
+        <Icon name="code" /> 调试
       </MenuItem>
     </>
   );
@@ -84,15 +84,15 @@ const ViewActionsMenu = ({ view, isNewView, metadata }) => {
       {showSaveButton && (
       <Button onClick={() => onSaveView(view)}
               disabled={isNewView || hasUndeclaredParameters || !allowedToEdit}
-              title="Save dashboard">
-        <Icon name="save" /> Save
+              title="保存仪表盘">
+        <Icon name="save" /> 保存
       </Button>
       )}
       {showSaveAsButton && (
       <Button onClick={() => setSaveAsViewOpen(true)}
               disabled={hasUndeclaredParameters}
-              title="Save as new dashboard">
-        <Icon name="copy" /> Save as
+              title="另存为新仪表板">
+        <Icon name="copy" /> 另存为
       </Button>
       )}
       {showShareButton && (
@@ -100,14 +100,14 @@ const ViewActionsMenu = ({ view, isNewView, metadata }) => {
                    entityId={view.id}
                    onClick={() => setShareViewOpen(true)}
                    bsStyle="default"
-                   disabledInfo={isNewView && 'Only saved dashboards can be shared.'} />
+                   disabledInfo={isNewView && '只能共享已保存的仪表板.'} />
       )}
       {showDropDownButton && (
       <DropdownButton title={<Icon name="ellipsis-h" />} id="query-tab-actions-dropdown" pullRight noCaret>
         <MenuItem onSelect={() => setEditViewOpen(true)} disabled={isNewView || !allowedToEdit}>
-          <Icon name="edit" /> Edit metadata
+          <Icon name="edit" /> 编辑元数据
         </MenuItem>
-        <MenuItem onSelect={() => setExportOpen(true)}><Icon name="cloud-download-alt" /> Export</MenuItem>
+        <MenuItem onSelect={() => setExportOpen(true)}><Icon name="cloud-download-alt" /> 导出</MenuItem>
         {debugOverlay}
         <IfDashboard>
           <MenuItem divider />
@@ -119,14 +119,14 @@ const ViewActionsMenu = ({ view, isNewView, metadata }) => {
       {saveAsViewOpen && (
         <ViewPropertiesModal show
                              view={view.toBuilder().newId().build()}
-                             title="Save new dashboard"
+                             title="保存新仪表板"
                              onClose={() => setSaveAsViewOpen(false)}
                              onSave={(newView) => onSaveAsView(newView)} />
       )}
       {editViewOpen && (
         <ViewPropertiesModal show
                              view={view}
-                             title="Editing dashboard"
+                             title="编辑仪表板"
                              onClose={() => setEditViewOpen(false)}
                              onSave={onSaveView} />
       )}
@@ -135,7 +135,7 @@ const ViewActionsMenu = ({ view, isNewView, metadata }) => {
         <EntityShareModal entityId={view.id}
                           entityType="dashboard"
                           entityTitle={view.title}
-                          description={`Search for a User or Team to add as collaborator on this ${viewTypeLabel}.`}
+                          description={`在此 ${viewTypeLabel} 上搜索要添加为协作者的用户或团队。`}
                           onClose={() => setShareViewOpen(false)} />
       )}
       {exportOpen && <ExportModal view={view} closeModal={() => setExportOpen(false)} />}

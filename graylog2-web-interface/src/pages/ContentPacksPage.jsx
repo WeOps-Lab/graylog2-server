@@ -47,9 +47,9 @@ const ContentPacksPage = createReactClass({
 
   _deleteContentPack(contentPackId) {
     // eslint-disable-next-line no-alert
-    if (window.confirm('You are about to delete this Content Pack, are you sure?')) {
+    if (window.confirm('您即将删除此扩展包，您确定吗?')) {
       ContentPacksActions.delete(contentPackId).then(() => {
-        UserNotification.success('Content Pack deleted successfully.', 'Success');
+        UserNotification.success('扩展包删除成功.', '成功');
         ContentPacksActions.list();
       }, (error) => {
         let err_message = error.message;
@@ -59,17 +59,17 @@ const ContentPacksPage = createReactClass({
           err_message = error.additional.body.message;
         }
 
-        UserNotification.error(`Deleting bundle failed: ${err_message}`, 'Error');
+        UserNotification.error(`删除失败: ${err_message}`, '异常');
       });
     }
   },
 
   _installContentPack(contentPackId, contentPackRev, parameters) {
     ContentPacksActions.install(contentPackId, contentPackRev, parameters).then(() => {
-      UserNotification.success('Content Pack installed successfully.', 'Success');
+      UserNotification.success('扩展包安装成功', '成功');
     }, (error) => {
-      UserNotification.error(`Installing content pack failed with status: ${error}.
-         Could not install Content Pack with ID: ${contentPackId}`);
+      UserNotification.error(`安装扩展包失败，状态为：${error}。
+         无法使用 ID 安装扩展包: ${contentPackId}`);
     });
   },
 
@@ -81,24 +81,24 @@ const ContentPacksPage = createReactClass({
     }
 
     return (
-      <DocumentTitle title="Content Packs">
+      <DocumentTitle title="扩展包">
         <span>
-          <PageHeader title="Content Packs">
+          <PageHeader title="扩展包">
             <span>
-              Content Packs accelerate the set up process for a specific data source. A Content Pack can include inputs/extractors, streams, and dashboards.
+              扩展包可加速特定数据源的设置过程。扩展包可以包括输入/​​提取器、流和仪表板。
             </span>
 
             <span>
-              Find more Content Packs in {' '}
-              <a href="https://marketplace.graylog.org/" target="_blank" rel="noopener noreferrer">the Graylog Marketplace</a>.
+              查看 {' '}
+              <a href="https://marketplace.graylog.org/" target="_blank" rel="noopener noreferrer">文档</a>.
             </span>
 
             <ButtonToolbar>
               <ContentPackUploadControls />
               <LinkContainer to={Routes.SYSTEM.CONTENTPACKS.CREATE}>
-                <Button bsStyle="success">Create a Content Pack</Button>
+                <Button bsStyle="success">创建扩展包</Button>
               </LinkContainer>
-              <Button bsStyle="info" active>Content Packs</Button>
+              <Button bsStyle="info" active>扩展包</Button>
             </ButtonToolbar>
           </PageHeader>
 

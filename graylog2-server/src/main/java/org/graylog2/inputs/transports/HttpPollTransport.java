@@ -209,31 +209,31 @@ public class HttpPollTransport extends ThrottleableTransport {
             final ConfigurationRequest r = super.getRequestedConfiguration();
             r.addField(new TextField(
                     CK_URL,
-                    "URI of JSON resource",
+                    "URI/JSON资源",
                     "http://example.org/api",
-                    "HTTP resource returning JSON on GET",
+                    "一个通过Get调用返回JSON串的HTTP资源",
                     ConfigurationField.Optional.NOT_OPTIONAL
             ));
 
             r.addField(new TextField(
                     CK_HEADERS,
-                    "Additional HTTP headers",
+                    "Http Header信息",
                     "",
-                    "Add a comma separated list of additional HTTP headers. For example: Accept: application/json, X-Requester: Graylog",
+                    "通过逗号分隔的Http Header信息。例如: Accept: application/json",
                     ConfigurationField.Optional.OPTIONAL
             ));
 
             r.addField(new NumberField(
                     CK_INTERVAL,
-                    "Interval",
+                    "调用间隔",
                     1,
-                    "Time between every collector run. Select a time unit in the corresponding dropdown. Example: Run every 5 minutes.",
+                    "采集器采集的间隔。例如：每5分钟采集一次.",
                     ConfigurationField.Optional.NOT_OPTIONAL
             ));
 
             r.addField(new DropdownField(
                     CK_TIMEUNIT,
-                    "Interval time unit",
+                    "间隔的时间单位",
                     TimeUnit.MINUTES.toString(),
                     DropdownField.ValueTemplates.timeUnits(),
                     ConfigurationField.Optional.NOT_OPTIONAL

@@ -37,7 +37,7 @@ const DEFAULT_PAGINATION = {
   query: '',
 };
 
-const TABLE_HEADERS = ['', 'Full name', 'Username', 'E-Mail Address', 'Client Address', 'Enabled', 'Role', 'Actions'];
+const TABLE_HEADERS = ['', '全名', '用户名', '电子邮件地址', '客户端地址', '启用', '角色', '操作'];
 
 const Container = styled.div`
   .data-table {
@@ -119,11 +119,11 @@ const UsersOverview = () => {
       <Row className="content">
         <Col xs={12}>
           <Header>
-            <h2>Users</h2>
+            <h2>用户</h2>
             {loading && <LoadingSpinner text="" delay={0} />}
           </Header>
           <p className="description">
-            Found {total} registered users on the system.
+            在系统上找到 {total} 个注册用户。
           </p>
           <StyledPaginatedList activePage={page}
                                totalItems={total}
@@ -134,12 +134,12 @@ const UsersOverview = () => {
                        headers={TABLE_HEADERS}
                        headerCellFormatter={_headerCellFormatter}
                        sortByKey="fullName"
-                       noDataText={<EmptyResult>No users have been found.</EmptyResult>}
+                       noDataText={<EmptyResult>没有找到用户.</EmptyResult>}
                        rows={users.toJS()}
                        customFilter={searchFilter}
                        dataRowFormatter={_usersOverviewItem}
                        filterKeys={[]}
-                       filterLabel="Filter Users" />
+                       filterLabel="过滤" />
           </StyledPaginatedList>
         </Col>
       </Row>

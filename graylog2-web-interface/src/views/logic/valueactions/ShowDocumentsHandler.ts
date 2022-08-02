@@ -66,7 +66,7 @@ const ShowDocumentsHandler: ValueActionHandler<Contexts> = ({ contexts: { valueP
       .showMessageRow(true).build())
     .build();
 
-  const title = `Messages for ${valuePathQuery}`;
+  const title = `${valuePathQuery} 的消息`;
 
   return WidgetActions.create(newWidget).then(() => TitlesActions.set(TitleTypes.Widget, newWidget.id, title));
 };

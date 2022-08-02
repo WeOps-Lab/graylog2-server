@@ -34,7 +34,7 @@ export const fetchSearchVersionCheck = async ({ queryKey }) => {
 
     return data;
   } catch (e) {
-    return UserNotification.error('Could not fetch override data.');
+    return UserNotification.error('无法获取覆盖数据.');
   }
 };
 

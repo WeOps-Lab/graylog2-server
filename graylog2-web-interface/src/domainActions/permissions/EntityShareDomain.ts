@@ -21,24 +21,24 @@ import notifyingAction from '../notifyingAction';
 const prepare = notifyingAction({
   action: EntityShareActions.prepare,
   error: (error, entityName, entityType) => ({
-    message: `Preparing shares for ${entityType} "${entityName}" failed with status: ${error}`,
+    message: `为 ${entityType} "${entityName}" 准备共享失败，状态为: ${error}`,
   }),
 });
 
 const update = notifyingAction({
   action: EntityShareActions.update,
   error: (error, entityName, entityType) => ({
-    message: `Updating shares for ${entityType} "${entityName}" failed with status: ${error}`,
+    message: `更新 ${entityType} "${entityName}" 的共享失败，状态为: ${error}`,
   }),
   success: (entityName, entityType) => ({
-    message: `Shares for ${entityType} "${entityName}" updated successfully`,
+    message: `${entityType} "${entityName}" 的共享已成功更新`,
   }),
 });
 
 const loadUserSharesPaginated = notifyingAction({
   action: EntityShareActions.loadUserSharesPaginated,
   error: (error, userId) => ({
-    message: `Loading entities which got shared for user with id "${userId}" failed with status: ${error}`,
+    message: `加载为 ID 为"${userId}"的用户共享的实体失败，状态为：${error}`,
   }),
 });
 

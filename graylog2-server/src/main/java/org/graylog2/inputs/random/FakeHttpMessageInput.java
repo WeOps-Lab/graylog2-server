@@ -30,7 +30,7 @@ import javax.inject.Inject;
 
 public class FakeHttpMessageInput extends MessageInput {
 
-    private static final String NAME = "Random HTTP message generator";
+    private static final String NAME = "随机HTTP消息";
 
     @AssistedInject
     public FakeHttpMessageInput(@Assisted Configuration configuration,

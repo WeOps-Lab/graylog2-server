@@ -16,7 +16,7 @@
  */
 import moment from 'moment';
 import {} from 'moment-duration-format';
-
+moment.locale('zh-cn');
 const ISODurationUtils = {
   isValidDuration(duration, validator) {
     return validator(moment.duration(duration).asMilliseconds(), duration);
@@ -46,7 +46,7 @@ const ISODurationUtils = {
     let text = errorText;
 
     if (!text) {
-      text = 'error';
+      text = '异常';
     }
 
     return this.isValidDuration(duration, validator) ? moment.duration(duration).humanize() : text;

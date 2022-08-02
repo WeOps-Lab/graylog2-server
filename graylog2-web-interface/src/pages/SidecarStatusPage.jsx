@@ -71,31 +71,26 @@ class SidecarStatusPage extends React.Component {
     const isLoading = !sidecar || !collectors;
 
     if (isLoading) {
-      return <DocumentTitle title="Sidecar status"><Spinner /></DocumentTitle>;
+      return <DocumentTitle title="客户端状态"><Spinner /></DocumentTitle>;
     }
 
     return (
-      <DocumentTitle title={`Sidecar ${sidecar.node_name} status`}>
+      <DocumentTitle title={`客户端 ${sidecar.node_name} 状态`}>
         <span>
-          <PageHeader title={<span>Sidecar <em>{sidecar.node_name} status</em></span>}>
+          <PageHeader title={<span>客户端 <em>{sidecar.node_name} 状态</em></span>}>
             <span>
-              A status overview of the Graylog Sidecar.
-            </span>
-
-            <span>
-              Read more about sidecars and how to set them up in the
-              {' '}<DocumentationLink page={DocsHelper.PAGES.COLLECTOR_STATUS} text="Graylog documentation" />.
+              DataInsight客户端状态概览
             </span>
 
             <ButtonToolbar>
               <LinkContainer to={Routes.SYSTEM.SIDECARS.OVERVIEW}>
-                <Button bsStyle="info" className="active">Overview</Button>
+                <Button bsStyle="info" className="active">概览</Button>
               </LinkContainer>
               <LinkContainer to={Routes.SYSTEM.SIDECARS.ADMINISTRATION}>
-                <Button bsStyle="info">Administration</Button>
+                <Button bsStyle="info">客户端管理</Button>
               </LinkContainer>
               <LinkContainer to={Routes.SYSTEM.SIDECARS.CONFIGURATION}>
-                <Button bsStyle="info">Configuration</Button>
+                <Button bsStyle="info">采集器配置</Button>
               </LinkContainer>
             </ButtonToolbar>
           </PageHeader>

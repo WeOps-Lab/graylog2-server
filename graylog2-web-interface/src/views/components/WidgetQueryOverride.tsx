@@ -75,7 +75,7 @@ const WidgetQueryOverride = ({ value, onReset }: Props) => (
                              wrapEnabled={false}
                              maxLines={1} />
       <ResetButton bsSize="xs" bsStyle="primary" onClick={onReset} data-testid="reset-global-query">
-        Reset Global Filter
+        重置全局过滤器
       </ResetButton>
     </QueryInfo>
   </Wrapper>

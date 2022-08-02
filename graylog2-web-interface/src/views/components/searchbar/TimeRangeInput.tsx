@@ -60,7 +60,7 @@ const TimeRangeInput = ({
   const [show, setShow] = useState(false);
 
   if (validTypes && value && 'type' in value && !validTypes.includes(value?.type)) {
-    throw new Error(`Value is of type ${value.type}, but only these types are valid: ${validTypes}`);
+    throw new Error(`值的类型为 ${value.type}，但只有以下类型有效：${validTypes}`);
   }
 
   const toggleShow = () => setShow(!show);

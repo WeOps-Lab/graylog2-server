@@ -17,9 +17,9 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 
-import { HoverForHelp } from 'components/common';
+import {HoverForHelp} from 'components/common';
 import Select from 'views/components/Select';
-import type { BarMode } from 'views/logic/aggregationbuilder/visualizations/BarVisualizationConfig';
+import type {BarMode} from 'views/logic/aggregationbuilder/visualizations/BarVisualizationConfig';
 import BarVisualizationConfig from 'views/logic/aggregationbuilder/visualizations/BarVisualizationConfig';
 
 type Props = {
@@ -39,32 +39,33 @@ class BarVisualizationConfiguration extends React.Component<Props> {
   };
 
   static defaultProps = {
-    onChange: () => {},
+    onChange: () => {
+    },
     config: BarVisualizationConfig.create('group'),
   };
 
   static options = {
     group: {
-      label: 'Group',
-      help: 'Every series is represented by its own bar in the chart.',
+      label: '分组',
+      help: '每个系列在图表中由其自己的条形表示.',
     },
     stack: {
-      label: 'Stack',
-      help: 'All series are stacked upon each other resulting in one bar.',
+      label: '堆栈',
+      help: '所有系列相互堆叠，形成一个条形图',
     },
     relative: {
-      label: 'Relative',
-      help: 'All series are stacked upon each other resulting in one chart. But negative series are placed below zero.',
+      label: '相对值',
+      help: '所有系列相互堆叠，形成一张图表。但负数列低于零.',
     },
     overlay: {
-      label: 'Overlay',
-      help: 'All series are placed as bars upon each other. To be able to see the bars the opacity is reduced to 75%.'
-        + ' It is recommended to use this option with not more than 3 series.',
+      label: '覆盖',
+      help: '所有系列都作为条形放置在彼此之上。为了能够看到条形，不透明度降低到 75%。'
+        + ' 建议在不超过 3 个系列的情况下使用此选项。',
     },
   };
 
   _onChange: (barmode: BarModeOption) => void = (barmode: BarModeOption) => {
-    const { onChange, config } = this.props;
+    const {onChange, config} = this.props;
     const newConfig = config.toBuilder().barmode(barmode.value).build();
 
     onChange(newConfig);
@@ -73,18 +74,18 @@ class BarVisualizationConfiguration extends React.Component<Props> {
   _wrapOption: (value: BarMode) => BarModeOption = (value) => {
     const option = BarVisualizationConfiguration.options[value];
 
-    return { label: option.label, value: value };
+    return {label: option.label, value: value};
   };
 
   render() {
     const modes = Object.keys(BarVisualizationConfiguration.options);
     const options = modes.map(this._wrapOption);
-    const { config } = this.props;
+    const {config} = this.props;
 
     return (
       <>
         <span>Mode:</span>
-        <HoverForHelp title="Help for bar chart mode">
+        <HoverForHelp title="条形图模式帮助">
           <ul>
             {modes.map((mode) => (
               <li key={mode}><h4>{BarVisualizationConfiguration.options[mode].label}</h4>
@@ -93,10 +94,10 @@ class BarVisualizationConfiguration extends React.Component<Props> {
             ))}
           </ul>
         </HoverForHelp>
-        <Select placeholder="None: click to add series"
+        <Select placeholder="无：点击添加列"
                 onChange={this._onChange}
                 options={options}
-                value={this._wrapOption(config.barmode)} />
+                value={this._wrapOption(config.barmode)}/>
       </>
     );
   }

@@ -32,7 +32,7 @@ const SharedEntitiesSection = ({ userId }: Props) => {
   const _searchPaginated = useCallback((pagination) => EntityShareDomain.loadUserSharesPaginated(userId, pagination), [userId]);
 
   return (
-    <SectionComponent title="Shared Entities" showLoading={loading}>
+    <SectionComponent title="分享" showLoading={loading}>
       <SharedEntitiesOverview setLoading={setLoading}
                               entityType="user"
                               searchPaginated={_searchPaginated} />

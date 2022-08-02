@@ -27,8 +27,8 @@ type Props = {
 }
 
 const directionOptions = [
-  { label: 'Ascending', value: 'Ascending' },
-  { label: 'Descending', value: 'Descending' },
+  { label: '升序', value: 'Ascending' },
+  { label: '降序', value: 'Descending' },
 ];
 
 const formatSeries = (metric: MetricFormValues) => {
@@ -85,7 +85,7 @@ const Sort = React.memo(({ index }: Props) => {
         {({ field: { name, onChange }, meta: { error } }) => {
           return (
             <Input id="field-select"
-                   label="Field"
+                   label="字段"
                    error={error}
                    labelClassName="col-sm-3"
                    wrapperClassName="col-sm-9">
@@ -93,8 +93,8 @@ const Sort = React.memo(({ index }: Props) => {
                       clearable={false}
                       name={name}
                       value={selectedOption}
-                      placeholder="Specify field/metric to be sorted on"
-                      aria-label="Select field for sorting"
+                      placeholder="指定要排序的字段/指标"
+                      aria-label="选择字段进行排序"
                       size="small"
                       menuPortalTarget={document.body}
                       onChange={(newValue: Option['value']) => {
@@ -110,14 +110,14 @@ const Sort = React.memo(({ index }: Props) => {
       <Field name={`sort.${index}.direction`}>
         {({ field: { name, value, onChange }, meta: { error } }) => (
           <Input id="direction-select"
-                 label="Direction"
+                 label="排序类型"
                  error={error}
                  labelClassName="col-sm-3"
                  wrapperClassName="col-sm-9">
             <Select options={directionOptions}
                     clearable={false}
                     name={name}
-                    aria-label="Select direction for sorting"
+                    aria-label="选择排序类型"
                     value={value}
                     size="small"
                     menuPortalTarget={document.body}

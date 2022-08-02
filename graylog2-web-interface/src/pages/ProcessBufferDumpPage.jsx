@@ -60,16 +60,16 @@ const ProcessBufferDumpPage = createReactClass({
 
     const title = (
       <span>
-        Process-buffer dump of node {node.short_node_id} / {node.hostname}
+        节点{node.short_node_id} / {node.hostname} 的进程转储
         &nbsp;
-        <small>Taken at {DateTime.now().toString(DateTime.Formats.COMPLETE)}</small>
+        <small>耗时 {DateTime.now().toString(DateTime.Formats.COMPLETE)}</small>
       </span>
     );
 
     const content = processbufferDump ? <pre className="processbufferdump">{JSON.stringify(processbufferDump, null, 2)}</pre> : <Spinner />;
 
     return (
-      <DocumentTitle title={`Process-buffer dump of node ${node.short_node_id} / ${node.hostname}`}>
+      <DocumentTitle title={`节点 ${node.short_node_id} / ${node.hostname} 的进程转储`}>
         <div>
           <PageHeader title={title}>
             <span />

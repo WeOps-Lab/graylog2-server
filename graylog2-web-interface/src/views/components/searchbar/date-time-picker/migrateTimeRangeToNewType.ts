@@ -16,7 +16,7 @@
  */
 
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import type { AbsoluteTimeRange, KeywordTimeRange, NoTimeRangeOverride } from 'views/logic/queries/Query';
 import { DEFAULT_RELATIVE_FROM } from 'views/Constants';
 import DateTime from 'logic/datetimes/DateTime';

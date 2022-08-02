@@ -26,7 +26,12 @@ type Props = {
   config: LineVisualizationConfig,
 };
 
-const _makeOption = (value) => ({ label: capitalize(value), value });
+const MAPPING = {
+  'Linear': '线性',
+  'Step-after': '步进',
+  'Spline': '样条'
+}
+const _makeOption = (value) => ({ label: MAPPING[capitalize(value)], value });
 const interpolationOptions = ['linear', 'step-after', 'spline'].map(_makeOption);
 
 const LineVisualizationConfiguration = ({ config = LineVisualizationConfig.empty(), onChange }: Props) => {
@@ -34,8 +39,8 @@ const LineVisualizationConfiguration = ({ config = LineVisualizationConfig.empty
 
   return (
     <>
-      <span>Interpolation:</span>
-      <Select placeholder="Select Interpolation Mode"
+      <span>插值模式:</span>
+      <Select placeholder="选择插值模式"
               onChange={_onChange}
               options={interpolationOptions}
               value={_makeOption(config.interpolation)} />

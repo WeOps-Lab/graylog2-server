@@ -50,8 +50,8 @@ export const AlarmCallbackHistoryStore = singletonStore(
             return this.histories;
           },
           (error) => {
-            UserNotification.error(`Fetching notification history for alert '${alertId}' failed with status: ${error}`,
-              'Could not retrieve notification history.');
+            UserNotification.error(`加载历史告警 '${alertId}' 失败: ${error}`,
+              '加载历史告警失败.');
           },
         );
 

@@ -78,12 +78,12 @@ const VisualizationConfiguration = () => {
       <Field name="visualization.type">
         {({ field: { name, value }, meta: { error } }) => (
           <Input id="visualization-type-select"
-                 label="Type"
+                 label="类型"
                  error={error}
                  labelClassName="col-sm-3"
                  wrapperClassName="col-sm-9">
             <Select options={visualizationTypeOptions}
-                    aria-label="Select visualization type"
+                    aria-label="选择可视化类型"
                     clearable={false}
                     name={name}
                     value={value}
@@ -101,7 +101,7 @@ const VisualizationConfiguration = () => {
         <Field name="visualization.eventAnnotation">
           {({ field: { name, value = false }, meta: { error } }) => (
             <Input id={`${name}-input`}
-                   label="Show Event annotations"
+                   label="显示事件注释"
                    error={error}
                    labelClassName="col-sm-11"
                    wrapperClassName="col-sm-1">

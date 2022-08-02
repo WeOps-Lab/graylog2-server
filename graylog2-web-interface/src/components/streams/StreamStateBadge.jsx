@@ -26,14 +26,14 @@ class StreamStateBadge extends React.Component {
 
   render() {
     if (this.props.stream.is_default) {
-      return <Label bsStyle="primary">Default</Label>;
+      return <Label bsStyle="primary">默认</Label>;
     }
 
     if (!this.props.stream.disabled) {
       return null;
     }
 
-    return <Label bsStyle="warning">Stopped</Label>;
+    return <Label bsStyle="warning">已停止</Label>;
   }
 }
 

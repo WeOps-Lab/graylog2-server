@@ -33,7 +33,7 @@ const MissingRequirements = ({ view, missingRequirements }: Props) => (
   <Row className="content">
     <Col md={6} mdOffset={3} className={fixup.bootstrapHeading}>
       <h1>{capitalize(view.type)}: <em>{view.title}</em></h1>
-      <p>Unfortunately executing this {view.type?.toLowerCase()} is not possible. It uses the following capabilities which are not available:</p>
+      <p>执行此 {view.type?.toLowerCase()} 是不可能的。它使用以下不可用的功能：</p>
 
       <ul>
         {Object.entries(missingRequirements).map(([require, plugin]: [string, PluginMetadata]) => (
@@ -45,7 +45,7 @@ const MissingRequirements = ({ view, missingRequirements }: Props) => (
     </Col>
 
     <Col md={1} mdOffset={8}>
-      <Button bsStyle="success" onClick={() => history.goBack()}>Back</Button>
+      <Button bsStyle="success" onClick={() => history.goBack()}>返回</Button>
     </Col>
   </Row>
 );

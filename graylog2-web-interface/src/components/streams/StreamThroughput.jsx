@@ -59,7 +59,7 @@ const StreamThroughput = createReactClass({
     }
 
     return (
-      <span>{this._calculateThroughput()} messages/second</span>
+      <span>{this._calculateThroughput()} 消息/秒</span>
     );
   },
 });

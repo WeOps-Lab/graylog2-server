@@ -105,5 +105,5 @@ export function createHandlerFor<T>(action: ActionDefinitionBase<T> & HandlerAct
     };
   }
 
-  throw new Error(`Invalid binding for action: ${String(action)} - has neither 'handler' nor 'component'.`);
+  throw new Error(`操作绑定无效: ${String(action)} - 既没有“处理程序”也没有“组件”.`);
 }

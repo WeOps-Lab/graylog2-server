@@ -95,15 +95,15 @@ const TokenList = ({ creatingToken, deletingToken, onCreate, onDelete, tokens }:
       {createdToken && (
         <StyledTokenPanel bsStyle="success">
           <Panel.Heading>
-            <Panel.Title>Token <em>{createdToken.name}</em> created!</Panel.Title>
+            <Panel.Title>令牌 <em>{createdToken.name}</em> 已创建!</Panel.Title>
           </Panel.Heading>
           <Panel.Body>
-            <p>This is your new token. Make sure to copy it now, you will not be able to see it again.</p>
+            <p>这是你的新令牌。确保现在复制它，您将无法再次看到它.</p>
             <pre>
               {createdToken.token}
               <StyledCopyTokenButton title={<Icon name="clipboard" fixedWidth />} text={createdToken.token} bsSize="xsmall" />
             </pre>
-            <Button bsStyle="primary" onClick={() => setCreatedToken(undefined)}>Done</Button>
+            <Button bsStyle="primary" onClick={() => setCreatedToken(undefined)}>完成</Button>
           </Panel.Body>
         </StyledTokenPanel>
       )}
@@ -112,14 +112,14 @@ const TokenList = ({ creatingToken, deletingToken, onCreate, onDelete, tokens }:
                         onReset={updateQuery}
                         searchButtonLabel="Find"
                         searchBsStyle="info"
-                        label="Filter"
+                        label="过滤"
                         useLoadingState={false} />
 
       <ControlledTableList>
         <ControlledTableList.Header />
         {effectiveTokens.length === 0 && (
           <ControlledTableList.Item>
-            <p>{query === '' ? 'No tokens to display.' : 'No tokens match the filter.'}</p>
+            <p>{query === '' ? '没有可显示的令牌.' : '没有标记与过滤器匹配.'}</p>
           </ControlledTableList.Item>
         )}
         {effectiveTokens.map((token) => {
@@ -131,7 +131,7 @@ const TokenList = ({ creatingToken, deletingToken, onCreate, onDelete, tokens }:
                 <Col md={9}>
                   {token.name}
                   <StyledLastAccess>
-                    {tokenNeverUsed ? 'Never used' : <>Last used <RelativeTime dateTime={token.last_access} /></>}
+                    {tokenNeverUsed ? '未使用' : <>Last used <RelativeTime dateTime={token.last_access} /></>}
                   </StyledLastAccess>
                 </Col>
                 <Col md={3} className="text-right">
@@ -139,7 +139,7 @@ const TokenList = ({ creatingToken, deletingToken, onCreate, onDelete, tokens }:
                           disabled={deletingToken === token.id}
                           bsStyle="primary"
                           onClick={deleteToken(token)}>
-                    {deletingToken === token.id ? <Spinner text="Deleting..." /> : 'Delete'}
+                    {deletingToken === token.id ? <Spinner text="删除中..." /> : '删除'}
                   </Button>
                 </Col>
               </Row>

@@ -90,7 +90,7 @@ class EventDefinitionForm extends React.Component {
       return (
         <div className="pull-right">
           <ButtonToolbar>
-            <Button onClick={onCancel}>Cancel</Button>
+            <Button onClick={onCancel}>取消</Button>
             <Button bsStyle="primary" onClick={this.handleSubmit}>完成</Button>
           </ButtonToolbar>
         </div>

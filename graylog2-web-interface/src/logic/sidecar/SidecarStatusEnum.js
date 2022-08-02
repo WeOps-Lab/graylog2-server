@@ -22,10 +22,10 @@ const SidecarStatusEnum = {
   FAILING: 2,
   STOPPED: 3,
   properties: {
-    0: { name: 'running' },
-    1: { name: 'unknown' },
-    2: { name: 'failing' },
-    3: { name: 'stopped' },
+    0: {name: 'running'},
+    1: {name: 'unknown'},
+    2: {name: 'failing'},
+    3: {name: 'stopped'},
   },
 
   isValidStatusCode(statusCode) {
@@ -51,15 +51,16 @@ const SidecarStatusEnum = {
   },
 
   toString(statusCode) {
+
     switch (lodash.toNumber(statusCode)) {
       case this.RUNNING:
-        return 'running';
+        return '运行中';
       case this.FAILING:
-        return 'failing';
+        return '失败';
       case this.STOPPED:
-        return 'stopped';
+        return '停止';
       default:
-        return 'unknown';
+        return '未知';
     }
   },
 };

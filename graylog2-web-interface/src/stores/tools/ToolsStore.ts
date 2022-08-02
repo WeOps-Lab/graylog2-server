@@ -36,8 +36,8 @@ const ToolsStore = {
 
     promise.catch((errorThrown) => {
       if (errorThrown.additional.status !== 422) {
-        UserNotification.error(`Loading keyword preview failed with status: ${errorThrown}`,
-          'Could not load keyword preview');
+        UserNotification.error(`加载关键词预览: ${errorThrown}`,
+          '无法加载关键词预览');
       }
     });
 
@@ -56,8 +56,8 @@ const ToolsStore = {
     });
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'We were not able to run the grok extraction. Please check your parameters.');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '无法启用Grok提取器');
     });
 
     return promise;
@@ -94,8 +94,8 @@ const ToolsStore = {
     const promise = fetch('POST', qualifyUrl(url), payload);
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'We were not able to run the JSON extraction. Please check your parameters.');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '无法执行Json提取器');
     });
 
     return promise;
@@ -107,8 +107,8 @@ const ToolsStore = {
     const promise = fetch('GET', qualifyUrl(url));
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'Could not validate regular expression. Make sure that it is valid.');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '无法校验正则表达式.');
     });
 
     return promise;
@@ -123,8 +123,8 @@ const ToolsStore = {
     });
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'Could not verify if the url is in the whitelist.');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '无法验证网址是否在白名单中.');
     });
 
     return promise;
@@ -140,8 +140,8 @@ const ToolsStore = {
     });
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'Could not generate regex.');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '无法生成正则表达式.');
     });
 
     return promise;
@@ -157,8 +157,8 @@ const ToolsStore = {
     });
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'Could not try regular expression. Make sure that it is valid.');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '无法尝试正则表达式。确保它是有效的.');
     });
 
     return promise;
@@ -179,8 +179,8 @@ const ToolsStore = {
     const promise = fetch('POST', qualifyUrl(url), payload);
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'Could not try regular expression. Make sure that it is valid.');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '无法尝试正则表达式。确保它是有效的.');
     });
 
     return promise;
@@ -202,8 +202,8 @@ const ToolsStore = {
     const promise = fetch('POST', qualifyUrl(url), payload);
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'We were not able to run the split and index extraction. Please check your parameters.');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '我们无法运行拆分和索引提取。请检查您的参数.');
     });
 
     return promise;
@@ -223,8 +223,8 @@ const ToolsStore = {
     const promise = fetch('POST', qualifyUrl(url), payload);
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'We were not able to run the substring extraction. Please check index boundaries.');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '我们无法运行子字符串提取。请检查索引边界.');
     });
 
     return promise;
@@ -240,8 +240,8 @@ const ToolsStore = {
     });
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`,
-        'Could not check if field contains the string');
+      UserNotification.error(`详情: ${errorThrown}`,
+        '我们无法运行子字符串提取。请检查索引边界');
     });
 
     return promise;
@@ -258,7 +258,7 @@ const ToolsStore = {
     });
 
     promise.catch((errorThrown) => {
-      UserNotification.error(`Details: ${errorThrown}`, 'Could not check if lookup table translates the string');
+      UserNotification.error(`详情: ${errorThrown}`, '无法检查查找表是否翻译了字符串');
     });
 
     return promise;

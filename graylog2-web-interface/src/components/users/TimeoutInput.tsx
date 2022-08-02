@@ -83,13 +83,13 @@ const TimeoutInput = ({ value: propsValue, onChange }: Props) => {
     <Input id="timeout-controls"
            labelClassName="col-sm-3"
            wrapperClassName="col-sm-9"
-           label="Sessions Timeout">
+           label="会话超时">
       <>
         <Input type="checkbox"
                id="session-timeout-never"
                name="session_timeout_never"
-               label="Sessions do not time out"
-               help="When checked, sessions never time out due to inactivity."
+               label="会话不会超时"
+               help="选中后，会话永远不会因为不活动而超时."
                formGroupClassName="no-bm"
                onChange={_onClick}
                checked={sessionTimeoutNever} />
@@ -98,7 +98,7 @@ const TimeoutInput = ({ value: propsValue, onChange }: Props) => {
           <Col xs={2}>
             <Input type="number"
                    id="timeout"
-                   placeholder="Timeout amount"
+                   placeholder="超时"
                    name="timeout"
                    min={1}
                    formGroupClassName="form-group no-bm"
@@ -114,7 +114,7 @@ const TimeoutInput = ({ value: propsValue, onChange }: Props) => {
           <Row className="no-bm">
             <Col xs={12}>
               <HelpBlock>
-                Session automatically end after this amount of time, unless they are actively used.
+                会话在这段时间后自动结束，除非它们被积极使用。
               </HelpBlock>
             </Col>
           </Row>

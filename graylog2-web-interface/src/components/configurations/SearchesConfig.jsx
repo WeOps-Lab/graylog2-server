@@ -17,7 +17,7 @@
 import PropTypes from 'prop-types';
 import React, {createRef} from 'react';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import {Button, Row, Col, BootstrapModalForm, Input} from 'components/bootstrap';
 import {IfPermitted, ISODurationInput} from 'components/common';
 import ObjectUtils from 'util/ObjectUtils';

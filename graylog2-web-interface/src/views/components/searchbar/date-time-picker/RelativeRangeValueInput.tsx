@@ -35,7 +35,7 @@ const RelativeRangeValueInput = React.memo(({ fieldName, unsetRange, value, onCh
          min="1"
          value={value === null ? '' : value}
          className="mousetrap"
-         title={`Set the ${fieldName} value`}
+         title={`设置 ${fieldName} 的值`}
          onChange={onChange}
          bsStyle={error ? 'error' : null} />
 ));

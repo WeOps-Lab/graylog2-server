@@ -55,10 +55,10 @@ export const onSubmittingTimerange = (timerange: TimeRange): TimeRange => {
         };
       }
 
-      throw new Error('Invalid relative time range');
+      throw new Error('相对时间范围无效');
     case 'keyword':
       return timerange;
-    default: throw new Error(`Invalid time range type: ${type}`);
+    default: throw new Error(`相对时间范围无效: ${type}`);
   }
 };
 
@@ -102,9 +102,9 @@ export const onInitializingTimerange = (timerange: TimeRange): SearchBarFormValu
         };
       }
 
-      throw new Error('Invalid relative time range');
+      throw new Error('相对时间范围无效');
     case 'keyword':
       return timerange;
-    default: throw new Error(`Invalid time range type: ${type}`);
+    default: throw new Error(`时间范围类型无效: ${type}`);
   }
 };

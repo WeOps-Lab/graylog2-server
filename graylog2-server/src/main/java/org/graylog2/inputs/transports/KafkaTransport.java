@@ -100,8 +100,8 @@ public class KafkaTransport extends ThrottleableTransport {
 
     // See https://kafka.apache.org/090/documentation.html for available values for "auto.offset.reset".
     private static final ImmutableMap<String, String> OFFSET_RESET_VALUES = ImmutableMap.of(
-            "largest", "Automatically reset the offset to the latest offset", // "largest" OR "latest"
-            "smallest", "Automatically reset the offset to the earliest offset" // "smallest" OR "earliest"
+            "latest", "自动重置到最大的offset",
+            "earliest", "自动重置到最小的offset"
     );
 
     private static final String DEFAULT_OFFSET_RESET = "largest";
@@ -505,73 +505,72 @@ public class KafkaTransport extends ThrottleableTransport {
             final ConfigurationRequest cr = super.getRequestedConfiguration();
 
             cr.addField(new BooleanField(CK_LEGACY,
-                    "Legacy mode",
+                    "传统模式",
                     true,
-                    "Use old ZooKeeper-based consumer API. (Used before Graylog 3.3)",
+                    "使用Zookeeper",
                     10
             ));
             cr.addField(new TextField(
                     CK_BOOTSTRAP,
-                    "Bootstrap Servers",
-                    "127.0.0.1:9092",
-                    "Comma separated list of one or more Kafka brokers. (Format: \"host1:port1,host2:port2\")." +
-                            "Not used in legacy mode.",
+                    "Broker服务节点",
+                    "localhost:9092",
+                    "Kafka Broker服务节点",
                     ConfigurationField.Optional.OPTIONAL,
                     11));
             cr.addField(new TextField(
                     CK_ZOOKEEPER,
-                    "ZooKeeper address (legacy mode only)",
+                    "ZooKeeper 地址(只适用于传统模式)",
                     "127.0.0.1:2181",
-                    "Host and port of the ZooKeeper that is managing your Kafka cluster. Not used in consumer API (non-legacy) mode.",
+                    "管理 Kafka 集群的 ZooKeeper 的主机和端口。未在消费者 API（非传统）模式下使用.",
                     ConfigurationField.Optional.OPTIONAL,
                     12));
             cr.addField(new TextField(
                     CK_TOPIC_FILTER,
-                    "Topic filter regex",
-                    "^your-topic$",
-                    "Every topic that matches this regular expression will be consumed.",
+                    "Topic 名称",
+                    "your-topic",
+                    "Topic名称，使用;分隔",
                     ConfigurationField.Optional.NOT_OPTIONAL));
 
             cr.addField(new NumberField(
                     CK_FETCH_MIN_BYTES,
-                    "Fetch minimum bytes",
-                    5,
-                    "Wait for a message batch to reach at least this size or the configured maximum wait time before fetching.",
+                    "读取超时时间",
+                    100,
+                    "从kafka队列中读取数据的超时时间(ms)",
                     ConfigurationField.Optional.NOT_OPTIONAL));
 
             cr.addField(new NumberField(
                     CK_FETCH_WAIT_MAX,
-                    "Fetch maximum wait time (ms)",
+                    "读取最大等待时间",
                     100,
-                    "Wait for this time or the configured minimum size of a message batch before fetching.",
+                    "从kafka队列中读取数据的最大等待时间(ms)",
                     ConfigurationField.Optional.NOT_OPTIONAL));
 
             cr.addField(new NumberField(
                     CK_THREADS,
-                    "Processor threads",
+                    "采集的线程数",
                     2,
-                    "Number of processor threads to spawn. Use one thread per Kafka topic partition.",
+                    "采集的线程数量,建议一个Topic的Partition开启一个线程",
                     ConfigurationField.Optional.NOT_OPTIONAL));
 
             cr.addField(new DropdownField(
                     CK_OFFSET_RESET,
-                    "Auto offset reset",
+                    "自动重置offset",
                     DEFAULT_OFFSET_RESET,
                     OFFSET_RESET_VALUES,
-                    "What to do when there is no initial offset in Kafka or if an offset is out of range",
+                    "当没有初始化offset或者offset超出范围时自动重置offset.如果想从尾部开始读取新消息，选择重置到最大offset.",
                     ConfigurationField.Optional.OPTIONAL));
 
             cr.addField(new TextField(
                     CK_GROUP_ID,
-                    "Consumer group id",
+                    "消费者分组ID",
                     DEFAULT_GROUP_ID,
-                    "Name of the consumer group the Kafka input belongs to",
+                    "消费者分组ID",
                     ConfigurationField.Optional.OPTIONAL));
             cr.addField(new TextField(
                     CK_CUSTOM_PROPERTIES,
-                    "Custom Kafka properties",
+                    "Kafka自定义属性",
                     "",
-                    "A newline separated list of Kafka properties. (e.g.: \"ssl.keystore.location=/etc/graylog/server/kafka.keystore.jks\").",
+                    "Kafka自定义属性. (例如.: \"ssl.keystore.location=/etc/datainsight/server/kafka.keystore.jks\").",
                     ConfigurationField.Optional.OPTIONAL,
                     ConfigurationField.PLACE_AT_END_POSITION,
                     TextField.Attribute.TEXTAREA

@@ -17,6 +17,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
+moment.locale('zh-cn');
 import { Formik, Form, Field } from 'formik';
 import styled from 'styled-components';
 import { PluginStore } from 'graylog-web-plugin/plugin';

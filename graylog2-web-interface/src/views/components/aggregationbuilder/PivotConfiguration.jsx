@@ -66,7 +66,7 @@ export default class PivotConfiguration extends React.Component {
       <form onSubmit={this._onSubmit}>
         {typeSpecificConfiguration}
         <div className="pull-right" style={{ marginBottom: '10px' }}>
-          <Button type="submit" bsStyle="success">Done</Button>
+          <Button type="submit" bsStyle="success">完成</Button>
         </div>
       </form>
     );

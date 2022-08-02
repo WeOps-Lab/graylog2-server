@@ -67,15 +67,14 @@ const ErrorFallback = ({ error, resetErrorBoundary }) => {
   return (
     <Alert bsStyle="danger">
       {isCloud ? (
-        <p>Error loading login screen, please contact your Graylog account manager.</p>
+        <p>加载登录屏幕时出错，请联系管理员.</p>
       ) : (
         <>
           <p>
-            Error using active authentication service login. Please check its configuration or contact your
-            Graylog account manager. Error details:
+            异常信息
           </p>
           <StyledPre>{error.message}</StyledPre>
-          <Button bsStyle="danger" onClick={resetErrorBoundary}>Login with default method</Button>
+          <Button bsStyle="danger" onClick={resetErrorBoundary}>使用默认方法登录</Button>
         </>
       )}
     </Alert>
@@ -164,15 +163,15 @@ const LoginPage = () => {
   && loginFormState === LOGIN_INITIALIZED_STATE;
 
   return (
-    <DocumentTitle title="Sign in">
+    <DocumentTitle title="登录">
       <LoginBox>
-        <legend><Icon name="users" /> Welcome to Graylog</legend>
+        <legend><Icon name="users" /> 欢迎来到DataInsight</legend>
         <LoginPageStyles />
         {formatLastError()}
         {renderLoginForm()}
         {shouldDisplayFallbackLink && (
         <StyledButton as="a" onClick={() => setUseFallback(!useFallback)}>
-          {`Login with ${useFallback ? loginComponent.type.replace(/^\w/, (c) => c.toUpperCase()) : 'default method'}`}
+          {`使用 ${useFallback ? loginComponent.type.replace(/^\w/, (c) => c.toUpperCase()) : '默认登录'}`}
         </StyledButton>
         )}
       </LoginBox>

@@ -30,28 +30,25 @@ const EventsPage = ({ location }) => {
   const filteredSourceStream = location.query.stream_id;
 
   return (
-    <DocumentTitle title="Alerts &amp; Events">
+    <DocumentTitle title="告警 &amp; 事件">
       <span>
-        <PageHeader title="Alerts &amp; Events">
+        <PageHeader title="告警 &amp; 事件">
           <span>
-            Define Events through different conditions. Add Notifications to Events that require your attention
-            to create Alerts.
+              通过不同的条件定义事件。为需要告警的事件添加通知。
           </span>
           <span>
-            Graylog&apos;s new Alerting system let you define more flexible and powerful rules. Learn more in the{' '}
-            <DocumentationLink page={DocsHelper.PAGES.ALERTS}
-                               text="documentation" />
+            在<DocumentationLink page={DocsHelper.PAGES.ALERTS} text="文档" />中查看更多关于告警的信息。
           </span>
 
           <ButtonToolbar>
             <LinkContainer to={Routes.ALERTS.LIST}>
-              <Button bsStyle="info">Alerts &amp; Events</Button>
+               <Button bsStyle="info" className="active">告警 &amp; 事件</Button>
             </LinkContainer>
             <LinkContainer to={Routes.ALERTS.DEFINITIONS.LIST}>
-              <Button bsStyle="info">Event Definitions</Button>
+              <Button bsStyle="info">事件规则</Button>
             </LinkContainer>
             <LinkContainer to={Routes.ALERTS.NOTIFICATIONS.LIST}>
-              <Button bsStyle="info">Notifications</Button>
+              <Button bsStyle="info">通知</Button>
             </LinkContainer>
           </ButtonToolbar>
         </PageHeader>

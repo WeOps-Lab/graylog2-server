@@ -26,9 +26,9 @@ const DisabledTimeRangeSelector = () => (
            type="select"
            disabled
            value="disabled"
-           title="There is no override for the timerange currently selected"
+           title="当前选择的时间范围没有覆盖"
            name="no-override">
-      <option value="disabled">No Override</option>
+      <option value="disabled">无覆盖</option>
     </Input>
   </TimerangeSelector>
 );

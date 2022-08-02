@@ -31,7 +31,7 @@ const validate = hasAtLeastOneMetric('Bar chart');
 
 const barChart: VisualizationType<typeof BarVisualization.type, BarVisualizationConfig, BarVisualizationConfigFormValues> = {
   type: BarVisualization.type,
-  displayName: 'Bar Chart',
+  displayName: '柱状图',
   component: BarVisualization,
   config: {
     createConfig: () => ({ barmode: DEFAULT_BARMODE }),
@@ -39,28 +39,28 @@ const barChart: VisualizationType<typeof BarVisualization.type, BarVisualization
     toConfig: (formValues: BarVisualizationConfigFormValues) => BarVisualizationConfig.create(formValues.barmode),
     fields: [{
       name: 'barmode',
-      title: 'Mode',
+      title: '模式',
       type: 'select',
-      options: [['Group', 'group'], ['Stack', 'stack'], ['Relative', 'relative'], ['Overlay', 'overlay']],
+      options: [['分组', 'group'], ['堆叠', 'stack'], ['相对', 'relative'], ['覆盖', 'overlay']],
       required: true,
       helpComponent: () => {
         const options = {
           group: {
-            label: 'Group',
-            help: 'Every series is represented by its own bar in the chart.',
+            label: '分组',
+            help: '每个系列在图表中由其自己的条形表示.',
           },
           stack: {
-            label: 'Stack',
-            help: 'All series are stacked upon each other resulting in one bar.',
+            label: '堆叠',
+            help: '所有系列相互堆叠，形成一个条形图.',
           },
           relative: {
-            label: 'Relative',
-            help: 'All series are stacked upon each other resulting in one chart. But negative series are placed below zero.',
+            label: '相对',
+            help: '所有系列相互堆叠，形成一张图表。但负数列低于零.',
           },
           overlay: {
-            label: 'Overlay',
-            help: 'All series are placed as bars upon each other. To be able to see the bars the opacity is reduced to 75%.'
-              + ' It is recommended to use this option with not more than 3 series.',
+            label: '覆盖',
+            help: '所有系列都作为条形放置在彼此之上。为了能够看到条形，不透明度降低到 75%。'
+              + ' 建议在不超过 3 个系列的情况下使用此选项。',
           },
         };
 

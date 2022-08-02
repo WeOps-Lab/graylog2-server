@@ -23,11 +23,11 @@ type LineVisualizationConfigFormValues = {
   interpolation: 'linear' | 'step-after' | 'spline';
 };
 
-const validate = hasAtLeastOneMetric('Line chart');
+const validate = hasAtLeastOneMetric('折线图');
 
 const lineChart: VisualizationType<typeof LineVisualization.type, LineVisualizationConfig, LineVisualizationConfigFormValues> = {
   type: LineVisualization.type,
-  displayName: 'Line Chart',
+  displayName: '折线图',
   component: LineVisualization,
   config: {
     createConfig: () => ({ interpolation: LineVisualizationConfig.DEFAULT_INTERPOLATION }),
@@ -35,7 +35,7 @@ const lineChart: VisualizationType<typeof LineVisualization.type, LineVisualizat
     toConfig: (formValues: LineVisualizationConfigFormValues) => LineVisualizationConfig.create(formValues.interpolation),
     fields: [{
       name: 'interpolation',
-      title: 'Interpolation',
+      title: '插值',
       type: 'select',
       options: ['linear', 'step-after', 'spline'],
       required: true,

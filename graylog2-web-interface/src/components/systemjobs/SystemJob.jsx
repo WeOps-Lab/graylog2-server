@@ -50,7 +50,7 @@ class SystemJob extends React.Component {
       e.preventDefault();
 
       // eslint-disable-next-line no-alert
-      if (window.confirm(`Are you sure you want to cancel system job "${job.info}"?`)) {
+      if (window.confirm(`确定要取消系统任务 "${job.info}"?`)) {
         SystemJobsActions.cancelJob(job.id);
       }
     };
@@ -60,16 +60,16 @@ class SystemJob extends React.Component {
     const { job } = this.props;
     const progress = job.percent_complete < 100
       ? <StyledProgressBar bars={[{ value: job.percent_complete, bsStyle: 'info', animated: true }]} />
-      : <span className="label label-success finished">Finished!</span>;
+      : <span className="label label-success finished">完成!</span>;
     const cancel = job.is_cancelable
-      ? (<Button type="button" bsSize="xs" bsStyle="primary" className="pull-right" onClick={this._onCancel(job)}>Cancel Job</Button>) : null;
+      ? (<Button type="button" bsSize="xs" bsStyle="primary" className="pull-right" onClick={this._onCancel(job)}>取消任务</Button>) : null;
 
     return (
       <div>
         <JobWrap>
           <Icon name="cog" />{' '}
           <span data-toggle="tooltip" title={job.name}>{job.info}</span>{' '}
-          - Started on <LinkToNode nodeId={job.node_id} />{' '}
+          - 开始于 <LinkToNode nodeId={job.node_id} />{' '}
           <RelativeTime dateTime={job.started_at} />{' '}
           {cancel}
         </JobWrap>

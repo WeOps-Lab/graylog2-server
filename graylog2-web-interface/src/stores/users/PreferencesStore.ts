@@ -90,13 +90,13 @@ export const PreferencesStore = singletonStore(
       const promise = fetch('PUT', url, { preferences: convertedPreferences })
         .then(() => {
           if (displaySuccessNotification) {
-            UserNotification.success('User preferences successfully saved');
+            UserNotification.success('用户信息保存成功');
           }
 
           callback(preferences);
         }, (errorThrown) => {
-          UserNotification.error(`Saving of preferences for "${userName}" failed with status: ${errorThrown}`,
-            'Could not save user preferences');
+          UserNotification.error(`保存用户信息 "${this._userName}" 失败: ${errorThrown}`,
+            '无法保存用户信息');
         });
 
       PreferencesActions.saveUserPreferences.promise(promise);
@@ -108,8 +108,8 @@ export const PreferencesStore = singletonStore(
 
       const failCallback = (errorThrown) => {
         UserNotification.error(
-          `Loading of user preferences for "${userName}" failed with status: ${errorThrown}. Try reloading the page`,
-          'Could not retrieve user preferences from server',
+          `加载用户信息"${userName}" 失败: ${errorThrown}.`,
+          '无法加载用户信息',
         );
       };
 

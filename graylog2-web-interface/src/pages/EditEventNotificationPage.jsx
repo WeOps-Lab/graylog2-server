@@ -74,10 +74,10 @@ class EditEventDefinitionPage extends React.Component {
 
     if (!notification) {
       return (
-        <DocumentTitle title="Edit Notification">
+        <DocumentTitle title="编辑通知">
           <span>
-            <PageHeader title="Edit Notification">
-              <Spinner text="Loading Notification information..." />
+            <PageHeader title="编辑通知">
+              <Spinner text="加载通知信息中..."/>
             </PageHeader>
           </span>
         </DocumentTitle>
@@ -85,32 +85,29 @@ class EditEventDefinitionPage extends React.Component {
     }
 
     return (
-      <DocumentTitle title={`Edit "${notification.title}" Notification`}>
+      <DocumentTitle title={`编辑通知 "${notification.title}"`}>
         <span>
-          <PageHeader title={`Edit "${notification.title}" Notification`} subactions={<EventNotificationActionLinks notificationId={notification.id} />}>
+          <PageHeader title={`编辑通知 "${notification.title}"`}>
             <span>
-              Notifications alert you of any configured Event when they occur. Graylog can send Notifications directly
-              to you or to other systems you use for that purpose.
+              通知会在任何配置好的事件触发时给您发送告警.DataInsight可以发送通知给您或您指定的第三方平台
             </span>
 
             <span>
-              Graylog&apos;s new Alerting system let you define more flexible and powerful rules. Learn more in the{' '}
-              <DocumentationLink page={DocsHelper.PAGES.ALERTS}
-                                 text="documentation" />
+              在<DocumentationLink page={DocsHelper.PAGES.ALERTS} text="文档"/>中查看更多关于告警的信息
             </span>
 
             <ButtonToolbar>
               <LinkContainer to={Routes.ALERTS.LIST}>
-                <Button bsStyle="info">Alerts & Events</Button>
+                <Button bsStyle="info">告警 & 事件</Button>
               </LinkContainer>
               <IfPermitted permissions="eventdefinitions:read">
                 <LinkContainer to={Routes.ALERTS.DEFINITIONS.LIST}>
-                  <Button bsStyle="info">Event Definitions</Button>
+                  <Button bsStyle="info">事件规则</Button>
                 </LinkContainer>
               </IfPermitted>
               <IfPermitted permissions="eventnotifications:read">
                 <LinkContainer to={Routes.ALERTS.NOTIFICATIONS.LIST}>
-                  <Button bsStyle="info">Notifications</Button>
+                  <Button bsStyle="info">通知</Button>
                 </LinkContainer>
               </IfPermitted>
             </ButtonToolbar>

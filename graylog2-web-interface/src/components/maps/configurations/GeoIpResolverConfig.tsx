@@ -117,7 +117,7 @@ const GeoIpResolverConfig = ({ config = defaultConfig, updateConfig }: Props) =>
                 onClick={() => {
                   setShowModal(true);
                 }}>
-          Update
+          更新
         </Button>
       </IfPermitted>
       <Modal show={showModal} onHide={resetConfig} aria-modal="true" aria-labelledby="dialog_label">

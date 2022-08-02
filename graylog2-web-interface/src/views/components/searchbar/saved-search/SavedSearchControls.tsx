@@ -143,8 +143,8 @@ class SavedSearchControls extends React.Component<Props, State> {
 
     ViewManagementActions.update(newView)
       .then(this.toggleFormModal)
-      .then(() => UserNotification.success(`Saving view "${newView.title}" was successful!`, 'Success!'))
-      .catch((error) => UserNotification.error(`Saving view failed: ${this._extractErrorMessage(error)}`, 'Error!'));
+      .then(() => UserNotification.success(`保存视图 "${newView.title}" 成功!`, '成功!'))
+      .catch((error) => UserNotification.error(`保存视图失败: ${this._extractErrorMessage(error)}`, '失败!'));
   };
 
   _extractErrorMessage = (error) => {
@@ -180,8 +180,8 @@ class SavedSearchControls extends React.Component<Props, State> {
 
         loaderFunc(createdView.id);
       })
-      .then(() => UserNotification.success(`Saving view "${newView.title}" was successful!`, 'Success!'))
-      .catch((error) => UserNotification.error(`Saving view failed: ${this._extractErrorMessage(error)}`, 'Error!'));
+      .then(() => UserNotification.success(`保存视图 "${newView.title}" 成功!`, '成功!'))
+      .catch((error) => UserNotification.error(`保存视图失败: ${this._extractErrorMessage(error)}`, 'Error!'));
   };
 
   deleteSavedSearch = (deletedView) => {
@@ -189,14 +189,14 @@ class SavedSearchControls extends React.Component<Props, State> {
     const { view } = viewStoreState;
 
     return ViewManagementActions.delete(deletedView)
-      .then(() => UserNotification.success(`Deleting view "${deletedView.title}" was successful!`, 'Success!'))
+      .then(() => UserNotification.success(`删除视图 "${deletedView.title}" 成功!`, '成功!'))
       .then(() => ViewActions.create(View.Type.Search))
       .then(() => {
         if (deletedView.id === view.id) {
           loadNewSearch();
         }
       })
-      .catch((error) => UserNotification.error(`Deleting view failed: ${this._extractErrorMessage(error)}`, 'Error!'));
+      .catch((error) => UserNotification.error(`删除视图失败: ${this._extractErrorMessage(error)}`, '失败!'));
   };
 
   _loadAsDashboard = () => {
@@ -222,9 +222,9 @@ class SavedSearchControls extends React.Component<Props, State> {
     let title: string;
 
     if (dirty) {
-      title = 'Unsaved changes';
+      title = '未保存的变更';
     } else {
-      title = loaded ? 'Saved search' : 'Save search';
+      title = loaded ? '已保存的搜索' : '保存搜索';
     }
 
     return (
@@ -235,9 +235,9 @@ class SavedSearchControls extends React.Component<Props, State> {
           return (
             <NewViewLoaderContext.Consumer>
               {(loadNewView) => (
-                <ButtonGroup aria-label="Search Meta Buttons">
+                <ButtonGroup aria-label="搜索按钮">
                   <Button title={title} ref={this.formTarget} onClick={this.toggleFormModal}>
-                    <Icon style={{ color: savedSearchColor }} name="star" type={loaded ? 'solid' : 'regular'} /> Save
+                    <Icon style={{ color: savedSearchColor }} name="star" type={loaded ? 'solid' : 'regular'} /> 保存
                   </Button>
                   {showForm && (
                     <SavedSearchForm onChangeTitle={this.onChangeTitle}
@@ -249,9 +249,9 @@ class SavedSearchControls extends React.Component<Props, State> {
                                      toggleModal={this.toggleFormModal}
                                      value={newTitle} />
                   )}
-                  <Button title="Load a previously saved search"
+                  <Button title="加载前一个保存的搜索"
                           onClick={this.toggleListModal}>
-                    <Icon name="folder" type="regular" /> Load
+                    <Icon name="folder" type="regular" /> 加载
                   </Button>
                   {showList && (
                     <SavedSearchList deleteSavedSearch={this.deleteSavedSearch}
@@ -262,17 +262,17 @@ class SavedSearchControls extends React.Component<Props, State> {
                                entityId={view.id}
                                onClick={this.toggleShareSearch}
                                bsStyle="default"
-                               disabledInfo={!view.id && 'Only saved searches can be shared.'} />
-                  <DropdownButton title={<Icon name="ellipsis-h" />} aria-label="Open search actions dropdown" id="search-actions-dropdown" pullRight noCaret>
+                               disabledInfo={!view.id && '只能共享已保存的搜索.'} />
+                  <DropdownButton title={<Icon name="ellipsis-h" />} aria-label="打开搜索操作下拉菜单" id="search-actions-dropdown" pullRight noCaret>
                     <MenuItem onSelect={this.toggleMetadataEdit} disabled={!isAllowedToEdit}>
-                      <Icon name="edit" /> Edit metadata
+                      <Icon name="edit" /> 编辑元数据
                     </MenuItem>
                     <IfPermitted permissions="dashboards:create">
-                      <MenuItem onSelect={this._loadAsDashboard}><Icon name="tachometer-alt" /> Export to dashboard</MenuItem>
+                      <MenuItem onSelect={this._loadAsDashboard}><Icon name="tachometer-alt" /> 导出到仪表板</MenuItem>
                     </IfPermitted>
-                    <MenuItem onSelect={this.toggleExport}><Icon name="cloud-download-alt" /> Export</MenuItem>
+                    <MenuItem onSelect={this.toggleExport}><Icon name="cloud-download-alt" /> 导出</MenuItem>
                     <MenuItem disabled={disableReset} onSelect={() => loadNewView()}>
-                      <Icon name="eraser" /> Reset search
+                      <Icon name="eraser" /> 重置搜索
                     </MenuItem>
                     <MenuItem divider />
                   </DropdownButton>
@@ -282,7 +282,7 @@ class SavedSearchControls extends React.Component<Props, State> {
                   {showMetadataEdit && (
                     <ViewPropertiesModal show
                                          view={view}
-                                         title="Editing saved search"
+                                         title="编辑保存的搜索"
                                          onClose={this.toggleMetadataEdit}
                                          onSave={onSaveView} />
                   )}
@@ -290,7 +290,7 @@ class SavedSearchControls extends React.Component<Props, State> {
                     <EntityShareModal entityId={view.id}
                                       entityType="search"
                                       entityTitle={view.title}
-                                      description={`Search for a User or Team to add as collaborator on this ${viewTypeLabel}.`}
+                                      description={`搜索要添加为协作者的用户或团队 ${viewTypeLabel}.`}
                                       onClose={this.toggleShareSearch} />
                   )}
                 </ButtonGroup>

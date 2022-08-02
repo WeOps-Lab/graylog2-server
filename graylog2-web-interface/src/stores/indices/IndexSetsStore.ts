@@ -138,8 +138,8 @@ export const IndexSetsStore = singletonStore(
             indexSetStats: response.stats,
           }),
           (error) => {
-            UserNotification.error(`Fetching index sets list failed: ${error.message}`,
-              'Could not retrieve index sets.');
+            UserNotification.error(`获取索引集列表失败: ${error.message}`,
+              '无法获取索引集列表.');
           },
         );
 
@@ -158,8 +158,8 @@ export const IndexSetsStore = singletonStore(
             indexSetStats: response.stats,
           }),
           (error) => {
-            UserNotification.error(`Fetching index sets list failed: ${this._errorMessage(error)}`,
-              'Could not retrieve index sets.');
+            UserNotification.error(`获取索引集列表失败: ${this._errorMessage(error)}`,
+              '无法获取索引集列表.');
           },
         );
 
@@ -177,7 +177,7 @@ export const IndexSetsStore = singletonStore(
           return response;
         },
         (error) => {
-          UserNotification.error(`Fetching index set '${indexSetId}' failed with status: ${this._errorMessage(error)}`, 'Could not retrieve index set.');
+          UserNotification.error(`无法获取索引集 '${indexSetId}' 的信息: ${this._errorMessage(error)}`, '无法获取索引集信息.');
         },
       );
 
@@ -190,13 +190,13 @@ export const IndexSetsStore = singletonStore(
 
       promise.then(
         (response: IndexSet) => {
-          UserNotification.success(`Successfully updated index set '${indexSet.title}'`, 'Success');
+          UserNotification.success(`更新索引集 '${indexSet.title}' 成功`, '成功');
           this.trigger({ indexSet: response });
 
           return response;
         },
         (error) => {
-          UserNotification.error(`Updating index set '${indexSet.title}' failed with status: ${this._errorMessage(error)}`, 'Could not update index set.');
+          UserNotification.error(`更新索引集 '${indexSet.title}' 失败: ${this._errorMessage(error)}`, '无法更新索引集.');
         },
       );
 
@@ -209,13 +209,13 @@ export const IndexSetsStore = singletonStore(
 
       promise.then(
         (response: IndexSet) => {
-          UserNotification.success(`Successfully created index set '${indexSet.title}'`, 'Success');
+          UserNotification.success(`成功创建索引集 '${indexSet.title}'`, '成功');
           this.trigger({ indexSet: response });
 
           return response;
         },
         (error) => {
-          UserNotification.error(`Creating index set '${indexSet.title}' failed with status: ${this._errorMessage(error)}`, 'Could not create index set.');
+          UserNotification.error(`创建索引集 '${indexSet.title}' 失败: ${this._errorMessage(error)}`, '无法创建索引集.');
         },
       );
 
@@ -228,10 +228,10 @@ export const IndexSetsStore = singletonStore(
 
       promise.then(
         () => {
-          UserNotification.success(`Successfully deleted index set '${indexSet.title}'`, 'Success');
+          UserNotification.success(`成功删除索引集 '${indexSet.title}'`, '成功');
         },
         (error) => {
-          UserNotification.error(`Deleting index set '${indexSet.title}' failed with status: ${this._errorMessage(error)}`, 'Could not delete index set.');
+          UserNotification.error(`删除索引集 '${indexSet.title}' 失败: ${this._errorMessage(error)}`, '无法删除索引集.');
         },
       );
 
@@ -244,10 +244,10 @@ export const IndexSetsStore = singletonStore(
 
       promise.then(
         () => {
-          UserNotification.success(`Successfully set index set '${indexSet.title}' as default`, 'Success');
+          UserNotification.success(`成功设置默认索引集 '${indexSet.title}' `, '成功');
         },
         (error) => {
-          UserNotification.error(`Setting index set '${indexSet.title}' as default failed with status: ${this._errorMessage(error)}`, 'Could not set default index set.');
+          UserNotification.error(`设置 '${indexSet.title}' 为默认索引集失败: ${this._errorMessage(error)}`, '无法设置默认索引集.');
         },
       );
 
@@ -268,8 +268,8 @@ export const IndexSetsStore = singletonStore(
             },
           }),
           (error) => {
-            UserNotification.error(`Fetching global index stats failed: ${error.message}`,
-              'Could not retrieve global index stats.');
+            UserNotification.error(`获取全局索引集失败: ${error.message}`,
+              '获取全局索引集失败.');
           },
         );
 

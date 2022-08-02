@@ -123,7 +123,7 @@ const ElementsConfigurationActions = () => {
 
           {dirty && (
             <Button bsStyle="success" className="pull-right" type="submit" disabled={!isValid || isSubmitting}>
-              {isSubmitting ? <Spinner text="Updating Preview" delay={0} /> : 'Update Preview'}
+              {isSubmitting ? <Spinner text="更新预览中...." delay={0} /> : '更新预览'}
             </Button>
           )}
         </ButtonToolbar>

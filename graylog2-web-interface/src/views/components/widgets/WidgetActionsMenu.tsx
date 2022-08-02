@@ -127,7 +127,7 @@ const _onMoveWidgetToTab = (
 };
 
 // eslint-disable-next-line no-alert
-const defaultOnDeleteWidget = async (widget: Widget, view: View, title: string) => window.confirm(`Are you sure you want to remove the widget "${title}"?`);
+const defaultOnDeleteWidget = async (widget: Widget, view: View, title: string) => window.confirm(`您确定要删除小部件吗 "${title}"?`);
 
 const _onDelete = async (widget: Widget, view: View, title: string) => {
   const pluggableWidgetDeletionHooks = PluginStore.exports('views.hooks.confirmDeletingWidget');
@@ -181,7 +181,7 @@ const WidgetActionsMenu = ({
         </IfDashboard>
         {isFocused && (
           <IconButton name="compress-arrows-alt"
-                      title="Un-focus widget"
+                      title="取消聚焦小部件"
                       onClick={unsetWidgetFocusing} />
         )}
         {!isFocused && (
@@ -191,28 +191,28 @@ const WidgetActionsMenu = ({
                                      onStretch={onPositionsChange}
                                      position={position} />
             <IconButton name="expand-arrows-alt"
-                        title="Focus this widget"
+                        title="聚焦小部件"
                         onClick={focusWidget} />
           </>
         )}
 
         <IconButton name="edit"
-                    title="Edit"
+                    title="编辑"
                     onClick={toggleEdit} />
 
         <WidgetActionDropdown>
           <MenuItem onSelect={onDuplicate}>
-            Duplicate
+            复制
           </MenuItem>
           <IfSearch>
             <MenuItem onSelect={() => setShowCopyToDashboard(true)}>
-              Copy to Dashboard
+              复制到仪表盘
             </MenuItem>
           </IfSearch>
-          {widget.isExportable && <MenuItem onSelect={() => setShowExport(true)}>Export</MenuItem>}
+          {widget.isExportable && <MenuItem onSelect={() => setShowExport(true)}>导出</MenuItem>}
           <IfDashboard>
             <MenuItem onSelect={() => setShowMoveWidgetToTab(true)}>
-              Move to Page
+              移动
             </MenuItem>
           </IfDashboard>
           <ExtraWidgetActions widget={widget} onSelect={() => {}} />

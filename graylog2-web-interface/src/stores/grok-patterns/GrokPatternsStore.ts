@@ -52,8 +52,8 @@ export const GrokPatternsStore = singletonStore(
 
     loadPatterns(callback: (patterns: Array<GrokPattern>) => void) {
       const failCallback = (error) => {
-        UserNotification.error(`Loading Grok patterns failed with status: ${error.message}`,
-          'Could not load Grok patterns');
+        UserNotification.error("加载Grok表达式失败：" + error.message,
+          "无法加载Grok表达式");
       };
 
       // get the current list of patterns and sort it by name
@@ -94,8 +94,8 @@ export const GrokPatternsStore = singletonStore(
           };
         })
         .catch((errorThrown) => {
-          UserNotification.error(`Loading patterns failed with status: ${errorThrown}`,
-            'Could not load streams');
+          UserNotification.error(`加载失败: ${errorThrown}`,
+            '加载失败');
         });
     },
 
@@ -139,8 +139,8 @@ export const GrokPatternsStore = singletonStore(
           errorMessage = error.additional.body.message;
         }
 
-        UserNotification.error(`Testing Grok pattern "${pattern.name}" failed with status: ${errorMessage}`,
-          'Could not test Grok pattern');
+        UserNotification.error(`测试Grok表达式“${pattern.name}”失败：${errorMessage}`,
+          "无法测试Grok表达式");
       };
 
       const requestPattern = {
@@ -164,8 +164,8 @@ export const GrokPatternsStore = singletonStore(
         .then(
           (response) => {
             callback();
-            const action = pattern.id === '' ? 'created' : 'updated';
-            const message = `Grok pattern "${pattern.name}" successfully ${action}`;
+            const actionName = pattern.id === "" ? "创建" : "更新";
+            const message = "Grok表达式”" + pattern.name + "“" + actionName + "成功";
 
             UserNotification.success(message);
 
@@ -177,15 +177,15 @@ export const GrokPatternsStore = singletonStore(
 
     deletePattern(pattern: GrokPattern, callback: () => void) {
       const failCallback = (error) => {
-        UserNotification.error(`Deleting Grok pattern "${pattern.name}" failed with status: ${error.message}`,
-          'Could not delete Grok pattern');
+        UserNotification.error("删除Grok表达式“" + pattern.name + "”失败：" + error.message,
+          "无法删除Grok表达式");
       };
 
       fetch('DELETE', `${this.URL}/${pattern.id}`)
         .then(
           (response) => {
             callback();
-            UserNotification.success(`Grok pattern "${pattern.name}" successfully deleted`);
+            UserNotification.success("Grok表达式“" + pattern.name + "”删除成功");
 
             return response;
           },
@@ -208,8 +208,8 @@ export const GrokPatternsStore = singletonStore(
           }
         }
 
-        UserNotification.error(`Importing Grok pattern file failed with status: ${errorMessage}`,
-          'Could not load Grok patterns');
+        UserNotification.error(`导入Grok表达式失败: ${errorMessage}`,
+          '无法导入Grok表达式');
       };
 
       const promise = fetchPlainText('POST', `${this.URL}?import-strategy=${importStrategy}`, patterns);

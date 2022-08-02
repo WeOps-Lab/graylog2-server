@@ -133,9 +133,9 @@ const PipelineDetailsPage = createReactClass({
     let title;
 
     if (this._isNewPipeline(params.pipelineId)) {
-      title = 'New pipeline';
+      title = '新建流水线';
     } else {
-      title = <span>Pipeline <em>{pipeline.title}</em></span>;
+      title = <span>流水线 <em>{pipeline.title}</em></span>;
     }
 
     let content;
@@ -154,32 +154,30 @@ const PipelineDetailsPage = createReactClass({
       );
     }
 
-    const pageTitle = (this._isNewPipeline(params.pipelineId) ? 'New pipeline' : `Pipeline ${pipeline.title}`);
+    const pageTitle = (this._isNewPipeline(params.pipelineId) ? '新建流水线' : `流水线 ${pipeline.title}`);
 
     return (
       <DocumentTitle title={pageTitle}>
         <div>
           <PageHeader title={title}>
-            <span>
-              Pipelines let you transform and process messages coming from streams. Pipelines consist of stages where
-              rules are evaluated and applied. Messages can go through one or more stages.
+             <span>
+              流水线允许转换和处理来自消息流的消息.它由多个步骤组成,每个步骤中的规则会在消息流入的时候执行.
             </span>
             <span>
-              After each stage is completed, you can decide if messages matching all or one of the rules continue to
-              the next stage.
+              当步骤处理完成之后,您可以决定是否继续执行接下来的步骤.
             </span>
 
             <span>
               <LinkContainer to={Routes.SYSTEM.PIPELINES.OVERVIEW}>
-                <Button bsStyle="info">Manage pipelines</Button>
+                <Button bsStyle="info">管理流水线</Button>
               </LinkContainer>
               &nbsp;
               <LinkContainer to={Routes.SYSTEM.PIPELINES.RULES}>
-                <Button bsStyle="info">Manage rules</Button>
+                <Button bsStyle="info">规则管理</Button>
               </LinkContainer>
               &nbsp;
               <LinkContainer to={Routes.SYSTEM.PIPELINES.SIMULATOR}>
-                <Button bsStyle="info">Simulator</Button>
+                <Button bsStyle="info">模拟</Button>
               </LinkContainer>
             </span>
           </PageHeader>

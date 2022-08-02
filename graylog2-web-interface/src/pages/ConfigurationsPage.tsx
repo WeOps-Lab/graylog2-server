@@ -15,12 +15,12 @@
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 
-import { Col, Row } from 'components/bootstrap';
-import { DocumentTitle, PageHeader, Spinner } from 'components/common';
-import { useStore } from 'stores/connect';
-import { isPermitted } from 'util/PermissionsMixin';
+import {Col, Row} from 'components/bootstrap';
+import {DocumentTitle, PageHeader, Spinner} from 'components/common';
+import {useStore} from 'stores/connect';
+import {isPermitted} from 'util/PermissionsMixin';
 import SearchesConfig from 'components/configurations/SearchesConfig';
 import MessageProcessorsConfig from 'components/configurations/MessageProcessorsConfig';
 import SidecarConfig from 'components/configurations/SidecarConfig';
@@ -28,11 +28,11 @@ import EventsConfig from 'components/configurations/EventsConfig';
 import UrlWhiteListConfig from 'components/configurations/UrlWhiteListConfig';
 import PermissionsConfig from 'components/configurations/PermissionsConfig';
 import 'components/maps/configurations';
-import type { Store } from 'stores/StoreTypes';
+import type {Store} from 'stores/StoreTypes';
 import usePluginEntities from 'views/logic/usePluginEntities';
 import ConfigletRow from 'pages/configurations/ConfigletRow';
-import { ConfigurationsActions, ConfigurationsStore } from 'stores/configurations/ConfigurationsStore';
-import { CurrentUserStore } from 'stores/users/CurrentUserStore';
+import {ConfigurationsActions, ConfigurationsStore} from 'stores/configurations/ConfigurationsStore';
+import {CurrentUserStore} from 'stores/users/CurrentUserStore';
 
 import ConfigletContainer from './configurations/ConfigletContainer';
 import PluginConfigRows from './configurations/PluginConfigRows';
@@ -88,7 +88,7 @@ const ConfigurationsPage = () => {
 
   let Output = (
     <Col md={12}>
-      <Spinner text="Loading Configuration Panel..." />
+      <Spinner text="加载配置面板中..."/>
     </Col>
   );
 
@@ -103,42 +103,42 @@ const ConfigurationsPage = () => {
     Output = (
       <>
         {searchesConfig && (
-          <ConfigletContainer title="Search Configuration">
+          <ConfigletContainer title="搜索配置">
             <SearchesConfig config={searchesConfig}
-                            updateConfig={_onUpdate(SEARCHES_CLUSTER_CONFIG)} />
+                            updateConfig={_onUpdate(SEARCHES_CLUSTER_CONFIG)}/>
           </ConfigletContainer>
         )}
         {messageProcessorsConfig && (
-          <ConfigletContainer title="Message Processor Configuration">
+          <ConfigletContainer title="消息处理器配置">
             <MessageProcessorsConfig config={messageProcessorsConfig}
-                                     updateConfig={_onUpdate(MESSAGE_PROCESSORS_CONFIG)} />
+                                     updateConfig={_onUpdate(MESSAGE_PROCESSORS_CONFIG)}/>
           </ConfigletContainer>
         )}
         {sidecarConfig && (
-          <ConfigletContainer title="Sidecar Configuration">
+          <ConfigletContainer title="客户端管理配置">
             <SidecarConfig config={sidecarConfig}
-                           updateConfig={_onUpdate(SIDECAR_CONFIG)} />
+                           updateConfig={_onUpdate(SIDECAR_CONFIG)}/>
           </ConfigletContainer>
         )}
         {eventsConfig && (
-          <ConfigletContainer title="Events Configuration">
+          <ConfigletContainer title="事件配置">
             <EventsConfig config={eventsConfig}
-                          updateConfig={_onUpdate(EVENTS_CONFIG)} />
+                          updateConfig={_onUpdate(EVENTS_CONFIG)}/>
           </ConfigletContainer>
         )}
         {isPermitted(permissions, ['urlwhitelist:read']) && urlWhiteListConfig && (
-          <ConfigletContainer title="URL Whitelist Configuration">
+          <ConfigletContainer title="URL白名单配置">
             <UrlWhiteListConfig config={urlWhiteListConfig}
-                                updateConfig={_onUpdate(URL_WHITELIST_CONFIG)} />
+                                updateConfig={_onUpdate(URL_WHITELIST_CONFIG)}/>
           </ConfigletContainer>
         )}
-        <ConfigletContainer title="Decorators Configuration">
-          <DecoratorsConfig />
+        <ConfigletContainer title="装饰器配置">
+          <DecoratorsConfig/>
         </ConfigletContainer>
         {permissionsConfig && (
-          <ConfigletContainer title="Permissions Configuration">
+          <ConfigletContainer title="权限配置">
             <PermissionsConfig config={permissionsConfig}
-                               updateConfig={_onUpdate(PERMISSIONS_CONFIG)} />
+                               updateConfig={_onUpdate(PERMISSIONS_CONFIG)}/>
           </ConfigletContainer>
         )}
       </>
@@ -146,30 +146,30 @@ const ConfigurationsPage = () => {
   }
 
   return (
-    <DocumentTitle title="Configurations">
-      <span>
-        <PageHeader title="Configurations">
-          <span>
-            You can configure system settings for different sub systems on this page.
-          </span>
-        </PageHeader>
+    <DocumentTitle title="配置">
+        <span>
+          <PageHeader title="配置">
+            <span>
+              您可以在此页面对系统进行设置
+            </span>
+          </PageHeader>
 
         <ConfigletRow className="content">
           {Output}
         </ConfigletRow>
 
-        {pluginSystemConfigs.length > 0 && (
-        <Row className="content">
-          <Col md={12}>
-            <h2>Plugins</h2>
-            <p className="description">Configuration for installed plugins.</p>
-            <hr className="separator" />
-            <div className="top-margin">
-              <PluginConfigRows configuration={configuration} systemConfigs={pluginSystemConfigs} />
-            </div>
-          </Col>
-        </Row>
-        )}
+          {pluginSystemConfigs.length > 0 && (
+            <Row className="content">
+              <Col md={12}>
+                <h2>插件</h2>
+                <p className="description">配置已安装的插件.</p>
+                <hr className="separator"/>
+                <div className="top-margin">
+                  <PluginConfigRows configuration={configuration} systemConfigs={pluginSystemConfigs}/>
+                </div>
+              </Col>
+            </Row>
+          )}
       </span>
     </DocumentTitle>
   );

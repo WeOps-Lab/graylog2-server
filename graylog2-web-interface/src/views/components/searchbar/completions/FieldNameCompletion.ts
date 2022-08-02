@@ -91,7 +91,7 @@ class FieldNameCompletion implements Completer {
       .map((field) => _fieldResult(field, 10 + matchesFieldName(field), valuePosition));
     const allFields = allButInCurrent.filter((field) => (matchesFieldName(field) > 0))
       .map((field) => _fieldResult(field, 1 + matchesFieldName(field), valuePosition))
-      .map((result) => ({ ...result, meta: `${result.meta} (not in streams)` }));
+      .map((result) => ({ ...result, meta: `${result.meta} (非消息流)` }));
 
     return [...currentQuery, ...allFields];
   };

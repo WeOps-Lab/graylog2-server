@@ -19,22 +19,22 @@ import PropTypes from 'prop-types';
 import numeral from 'numeral';
 
 import HideOnCloud from 'util/conditional/HideOnCloud';
-import { LinkContainer } from 'components/common/router';
-import { Alert, Row, Col, Panel, Button } from 'components/bootstrap';
-import { DocumentTitle, PageHeader, Spinner, Icon } from 'components/common';
-import { IndicesMaintenanceDropdown, IndicesOverview, IndexSetDetails } from 'components/indices';
-import { IndexerClusterHealthSummary } from 'components/indexers';
-import { DocumentationLink } from 'components/support';
+import {LinkContainer} from 'components/common/router';
+import {Alert, Row, Col, Panel, Button} from 'components/bootstrap';
+import {DocumentTitle, PageHeader, Spinner, Icon} from 'components/common';
+import {IndicesMaintenanceDropdown, IndicesOverview, IndexSetDetails} from 'components/indices';
+import {IndexerClusterHealthSummary} from 'components/indexers';
+import {DocumentationLink} from 'components/support';
 import DocsHelper from 'util/DocsHelper';
 import Routes from 'routing/Routes';
 import withParams from 'routing/withParams';
 import connect from 'stores/connect';
-import type { IndexSet } from 'stores/indices/IndexSetsStore';
-import type { IndexerOverview } from 'stores/indexers/IndexerOverviewStore';
-import type { Indices } from 'stores/indices/IndicesStore';
-import { IndexerOverviewActions, IndexerOverviewStore } from 'stores/indexers/IndexerOverviewStore';
-import { IndexSetsActions, IndexSetsStore } from 'stores/indices/IndexSetsStore';
-import { IndicesActions, IndicesStore } from 'stores/indices/IndicesStore';
+import type {IndexSet} from 'stores/indices/IndexSetsStore';
+import type {IndexerOverview} from 'stores/indexers/IndexerOverviewStore';
+import type {Indices} from 'stores/indices/IndicesStore';
+import {IndexerOverviewActions, IndexerOverviewStore} from 'stores/indexers/IndexerOverviewStore';
+import {IndexSetsActions, IndexSetsStore} from 'stores/indices/IndexSetsStore';
+import {IndicesActions, IndicesStore} from 'stores/indices/IndicesStore';
 
 const REFRESH_INTERVAL = 2000;
 
@@ -85,7 +85,7 @@ class IndexSetPage extends React.Component<Props, State> {
   }
 
   componentDidMount() {
-    const { params: { indexSetId } } = this.props;
+    const {params: {indexSetId}} = this.props;
     IndexSetsActions.get(indexSetId);
     IndicesActions.list(indexSetId);
 
@@ -93,11 +93,11 @@ class IndexSetPage extends React.Component<Props, State> {
       IndicesActions.multiple();
       IndexerOverviewActions.list(indexSetId);
     }, REFRESH_INTERVAL);
-    this.setState({ timerId: timerId });
+    this.setState({timerId: timerId});
   }
 
   componentWillUnmount() {
-    const { timerId } = this.state;
+    const {timerId} = this.state;
 
     if (timerId) {
       clearInterval(timerId);
@@ -105,7 +105,7 @@ class IndexSetPage extends React.Component<Props, State> {
   }
 
   _totalIndexCount = () => {
-    const { indexerOverview: { indices } } = this.props;
+    const {indexerOverview: {indices}} = this.props;
 
     return indices ? Object.keys(indices).length : null;
   };
@@ -116,16 +116,12 @@ class IndexSetPage extends React.Component<Props, State> {
         <Col md={8} mdOffset={2}>
           <div className="top-margin">
             <Panel bsStyle="danger"
-                   header={<span><Icon name="exclamation-triangle" /> Indices overview unavailable</span>}>
+                   header={<span><Icon name="exclamation-triangle"/> 索引概览不可用</span>}>
               <p>
-                We could not get the indices overview information. This usually means there was a problem
-                connecting to Elasticsearch, and <strong>you should ensure Elasticsearch is up and reachable from
-                  Graylog
-                                                 </strong>.
+                无法获取索引概览。这通常表示连接elasticsearch有问题，<strong>您应该确保ElasticSearch已启动，并且DataInsight可以访问</strong>。
               </p>
               <p>
-                Graylog will continue storing your messages in its journal, but you will not be able to search on them
-                until Elasticsearch is reachable again.
+                DataInsight将继续在其日志中存储您的消息，但在再次访问elasticsearch之前，您将无法搜索这些消息。
               </p>
             </Panel>
           </div>
@@ -135,40 +131,45 @@ class IndexSetPage extends React.Component<Props, State> {
   };
 
   _isLoading = () => {
-    const { indexSet } = this.props;
+    const {indexSet} = this.props;
 
     return !indexSet;
   };
 
   render() {
     if (this._isLoading()) {
-      return <Spinner />;
+      return <Spinner/>;
     }
 
-    const { indexSet, indexerOverview, indexerOverviewError, params: { indexSetId }, indexDetails: { indices: indexDetailsIndices, closedIndices: indexDetailsClosedIndices } } = this.props;
+    const {
+      indexSet,
+      indexerOverview,
+      indexerOverviewError,
+      params: {indexSetId},
+      indexDetails: {indices: indexDetailsIndices, closedIndices: indexDetailsClosedIndices}
+    } = this.props;
 
     const pageHeader = indexSet && (
-      <PageHeader title={`Index Set: ${indexSet.title}`}>
+      <PageHeader title={`索引集: ${indexSet.title}`}>
         <span>
-          This is an overview of all indices (message stores) in this index set Graylog is currently taking in account
-          for searches and analysis.
+          索引集概览
         </span>
 
         <span>
-          You can learn more about the index model in the{' '}
-          <DocumentationLink page={DocsHelper.PAGES.INDEX_MODEL} text="documentation" />
+          可以点击这里查看帮助{' '}
+          <DocumentationLink page={DocsHelper.PAGES.INDEX_MODEL} text="文档"/>
         </span>
 
         <span>
           <LinkContainer to={Routes.SYSTEM.INDICES.LIST}>
-            <Button bsStyle="info">Index sets overview</Button>
+            <Button bsStyle="info">索引概览</Button>
           </LinkContainer>
           &nbsp;
           <LinkContainer to={Routes.SYSTEM.INDEX_SETS.CONFIGURATION(indexSet.id, 'details')}>
-            <Button bsStyle="info">Edit Index Set</Button>
+            <Button bsStyle="info">编辑索引集</Button>
           </LinkContainer>
           &nbsp;
-          <IndicesMaintenanceDropdown indexSetId={indexSetId} indexSet={indexSet} />
+          <IndicesMaintenanceDropdown indexSetId={indexSetId} indexSet={indexSet}/>
         </span>
       </PageHeader>
     );
@@ -190,13 +191,13 @@ class IndexSetPage extends React.Component<Props, State> {
 
       indicesInfo = (
         <span>
-          <Alert bsStyle="success" style={{ marginTop: '10' }}>
-            <Icon name="th" /> &nbsp;{this._totalIndexCount()} indices with a total of{' '}
-            {numeral(indexerOverview.counts.events).format('0,0')} messages under management,
-            current write-active index is <i>{deflectorInfo.current_target}</i>.
+          <Alert bsStyle="success" style={{marginTop: '10'}}>
+             <Icon name="th"/> &nbsp;共{this._totalIndexCount()}个索引, 每个分段中共{' '}
+            {numeral(indexerOverview.counts.events).format('0,0')} 条消息,
+            当前可写索引为 <i>{deflectorInfo.current_target}</i>.
           </Alert>
           <HideOnCloud>
-            <IndexerClusterHealthSummary health={indexerOverview.indexer_cluster.health} />
+            <IndexerClusterHealthSummary health={indexerOverview.indexer_cluster.health}/>
           </HideOnCloud>
         </span>
       );
@@ -206,21 +207,21 @@ class IndexSetPage extends React.Component<Props, State> {
                          indexDetails={indexDetailsIndices}
                          indexSetId={indexSetId}
                          closedIndices={indexDetailsClosedIndices}
-                         deflector={indexerOverview.deflector} />
+                         deflector={indexerOverview.deflector}/>
       );
     } else {
-      indicesInfo = <Spinner />;
-      indicesOverview = <Spinner />;
+      indicesInfo = <Spinner/>;
+      indicesOverview = <Spinner/>;
     }
 
     return (
-      <DocumentTitle title={`Index Set - ${indexSet ? indexSet.title : ''}`}>
+      <DocumentTitle title={`索引集 - ${indexSet.title}`}>
         <div>
           {pageHeader}
 
           <Row className="content">
             <Col md={12}>
-              <IndexSetDetails indexSet={indexSet} />
+              <IndexSetDetails indexSet={indexSet}/>
             </Col>
           </Row>
 
@@ -244,7 +245,7 @@ export default connect(
     indexerOverview: IndexerOverviewStore,
     indices: IndicesStore,
   },
-  ({ indexSets, indexerOverview, indices }) => ({
+  ({indexSets, indexerOverview, indices}) => ({
     // @ts-ignore
     indexSet: indexSets ? indexSets.indexSet : undefined,
     // @ts-ignore

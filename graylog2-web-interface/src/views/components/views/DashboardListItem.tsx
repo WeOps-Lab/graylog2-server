@@ -32,10 +32,10 @@ const OwnerTag = ({ owner }) => {
   const currentUser = useContext(CurrentUserContext);
 
   if (!owner || owner === currentUser?.username) {
-    return <span>Last saved</span>;
+    return <span>最后保存</span>;
   }
 
-  return <span>Shared by {owner}, last saved</span>;
+  return <span> {owner} 分享</span>;
 };
 
 OwnerTag.propTypes = {
@@ -46,7 +46,7 @@ OwnerTag.propTypes = {
 const Description = ({ description, owner, createdAt }) => (
   <>
     <div>{description || <i>No description given.</i>}</div>
-    <div style={{ color: 'darkgray' }}><OwnerTag owner={owner} /> at <Timestamp dateTime={createdAt} /></div>
+    <div style={{ color: 'darkgray' }}><OwnerTag owner={owner} />  <Timestamp dateTime={createdAt} /></div>
   </>
 );
 
@@ -118,7 +118,7 @@ DashboardListItem.propTypes = {
 
 DashboardListItem.defaultProps = {
   children: null,
-  title: 'Unnamed Dashboard',
+  title: '未命名仪表盘',
   summary: null,
   description: null,
 };

@@ -31,11 +31,11 @@ const SortDirectionSelect = ({ direction, disabled, onChange }: Props) => (
           isClearable={false}
           isSearchable={false}
           options={[
-            { label: 'Ascending', value: 'Ascending' },
-            { label: 'Descending', value: 'Descending' },
+            { label: '升序', value: 'Ascending' },
+            { label: '降序', value: 'Descending' },
           ]}
           onChange={({ value }) => onChange(Direction.fromString(value))}
-          placeholder={disabled ? 'No sorting selected' : 'Click to select direction'}
+          placeholder={disabled ? '未选择排序' : '点击选择排序'}
           value={(direction && { label: direction, value: direction }) ?? null} />
 );
 

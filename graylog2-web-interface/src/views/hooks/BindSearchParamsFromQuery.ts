@@ -35,7 +35,7 @@ const bindSearchParamsFromQuery: ViewHook = ({ query, view }: {query: RawQuery, 
   const { queries } = view.search;
 
   if (queries.size !== 1) {
-    throw new Error('Searches must only have a single query!');
+    throw new Error('搜索只能有一个查询!');
   }
 
   const firstQuery = queries.first();

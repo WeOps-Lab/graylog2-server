@@ -85,11 +85,11 @@ class SelectExtractorType extends React.Component<ActionComponentProps, State> {
     const { selectedExtractor } = this.state;
 
     return (
-      <BootstrapModalForm title="Select extractor type"
+      <BootstrapModalForm title="选择提取器类型"
                           submitButtonDisabled={!selectedExtractor}
                           show
                           onSubmitForm={this._onSubmit}>
-        <Select placeholder="Select extractor type"
+        <Select placeholder="选择提取器类型"
                 optionRenderer={this._renderOption}
                 clearable
                 onChange={this._onChange}

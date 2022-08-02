@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+moment.locale('zh-cn');
 import styled from 'styled-components';
 
 import connect from 'stores/connect';
@@ -60,13 +61,13 @@ class RefreshControls extends React.Component<Props> {
   };
 
   static INTERVAL_OPTIONS: Array<[string, number]> = [
-    ['1 Second', 1000],
-    ['2 Seconds', 2000],
-    ['5 Seconds', 5000],
-    ['10 Seconds', 10000],
-    ['30 Seconds', 30000],
-    ['1 Minute', 60000],
-    ['5 Minutes', 300000],
+    ['1 秒', 1000],
+    ['2 秒', 2000],
+    ['5 秒', 5000],
+    ['10 秒', 10000],
+    ['30 秒', 30000],
+    ['1 分', 60000],
+    ['5 分', 300000],
   ];
 
   componentWillUnmount(): void {
@@ -88,10 +89,10 @@ class RefreshControls extends React.Component<Props> {
   };
 
   _buttonLabel = (refreshConfigEnabled, naturalInterval) => {
-    let buttonText: React.ReactNode = 'Not updating';
+    let buttonText: React.ReactNode = '未更新';
 
     if (refreshConfigEnabled) {
-      buttonText = <>Every {naturalInterval}</>;
+      buttonText = <>每 {naturalInterval}</>;
     }
 
     return <ButtonLabel>{buttonText}</ButtonLabel>;
@@ -104,12 +105,12 @@ class RefreshControls extends React.Component<Props> {
     });
     const intervalDuration = moment.duration(refreshConfig.interval);
     const naturalInterval = intervalDuration.asSeconds() < 60
-      ? <span>{intervalDuration.asSeconds()} <Pluralize singular="second" plural="seconds" value={intervalDuration.asSeconds()} /></span>
-      : <span>{intervalDuration.asMinutes()} <Pluralize singular="minute" plural="minutes" value={intervalDuration.asMinutes()} /></span>;
+      ? <span>{intervalDuration.asSeconds()} <Pluralize singular="秒" plural="秒" value={intervalDuration.asSeconds()} /></span>
+      : <span>{intervalDuration.asMinutes()} <Pluralize singular="分" plural="分" value={intervalDuration.asMinutes()} /></span>;
     const buttonLabel = this._buttonLabel(refreshConfig.enabled, naturalInterval);
 
     return (
-      <FlexibleButtonGroup aria-label="Refresh Search Controls">
+      <FlexibleButtonGroup aria-label="刷新搜索控件">
         <Button onClick={this._toggleEnable}>
           {refreshConfig.enabled ? <Icon name="pause" /> : <Icon name="play" />}
         </Button>

@@ -25,7 +25,7 @@ import type { ActionHandler } from 'views/components/actions/ActionHandler';
 const AddMessageCountActionHandler: ActionHandler<{}> = async () => {
   const series = Series.forFunction('count()')
     .toBuilder()
-    .config(new SeriesConfig('Message Count'))
+    .config(new SeriesConfig('消息总数'))
     .build();
 
   WidgetActions.create(AggregationWidget.builder()

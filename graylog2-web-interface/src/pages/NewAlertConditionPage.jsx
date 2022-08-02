@@ -40,21 +40,19 @@ const NewAlertConditionPage = createReactClass({
     const streamId = this.props.location.query.stream_id;
 
     return (
-      <DocumentTitle title="New alert condition">
+      <DocumentTitle title="新的告警条件">
         <div>
-          <PageHeader title="New alert condition">
+          <PageHeader title="新的告警条件">
             <span>
-              Define an alert condition and configure the way Graylog will notify you when that condition is satisfied.
+              定义告警条件并配置满足该条件时DataInsight通知您的方式。
             </span>
 
             <span>
-              Are the default conditions not flexible enough? You can write your own! Read more about alerting in
-              the{' '}
-              <DocumentationLink page={DocsHelper.PAGES.ALERTS} text="documentation" />.
+              在<DocumentationLink page={DocsHelper.PAGES.ALERTS} text="文档"/>中查看更多关于告警的信息。
             </span>
 
             <span>
-              <AlertsHeaderToolbar active={Routes.LEGACY_ALERTS.CONDITIONS} />
+              <AlertsHeaderToolbar active={Routes.LEGACY_ALERTS.CONDITIONS}/>
             </span>
           </PageHeader>
 

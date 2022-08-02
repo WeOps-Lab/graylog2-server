@@ -17,7 +17,7 @@
 import React from 'react';
 import numeral from 'numeral';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { Col, Row } from 'components/bootstrap';
 import DocsHelper from 'util/DocsHelper';
 import { DocumentTitle, Spinner, PageHeader, PaginatedList } from 'components/common';
@@ -54,18 +54,17 @@ class IndexerFailuresPage extends React.Component {
     }
 
     return (
-      <DocumentTitle title="Indexer failures">
+      <DocumentTitle title="索引失败信息">
         <span>
-          <PageHeader title="Indexer failures">
+          <PageHeader title="索引失败信息">
             <span>
-              This is a list of message index attempts that failed. A failure means that a message you sent to Graylog was{' '}
-              properly processed but writing it to the Elasticsearch cluster failed. Note that the list is capped to a size{' '}
-              of 50 MB so it will contain a lot of failure logs but not necessarily all that ever occurred.
+              这是索引失败信息列表,
+              索引失败意味着您发送给DataInsight的消息已被正确处理,但将其写入ElasticSearch集群失败了.
+              请注意,此列表的大小限制为50MB，因此它不一定包含所有索引失败的消息
             </span>
 
             <span>
-              Collection containing a total of {numeral(this.state.total).format('0,0')} indexer failures. Read more about
-              this topic in the <DocumentationLink page={DocsHelper.PAGES.INDEXER_FAILURES} text="documentation" />.
+              在<DocumentationLink page={DocsHelper.PAGES.INDEXER_FAILURES} text="文档" />中查看更多关于索引失败的信息。
             </span>
           </PageHeader>
           <Row className="content">

@@ -51,23 +51,23 @@ public class FormattedEmailAlertSender implements AlertSender {
     private static final Logger LOG = LoggerFactory.getLogger(FormattedEmailAlertSender.class);
 
     public static final String bodyTemplate = "##########\n" +
-            "Alert Description: ${check_result.resultDescription}\n" +
-            "Date: ${check_result.triggeredAt}\n" +
-            "Stream ID: ${stream.id}\n" +
-            "Stream title: ${stream.title}\n" +
-            "Stream description: ${stream.description}\n" +
-            "Alert Condition Title: ${alertCondition.title}\n" +
-            "${if stream_url}Stream URL: ${stream_url}${end}\n" +
+            "告警描述: ${check_result.resultDescription}\n" +
+            "日期: ${check_result.triggeredAt}\n" +
+            "消息流ID: ${stream.id}\n" +
+            "消息流标题: ${stream.title}\n" +
+            "消息流描述: ${stream.description}\n" +
+            "告警标题: ${alertCondition.title}\n" +
+            "${if stream_url}消息流URL: ${stream_url}${end}\n" +
             "\n" +
-            "Triggered condition: ${check_result.triggeredCondition}\n" +
+            "告警条件: ${check_result.triggeredCondition}\n" +
             "##########\n\n" +
             "${if backlog}" +
-            "Last messages accounting for this alert:\n" +
+            "此告警的最近的消息:\n" +
             "${foreach backlog message}" +
             "${message}\n\n" +
             "${end}" +
             "${else}" +
-            "<No backlog>\n" +
+            "<无消息>\n" +
             "${end}" +
             "\n";
 
@@ -100,7 +100,7 @@ public class FormattedEmailAlertSender implements AlertSender {
     String buildSubject(Stream stream, AlertCondition.CheckResult checkResult, List<Message> backlog) {
         final String template;
         if (pluginConfig == null || pluginConfig.getString("subject") == null) {
-            template = "Graylog alert for stream: ${stream.title}: ${check_result.resultDescription}";
+            template = "消息流告警: ${stream.title}: ${check_result.resultDescription}";
         } else {
             template = pluginConfig.getString("subject");
         }
@@ -140,7 +140,7 @@ public class FormattedEmailAlertSender implements AlertSender {
     private String buildStreamDetailsURL(URI baseUri, AlertCondition.CheckResult checkResult, Stream stream) {
         // Return an informational message if the web interface URL hasn't been set
         if (baseUri == null || isNullOrEmpty(baseUri.getHost())) {
-            return "Please configure 'transport_email_web_interface_url' in your Graylog configuration file.";
+            return "请在配置文件中配置 'transport_email_web_interface_url' .";
         }
 
         int time = 5;
@@ -196,8 +196,8 @@ public class FormattedEmailAlertSender implements AlertSender {
                 .addNode(nodeId.toString())
                 .addType(Notification.Type.GENERIC)
                 .addSeverity(Notification.Severity.NORMAL)
-                .addDetail("title", "Stream \"" + stream.getTitle() + "\" is alerted, but no recipients have been defined!")
-                .addDetail("description", "To fix this, go to the alerting configuration of the stream and add at least one alert recipient.");
+                    .addDetail("title", "消息流 \"" + stream.getTitle() + "\" 触发了告警, 但是没有配置任何接收者!")
+                    .addDetail("description", "请为告警配置至少一个接收者.");
             notificationService.publishIfFirst(notification);
         }
 

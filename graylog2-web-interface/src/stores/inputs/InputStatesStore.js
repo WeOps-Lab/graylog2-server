@@ -69,14 +69,14 @@ export const InputStatesStore = singletonStore(
       const failedNodes = nodes.filter((nodeId) => response[nodeId] === null);
 
       if (failedNodes.length === 0) {
-        UserNotification.success(`Request to ${action.toLowerCase()} input '${input.title}' was sent successfully.`,
-          `Input '${input.title}' will be ${action === 'START' ? 'started' : 'stopped'} shortly`);
+        UserNotification.success(`${action === 'START' ? '启动' : '暂停'}数据接收 '${input.title}' 成功.`,
+          `数据接收器 '${input.title}' 将会 ${action === 'START' ? '启动' : '暂停'} `);
       } else if (failedNodes.length === nodes.length) {
-        UserNotification.error(`Request to ${action.toLowerCase()} input '${input.title}' failed. Check your Graylog logs for more information.`,
-          `Input '${input.title}' could not be ${action === 'START' ? 'started' : 'stopped'}`);
+        UserNotification.error(`${action === 'START' ? '启动' : '暂停'}数据接收  '${input.title}' 失败.`,
+          `数据接收器 '${input.title}' 将不会 ${action === 'START' ? '启动' : '暂停'} `);
       } else {
-        UserNotification.warning(`Request to ${action.toLowerCase()} input '${input.title}' failed in some nodes. Check your Graylog logs for more information.`,
-          `Input '${input.title}' could not be ${action === 'START' ? 'started' : 'stopped'} in all nodes`);
+        UserNotification.error(`${action === 'START' ? '启动' : '暂停'}数据接收  '${input.title}' 失败.`,
+          `数据接收器 '${input.title}' 将会 ${action === 'START' ? '启动' : '暂停'} `);
       }
     },
 
@@ -92,7 +92,7 @@ export const InputStatesStore = singletonStore(
             return response;
           },
           (error) => {
-            UserNotification.error(`Error starting input '${input.title}': ${error}`, `Input '${input.title}' could not be started`);
+            UserNotification.error(`启动数据接收'${input.title}' 失败: ${error}`, `数据接收 '${input.title}' 启动失败`);
           },
         );
     },
@@ -109,7 +109,7 @@ export const InputStatesStore = singletonStore(
             return response;
           },
           (error) => {
-            UserNotification.error(`Error stopping input '${input.title}': ${error}`, `Input '${input.title}' could not be stopped`);
+            UserNotification.error(`暂停数据接收 '${input.title}' 失败: ${error}`, `数据接收 '${input.title}' 无法暂停`);
           },
         );
     },

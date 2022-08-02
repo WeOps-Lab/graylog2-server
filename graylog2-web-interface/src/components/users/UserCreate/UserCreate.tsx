@@ -83,7 +83,7 @@ const _validate = (values) => {
 type RequestError = { additional: { res: { text: string }}};
 
 const UserCreate = () => {
-  const initialRole = { name: 'Reader', description: 'Grants basic permissions for every Graylog user (built-in)', id: '' };
+  const initialRole = { name: 'Reader', description: '为每个 DataInsight 用户授予基本权限（内置）', id: '' };
   const [users, setUsers] = useState<Immutable.List<User> | undefined>();
   const [user, setUser] = useState(User.empty().toBuilder().roles(Immutable.Set([initialRole.name])).build());
   const [submitError, setSubmitError] = useState<RequestError | undefined>();
@@ -167,50 +167,50 @@ const UserCreate = () => {
           {({ isSubmitting, isValid }) => (
             <Form className="form form-horizontal">
               <div>
-                <Headline>Profile</Headline>
+                <Headline>信息</Headline>
                 <FirstNameFormGroup />
                 <LastNameFormGroup />
                 {getUserNameGroup()}
                 {getEmailGroup()}
               </div>
               <div>
-                <Headline>Settings</Headline>
+                <Headline>设置</Headline>
                 <TimeoutFormGroup />
                 <TimezoneFormGroup />
                 <ServiceAccountFormGroup />
               </div>
               <div>
-                <Headline>Roles</Headline>
+                <Headline>角色</Headline>
                 <Input id="roles-selector-input"
                        labelClassName="col-sm-3"
                        wrapperClassName="col-sm-9"
-                       label="Assign Roles">
+                       label="分配角色">
                   <RolesSelector onSubmit={_onAssignRole} assignedRolesIds={user.roles} identifier={(role) => role.name} />
                 </Input>
 
                 <Input id="selected-roles-overview"
                        labelClassName="col-sm-3"
                        wrapperClassName="col-sm-9"
-                       label="Selected Roles">
+                       label="选择角色">
                   <>
                     {selectedRoles.map((role) => (
                       <PaginatedItem item={role}
                                      onDeleteItem={(data) => _onUnassignRole(data)}
                                      key={role.id} />
                     ))}
-                    {!hasValidRole && <Alert bsStyle="danger">You need to select at least one of the <em>Reader</em> or <em>Admin</em> roles.</Alert>}
+                    {!hasValidRole && <Alert bsStyle="danger">您需要至少选择 <em>Reader</em> 或 <em>Admin</em> 角色之一</Alert>}
                   </>
                 </Input>
               </div>
               <div>
-                <Headline>Password</Headline>
+                <Headline>密码</Headline>
                 {getPasswordGroup()}
               </div>
               {submitError && (
                 <Row>
                   <Col xs={9} xsOffset={3}>
                     <Alert bsStyle="danger">
-                      <b>Failed to create user</b><br />
+                      <b>创建用户失败</b><br />
                       {showSubmitError(submitError)}
                     </Alert>
                   </Col>
@@ -221,11 +221,11 @@ const UserCreate = () => {
                   <ButtonToolbar>
                     <Button bsStyle="success"
                             disabled={isSubmitting || !isValid || !hasValidRole}
-                            title="Create User"
+                            title="创建用户"
                             type="submit">
-                      Create User
+                      创建用户
                     </Button>
-                    <Button type="button" onClick={_handleCancel}>Cancel</Button>
+                    <Button type="button" onClick={_handleCancel}>取消</Button>
                   </ButtonToolbar>
                 </Col>
               </Row>

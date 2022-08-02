@@ -19,12 +19,12 @@ import * as React from 'react';
 import { FormikFormGroup } from 'components/common';
 
 const EmailFormGroup = () => (
-  <FormikFormGroup label="E-Mail Address"
+  <FormikFormGroup label="邮件地址"
                    name="email"
                    maxLength={254}
                    type="email"
                    required
-                   help="The user's email address." />
+                   help="用户邮件地址." />
 );
 
 export default EmailFormGroup;

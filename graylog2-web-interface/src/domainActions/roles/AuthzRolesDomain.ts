@@ -21,7 +21,7 @@ import notifyingAction from '../notifyingAction';
 const load = notifyingAction({
   action: AuthzRolesActions.load,
   error: (error, roleId) => ({
-    message: `Loading role with id "${roleId}" failed with status: ${error}`,
+    message: `加载 ID 为"${roleId}"的角色失败，状态为: ${error}`,
   }),
   notFoundRedirect: true,
 });
@@ -29,51 +29,51 @@ const load = notifyingAction({
 const deleteAction = notifyingAction({
   action: AuthzRolesActions.delete,
   success: (roleId, roleName) => ({
-    message: `Role "${roleName}" was deleted successfully`,
+    message: `角色"${roleName}"已成功删除`,
   }),
   error: (error, roleId, roleName) => ({
-    message: `Deleting role "${roleName}" failed with status: ${error}`,
+    message: `删除角色"${roleName}"失败，状态为：${error}`,
   }),
 });
 
 const addMembers = notifyingAction({
   action: AuthzRolesActions.addMembers,
   success: (roleId, usernames) => ({
-    message: `Users:"${usernames.join(', ')}" were assigned successfully`,
+    message: `用户："${usernames.join(', ')}" 分配成功`,
   }),
   error: (error, roleId, usernames) => ({
-    message: `Assigning users "${usernames.join(', ')}" failed with status: ${error}`,
+    message: `分配用户"${usernames.join(', ')}"失败，状态为：${error}`,
   }),
 });
 
 const removeMember = notifyingAction({
   action: AuthzRolesActions.removeMember,
   success: (roleId, username) => ({
-    message: `User "${username}" was unassigned successfully`,
+    message: `用户"${username}"已成功取消分配`,
   }),
   error: (error, roleId, username) => ({
-    message: `Unassign user "${username}" failed with status: ${error}`,
+    message: `取消分配用户"${username}"失败，状态为：${error}`,
   }),
 });
 
 const loadUsersForRole = notifyingAction({
   action: AuthzRolesActions.loadUsersForRole,
   error: (error, username, roleName) => ({
-    message: `Loading users for role "${roleName}" failed with status: ${error}`,
+    message: `为角色"${roleName}"加载用户失败，状态为: ${error}`,
   }),
 });
 
 const loadRolesForUser = notifyingAction({
   action: AuthzRolesActions.loadRolesForUser,
   error: (error, username) => ({
-    message: `Loading roles for user "${username}" failed with status: ${error}`,
+    message: `为用户"${username}"加载角色失败，状态为： ${error}`,
   }),
 });
 
 const loadRolesPaginated = notifyingAction({
   action: AuthzRolesActions.loadRolesPaginated,
   error: (error) => ({
-    message: `Loading roles failed with status: ${error}`,
+    message: `加载角色失败，状态为: ${error}`,
   }),
 });
 

@@ -106,7 +106,7 @@ class SeriesSelect extends React.Component<Props, State> {
 
     if (isIncomplete(last)) {
       const options = [].concat(
-        [{ label: 'Back to function list', backToFunctions: true }],
+        [{ label: '返回功能列表', backToFunctions: true }],
         suggester.for(last.value, last.parameter),
       );
 
@@ -153,7 +153,7 @@ class SeriesSelect extends React.Component<Props, State> {
           <ConfigurableElement {...rest}
                                configuration={({ onClose }) => <SeriesConfiguration series={element} usedNames={usedNames} onClose={onClose} />}
                                onChange={(newElement) => newSeriesConfigChange(series, element, newElement, onChange)}
-                               title="Series Configuration">
+                               title="系列配置">
             {children}
           </ConfigurableElement>
         </span>
@@ -165,7 +165,7 @@ class SeriesSelect extends React.Component<Props, State> {
     };
 
     return (
-      <Select placeholder="None: click to add series"
+      <Select placeholder="无：单击可添加系列"
               onChange={this._onChange}
               options={options}
               value={series.map(_wrapOption)}

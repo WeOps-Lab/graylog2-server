@@ -27,28 +27,25 @@ import { IndexSetsComponent } from 'components/indices';
 class IndicesPage extends React.Component {
   render() {
     const pageHeader = (
-      <PageHeader title="Indices & Index Sets">
+      <PageHeader title="索引 & 索引集">
         <span>
-          A Graylog stream write messages to an index set, which is a configuration for retention, sharding, and
-          replication of the stored data.
-          By configuring index sets, you could, for example, have different retention times for certain streams.
+          DataInsight 会把消息流的数据写入对应的索引集中，可以创建多个索引集，并定义多种不同的索引轮转策略。
         </span>
 
         <span>
-          You can learn more about the index model in the{' '}
-          <DocumentationLink page={DocsHelper.PAGES.INDEX_MODEL} text="documentation" />
+          在<DocumentationLink page={DocsHelper.PAGES.INDEX_MODEL} text="文档" />中查看更多关于索引的信息。
         </span>
 
         <span>
           <LinkContainer to={Routes.SYSTEM.INDEX_SETS.CREATE}>
-            <Button bsStyle="success" bsSize="lg">Create index set</Button>
+            <Button bsStyle="success" bsSize="lg">创建索引集</Button>
           </LinkContainer>
         </span>
       </PageHeader>
     );
 
     return (
-      <DocumentTitle title="Indices and Index Sets">
+      <DocumentTitle title="索引和索引集">
         <span>
           {pageHeader}
 

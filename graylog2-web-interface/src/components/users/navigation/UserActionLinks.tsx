@@ -31,19 +31,19 @@ const UserActionLinks = ({ userId, userIsReadOnly }: Props) => (
   <ButtonToolbar>
     <LinkContainer to={Routes.SYSTEM.USERS.show(userId)}>
       <Button bsStyle="success">
-        View Details
+        查看
       </Button>
     </LinkContainer>
     {!userIsReadOnly && (
       <LinkContainer to={Routes.SYSTEM.USERS.edit(userId)}>
         <Button bsStyle="success">
-          Edit User
+          编辑用户
         </Button>
       </LinkContainer>
     )}
     <LinkContainer to={Routes.SYSTEM.USERS.TOKENS.edit(userId)}>
       <Button bsStyle="success">
-        Edit Tokens
+        编辑令牌
       </Button>
     </LinkContainer>
   </ButtonToolbar>

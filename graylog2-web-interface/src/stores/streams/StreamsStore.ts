@@ -145,8 +145,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
         };
       })
       .catch((errorThrown) => {
-        UserNotification.error(`Loading streams failed with status: ${errorThrown}`,
-          'Could not load streams');
+        UserNotification.error(`加载消息流失败: ${errorThrown}`,
+          '无法加载消息流');
       });
 
     StreamsActions.searchPaginated.promise(promise);
@@ -159,8 +159,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
     const promise = fetch('GET', qualifyUrl(url))
       .then((result: StreamSummaryResponse) => result.streams)
       .catch((errorThrown) => {
-        UserNotification.error(`Loading streams failed with status: ${errorThrown}`,
-          'Could not load streams');
+        UserNotification.error(`加载消息流失败: ${errorThrown}`,
+          '无法加载消息流');
       });
 
     StreamsActions.listStreams.promise(promise);
@@ -175,8 +175,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
   },
   get(streamId: string, callback: ((stream: Stream) => void)): Promise<StreamResponse> {
     const failCallback = (errorThrown) => {
-      UserNotification.error(`Loading Stream failed with status: ${errorThrown}`,
-        'Could not retrieve Stream');
+      UserNotification.error(`加载消息流失败: ${errorThrown}`,
+        '无法加载消息流');
     };
 
     const { url } = ApiRoutes.StreamsApiController.get(streamId);
@@ -190,8 +190,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
   },
   remove(streamId: string, callback: (() => void)) {
     const failCallback = (errorThrown) => {
-      UserNotification.error(`Removing Stream failed with status: ${errorThrown}`,
-        'Could not remove Stream');
+      UserNotification.error(`删除消息流失败: ${errorThrown}`,
+        '无法删除消息流');
     };
 
     const url = qualifyUrl(ApiRoutes.StreamsApiController.delete(streamId).url);
@@ -207,8 +207,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
   },
   pause(streamId: string, callback: (() => void)) {
     const failCallback = (errorThrown) => {
-      UserNotification.error(`Pausing Stream failed with status: ${errorThrown}`,
-        'Could not pause Stream');
+      UserNotification.error(`暂停消息流失败: ${errorThrown}`,
+        '无法暂停消息流');
     };
 
     const url = qualifyUrl(ApiRoutes.StreamsApiController.pause(streamId).url);
@@ -227,8 +227,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
   },
   resume(streamId: string, callback: (() => void)) {
     const failCallback = (errorThrown) => {
-      UserNotification.error(`Resuming Stream failed with status: ${errorThrown}`,
-        'Could not resume Stream');
+      UserNotification.error(`恢复消息流失败: ${errorThrown}`,
+        '无法恢复消息流');
     };
 
     const url = qualifyUrl(ApiRoutes.StreamsApiController.resume(streamId).url);
@@ -247,8 +247,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
   },
   save(stream: any, callback: ((streamId: string) => void)) {
     const failCallback = (errorThrown) => {
-      UserNotification.error(`Saving Stream failed with status: ${errorThrown}`,
-        'Could not save Stream');
+      UserNotification.error(`保存消息流失败: ${errorThrown}`,
+        '无法保存消息流');
     };
 
     const url = qualifyUrl(ApiRoutes.StreamsApiController.create().url);
@@ -264,8 +264,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
   },
   update(streamId: string, data: any, callback: ((stream: Stream) => void)) {
     const failCallback = (errorThrown) => {
-      UserNotification.error(`Updating Stream failed with status: ${errorThrown}`,
-        'Could not update Stream');
+      UserNotification.error(`更新消息流失败: ${errorThrown}`,
+        '无法更新消息流');
     };
 
     const url = qualifyUrl(ApiRoutes.StreamsApiController.update(streamId).url);
@@ -280,8 +280,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
   },
   cloneStream(streamId: string, data: any, callback: ((streamId: string) => void)) {
     const failCallback = (errorThrown) => {
-      UserNotification.error(`Cloning Stream failed with status: ${errorThrown}`,
-        'Could not clone Stream');
+      UserNotification.error(`复制消息流失败: ${errorThrown}`,
+        '无法复制消息流');
     };
 
     const url = qualifyUrl(ApiRoutes.StreamsApiController.cloneStream(streamId).url);
@@ -300,8 +300,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
 
     const promise = fetch('DELETE', url)
       .then(callback, (errorThrown) => {
-        UserNotification.error(`Removing output from stream failed with status: ${errorThrown}`,
-          'Could not remove output from stream');
+        UserNotification.error(`删除消息流输出失败: ${errorThrown}`,
+          '无法删除消息流输出');
       })
       .then(this._emitChange.bind(this));
 
@@ -314,8 +314,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
 
     const promise = fetch('POST', url, { outputs: [outputId] })
       .then(callback, (errorThrown) => {
-        UserNotification.error(`Adding output to stream failed with status: ${errorThrown}`,
-          'Could not add output to stream');
+        UserNotification.error(`添加消息流输出失败: ${errorThrown}`,
+          '无法添加消息流输出');
       })
       .then(this._emitChange.bind(this));
 
@@ -328,8 +328,8 @@ const StreamsStore = singletonStore('Streams', () => Reflux.createStore({
 
     const promise = fetch('POST', url, message)
       .then(callback, (error) => {
-        UserNotification.error(`Testing stream rules of stream failed with status: ${error.message}`,
-          'Could not test stream rules of stream');
+        UserNotification.error(`测试消息流失败: ${error.message}`,
+          '无法测试消息流');
       });
 
     StreamsActions.testMatch.promise(promise);

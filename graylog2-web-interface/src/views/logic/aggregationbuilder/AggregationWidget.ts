@@ -31,7 +31,7 @@ export default class AggregationWidget extends Widget {
 
   static type = 'AGGREGATION';
 
-  static defaultTitle = 'Untitled Aggregation';
+  static defaultTitle = '未命名的聚合';
 
   static fromJSON(value) {
     const { id, config, filter, timerange, query, streams } = value;

@@ -28,16 +28,15 @@ const SystemOutputsPage = createReactClass({
 
   render() {
     return (
-      <DocumentTitle title="Outputs">
+      <DocumentTitle title="数据输出">
         <span>
-          <PageHeader title="Outputs in Cluster">
+          <PageHeader title="数据输出">
             <span>
-              Graylog nodes can forward messages via outputs. Launch or terminate as many outputs as you want here{' '}
-              <strong>and then assign them to streams to forward all messages of a stream in real-time.</strong>
+              DataInsight节点可以对外输出结构化后的日志信息。
             </span>
 
             <span>
-              You can find output plugins in <a href="https://marketplace.graylog.org/" target="_blank" rel="noreferrer">the Graylog Marketplace</a>.
+              您可以在<a href="" rel="noopener noreferrer" target="_blank">DataInsight市场</a>查找更多输出插件。
             </span>
           </PageHeader>
 

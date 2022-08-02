@@ -67,20 +67,20 @@ class IndexSetConfigurationPage extends React.Component {
     const { indexSet, retentionStrategiesContext, rotationStrategies, retentionStrategies } = this.props;
 
     return (
-      <DocumentTitle title="Configure Index Set">
+      <DocumentTitle title="配置索引集">
         <div>
-          <PageHeader title="Configure Index Set">
+          <PageHeader title="配置索引集">
             <span>
-              Modify the current configuration for this index set, allowing you to customize the retention, sharding,
-              and replication of messages coming from one or more streams.
+              修改此索引集的当前配置，允许您自定义来自一个或多个流的消息的保留、分片和复制。
             </span>
+
             <span>
-              You can learn more about the index model in the{' '}
-              <DocumentationLink page={DocsHelper.PAGES.INDEX_MODEL} text="documentation" />
+              在<DocumentationLink page={DocsHelper.PAGES.INDEX_MODEL} text="文档"/>中查看更多关于索引的信息。
             </span>
+
             <span>
               <LinkContainer to={Routes.SYSTEM.INDICES.LIST}>
-                <Button bsStyle="info">Index sets overview</Button>
+                <Button bsStyle="info">索引集概览</Button>
               </LinkContainer>
             </span>
           </PageHeader>

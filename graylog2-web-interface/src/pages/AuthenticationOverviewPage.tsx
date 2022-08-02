@@ -31,16 +31,16 @@ const AuthenticationOverviewPage = () => {
   const { finishedLoading, activeBackend, backendsTotal } = useActiveBackend([AuthenticationActions.setActiveBackend]);
 
   return (
-    <DocumentTitle title="All Authentication Services">
+    <DocumentTitle title="所有身份验证服务">
       <>
-        <PageHeader title="All Authentication Services"
+        <PageHeader title="所有身份验证服务"
                     subactions={(
                       <BackendActionLinks activeBackend={activeBackend}
                                           finishedLoading={finishedLoading} />
                   )}>
-          <span>Configure Graylog&apos;s authentication services of this Graylog cluster.</span>
-          <span>Read more authentication in the <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
-                                                                   text="documentation" />.
+          <span>配置此 DataInsight 集群的身份验证服务。</span>
+          <span>查看 <DocumentationLink page={DocsHelper.PAGES.USERS_ROLES}
+                                                                   text="文档" />.
           </span>
           <AuthenticationOverviewLinks />
         </PageHeader>
@@ -48,7 +48,7 @@ const AuthenticationOverviewPage = () => {
         <Row className="content">
           <Col xs={12}>
             <Alert bsStyle="warning">
-              <Icon name="exclamation-circle" /> None of the configured authentication services is currently active.
+              <Icon name="exclamation-circle" /> 当前没有任何已配置的身份验证服务处于活动状态。
             </Alert>
           </Col>
         </Row>

@@ -30,9 +30,9 @@ type Props = {
 const SystemAdministratorOverview = ({ adminUser, dataRowFormatter, headers, headerCellFormatter }: Props) => (
   <Row className="content">
     <Col xs={12}>
-      <h2>System Administrator</h2>
+      <h2>系统管理员</h2>
       <p className="description">
-        The system administrator can only be edited in the Graylog configuration file.
+        系统管理员只能在 DataInsight 配置文件中进行编辑。
       </p>
       <DataTable id="users-overview"
                  className="table-hover"

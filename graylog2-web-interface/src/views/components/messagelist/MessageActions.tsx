@@ -43,7 +43,7 @@ type Props = {
 const _getTestAgainstStreamButton = (streams: Immutable.List<any>, index: string, id: string) => {
   const streamList = streams.map((stream) => {
     if (stream.is_default) {
-      return <MenuItem key={stream.id} disabled title="Cannot test against the default stream">{stream.title}</MenuItem>;
+      return <MenuItem key={stream.id} disabled title="无法针对默认流进行测试">{stream.title}</MenuItem>;
     }
 
     return (
@@ -57,9 +57,9 @@ const _getTestAgainstStreamButton = (streams: Immutable.List<any>, index: string
   return (
     <DropdownButton pullRight
                     bsSize="small"
-                    title="Test against stream"
+                    title="针对消息流进行测试"
                     id="select-stream-dropdown">
-      {streamList || <MenuItem header>No streams available</MenuItem>}
+      {streamList || <MenuItem header>没有可用的消息流</MenuItem>}
     </DropdownButton>
   );
 };
@@ -85,9 +85,9 @@ const MessageActions = ({ index, id, fields, decorationStats, disabled, disableS
   return (
     <ButtonGroup className="pull-right" bsSize="small">
       {showChanges}
-      <Button href={messageUrl}>Permalink</Button>
+      <Button href={messageUrl}>固定链接</Button>
 
-      <ClipboardButton title="Copy ID" text={id} bsSize="small" />
+      <ClipboardButton title="复制" text={id} bsSize="small" />
       {surroundingSearchButton}
       {disableTestAgainstStream ? null : _getTestAgainstStreamButton(streams, index, id)}
     </ButtonGroup>

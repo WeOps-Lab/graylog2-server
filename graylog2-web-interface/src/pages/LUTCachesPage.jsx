@@ -81,14 +81,14 @@ class LUTCachesPage extends React.Component {
 
     if (isShowing || isEditing) {
       if (!cache) {
-        content = <Spinner text="Loading data cache" />;
+        content = <Spinner text="加载数据缓存中" />;
       } else if (isEditing) {
         content = (
           <Row className="content">
             <Col lg={12}>
               <CacheForm cache={cache}
                          type={cache.config.type}
-                         title="Data Cache"
+                         title="数据缓存"
                          create={false}
                          saved={this._saved}
                          validate={this._validateCache}
@@ -101,7 +101,7 @@ class LUTCachesPage extends React.Component {
       }
     } else if (this._isCreating(this.props)) {
       if (!types) {
-        content = <Spinner text="Loading data cache types" />;
+        content = <Spinner text="加载数据缓存类型中" />;
       } else {
         content = (
           <CacheCreate types={types}
@@ -111,7 +111,7 @@ class LUTCachesPage extends React.Component {
         );
       }
     } else if (!caches) {
-      content = <Spinner text="Loading caches" />;
+      content = <Spinner text="加载缓存中" />;
     } else {
       content = (
         <CachesOverview caches={caches}
@@ -120,21 +120,21 @@ class LUTCachesPage extends React.Component {
     }
 
     return (
-      <DocumentTitle title="Lookup Tables - Caches">
+      <DocumentTitle title="数据字典 - 缓存">
         <span>
-          <PageHeader title="Caches for Lookup Tables">
-            <span>Caches provide the actual values for lookup tables</span>
+          <PageHeader title="数据字典的缓存">
+            <span>数据缓存为数据字典提供实际值</span>
             {null}
             <span>
               <ButtonToolbar>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.OVERVIEW}>
-                  <Button bsStyle="info">Lookup Tables</Button>
+                  <Button bsStyle="info">数据字典</Button>
                 </LinkContainer>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.CACHES.OVERVIEW}>
-                  <Button bsStyle="info">Caches</Button>
+                  <Button bsStyle="info">数据缓存</Button>
                 </LinkContainer>
                 <LinkContainer to={Routes.SYSTEM.LOOKUPTABLES.DATA_ADAPTERS.OVERVIEW}>
-                  <Button bsStyle="info">Data Adapters</Button>
+                  <Button bsStyle="info">数据源</Button>
                 </LinkContainer>
               </ButtonToolbar>
             </span>

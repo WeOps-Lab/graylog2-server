@@ -63,12 +63,11 @@ class MatchingTypeSwitcher extends React.Component {
     const { onChange, stream } = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm('You are about to change how rules are applied to this stream, do you want to continue? Changes will take effect immediately.')) {
+    if (window.confirm('确定要修改该消息流的规则?')) {
       StreamsStore.update(stream.id, { matching_type: newValue }, (response) => {
         onChange();
 
-        UserNotification.success(`Messages will now be routed into the stream when ${newValue === 'AND' ? 'all' : 'any'} rules are matched`,
-          'Success');
+        UserNotification.success(`消息将会在${newValue === 'AND' ? '完整匹配' : '部分匹配'}的情况下路由到该消息流.`, '成功');
 
         return response;
       });
@@ -83,12 +82,12 @@ class MatchingTypeSwitcher extends React.Component {
         <div>
           <Input id="streamrule-and-connector"
                  type="radio"
-                 label="A message must match all of the following rules"
+                 label="消息必须符合所有以下规则"
                  checked={stream.matching_type === 'AND'}
                  onChange={this.handleTypeChangeToAnd} />
           <Input id="streamrule-or-connector"
                  type="radio"
-                 label="A message must match at least one of the following rules"
+                 label="消息必须至少匹配以下规则之一"
                  checked={stream.matching_type === 'OR'}
                  onChange={this.handleTypeChangeToOr} />
         </div>

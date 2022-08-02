@@ -62,23 +62,23 @@ const NodeThroughput = createReactClass({
     if (this.props.longFormat) {
       return (
         <span>
-          Processing <strong>{numeral(metrics.totalIn).format('0,0')}</strong> incoming and <strong>
-            {numeral(metrics.totalOut).format('0,0')}
-                                                                                            </strong> outgoing msg/s.
+          每秒接收 <strong>{numeral(metrics.totalIn).format('0,0')}</strong> 消息 <strong>
+          输出 {numeral(metrics.totalOut).format('0,0')}
+          </strong>  消息/秒.
         </span>
       );
     }
 
     return (
       <span>
-        In {numeral(metrics.totalIn).format('0,0')} / Out {numeral(metrics.totalOut).format('0,0')} msg/s.
+        输入 {numeral(metrics.totalIn).format('0,0')} 条/秒，输出{numeral(metrics.totalOut).format('0,0')} 条/秒.
       </span>
     );
   },
 
   render() {
     if (this._isLoading()) {
-      return <Spinner text="Loading throughput..." />;
+      return <Spinner text="加载吞吐量中..." />;
     }
 
     const { nodeId } = this.props;

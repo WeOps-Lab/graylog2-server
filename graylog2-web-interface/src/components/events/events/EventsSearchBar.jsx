@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import moment from 'moment';
+moment.locale('zh-cn');
 import lodash from 'lodash';
 
 import { ButtonGroup, ControlLabel, FormControl, FormGroup, Button } from 'components/bootstrap';

@@ -21,219 +21,219 @@ import lodash from 'lodash';
 import * as URLUtils from 'util/URLUtils';
 import UserNotification from 'util/UserNotification';
 import fetch from 'logic/rest/FetchProvider';
-import { singletonStore, singletonActions } from 'logic/singleton';
+import {singletonStore, singletonActions} from 'logic/singleton';
 
 export const EventNotificationsActions = singletonActions(
-  'core.EventNotifications',
-  () => Reflux.createActions({
-    listAll: { asyncResult: true },
-    listAllLegacyTypes: { asyncResult: true },
-    listPaginated: { asyncResult: true },
-    get: { asyncResult: true },
-    create: { asyncResult: true },
-    update: { asyncResult: true },
-    delete: { asyncResult: true },
-    test: { asyncResult: true },
-    testPersisted: { asyncResult: true },
-  }),
+    'core.EventNotifications',
+    () => Reflux.createActions({
+        listAll: {asyncResult: true},
+        listAllLegacyTypes: {asyncResult: true},
+        listPaginated: {asyncResult: true},
+        get: {asyncResult: true},
+        create: {asyncResult: true},
+        update: {asyncResult: true},
+        delete: {asyncResult: true},
+        test: {asyncResult: true},
+        testPersisted: {asyncResult: true},
+    }),
 );
 
 export const EventNotificationsStore = singletonStore(
-  'core.EventNotifications',
-  () => Reflux.createStore({
-    listenables: [EventNotificationsActions],
-    sourceUrl: '/events/notifications',
-    all: undefined,
-    allLegacyTypes: undefined,
-    notifications: undefined,
-    query: undefined,
-    pagination: {
-      count: undefined,
-      page: undefined,
-      pageSize: undefined,
-      total: undefined,
-      grandTotal: undefined,
-    },
-
-    getInitialState() {
-      return this.getState();
-    },
-
-    propagateChanges() {
-      this.trigger(this.getState());
-    },
-
-    getState() {
-      return {
-        all: this.all,
-        allLegacyTypes: this.allLegacyTypes,
-        notifications: this.notifications,
-        query: this.query,
-        pagination: this.pagination,
-      };
-    },
-
-    eventNotificationsUrl({ segments = [], query = {} }) {
-      const uri = new URI(this.sourceUrl);
-      const nextSegments = lodash.concat(uri.segment(), segments);
-
-      uri.segmentCoded(nextSegments);
-      uri.query(query);
-
-      return URLUtils.qualifyUrl(uri.resource());
-    },
-
-    refresh() {
-      if (this.all) {
-        this.listAll();
-      }
-
-      if (this.pagination.page) {
-        this.listPaginated({
-          query: this.query,
-          page: this.pagination.page,
-          pageSize: this.pagination.pageSize,
-        });
-      }
-    },
-
-    listAll() {
-      const promise = fetch('GET', this.eventNotificationsUrl({ query: { per_page: 0 } }));
-
-      promise.then((response) => {
-        this.all = response.notifications;
-        this.propagateChanges();
-
-        return response;
-      });
-
-      EventNotificationsActions.listAll.promise(promise);
-    },
-
-    listPaginated({ query = '', page = 1, pageSize = 10 }) {
-      const promise = fetch('GET', this.eventNotificationsUrl({
-        query: {
-          query: query,
-          page: page,
-          per_page: pageSize,
+    'core.EventNotifications',
+    () => Reflux.createStore({
+        listenables: [EventNotificationsActions],
+        sourceUrl: '/events/notifications',
+        all: undefined,
+        allLegacyTypes: undefined,
+        notifications: undefined,
+        query: undefined,
+        pagination: {
+            count: undefined,
+            page: undefined,
+            pageSize: undefined,
+            total: undefined,
+            grandTotal: undefined,
         },
-      }));
 
-      promise.then((response) => {
-        this.notifications = response.notifications;
-        this.query = response.query;
-
-        this.pagination = {
-          count: response.count,
-          page: response.page,
-          pageSize: response.per_page,
-          total: response.total,
-          grandTotal: response.grand_total,
-        };
-
-        this.propagateChanges();
-
-        return response;
-      });
-
-      EventNotificationsActions.listPaginated.promise(promise);
-    },
-
-    get(notificationId) {
-      const promise = fetch('GET', this.eventNotificationsUrl({ segments: [notificationId] }));
-
-      promise.catch((error) => {
-        if (error.status === 404) {
-          UserNotification.error(`Unable to find Event Notification with id <${notificationId}>, please ensure it wasn't deleted.`,
-            'Could not retrieve Event Notification');
-        }
-      });
-
-      EventNotificationsActions.get.promise(promise);
-    },
-
-    create(notification) {
-      const promise = fetch('POST', this.eventNotificationsUrl({}), notification);
-
-      promise.then(
-        (response) => {
-          UserNotification.success('Notification created successfully', `Notification "${notification.title}" was created successfully.`);
-          this.refresh();
-
-          return response;
+        getInitialState() {
+            return this.getState();
         },
-        (error) => {
-          if (error.status !== 400 || !error.additional.body || !error.additional.body.failed) {
-            UserNotification.error(`Creating Notification "${notification.title}" failed with status: ${error}`,
-              'Could not save Notification');
-          }
+
+        propagateChanges() {
+            this.trigger(this.getState());
         },
-      );
 
-      EventNotificationsActions.create.promise(promise);
-    },
-
-    update(notificationId, notification) {
-      const promise = fetch('PUT', this.eventNotificationsUrl({ segments: [notificationId] }), notification);
-
-      promise.then(
-        (response) => {
-          UserNotification.success('Notification updated successfully', `Notification "${notification.title}" was updated successfully.`);
-          this.refresh();
-
-          return response;
+        getState() {
+            return {
+                all: this.all,
+                allLegacyTypes: this.allLegacyTypes,
+                notifications: this.notifications,
+                query: this.query,
+                pagination: this.pagination,
+            };
         },
-        (error) => {
-          if (error.status !== 400 || !error.additional.body || !error.additional.body.failed) {
-            UserNotification.error(`Updating Notification "${notification.title}" failed with status: ${error}`,
-              'Could not update Notification');
-          }
+
+        eventNotificationsUrl({segments = [], query = {}}) {
+            const uri = new URI(this.sourceUrl);
+            const nextSegments = lodash.concat(uri.segment(), segments);
+
+            uri.segmentCoded(nextSegments);
+            uri.query(query);
+
+            return URLUtils.qualifyUrl(uri.resource());
         },
-      );
 
-      EventNotificationsActions.update.promise(promise);
-    },
+        refresh() {
+            if (this.all) {
+                this.listAll();
+            }
 
-    delete(notification) {
-      const promise = fetch('DELETE', this.eventNotificationsUrl({ segments: [notification.id] }));
-
-      promise.then(
-        () => {
-          UserNotification.success('Notification deleted successfully', `Notification "${notification.title}" was deleted successfully.`);
-          this.refresh();
+            if (this.pagination.page) {
+                this.listPaginated({
+                    query: this.query,
+                    page: this.pagination.page,
+                    pageSize: this.pagination.pageSize,
+                });
+            }
         },
-        (error) => {
-          UserNotification.error(`Deleting Notification "${notification.title}" failed with status: ${error}`,
-            'Could not delete Notification');
+
+        listAll() {
+            const promise = fetch('GET', this.eventNotificationsUrl({query: {per_page: 0}}));
+
+            promise.then((response) => {
+                this.all = response.notifications;
+                this.propagateChanges();
+
+                return response;
+            });
+
+            EventNotificationsActions.listAll.promise(promise);
         },
-      );
 
-      EventNotificationsActions.delete.promise(promise);
-    },
+        listPaginated({query = '', page = 1, pageSize = 10}) {
+            const promise = fetch('GET', this.eventNotificationsUrl({
+                query: {
+                    query: query,
+                    page: page,
+                    per_page: pageSize,
+                },
+            }));
 
-    test(notification) {
-      const promise = fetch('POST', this.eventNotificationsUrl({ segments: ['test'] }), notification);
+            promise.then((response) => {
+                this.notifications = response.notifications;
+                this.query = response.query;
 
-      EventNotificationsActions.test.promise(promise);
-    },
+                this.pagination = {
+                    count: response.count,
+                    page: response.page,
+                    pageSize: response.per_page,
+                    total: response.total,
+                    grandTotal: response.grand_total,
+                };
 
-    testPersisted(notification) {
-      const promise = fetch('POST', this.eventNotificationsUrl({ segments: [notification.id, 'test'] }));
+                this.propagateChanges();
 
-      EventNotificationsActions.testPersisted.promise(promise);
-    },
+                return response;
+            });
 
-    listAllLegacyTypes() {
-      const promise = fetch('GET', this.eventNotificationsUrl({ segments: ['legacy', 'types'] }));
+            EventNotificationsActions.listPaginated.promise(promise);
+        },
 
-      promise.then((response) => {
-        this.allLegacyTypes = response.types;
-        this.propagateChanges();
+        get(notificationId) {
+            const promise = fetch('GET', this.eventNotificationsUrl({segments: [notificationId]}));
 
-        return response;
-      });
+            promise.catch((error) => {
+                if (error.status === 404) {
+                    UserNotification.error(`无法找到事件通知<${notificationId}>，请确认是否被删除。`,
+                        '无法找到事件通知');
+                }
+            });
 
-      EventNotificationsActions.listAllLegacyTypes.promise(promise);
-    },
-  }),
+            EventNotificationsActions.get.promise(promise);
+        },
+
+        create(notification) {
+            const promise = fetch('POST', this.eventNotificationsUrl({}), notification);
+
+            promise.then(
+                (response) => {
+                    UserNotification.success('通知创建成功', `通知“${notification.title}”创建成功。`);
+                    this.refresh();
+
+                    return response;
+                },
+                (error) => {
+                    if (error.status !== 400 || !error.additional.body || !error.additional.body.failed) {
+                        UserNotification.error(`创建通知"${notification.title}"失败：${error}`,
+                            '无法创建通知');
+                    }
+                },
+            );
+
+            EventNotificationsActions.create.promise(promise);
+        },
+
+        update(notificationId, notification) {
+            const promise = fetch('PUT', this.eventNotificationsUrl({segments: [notificationId]}), notification);
+
+            promise.then(
+                (response) => {
+                    UserNotification.success('通知更新成功', `通知"${notification.title}"更新成功。`);
+                    this.refresh();
+
+                    return response;
+                },
+                (error) => {
+                    if (error.status !== 400 || !error.additional.body || !error.additional.body.failed) {
+                        UserNotification.error(`更新通知"${notification.title}"失败：${error}`,
+                            '无法更新通知');
+                    }
+                },
+            );
+
+            EventNotificationsActions.update.promise(promise);
+        },
+
+        delete(notification) {
+            const promise = fetch('DELETE', this.eventNotificationsUrl({segments: [notification.id]}));
+
+            promise.then(
+                () => {
+                    UserNotification.success('通知删除成功', `通知"${notification.title}"删除成功。`);
+                    this.refresh();
+                },
+                (error) => {
+                    UserNotification.error(`删除通知"${notification.title}"失败：${error}`,
+                        '无法删除通知');
+                },
+            );
+
+            EventNotificationsActions.delete.promise(promise);
+        },
+
+        test(notification) {
+            const promise = fetch('POST', this.eventNotificationsUrl({segments: ['test']}), notification);
+
+            EventNotificationsActions.test.promise(promise);
+        },
+
+        testPersisted(notification) {
+            const promise = fetch('POST', this.eventNotificationsUrl({segments: [notification.id, 'test']}));
+
+            EventNotificationsActions.testPersisted.promise(promise);
+        },
+
+        listAllLegacyTypes() {
+            const promise = fetch('GET', this.eventNotificationsUrl({segments: ['legacy', 'types']}));
+
+            promise.then((response) => {
+                this.allLegacyTypes = response.types;
+                this.propagateChanges();
+
+                return response;
+            });
+
+            EventNotificationsActions.listAllLegacyTypes.promise(promise);
+        },
+    }),
 );

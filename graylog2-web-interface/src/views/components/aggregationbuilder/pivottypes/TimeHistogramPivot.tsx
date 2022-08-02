@@ -84,7 +84,7 @@ export default class TimeHistogramPivot extends React.Component<Props, State> {
         <ControlLabel>Interval</ControlLabel>
         <Checkbox className={`pull-right ${styles.automaticCheckbox}`}
                   checked={this._isAuto()}
-                  title="When this is enabled, the interval will be chosen automatically based on the timerange of the query"
+                  title="启用后，将根据查询的时间范围自动选择间隔"
                   onChange={this._toggleAuto}>
           Automatic
         </Checkbox>

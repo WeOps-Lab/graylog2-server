@@ -20,7 +20,7 @@ import * as URLUtils from 'util/URLUtils';
 import UserNotification from 'util/UserNotification';
 import fetch from 'logic/rest/FetchProvider';
 
-import { singletonStore } from '../../logic/singleton';
+import {singletonStore} from '../../logic/singleton';
 
 // eslint-disable-next-line import/prefer-default-export
 export const SystemProcessingStore = singletonStore(
@@ -33,11 +33,11 @@ export const SystemProcessingStore = singletonStore(
         .then(
           () => {
             this.trigger({});
-            UserNotification.success(`Message processing paused successfully in '${nodeId}'`);
+            UserNotification.success(`在’${nodeId}‘的消息处理暂停成功。`);
           },
           (error) => {
-            UserNotification.error(`Pausing message processing in '${nodeId}' failed: ${error}`,
-              `Could not pause message processing in node '${nodeId}'`);
+            UserNotification.error(`在’${nodeId}‘的消息处理暂停失败：${error}`,
+              `无法暂停在’${nodeId}‘的消息处理`);
           },
         );
     },
@@ -47,11 +47,11 @@ export const SystemProcessingStore = singletonStore(
         .then(
           () => {
             this.trigger({});
-            UserNotification.success(`Message processing resumed successfully in '${nodeId}'`);
+            UserNotification.success(`在’${nodeId}‘的消息处理恢复成功。`);
           },
           (error) => {
-            UserNotification.error(`Resuming message processing in '${nodeId}' failed: ${error}`,
-              `Could not resume message processing in node '${nodeId}'`);
+            UserNotification.error(`在’${nodeId}‘的消息处理恢复失败：${error}`,
+              `无法恢复在’${nodeId}‘的消息处理`);
           },
         );
     },

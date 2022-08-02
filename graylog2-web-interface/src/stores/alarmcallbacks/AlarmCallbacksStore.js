@@ -39,8 +39,8 @@ export const AlarmCallbacksStore = singletonStore(
     listenables: [AlarmCallbacksActions],
 
     list(streamId) {
-      const failCallback = (error) => UserNotification.error(`Fetching alert notifications failed with status: ${error.message}`,
-        'Could not retrieve alert notification');
+      const failCallback = (error) => UserNotification.error(`加载告警通知: ${error.message} 失败`,
+        '加载告警通知失败');
 
       const url = URLUtils.qualifyUrl(ApiRoutes.AlarmCallbacksApiController.list(streamId).url);
       const promise = fetch('GET', url).then((response) => response.alarmcallbacks, failCallback);
@@ -51,8 +51,8 @@ export const AlarmCallbacksStore = singletonStore(
       const failCallback = (error) => {
         const errorMessage = (error.additional && error.additional.status === 400 ? error.additional.body.message : error.message);
 
-        UserNotification.error(`Saving alert notification failed with status: ${errorMessage}`,
-          'Could not save alert notification');
+        UserNotification.error(`保存告警通知失败: ${errorMessage}`,
+          '无法保存告警通知');
       };
 
       const url = URLUtils.qualifyUrl(ApiRoutes.AlarmCallbacksApiController.create(streamId).url);
@@ -60,22 +60,22 @@ export const AlarmCallbacksStore = singletonStore(
       const promise = fetch('POST', url, alarmCallback);
 
       promise.then(
-        () => UserNotification.success('Alert notification saved successfully'),
+        () => UserNotification.success('告警通知保存成功'),
         failCallback,
       );
 
       AlarmCallbacksActions.save.promise(promise);
     },
     delete(streamId, alarmCallbackId) {
-      const failCallback = (error) => UserNotification.error(`Removing alert notification failed with status: ${error.message}`,
-        'Could not remove alert notification');
+      const failCallback = (error) => UserNotification.error(`删除告警通知失败: ${error.message}`,
+        '删除告警通知失败');
 
       const url = URLUtils.qualifyUrl(ApiRoutes.AlarmCallbacksApiController.delete(streamId, alarmCallbackId).url);
 
       const promise = fetch('DELETE', url);
 
       promise.then(
-        () => UserNotification.success('Alert notification deleted successfully'),
+        () => UserNotification.success('删除告警通知成功'),
         failCallback,
       );
 
@@ -85,8 +85,8 @@ export const AlarmCallbacksStore = singletonStore(
       const failCallback = (error) => {
         const errorMessage = (error.additional && error.additional.status === 400 ? error.additional.body.message : error.message);
 
-        UserNotification.error(`Updating alert notification '${alarmCallbackId}' failed with status: ${errorMessage}`,
-          'Could not update alert notification');
+        UserNotification.error(`更新告警通知 '${alarmCallbackId}' 失败: ${errorMessage}`,
+          '更新告警通知失败');
       };
 
       const url = URLUtils.qualifyUrl(ApiRoutes.AlarmCallbacksApiController.update(streamId, alarmCallbackId).url);
@@ -94,7 +94,7 @@ export const AlarmCallbacksStore = singletonStore(
       const promise = fetch('PUT', url, deltas);
 
       promise.then(
-        () => UserNotification.success('Alert notification updated successfully'),
+        () => UserNotification.success('更新告警通知成功'),
         failCallback,
       );
 

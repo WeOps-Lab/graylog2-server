@@ -62,8 +62,8 @@ export const PipelineConnectionsStore = singletonStore(
 
     list() {
       const failCallback = (error) => {
-        UserNotification.error(`Fetching pipeline connections failed with status: ${error.message}`,
-          'Could not retrieve pipeline connections');
+        UserNotification.error(`加载流水线连接失败: ${error.message}`,
+          '无法加载流水线连接');
       };
 
       const url = qualifyUrl(ApiRoutes.ConnectionsController.list().url);
@@ -92,7 +92,7 @@ export const PipelineConnectionsStore = singletonStore(
           }
 
           this.trigger({ connections: this.connections });
-          UserNotification.success('Pipeline connections updated successfully');
+          UserNotification.success('流水线连接成功');
         },
         this._failUpdateCallback,
       );
@@ -117,15 +117,15 @@ export const PipelineConnectionsStore = singletonStore(
           });
 
           this.trigger({ connections: this.connections });
-          UserNotification.success('Pipeline connections updated successfully');
+          UserNotification.success('流水线连接更新成功');
         },
         this._failUpdateCallback,
       );
     },
 
     _failUpdateCallback(error) {
-      UserNotification.error(`Updating pipeline connections failed with status: ${error.message}`,
-        'Could not update pipeline connections');
+      UserNotification.error(`流水线连接更新失败: ${error.message}`,
+        '流水线连接更新失败');
     },
   }),
 );

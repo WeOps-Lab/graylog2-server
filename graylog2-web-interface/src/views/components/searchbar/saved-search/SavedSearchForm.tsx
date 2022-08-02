@@ -55,19 +55,19 @@ const SavedSearchForm = (props: Props) => {
     target,
   } = props;
   const disableSaveAs = !value || value === '' || disableCreateNew;
-  const createNewTitle = isCreateNew ? 'Create new' : 'Save as';
+  const createNewTitle = isCreateNew ? '创建' : '更新';
 
   return (
     <Portal>
       <Position placement="left"
                 target={target}>
-        <Popover title="Name of search" id="saved-search-popover">
+        <Popover title="搜索" id="saved-search-popover">
           <StyledForm onSubmit={stopEvent}>
             <FormGroup>
               <ControlLabel>Title</ControlLabel>
               <FormControl type="text"
                            value={value}
-                           placeholder="Enter title"
+                           placeholder="输入标题"
                            onChange={onChangeTitle} />
             </FormGroup>
             {!isCreateNew
@@ -77,7 +77,7 @@ const SavedSearchForm = (props: Props) => {
                       type="submit"
                       bsSize="sm"
                       onClick={saveSearch}>
-                Save
+                保存
               </Button>
             )}
             <Button disabled={disableSaveAs}
@@ -91,7 +91,7 @@ const SavedSearchForm = (props: Props) => {
             <Button className={styles.button}
                     onClick={toggleModal}
                     bsSize="sm">
-              Cancel
+              取消
             </Button>
           </StyledForm>
         </Popover>

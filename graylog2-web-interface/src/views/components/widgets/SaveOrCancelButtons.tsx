@@ -50,9 +50,9 @@ const SaveOrCancelButtons = ({ onFinish, onCancel, disableSave = false }: Props)
   return (
     <StyledButtonToolbar className="pull-right">
       <Button onClick={_onFinish} bsStyle="primary" disabled={disableSave}>
-        {isSubmitting ? <Spinner text="Applying Changes" delay={0} /> : 'Apply Changes'}
+        {isSubmitting ? <Spinner text="提交中" delay={0} /> : '提交'}
       </Button>
-      <Button onClick={onCancel}>Cancel</Button>
+      <Button onClick={onCancel}>取消</Button>
     </StyledButtonToolbar>
   );
 };

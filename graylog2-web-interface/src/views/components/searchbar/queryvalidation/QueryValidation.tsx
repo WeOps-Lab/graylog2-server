@@ -175,7 +175,7 @@ const QueryValidation = () => {
     <>
       <Container ref={explanationTriggerRef}>
         {hasExplanations ? (
-          <ExplanationTrigger title="Toggle validation error explanation"
+          <ExplanationTrigger title="切换验证错误说明"
                               onClick={toggleShow}
                               $clickable
                               tabIndex={0}
@@ -184,7 +184,7 @@ const QueryValidation = () => {
           </ExplanationTrigger>
         ) : (
           <DocumentationLink page={DocsHelper.PAGES.SEARCH_QUERY_LANGUAGE}
-                             title="Search query syntax documentation"
+                             title="搜索查询语法文档"
                              text={<Icon name="lightbulb" />} />
         )}
       </Container>

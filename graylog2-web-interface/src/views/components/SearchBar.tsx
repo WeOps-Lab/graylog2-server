@@ -21,7 +21,7 @@ import * as Immutable from 'immutable';
 import { Field } from 'formik';
 import styled from 'styled-components';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import connect from 'stores/connect';
 import { Spinner, FlatContentRow } from 'components/common';
 import { Row, Col } from 'components/bootstrap';
@@ -199,7 +199,7 @@ const SearchBar = ({
                                   <QueryInput value={value}
                                               timeRange={values.timerange}
                                               streams={values.streams}
-                                              placeholder='Type your search query here and press enter. E.g.: ("not found" AND http) OR http_response_code:[400 TO 404]'
+                                              placeholder='在此处输入您的搜索查询，然后按 Enter。例如：（“未找到”和 http）或 http_response_code：[400 TO 404]'
                                               error={error}
                                               isValidating={isValidating}
                                               warning={warnings.queryString}

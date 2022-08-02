@@ -47,8 +47,8 @@ export const AlertsStore = singletonStore(
         .then(
           (response) => this.trigger({ alerts: response }),
           (error) => {
-            UserNotification.error(`Fetching alerts for stream "${stream.title}" failed with status: ${error.message}`,
-              `Could not retrieve alerts for stream "${stream.title}".`);
+            UserNotification.error(`加载消息流 "${stream.title}" 的告警失败: ${error.message}`,
+              `无法加载消息流 "${stream.title}" 的告警.`);
           },
         );
 
@@ -63,7 +63,7 @@ export const AlertsStore = singletonStore(
         .then(
           (response) => this.trigger({ alerts: response }),
           (error) => {
-            UserNotification.error(`Fetching alerts failed with status: ${error.message}`, 'Could not retrieve alerts.');
+            UserNotification.error(`加载告警失败: ${error.message}`, '无法加载消息流的告警.');
           },
         );
 
@@ -77,7 +77,7 @@ export const AlertsStore = singletonStore(
       promise.then(
         (response) => this.trigger({ alerts: response }),
         (error) => {
-          UserNotification.error(`Fetching alerts failed with status: ${error.message}`, 'Could not retrieve alerts.');
+          UserNotification.error(`加载告警失败: ${error.message}`, '无法加载告警.');
         },
       );
 
@@ -92,7 +92,7 @@ export const AlertsStore = singletonStore(
         .then(
           (response) => this.trigger({ alerts: response }),
           (error) => {
-            UserNotification.error(`Fetching alerts failed with status: ${error.message}`, 'Could not retrieve alerts.');
+            UserNotification.error(`加载告警状态失败: ${error.message}`, '无法加载告警状态.');
           },
         );
 
@@ -110,7 +110,7 @@ export const AlertsStore = singletonStore(
           return response;
         },
         (error) => {
-          UserNotification.error(`Fetching alert '${alertId}' failed with status: ${error.message}`, 'Could not retrieve alert.');
+          UserNotification.error(`加载告警 '${alertId}' 失败: ${error.message}`, '无法加载告警.');
         },
       );
 

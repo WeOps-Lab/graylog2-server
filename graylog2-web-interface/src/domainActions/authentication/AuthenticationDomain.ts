@@ -21,17 +21,17 @@ import notifyingAction from '../notifyingAction';
 const create = notifyingAction({
   action: AuthenticationActions.create,
   success: (authBackend) => ({
-    message: `Authentication service "${authBackend.title} was created successfully`,
+    message: `身份验证服务"${authBackend.title} 已成功创建`,
   }),
   error: (error, authBackend) => ({
-    message: `Creating authentication service "${authBackend.title}" failed with status: ${error}`,
+    message: `创建身份验证服务"${authBackend.title}"失败，状态为：${error}`,
   }),
 });
 
 const load = notifyingAction({
   action: AuthenticationActions.load,
   error: (error, authBackendId) => ({
-    message: `Loading authentication service with id "${authBackendId}" failed with status: ${error}`,
+    message: `加载 ID 为"${authBackendId}"的身份验证服务失败并显示状态: ${error}`,
   }),
   notFoundRedirect: true,
 });
@@ -39,72 +39,72 @@ const load = notifyingAction({
 const loadActive = notifyingAction({
   action: AuthenticationActions.loadActive,
   error: (error) => ({
-    message: `Loading active authentication service failed with status: ${error}`,
+    message: `加载活动身份验证服务失败并显示状态: ${error}`,
   }),
 });
 
 const update = notifyingAction({
   action: AuthenticationActions.update,
   success: (authBackendId, authBackend) => ({
-    message: `Authentication service "${authBackend.title}" was updated successfully`,
+    message: `身份验证服务"${authBackend.title}"已成功更新`,
   }),
   error: (error, authBackendId, authBackend) => ({
-    message: `Updating authentication service "${authBackend.title}" failed with status: ${error}`,
+    message: `更新身份验证服务"${authBackend.title}"失败，状态为: ${error}`,
   }),
 });
 
 const deleteBackend = notifyingAction({
   action: AuthenticationActions.delete,
   success: (authBackendId, authBackendTitle) => ({
-    message: `Authentication service "${authBackendTitle} was deleted successfully`,
+    message: `身份验证服务"${authBackendTitle}" 已成功删除`,
   }),
   error: (error, authBackendId, authBackendTitle) => ({
-    message: `Deleting authentication service "${authBackendTitle}" failed with status: ${error}`,
+    message: `删除身份验证服务"${authBackendTitle}"失败，状态为：${error}`,
   }),
 });
 
 const testConnection = notifyingAction({
   action: AuthenticationActions.testConnection,
   error: (error) => ({
-    message: `Connection test failed with status: ${error}`,
+    message: `连接测试失败，状态为: ${error}`,
   }),
 });
 
 const testLogin = notifyingAction({
   action: AuthenticationActions.testLogin,
   error: (error) => ({
-    message: `Login test failed with status: ${error}`,
+    message: `登录测试失败，状态为: ${error}`,
   }),
 });
 
 const setActiveBackend = notifyingAction({
   action: AuthenticationActions.setActiveBackend,
   success: (authBackendId, authBackendTitle) => ({
-    message: `Authentication service "${authBackendTitle} was ${authBackendId ? 'activated' : 'deactivated'} successfully`,
+    message: `鉴权服务 "${authBackendTitle} 设置为 ${authBackendId ? '活跃' : '不活跃'} 成功`,
   }),
   error: (error, authBackendId, authBackendTitle) => ({
-    message: `Activating authentication service "${authBackendTitle}" failed with status: ${error}`,
+    message: `鉴权服务 "${authBackendTitle}" 失败,当前状态: ${error}`,
   }),
 });
 
 const loadBackendsPaginated = notifyingAction({
   action: AuthenticationActions.loadBackendsPaginated,
   error: (error) => ({
-    message: `Loading authentication services failed with status: ${error}`,
+    message: `加载身份验证服务失败并显示状态: ${error}`,
   }),
 });
 
 const loadUsersPaginated = notifyingAction({
   action: AuthenticationActions.loadUsersPaginated,
   error: (authBackendId, error) => ({
-    message: `Loading synchronized users for authentication service with id "${authBackendId}" failed with status: ${error}`,
+    message: `加载 ID 为"${authBackendId}"的身份验证服务的同步用户失败，状态为: ${error}`,
   }),
 });
 
 const loadActiveBackendType = notifyingAction({
   action: AuthenticationActions.loadActiveBackendType,
   error: (error) => ({
-    message: `Loading active authentication service type failed with status: ${error}`,
+    message: `加载活动身份验证服务类型失败并显示状态: ${error}`,
   }),
 });
 

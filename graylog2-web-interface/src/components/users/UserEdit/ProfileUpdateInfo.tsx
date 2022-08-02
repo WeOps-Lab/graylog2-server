@@ -21,8 +21,8 @@ import { Icon } from 'components/common';
 
 const ProfileUpdateInfo = () => (
   <Alert bsStyle="info">
-    <Icon name="info-circle" />{' '}<b> First and Last Name</b><br />
-    With Graylog 4.1, we&apos;ve added distinct first and last name fields. These must be provided before the user’s profile can be saved.
+    <Icon name="info-circle" />{' '}<b> 名字和姓氏</b><br />
+      我们添加了不同的名字和姓氏字段。必须先提供这些信息，然后才能保存用户的个人资料。
   </Alert>
 );
 

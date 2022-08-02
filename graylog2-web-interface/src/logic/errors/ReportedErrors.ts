@@ -69,6 +69,6 @@ export const createFromFetchError = (error: FetchError) => {
     case 404:
       return createNotFoundError(error);
     default:
-      throw Error(`Provided FetchError is not a valid ReportedError because status code ${error.status} is not supported`);
+      throw Error(`假设 FetchError 不是有效的 ReportedError，因为不支持状态代码 ${error.status}`);
   }
 };

@@ -54,7 +54,7 @@ const formatDefinition = (format: string) => {
   const definition = formats.find(({ type }) => (type === format));
 
   if (!definition) {
-    throw new Error(`Unknown export format "${definition}"`);
+    throw new Error(`未知的导出格式 "${definition}"`);
   }
 
   return definition;
@@ -62,7 +62,7 @@ const formatDefinition = (format: string) => {
 
 const _exportOnDashboard = (format: string, payload: ExportPayload, searchType: SearchType | undefined | null, searchId: string, filename: string) => {
   if (!searchType) {
-    throw new Error('Exports on a dashboard require a selected widget!');
+    throw new Error('仪表板上的导出需要选定的小部件!');
   }
 
   const { mimeType, fileExtension } = formatDefinition(format);
@@ -73,7 +73,7 @@ const _exportOnDashboard = (format: string, payload: ExportPayload, searchType: 
 
 const _exportOnSearchPage = (format: string, payload: ExportPayload, searchQueries: Set<Query>, searchType: SearchType | undefined | null, searchId: string, filename: string) => {
   if (searchQueries.size !== 1) {
-    throw new Error('Searches must only have a single query!');
+    throw new Error('搜索只能有一个查询!');
   }
 
   const { mimeType, fileExtension } = formatDefinition(format);
@@ -87,7 +87,7 @@ const _exportOnSearchPage = (format: string, payload: ExportPayload, searchQueri
 };
 
 const SearchExportStrategy: ExportStrategy = {
-  title: 'Export all search results',
+  title: '导出所有搜索结果',
   shouldEnableDownload: (showWidgetSelection, selectedWidget, selectedFields, loading) => !loading && !showWidgetSelection && !!selectedFields && selectedFields.length > 0,
   shouldAllowWidgetSelection: (singleWidgetDownload, showWidgetSelection, widgets) => !singleWidgetDownload && !showWidgetSelection && widgets.size > 1,
   shouldShowWidgetSelection: (singleWidgetDownload, selectedWidget, widgets) => !singleWidgetDownload && !selectedWidget && widgets.size > 1,
@@ -96,7 +96,7 @@ const SearchExportStrategy: ExportStrategy = {
 };
 
 const DashboardExportStrategy: ExportStrategy = {
-  title: 'Export message table search results',
+  title: '导出消息表格搜索结果',
   shouldEnableDownload: (showWidgetSelection, selectedWidget, selectedFields, loading) => !loading && !!selectedWidget && !!selectedFields && selectedFields.length > 0,
   shouldAllowWidgetSelection: (singleWidgetDownload, showWidgetSelection) => !singleWidgetDownload && !showWidgetSelection,
   shouldShowWidgetSelection: (singleWidgetDownload, selectedWidget) => !singleWidgetDownload && !selectedWidget,

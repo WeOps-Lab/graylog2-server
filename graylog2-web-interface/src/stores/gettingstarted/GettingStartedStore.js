@@ -76,8 +76,8 @@ export const GettingStartedStore = singletonStore(
             return response;
           },
           (error) => {
-            UserNotification.error(`Dismissing Getting Started Guide failed with status: ${error}`,
-              'Could not dismiss guide');
+            UserNotification.error(`取消入门指南失败: ${error}`,
+              '无法取消入门指南');
           },
         );
 

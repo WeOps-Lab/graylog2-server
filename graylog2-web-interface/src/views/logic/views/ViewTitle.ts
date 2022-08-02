@@ -17,4 +17,4 @@
 import type { ViewType } from 'views/logic/views/View';
 import ViewTypeLabel from 'views/components/ViewTypeLabel';
 
-export default (title: string, type: ViewType) => title ?? `Unsaved ${ViewTypeLabel({ type, capitalize: true })}`;
+export default (title: string, type: ViewType) => title ?? `未保存的 ${ViewTypeLabel({ type, capitalize: true })}`;

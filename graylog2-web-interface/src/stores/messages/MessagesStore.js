@@ -49,8 +49,8 @@ export const MessagesStore = singletonStore(
         .then(
           (response) => MessageFormatter.formatResultMessage(response),
           (errorThrown) => {
-            UserNotification.error(`Loading message information failed with status: ${errorThrown}`,
-              'Could not load message information');
+            UserNotification.error(`加载消息失败: ${errorThrown}`,
+              '无法加载消息');
           },
         );
 
@@ -63,8 +63,8 @@ export const MessagesStore = singletonStore(
         .then(
           (response) => response.tokens,
           (error) => {
-            UserNotification.error(`Loading field terms failed with status: ${error}`,
-              'Could not load field terms.');
+            UserNotification.error(`加载词条失败: ${error}`,
+              '无法加载词条.');
           },
         );
 
@@ -85,14 +85,13 @@ export const MessagesStore = singletonStore(
           (response) => MessageFormatter.formatResultMessage(response),
           (error) => {
             if (error.additional && error.additional.status === 400) {
-              UserNotification.error('Please ensure the selected codec and its configuration are right. '
-              + 'Check your server logs for more information.', 'Could not load raw message');
+              UserNotification.error('请选择合适的编码器. ');
 
               return;
             }
 
-            UserNotification.error(`Loading raw message failed with status: ${error}`,
-              'Could not load raw message');
+            UserNotification.error(`加载原始消息失败: ${error}`,
+              '无法加载原始消息');
           },
         );
 

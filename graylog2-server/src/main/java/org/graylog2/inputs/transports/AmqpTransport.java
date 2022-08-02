@@ -214,9 +214,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new TextField(
                             CK_HOSTNAME,
-                            "Broker hostname",
+                            "Broker主机名",
                             "",
-                            "Hostname of the AMQP broker to use",
+                            "正在使用的AMQP broker主机名",
                             ConfigurationField.Optional.NOT_OPTIONAL
                     )
             );
@@ -224,9 +224,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new NumberField(
                             CK_PORT,
-                            "Broker port",
+                            "Broker端口",
                             5672,
-                            "Port of the AMQP broker to use",
+                            "正在使用的AMQP broker端口",
                             ConfigurationField.Optional.OPTIONAL,
                             NumberField.Attribute.IS_PORT_NUMBER
                     )
@@ -235,9 +235,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new TextField(
                             CK_VHOST,
-                            "Broker virtual host",
+                            "Broker虚拟主机名称",
                             "/",
-                            "Virtual host of the AMQP broker to use",
+                            "正在使用的AMQP broker虚拟主机",
                             ConfigurationField.Optional.NOT_OPTIONAL
                     )
             );
@@ -245,9 +245,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new TextField(
                             CK_USERNAME,
-                            "Username",
+                            "用户名",
                             "",
-                            "Username to connect to AMQP broker",
+                            "连接AMQP broker的用户名",
                             ConfigurationField.Optional.OPTIONAL
                     )
             );
@@ -255,9 +255,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new TextField(
                             CK_PASSWORD,
-                            "Password",
+                            "密码",
                             "",
-                            "Password to connect to AMQP broker",
+                            "连接AMQP broker的密码",
                             ConfigurationField.Optional.OPTIONAL,
                             TextField.Attribute.IS_PASSWORD
                     )
@@ -266,9 +266,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new NumberField(
                             CK_PREFETCH,
-                            "Prefetch count",
+                            "预加载数量",
                             100,
-                            "For advanced usage: AMQP prefetch count. Default is 100.",
+                            "为高级用户提供: AMQP预加载数量. 默认100.",
                             ConfigurationField.Optional.NOT_OPTIONAL
                     )
             );
@@ -276,9 +276,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new TextField(
                             CK_QUEUE,
-                            "Queue",
+                            "队列名称",
                             defaultQueueName(),
-                            "Name of queue that is created.",
+                            "已经创建的AMQP队列名称",
                             ConfigurationField.Optional.NOT_OPTIONAL
                     )
             );
@@ -286,9 +286,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new TextField(
                             CK_EXCHANGE,
-                            "Exchange",
+                            "Exchange名称",
                             defaultExchangeName(),
-                            "Name of exchange to bind to.",
+                            "侦听的Exchange名称.",
                             ConfigurationField.Optional.NOT_OPTIONAL
                     )
             );
@@ -296,9 +296,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new BooleanField(
                             CK_EXCHANGE_BIND,
-                            "Bind to exchange",
+                            "绑定Exchange",
                             false,
-                            "Binds the queue to the configured exchange. The exchange must already exist."
+                            "将队列与指定的Exchange相绑定，所绑定的Exchange必须是已经存在的."
                     )
             );
 
@@ -307,7 +307,7 @@ public class AmqpTransport extends ThrottleableTransport {
                             CK_ROUTING_KEY,
                             "Routing key",
                             defaultRoutingKey(),
-                            "Routing key to listen for.",
+                            "侦听的Routing key.",
                             ConfigurationField.Optional.NOT_OPTIONAL
                     )
             );
@@ -315,9 +315,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new NumberField(
                             CK_PARALLEL_QUEUES,
-                            "Number of Queues",
+                            "队列数量",
                             1,
-                            "Number of parallel Queues",
+                            "并行队列数量",
                             ConfigurationField.Optional.NOT_OPTIONAL
                     )
             );
@@ -325,9 +325,9 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new NumberField(
                             CK_HEARTBEAT_TIMEOUT,
-                            "Heartbeat timeout",
+                            "心跳检测超时时间",
                             ConnectionFactory.DEFAULT_HEARTBEAT,
-                            "Heartbeat interval in seconds (use 0 to disable heartbeat)",
+                            "心跳检测的时间间隔（设置为0可禁用心跳检测）",
                             ConfigurationField.Optional.OPTIONAL
                     )
             );
@@ -335,18 +335,18 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new BooleanField(
                             CK_TLS,
-                            "Enable TLS?",
+                            "启用TLS?",
                             false,
-                            "Enable transport encryption via TLS. (requires valid TLS port setting)"
+                            "是否启用TLS加密转发. (必须配置正确的TLS)"
                     )
             );
 
             cr.addField(
                     new BooleanField(
                             CK_REQUEUE_INVALID_MESSAGES,
-                            "Re-queue invalid messages?",
+                            "是否把失效信息重新加入队列?",
                             true,
-                            "Invalid messages will be discarded if disabled."
+                            "禁用此选项，无效的日志消息将被丢弃."
                     )
             );
 

@@ -49,7 +49,7 @@ type Props = {
 
 const _isRequired = (field) => (value: string) => {
   if (['', null, undefined].includes(value)) {
-    return `${field} is required`;
+    return `${field} 必填`;
   }
 
   return undefined;
@@ -123,7 +123,7 @@ const HighlightForm = ({ onClose, rule }: Props) => {
     HighlightingRulesActions.add(HighlightingRule.create(field, value, condition, newColor)).then(onClose);
   };
 
-  const headerTxt = rule ? 'Edit' : 'New';
+  const headerTxt = rule ? '编辑' : '新增';
 
   return (
     <Formik onSubmit={onSubmit}
@@ -150,13 +150,13 @@ const HighlightForm = ({ onClose, rule }: Props) => {
                   {({ field: { name, value, onChange }, meta }) => (
                     <Input id="field_type_controls"
                            error={meta?.error}
-                           label="Field">
+                           label="字段">
                       <Select inputId="field-select"
                               onChange={(newValue) => onChange({ target: { name, value: newValue } })}
                               options={fieldOptions}
                               allowCreate
                               value={value}
-                              placeholder="Pick a field" />
+                              placeholder="选择字段" />
                     </Input>
                   )}
                 </Field>
@@ -164,12 +164,12 @@ const HighlightForm = ({ onClose, rule }: Props) => {
                   {({ field: { name, value, onChange }, meta }) => (
                     <Input id="condition-controls"
                            error={meta?.error}
-                           label="Condition">
+                           label="条件">
                       <Select inputId="condition-select"
                               onChange={(newValue) => onChange({ target: { name, value: newValue } })}
                               options={isNumeric ? numberConditionOptions : otherConditionOptions}
                               value={value}
-                              placeholder="Choose a condition" />
+                              placeholder="选择条件" />
                     </Input>
                   )}
                 </Field>
@@ -180,14 +180,14 @@ const HighlightForm = ({ onClose, rule }: Props) => {
                            error={meta?.error}
                            onChange={onChange}
                            value={value ?? ''}
-                           label="Value" />
+                           label="值" />
                   )}
                 </Field>
                 <HighlightingColorForm field={selectedFieldType} />
               </Modal.Body>
               <Modal.Footer>
-                <Button type="button" onClick={onClose}>Cancel</Button>
-                <Button type="submit" disabled={!isValid} bsStyle="primary">Save</Button>
+                <Button type="button" onClick={onClose}>取消</Button>
+                <Button type="submit" disabled={!isValid} bsStyle="primary">保存</Button>
               </Modal.Footer>
             </Form>
           </BootstrapModalWrapper>

@@ -50,7 +50,7 @@ const _formatMessageTitle = (index, id) => {
     );
   }
 
-  return <span>{id} <Label bsStyle="warning">Not stored</Label></span>;
+  return <span>{id} <Label bsStyle="warning">未保存</Label></span>;
 };
 
 type Props = {

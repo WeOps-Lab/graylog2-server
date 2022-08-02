@@ -49,16 +49,16 @@ const _validateConfig = (config: HeatmapVisualizationConfig, setErrors): boolean
 
   if (zMin || zMax) {
     if (zMin >= zMax) {
-      errors.zmin = 'Min is bigger than Max';
+      errors.zmin = '最小值大于最大值';
     }
 
     if (zMax <= zMin) {
-      errors.zmin = 'Max is smaller than Min';
+      errors.zmin = '最大值小于最小值';
     }
 
     if (defaultValue) {
       if (defaultValue > zMax || defaultValue < zMin) {
-        errors.defaultValue = 'Default Value is out of range from Min and Max';
+        errors.defaultValue = '默认值超出最小值和最大值的范围';
       }
     }
   }
@@ -100,18 +100,18 @@ const HeatmapVisualizationConfiguration = ({ config = HeatmapVisualizationConfig
   return (
     <>
       <span>Color Scheme</span>
-      <Select placeholder="Select Color Scheme"
+      <Select placeholder="选择颜色"
               onChange={_onColorScaleChange}
               options={colorScalesOptions}
               isClearable={false}
               value={_makeOption(config.colorScale)} />
       <Checkbox onChange={_onReverseScaleChange}
                 checked={config.reverseScale}>
-        Reverse Scale
+        取消缩放
       </Checkbox>
       <Checkbox onChange={_onAutoScaleChange}
                 checked={config.autoScale}>
-        Auto Scale
+        自动缩放
       </Checkbox>
       <StyledInput type="number"
                    disabled={config.autoScale}
@@ -119,24 +119,24 @@ const HeatmapVisualizationConfiguration = ({ config = HeatmapVisualizationConfig
                    onChange={_onZminChange}
                    value={config.zMin}
                    error={errors.zmin}
-                   label="Min" />
+                   label="最小值" />
       <StyledInput type="number"
                    disabled={config.autoScale}
                    id="zmax"
                    value={config.zMax}
                    error={errors.zmax}
                    onChange={_onZmaxChange}
-                   label="Max" />
+                   label="最大值" />
       <Checkbox onChange={_onUseSmallestAsDefaultChange}
                 checked={config.useSmallestAsDefault}>
-        Use smallest as default
+        使用最小作为默认值
       </Checkbox>
       <StyledInput type="number"
                    id="default_value"
                    error={errors.defaultValue}
                    disabled={config.useSmallestAsDefault}
                    onChange={_onDefaultValueChange}
-                   label="Default Value" />
+                   label="默认值" />
     </>
   );
 };

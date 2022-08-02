@@ -18,7 +18,7 @@ import * as React from 'react';
 import PropTypes from 'prop-types';
 import { DateUtils } from 'react-day-picker';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { DatePicker } from 'components/common';
 import DateTime from 'logic/datetimes/DateTime';
 

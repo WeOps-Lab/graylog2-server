@@ -23,6 +23,6 @@ export default (newView: View) => {
   return ViewActions.update(newView).then(({ view }) => {
     return ViewManagementActions.update(view);
   }).then(({ title }) => {
-    return UserNotification.success(`Saving view "${title}" was successful!`, 'Success!');
-  }).catch((error) => UserNotification.error(`Saving view failed: ${error}`, 'Error!'));
+    return UserNotification.success(`保存视图 "${title}" 成功!`, '成功!');
+  }).catch((error) => UserNotification.error(`保存视图失败: ${error}`, '失败!'));
 };

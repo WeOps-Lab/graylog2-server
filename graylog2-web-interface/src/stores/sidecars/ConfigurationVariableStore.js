@@ -45,8 +45,8 @@ export const ConfigurationVariableStore = singletonStore(
       promise
         .catch(
           (error) => {
-            UserNotification.error(`Fetching configuration variables failed with status: ${error}`,
-              'Could not retrieve configuration variables');
+            UserNotification.error(`获取配置变量失败: ${error}`,
+              '无法获取配置变量');
           },
         );
 
@@ -78,10 +78,10 @@ export const ConfigurationVariableStore = singletonStore(
 
       promise
         .then(() => {
-          UserNotification.success(`Configuration variable "${configurationVariable.name}" successfully ${action}`);
+          UserNotification.success(`配置变量 "${configurationVariable.name}" 成功 ${action}`);
         }, (error) => {
-          UserNotification.error(`Saving variable "${configurationVariable.name}" failed with status: ${error.message}`,
-            'Could not save variable');
+          UserNotification.error(`保存变量 "${configurationVariable.name}" 失败: ${error.message}`,
+            '无法保存变量');
         });
 
       ConfigurationVariableActions.save.promise(promise);
@@ -93,7 +93,7 @@ export const ConfigurationVariableStore = singletonStore(
 
       promise.catch(
         (error) => {
-          UserNotification.error(`Fetching configurations for this variable failed with status: ${error}`);
+          UserNotification.error(`获取配置变量失败: ${error}`);
         },
       );
 
@@ -106,10 +106,10 @@ export const ConfigurationVariableStore = singletonStore(
 
       promise
         .then(() => {
-          UserNotification.success(`Configuration variable "${configurationVariable.name}" successfully deleted`);
+          UserNotification.success(`配置变量 "${configurationVariable.name}" 删除成功`);
         }, (error) => {
-          UserNotification.error(`Deleting variable "${configurationVariable.name}" failed with status: ${error.message}`,
-            'Could not delete variable');
+          UserNotification.error(`无法删除 "${configurationVariable.name}" 变量: ${error.message}`,
+            '无法删除变量');
         });
 
       ConfigurationVariableActions.delete.promise(promise);
@@ -129,8 +129,8 @@ export const ConfigurationVariableStore = singletonStore(
 
       promise.catch(
         (error) => {
-          UserNotification.error(`Validating variable "${configurationVariable.name}" failed with status: ${error.message}`,
-            'Could not validate variable');
+          UserNotification.error(`校验变量 "${configurationVariable.name}" 失败: ${error.message}`,
+            '无法校验变量');
         },
       );
 

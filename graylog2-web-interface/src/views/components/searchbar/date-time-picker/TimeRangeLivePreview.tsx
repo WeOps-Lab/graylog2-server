@@ -86,7 +86,7 @@ const dateOutput = (timerange: TimeRange | NoTimeRangeOverride) => {
       from = readableRange(timerange, 'from');
     }
 
-    to = readableRange(timerange, 'to', 'Now');
+    to = readableRange(timerange, 'to', '现在');
 
     return {
       from,
@@ -117,8 +117,8 @@ const TimeRangeLivePreview = ({ timerange }: Props) => {
   return (
     <PreviewWrapper data-testid="time-range-live-preview">
       <FromWrapper>
-        <Title>From</Title>
-        <Date title={`Dates Formatted as [${DateTime.Formats.TIMESTAMP}]`}>{from}</Date>
+        <Title>从</Title>
+        <Date title={`日期格式 [${DateTime.Formats.TIMESTAMP}]`}>{from}</Date>
       </FromWrapper>
 
       <MiddleIcon>
@@ -127,7 +127,7 @@ const TimeRangeLivePreview = ({ timerange }: Props) => {
 
       <UntilWrapper>
         <Title>Until</Title>
-        <Date title={`Dates Formatted as [${DateTime.Formats.TIMESTAMP}]`}>{until}</Date>
+        <Date title={`日期格式 [${DateTime.Formats.TIMESTAMP}]`}>{until}</Date>
       </UntilWrapper>
     </PreviewWrapper>
   );

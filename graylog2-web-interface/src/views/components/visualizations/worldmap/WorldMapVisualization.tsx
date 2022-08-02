@@ -42,7 +42,7 @@ const _createSeriesWithoutMetric = (rows: Rows) => {
   const xLabels = getXLabelsFromLeafs(leafs);
 
   if (!isEmpty(xLabels)) {
-    return { valuesBySeries: { 'No metric defined': xLabels.map(() => null) }, xLabels };
+    return { valuesBySeries: { '未定义指标': xLabels.map(() => null) }, xLabels };
   }
 
   return {};

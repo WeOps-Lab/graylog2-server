@@ -64,11 +64,11 @@ export default class TermsPivotConfiguration extends React.Component {
       <Input type="number"
              id="stage"
              name="stage"
-             label="Number of Values"
+             label="值的数量"
              autoFocus
              onBlur={this._onBlur}
              onChange={this._changeLimit}
-             help="The number of values returned for this field"
+             help="此字段返回的值的数量"
              value={this.state.limit} />
     );
   }

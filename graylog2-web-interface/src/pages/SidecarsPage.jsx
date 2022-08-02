@@ -38,20 +38,20 @@ const SidecarsPage = () => {
   }, [canCreateSidecarUserTokens]);
 
   return (
-    <DocumentTitle title="Sidecars">
+    <DocumentTitle title="客户端">
       <span>
-        <PageHeader title="Sidecars Overview">
+        <PageHeader title="客户端概览">
           <span>
-            The Graylog sidecars can reliably forward contents of log files or Windows EventLog from your servers.
+            DataInsight客户端中的客户端管理器可以帮助您管理采集器,将数据通过采集器发送到DataInsight
           </span>
 
           {canCreateSidecarUserTokens && (
             <>
               {sidecarUser ? (
                 <span>
-                  Do you need an API token for a sidecar?&ensp;
+                  您需要为DataInsight客户端创建访问API的Token&ensp;
                   <Link to={Routes.SYSTEM.USERS.TOKENS.edit(sidecarUser.id)}>
-                    Create or reuse a token for the <em>graylog-sidecar</em> user
+                    为 <em>sidecar</em> 用户创建或重用令牌
                   </Link>
                 </span>
               ) : <Spinner />}
@@ -60,13 +60,13 @@ const SidecarsPage = () => {
 
           <ButtonToolbar>
             <LinkContainer to={Routes.SYSTEM.SIDECARS.OVERVIEW}>
-              <Button bsStyle="info">Overview</Button>
+              <Button bsStyle="info">概览</Button>
             </LinkContainer>
             <LinkContainer to={Routes.SYSTEM.SIDECARS.ADMINISTRATION}>
-              <Button bsStyle="info">Administration</Button>
+              <Button bsStyle="info">客户端管理</Button>
             </LinkContainer>
             <LinkContainer to={Routes.SYSTEM.SIDECARS.CONFIGURATION}>
-              <Button bsStyle="info">Configuration</Button>
+              <Button bsStyle="info">采集器配置</Button>
             </LinkContainer>
           </ButtonToolbar>
         </PageHeader>

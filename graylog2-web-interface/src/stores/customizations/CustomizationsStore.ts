@@ -64,7 +64,7 @@ const CustomizationStore = singletonStore('customization.store', () => Reflux.cr
         return response;
       },
       (error) => {
-        UserNotification.error(`Update failed: ${error}`, `Could not update customization: ${type}`);
+        UserNotification.error(`更新失败: ${error}`, `无法更新: ${type}`);
       },
     );
 

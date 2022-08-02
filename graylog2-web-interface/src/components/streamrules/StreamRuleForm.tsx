@@ -17,16 +17,15 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 
-import { Icon, TypeAheadFieldInput } from 'components/common';
-import { Col, Well, BootstrapModalForm, Input } from 'components/bootstrap';
-import { DocumentationLink } from 'components/support';
+import {Icon, TypeAheadFieldInput} from 'components/common';
+import {Col, Well, BootstrapModalForm, Input} from 'components/bootstrap';
+import {DocumentationLink} from 'components/support';
 import HumanReadableStreamRule from 'components/streamrules//HumanReadableStreamRule';
 import connect from 'stores/connect';
 import DocsHelper from 'util/DocsHelper';
-import Version from 'util/Version';
 import * as FormsUtils from 'util/FormsUtils';
-import type { Store } from 'stores/StoreTypes';
-import { InputsActions, InputsStore } from 'stores/inputs/InputsStore';
+import type {Store} from 'stores/StoreTypes';
+import {InputsActions, InputsStore} from 'stores/inputs/InputsStore';
 
 type StreamRule = {
   type: number,
@@ -61,10 +60,11 @@ type State = {
 class StreamRuleForm extends React.Component<Props, State> {
   static defaultProps = {
     // eslint-disable-next-line react/default-props-match-prop-types
-    streamRule: { field: '', type: 1, value: '', inverted: false, description: '' },
+    streamRule: {field: '', type: 1, value: '', inverted: false, description: ''},
     // eslint-disable-next-line react/default-props-match-prop-types
     inputs: [],
-    onClose: () => {},
+    onClose: () => {
+    },
   };
 
   static propTypes = {
@@ -96,33 +96,33 @@ class StreamRuleForm extends React.Component<Props, State> {
   }
 
   _validateMatchInput = () => {
-    const { streamRule: { value } } = this.state;
+    const {streamRule: {value}} = this.state;
 
     if (String(value) === String(this.PLACEHOLDER_INPUT)) {
-      this.setState({ error: 'Please choose an input' });
+      this.setState({error: '请选择输入'});
 
       return false;
     }
 
-    this.setState({ error: '' });
+    this.setState({error: ''});
 
     return true;
   };
 
   _onSubmit = () => {
-    const { streamRule: currentStreamRule } = this.state;
-    const { type } = currentStreamRule;
-    const { streamRule, onSubmit } = this.props;
-    const { onClose } = this.props;
+    const {streamRule: currentStreamRule} = this.state;
+    const {type} = currentStreamRule;
+    const {streamRule, onSubmit} = this.props;
+    const {onClose} = this.props;
 
     if (type === this.ALWAYS_MATCH_RULE_TYPE) {
       currentStreamRule.field = '';
-      this.setState({ streamRule: currentStreamRule });
+      this.setState({streamRule: currentStreamRule});
     }
 
     if (type === this.FIELD_PRESENCE_RULE_TYPE || type === this.ALWAYS_MATCH_RULE_TYPE) {
       currentStreamRule.value = '';
-      this.setState({ streamRule: currentStreamRule });
+      this.setState({streamRule: currentStreamRule});
     }
 
     if (String(type) === String(this.MATCH_INPUT)) {
@@ -143,8 +143,8 @@ class StreamRuleForm extends React.Component<Props, State> {
   );
 
   handleChange = (event) => {
-    const { streamRule } = this.state;
-    const updatedStreamRule = { ...streamRule };
+    const {streamRule} = this.state;
+    const updatedStreamRule = {...streamRule};
 
     updatedStreamRule[event.target.name] = FormsUtils.getValueFromInput(event.target);
 
@@ -152,7 +152,7 @@ class StreamRuleForm extends React.Component<Props, State> {
       updatedStreamRule.value = String(this.PLACEHOLDER_INPUT);
     }
 
-    this.setState({ streamRule: updatedStreamRule });
+    this.setState({streamRule: updatedStreamRule});
   };
 
   _formatInputOptions = (input) => (
@@ -162,8 +162,8 @@ class StreamRuleForm extends React.Component<Props, State> {
   );
 
   valueBox = () => {
-    const { streamRule: { value, type }, error } = this.state;
-    const { inputs } = this.props;
+    const {streamRule: {value, type}, error} = this.state;
+    const {inputs} = this.props;
 
     switch (String(type)) {
       case String(this.FIELD_PRESENCE_RULE_TYPE):
@@ -179,38 +179,40 @@ class StreamRuleForm extends React.Component<Props, State> {
                  id="Value"
                  type="select"
                  required
-                 label="Value"
+                 label="值"
                  name="value"
                  value={value}
                  data-testid="input-selection"
                  onChange={this.handleChange}>
-            <option value={this.PLACEHOLDER_INPUT}>Choose Input</option>
+            <option value={this.PLACEHOLDER_INPUT}>选择输入</option>
             {inputs.map(this._formatInputOptions)}
           </Input>
         );
       }
 
       default:
-        return <Input id="Value" type="text" required label="Value" name="value" value={value} onChange={this.handleChange} />;
+        return <Input id="Value" type="text" required label="值" name="value" value={value}
+                      onChange={this.handleChange}/>;
     }
   };
 
   fieldBox = () => {
-    const { streamRule: { field, type } } = this.state;
+    const {streamRule: {field, type}} = this.state;
 
     switch (String(type)) {
       case String(this.ALWAYS_MATCH_RULE_TYPE):
       case String(this.MATCH_INPUT):
         return '';
       default:
-        return <TypeAheadFieldInput id="field-input" type="text" required label="Field" name="field" defaultValue={field} onChange={this.handleChange} autoFocus />;
+        return <TypeAheadFieldInput id="field-input" type="text" required label="字段" name="field" defaultValue={field}
+                                    onChange={this.handleChange} autoFocus/>;
     }
   };
 
   render() {
-    const { streamRule } = this.state;
-    const { type, inverted, description } = streamRule;
-    const { streamRuleTypes: ruleTypes, title, onClose, inputs } = this.props;
+    const {streamRule} = this.state;
+    const {type, inverted, description} = streamRule;
+    const {streamRuleTypes: ruleTypes, title, onClose, inputs} = this.props;
 
     const streamRuleTypes = ruleTypes.map(this._formatStreamRuleType);
     const fieldBox = this.fieldBox();
@@ -222,39 +224,37 @@ class StreamRuleForm extends React.Component<Props, State> {
                           onCancel={onClose}
                           onModalClose={onClose}
                           onSubmitForm={this._onSubmit}
-                          submitButtonText="Save"
-                          formProps={{ id: 'StreamRuleForm' }}>
+                          submitButtonText="保存"
+                          formProps={{id: 'StreamRuleForm'}}>
         <div>
           <Col md={8}>
             {fieldBox}
-            <Input id="Type" data-testid="rule-type-selection" type="select" required label="Type" name="type" value={type} onChange={this.handleChange}>
+            <Input id="Type" data-testid="rule-type-selection" type="select" required label="类型" name="type"
+                   value={type} onChange={this.handleChange}>
               {streamRuleTypes}
             </Input>
             {valueBox}
-            <Input id="Inverted" type="checkbox" label="Inverted" name="inverted" checked={inverted} onChange={this.handleChange} />
+            <Input id="Inverted" type="checkbox" label="取反" name="inverted" checked={inverted}
+                   onChange={this.handleChange}/>
 
-            <Input id="Description" type="textarea" label="Description (optional)" name="description" value={description} onChange={this.handleChange} />
+            <Input id="Description" type="textarea" label="描述 (取反)" name="description" value={description}
+                   onChange={this.handleChange}/>
 
             <p>
-              <strong>Result:</strong>
+              <strong>结果:</strong>
               {' '}
-              <HumanReadableStreamRule streamRule={streamRule} streamRuleTypes={ruleTypes} inputs={inputs} />
+              <HumanReadableStreamRule streamRule={streamRule} streamRuleTypes={ruleTypes} inputs={inputs}/>
             </p>
           </Col>
           <Col md={4}>
             <Well bsSize="small" className="matcher-github">
-              The server will try to convert to strings or numbers based on the matcher type as well as it can.
+              服务会尝试将对应字段值转换成数值或字符串.
 
-              <br /><br />
-              <Icon name="github" type="brand" />&nbsp;
-              <a href={`https://github.com/Graylog2/graylog2-server/tree/${Version.getMajorAndMinorVersion()}/graylog2-server/src/main/java/org/graylog2/streams/matchers`}
-                 target="_blank"
-                 rel="noopener noreferrer"> Take a look at the matcher code on GitHub
-              </a>
-              <br /><br />
-              Regular expressions use Java syntax. <DocumentationLink page={DocsHelper.PAGES.STREAMS}
-                                                                      title="More information"
-                                                                      text={<Icon name="lightbulb" type="regular" />} />
+              <br/><br/>
+              <br/><br/>
+              使用 Java 语法的正则表达式. <DocumentationLink page={DocsHelper.PAGES.STREAMS}
+                                                   title="更多信息"
+                                                   text={<Icon name="lightbulb" type="regular"/>}/>
             </Well>
           </Col>
         </div>
@@ -268,5 +268,5 @@ type InputsStoreState = {
 };
 
 export default connect(StreamRuleForm,
-  { inputs: InputsStore as Store<InputsStoreState> },
-  ({ inputs }) => ({ inputs: inputs.inputs }));
+  {inputs: InputsStore as Store<InputsStoreState>},
+  ({inputs}) => ({inputs: inputs.inputs}));

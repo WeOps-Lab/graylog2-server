@@ -26,28 +26,26 @@ import DocsHelper from 'util/DocsHelper';
 
 const EventDefinitionsPage = () => {
   return (
-    <DocumentTitle title="Event Definitions">
+    <DocumentTitle title="事件定义">
       <span>
-        <PageHeader title="Event Definitions">
+        <PageHeader title="事件定义">
           <span>
-            Create new Event Definitions that will allow you to search for different Conditions and alert on them.
+            事件定义允许您使用不同的条件创建告警并在触发时发出告警。
           </span>
 
           <span>
-            Graylog&apos;s new Alerting system let you define more flexible and powerful rules. Learn more in the{' '}
-            <DocumentationLink page={DocsHelper.PAGES.ALERTS}
-                               text="documentation" />
+            在<DocumentationLink page={DocsHelper.PAGES.ALERTS} text="文档" />中查看更多关于告警的信息。
           </span>
 
           <ButtonToolbar>
             <LinkContainer to={Routes.ALERTS.LIST}>
-              <Button bsStyle="info">Alerts & Events</Button>
+              <Button bsStyle="info">告警 & 事件</Button>
             </LinkContainer>
             <LinkContainer to={Routes.ALERTS.DEFINITIONS.LIST}>
-              <Button bsStyle="info">Event Definitions</Button>
+               <Button bsStyle="info" className="active">事件规则</Button>
             </LinkContainer>
             <LinkContainer to={Routes.ALERTS.NOTIFICATIONS.LIST}>
-              <Button bsStyle="info">Notifications</Button>
+              <Button bsStyle="info">通知</Button>
             </LinkContainer>
           </ButtonToolbar>
         </PageHeader>

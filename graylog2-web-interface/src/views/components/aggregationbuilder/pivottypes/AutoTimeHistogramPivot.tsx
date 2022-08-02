@@ -49,9 +49,9 @@ const AutoTimeHistogramPivot = ({ interval, onChange }: Props) => (
                    onChange={(e) => _changeScaling(e, interval, onChange)} />
       <Icon name="search-plus" size="lg" style={{ paddingLeft: '0.5rem' }} />
     </div>
-    <div className="pull-right">Currently: {interval.scaling ? (1 / interval.scaling) : 1.0}x</div>
+    <div className="pull-right">当前: {interval.scaling ? (1 / interval.scaling) : 1.0}x</div>
     <HelpBlock className={styles.helpBlock}>
-      A smaller granularity leads to <strong>less</strong>, a bigger to <strong>more</strong> values.
+      较小的粒度导致 <strong>less</strong>，较大的粒度导致 <strong>more</strong> 值。
     </HelpBlock>
   </>
 );

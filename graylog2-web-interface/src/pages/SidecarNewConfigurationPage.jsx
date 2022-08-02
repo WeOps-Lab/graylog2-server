@@ -33,26 +33,22 @@ const SidecarNewConfigurationPage = createReactClass({
 
   render() {
     return (
-      <DocumentTitle title="New Collector Configuration">
+      <DocumentTitle title="新的采集器配置">
         <span>
-          <PageHeader title="New Collector Configuration">
+          <PageHeader title="新的采集器配置">
             <span>
-              Some words about collector configurations.
-            </span>
-
-            <span>
-              Read more about the Graylog Sidecar in the documentation.
+              客户端会管理并配置您使用的采集器。在这里你可以管理采集器的配置。
             </span>
 
             <ButtonToolbar>
               <LinkContainer to={Routes.SYSTEM.SIDECARS.OVERVIEW}>
-                <Button bsStyle="info">Overview</Button>
+                <Button bsStyle="info">概览</Button>
               </LinkContainer>
               <LinkContainer to={Routes.SYSTEM.SIDECARS.ADMINISTRATION}>
-                <Button bsStyle="info">Administration</Button>
+                <Button bsStyle="info">客户端管理</Button>
               </LinkContainer>
               <LinkContainer to={Routes.SYSTEM.SIDECARS.CONFIGURATION}>
-                <Button bsStyle="info" className="active">Configuration</Button>
+                <Button bsStyle="info" className="active">采集器配置</Button>
               </LinkContainer>
             </ButtonToolbar>
           </PageHeader>

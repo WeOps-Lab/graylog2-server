@@ -67,11 +67,11 @@ const FieldSortSelect = ({ fields, onChange, sort }: Props) => {
   const options = useMemo(() => sortedOptions(fields), [fields]);
 
   return (
-    <Select placeholder="None: click to add fields"
+    <Select placeholder="无：点击添加字段"
             onChange={(newValue) => onOptionChange(options, onChange, newValue)}
             options={options}
             clearable={false}
-            aria-label="Select field for sorting"
+            aria-label="选择字段进行排序"
             value={currentValue(sort, options)} />
   );
 };

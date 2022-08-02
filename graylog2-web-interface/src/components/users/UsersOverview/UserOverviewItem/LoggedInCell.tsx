@@ -42,15 +42,15 @@ const LoggedInCell = ({ lastActivity, sessionActive, clientAddress }: Props) => 
       <OverlayTrigger trigger={['hover', 'focus']}
                       placement="right"
                       overlay={(
-                        <Popover id="session-badge-details" title={sessionActive ? 'Logged in' : ''}>
+                        <Popover id="session-badge-details" title={sessionActive ? '登录' : ''}>
                           {sessionActive ? (
                             <>
-                              <div>Last activity: {lastActivity
+                              <div>上次活动: {lastActivity
                                 ? <RelativeTime dateTime={lastActivity} /> : '-'}
                               </div>
-                              <div>Client address: {clientAddress ?? '-'}</div>
+                              <div>客户端地址: {clientAddress ?? '-'}</div>
                             </>
-                          ) : 'Not logged in'}
+                          ) : '未登录'}
                         </Popover>
                       )}
                       rootClose>

@@ -109,7 +109,7 @@ const mapInterpolation = (legacyInterpolation: LegacyInterpolation): Interpolati
     case 'step-after':
       return legacyInterpolation;
     default:
-      throw new Error(`Unsupported interpolation ${legacyInterpolation}`);
+      throw new Error(`不支持的插值 ${legacyInterpolation}`);
   }
 };
 
@@ -224,25 +224,25 @@ const MigrateFieldCharts = () => {
     <Row>
       <Col>
         <Alert bsStyle="warning">
-          <h2>Migrate existing search page charts</h2>
+          <h2>迁移现有的搜索页图表</h2>
           {/* Should we inform the user here about the backend migrations? */}
           <br />
-          We found {chartAmount} chart(s), created for an older version of the search.
-          Do you want to migrate these chart(s) for the current search?
+          我们找到了 {chartAmount} 图表，它是为旧版搜索创建的。
+          您想为当前搜索迁移这些图表吗？
           <br />
-          When you have run the migration and want to keep the newly created charts, you will have to save the current search as a new dashboard.
-          Otherwise the charts will get lost, when leaving the search page.
+          当您运行迁移并希望保留新创建的图表时，您必须将当前搜索保存为新仪表板。
+          否则图表会在离开搜索页面时丢失。
           <br />
           <Actions>
             <Button bsStyle="primary"
                     onClick={() => _onMigrate(legacyCharts, setMigrating, setMigrationFinished)}
                     disabled={migrating}
                     className="save-button-margin">
-              Migrate {migrating && <Spinner text="" />}
+              迁移 {migrating && <Spinner text="" />}
             </Button>
             <Button onClick={() => _onCancel(setMigrationFinished)}
                     disabled={migrating}>
-              Discard charts
+              忽略图表
             </Button>
           </Actions>
         </Alert>

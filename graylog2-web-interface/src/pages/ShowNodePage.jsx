@@ -94,17 +94,17 @@ const ShowNodePage = createReactClass({
     }
 
     const { node } = this.state;
-    const title = <span>Node {node.short_node_id} / {node.hostname}</span>;
+    const title = <span>节点 {node.short_node_id} / {node.hostname}</span>;
 
     return (
-      <DocumentTitle title={`Node ${node.short_node_id} / ${node.hostname}`}>
+      <DocumentTitle title={`节点 ${node.short_node_id} / ${node.hostname}`}>
         <div>
           <PageHeader title={title}>
             <span>
-              This page shows details of a Graylog server node that is active and reachable in your cluster.
+              此页面展示集群中活跃的且可访问的DataInsight服务器节点的详细信息.
             </span>
             <span>
-              {node.is_leader ? <span>This is the leader node.</span> : <span>This is <em>not</em> the leader node.</span>}
+              {node.is_master ? <span>这是一个主节点。</span> : <span>这<em>不是</em>主节点。</span>}
             </span>
             <span><NodeMaintenanceDropdown node={node} /></span>
           </PageHeader>

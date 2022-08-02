@@ -124,7 +124,7 @@ class AddWidgetButton extends React.Component<Props, State> {
       };
     }
 
-    throw new Error(`Invalid binding for creator: ${JSON.stringify(creator)} - has neither 'func' nor 'component'.`);
+    throw new Error(`创建者的无效绑定：${JSON.stringify(creator)} - 既没有 'func' 也没有 'component'.`);
   };
 
   _createMenuItem = (creator: Creator): React.ReactNode => (
@@ -151,18 +151,18 @@ class AddWidgetButton extends React.Component<Props, State> {
 
     return (
       <>
-        <SectionInfo>Use the following options to add an aggregation, log view (enterprise feature) or parameters (enterprise feature) to your search.</SectionInfo>
+        <SectionInfo>使用以下选项将聚合、日志视图（企业功能）或参数（企业功能）添加到您的搜索中。</SectionInfo>
         <Group>
-          <SectionSubheadline>Generic</SectionSubheadline>
+          <SectionSubheadline>通用</SectionSubheadline>
           {generic}
         </Group>
         <Group>
-          <SectionSubheadline>Predefined Aggregation</SectionSubheadline>
+          <SectionSubheadline>预定义聚合</SectionSubheadline>
           {presets}
         </Group>
         {!isEmpty(components) && (
           <Group>
-            <SectionSubheadline>Other</SectionSubheadline>
+            <SectionSubheadline>其他</SectionSubheadline>
             {components}
           </Group>
         )}

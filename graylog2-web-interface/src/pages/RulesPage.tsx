@@ -86,7 +86,7 @@ const RulesPage = () => {
     return () => {
       // TODO: Replace with custom confirm dialog
       // eslint-disable-next-line no-alert
-      if (window.confirm(`Do you really want to delete rule "${rule.title}"?`)) {
+      if (window.confirm(`你真的要删除规则 "${rule.title}"?`)) {
         RulesActions.delete(rule).then(() => {
           if (count > 1) {
             _loadData(pagination, setIsDataLoading, setPaginatedRules);
@@ -107,16 +107,16 @@ const RulesPage = () => {
 
   const renderDebugMetricsButton = () => {
     if (metricsConfig && metricsConfig.metrics_enabled) {
-      return <Button bsStyle="warning" onClick={toggleMetricsConfig}>Debug Metrics: ON</Button>;
+      return <Button bsStyle="warning" onClick={toggleMetricsConfig}>调试: 开启</Button>;
     }
 
-    return <Button onClick={toggleMetricsConfig}>Debug Metrics</Button>;
+    return <Button onClick={toggleMetricsConfig}>调试</Button>;
   };
 
   const RulesButtonToolbar = () => (
     <ButtonToolbar className="pull-right">
       <LinkContainer to={Routes.SYSTEM.PIPELINES.RULE('new')}>
-        <Button bsStyle="success">Create Rule</Button>
+        <Button bsStyle="success">创建规则</Button>
       </LinkContainer>
       {renderDebugMetricsButton()}
     </ButtonToolbar>
@@ -129,7 +129,7 @@ const RulesPage = () => {
       <SearchForm query={query}
                   onSearch={handleSearch}
                   queryWidth={400}
-                  queryHelpComponent={<QueryHelper entityName="Pipeline Rule" />}
+                  queryHelpComponent={<QueryHelper entityName="流水线规则" />}
                   wrapperClass="has-bm"
                   onReset={() => handleSearch('')}
                   topMargin={0} />
@@ -138,30 +138,30 @@ const RulesPage = () => {
   );
 
   return (
-    <DocumentTitle title="Pipeline rules">
+    <DocumentTitle title="流水线规则">
       <span>
-        <PageHeader title="Pipeline Rules" subactions={<RulesButtonToolbar />}>
+        <PageHeader title="流水线规则" subactions={<RulesButtonToolbar />}>
           <span>
-            Rules are a way of applying changes to messages in Graylog. A rule consists of a condition and a list of actions.
-            Graylog evaluates the condition against a message and executes the actions if the condition is satisfied.
+            规则是对DataInsight中的消息应用更改的一种方法。规则由条件和操作列表组成。
+            DataInsight根据消息计算条件，并在条件满足时执行操作。
           </span>
 
           <span>
-            Read more about Graylog pipeline rules in the <DocumentationLink page={DocsHelper.PAGES.PIPELINE_RULES}
-                                                                             text="documentation" />.
+           更多帮助请查看 <DocumentationLink page={DocsHelper.PAGES.PIPELINE_RULES}
+                                                                             text="文档" />.
           </span>
 
           <span>
             <LinkContainer to={Routes.SYSTEM.PIPELINES.OVERVIEW}>
-              <Button bsStyle="info">Manage pipelines</Button>
+              <Button bsStyle="info">管理流水线</Button>
             </LinkContainer>
               &nbsp;
             <LinkContainer to={Routes.SYSTEM.PIPELINES.RULES}>
-              <Button bsStyle="info">Manage rules</Button>
+              <Button bsStyle="info">管理规则</Button>
             </LinkContainer>
               &nbsp;
             <LinkContainer to={Routes.SYSTEM.PIPELINES.SIMULATOR}>
-              <Button bsStyle="info">Simulator</Button>
+              <Button bsStyle="info">模拟</Button>
             </LinkContainer>
           </span>
         </PageHeader>

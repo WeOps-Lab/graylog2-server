@@ -54,24 +54,22 @@ const DashboardsPage = () => {
   const { list, pagination } = useDashboards(searchQuery);
 
   return (
-    <DocumentTitle title="Dashboards">
+    <DocumentTitle title="仪表盘">
       <span>
-        <PageHeader title="Dashboards">
+        <PageHeader title="仪表盘">
           <span>
-            Use dashboards to create specific views on your messages. Create a new dashboard here and add any graph or
-            chart you create in other parts of Graylog with one click.
+            使用仪表盘在您的消息上创建特定视图。在此处创建一个新的仪表盘，将在DataInsight其他页面创建的任何图形或图表添加到仪表盘上。
           </span>
 
+
           <span>
-            Take a look at the
-            {' '}<DocumentationLink page={DocsHelper.PAGES.DASHBOARDS} text="dashboard tutorial" />{' '}
-            for lots of other useful tips.
+            在<DocumentationLink page={DocsHelper.PAGES.DASHBOARDS} text="文档" />中查看更多关于仪表盘的信息。
           </span>
 
           <IfPermitted permissions="dashboards:create">
             <span>
               <LinkContainer to={Routes.pluginRoute('DASHBOARDS_NEW')}>
-                <Button bsStyle="success" bsSize="lg">Create new dashboard</Button>
+                <Button bsStyle="success" bsSize="lg">创建仪表盘</Button>
               </LinkContainer>
             </span>
           </IfPermitted>

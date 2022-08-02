@@ -27,23 +27,29 @@ type Props = {
   config: NumberVisualizationConfig,
 };
 
-const _makeOption = (value) => ({ label: capitalize(value), value });
+const MAPPING = {
+  'Lower': '低',
+  'Neutral': '无',
+  'Higher': '高'
+}
+
+const _makeOption = (value) => ({ label: MAPPING[capitalize(value)], value });
 const trendPreferenceOptions = ['LOWER', 'NEUTRAL', 'HIGHER'].map(_makeOption);
 
 const NumberVisualizationConfiguration = ({ config = NumberVisualizationConfig.empty(), onChange }: Props) => {
   const changeTrend = useCallback(({ target: { checked } }) => onChange(config.toBuilder().trend(checked).build()), [config, onChange]);
   const changeTrendPreference = useCallback(({ value }) => onChange(config.toBuilder().trendPreference(value).build()), [config, onChange]);
   const trendingHelp = (
-    <HoverForHelp title="Trending">
+    <HoverForHelp title="趋势">
       <p>
-        If the user enables trending, a separate box is shown below the current value, indicating the direction of the change
-        by an icon as well as the absolute and the relative differences between the current value and the previous one.
+        如果用户启用趋势，则在当前值下方会显示一个单独的框，指示更改的方向
+        通过图标以及当前值与上一个值之间的绝对和相对差异。
       </p>
 
       <p>
-        The previous value is calculated by performing two searches in the background, which are completely identical besides
-        the timerange. The timerange of the first search is identical to the one configured for this query/this widget,
-        the second one is the same timerange, but with an offset of the timerange length shifted to the past.
+        前一个值是通过在后台执行两次搜索来计算的，除了
+        时间范围。第一次搜索的时间范围与为此查询/此小部件配置的时间范围相同，
+        第二个是相同的时间范围，但是时间范围长度的偏移量移到了过去。
       </p>
     </HoverForHelp>
   );
@@ -54,12 +60,12 @@ const NumberVisualizationConfiguration = ({ config = NumberVisualizationConfig.e
              id="trend"
              type="checkbox"
              name="trend"
-             label={<span>Display trend {trendingHelp}</span>}
+             label={<span>显示趋势 {trendingHelp}</span>}
              defaultChecked={config.trend}
              onChange={changeTrend}
-             help="Show trend information for this number." />
+             help="显示此数值的趋势信息." />
 
-      <Input id="trend_preference" label="Trend Preference" help="Choose which trend direction is colored positively">
+      <Input id="trend_preference" label="趋势配置" help="选择哪个趋势方向为正色">
         <Select isDisabled={!config.trend}
                 isClearable={false}
                 isSearchable={false}

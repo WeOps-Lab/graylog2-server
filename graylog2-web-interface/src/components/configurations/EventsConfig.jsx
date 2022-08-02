@@ -19,7 +19,7 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import lodash from 'lodash';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { Button, FormGroup, HelpBlock, BootstrapModalForm } from 'components/bootstrap';
 import { IfPermitted, TimeUnitInput } from 'components/common';
 import FormUtils from 'util/FormsUtils';

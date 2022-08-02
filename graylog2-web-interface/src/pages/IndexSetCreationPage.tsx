@@ -71,22 +71,20 @@ const IndexSetCreationPage = ({ retentionStrategies, rotationStrategies, retenti
   };
 
   return (
-    <DocumentTitle title="Create Index Set">
+    <DocumentTitle title="创建索引集">
       <div>
-        <PageHeader title="Create Index Set">
+        <PageHeader title="创建索引集">
+            <span>
+              创建一个新的索引集，用于配置来自一个或多个流的消息的保留、分片和复制。
+            </span>
           <span>
-            Create a new index set that will let you configure the retention, sharding, and replication of messages
-            coming from one or more streams.
-          </span>
+              在<DocumentationLink page={DocsHelper.PAGES.INDEX_MODEL} text="文档"/>中查看更多关于索引的信息。
+            </span>
           <span>
-            You can learn more about the index model in the{' '}
-            <DocumentationLink page={DocsHelper.PAGES.INDEX_MODEL} text="documentation" />
-          </span>
-          <span>
-            <LinkContainer to={Routes.SYSTEM.INDICES.LIST}>
-              <Button bsStyle="info">Index sets overview</Button>
-            </LinkContainer>
-          </span>
+              <LinkContainer to={Routes.SYSTEM.INDICES.LIST}>
+                <Button bsStyle="info">索引集概览</Button>
+              </LinkContainer>
+            </span>
         </PageHeader>
 
         <Row className="content">

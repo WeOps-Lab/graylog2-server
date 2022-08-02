@@ -22,7 +22,7 @@ import { DocumentTitle } from 'components/common';
 class GrokPatternsPage extends React.Component {
   render() {
     return (
-      <DocumentTitle title="Grok patterns">
+      <DocumentTitle title="Grok表达式">
         <GrokPatterns />
       </DocumentTitle>
     );

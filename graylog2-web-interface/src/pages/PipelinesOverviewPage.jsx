@@ -27,29 +27,28 @@ import DocsHelper from 'util/DocsHelper';
 import CreatePipelineButton from '../components/pipelines/CreatePipelineButton';
 
 const PipelinesOverviewPage = () => (
-  <DocumentTitle title="Pipelines">
+  <DocumentTitle title="流水线概览">
     <div>
-      <PageHeader title="Pipelines overview"
-                  subactions={(<CreatePipelineButton />)}>
+      <PageHeader title="流水线概览">
+            <span>
+              流水线允许转换和处理来自消息流的日志。流水线由多个步骤组成，每个步骤中的规则会在消息流入的时候执行。单条消息可以被多个规则处理。
+            </span>
+
         <span>
-          Pipelines let you transform and process messages coming from streams. Pipelines consist of stages where
-          rules are evaluated and applied. Messages can go through one or more stages.
-        </span>
-        <span>
-          Read more about Graylog pipelines in the <DocumentationLink page={DocsHelper.PAGES.PIPELINES} text="documentation" />.
+              在<DocumentationLink page={DocsHelper.PAGES.ALERTS} text="文档" />中查看更多关于流水线的信息。
         </span>
 
         <span>
           <LinkContainer to={Routes.SYSTEM.PIPELINES.OVERVIEW}>
-            <Button bsStyle="info">Manage pipelines</Button>
+            <Button bsStyle="info">流水线管理</Button>
           </LinkContainer>
               &nbsp;
           <LinkContainer to={Routes.SYSTEM.PIPELINES.RULES}>
-            <Button bsStyle="info">Manage rules</Button>
+            <Button bsStyle="info">规则管理</Button>
           </LinkContainer>
               &nbsp;
           <LinkContainer to={Routes.SYSTEM.PIPELINES.SIMULATOR}>
-            <Button bsStyle="info">Simulator</Button>
+            <Button bsStyle="info">模拟</Button>
           </LinkContainer>
         </span>
       </PageHeader>

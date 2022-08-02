@@ -66,14 +66,13 @@ const EnterprisePage = () => {
   const { clusterId } = nodes;
 
   return (
-    <DocumentTitle title="Try Graylog Enterprise">
+    <DocumentTitle title="试用企业版">
       <div>
-        <PageHeader title="Try Graylog Enterprise">
+        <PageHeader title="试用企业版">
           {null}
 
           <span>
-            Graylog Enterprise adds commercial functionality to the Open Source Graylog core. You can learn more
-            about Graylog Enterprise on the <EnterpriseProductLink>product page</EnterpriseProductLink>.
+            查看  <EnterpriseProductLink>文档</EnterpriseProductLink>.
           </span>
         </PageHeader>
 

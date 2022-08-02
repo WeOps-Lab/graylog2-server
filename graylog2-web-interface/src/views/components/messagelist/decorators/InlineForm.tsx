@@ -25,7 +25,7 @@ type Props = {
   onSubmitForm: (arg: any) => void,
 };
 
-const InlineForm = (submitTitle: string = 'Create'): React.ComponentType<Props> => React.forwardRef<HTMLFormElement, Props>(
+const InlineForm = (submitTitle: string = '创建'): React.ComponentType<Props> => React.forwardRef<HTMLFormElement, Props>(
   ({ children, disabled, onCancel, onSubmitForm }: Props, ref) => {
     const onSubmit = (event) => {
       event.stopPropagation();
@@ -48,7 +48,7 @@ const InlineForm = (submitTitle: string = 'Create'): React.ComponentType<Props> 
       <form onSubmit={onSubmit} ref={ref}>
         {children}
         <Button type="submit" bsStyle="success" disabled={disabled}>{submitTitle}</Button>{' '}
-        <Button type="button" disabled={disabled} onClick={onCancel}>Cancel</Button>
+        <Button type="button" disabled={disabled} onClick={onCancel}>取消</Button>
       </form>
     );
   },

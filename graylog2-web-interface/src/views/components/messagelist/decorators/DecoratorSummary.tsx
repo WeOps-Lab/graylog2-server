@@ -63,7 +63,7 @@ class DecoratorSummary extends React.Component<Props, State> {
     const { onDelete, decorator } = this.props;
 
     // eslint-disable-next-line no-alert
-    if (window.confirm('Do you really want to delete this decorator?')) {
+    if (window.confirm('你真的要删除这个装饰器吗?')) {
       onDelete(decorator.id);
     }
   };
@@ -94,7 +94,7 @@ class DecoratorSummary extends React.Component<Props, State> {
 
   _decoratorTypeNotPresent = () => {
     return {
-      name: 'Unknown decorator type',
+      name: '未知的装饰器类型',
     };
   };
 
@@ -124,7 +124,7 @@ class DecoratorSummary extends React.Component<Props, State> {
     const { decorator } = this.props;
 
     return (
-      <DropdownButton id={`decorator-${decorator.id}-actions`} bsStyle="default" bsSize="xsmall" title="Actions">
+      <DropdownButton id={`decorator-${decorator.id}-actions`} bsStyle="default" bsSize="xsmall" title="操作">
         <MenuItem onSelect={this._handleEditClick}>Edit</MenuItem>
         <MenuItem divider />
         <MenuItem onSelect={this._handleDeleteClick}>Delete</MenuItem>
@@ -140,14 +140,14 @@ class DecoratorSummary extends React.Component<Props, State> {
 
     const decoratorActionsMenu = disableMenu || this._formatActionsMenu();
     const { name, requested_configuration: requestedConfiguration } = typeDefinition;
-    const wrapperComponent = InlineForm('Update');
+    const wrapperComponent = InlineForm('更新');
     const decoratorId = decorator.id || 'new';
 
     const content = editing
       ? (
         <ConfigurationForm key="configuration-form-decorator"
                            configFields={requestedConfiguration}
-                           title={`Edit ${name}`}
+                           title={`编辑 ${name}`}
                            typeName={decorator.type}
                            includeTitleField={false}
                            submitAction={this._handleSubmit}

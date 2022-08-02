@@ -75,14 +75,14 @@ class QueryTitleEditModal extends React.Component<Props, State> {
 
     return (
       <BootstrapModalForm ref={(modal) => { this.modal = modal; }}
-                          title="Editing dashboard page title"
+                          title="编辑仪表板标题"
                           onSubmitForm={this._onDraftSave}
                           submitButtonText="Save"
                           bsSize="large">
         <Input autoFocus
-               help="Enter a helpful dashboard page title. It has a maximum length of 40 characters."
+               help="输入仪表板页面标题,它的最大长度为 40 个字符."
                id="title"
-               label="Title"
+               label="标题"
                name="title"
                onChange={this._onDraftChange}
                maxLength={40}

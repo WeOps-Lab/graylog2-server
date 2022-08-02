@@ -18,7 +18,7 @@ import React from 'react';
 import createReactClass from 'create-react-class';
 import Reflux from 'reflux';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { Col, Row } from 'components/bootstrap';
 import { Spinner, Timestamp, BrowserTime } from 'components/common';
 import DateTime from 'logic/datetimes/DateTime';
@@ -54,19 +54,19 @@ const TimesList = createReactClass({
     return (
       <Row className="content">
         <Col md={12}>
-          <h2>Time configuration</h2>
+          <h2>时间配置</h2>
 
           <p className="description">
-            Dealing with timezones can be confusing. Here you can see the timezone applied to different components of your system.
-            You can check timezone settings of specific graylog-server nodes on their respective detail page.
+            在这里,您可以看到系统不同组件的时间.
+            您可以在配置文件、服务器时间、用户页面进行时间和时区设置.
           </p>
 
           <dl className="system-dl">
-            <dt>User <em>{currentUser.username}</em>:</dt>
+            <dt>用户 <em>{currentUser.username}</em>:</dt>
             <dd><Timestamp dateTime={time} format={timeFormat} /></dd>
-            <dt>Your web browser:</dt>
+            <dt>浏览器:</dt>
             <dd><BrowserTime dateTime={time} format={timeFormat} /></dd>
-            <dt>Graylog server:</dt>
+            <dt>服务器:</dt>
             <dd><Timestamp dateTime={time} format={timeFormat} tz={serverTimezone} /></dd>
           </dl>
         </Col>

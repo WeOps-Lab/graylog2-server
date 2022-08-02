@@ -22,12 +22,11 @@ import ErrorPage from 'components/errors/ErrorPage';
 const NotFoundPage = ({ displayPageLayout }) => {
   const description = (
     <>
-      <p>The party gorilla was just here, but had another party to rock.</p>
-      <p>Oh, party gorilla! How we miss you! Will we ever see you again?</p>
+      <p>抱歉，您访问的页面不存在.</p>
     </>
   );
 
-  return (<ErrorPage title="Page not found" description={description} displayPageLayout={displayPageLayout} />);
+  return (<ErrorPage title="页面未找到" description={description} displayPageLayout={displayPageLayout} />);
 };
 
 NotFoundPage.propTypes = {

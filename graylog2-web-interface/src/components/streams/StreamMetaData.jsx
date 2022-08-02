@@ -32,20 +32,20 @@ const StreamMetaDataWrapper = styled.div`
 const StreamMetaData = ({ isDefaultStream, stream, streamRuleTypes, permissions }) => {
   let verbalMatchingType;
   const [expanded, setExpanded] = useState(false);
-  const toggleText = expanded ? 'Hide' : 'Show';
+  const toggleText = expanded ? '隐藏' : '显示';
 
   if (stream.is_default) {
-    return 'The default stream contains all messages.';
+    return '默认消息流包含所有消息.';
   }
 
   if (stream.rules.length === 0) {
-    return 'No configured rules.';
+    return '没有包含任何规则.';
   }
 
   switch (stream.matching_type) {
-    case 'OR': verbalMatchingType = 'at least one'; break;
+    case 'OR': verbalMatchingType = '至少一个'; break;
     default:
-    case 'AND': verbalMatchingType = 'all'; break;
+    case 'AND': verbalMatchingType = '所有'; break;
   }
 
   const _onHandleToggle = () => {
@@ -58,7 +58,7 @@ const StreamMetaData = ({ isDefaultStream, stream, streamRuleTypes, permissions 
         <StreamThroughput streamId={stream.id} />.
 
         <span>
-        &nbsp;Must match {verbalMatchingType} of the {stream.rules.length} configured stream&nbsp;
+        &nbsp;必须匹配 {verbalMatchingType} 消息流规则 {stream.rules.length}&nbsp;
           <Pluralize value={stream.rules.length} plural="rules" singular="rule" />.
         </span>
 
@@ -66,7 +66,7 @@ const StreamMetaData = ({ isDefaultStream, stream, streamRuleTypes, permissions 
           <Button bsStyle="link"
                   bsSize="xsmall"
                   onClick={_onHandleToggle}>
-            {toggleText} stream rules
+            {toggleText} 消息流规则
           </Button>
         )}
       </StreamMetaDataWrapper>

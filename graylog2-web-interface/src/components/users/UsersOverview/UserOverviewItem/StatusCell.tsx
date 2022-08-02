@@ -41,7 +41,7 @@ const StatusCell = ({ accountStatus }: Props) => (
                     placement="right"
                     overlay={(
                       <Popover id="session-badge-details">
-                        {`User is ${accountStatus}`}
+                        {`用户 ${accountStatus}`}
                       </Popover>
                     )}
                     rootClose>

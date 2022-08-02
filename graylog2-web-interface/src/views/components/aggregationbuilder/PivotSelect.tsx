@@ -79,7 +79,7 @@ const PivotSelect = ({ onChange, value, ...props }: Props) => {
         <ConfigurableElement {...rest}
                              configuration={({ onClose }) => <PivotConfiguration type={fieldType} config={configFor(element, value)} onClose={onClose} />}
                              onChange={(newPivotConfig) => newPivotConfigChange(value, element, newPivotConfig, onChange)}
-                             title="Pivot Configuration">
+                             title="透视表配置">
           {children}
         </ConfigurableElement>
       </span>

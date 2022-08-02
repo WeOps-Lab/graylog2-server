@@ -66,8 +66,8 @@ const UserEdit = ({ user }: Props) => {
           {user.external && (
             <SectionComponent title="External User">
               <Alert bsStyle="warning">
-                This user was synced from an external server, therefore neither
-                the profile nor the password can be changed. Please contact your administrator for more information.
+                此用户是从外部服务器同步的，因此两者都没有
+                配置文件和密码都不能更改。请联系您的管理员以获取更多信息。
               </Alert>
             </SectionComponent>
           )}

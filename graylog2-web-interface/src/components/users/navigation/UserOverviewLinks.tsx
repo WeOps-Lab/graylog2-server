@@ -29,14 +29,14 @@ const UserOverviewLinks = () => {
       <IfPermitted permissions="users:list">
         <LinkContainer to={Routes.SYSTEM.USERS.OVERVIEW}>
           <Button bsStyle="info">
-            Users Overview
+            用户概览
           </Button>
         </LinkContainer>
       </IfPermitted>
       {teamsRoute && (
         <IfPermitted permissions="teams:list">
           <LinkContainer to={teamsRoute}>
-            <Button bsStyle="info">Teams Overview</Button>
+            <Button bsStyle="info">团队概览</Button>
           </LinkContainer>
         </IfPermitted>
       )}

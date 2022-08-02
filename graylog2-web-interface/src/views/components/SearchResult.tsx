@@ -52,7 +52,7 @@ const StyledCol = styled(Col)`
 const SearchLoadingIndicator = () => {
   const searchLoadingState = useStore(SearchLoadingStateStore);
 
-  return (searchLoadingState.isLoading && <LoadingIndicator text="Updating search results..." />);
+  return (searchLoadingState.isLoading && <LoadingIndicator text="更新搜索结果..." />);
 };
 
 type Props = {

@@ -47,7 +47,7 @@ export default class Direction {
     switch (value) {
       case 'Ascending': return Direction.Ascending;
       case 'Descending': return Direction.Descending;
-      default: throw new Error(`Invalid direction: ${value}`);
+      default: throw new Error(`不合法的配置: ${value}`);
     }
   }
 }

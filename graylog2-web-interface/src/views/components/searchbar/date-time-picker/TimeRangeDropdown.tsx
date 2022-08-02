@@ -19,7 +19,7 @@ import { useCallback, useState } from 'react';
 import { Form, Formik } from 'formik';
 import styled, { css } from 'styled-components';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { Button, Col, Tabs, Tab, Row, Popover } from 'components/bootstrap';
 import { Icon, KeyCapture } from 'components/common';
 import { availableTimeRangeTypes } from 'views/Constants';
@@ -212,11 +212,11 @@ const TimeRangeDropdown = ({
 
   const title = (
     <PopoverTitle>
-      <span>Search Time Range</span>
+      <span>时间范围</span>
       {limitDuration > 0 && (
         <LimitLabel>
           <Icon name="exclamation-triangle" />
-          <span>Admin has limited searching to {moment.duration(-limitDuration, 'seconds').humanize(true)}</span>
+          <span>管理员已将搜索限制为 {moment.duration(-limitDuration, 'seconds').humanize(true)}</span>
         </LimitLabel>
       )}
     </PopoverTitle>
@@ -273,15 +273,15 @@ const TimeRangeDropdown = ({
 
                 <Row className="row-sm">
                   <Col md={6}>
-                    <Timezone>All timezones using: <b>{userTimezone}</b></Timezone>
+                    <Timezone>所有时区使用：<b>{userTimezone}</b></Timezone>
                   </Col>
                   <Col md={6}>
                     <div className="pull-right">
                       {noOverride && (
-                        <Button bsStyle="link" onClick={handleNoOverride}>No Override</Button>
+                        <Button bsStyle="link" onClick={handleNoOverride}>无覆盖</Button>
                       )}
-                      <CancelButton bsStyle="default" onClick={handleCancel}>Cancel</CancelButton>
-                      <Button bsStyle="success" disabled={!isValid || validatingKeyword} type="submit">Apply</Button>
+                      <CancelButton bsStyle="default" onClick={handleCancel}>取消</CancelButton>
+                      <Button bsStyle="success" disabled={!isValid || validatingKeyword} type="submit">申请</Button>
                     </div>
                   </Col>
                 </Row>

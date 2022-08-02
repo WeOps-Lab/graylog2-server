@@ -19,15 +19,15 @@ import PropTypes from 'prop-types';
 import Reflux from 'reflux';
 import createReactClass from 'create-react-class';
 
-import { Link } from 'components/common/router';
-import { Col } from 'components/bootstrap';
-import { ContentHeadRow, DocumentTitle, Spinner } from 'components/common';
+import {Link} from 'components/common/router';
+import {Col} from 'components/bootstrap';
+import {ContentHeadRow, DocumentTitle, Spinner} from 'components/common';
 import OutputsComponent from 'components/outputs/OutputsComponent';
 import SupportLink from 'components/support/SupportLink';
 import Routes from 'routing/Routes';
 import withParams from 'routing/withParams';
 import StreamsStore from 'stores/streams/StreamsStore';
-import { CurrentUserStore } from 'stores/users/CurrentUserStore';
+import {CurrentUserStore} from 'stores/users/CurrentUserStore';
 
 const StreamOutputsPage = createReactClass({
   displayName: 'StreamOutputsPage',
@@ -40,49 +40,45 @@ const StreamOutputsPage = createReactClass({
   mixins: [Reflux.connect(CurrentUserStore)],
 
   getInitialState() {
-    return { stream: undefined };
+    return {stream: undefined};
   },
 
   componentDidMount() {
-    const { params } = this.props;
+    const {params} = this.props;
 
     StreamsStore.get(params.streamId, (stream) => {
-      this.setState({ stream: stream });
+      this.setState({stream: stream});
     });
   },
 
   render() {
-    const { stream, currentUser } = this.state;
+    const {stream, currentUser} = this.state;
 
     if (!stream) {
-      return <Spinner />;
+      return <Spinner/>;
     }
 
     return (
-      <DocumentTitle title={`Outputs for Stream ${stream.title}`}>
+      <DocumentTitle title={`消息流 ${stream.title} 输出`}>
         <div>
           <ContentHeadRow className="content">
             <Col md={10}>
               <h1>
-                Outputs for Stream &raquo;{stream.title}&laquo;
+                消息流 &raquo;{stream.title}&laquo;输出
               </h1>
 
               <p className="description">
-                Graylog nodes can forward messages of streams via outputs. Launch or terminate as many outputs as you want here.
-                You can also reuse outputs that are already running for other streams.
-
-                A global view of all configured outputs is available <Link to={Routes.SYSTEM.OUTPUTS}>here</Link>.
-                You can find output plugins on <a href="https://marketplace.graylog.org/" rel="noopener noreferrer" target="_blank">the Graylog Marketplace</a>.
+                DataInsight节点可以将日志消息输出到指定的位置，在这里您可以启动或停止您所需要的输出流。
+                <Link to={Routes.SYSTEM.OUTPUTS}>这里</Link>配置的输出都可用。
+                您可以在<a href="" rel="noopener noreferrer" target="_blank">DataInsight市场</a>查找更多输出插件
               </p>
 
               <SupportLink>
-                <i>Removing</i> an output removes it from this stream but it will still be in the list of available outputs.
-                Deleting an output <i>globally</i> will remove it from this and all other streams and terminate it.
-                You can see all defined outputs in details at the {' '} <Link to={Routes.SYSTEM.OUTPUTS}>global output list</Link>.
+                在此处<i>删除</i>消息流输出，不会影响其在输出列表中的使用。如果您需要<i>全局</i>用输出流，请点击<Link to={Routes.SYSTEM.OUTPUTS}>全局输出列表</Link>。
               </SupportLink>
             </Col>
           </ContentHeadRow>
-          <OutputsComponent streamId={stream.id} permissions={currentUser.permissions} />
+          <OutputsComponent streamId={stream.id} permissions={currentUser.permissions}/>
         </div>
       </DocumentTitle>
     );

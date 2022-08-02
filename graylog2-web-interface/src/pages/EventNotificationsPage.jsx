@@ -24,27 +24,26 @@ import Routes from 'routing/Routes';
 
 const EventNotificationsPage = () => {
   return (
-    <DocumentTitle title="Notifications">
+    <DocumentTitle title="通知">
       <span>
-        <PageHeader title="Notifications">
+        <PageHeader title="通知">
           <span>
-            Notifications alert you of any configured Event when they occur. Graylog can send Notifications directly
-            to you or to other systems you use for that purpose.
+              通知会在任何配置好的事件触发时给您发送告警。DataInsight可以发送通知给您或您指定的第三方平台。
           </span>
 
           <span>
-            Remember to assign Notifications while creating or editing an Event Definition.
+              请记得要在告警条件页面中分配通知。
           </span>
 
           <ButtonToolbar>
             <LinkContainer to={Routes.ALERTS.LIST}>
-              <Button bsStyle="info">Alerts & Events</Button>
+               <Button bsStyle="info">告警 & 事件</Button>
             </LinkContainer>
             <LinkContainer to={Routes.ALERTS.DEFINITIONS.LIST}>
-              <Button bsStyle="info">Event Definitions</Button>
+              <Button bsStyle="info">事件规则</Button>
             </LinkContainer>
             <LinkContainer to={Routes.ALERTS.NOTIFICATIONS.LIST}>
-              <Button bsStyle="info">Notifications</Button>
+              <Button bsStyle="info" className="active">通知</Button>
             </LinkContainer>
           </ButtonToolbar>
         </PageHeader>

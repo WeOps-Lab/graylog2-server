@@ -19,19 +19,19 @@ import Reflux from 'reflux';
 import createReactClass from 'create-react-class';
 import PropTypes from 'prop-types';
 
-import { LinkContainer } from 'components/common/router';
-import { Row, Col, Button, ButtonToolbar, BootstrapModalConfirm } from 'components/bootstrap';
+import {LinkContainer} from 'components/common/router';
+import {Row, Col, Button, ButtonToolbar, BootstrapModalConfirm} from 'components/bootstrap';
 import Spinner from 'components/common/Spinner';
 import history from 'util/History';
 import Routes from 'routing/Routes';
 import UserNotification from 'util/UserNotification';
-import { DocumentTitle, PageHeader } from 'components/common';
+import {DocumentTitle, PageHeader} from 'components/common';
 import ContentPackDetails from 'components/content-packs/ContentPackDetails';
 import ContentPackVersions from 'components/content-packs/ContentPackVersions';
 import ContentPackInstallations from 'components/content-packs/ContentPackInstallations';
 import ContentPackInstallEntityList from 'components/content-packs/ContentPackInstallEntityList';
 import withParams from 'routing/withParams';
-import { ContentPacksActions, ContentPacksStore } from 'stores/content-packs/ContentPacksStore';
+import {ContentPacksActions, ContentPacksStore} from 'stores/content-packs/ContentPacksStore';
 
 import ShowContentPackStyle from './ShowContentPackPage.css';
 
@@ -57,10 +57,10 @@ const ShowContentPackPage = createReactClass({
     ContentPacksActions.get(this.props.params.contentPackId).catch((error) => {
       if (error.status === 404) {
         UserNotification.error(
-          `Cannot find Content Pack with the id ${this.props.params.contentPackId} and may have been deleted.`,
+          `无法找到ID为${this.props.params.contentPackId}的扩展包，可能已经被删除。`
         );
       } else {
-        UserNotification.error('An internal server error occurred. Please check your logfiles for more information');
+        UserNotification.error('服务器发生错误，请检查日志以获取更多信息。');
       }
 
       history.push(Routes.SYSTEM.CONTENTPACKS.LIST);
@@ -70,18 +70,18 @@ const ShowContentPackPage = createReactClass({
   },
 
   _onVersionChanged(newVersion) {
-    this.setState({ selectedVersion: newVersion });
+    this.setState({selectedVersion: newVersion});
   },
 
   _deleteContentPackRev(contentPackId, revision) {
     /* eslint-disable-next-line no-alert */
-    if (window.confirm('You are about to delete this content pack revision, are you sure?')) {
+    if (window.confirm('您将要删除这个版本的扩展包，是否确定？')) {
       ContentPacksActions.deleteRev(contentPackId, revision).then(() => {
-        UserNotification.success('Content pack revision deleted successfully.', 'Success');
+        UserNotification.success('扩展包删除成功。', '成功');
 
         ContentPacksActions.get(contentPackId).catch((error) => {
           if (error.status !== 404) {
-            UserNotification.error('An internal server error occurred. Please check your logfiles for more information');
+            UserNotification.error('服务器发生错误，请检查日志以获取更多信息。');
           }
 
           history.push(Routes.SYSTEM.CONTENTPACKS.LIST);
@@ -93,14 +93,14 @@ const ShowContentPackPage = createReactClass({
           errMessage = error.responseMessage;
         }
 
-        UserNotification.error(`Deleting content pack failed: ${errMessage}`, 'Error');
+        UserNotification.error(`扩展包删除失败：${errMessage}`, '错误');
       });
     }
   },
 
   _onUninstallContentPackRev(contentPackId, installId) {
     ContentPacksActions.uninstallDetails(contentPackId, installId).then((result) => {
-      this.setState({ uninstallEntities: result.entities });
+      this.setState({uninstallEntities: result.entities});
     });
 
     this.setState({
@@ -125,47 +125,46 @@ const ShowContentPackPage = createReactClass({
     const contentPackId = this.state.uninstallContentPackId;
 
     ContentPacksActions.uninstall(this.state.uninstallContentPackId, this.state.uninstallInstallId).then(() => {
-      UserNotification.success('Content Pack uninstalled successfully.', 'Success');
+      UserNotification.success('扩展包卸载成功.', '成功');
       ContentPacksActions.installList(contentPackId);
       this._clearUninstall();
     }, () => {
-      UserNotification.error('Uninstall content pack failed, please check your logs for more information.', 'Error');
+      UserNotification.error('扩展包卸载失败, 请检查日志以获取更多信息。', '错误');
     });
   },
 
   _installContentPack(contentPackId, contentPackRev, parameters) {
     ContentPacksActions.install(contentPackId, contentPackRev, parameters).then(() => {
-      UserNotification.success('Content Pack installed successfully.', 'Success');
+      UserNotification.success('扩展包安装成功。', '成功');
       ContentPacksActions.installList(contentPackId);
     }, (error) => {
-      UserNotification.error(`Installing content pack failed with status: ${error}.
-         Could not install content pack with ID: ${contentPackId}`);
+      UserNotification.error(`扩展包安装失败: ${error}。
+         无法安装ID为${contentPackId}的扩展包。`);
     });
   },
 
   render() {
     if (!this.state.contentPackRevisions) {
-      return (<Spinner />);
+      return (<Spinner/>);
     }
 
-    const { contentPackRevisions, selectedVersion, constraints } = this.state;
+    const {contentPackRevisions, selectedVersion, constraints} = this.state;
 
     return (
-      <DocumentTitle title="Content packs">
+      <DocumentTitle title="扩展包">
         <span>
-          <PageHeader title="Content packs">
+          <PageHeader title="扩展包">
             <span>
-              Content packs accelerate the set up process for a specific data source. A content pack can include inputs/extractors, streams, and dashboards.
+              扩展包可以加快特定数据源的设置过程。一个扩展包可以包括接收器、提取器、消息流、仪表盘等资源。
             </span>
 
             <span>
-              Find more content packs in {' '}
-              <a href="https://marketplace.graylog.org/" target="_blank" rel="noopener noreferrer">the Graylog Marketplace</a>.
+              在<a href="" target="_blank" rel="noopener noreferrer">DataInsight市场</a>查找更多扩展包。
             </span>
 
             <ButtonToolbar>
               <LinkContainer to={Routes.SYSTEM.CONTENTPACKS.LIST}>
-                <Button bsStyle="info">Content Packs</Button>
+                <Button bsStyle="info">扩展包列表</Button>
               </LinkContainer>
             </ButtonToolbar>
           </PageHeader>
@@ -175,18 +174,18 @@ const ShowContentPackPage = createReactClass({
               <div id="content-pack-versions">
                 <Row className={ShowContentPackStyle.leftRow}>
                   <Col>
-                    <h2>Versions</h2>
+                    <h2>版本</h2>
                     <ContentPackVersions contentPackRevisions={contentPackRevisions}
                                          onInstall={this._installContentPack}
                                          onChange={this._onVersionChanged}
-                                         onDeletePack={this._deleteContentPackRev} />
+                                         onDeletePack={this._deleteContentPackRev}/>
                   </Col>
                 </Row>
                 <Row className={ShowContentPackStyle.leftRow}>
                   <Col>
-                    <h2>Installations</h2>
+                    <h2>已安装</h2>
                     <ContentPackInstallations installations={this.state.installations}
-                                              onUninstall={this._onUninstallContentPackRev} />
+                                              onUninstall={this._onUninstallContentPackRev}/>
                   </Col>
                 </Row>
               </div>
@@ -195,15 +194,17 @@ const ShowContentPackPage = createReactClass({
               <ContentPackDetails contentPack={contentPackRevisions.contentPack(selectedVersion)}
                                   constraints={constraints[selectedVersion]}
                                   showConstraints
-                                  verbose />
+                                  verbose/>
             </Col>
           </Row>
         </span>
-        <BootstrapModalConfirm ref={(c) => { this.modal = c; }}
-                               title="Do you really want to uninstall this Content Pack?"
+        <BootstrapModalConfirm ref={(c) => {
+          this.modal = c;
+        }}
+                               title="确定删除此扩展包?"
                                onConfirm={this._uninstallContentPackRev}
                                onCancel={this._clearUninstall}>
-          <ContentPackInstallEntityList uninstall entities={this.state.uninstallEntities} />
+          <ContentPackInstallEntityList uninstall entities={this.state.uninstallEntities}/>
         </BootstrapModalConfirm>
       </DocumentTitle>
     );

@@ -79,8 +79,8 @@ const WidgetConfigModal = createReactClass({
           {this.props.children}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.handleSave} bsStyle="success">Save</Button>
-          <Button onClick={this.handleClose}>Cancel</Button>
+          <Button onClick={this.handleSave} bsStyle="success">保存</Button>
+          <Button onClick={this.handleClose}>取消</Button>
         </Modal.Footer>
       </Modal>
     );

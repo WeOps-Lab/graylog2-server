@@ -17,7 +17,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { LinkToNode } from 'components/common';
 
 class SystemMessage extends React.Component {

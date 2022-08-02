@@ -78,7 +78,7 @@ const _visualizationForType = <T extends string> (type: T): VisualizationCompone
   const visualization = visualizationTypes.filter((viz) => viz.type === type)[0];
 
   if (!visualization) {
-    throw new Error(`Unable to find visualization component for type: ${type}`);
+    throw new Error(`找不到类型的可视化组件: ${type}`);
   }
 
   return visualization.component;

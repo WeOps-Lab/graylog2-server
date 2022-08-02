@@ -57,22 +57,21 @@ class RuntimeErrorPage extends React.Component {
     const errorDetails = `\n\nStack Trace:\n\n${error.stack}\n\nComponent Stack:\n${componentStack}`;
     const description = (
       <>
-        <p>It seems like the page you navigated to contained an error.</p>
-        <p>You can use the navigation to reach other parts of the product, refresh the page or submit an error report.</p>
+        <p>您访问的页面似乎包含错误</p>
       </>
     );
 
     return (
-      <ErrorPage title="Something went wrong." description={description}>
-        <div className="content" style={{ padding: '2em' }}>
-          <SupportSources />
-        </div>
+      <ErrorPage title="发生错误." description={description}>
+        {/*<div className="content" style={{ padding: '2em' }}>*/}
+        {/*  <SupportSources />*/}
+        {/*</div>*/}
         <dl>
           <dt>
             Error:
             <ToggleDetails className="pull-right">
               <Button bsStyle="link" tabIndex={0} onClick={this._toggleDetails}>
-                {showDetails ? 'Show less' : 'Show more'}
+                {showDetails ? '收起' : '展开'}
               </Button>
             </ToggleDetails>
           </dt>
@@ -82,7 +81,7 @@ class RuntimeErrorPage extends React.Component {
                 <ClipboardButton title={<Icon name="copy" fixedWidth />}
                                  bsSize="sm"
                                  text={`${error.message}\n${errorDetails}`}
-                                 buttonTitle="Copy error details to clipboard" />
+                                 buttonTitle="复制详细错误信息" />
               </div>
               {error.message}
               {showDetails && errorDetails}

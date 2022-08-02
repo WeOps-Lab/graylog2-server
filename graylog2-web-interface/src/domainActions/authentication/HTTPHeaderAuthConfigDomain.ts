@@ -21,17 +21,17 @@ import notifyingAction from '../notifyingAction';
 const load = notifyingAction({
   action: HTTPHeaderAuthConfigActions.load,
   error: (error) => ({
-    message: `Loading HTTP header authentication config failed with status: ${error}`,
+    message: `加载 HTTP 标头身份验证配置失败并显示状态: ${error}`,
   }),
 });
 
 const update = notifyingAction({
   action: HTTPHeaderAuthConfigActions.update,
   success: () => ({
-    message: 'Successfully updated HTTP header authentication config',
+    message: '已成功更新 HTTP 标头身份验证配置',
   }),
   error: (error) => ({
-    message: `Updating HTTP header authentication config failed with status: ${error}`,
+    message: `更新 HTTP 标头身份验证配置失败并显示状态: ${error}`,
   }),
 });
 

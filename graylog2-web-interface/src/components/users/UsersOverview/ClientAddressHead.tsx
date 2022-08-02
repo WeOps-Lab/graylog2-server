@@ -34,7 +34,7 @@ const ClientAddressHead = ({ title }: Props) => {
   const popover = (
     <Popover id="client-address-help">
       <p>
-        The address of the client used to initially establish the session, not necessarily its current address.
+        用于初始建立会话的客户端地址，不一定是其当前地址。
       </p>
     </Popover>
   );

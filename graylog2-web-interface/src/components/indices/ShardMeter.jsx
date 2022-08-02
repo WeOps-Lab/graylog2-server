@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import numeral from 'numeral';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 class ShardMeter extends React.Component {
   static propTypes = {
     title: PropTypes.string.isRequired,

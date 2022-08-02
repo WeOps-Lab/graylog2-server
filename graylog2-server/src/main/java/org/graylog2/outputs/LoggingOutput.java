@@ -80,7 +80,7 @@ public class LoggingOutput implements MessageOutput {
 
     public static class Descriptor extends MessageOutput.Descriptor {
         public Descriptor() {
-            super("STDOUT Output", false, "", "An output writing every message to STDOUT.");
+            super("控制台输出", false, "", "输出消息到控制台.");
         }
     }
 
@@ -89,7 +89,7 @@ public class LoggingOutput implements MessageOutput {
         @Override
         public ConfigurationRequest getRequestedConfiguration() {
             ConfigurationRequest configurationRequest = new ConfigurationRequest();
-            configurationRequest.addField(new TextField("prefix", "Prefix", "Writing message: ", "How to prefix the message before logging it", ConfigurationField.Optional.OPTIONAL));
+            configurationRequest.addField(new TextField("prefix", "前缀", "消息: ", "记录消息的前缀", ConfigurationField.Optional.OPTIONAL));
             return configurationRequest;
         }
     }

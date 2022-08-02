@@ -95,17 +95,17 @@ public class TcpTransport extends AbstractTcpTransport {
             x.addField(
                     new BooleanField(
                             CK_USE_NULL_DELIMITER,
-                            "Null frame delimiter?",
+                            "使用Null做分割?",
                             false,
-                            "Use null byte as frame delimiter? Otherwise newline delimiter is used."
+                            "使用Null做消息切分？不启用则用换行符做切分."
                     )
             );
             x.addField(
                     new NumberField(
                             CK_MAX_MESSAGE_SIZE,
-                            "Maximum message size",
+                            "最大消息长度",
                             DEFAULT_MAX_FRAME_LENGTH,
-                            "The maximum length of a message.",
+                            "最大消息长度.",
                             ConfigurationField.Optional.OPTIONAL,
                             NumberField.Attribute.ONLY_POSITIVE
                     )

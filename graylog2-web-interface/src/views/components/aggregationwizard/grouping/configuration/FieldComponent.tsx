@@ -68,14 +68,14 @@ const FieldComponent = ({ index, fieldType }: Props) => {
     <Field name={`groupBy.groupings.${index}.field`}>
       {({ field: { name, value, onChange }, meta: { error } }) => (
         <FieldSelect id="group-by-field-select"
-                     label="Field"
+                     label="字段"
                      onChange={(e) => onChangeField(e, name, onChange)}
                      error={error}
                      clearable={false}
-                     ariaLabel="Field"
+                     ariaLabel="字段"
                      name={name}
                      value={value.field}
-                     aria-label="Select a field" />
+                     aria-label="选择字段" />
       )}
     </Field>
   );

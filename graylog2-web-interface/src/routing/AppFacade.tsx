@@ -60,7 +60,7 @@ const AppFacade = () => {
   }
 
   if (!currentUser) {
-    return <LoadingPage text="We are preparing Graylog for you..." />;
+    return <LoadingPage text="系统加载中.." />;
   }
 
   return <LoggedInPage />;

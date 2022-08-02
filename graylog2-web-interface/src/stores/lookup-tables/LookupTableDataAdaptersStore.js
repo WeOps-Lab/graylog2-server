@@ -102,7 +102,7 @@ export const LookupTableDataAdaptersStore = singletonStore(
 
         this.dataAdapters = response.data_adapters;
         this.propagateChanges();
-      }, this._errorHandler('Fetching lookup table data adapters failed', 'Could not retrieve the lookup dataAdapters'));
+      }, this._errorHandler('加载数据源失败', '无法加载数据源'));
 
       LookupTableDataAdaptersActions.searchPaginated.promise(promise);
 
@@ -116,7 +116,7 @@ export const LookupTableDataAdaptersStore = singletonStore(
       promise.then((response) => {
         this.dataAdapter = response;
         this.propagateChanges();
-      }, this._errorHandler(`Fetching lookup table data adapter ${idOrName} failed`, 'Could not retrieve lookup table data adapter'));
+      }, this._errorHandler(`加载数据源 ${idOrName} 失败`, '无法加载数据源'));
 
       LookupTableDataAdaptersActions.get.promise(promise);
 
@@ -130,7 +130,7 @@ export const LookupTableDataAdaptersStore = singletonStore(
       promise.then((response) => {
         this.dataAdapter = response;
         this.propagateChanges();
-      }, this._errorHandler('Creating lookup table data adapter failed', `Could not create lookup table data adapter "${dataAdapter.name}"`));
+      }, this._errorHandler('创建数据源失败', `无法创建数据源 "${dataAdapter.name}"`));
 
       LookupTableDataAdaptersActions.create.promise(promise);
 
@@ -144,7 +144,7 @@ export const LookupTableDataAdaptersStore = singletonStore(
       promise.then((response) => {
         this.dataAdapter = response;
         this.propagateChanges();
-      }, this._errorHandler('Updating lookup table data adapter failed', `Could not update lookup table data adapter "${dataAdapter.name}"`));
+      }, this._errorHandler('更新数据源失败', `无法更新数据源 "${dataAdapter.name}"`));
 
       LookupTableDataAdaptersActions.update.promise(promise);
 
@@ -158,7 +158,7 @@ export const LookupTableDataAdaptersStore = singletonStore(
       promise.then((response) => {
         this.types = response;
         this.propagateChanges();
-      }, this._errorHandler('Fetching available types failed', 'Could not fetch the available lookup table data adapter types'));
+      }, this._errorHandler('加载可用类型失败', '无法加载可用类型'));
 
       LookupTableDataAdaptersActions.getTypes.promise(promise);
 
@@ -169,7 +169,7 @@ export const LookupTableDataAdaptersStore = singletonStore(
       const url = this._url(`adapters/${idOrName}`);
       const promise = fetch('DELETE', url);
 
-      promise.catch(this._errorHandler('Deleting lookup table data adapter failed', `Could not delete lookup table data adapter "${idOrName}"`));
+      promise.catch(this._errorHandler('删除数据源失败', `无法删除数据源 "${idOrName}"`));
 
       LookupTableDataAdaptersActions.delete.promise(promise);
 
@@ -182,7 +182,7 @@ export const LookupTableDataAdaptersStore = singletonStore(
       promise.then((response) => {
         this.lookupResult = response;
         this.propagateChanges();
-      }, this._errorHandler('Lookup failed', `Could not lookup value for key "${key}" in lookup table data adapter "${adapterName}"`));
+      }, this._errorHandler('映射失败', `无法在"${adapterName}"中映射 "${key}" `));
 
       LookupTableDataAdaptersActions.lookup.promise(promise);
 
@@ -196,7 +196,7 @@ export const LookupTableDataAdaptersStore = singletonStore(
       promise.then((response) => {
         this.validationErrors = response.errors;
         this.propagateChanges();
-      }, this._errorHandler('Lookup table data adapter validation failed', `Could not validate lookup table data adapter "${adapter.name}"`));
+      }, this._errorHandler('数据源校验失败', `无法校验数据源 "${adapter.name}"`));
 
       LookupTableDataAdaptersActions.validate.promise(promise);
 

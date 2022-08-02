@@ -38,17 +38,17 @@ const validate = (formValues: WidgetConfigFormValues) => {
   const errors = [];
 
   if (!areAtLeastNGroupingsConfigured(formValues, 2)) {
-    errors.push('Heatmap requires at least two groupings.');
+    errors.push('热图至少需要两个分组.');
   } else {
     const groupingDirections = formValues.groupBy.groupings.map((grouping) => grouping.direction);
 
     if (!groupingDirections.includes('row') || !groupingDirections.includes('column')) {
-      errors.push('Groupings must include row and column groupings.');
+      errors.push('分组必须包括行和列分组.');
     }
   }
 
   if (!areAtLeastNMetricsConfigured(formValues, 1)) {
-    errors.push('At least one metric must be configured.');
+    errors.push('必须至少配置一项指标.');
   }
 
   return errors.length > 0
@@ -58,7 +58,7 @@ const validate = (formValues: WidgetConfigFormValues) => {
 
 const heatmap: VisualizationType<typeof HeatmapVisualization.type, HeatmapVisualizationConfig, HeatMapVisualizationConfigFormValues> = {
   type: HeatmapVisualization.type,
-  displayName: 'Heatmap',
+  displayName: '热力图',
   component: HeatmapVisualization,
   config: {
     fromConfig: ({ autoScale, colorScale, reverseScale, defaultValue, useSmallestAsDefault, zMax, zMin }: HeatmapVisualizationConfig = HeatmapVisualizationConfig.empty()) => ({
@@ -73,38 +73,38 @@ const heatmap: VisualizationType<typeof HeatmapVisualization.type, HeatmapVisual
     createConfig: () => ({ colorScale: 'Viridis', autoScale: true }),
     fields: [{
       name: 'colorScale',
-      title: 'Color Scale',
+      title: '色标',
       required: true,
       type: 'select',
       options: [...COLORSCALES].sort(defaultCompare),
     }, {
       name: 'reverseScale',
       type: 'boolean',
-      title: 'Reverse Scale',
+      title: '反色',
     }, {
       name: 'autoScale',
       type: 'boolean',
-      title: 'Auto Scale',
+      title: '自动缩放',
     }, {
       name: 'zMin',
       type: 'numeric',
-      title: 'Min',
+      title: '最小值',
       required: true,
       isShown: (values: HeatMapVisualizationConfigFormValues) => !values?.autoScale,
     }, {
       name: 'zMax',
       type: 'numeric',
-      title: 'Max',
+      title: '最大值',
       required: true,
       isShown: (values: HeatMapVisualizationConfigFormValues) => !values?.autoScale,
     }, {
       name: 'useSmallestAsDefault',
       type: 'boolean',
-      title: 'Use smallest as default',
+      title: '使用最小作为默认值',
     }, {
       name: 'defaultValue',
       type: 'numeric',
-      title: 'Default Value',
+      title: '默认值',
       isShown: (values: HeatMapVisualizationConfigFormValues) => !values?.useSmallestAsDefault,
       required: false,
     }],

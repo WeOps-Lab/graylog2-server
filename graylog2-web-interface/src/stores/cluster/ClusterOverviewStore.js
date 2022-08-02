@@ -50,7 +50,7 @@ export const ClusterOverviewStore = singletonStore(
           this.clusterOverview = response;
           this.trigger({ clusterOverview: this.clusterOverview });
         },
-        (error) => UserNotification.error(`Getting cluster overview failed: ${error}`, 'Could not get cluster overview'),
+        (error) => UserNotification.error(`加载集群概览失败: ${error}`, '加载集群概览失败'),
       );
 
       return promise;
@@ -62,7 +62,7 @@ export const ClusterOverviewStore = singletonStore(
           (response) => {
             return response.threaddump;
           },
-          (error) => UserNotification.error(`Getting thread dump for node '${nodeId}' failed: ${error}`, 'Could not get thread dump'),
+          (error) => UserNotification.error(`获取节点 '${nodeId}' 的线程转储失败: ${error}`, '无法获取线程转储'),
         );
 
       return promise;
@@ -74,7 +74,7 @@ export const ClusterOverviewStore = singletonStore(
           (response) => {
             return response.processbuffer_dump;
           },
-          (error) => UserNotification.error(`Getting process buffer dump for node '${nodeId}' failed: ${error}`, 'Could not get process buffer dump'),
+          (error) => UserNotification.error(`获取节点'${nodeId}'进程转储失败: ${error}`, '无法获取节点的进程转储'),
         );
 
       return promise;
@@ -83,7 +83,7 @@ export const ClusterOverviewStore = singletonStore(
     jvm(nodeId) {
       const promise = fetch('GET', URLUtils.qualifyUrl(`${this.sourceUrl}/${nodeId}/jvm`));
 
-      promise.catch((error) => UserNotification.error(`Getting JVM information for node '${nodeId}' failed: ${error}`, 'Could not get JVM information'));
+      promise.catch((error) => UserNotification.error(`获取节点'${nodeId}'JVM信息失败: ${error}`, '无法获得节点JVM信息'));
 
       return promise;
     },

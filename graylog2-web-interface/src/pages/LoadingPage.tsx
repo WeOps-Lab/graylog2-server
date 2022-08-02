@@ -32,10 +32,10 @@ const LoadingPageStyles = createGlobalStyle`
 
 const LoadingPage = ({ text }: Props) => {
   return (
-    <DocumentTitle title="Loading...">
+    <DocumentTitle title="加载中...">
       <LoadingPageStyles />
       <LoginBox>
-        <legend><Icon name="users" /> Welcome to Graylog</legend>
+        <legend><Icon name="users" /> 欢迎进入DataInsight</legend>
         <p>
           <Spinner text={text} delay={0} />
         </p>
@@ -49,7 +49,7 @@ LoadingPage.propTypes = {
 };
 
 LoadingPage.defaultProps = {
-  text: 'Loading, please wait...',
+  text: '加载中, 请稍等...',
 };
 
 export default LoadingPage;

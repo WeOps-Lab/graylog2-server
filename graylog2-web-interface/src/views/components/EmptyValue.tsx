@@ -21,6 +21,6 @@ const Container = styled.i`
   color: darkgray;
 `;
 
-const EmptyValue = () => <Container>&lt;Empty Value&gt;</Container>;
+const EmptyValue = () => <Container>&lt;空值&gt;</Container>;
 
 export default EmptyValue;

@@ -24,8 +24,8 @@ const queryTitle = (view: View, queryId: QueryId): string | undefined | null => 
     .map((q, idx) => {
       if (queryId !== undefined && q.id !== undefined && queryId === q.id) {
         return view.state
-          ? view.state.getIn([q.id], ViewState.create()).titles.getIn(['tab', 'title'], `Page#${idx + 1}`)
-          : `Page#${idx + 1}`;
+          ? view.state.getIn([q.id], ViewState.create()).titles.getIn(['tab', 'title'], `页面#${idx + 1}`)
+          : `页面#${idx + 1}`;
       }
 
       return undefined;

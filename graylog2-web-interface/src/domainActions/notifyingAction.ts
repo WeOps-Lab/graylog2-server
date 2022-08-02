@@ -25,7 +25,7 @@ type Notification = {
 
 const _displaySuccessNotification = <T, Args extends Array<T>>(successNotification: (...Args) => Notification, ...args: Args) => {
   const { message, title } = successNotification(...args);
-  UserNotification.success(message, title || 'Success');
+  UserNotification.success(message, title || '成功');
 };
 
 const _displayErrorNotification = <T, Args extends Array<T>>(errorNotification: (error: string, ...Args) => Notification, error, ...args: Args) => {
@@ -36,7 +36,7 @@ const _displayErrorNotification = <T, Args extends Array<T>>(errorNotification: 
   }
 
   const { message, title } = errorNotification(errorMessage, ...args);
-  UserNotification.error(message, title || 'Error');
+  UserNotification.error(message, title || '异常');
 };
 
 type Props<F extends (...args: Array<any>) => any> = {

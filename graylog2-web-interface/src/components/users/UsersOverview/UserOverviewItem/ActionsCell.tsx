@@ -47,18 +47,18 @@ const EditTokensAction = ({
                       bsStyle="info"
                       bsSize="xs"
                       title={`Edit tokens of user ${fullName}`}>
-      Edit tokens
+      编辑令牌
     </WrapperComponent>
   </LinkContainer>
 );
 
 const ReadOnlyActions = ({ user }: { user: UserOverview }) => {
-  const tooltip = <Tooltip id="system-user">System users can only be modified in the Graylog configuration file.</Tooltip>;
+  const tooltip = <Tooltip id="system-user">系统用户只能在 DataInsight 配置文件中修改.</Tooltip>;
 
   return (
     <>
       <OverlayTrigger placement="left" overlay={tooltip}>
-        <Button bsSize="xs" bsStyle="info" disabled>System user</Button>
+        <Button bsSize="xs" bsStyle="info" disabled>系统用户</Button>
       </OverlayTrigger>
       &nbsp;
       <EditTokensAction user={user} wrapperComponent={Button} />
@@ -72,7 +72,7 @@ const EditActions = ({ user, user: { username, id, fullName, accountStatus, exte
   const _toggleStatus = () => {
     if (accountStatus === 'enabled') {
       // eslint-disable-next-line no-alert
-      if (window.confirm(`Do you really want to disable user ${fullName}? All current sessions will be terminated.`)) {
+      if (window.confirm(`你真的要禁用用户 ${fullName} 吗？所有当前会话都将被终止。`)) {
         UsersDomain.setStatus(id, 'disabled');
       }
 
@@ -84,7 +84,7 @@ const EditActions = ({ user, user: { username, id, fullName, accountStatus, exte
 
   const _deleteUser = () => {
     // eslint-disable-next-line no-alert
-    if (window.confirm(`Do you really want to delete user ${fullName}?`)) {
+    if (window.confirm(`你真的要删除用户 ${fullName} 吗？`)) {
       UsersDomain.delete(id, fullName);
     }
   };
@@ -95,28 +95,28 @@ const EditActions = ({ user, user: { username, id, fullName, accountStatus, exte
     <>
       <IfPermitted permissions={[`users:edit:${username}`]}>
         <LinkContainer to={Routes.SYSTEM.USERS.edit(id)}>
-          <Button id={`edit-user-${id}`} bsStyle="info" bsSize="xs" title={`Edit user ${fullName}`}>
+          <Button id={`edit-user-${id}`} bsStyle="info" bsSize="xs" title={`编辑用户 ${fullName}`}>
             Edit
           </Button>
         </LinkContainer>
       </IfPermitted>
       &nbsp;
-      <DropdownButton bsSize="xs" title="More actions" pullRight id={`delete-user-${id}`}>
+      <DropdownButton bsSize="xs" title="更多操作" pullRight id={`delete-user-${id}`}>
         <EditTokensAction user={user} wrapperComponent={MenuItem} />
         <IfPermitted permissions={[`users:edit:${username}`]}>
           {showEnableDisable && (
             <MenuItem id={`set-status-user-${id}`}
                       onClick={_toggleStatus}
-                      title={`Set new account status for ${fullName}`}>
-              {accountStatus === 'enabled' ? 'Disable' : 'Enable'}
+                      title={`设置新帐户状态 ${fullName}`}>
+              {accountStatus === 'enabled' ? '禁用' : '启用'}
             </MenuItem>
           )}
           <MenuItem id={`delete-user-${id}`}
                     bsStyle="primary"
                     bsSize="xs"
-                    title={`Delete user ${fullName}`}
+                    title={`删除用户 ${fullName}`}
                     onClick={_deleteUser}>
-            Delete
+            删除
           </MenuItem>
         </IfPermitted>
       </DropdownButton>

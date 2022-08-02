@@ -44,8 +44,8 @@ export const RolesStore = singletonStore(
           (response) => response.roles,
           (error) => {
             if (error.additional.status !== 404) {
-              UserNotification.error(`Loading role list failed with status: ${error}`,
-                'Could not load role list');
+              UserNotification.error(`加载角色信息失败: ${error}`,
+                '无法加载角色信息');
             }
           },
         );
@@ -56,10 +56,10 @@ export const RolesStore = singletonStore(
       const promise = fetch('POST', url, role);
 
       promise.then((newRole) => {
-        UserNotification.success(`Role "${newRole.name}" was created successfully`);
+        UserNotification.success(`角色 "${newRole.name}" 创建成功`);
       }, (error) => {
-        UserNotification.error(`Creating role "${role.name}" failed with status: ${error}`,
-          'Could not create role');
+        UserNotification.error(`创建角色 "${role.name}" 失败: ${error}`,
+          '无法创建角色');
       });
 
       return promise;
@@ -69,11 +69,11 @@ export const RolesStore = singletonStore(
       const promise = fetch('PUT', qualifyUrl(ApiRoutes.RolesApiController.updateRole(encodeURIComponent(rolename)).url), role);
 
       promise.then((newRole) => {
-        UserNotification.success(`Role "${newRole.name}" was updated successfully`);
+        UserNotification.success(`角色 "${newRole.name}" 更新成功`);
       }, (error) => {
         if (error.additional.status !== 404) {
-          UserNotification.error(`Updating role failed with status: ${error}`,
-            'Could not update role');
+          UserNotification.error(`无法更新角色信息: ${error}`,
+            '更新角色信息失败');
         }
       });
 
@@ -85,11 +85,11 @@ export const RolesStore = singletonStore(
       const promise = fetch('DELETE', url);
 
       promise.then(() => {
-        UserNotification.success(`Role "${rolename}" was deleted successfully`);
+        UserNotification.success(`角色 "${rolename}" 删除成功`);
       }, (error) => {
         if (error.additional.status !== 404) {
-          UserNotification.error(`Deleting role failed with status: ${error}`,
-            'Could not delete role');
+          UserNotification.error(`角色删除失败: ${error}`,
+            '无法删除角色');
         }
       });
 
@@ -102,8 +102,8 @@ export const RolesStore = singletonStore(
 
       promise.catch((error) => {
         if (error.additional.status !== 404) {
-          UserNotification.error(`Could not load role's members with status: ${error}`,
-            'Could not load role members');
+          UserNotification.error(`无法加载角色信息: ${error}`,
+            '无法加载角色信息');
         }
       });
 

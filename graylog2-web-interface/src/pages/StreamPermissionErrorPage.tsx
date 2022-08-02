@@ -29,17 +29,17 @@ type Props = {
 const StreamPermissionErrorPage = ({ error, missingStreamIds = [] }: Props) => {
   const description = (
     <>
-      <p>This resource includes streams you do not have permissions for.</p>
-      <p>Please contact your administrator and provide the error details which include a list of streams you need access to.</p>
+      <p>此资源包括您无权访问的流。</p>
+      <p>请联系您的管理员并提供错误详细信息，其中包括您需要访问的流列表。</p>
     </>
   );
   const streamIds = missingStreamIds.length > 0
     ? missingStreamIds
     : error?.additional?.body?.streams;
-  const errorDetails = streamIds?.length > 0 ? `You need permissions for streams with the id: ${streamIds.join(', ')}.` : undefined;
+  const errorDetails = streamIds?.length > 0 ? `您需要具有此消息流的权限: ${streamIds.join(', ')}.` : undefined;
 
   return (
-    <UnauthorizedErrorPage error={error} description={description} title="Missing Stream Permissions" errorDetails={errorDetails} />
+    <UnauthorizedErrorPage error={error} description={description} title="缺少消息流权限" errorDetails={errorDetails} />
   );
 };
 

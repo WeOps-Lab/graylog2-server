@@ -67,22 +67,22 @@ const ConfigurationModal = ({ onSave, view, show, onClose }: ConfigurationModalP
                         onModalClose={onClose}
                         onSubmitForm={_onSave}
                         submitButtonText="Save"
-                        title="Configuring Full Screen"
+                        title="配置全屏"
                         show={show}>
       <Input autoFocus
              id="refresh-interval"
              type="number"
              min="1"
              name="refresh-interval"
-             label="Refresh Interval"
-             help="After how many seconds should the dashboard refresh?"
+             label="刷新间隔"
+             help="仪表板应在几秒后刷新?"
              onChange={({ target: { value } }) => setRefreshInterval(value ? Number.parseInt(value, 10) : value)}
              required
              step={1}
              value={refreshInterval} />
 
       <FormGroup>
-        <ControlLabel>Tabs</ControlLabel>
+        <ControlLabel>标签</ControlLabel>
         <ul>
           {availableTabs.map(([idx, title]) => (
             <li key={`${idx}-${title}`}>
@@ -95,7 +95,7 @@ const ConfigurationModal = ({ onSave, view, show, onClose }: ConfigurationModalP
           ))}
         </ul>
         <HelpBlock>
-          Select the query tabs to include in rotation.
+          选择要轮流包含的查询选项卡。
         </HelpBlock>
       </FormGroup>
 
@@ -103,8 +103,8 @@ const ConfigurationModal = ({ onSave, view, show, onClose }: ConfigurationModalP
              type="number"
              min="1"
              name="query-cycle-interval"
-             label="Tab cycle interval"
-             help="After how many seconds should the next tab be shown?"
+             label="标签轮转周期"
+             help="多少秒后应该显示下一个选项卡?"
              onChange={({ target: { value } }) => setQueryCycleInterval(value ? Number.parseInt(value, 10) : value)}
              required
              step="1"
@@ -158,7 +158,7 @@ const BigDisplayModeConfiguration = ({ disabled, show, view }: Props) => {
                             view={view} />
       )}
       <MenuItem disabled={disabled} onSelect={() => setShowConfigurationModal(true)}>
-        <Icon name="desktop" /> Full Screen
+        <Icon name="desktop" /> 全屏
       </MenuItem>
     </>
   );

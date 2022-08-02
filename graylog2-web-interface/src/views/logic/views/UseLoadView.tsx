@@ -25,8 +25,8 @@ import { processHooks } from './ViewLoader';
 import usePluginEntities from '../usePluginEntities';
 
 const LoadViewError = ({ error }: { error: Error }) => (
-  <ErrorPage title="Something went wrong"
-             description={<p>An unknown error has occurred. Please have a look at the following message and the graylog server log for more information.</p>}>
+  <ErrorPage title="系统异常"
+             description={<p>系统异常.</p>}>
     <pre>
       {error?.message}
     </pre>

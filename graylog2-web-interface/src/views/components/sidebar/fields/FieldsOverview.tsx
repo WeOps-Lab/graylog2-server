@@ -93,37 +93,38 @@ const FieldsOverview = ({ allFields, activeQueryFields, viewMetadata }: Props) =
                          className="query form-control"
                          onChange={handleSearch}
                          value={filter || ''}
-                         placeholder="Filter fields"
+                         placeholder="过滤字段"
                          type="text"
                          autoComplete="off"
                          spellCheck="false" />
           </FilterInputWrapper>
           <div className="form-group">
             <Button type="reset" className="reset-button" onClick={handleSearchReset}>
-              Reset
+              重置
             </Button>
           </div>
         </FilterForm>
         <FieldGroups>
-          List fields of{' '}
+          列出
           <FieldGroup selected={currentGroup === 'current'}
                       group="current"
-                      text="current query"
-                      title="This shows fields which occur in your current query."
+                      text="当前"
+                      title="这显示了当前查询中出现的字段."
                       onSelect={setCurrentGroup} />
           {', '}
           <FieldGroup selected={currentGroup === 'all'}
                       group="all"
-                      text="all"
-                      title="This shows all fields, but no reserved (gl2_*) fields."
+                      text="所有"
+                      title="这显示所有字段，但没有保留 (gl2_*) 字段."
                       onSelect={setCurrentGroup} />
           {' or '}
           <FieldGroup onSelect={setCurrentGroup}
                       selected={currentGroup === 'allreserved'}
                       group="allreserved"
-                      text="all including reserved"
-                      title="This shows all fields, including reserved (gl2_*) fields." />
-          {' fields.'}
+                      text="所有保留"
+                      title="这会显示所有字段，包括保留的 (gl2_*) 字段。" />
+          {' 字段.'}
+
         </FieldGroups>
         <hr />
       </div>

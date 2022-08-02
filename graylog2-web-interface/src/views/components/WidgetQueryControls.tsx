@@ -18,6 +18,7 @@ import * as React from 'react';
 import { useCallback, useEffect, useContext, useRef } from 'react';
 import { Field } from 'formik';
 import moment from 'moment';
+moment.locale('zh-cn');
 import styled from 'styled-components';
 import { isEmpty } from 'lodash';
 import { useIsFetching } from 'react-query';
@@ -191,7 +192,7 @@ const WidgetQueryControls = ({ availableStreams, globalOverride }: Props) => {
                         <QueryInput value={value}
                                     timeRange={!isEmpty(globalOverride?.timerange) ? globalOverride.timerange : values?.timerange}
                                     streams={values?.streams}
-                                    placeholder={'Type your search query here and press enter. E.g.: ("not found" AND http) OR http_response_code:[400 TO 404]'}
+                                    placeholder={'在此处输入您的搜索查询，然后按 Enter。例如：（“未找到”和 http）或 http_response_code：[400 TO 404]'}
                                     error={error}
                                     disableExecution={disableSearchSubmit}
                                     isValidating={isValidatingQuery}

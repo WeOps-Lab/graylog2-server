@@ -43,7 +43,7 @@ type Props = {
 
 const UnauthorizedErrorPage = ({ error, errorDetails, title, description, location: { pathname } }: Props) => {
   const errorMessage = error?.message || JSON.stringify(error);
-  const pageDetails = `The permissions check for the following request failed,\nwhile trying to access ${pathname}.`;
+  const pageDetails = `以下请求的权限检查失败，\n在尝试访问时 ${pathname}.`;
   const defaultDescription = (
     <>
       <p>You do not have the required permissions to view this resource.</p>
@@ -61,7 +61,7 @@ const UnauthorizedErrorPage = ({ error, errorDetails, title, description, locati
               <ClipboardButton title={<Icon name="copy" fixedWidth />}
                                bsSize="sm"
                                text={errorMessageString}
-                               buttonTitle="Copy error details to clipboard" />
+                               buttonTitle="将错误详细信息复制到剪贴板" />
             </div>
             {errorDetails && (
               <p>

@@ -18,7 +18,7 @@ import Reflux from 'reflux';
 import * as Immutable from 'immutable';
 import { isEqual } from 'lodash';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import type { Store } from 'stores/StoreTypes';
 import Search from 'views/logic/search/Search';
 import { QueriesActions } from 'views/actions/QueriesActions';

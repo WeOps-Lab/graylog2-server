@@ -31,7 +31,7 @@ export const JournalStore = singletonStore(
       const promise = fetch('GET', URLUtils.qualifyUrl(this.sourceUrl(nodeId)));
 
       promise.catch((error) => {
-        UserNotification.error(`Getting journal information on node ${nodeId} failed: ${error}`, 'Could not get journal information');
+        UserNotification.error(`获取节点${nodeId}的队列信息失败: ${error}`, '无法获取节点的队列信息');
       });
 
       return promise;

@@ -104,7 +104,7 @@ const createInstanceOf = (expectedClass, required = false) => {
       .filter((name) => name !== undefined);
 
     if (!constructorNames.includes(expectedConstructorName)) {
-      return new Error(`Invalid prop ${propName} supplied to ${componentName}: ${valueConstructorName} expected to be instance of ${expectedConstructorName}`);
+      return new Error(`提供给 ${componentName} 的无效道具 ${propName}：${valueConstructorName} 应为 ${expectedConstructorName} 的实例`);
     }
 
     return undefined;

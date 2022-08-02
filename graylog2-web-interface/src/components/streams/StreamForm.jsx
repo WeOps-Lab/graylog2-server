@@ -122,10 +122,10 @@ class StreamForm extends React.Component {
     if (indexSets) {
       return (
         <Input id="index-set-selector"
-               label="Index Set"
-               help="Messages that match this stream will be written to the configured index set.">
+               label="索引集"
+               help="匹配该消息流的消息将会被写入索引集,若重复的数据进入同一个索引集会进行去重存储,进入不同索引集会进行重复存储.">
           <Select inputId="index-set-selector"
-                  placeholder="Select index set"
+                  placeholder="选择索引集"
                   options={this._formatSelectOptions()}
                   matchProp="label"
                   onChange={this._onIndexSetSelect}
@@ -134,7 +134,7 @@ class StreamForm extends React.Component {
       );
     }
 
-    return <Spinner>Loading index sets...</Spinner>;
+    return <Spinner>加载索引集中...</Spinner>;
   };
 
   render() {
@@ -145,31 +145,31 @@ class StreamForm extends React.Component {
       <BootstrapModalForm ref={(c) => { this.modal = c; }}
                           title={propTitle}
                           onSubmitForm={this._onSubmit}
-                          submitButtonText="Save">
+                          submitButtonText="保存">
         <Input id="Title"
                type="text"
                required
-               label="Title"
+               label="标题"
                name="title"
                value={title}
                onChange={this.handleChange}
-               placeholder="A descriptive name of the new stream"
+               placeholder="消息流的标题"
                autoFocus />
         <Input id="Description"
                type="text"
-               label="Description"
+               label="描述"
                name="description"
                value={description}
                onChange={this.handleChange}
-               placeholder="What kind of messages are routed into this stream?" />
+               placeholder="消息流的描述" />
         {this._indexSetSelect()}
         <Input id="RemoveFromDefaultStream"
                type="checkbox"
-               label="Remove matches from &lsquo;All messages&rsquo; stream"
+               label="从默认消息流中移除该消息流的数据"
                name="removeMatchesFromDefaultStream"
                checked={removeMatchesFromDefaultStream}
                onChange={this.handleChange}
-               help={<span>Remove messages that match this stream from the &lsquo;All messages&rsquo; stream which is assigned to every message by default.</span>} />
+               help={<span>移除后,默认消息流的索引集将不再存储该消息流的数据</span>} />
       </BootstrapModalForm>
     );
   }

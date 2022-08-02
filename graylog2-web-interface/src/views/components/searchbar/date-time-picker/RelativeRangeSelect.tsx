@@ -18,7 +18,7 @@ import * as React from 'react';
 import { Field, useFormikContext } from 'formik';
 import styled, { css } from 'styled-components';
 import moment from 'moment';
-
+moment.locale('zh-cn');
 import { RELATIVE_RANGE_TYPES } from 'views/Constants';
 import { Select } from 'components/common';
 import type { RangeClassified } from 'views/components/searchbar/date-time-picker/types';
@@ -63,7 +63,7 @@ const Ago = styled.span(({ theme }) => css`
   font-size: ${theme.fonts.size.large};
 
   ::after {
-    content: 'ago';
+    content: '';
   }
 `);
 
@@ -224,7 +224,7 @@ const RelativeRangeSelectInner = ({
                     name={`relative-timerange-${fieldName}-unit`}
                     onChange={_onChangeUnit}
                     options={availableRangeTypes}
-                    placeholder="Select a range length"
+                    placeholder="选择范围长度"
                     value={unit} />
 
       <Ago />

@@ -31,7 +31,7 @@ const ItemActions = ({ dashboard, onDashboardDelete, setDashboardToShare }) => {
   return (
     <ButtonToolbar>
       <ShareButton entityId={dashboard.id} entityType="dashboard" onClick={() => setDashboardToShare(dashboard)} />
-      <DropdownButton title="Actions" data-testid={`dashboard-actions-dropdown-${dashboard.id}`} id={`dashboard-actions-dropdown-${dashboard.id}`} pullRight>
+      <DropdownButton title="操作" data-testid={`dashboard-actions-dropdown-${dashboard.id}`} id={`dashboard-actions-dropdown-${dashboard.id}`} pullRight>
         <IfPermitted permissions={[`view:edit:${dashboard.id}`, 'view:edit']} anyPermissions>
           <MenuItem onSelect={onDashboardDelete(dashboard)}>Delete</MenuItem>
         </IfPermitted>
@@ -82,7 +82,7 @@ const DashboardList = ({ pagination, handleSearch, handleDashboardDelete, dashbo
   };
 
   if (!dashboards) {
-    return <Spinner text="Loading dashboards..." />;
+    return <Spinner text="加载中..." />;
   }
 
   const items = dashboards.map((dashboard) => (
@@ -103,7 +103,7 @@ const DashboardList = ({ pagination, handleSearch, handleDashboardDelete, dashbo
       {dashboardToShare && (
         <EntityShareModal entityId={dashboardToShare.id}
                           entityType="dashboard"
-                          description={`Search for a User or Team to add as collaborator on this ${ViewTypeLabel({ type: dashboardToShare.type })}.`}
+                          description={`搜索要添加为此 ${ViewTypeLabel({ type: dashboardToShare.type })} 的协作者的用户或团队。`}
                           entityTitle={dashboardToShare.title}
                           onClose={() => setDashboardToShare(undefined)} />
       )}
@@ -120,7 +120,7 @@ const DashboardList = ({ pagination, handleSearch, handleDashboardDelete, dashbo
         </div>
         <EntityList items={items}
                     bsNoItemsStyle="success"
-                    noItemsText="There are no dashboards present/matching the filter!" />
+                    noItemsText="没有仪表板存在/匹配过滤器！" />
       </PaginatedList>
     </>
   );

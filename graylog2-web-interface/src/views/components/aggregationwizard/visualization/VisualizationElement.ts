@@ -31,7 +31,7 @@ const findVisualizationType = (visualizationType: string) => {
   const visualizationTypeDefinition = PluginStore.exports('visualizationTypes').find(({ type }) => (type === visualizationType));
 
   if (!visualizationTypeDefinition) {
-    throw new Error(`Invalid visualization type: ${visualizationType}`);
+    throw new Error(`无效的可视化类型: ${visualizationType}`);
   }
 
   return visualizationTypeDefinition;
@@ -77,7 +77,7 @@ const validateConfig = (visualizationType: VisualizationType<any>, config: Visua
     .filter((field) => 'required' in field && field.required)
     .filter((field) => !field.isShown || field.isShown(config))
     .filter(({ name }) => config[name] === undefined || config[name] === '')
-    .map(({ name, title }) => ({ [name]: `${title} is required.` }))
+    .map(({ name, title }) => ({ [name]: `${title} 必填.` }))
     .reduce((prev, cur) => ({ ...prev, ...cur }), {});
 };
 
@@ -85,7 +85,7 @@ const validate = (formValues: WidgetConfigFormValues) => {
   const { visualization: { type, config } } = formValues;
 
   if (!type) {
-    return { 'visualization.type': 'Type is required.' };
+    return { 'visualization.type': '类型为必填项.' };
   }
 
   const visualizationType = findVisualizationType(type);
@@ -102,7 +102,7 @@ const validate = (formValues: WidgetConfigFormValues) => {
 };
 
 const VisualizationElement: AggregationElement = {
-  title: 'Visualization',
+  title: '可视化',
   key: 'visualization',
   order: 4,
   allowCreate: (formValues: WidgetConfigFormValues) => isEmpty(formValues.visualization),

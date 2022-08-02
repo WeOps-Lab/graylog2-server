@@ -65,14 +65,13 @@ const ShowMetricsPage = createReactClass({
     const { filter } = this.props.location.query;
 
     return (
-      <DocumentTitle title={`Metrics of node ${node.short_node_id} / ${node.hostname}`}>
+      <DocumentTitle title={`节点度量 ${node.short_node_id} / ${node.hostname}的性能指标`} >
         <span>
           <PageHeader title={title}>
             <span>
-              All Graylog nodes provide a set of internal metrics for diagnosis, debugging and monitoring. Note that you can access
-              all metrics via JMX, too.
+              所有的DataInsight节点为诊断,调试和监控都提供了一套的内部指标.注意,您同样可以通过JMX协议访问所有指标.
             </span>
-            <span>This node is reporting a total of {(names || []).length} metrics.</span>
+            <span>这个节点共有 {(names || []).length} 个性能指标.</span>
           </PageHeader>
 
           <MetricsComponent names={names} namespace={namespace} nodeId={nodeId} filter={filter} error={error} />

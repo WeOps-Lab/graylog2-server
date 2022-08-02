@@ -83,8 +83,8 @@ export const SidecarsAdministrationStore = singletonStore(
           return response;
         },
         (error) => {
-          UserNotification.error(error.status === 400 ? error.responseMessage : `Fetching Sidecars failed with status: ${error.message}`,
-            'Could not retrieve Sidecars');
+          UserNotification.error(error.status === 400 ? error.responseMessage : `获取客户端失败: ${error.message}`,
+            '无法获取客户端');
         },
       );
 
@@ -107,16 +107,24 @@ export const SidecarsAdministrationStore = singletonStore(
       };
 
       const promise = fetchPeriodically('PUT', URLUtils.qualifyUrl(`${this.sourceUrl}/administration/action`), body);
+      let actionName = ''
+      if (action === 'start') {
+        actionName = '启动'
+      } else if (action === 'restart') {
+        actionName = '重启'
+      } else {
+        actionName = '暂停'
+      }
 
       promise.then(
         (response) => {
-          UserNotification.success('', `${lodash.upperFirst(action)} for ${formattedCollectors.length} collectors requested`);
+          UserNotification.success('', `${actionName}${formattedCollectors.length}个客户端`);
 
           return response;
         },
         (error) => {
-          UserNotification.error(`Requesting ${action} failed with status: ${error}`,
-            `Could not ${action} collectors`);
+          UserNotification.error(`请求 ${action} 失败: ${error}`,
+            `无法 ${action} 客户端`);
         },
       );
 
