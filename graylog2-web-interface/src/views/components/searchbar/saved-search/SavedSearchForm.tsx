@@ -64,7 +64,7 @@ const SavedSearchForm = (props: Props) => {
         <Popover title="搜索" id="saved-search-popover">
           <StyledForm onSubmit={stopEvent}>
             <FormGroup>
-              <ControlLabel>Title</ControlLabel>
+              <ControlLabel>标题</ControlLabel>
               <FormControl type="text"
                            value={value}
                            placeholder="输入标题"

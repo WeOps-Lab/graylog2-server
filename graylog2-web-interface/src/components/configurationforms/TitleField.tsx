@@ -27,7 +27,7 @@ type Props = {
 };
 
 const TitleField = ({ typeName, helpBlock, value, onChange }: Props) => {
-  const titleField = { is_optional: false, attributes: [], human_name: 'Title', description: helpBlock };
+  const titleField = { is_optional: false, attributes: [], human_name: '标题', description: helpBlock };
 
   return (
     <TextField key={`${typeName}-title`}

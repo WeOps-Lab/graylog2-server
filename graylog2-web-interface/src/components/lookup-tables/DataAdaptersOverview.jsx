@@ -135,11 +135,11 @@ class DataAdaptersOverview extends React.Component {
               <Table condensed hover className={Styles.overviewTable}>
                 <thead>
                   <tr>
-                    <th className={Styles.rowTitle}>Title</th>
-                    <th className={Styles.rowDescription}>Description</th>
-                    <th className={Styles.rowName}>Name</th>
-                    <th>Throughput</th>
-                    <th className={Styles.rowActions}>Actions</th>
+                    <th className={Styles.rowTitle}>标题</th>
+                    <th className={Styles.rowDescription}>描述</th>
+                    <th className={Styles.rowName}>名称</th>
+                    <th>吞吐量</th>
+                    <th className={Styles.rowActions}>操作</th>
                   </tr>
                 </thead>
                 {dataAdapterEntries}

@@ -145,7 +145,7 @@ class ContentPackParameterList extends React.Component {
     };
 
     const size = parameter ? 'xsmall' : 'small';
-    const name = parameter ? 'Edit' : 'Create parameter';
+    const name = parameter ? '编辑' : '创建参数';
 
     const modal = (
       <BootstrapModalWrapper ref={(node) => { modalRef = node; }} bsSize="large">
@@ -164,8 +164,8 @@ class ContentPackParameterList extends React.Component {
         <Modal.Footer>
           <div className="pull-right">
             <ButtonToolbar>
-              <Button bsStyle="primary" onClick={addParameter}>Save</Button>
-              <Button onClick={closeModal}>Close</Button>
+              <Button bsStyle="primary" onClick={addParameter}>保存</Button>
+              <Button onClick={closeModal}>关闭</Button>
             </ButtonToolbar>
           </div>
         </Modal.Footer>
@@ -176,7 +176,7 @@ class ContentPackParameterList extends React.Component {
       <>
         <Button bsStyle="info"
                 bsSize={size}
-                title="Edit Modal"
+                title="编辑"
                 onClick={openModal}>
           {name}
         </Button>
@@ -190,23 +190,23 @@ class ContentPackParameterList extends React.Component {
     const { filteredParameters } = this.state;
 
     const headers = readOnly
-      ? ['Title', 'Name', 'Description', 'Value Type', 'Default Value', 'Used']
-      : ['Title', 'Name', 'Description', 'Value Type', 'Default Value', 'Used', 'Action'];
+      ? ['标题', '名称', '描述', '数据类型', '默认值', '已应用']
+      : ['标题', '名称', '描述', '数据类型', '默认值', '已应用', '操作'];
 
     return (
       <div>
-        <h2>Parameters list</h2>
+        <h2>参数列表</h2>
         <br />
         {!readOnly && this._parameterModal()}
         {!readOnly && (<span><br /><br /></span>)}
         <SearchForm onSearch={this._filterParameters}
                     onReset={() => { this._filterParameters(''); }}
-                    searchButtonLabel="Filter" />
+                    searchButtonLabel="过滤" />
         <DataTable id="parameter-list"
                    headers={headers}
                    className={ContentPackParameterListStyle.scrollable}
                    sortByKey="title"
-                   noDataText="To use parameters for content packs, at first a parameter must be created and can then be applied to a entity."
+                   noDataText="可以使用变量替换掉扩展包中的参数值."
                    filterKeys={[]}
                    rows={filteredParameters}
                    dataRowFormatter={this._parameterRowFormatter} />
