@@ -152,11 +152,11 @@ const JournalDetails = createReactClass({
             <dt>最大长度:</dt>
             <dd>{NumberUtils.formatBytes(journalInformation.journal_config.max_size)}</dd>
             <dt>最大周期:</dt>
-            <dd>{moment.duration(journalInformation.journal_config.max_age).format('d [days] h [hours] m [minutes]')}</dd>
+            <dd>{moment.duration(journalInformation.journal_config.max_age).format('d [天] h [小时] m [分]')}</dd>
             <dt>刷入规则:</dt>
             <dd>
               每 {numeral(journalInformation.journal_config.flush_interval).format('0,0')} 条消息
-              {' '}or {moment.duration(journalInformation.journal_config.flush_age).format('h [hours] m [minutes] s [seconds]')}
+              {' '} {moment.duration(journalInformation.journal_config.flush_age).format('h [天] m [小时] s [分]')}
             </dd>
           </dl>
         </Col>

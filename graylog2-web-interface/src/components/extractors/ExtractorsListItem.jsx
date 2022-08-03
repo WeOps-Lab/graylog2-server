@@ -102,7 +102,7 @@ class ExtractorsListItem extends React.Component {
       </LinkContainer>,
     );
 
-    actions.push(<Button key="delete-extractor-" bsStyle="danger" onClick={this._deleteExtractor}>Delete</Button>);
+    actions.push(<Button key="delete-extractor-" bsStyle="danger" onClick={this._deleteExtractor}>删除</Button>);
 
     return actions;
   };

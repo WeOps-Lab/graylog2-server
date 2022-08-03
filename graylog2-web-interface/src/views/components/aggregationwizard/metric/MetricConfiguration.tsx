@@ -54,6 +54,7 @@ const Metric = ({ index }: Props) => {
         {({ field: { name, value, onChange }, meta: { error } }) => (
           <Input id="metric-function-select"
                  label="函数"
+                 placeholder={"选择..."}
                  error={error}
                  labelClassName="col-sm-3"
                  wrapperClassName="col-sm-9">
@@ -63,6 +64,7 @@ const Metric = ({ index }: Props) => {
                     value={value}
                     aria-label="选择一个函数"
                     size="small"
+                    placeholder="选择..."
                     menuPortalTarget={document.body}
                     onChange={(newValue) => {
                       onChange({ target: { name, value: newValue } });
@@ -103,7 +105,7 @@ const Metric = ({ index }: Props) => {
         </Field>
       )}
       <FormikInput id="name"
-                   label={<>Name <Opt /></>}
+                   label={<>名称 <Opt /></>}
                    bsSize="small"
                    placeholder="指定显示名称"
                    name={`metrics.${index}.name`}

@@ -36,7 +36,7 @@ public class V20190730100900_AddAlertsManagerRole extends Migration {
 
     @Override
     public void upgrade() {
-        helpers.ensureBuiltinRole("Alerts Manager", "Allows reading and writing all event definitions and event notifications (built-in)", ImmutableSet.of(
+        helpers.ensureBuiltinRole("告警管理员", "允许对所有的告警事件和通知进行管理(内置)", ImmutableSet.of(
                 RestPermissions.EVENT_DEFINITIONS_CREATE,
                 RestPermissions.EVENT_DEFINITIONS_DELETE,
                 RestPermissions.EVENT_DEFINITIONS_EDIT,

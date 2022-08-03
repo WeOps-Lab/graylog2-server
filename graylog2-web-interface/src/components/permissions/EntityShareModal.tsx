@@ -15,21 +15,21 @@
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
 import * as React from 'react';
-import { useRef, useEffect, useState } from 'react';
-import type { FormikProps } from 'formik';
+import {useRef, useEffect, useState} from 'react';
+import type {FormikProps} from 'formik';
 import PropTypes from 'prop-types';
-import type { $PropertyType } from 'utility-types';
+import type {$PropertyType} from 'utility-types';
 
 import EntityShareDomain from 'domainActions/permissions/EntityShareDomain';
-import { createGRN } from 'logic/permissions/GRN';
-import { useStore } from 'stores/connect';
-import { Spinner } from 'components/common';
-import { EntityShareStore } from 'stores/permissions/EntityShareStore';
-import type { EntitySharePayload } from 'actions/permissions/EntityShareActions';
+import {createGRN} from 'logic/permissions/GRN';
+import {useStore} from 'stores/connect';
+import {Spinner} from 'components/common';
+import {EntityShareStore} from 'stores/permissions/EntityShareStore';
+import type {EntitySharePayload} from 'actions/permissions/EntityShareActions';
 import type SharedEntity from 'logic/permissions/SharedEntity';
 import BootstrapModalConfirm from 'components/bootstrap/BootstrapModalConfirm';
 
-import type { FormValues as GranteesSelectFormValues } from './GranteesSelector';
+import type {FormValues as GranteesSelectFormValues} from './GranteesSelector';
 import EntityShareSettings from './EntityShareSettings';
 
 type Props = {
@@ -41,8 +41,8 @@ type Props = {
   onClose: () => void,
 };
 
-const EntityShareModal = ({ description, entityId, entityType, entityTitle, entityTypeTitle, onClose }: Props) => {
-  const { state: entityShareState } = useStore(EntityShareStore);
+const EntityShareModal = ({description, entityId, entityType, entityTitle, entityTypeTitle, onClose}: Props) => {
+  const {state: entityShareState} = useStore(EntityShareStore);
   const [disableSubmit, setDisableSubmit] = useState(entityShareState?.validationResults?.failed);
   const entityGRN = createGRN(entityType, entityId);
   const granteesSelectFormRef = useRef<FormikProps<GranteesSelectFormValues>>();
@@ -75,6 +75,10 @@ const EntityShareModal = ({ description, entityId, entityType, entityTitle, enti
     });
   };
 
+  let typeName = '';
+  if (entityType == 'stream') {
+    typeName = '消息流'
+  }
   return (
     <BootstrapModalConfirm confirmButtonDisabled={disableSubmit}
                            confirmButtonText="保存"
@@ -82,7 +86,7 @@ const EntityShareModal = ({ description, entityId, entityType, entityTitle, enti
                            onConfirm={_handleSave}
                            onModalClose={onClose}
                            showModal
-                           title={<>共享 {entityTypeTitle ?? entityType}: <i>{entityTitle}</i></>}>
+                           title={<>分享 {entityTypeTitle ?? typeName}: <i>{entityTitle}</i></>}>
       <>
         {(entityShareState && entityShareState.entity === entityGRN) ? (
           <EntityShareSettings description={description}
@@ -91,9 +95,9 @@ const EntityShareModal = ({ description, entityId, entityType, entityTitle, enti
                                entityTitle={entityTitle}
                                entityShareState={entityShareState}
                                granteesSelectFormRef={granteesSelectFormRef}
-                               setDisableSubmit={setDisableSubmit} />
+                               setDisableSubmit={setDisableSubmit}/>
         ) : (
-          <Spinner />
+          <Spinner/>
         )}
       </>
     </BootstrapModalConfirm>

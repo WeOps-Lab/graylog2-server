@@ -116,6 +116,7 @@ const Sort = React.memo(({ index }: Props) => {
                  wrapperClassName="col-sm-9">
             <Select options={directionOptions}
                     clearable={false}
+                    placeholder={"选择..."}
                     name={name}
                     aria-label="选择排序类型"
                     value={value}

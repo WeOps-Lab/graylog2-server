@@ -196,9 +196,9 @@ public abstract class NettyTransport implements Transport {
             r.addField(ConfigurationRequest.Templates.recvBufferSize(CK_RECV_BUFFER_SIZE, 1024 * 1024));
             r.addField(new NumberField(
                     CK_NUMBER_WORKER_THREADS,
-                    "No. of worker threads",
+                    "工作线程个数",
                     DEFAULT_NUMBER_WORKER_THREADS,
-                    "Number of worker threads processing network connections for this input.",
+                    "处理网络连接的工作线程个数.",
                     // Should be mandatory, but then all existing inputs are failing to start
                     ConfigurationField.Optional.OPTIONAL,
                     NumberField.Attribute.ONLY_POSITIVE)

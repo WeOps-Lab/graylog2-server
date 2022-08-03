@@ -48,7 +48,7 @@ const _getOwnerTitle = ({ type, id, title }: Grantee, userPermissions: List<stri
 
       return <TitleWithLink to={getShowRouteFromGRN(id)} title={title} />;
     case 'global':
-      return 'Everyone';
+      return '所有人';
     default:
       return assertUnreachable(type);
   }

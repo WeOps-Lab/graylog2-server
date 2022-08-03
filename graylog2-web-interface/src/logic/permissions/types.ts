@@ -32,7 +32,7 @@ export type GRNType =
 
 export type CapabilityType = {
   id: GRN,
-  title: 'Viewer' | 'Manager' | 'Owner',
+  title: '只读' | '管理' | '属主',
 };
 
 export type GranteeType = {

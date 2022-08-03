@@ -204,32 +204,32 @@ const ServerConfigStep = ({ formRef, help = {}, onSubmit, onSubmitAll, submitAll
           </Input>
           <FormikFormGroup help={help.systemUserDn}
                            error={backendValidationErrors?.systemUserDn}
-                           label={<>System User DN <Opt /></>}
+                           label={<>用户DN <Opt /></>}
                            name="systemUserDn"
                            validate={validateField(FORM_VALIDATION.systemUserDn)}
-                           placeholder="System User DN" />
+                           placeholder="用户DN" />
 
           {(backendHasPassword && values.systemUserPassword === undefined) ? (
             <Input id="systemPassword"
-                   label={<>System Password <Opt /></>}
+                   label={<>密码 <Opt /></>}
                    labelClassName="col-sm-3"
                    wrapperClassName="col-sm-9">
               <Button type="button" onClick={() => setFieldValue('systemUserPassword', '')}>
-                Reset Password
+                重置密码
               </Button>
             </Input>
           ) : (
             <FormikFormGroup autoComplete="authentication-service-password"
                              buttonAfter={(backendHasPassword && values.systemUserPassword !== undefined) ? (
                                <Button type="button" onClick={() => setFieldValue('systemUserPassword', undefined)}>
-                                 Undo Reset
+                                 撤销
                                </Button>
                              ) : undefined}
                              help={help.systemUserPassword}
-                             label={<>System Password <Opt /></>}
+                             label={<>密码 <Opt /></>}
                              name="systemUserPassword"
                              error={backendValidationErrors?.systemUserPassword}
-                             placeholder="System Password"
+                             placeholder="密码"
                              validate={validateField(FORM_VALIDATION.systemUserPassword)}
                              type="password" />
           )}
@@ -240,12 +240,12 @@ const ServerConfigStep = ({ formRef, help = {}, onSubmit, onSubmitAll, submitAll
             <Button disabled={isSubmitting}
                     onClick={() => _onSubmitAll(validateForm)}
                     type="button">
-              Finish & Save Service
+              完成 & 保存
             </Button>
             <Button bsStyle="primary"
                     disabled={isSubmitting}
                     type="submit">
-              Next: User Synchronization
+              下一步: 用户同步
             </Button>
           </ButtonToolbar>
         </Form>

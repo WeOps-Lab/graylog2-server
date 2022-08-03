@@ -97,7 +97,7 @@ const ActionDropdown = ({
       </StyledListItem>
 
       <MenuItem divider />
-      <MenuItem header>Actions</MenuItem>
+      <MenuItem header>操作</MenuItem>
       {internalActions.map((action) => (
         <ActionMenuItem action={action}
                         key={`${type}-action-${action.type}`}

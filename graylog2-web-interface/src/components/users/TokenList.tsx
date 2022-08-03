@@ -110,7 +110,7 @@ const TokenList = ({ creatingToken, deletingToken, onCreate, onDelete, tokens }:
       <hr />
       <StyledSearchForm onSearch={updateQuery}
                         onReset={updateQuery}
-                        searchButtonLabel="Find"
+                        searchButtonLabel="查找"
                         searchBsStyle="info"
                         label="过滤"
                         useLoadingState={false} />

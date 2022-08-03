@@ -179,7 +179,7 @@ class ActionDropdown extends React.Component<ActionDropdownProps, ActionDropdown
                  target={() => this.target}>
           <FilterProps>
             <DropdownMenu show={show}>
-              <MenuItem header>Actions</MenuItem>
+              <MenuItem header>操作</MenuItem>
               {mappedChildren}
             </DropdownMenu>
           </FilterProps>

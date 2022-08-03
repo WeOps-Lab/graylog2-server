@@ -41,7 +41,7 @@ const InputListItem = createReactClass({
   mixins: [PermissionsMixin, Reflux.connect(InputTypesStore)],
 
   _deleteInput() {
-    if (window.confirm(`Do you really want to delete input '${this.props.input.title}'?`)) {
+    if (window.confirm(`确定要删除输入 '${this.props.input.title}'?`)) {
       InputsActions.delete(this.props.input);
     }
   },

@@ -281,7 +281,7 @@ const TimeRangeDropdown = ({
                         <Button bsStyle="link" onClick={handleNoOverride}>无覆盖</Button>
                       )}
                       <CancelButton bsStyle="default" onClick={handleCancel}>取消</CancelButton>
-                      <Button bsStyle="success" disabled={!isValid || validatingKeyword} type="submit">申请</Button>
+                      <Button bsStyle="success" disabled={!isValid || validatingKeyword} type="submit">确定</Button>
                     </div>
                   </Col>
                 </Row>

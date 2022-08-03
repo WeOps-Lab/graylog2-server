@@ -88,7 +88,7 @@ const formValueTypeToConfigType = (type: 'groupBy' | 'metric') => {
 };
 
 const SortElement: AggregationElement = {
-  title: 'Sort',
+  title: '排序',
   key: 'sort',
   order: 3,
   allowCreate: () => true,

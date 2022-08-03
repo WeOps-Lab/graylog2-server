@@ -83,22 +83,22 @@ public class V20190705071400_AddEventIndexSetsMigration extends Migration {
     @Override
     public void upgrade() {
         ensureEventsStreamAndIndexSet(
-                "Graylog Events",
-                "Stores Graylog events.",
+                "事件索引集",
+                "存储DataInsight消息.",
                 elasticsearchConfiguration.getDefaultEventsIndexPrefix(),
                 ElasticsearchConfiguration.DEFAULT_EVENTS_INDEX_PREFIX,
                 Stream.DEFAULT_EVENTS_STREAM_ID,
-                "All events",
-                "Stream containing all events created by Graylog"
+                "所有事件",
+                "包含所有事件的索引集"
         );
         ensureEventsStreamAndIndexSet(
-                "Graylog System Events",
-                "Stores Graylog system events.",
+                "系统事件索引集",
+                "包含所有系统事件的索引集.",
                 elasticsearchConfiguration.getDefaultSystemEventsIndexPrefix(),
                 ElasticsearchConfiguration.DEFAULT_SYSTEM_EVENTS_INDEX_PREFIX,
                 Stream.DEFAULT_SYSTEM_EVENTS_STREAM_ID,
-                "All system events",
-                "Stream containing all system events created by Graylog"
+                "系统事件",
+                "包含系统所有事件的消息流"
         );
     }
 

@@ -82,11 +82,11 @@ public class DropdownField extends AbstractConfigurationField {
         public static Map<String, String> timeUnits() {
             Map<String, String> units = Maps.newHashMap();
 
-            for (TimeUnit unit : TimeUnit.values()) {
-                String human = unit.toString().toLowerCase(Locale.ENGLISH);
-                units.put(unit.toString(), Character.toUpperCase(human.charAt(0)) + human.substring(1));
-            }
-
+            units.put("MILLISECONDS","毫秒");
+            units.put("HOURS","小时");
+            units.put("SECONDS","秒");
+            units.put("DAYS","天");
+            units.put("MINUTES","分");
             return units;
         }
 

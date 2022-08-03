@@ -82,7 +82,7 @@ const IndexSetsComponent = createReactClass({
           <Button bsStyle="info">编辑</Button>
         </LinkContainer>
         {' '}
-        <DropdownButton title="More Actions" id={`index-set-dropdown-${indexSet.id}`} pullRight>
+        <DropdownButton title="更多操作" id={`index-set-dropdown-${indexSet.id}`} pullRight>
           <MenuItem onSelect={this._onSetDefault(indexSet)}
                     disabled={!indexSet.can_be_default || indexSet.default}>设置为默认
           </MenuItem>

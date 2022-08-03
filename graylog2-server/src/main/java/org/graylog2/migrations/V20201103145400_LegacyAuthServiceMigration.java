@@ -155,8 +155,8 @@ public class V20201103145400_LegacyAuthServiceMigration extends Migration {
 
     private AuthServiceBackendDTO buildActiveDirectoryConfig(Document document) {
         return AuthServiceBackendDTO.builder()
-                .title(getTitle(document, "Active Directory"))
-                .description("Migrated from legacy Active Directory configuration.")
+                .title(getTitle(document, "活动目录"))
+                .description("迁移活动目录配置.")
                 .defaultRoles(getDefaultRoles(document))
                 .config(ADAuthServiceBackendConfig.builder()
                         .servers(Collections.singletonList(getADHostAndPort(document)))
@@ -175,7 +175,7 @@ public class V20201103145400_LegacyAuthServiceMigration extends Migration {
     private AuthServiceBackendDTO buildLDAPConfig(Document document) {
         return AuthServiceBackendDTO.builder()
                 .title(getTitle(document, "LDAP"))
-                .description("Migrated from legacy LDAP configuration.")
+                .description("迁移LDAP配置.")
                 .defaultRoles(getDefaultRoles(document))
                 .config(LDAPAuthServiceBackendConfig.builder()
                         .servers(Collections.singletonList(getLDAPHostAndPort(document)))

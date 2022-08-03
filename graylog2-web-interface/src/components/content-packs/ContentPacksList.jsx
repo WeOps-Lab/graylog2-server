@@ -146,10 +146,10 @@ class ContentPacksList extends React.Component {
             <Col md={3} className="text-right">
               {updateButton}
               &nbsp;
-              <Button bsStyle="info" bsSize="small" onClick={openFunc}>Install</Button>
+              <Button bsStyle="info" bsSize="small" onClick={openFunc}>安装</Button>
               {installModal}
               &nbsp;
-              <DropdownButton id={`more-actions-${item.id}`} title="More Actions" bsSize="small" pullRight>
+              <DropdownButton id={`more-actions-${item.id}`} title="更多操作" bsSize="small" pullRight>
                 <LinkContainer to={Routes.SYSTEM.CONTENTPACKS.show(item.id)}>
                   <MenuItem>查看</MenuItem>
                 </LinkContainer>

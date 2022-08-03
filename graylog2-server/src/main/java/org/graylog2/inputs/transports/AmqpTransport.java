@@ -305,7 +305,7 @@ public class AmqpTransport extends ThrottleableTransport {
             cr.addField(
                     new TextField(
                             CK_ROUTING_KEY,
-                            "Routing key",
+                            "Routing key名称",
                             defaultRoutingKey(),
                             "侦听的Routing key.",
                             ConfigurationField.Optional.NOT_OPTIONAL

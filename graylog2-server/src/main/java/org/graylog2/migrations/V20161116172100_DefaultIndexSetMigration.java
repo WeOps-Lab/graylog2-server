@@ -81,8 +81,8 @@ public class V20161116172100_DefaultIndexSetMigration extends Migration {
         checkState(indexManagementConfig != null, "Couldn't find index management configuration");
 
         final IndexSetConfig config = IndexSetConfig.builder()
-                .title("Default index set")
-                .description("The Graylog default index set")
+                .title("默认索引集")
+                .description("默认索引集")
                 .isRegular(true)
                 .indexPrefix(elasticsearchConfiguration.getIndexPrefix())
                 .shards(elasticsearchConfiguration.getShards())

@@ -21,7 +21,7 @@
         "throughput:read",
         "messages:read"
       ],
-      "description": "Grants basic permissions for every Graylog user (built-in)",
+      "description": "DataInsight用户的基础权限 (内置)",
       "read_only": true,
       "name_lower": "reader"
     },
@@ -40,14 +40,14 @@
       "_id": {
         "$oid": "5b17d7c63f3ab8204eea0589"
       },
-      "name": "Sidecar Node",
+      "name": "客户端节点",
       "permissions": [
         "sidecars:read",
         "configurations:read",
         "sidecars:update",
         "users:list"
       ],
-      "description": "Grants access to register and pull configurations for a Sidecar node (built-in)",
+      "description": "客户端节点权限 (内置)",
       "read_only": true,
       "name_lower": "sidecar node"
     },
@@ -55,12 +55,12 @@
       "_id": {
         "$oid": "58dbaa158ae4923256dc6266"
       },
-      "name": "Archive Viewer",
+      "name": "备份管理员",
       "permissions": [
         "archive:read",
         "archivelicense:read"
       ],
-      "description": "Grants read access to the archive catalog (built-in)",
+      "description": "备份管理员权限 (内置)",
       "read_only": true,
       "name_lower": "archive viewer"
     },
@@ -72,7 +72,7 @@
       "permissions": [
         "*"
       ],
-      "description": "Grants all permissions for Graylog administrators (built-in)",
+      "description": "管理员权限 (内置)",
       "read_only": true,
       "name_lower": "admin"
     },
@@ -91,7 +91,7 @@
         "archivecatalog:rebuild",
         "archive:delete"
       ],
-      "description": "Grants full control over the archive configuration and management (built-in)",
+      "description": "系统的所以权限 (内置)",
       "read_only": true,
       "name_lower": "archive manager"
     },
@@ -99,7 +99,7 @@
       "_id": {
         "$oid": "59fc4b2b6e948411fadbd85d"
       },
-      "name": "Report Manager",
+      "name": "报表管理员",
       "permissions": [
         "dashboards:read",
         "report:email",
@@ -110,7 +110,7 @@
         "report:read",
         "report:update"
       ],
-      "description": "Grants full control over report configurations and read access to dashboards and users (built-in)",
+      "description": "可访问系统报表 (内置)",
       "read_only": true,
       "name_lower": "report manager"
     },
@@ -118,14 +118,14 @@
       "_id": {
         "$oid": "59fc4b2b6e948411fadbd85e"
       },
-      "name": "Report Generator",
+      "name": "报表查询角色",
       "permissions": [
         "report:read",
         "streams:read",
         "dashboards:read",
         "users:list"
       ],
-      "description": "Internal role. Grants read access to streams and dashboards (built-in)",
+      "description": "可查询系统报表 (内置)",
       "read_only": true,
       "name_lower": "report generator"
     },
@@ -133,12 +133,12 @@
       "_id": {
         "$oid": "5c2f6d3b3dd06601be176b85"
       },
-      "name": "Views Manager",
+      "name": "系统查看角色",
       "permissions": [
         "view:read",
         "view:edit"
       ],
-      "description": "Allows reading and writing all views and extended searches (built-in)",
+      "description": "可查看系统视图 (内置)",
       "read_only": true,
       "name_lower": "views manager"
     },
@@ -146,14 +146,14 @@
       "_id": {
         "$oid": "5c488b67e3f1420b4d9ae635"
       },
-      "name": "Report System (Internal)",
+      "name": "报表系统 (内部)",
       "permissions": [
         "report:read",
         "streams:read",
         "dashboards:read",
         "users:list"
       ],
-      "description": "Internal technical role. Grants Report System User necessary access to generate reports (built-in)",
+      "description": "报表系统角色 (内置)",
       "read_only": true,
       "name_lower": "report system (internal)"
     },
@@ -161,13 +161,13 @@
       "_id": {
         "$oid": "5c488f1de3f14219be1cb9f6"
       },
-      "name": "Sidecar System (Internal)",
+      "name": "客户端系统 (内部)",
       "permissions": [
         "sidecar_collectors:read",
         "sidecar_collector_configurations:read",
         "sidecars:update"
       ],
-      "description": "Internal technical role. Grants access to register and pull configurations for a Sidecar node (built-in)",
+      "description": "内部使用的客户端系统角色 (内置)",
       "read_only": true,
       "name_lower": "sidecar system (internal)"
     },
@@ -175,7 +175,7 @@
       "_id": {
         "$oid": "5d41bb973086a840541a3ed2"
       },
-      "name": "Alerts Manager",
+      "name": "告警管理员",
       "permissions": [
         "eventdefinitions:create",
         "eventdefinitions:delete",
@@ -187,7 +187,7 @@
         "eventnotifications:edit",
         "eventnotifications:read"
       ],
-      "description": "Allows reading and writing all event definitions and event notifications (built-in)",
+      "description": "允许读取和写入所有事件定义和事件通知（内置）",
       "read_only": true,
       "name_lower": "alerts manager"
     },
@@ -195,11 +195,11 @@
       "_id": {
         "$oid": "5f1f0d2a6f58d7c052d49775"
       },
-      "name": "Dashboard Creator",
+      "name": "仪表盘创建者",
       "permissions": [
         "dashboards:create"
       ],
-      "description": "Allows creation of Dashboards (built-in)",
+      "description": "允许创建仪表板（内置）",
       "read_only": true,
       "name_lower": "dashboard creator"
     },
@@ -207,11 +207,11 @@
       "_id": {
         "$oid": "5f1f0d2a6f58d7c052d49778"
       },
-      "name": "Event Definition Creator",
+      "name": "告警规则管理员",
       "permissions": [
         "eventdefinitions:create"
       ],
-      "description": "Allows creation of Event Definitions (built-in)",
+      "description": "允许创建事件定义（内置）",
       "read_only": true,
       "name_lower": "event definition creator"
     },
@@ -219,11 +219,11 @@
       "_id": {
         "$oid": "5f1f0d2a6f58d7c052d4977b"
       },
-      "name": "Event Notification Creator",
+      "name": "通知创建者",
       "permissions": [
         "eventnotifications:create"
       ],
-      "description": "Allows creation of Event Notifications (built-in)",
+      "description": "允许创建事件通知（内置）",
       "read_only": true,
       "name_lower": "event notification creator"
     },
@@ -231,11 +231,11 @@
       "_id": {
         "$oid": "5f22792d6f58d7c0521edb23"
       },
-      "name": "Report Creator",
+      "name": "报告管理员",
       "permissions": [
         "report:create"
       ],
-      "description": "Allows creation of Reports (built-in)",
+      "description": "允许创建报告（内置）",
       "read_only": true,
       "name_lower": "report creator"
     }

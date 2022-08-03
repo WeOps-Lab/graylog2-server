@@ -18,7 +18,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 import Select from 'components/common/Select';
-import { Button, ListGroup, ListGroupItem } from 'components/bootstrap';
+import {Button, ListGroup, ListGroupItem} from 'components/bootstrap';
 
 /**
  * Component that renders a `Select` component above a list of selected
@@ -121,9 +121,12 @@ class SelectableList extends React.Component {
 
     return (
       <div>
-        <Select ref={(select) => { this.select = select; }} autoFocus={this.props.autoFocus} options={this.props.options} onChange={this._onAddOption} clearable={false} />
+        <Select placeholder={"选择..."} ref={(select) => {
+          this.select = select;
+        }} autoFocus={this.props.autoFocus} options={this.props.options} onChange={this._onAddOption}
+                clearable={false}/>
         {formattedOptions.length > 0
-        && <ListGroup style={{ marginTop: 10 }}>{formattedOptions}</ListGroup>}
+        && <ListGroup style={{marginTop: 10}}>{formattedOptions}</ListGroup>}
       </div>
     );
   }

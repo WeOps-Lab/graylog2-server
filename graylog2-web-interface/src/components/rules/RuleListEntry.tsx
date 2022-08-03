@@ -47,7 +47,7 @@ const RuleListEntry = ({ rule, onDelete, usingPipelines }: Props) => {
   const actions = (
     <ButtonToolbar>
       <Button bsStyle="primary" bsSize="xsmall" onClick={onDelete(rule)} title="删除角色">
-        Delete
+        删除
       </Button>
       <LinkContainer to={Routes.SYSTEM.PIPELINES.RULE(id)}>
         <Button bsStyle="info" bsSize="xsmall">编辑</Button>
@@ -95,7 +95,7 @@ const RuleListEntry = ({ rule, onDelete, usingPipelines }: Props) => {
       </td>
       <td>
         <MetricContainer name={`org.graylog.plugins.pipelineprocessor.ast.Rule.${id}.failed`}>
-          <CounterRate showTotal suffix="errors/s" hideOnMissing />
+          <CounterRate showTotal suffix="失败/秒" hideOnMissing />
         </MetricContainer>
       </td>
       <LimitedTd>

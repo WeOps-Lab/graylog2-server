@@ -118,8 +118,8 @@ class IndexSetDeletionForm extends React.Component {
         <Col md={12}>
           <Input id="remove-data-checkbox"
                  type="checkbox"
-                 label="Remove all data for this index set?"
-                 help={<span>All indices related to this index set will be deleted from Elasticsearch.</span>}
+                 label="确定删除索引集?"
+                 help={<span>与该索引集相关的所有索引都将从 Elasticsearch 中删除.</span>}
                  checked={this.state.deleteIndices}
                  onChange={this._onRemoveClick} />
         </Col>
@@ -138,10 +138,10 @@ class IndexSetDeletionForm extends React.Component {
   render() {
     return (
       <BootstrapModalForm ref={(elem) => { this.forms[`index-set-deletion-modal-${this.props.indexSet.id}`] = elem; }}
-                          title={`Delete index set "${this.props.indexSet.title}"?`}
+                          title={`删除索引集 "${this.props.indexSet.title}"?`}
                           onModalOpen={this._onModalOpen}
                           onSubmitForm={this._onDelete}
-                          submitButtonText="Delete"
+                          submitButtonText="删除"
                           submitButtonDisabled={!this._isDeletable()}>
         {this._modalContent()}
       </BootstrapModalForm>

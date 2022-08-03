@@ -35,7 +35,7 @@ class NodeMaintenanceDropdown extends React.Component {
 
     return (
       <ButtonGroup>
-        <DropdownButton bsStyle="info" bsSize="lg" title="Actions" id="node-maintenance-actions" pullRight>
+        <DropdownButton bsStyle="info" bsSize="lg" title="操作" id="node-maintenance-actions" pullRight>
           <IfPermitted permissions="threads:dump">
             <LinkContainer to={Routes.SYSTEM.THREADDUMP(node.node_id)}>
               <MenuItem>获取线程转储</MenuItem>

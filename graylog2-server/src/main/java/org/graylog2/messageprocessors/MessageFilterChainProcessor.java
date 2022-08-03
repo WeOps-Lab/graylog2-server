@@ -48,7 +48,7 @@ public class MessageFilterChainProcessor implements MessageProcessor {
     public static class Descriptor implements MessageProcessor.Descriptor {
         @Override
         public String name() {
-            return "Message Filter Chain";
+            return "消息过滤链";
         }
 
         @Override

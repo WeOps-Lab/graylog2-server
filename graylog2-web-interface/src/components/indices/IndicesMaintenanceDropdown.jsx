@@ -55,7 +55,7 @@ class IndicesMaintenanceDropdown extends React.Component {
 
     return (
       <ButtonGroup>
-        <DropdownButton bsStyle="info" title="Maintenance" id="indices-maintenance-actions" pullRight>
+        <DropdownButton bsStyle="info" title="维护" id="indices-maintenance-actions" pullRight>
           <MenuItem eventKey="1" onClick={this._onRecalculateIndexRange}>更新索引范围</MenuItem>
           {cycleButton}
         </DropdownButton>

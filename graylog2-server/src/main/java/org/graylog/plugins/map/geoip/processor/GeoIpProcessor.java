@@ -43,7 +43,7 @@ public class GeoIpProcessor implements MessageProcessor {
     public static class Descriptor implements MessageProcessor.Descriptor {
         @Override
         public String name() {
-            return "GeoIP Resolver";
+            return "GeoIP解析器";
         }
 
         @Override

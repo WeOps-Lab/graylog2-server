@@ -60,16 +60,16 @@ export const TimeUnits = {
 export const RELATIVE_RANGE_TYPES = [
   {
     type: 'seconds',
-    label: 'Seconds',
+    label: '秒',
   }, {
     type: 'minutes',
-    label: 'Minutes',
+    label: '分钟',
   }, {
     type: 'hours',
-    label: 'Hours',
+    label: '小时',
   }, {
     type: 'days',
-    label: 'Days',
+    label: '天',
   },
 ] as const;
 

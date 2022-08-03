@@ -33,7 +33,7 @@ const ItemActions = ({ dashboard, onDashboardDelete, setDashboardToShare }) => {
       <ShareButton entityId={dashboard.id} entityType="dashboard" onClick={() => setDashboardToShare(dashboard)} />
       <DropdownButton title="操作" data-testid={`dashboard-actions-dropdown-${dashboard.id}`} id={`dashboard-actions-dropdown-${dashboard.id}`} pullRight>
         <IfPermitted permissions={[`view:edit:${dashboard.id}`, 'view:edit']} anyPermissions>
-          <MenuItem onSelect={onDashboardDelete(dashboard)}>Delete</MenuItem>
+          <MenuItem onSelect={onDashboardDelete(dashboard)}>删除</MenuItem>
         </IfPermitted>
       </DropdownButton>
     </ButtonToolbar>

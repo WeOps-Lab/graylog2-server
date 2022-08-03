@@ -100,7 +100,7 @@ const RolesSection = ({ user, onSubmit }: Props) => {
       <ErrorAlert onClose={setErrors}>
         {errors}
       </ErrorAlert>
-      <h3>Selected Roles</h3>
+      <h3>选择角色</h3>
       <Container>
         <PaginatedItemOverview noDataText="未找到选定的角色."
                                onLoad={_onLoad}

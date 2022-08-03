@@ -126,7 +126,7 @@ const TimeRangeLivePreview = ({ timerange }: Props) => {
       </MiddleIcon>
 
       <UntilWrapper>
-        <Title>Until</Title>
+        <Title>到</Title>
         <Date title={`日期格式 [${DateTime.Formats.TIMESTAMP}]`}>{until}</Date>
       </UntilWrapper>
     </PreviewWrapper>

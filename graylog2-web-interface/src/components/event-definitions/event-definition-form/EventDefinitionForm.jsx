@@ -166,7 +166,7 @@ class EventDefinitionForm extends React.Component {
       },
       {
         key: STEP_KEYS[4],
-        title: '总览',
+        title: '预览',
         component: (
           <EventDefinitionSummary action={action}
                                   eventDefinition={eventDefinition}

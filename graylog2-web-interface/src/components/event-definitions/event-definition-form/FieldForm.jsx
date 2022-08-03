@@ -190,7 +190,7 @@ class FieldForm extends React.Component {
         validation: validation,
         currentUser: currentUser,
       })
-      : <div>Selected provider is not available.</div>
+      : <div>所选插件不可用.</div>
     );
   };
 
@@ -212,7 +212,7 @@ class FieldForm extends React.Component {
 
           <Input id="field-name"
                  name="name"
-                 label="Name"
+                 label="名称"
                  type="text"
                  value={fieldName}
                  onChange={this.handleFieldNameChange}

@@ -58,7 +58,7 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
         removeConfigPath();
 
         final String beatsPreambel =
-                "# Needed for Graylog\n" +
+                "# 必填字段\n" +
                 "fields_under_root: true\n" +
                 "fields.collector_node_id: ${sidecar.nodeName}\n" +
                 "fields.gl2_source_collector: ${sidecar.nodeId}\n\n";

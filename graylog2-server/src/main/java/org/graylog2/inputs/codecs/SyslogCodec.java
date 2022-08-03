@@ -248,36 +248,36 @@ public class SyslogCodec extends AbstractCodec {
             r.addField(
                     new BooleanField(
                             CK_FORCE_RDNS,
-                            "Force rDNS?",
+                            "强制使用 rDNS?",
                             false,
-                            "Force rDNS resolution of hostname? Use if hostname cannot be parsed. (Be careful if you are sending DNS logs into this input because it can cause a feedback loop.)"
+                            "是否强制使用rDNS？如果主机名无法解析，请启用此选项"
                     )
             );
 
             r.addField(
                     new BooleanField(
                             CK_ALLOW_OVERRIDE_DATE,
-                            "Allow overriding date?",
+                            "允许重写日期?",
                             true,
-                            "Allow to override with current date if date could not be parsed?"
+                            "无法转换日期时，是否允许重写?"
                     )
             );
 
             r.addField(
                     new BooleanField(
                             CK_STORE_FULL_MESSAGE,
-                            "Store full message?",
+                            "存储完整日志消息?",
                             false,
-                            "Store the full original syslog message as full_message?"
+                            "是否把syslog的消息完整保存至full_message字段?"
                     )
             );
 
             r.addField(
                     new BooleanField(
                             CK_EXPAND_STRUCTURED_DATA,
-                            "Expand structured data?",
+                            "展开结构化数据?",
                             false,
-                            "Expand structured data elements by prefixing attributes with their SD-ID?"
+                            "以SD-ID为前缀展开结构化数据元素?"
                     )
             );
 

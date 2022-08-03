@@ -5,7 +5,7 @@
     {
       "id": "grn::::builtin-team:everyone",
       "type": "global",
-      "title": "Everyone"
+      "title": "所有人"
     },
     {
       "id": "grn::::user:jane",
@@ -26,15 +26,15 @@
   "available_capabilities": [
     {
       "id": "grn::::capability:54e3deadbeefdeadbeef0000",
-      "title": "Viewer"
+      "title": "只读"
     },
     {
       "id": "grn::::capability:54e3deadbeefdeadbeef0001",
-      "title": "Manager"
+      "title": "管理"
     },
     {
       "id": "grn::::capability:54e3deadbeefdeadbeef0002",
-      "title": "Owner"
+      "title": "属主"
     }
   ],
   "active_shares": [

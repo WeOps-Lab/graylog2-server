@@ -126,7 +126,7 @@ public class SystemResource extends RestResource {
     @ApiOperation(value = "Get a process buffer dump")
     public SystemProcessBufferDumpResponse processBufferDump() {
         checkPermission(RestPermissions.PROCESSBUFFER_DUMP, serverStatus.getNodeId().toString());
-       return SystemProcessBufferDumpResponse.create(processBuffer.getDump());
+        return SystemProcessBufferDumpResponse.create(processBuffer.getDump());
     }
 
     @GET

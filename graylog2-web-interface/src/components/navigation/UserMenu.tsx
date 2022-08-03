@@ -37,7 +37,7 @@ const UserMenu = ({ fullName, readOnly = true, userId }: Props) => {
     ? Routes.SYSTEM.USERS.show(userId)
     : Routes.SYSTEM.USERS.edit(userId);
   const label = readOnly
-    ? '显示'
+    ? '个人信息'
     : '编辑';
 
   const onLogoutClicked = () => {

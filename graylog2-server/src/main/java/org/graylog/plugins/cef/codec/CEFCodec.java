@@ -207,23 +207,23 @@ public class CEFCodec implements Codec {
 
             cr.addField(new TextField(
                     CK_TIMEZONE,
-                    "Timezone",
+                    "时区",
                     DEFAULT_TIMEZONE.getID(),
-                    "Timezone of the timestamps in CEF messages. Set this to the local timezone if in doubt. Format example: \"+01:00\" or \"America/Chicago\"",
+                    "CEF消息的时区，例如 : \"+01:00\" 或 \"America/Chicago\"",
                     ConfigurationField.Optional.NOT_OPTIONAL
             ));
             cr.addField(new TextField(
                     CK_LOCALE,
-                    "Locale",
+                    "地区",
                     "",
-                    "Locale to use for parsing the timestamps of CEF messages. Set this to english if in doubt. Format example: \"en\" or \"en_US\"",
+                    "转换时区的地区，例如: \"en\" 或 \"en_US\"",
                     ConfigurationField.Optional.OPTIONAL
             ));
             cr.addField(new BooleanField(
                     CK_USE_FULL_NAMES,
-                    "Use full field names",
+                    "使用完整字段名称",
                     false,
-                    "Use full field names in CEF messages (as defined in the CEF specification)"
+                    "使用完整字段名称"
             ));
 
             return cr;

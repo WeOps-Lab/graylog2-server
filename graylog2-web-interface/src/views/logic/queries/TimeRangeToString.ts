@@ -18,11 +18,12 @@
 import moment from 'moment';
 import 'moment-duration-format';
 import 'moment-precise-range-plugin';
-moment.locale('zh-cn');
-import type { AbsoluteTimeRange, KeywordTimeRange, RelativeTimeRange, TimeRange } from 'views/logic/queries/Query';
-import { isTypeRelativeWithStartOnly } from 'views/typeGuards/timeRange';
 
-export const readableRange = (timerange: TimeRange, fieldName: 'range' | 'from' | 'to', placeholder = 'All Time') => {
+moment.locale('zh-cn');
+import type {AbsoluteTimeRange, KeywordTimeRange, RelativeTimeRange, TimeRange} from 'views/logic/queries/Query';
+import {isTypeRelativeWithStartOnly} from 'views/typeGuards/timeRange';
+
+export const readableRange = (timerange: TimeRange, fieldName: 'range' | 'from' | 'to', placeholder = '以前') => {
   const rangeAsSeconds = timerange?.[fieldName];
 
   if (!rangeAsSeconds) {
@@ -30,15 +31,28 @@ export const readableRange = (timerange: TimeRange, fieldName: 'range' | 'from' 
   }
 
   const dateAgo = moment().subtract(rangeAsSeconds, 'seconds');
-  const rangeTimespan = moment.preciseDiff(moment(), dateAgo);
+  let rangeTimespan = moment.preciseDiff(moment(), dateAgo);
 
-  return `${rangeTimespan} ago`;
+  rangeTimespan = rangeTimespan.replace('seconds', '秒')
+  rangeTimespan = rangeTimespan.replace('second', '秒')
+  rangeTimespan = rangeTimespan.replace('minutes', '分钟')
+  rangeTimespan = rangeTimespan.replace('minute', '分钟')
+  rangeTimespan = rangeTimespan.replace('hours', '小时')
+  rangeTimespan = rangeTimespan.replace('hour', '小时')
+  rangeTimespan = rangeTimespan.replace('days', '天')
+  rangeTimespan = rangeTimespan.replace('day', '天')
+  debugger
+  if (rangeTimespan == 'Now') {
+    return '现在'
+  }
+  return `${rangeTimespan} 前`;
 };
 
 const relativeTimeRangeToString = (timerange: RelativeTimeRange): string => {
+
   if (isTypeRelativeWithStartOnly(timerange)) {
     if (timerange.range === 0) {
-      return 'All Time';
+      return '所有时间';
     }
 
     return `${readableRange(timerange, 'range')} - Now`;
@@ -48,7 +62,7 @@ const relativeTimeRangeToString = (timerange: RelativeTimeRange): string => {
 };
 
 const absoluteTimeRangeToString = (timerange: AbsoluteTimeRange, localizer = (str) => str): string => {
-  const { from, to } = timerange;
+  const {from, to} = timerange;
 
   return `${localizer(from)} - ${localizer(to)}`;
 };
@@ -58,12 +72,14 @@ const keywordTimeRangeToString = (timerange: KeywordTimeRange): string => {
 };
 
 const TimeRangeToString = (timerange?: TimeRange, localizer?: (string) => string): string => {
-  const { type } = timerange || {};
-
+  const {type} = timerange || {};
   switch (type) {
-    case 'relative': return relativeTimeRangeToString(timerange as RelativeTimeRange);
-    case 'absolute': return absoluteTimeRangeToString(timerange as AbsoluteTimeRange, localizer);
-    case 'keyword': return keywordTimeRangeToString(timerange as KeywordTimeRange);
+    case 'relative':
+      return relativeTimeRangeToString(timerange as RelativeTimeRange);
+    case 'absolute':
+      return absoluteTimeRangeToString(timerange as AbsoluteTimeRange, localizer);
+    case 'keyword':
+      return keywordTimeRangeToString(timerange as KeywordTimeRange);
 
     default: {
       return '';

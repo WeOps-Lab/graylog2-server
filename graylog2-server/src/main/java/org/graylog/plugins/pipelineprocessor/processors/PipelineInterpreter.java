@@ -457,7 +457,7 @@ public class PipelineInterpreter implements MessageProcessor {
     public static class Descriptor implements MessageProcessor.Descriptor {
         @Override
         public String name() {
-            return "Pipeline Processor";
+            return "流水线处理器";
         }
 
         @Override

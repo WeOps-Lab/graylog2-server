@@ -52,7 +52,7 @@ class IndexSummary extends React.Component {
 
   _formatIndexRange = () => {
     if (this.props.isDeflector) {
-      return <span>Contains messages up to <RelativeTime dateTime={new Date()} /></span>;
+      return <span>包含消息 <RelativeTime dateTime={new Date()} /></span>;
     }
 
     const sizes = this.props.index.size;

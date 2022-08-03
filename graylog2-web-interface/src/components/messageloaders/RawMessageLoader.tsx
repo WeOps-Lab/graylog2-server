@@ -320,7 +320,7 @@ const RawMessageLoader = ({ onMessageLoaded, inputIdSelector, codecTypes, inputs
                        onInputSelect={_onInputSelect}
                        show={inputIdSelector} />
           <fieldset>
-            <legend>Codec configuration</legend>
+            <legend>消息编解码器</legend>
             <Input id="codec"
                    name="codec"
                    label="消息编解码器"

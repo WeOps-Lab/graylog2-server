@@ -60,6 +60,7 @@ const FieldSelect = ({ name, id, error, clearable, value, onChange, label, ariaL
               value={value}
               aria-label={ariaLabel}
               size="small"
+              placeholder="选择..."
               menuPortalTarget={document.body}
               onChange={(newValue: string) => onChange({ target: { name, value: newValue } })} />
     </Input>

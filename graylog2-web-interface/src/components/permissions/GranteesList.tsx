@@ -15,14 +15,14 @@
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
 import * as React from 'react';
-import { useState } from 'react';
+import {useState} from 'react';
 import styled from 'styled-components';
-import type { $PropertyType } from 'utility-types';
+import type {$PropertyType} from 'utility-types';
 
 import type SharedEntity from 'logic/permissions/SharedEntity';
-import { Alert } from 'components/bootstrap';
-import { Pagination, PageSizeSelect } from 'components/common';
-import type { ActiveShares, CapabilitiesList, SelectedGrantees } from 'logic/permissions/EntityShareState';
+import {Alert} from 'components/bootstrap';
+import {Pagination, PageSizeSelect} from 'components/common';
+import type {ActiveShares, CapabilitiesList, SelectedGrantees} from 'logic/permissions/EntityShareState';
 import type EntityShareState from 'logic/permissions/EntityShareState';
 import type Grantee from 'logic/permissions/Grantee';
 import type Capability from 'logic/permissions/Capability';
@@ -36,7 +36,7 @@ const Header = styled.div`
   margin-bottom: 10px;
 `;
 
-const List = styled.div(({ theme }) => `
+const List = styled.div(({theme}) => `
   >:nth-child(even) {
     background: ${theme.colors.table.backgroundAlt};
   };
@@ -59,7 +59,7 @@ const StyledPagination = styled(Pagination)`
   margin-bottom: 0;
 `;
 
-const StyledPageSizeSelect = styled(PageSizeSelect)(({ theme }) => `
+const StyledPageSizeSelect = styled(PageSizeSelect)(({theme}) => `
   label {
     font-weight: normal;
     font-size: ${theme.fonts.size.body}
@@ -87,7 +87,16 @@ const _paginatedGrantees = (selectedGrantees: SelectedGrantees, pageSize: number
   return selectedGrantees.slice(begin, end);
 };
 
-const GranteesList = ({ activeShares, onDelete, onCapabilityChange, entityType, availableCapabilities, selectedGrantees, className, title }: Props) => {
+const GranteesList = ({
+                        activeShares,
+                        onDelete,
+                        onCapabilityChange,
+                        entityType,
+                        availableCapabilities,
+                        selectedGrantees,
+                        className,
+                        title
+                      }: Props) => {
   const initialPageSize = PageSizeSelect.defaultPageSizes[0];
   const [pageSize, setPageSize] = useState(initialPageSize);
   const [currentPage, setCurrentPage] = useState(1);
@@ -96,12 +105,17 @@ const GranteesList = ({ activeShares, onDelete, onCapabilityChange, entityType, 
   const totalPages = Math.ceil(totalGrantees / pageSize);
   const showPageSizeSelect = totalGrantees > initialPageSize;
 
+  let typeName = '';
+  if (entityType == 'stream') {
+    typeName = '消息流'
+  }
+
   return (
     <div className={className}>
       <Header>
         <h5>{title}</h5>
         {showPageSizeSelect && (
-          <StyledPageSizeSelect onChange={(event) => setPageSize(Number(event.target.value))} pageSize={pageSize} />
+          <StyledPageSizeSelect onChange={(event) => setPageSize(Number(event.target.value))} pageSize={pageSize}/>
         )}
       </Header>
       {paginatedGrantees.size > 0 ? (
@@ -115,17 +129,17 @@ const GranteesList = ({ activeShares, onDelete, onCapabilityChange, entityType, 
                                 grantee={grantee}
                                 key={grantee.id}
                                 onDelete={onDelete}
-                                onCapabilityChange={onCapabilityChange} />
+                                onCapabilityChange={onCapabilityChange}/>
             );
           })}
         </List>
       ) : (
-        <Alert>此 {entityType} 没有协作者。</Alert>
+        <Alert>此 {typeName} 没有协作者。</Alert>
       )}
       <PaginationWrapper>
         <StyledPagination totalPages={totalPages}
                           currentPage={currentPage}
-                          onChange={setCurrentPage} />
+                          onChange={setCurrentPage}/>
       </PaginationWrapper>
     </div>
   );

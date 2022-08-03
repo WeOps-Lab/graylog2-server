@@ -57,7 +57,7 @@ const _getTestAgainstStreamButton = (streams: Immutable.List<any>, index: string
   return (
     <DropdownButton pullRight
                     bsSize="small"
-                    title="针对消息流进行测试"
+                    title="测试"
                     id="select-stream-dropdown">
       {streamList || <MenuItem header>没有可用的消息流</MenuItem>}
     </DropdownButton>

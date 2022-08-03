@@ -209,7 +209,7 @@ public class NetFlowCodec extends AbstractCodec implements MultiMessageCodec {
         @Override
         public ConfigurationRequest getRequestedConfiguration() {
             final ConfigurationRequest configuration = super.getRequestedConfiguration();
-            configuration.addField(new TextField(CK_NETFLOW9_DEFINITION_PATH, "Netflow 9 field definitions", "", "Path to the YAML file containing Netflow 9 field definitions", ConfigurationField.Optional.OPTIONAL));
+            configuration.addField(new TextField(CK_NETFLOW9_DEFINITION_PATH, "Netflow 9 字段", "", "包含Netflow 9 定义的YML路径", ConfigurationField.Optional.OPTIONAL));
             return configuration;
         }
     }

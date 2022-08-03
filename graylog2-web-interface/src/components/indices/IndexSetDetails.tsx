@@ -42,7 +42,7 @@ const IndexSetDetails = ({ indexSet }: Props) => {
             <dd>{indexSet.replicas}</dd>
           </HideOnCloud>
           <dt>字段类型刷新间隔:</dt>
-          <dd>{indexSet.field_type_refresh_interval / 1000.0} seconds</dd>
+          <dd>{indexSet.field_type_refresh_interval / 1000.0} 秒</dd>
         </dl>
       </Col>
 

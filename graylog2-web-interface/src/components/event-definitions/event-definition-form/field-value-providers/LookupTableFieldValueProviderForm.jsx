@@ -94,7 +94,7 @@ class LookupTableFieldValueProviderForm extends React.Component {
       <Row className="row-sm">
         <Col md={7} lg={6}>
           <FormGroup controlId="lookup-provider-table" validationState={validation.errors.table_name ? 'error' : null}>
-            <ControlLabel>Select Lookup Table</ControlLabel>
+            <ControlLabel>选择数据字典</ControlLabel>
             <Select name="event-field-table-name"
                     placeholder="选择数据字典"
                     onChange={this.handleSelectChange('table_name')}

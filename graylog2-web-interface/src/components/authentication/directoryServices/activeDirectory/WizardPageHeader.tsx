@@ -33,7 +33,7 @@ const _pageTitle = (authBackend) => {
   if (authBackend) {
     const backendTitle = StringUtils.truncateWithEllipses(authBackend.title, 30);
 
-    return <>Edit Authentication Service - <i>{backendTitle}</i></>;
+    return <>编辑认证服务 - <i>{backendTitle}</i></>;
   }
 
   return '创建 Active Directory 身份验证服务';

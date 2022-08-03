@@ -95,9 +95,9 @@ const IndexDetails = ({ index, indexName, indexRange, indexSetId, isDeflector }:
       <IndexRangeSummary indexRange={indexRange} />{' '}
 
       <HideOnCloud>
-        {index.all_shards.segments} segments,{' '}
-        {index.all_shards.open_search_contexts} open search contexts,{' '}
-        {index.all_shards.documents.deleted} deleted messages
+        {index.all_shards.segments} 段,{' '}
+        {index.all_shards.open_search_contexts} 打开的上下文,{' '}
+        {index.all_shards.documents.deleted} 删除的消息
         <Row style={{ marginBottom: '10' }}>
           <Col md={4} className="shard-meters">
             <ShardMeter title="主分片耗时" shardMeter={index.primary_shards} />

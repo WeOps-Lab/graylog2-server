@@ -218,7 +218,7 @@ const WidgetActionsMenu = ({
           <ExtraWidgetActions widget={widget} onSelect={() => {}} />
           <MenuItem divider />
           <MenuItem onSelect={onDelete}>
-            Delete
+            删除
           </MenuItem>
         </WidgetActionDropdown>
 

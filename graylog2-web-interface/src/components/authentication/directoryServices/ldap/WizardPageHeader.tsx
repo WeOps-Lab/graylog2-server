@@ -35,7 +35,7 @@ const _pageTitle = (authBackend, title) => {
   if (authBackend) {
     const backendTitle = StringUtils.truncateWithEllipses(authBackend.title, 30);
 
-    return <>Edit Authentication Service - <i>{backendTitle}</i></>;
+    return <>编辑认证服务 - <i>{backendTitle}</i></>;
   }
 
   return title || '创建LDAP鉴权服务';

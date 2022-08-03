@@ -50,8 +50,8 @@ public class V20180323150000_AddSidecarUser extends Migration {
     @Override
     public void upgrade() {
         final String roleId = helpers.ensureBuiltinRole(
-                "Sidecar System (Internal)",
-                "Internal technical role. Grants access to register and pull configurations for a Sidecar node (built-in)",
+                "客户端管理员 (内置)",
+                "内部管理客户端的用户",
                 ImmutableSet.of(
                         SidecarRestPermissions.COLLECTORS_READ,
                         SidecarRestPermissions.CONFIGURATIONS_READ,
@@ -60,8 +60,8 @@ public class V20180323150000_AddSidecarUser extends Migration {
         helpers.ensureUser(
                 sidecarUser,
                 UUID.randomUUID().toString(),
-                "Sidecar", "System User (built-in)",
-                "sidecar@graylog.local",
+                "客户端", "管理员 (内置)",
+                "sidecar@datainsight.local",
                 Sets.newHashSet(
                         roleId,
                         roleService.getReaderRoleObjectId()),

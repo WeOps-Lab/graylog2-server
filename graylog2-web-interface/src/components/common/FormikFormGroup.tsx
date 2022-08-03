@@ -50,6 +50,7 @@ const FormikFormGroup = ({ labelClassName, wrapperClassName, label, name, onChan
                id={name}
                onChange={onChange}
                name={name}
+               placeholder={"选择..."}
                labelClassName={labelClassName}
                wrapperClassName={wrapperClassName} />
 );

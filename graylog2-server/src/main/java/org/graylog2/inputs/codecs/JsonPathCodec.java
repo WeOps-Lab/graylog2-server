@@ -129,19 +129,20 @@ public class JsonPathCodec extends AbstractCodec {
         public ConfigurationRequest getRequestedConfiguration() {
             final ConfigurationRequest r = super.getRequestedConfiguration();
 
+
             r.addField(new TextField(
                     CK_PATH,
-                    "JSON path of data to extract",
+                    "需要提取的JSON Path",
                     "$.store.book[1].number_of_orders",
-                    "Path to the value you want to extract from the JSON response. Take a look at the documentation for a more detailed explanation.",
+                    "需要提取的JSON Path.",
                     ConfigurationField.Optional.NOT_OPTIONAL
             ));
 
             r.addField(new TextField(
                     CK_SOURCE,
-                    "Message source",
+                    "消息源",
                     "yourapi",
-                    "What to use as source field of the resulting message.",
+                    "作为结果数据的来源.",
                     ConfigurationField.Optional.NOT_OPTIONAL
             ));
 

@@ -108,9 +108,9 @@ public abstract class AbstractTcpTransport extends NettyTransport {
     private static final String TLS_CLIENT_AUTH_OPTIONAL = "optional";
     private static final String TLS_CLIENT_AUTH_REQUIRED = "required";
     private static final ImmutableMap<String, String> TLS_CLIENT_AUTH_OPTIONS = ImmutableMap.of(
-            TLS_CLIENT_AUTH_DISABLED, TLS_CLIENT_AUTH_DISABLED,
-            TLS_CLIENT_AUTH_OPTIONAL, TLS_CLIENT_AUTH_OPTIONAL,
-            TLS_CLIENT_AUTH_REQUIRED, TLS_CLIENT_AUTH_REQUIRED);
+            TLS_CLIENT_AUTH_DISABLED, "禁用",
+            TLS_CLIENT_AUTH_OPTIONAL, "可选",
+            TLS_CLIENT_AUTH_REQUIRED, "必选");
 
     private static final Supplier<Set<String>> secureDefaultCiphers = Suppliers.memoize(AbstractTcpTransport::getSecureCipherSuites);
 
@@ -392,35 +392,35 @@ public abstract class AbstractTcpTransport extends NettyTransport {
             x.addField(
                     new TextField(
                             CK_TLS_CERT_FILE,
-                            "TLS cert file",
+                            "TLS认证文件",
                             "",
-                            "Path to the TLS certificate file",
+                            "TLS认证文件的路径",
                             ConfigurationField.Optional.OPTIONAL
                     )
             );
             x.addField(
                     new TextField(
                             CK_TLS_KEY_FILE,
-                            "TLS private key file",
+                            "TLS私钥文件",
                             "",
-                            "Path to the TLS private key file",
+                            "TLS私钥文件路径",
                             ConfigurationField.Optional.OPTIONAL
                     )
             );
             x.addField(
                     new BooleanField(
                             CK_TLS_ENABLE,
-                            "Enable TLS",
+                            "启用TLS",
                             false,
-                            "Accept TLS connections"
+                            "启用TLS连接"
                     )
             );
             x.addField(
                     new TextField(
                             CK_TLS_KEY_PASSWORD,
-                            "TLS key password",
+                            "TLS私钥密码",
                             "",
-                            "The password for the encrypted key file.",
+                            "加密文件的密码.",
                             ConfigurationField.Optional.OPTIONAL,
                             TextField.Attribute.IS_PASSWORD
                     )
@@ -428,27 +428,27 @@ public abstract class AbstractTcpTransport extends NettyTransport {
             x.addField(
                     new DropdownField(
                             CK_TLS_CLIENT_AUTH,
-                            "TLS client authentication",
+                            "TLS客户端认证",
                             TLS_CLIENT_AUTH_DISABLED,
                             TLS_CLIENT_AUTH_OPTIONS,
-                            "Whether clients need to authenticate themselves in a TLS connection",
+                            "TLS连接是否需要客户端认证",
                             ConfigurationField.Optional.OPTIONAL
                     )
             );
             x.addField(
                     new TextField(
                             CK_TLS_CLIENT_AUTH_TRUSTED_CERT_FILE,
-                            "TLS Client Auth Trusted Certs",
+                            "TLS客户端认证证书",
                             "",
-                            "TLS Client Auth Trusted Certs  (File or Directory)",
+                            "TLS客户端认证证书路径，可以是文件和目录",
                             ConfigurationField.Optional.OPTIONAL)
             );
             x.addField(
                     new BooleanField(
                             CK_TCP_KEEPALIVE,
-                            "TCP keepalive",
+                            "TCP keepalive检测",
                             false,
-                            "Enable TCP keepalive packets"
+                            "启用TCP keepalive检测"
                     )
             );
 

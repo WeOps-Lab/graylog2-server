@@ -96,7 +96,7 @@ const EditActions = ({ user, user: { username, id, fullName, accountStatus, exte
       <IfPermitted permissions={[`users:edit:${username}`]}>
         <LinkContainer to={Routes.SYSTEM.USERS.edit(id)}>
           <Button id={`edit-user-${id}`} bsStyle="info" bsSize="xs" title={`编辑用户 ${fullName}`}>
-            Edit
+            编辑
           </Button>
         </LinkContainer>
       </IfPermitted>

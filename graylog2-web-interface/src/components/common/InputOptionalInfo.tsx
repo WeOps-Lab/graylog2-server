@@ -23,7 +23,7 @@ const StyledSpan = styled.span(({ theme }) => `
 `);
 
 const InputOptionalInfo = () => (
-  <StyledSpan>(Opt.)</StyledSpan>
+  <StyledSpan>(可选.)</StyledSpan>
 );
 
 export default InputOptionalInfo;

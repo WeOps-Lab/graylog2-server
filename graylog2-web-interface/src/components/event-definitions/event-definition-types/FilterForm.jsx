@@ -19,19 +19,20 @@ import PropTypes from 'prop-types';
 import lodash from 'lodash';
 import uuid from 'uuid/v4';
 import moment from 'moment';
+
 moment.locale('zh-cn');
-import { MultiSelect, TimeUnitInput } from 'components/common';
+import {MultiSelect, TimeUnitInput} from 'components/common';
 import connect from 'stores/connect';
 import Query from 'views/logic/queries/Query';
 import Search from 'views/logic/search/Search';
-import { extractDurationAndUnit } from 'components/common/TimeUnitInput';
-import { Alert, ButtonToolbar, ControlLabel, FormGroup, HelpBlock, Input } from 'components/bootstrap';
-import { naturalSortIgnoreCase } from 'util/SortUtils';
+import {extractDurationAndUnit} from 'components/common/TimeUnitInput';
+import {Alert, ButtonToolbar, ControlLabel, FormGroup, HelpBlock, Input} from 'components/bootstrap';
+import {naturalSortIgnoreCase} from 'util/SortUtils';
 import * as FormsUtils from 'util/FormsUtils';
-import { SearchMetadataActions } from 'views/stores/SearchMetadataStore';
-import { isPermitted } from 'util/PermissionsMixin';
+import {SearchMetadataActions} from 'views/stores/SearchMetadataStore';
+import {isPermitted} from 'util/PermissionsMixin';
 import LookupTableParameter from 'views/logic/parameters/LookupTableParameter';
-import { LookupTablesActions, LookupTablesStore } from 'stores/lookup-tables/LookupTablesStore';
+import {LookupTablesActions, LookupTablesStore} from 'stores/lookup-tables/LookupTablesStore';
 
 import EditQueryParameterModal from '../event-definition-form/EditQueryParameterModal';
 import commonStyles from '../common/commonStyles.css';
@@ -45,12 +46,12 @@ const LOOKUP_PERMISSIONS = [
 class FilterForm extends React.Component {
   formatStreamIds = lodash.memoize(
     (streamIds) => {
-      const { streams } = this.props;
+      const {streams} = this.props;
 
       return streamIds
         .map((streamId) => streams.find((s) => s.id === streamId) || streamId)
         .map((streamOrId) => {
-          const stream = (typeof streamOrId === 'object' ? streamOrId : { title: streamOrId, id: streamOrId });
+          const stream = (typeof streamOrId === 'object' ? streamOrId : {title: streamOrId, id: streamOrId});
 
           return {
             label: stream.title,
@@ -67,12 +68,12 @@ class FilterForm extends React.Component {
       return;
     }
 
-    const { queryId, searchTypeId } = this.state;
+    const {queryId, searchTypeId} = this.state;
 
     const queryBuilder = Query.builder()
       .id(queryId)
-      .query({ type: 'elasticsearch', query_string: queryString })
-      .timerange({ type: 'relative', range: 1000 })
+      .query({type: 'elasticsearch', query_string: queryString})
+      .timerange({type: 'relative', range: 1000})
       .searchTypes([{
         id: searchTypeId,
         type: 'messages',
@@ -103,7 +104,7 @@ class FilterForm extends React.Component {
   constructor(props) {
     super(props);
 
-    const { execute_every_ms: executeEveryMs, search_within_ms: searchWithinMs } = props.eventDefinition.config;
+    const {execute_every_ms: executeEveryMs, search_within_ms: searchWithinMs} = props.eventDefinition.config;
     const searchWithin = extractDurationAndUnit(searchWithinMs, TIME_UNITS);
     const executeEvery = extractDurationAndUnit(executeEveryMs, TIME_UNITS);
 
@@ -125,7 +126,7 @@ class FilterForm extends React.Component {
   }
 
   propagateChange = (key, value) => {
-    const { eventDefinition, onChange } = this.props;
+    const {eventDefinition, onChange} = this.props;
     const config = lodash.cloneDeep(eventDefinition.config);
 
     config[key] = value;
@@ -133,7 +134,7 @@ class FilterForm extends React.Component {
   };
 
   _syncParamsWithQuery = (paramsInQuery) => {
-    const { eventDefinition, onChange } = this.props;
+    const {eventDefinition, onChange} = this.props;
     const config = lodash.cloneDeep(eventDefinition.config);
     const queryParameters = config.query_parameters;
     const keptParameters = [];
@@ -147,7 +148,7 @@ class FilterForm extends React.Component {
       }
     });
 
-    const { queryParameterStash } = this.state;
+    const {queryParameterStash} = this.state;
     const newParameters = [];
 
     paramsInQuery.forEach((np) => {
@@ -160,14 +161,14 @@ class FilterForm extends React.Component {
       }
     });
 
-    this.setState({ queryParameterStash: lodash.merge(queryParameterStash, staleParameters) });
+    this.setState({queryParameterStash: lodash.merge(queryParameterStash, staleParameters)});
 
     config.query_parameters = keptParameters.concat(newParameters);
     onChange('config', config);
   };
 
   _userCanViewLookupTables = () => {
-    const { currentUser } = this.props;
+    const {currentUser} = this.props;
 
     return isPermitted(currentUser.permissions, LOOKUP_PERMISSIONS);
   };
@@ -189,7 +190,7 @@ class FilterForm extends React.Component {
   };
 
   handleConfigChange = (event) => {
-    const { name } = event.target;
+    const {name} = event.target;
 
     this.propagateChange(name, FormsUtils.getValueFromInput(event.target));
   };
@@ -214,11 +215,11 @@ class FilterForm extends React.Component {
   };
 
   renderQueryParameters = () => {
-    const { eventDefinition, onChange, lookupTables, validation } = this.props;
-    const { query_parameters: queryParameters } = eventDefinition.config;
+    const {eventDefinition, onChange, lookupTables, validation} = this.props;
+    const {query_parameters: queryParameters} = eventDefinition.config;
 
     const onChangeQueryParameters = (newQueryParameters) => {
-      const newConfig = { ...eventDefinition.config, query_parameters: newQueryParameters };
+      const newConfig = {...eventDefinition.config, query_parameters: newQueryParameters};
 
       return onChange('config', newConfig);
     };
@@ -239,7 +240,7 @@ class FilterForm extends React.Component {
                                  queryParameters={queryParameters}
                                  lookupTables={lookupTables.tables}
                                  validation={validation}
-                                 onChange={onChangeQueryParameters} />
+                                 onChange={onChangeQueryParameters}/>
       );
     });
 
@@ -269,8 +270,8 @@ class FilterForm extends React.Component {
   };
 
   render() {
-    const { eventDefinition, streams, validation } = this.props;
-    const { searchWithinMsDuration, searchWithinMsUnit, executeEveryMsDuration, executeEveryMsUnit } = this.state;
+    const {eventDefinition, streams, validation} = this.props;
+    const {searchWithinMsDuration, searchWithinMsUnit, executeEveryMsDuration, executeEveryMsUnit} = this.state;
 
     // Ensure deleted streams are still displayed in select
     const allStreamIds = lodash.union(streams.map((s) => s.id), lodash.defaultTo(eventDefinition.config.streams, []));
@@ -291,7 +292,7 @@ class FilterForm extends React.Component {
                  </span>
                )}
                value={lodash.defaultTo(eventDefinition.config.query, '')}
-               onChange={this.handleQueryChange} />
+               onChange={this.handleQueryChange}/>
 
         {this.renderQueryParameters()}
 
@@ -299,9 +300,10 @@ class FilterForm extends React.Component {
           <ControlLabel>消息流 <small className="text-muted">（可选）</small></ControlLabel>
           <MultiSelect id="filter-streams"
                        matchProp="label"
+                       placeholder="选择..."
                        onChange={(selected) => this.handleStreamsChange(selected === '' ? [] : selected.split(','))}
                        options={formattedStreams}
-                       value={lodash.defaultTo(eventDefinition.config.streams, []).join(',')} />
+                       value={lodash.defaultTo(eventDefinition.config.streams, []).join(',')}/>
           <HelpBlock>选择搜索应包括的流。如果为空，则在所有流中搜索。</HelpBlock>
         </FormGroup>
 
@@ -312,7 +314,7 @@ class FilterForm extends React.Component {
                          unit={searchWithinMsUnit}
                          units={TIME_UNITS}
                          clearable
-                         required />
+                         required/>
           {validation.errors.search_within_ms && (
             <HelpBlock>{lodash.get(validation, 'errors.search_within_ms[0]')}</HelpBlock>
           )}
@@ -325,7 +327,7 @@ class FilterForm extends React.Component {
                          unit={executeEveryMsUnit}
                          units={TIME_UNITS}
                          clearable
-                         required />
+                         required/>
           {validation.errors.execute_every_ms && (
             <HelpBlock>{lodash.get(validation, 'errors.execute_every_ms[0]')}</HelpBlock>
           )}
@@ -336,7 +338,7 @@ class FilterForm extends React.Component {
                label="启用"
                help="这个事件定义应该自动执行吗"
                checked={lodash.defaultTo(eventDefinition.config._is_scheduled, true)}
-               onChange={this.handleConfigChange} />
+               onChange={this.handleConfigChange}/>
       </fieldset>
     );
   }

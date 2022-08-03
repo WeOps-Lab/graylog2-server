@@ -148,6 +148,7 @@ class EventNotificationForm extends React.Component {
               <ControlLabel>通知类型</ControlLabel>
               <Select id="notification-type"
                       options={formattedEventNotificationTypes()}
+                      placeholder="选择..."
                       value={notification.config.type}
                       onChange={this.handleTypeChange}
                       clearable={false}

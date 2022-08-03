@@ -49,7 +49,7 @@ const CreateTokenForm = ({ creatingToken, onCreate }: Props) => {
   return (
     <StyledForm className="form-inline" onSubmit={createToken}>
       <FormGroup controlId="create-token-input">
-        <ControlLabel>Token Name</ControlLabel>
+        <ControlLabel>令牌名称</ControlLabel>
         <FormControl type="text"
                      placeholder="这个令牌的用途?"
                      value={tokenName}

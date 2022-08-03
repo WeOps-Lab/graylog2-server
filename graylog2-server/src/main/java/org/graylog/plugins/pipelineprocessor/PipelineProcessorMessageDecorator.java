@@ -75,10 +75,10 @@ public class PipelineProcessorMessageDecorator implements SearchResponseDecorato
                     .collect(Collectors.toMap(PipelineDao::id, PipelineDao::title));
             return new ConfigurationRequest() {{
                 addField(new DropdownField(CONFIG_FIELD_PIPELINE,
-                        "Pipeline",
+                        "流水线",
                         "",
                         pipelineOptions,
-                        "Which pipeline to use for message decoration",
+                        "使用哪个流水线装饰数据",
                         ConfigurationField.Optional.NOT_OPTIONAL));
             }};
         };
@@ -86,7 +86,7 @@ public class PipelineProcessorMessageDecorator implements SearchResponseDecorato
 
     public static class Descriptor extends SearchResponseDecorator.Descriptor {
         public Descriptor() {
-            super("Pipeline Processor Decorator", "https://docs.graylog.org/docs/processing-pipelines", "Pipeline Processor Decorator");
+            super("流水线处理器装饰器", "https://docs.graylog.org/docs/processing-pipelines", "流水线处理器装饰器");
         }
     }
 

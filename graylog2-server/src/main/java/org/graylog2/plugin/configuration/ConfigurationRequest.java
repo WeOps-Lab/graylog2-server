@@ -107,37 +107,37 @@ public class ConfigurationRequest {
                 switch (type) {
                     case BooleanField.FIELD_TYPE:
                         if (!configuration.booleanIsSet(fieldName)) {
-                            throw new ConfigurationException("Mandatory configuration field \"" + fieldName + "\" is missing or has the wrong data type");
+                            throw new ConfigurationException("不合法的字段 \"" + fieldName + "\"");
                         }
                         break;
                     case NumberField.FIELD_TYPE:
                         if (!configuration.intIsSet(fieldName)) {
-                            throw new ConfigurationException("Mandatory configuration field \"" + fieldName + "\" is missing or has the wrong data type");
+                            throw new ConfigurationException("不合法的字段 \"" + fieldName + "\"");
                         }
                         break;
                     case ListField.FIELD_TYPE:
                         if (!configuration.listIsSet(fieldName)) {
-                            throw new ConfigurationException("Mandatory configuration field \"" + fieldName + "\" is missing or has the wrong data type");
+                            throw new ConfigurationException("不合法的字段 \"" + fieldName + "\"");
                         }
                         break;
                     case TextField.FIELD_TYPE:
                     case DropdownField.FIELD_TYPE:
                         if (!configuration.stringIsSet(fieldName)) {
-                            throw new ConfigurationException("Mandatory configuration field \"" + fieldName + "\" is missing or has the wrong data type");
+                            throw new ConfigurationException("不合法的字段 \"" + fieldName + "\"");
                         }
                         break;
                     default:
-                        throw new IllegalStateException("Unknown field type " + type + " for configuration field \"" + fieldName + "\". This is a bug.");
+                        throw new ConfigurationException("不合法的字段 \"" + fieldName + "\"");
                 }
             }
         }
     }
 
 
-
     /**
      * Creates a new {@link org.graylog2.plugin.configuration.Configuration configuration object} containing only the
      * fields specified in this request object.
+     *
      * @param config original Configuration
      * @return filtered Configuration, not null but might be empty
      */
@@ -183,18 +183,18 @@ public class ConfigurationRequest {
         public static ConfigurationField bindAddress(String name) {
             return new TextField(
                     name,
-                    "Bind address",
+                    "绑定地址",
                     WILDCARD_IP_ADDRESS,
-                    "Address to listen on. For example 0.0.0.0 or 127.0.0.1."
+                    "服务端绑定的IP地址."
             );
         }
 
         public static ConfigurationField portNumber(String name, int port) {
             return new NumberField(
                     name,
-                    "Port",
+                    "端口号",
                     port,
-                    "Port to listen on.",
+                    "服务端侦听的端口号.",
                     NumberField.Attribute.IS_PORT_NUMBER
             );
         }
@@ -202,9 +202,9 @@ public class ConfigurationRequest {
         public static ConfigurationField recvBufferSize(String name, int size) {
             return new NumberField(
                     name,
-                    "Receive Buffer Size",
+                    "接收的缓冲区大小",
                     size,
-                    "The size in bytes of the recvBufferSize for network connections to this input.",
+                    "输入接收的缓冲区大小.",
                     ConfigurationField.Optional.OPTIONAL,
                     NumberField.Attribute.ONLY_POSITIVE
             );

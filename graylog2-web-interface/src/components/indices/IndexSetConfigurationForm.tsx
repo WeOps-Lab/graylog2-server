@@ -239,7 +239,7 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                       <Input id="roles-selector-input"
                              labelClassName="col-sm-3"
                              wrapperClassName="col-sm-9"
-                             label="Index optimization after rotation">
+                             label="轮转后索引优化">
                         <FormikInput type="checkbox"
                                      id="index_optimization_disabled"
                                      label="轮转索引后禁用"

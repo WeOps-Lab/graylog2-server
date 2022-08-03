@@ -125,9 +125,9 @@ class DecoratorSummary extends React.Component<Props, State> {
 
     return (
       <DropdownButton id={`decorator-${decorator.id}-actions`} bsStyle="default" bsSize="xsmall" title="操作">
-        <MenuItem onSelect={this._handleEditClick}>Edit</MenuItem>
+        <MenuItem onSelect={this._handleEditClick}>编辑</MenuItem>
         <MenuItem divider />
-        <MenuItem onSelect={this._handleDeleteClick}>Delete</MenuItem>
+        <MenuItem onSelect={this._handleDeleteClick}>删除</MenuItem>
       </DropdownButton>
     );
   };

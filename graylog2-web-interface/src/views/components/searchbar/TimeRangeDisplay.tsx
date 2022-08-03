@@ -71,7 +71,7 @@ const dateOutput = (timerange: TimeRange) => {
         from = readableRange(timerange, 'from');
       }
 
-      to = readableRange(timerange, 'to', 'Now');
+      to = readableRange(timerange, 'to', '现在');
 
       return {
         from,

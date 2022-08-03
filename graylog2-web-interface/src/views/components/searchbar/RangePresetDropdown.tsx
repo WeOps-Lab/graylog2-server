@@ -53,7 +53,6 @@ const RangePresetDropdown = ({ disabled, onChange, onToggle, className, displayT
     let all = null;
     options = Object.keys(availableOptions).map((key) => {
       const seconds = moment.duration(key).asSeconds();
-
       if (timeRangeLimit.asSeconds() > 0 && (seconds > timeRangeLimit.asSeconds() || seconds === 0)) {
         return null;
       }

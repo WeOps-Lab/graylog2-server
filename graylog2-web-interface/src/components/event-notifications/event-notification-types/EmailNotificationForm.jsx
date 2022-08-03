@@ -159,7 +159,7 @@ class EmailNotificationForm extends React.Component {
         </HideOnCloud>
         <FormGroup controlId="notification-user-recipients"
                    validationState={validation.errors.recipients ? 'error' : null}>
-          <ControlLabel>User recipient(s) <small className="text-muted">(可选)</small></ControlLabel>
+          <ControlLabel>收件用户 <small className="text-muted">(可选)</small></ControlLabel>
           <MultiSelect id="notification-user-recipients"
                        value={Array.isArray(config.user_recipients) ? config.user_recipients.join(',') : ''}
                        placeholder="Select user(s)..."
@@ -172,7 +172,7 @@ class EmailNotificationForm extends React.Component {
 
         <FormGroup controlId="notification-email-recipients"
                    validationState={validation.errors.recipients ? 'error' : null}>
-          <ControlLabel>Email recipient(s) <small className="text-muted">(可选)</small></ControlLabel>
+          <ControlLabel>收件邮箱 <small className="text-muted">(可选)</small></ControlLabel>
           <MultiSelect id="notification-email-recipients"
                        value={Array.isArray(config.email_recipients) ? config.email_recipients.join(',') : ''}
                        addLabelText={'新增邮箱 "{label}"?'}

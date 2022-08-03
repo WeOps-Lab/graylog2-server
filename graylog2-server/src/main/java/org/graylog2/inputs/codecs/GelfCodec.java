@@ -303,11 +303,11 @@ public class GelfCodec extends AbstractCodec {
         public ConfigurationRequest getRequestedConfiguration() {
             final ConfigurationRequest requestedConfiguration = super.getRequestedConfiguration();
             requestedConfiguration.addField(new NumberField(
-                CK_DECOMPRESS_SIZE_LIMIT,
-                "Decompressed size limit",
-                DEFAULT_DECOMPRESS_SIZE_LIMIT,
-                "The maximum number of bytes after decompression.",
-                ConfigurationField.Optional.OPTIONAL));
+                    CK_DECOMPRESS_SIZE_LIMIT,
+                    "解压后最大字节数",
+                    DEFAULT_DECOMPRESS_SIZE_LIMIT,
+                    "解压后最大字节数限制.",
+                    ConfigurationField.Optional.OPTIONAL));
 
             return requestedConfiguration;
         }

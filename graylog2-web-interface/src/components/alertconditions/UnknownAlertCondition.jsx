@@ -32,7 +32,7 @@ class UnknownAlertCondition extends React.Component {
     const { stream } = this.props;
 
     const actions = [
-      <DropdownButton key="actions-button" title="Actions" pullRight id={`more-actions-dropdown-${condition.id}`}>
+      <DropdownButton key="actions-button" title="操作" pullRight id={`more-actions-dropdown-${condition.id}`}>
         <MenuItem onSelect={this.props.onDelete}>删除</MenuItem>
       </DropdownButton>,
     ];

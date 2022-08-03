@@ -179,9 +179,9 @@ public class Beats2Codec extends AbstractCodec {
 
             configurationRequest.addField(new BooleanField(
                     CK_NO_BEATS_PREFIX,
-                    "Do not add Beats type as prefix",
+                    "禁止添加Beats类型作为前缀",
                     false,
-                    "Do not prefix each field with the Beats type, e. g. \"source\" -> \"filebeat_source\"."
+                    "禁止添加Beats类型作为前缀, 例如. \"source\" -> \"filebeat_source\"."
             ));
 
             return configurationRequest;

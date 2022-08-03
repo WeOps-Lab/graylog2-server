@@ -58,7 +58,7 @@ const ShowMetricsPage = createReactClass({
     const { metricsNames, metricsErrors } = this.state;
 
     const node = this.state.nodes[nodeId];
-    const title = <span>Metrics of node {node.short_node_id} / {node.hostname}</span>;
+    const title = <span>节点 {node.short_node_id} / {node.hostname} </span>;
     const { namespace } = MetricsStore;
     const names = metricsNames[nodeId];
     const error = metricsErrors ? metricsErrors[nodeId] : undefined;

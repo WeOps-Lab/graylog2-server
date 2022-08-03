@@ -245,7 +245,7 @@ class Stream extends React.Component {
 
     const indexSet = indexSets.find((is) => is.id === stream.index_set_id) || indexSets.find((is) => is.is_default);
     const indexSetDetails = isPermitted(permissions, ['indexsets:read']) && indexSet ?
-      <span>index set <em>{indexSet.title}</em> &nbsp;</span> : null;
+      <span><em>{indexSet.title}</em> &nbsp;</span> : null;
 
     return (
       <StreamListItem>

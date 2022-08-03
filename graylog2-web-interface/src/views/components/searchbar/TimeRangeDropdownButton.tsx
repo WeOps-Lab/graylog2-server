@@ -85,14 +85,13 @@ const TimeRangeDropdownButton = ({
       onPresetSelectOpen();
     }
   };
-
   const dropdown = showPresetDropdown
     ? (
       <StyledRangePresetDropdown disabled={disabled}
                                  displayTitle={false}
                                  onChange={selectRelativeTimeRangePreset}
                                  onToggle={_onPresetSelectToggle}
-                                 header="From (Until Now)"
+                                 header="到 (现在)"
                                  bsSize={null} />
     )
     : null;

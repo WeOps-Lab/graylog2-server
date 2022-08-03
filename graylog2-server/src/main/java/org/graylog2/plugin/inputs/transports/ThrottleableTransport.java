@@ -54,11 +54,9 @@ public abstract class ThrottleableTransport implements Transport {
 
             request.addField(new BooleanField(
                     CK_THROTTLING_ALLOWED,
-                    "Allow throttling this input.",
+                    "开启背压限流模式.",
                     false,
-                    "If enabled, no new messages will be read from this input until Graylog catches up with its message load. " +
-                    "This is typically useful for inputs reading from files or message queue systems like AMQP or Kafka. " +
-                    "If you regularly poll an external system, e.g. via HTTP, you normally want to leave this disabled."
+                    "如果从AMQP或Kafka等文件或消息队列系统读取消息，则建议将其开启。如果定期轮询外部系统，例如通过HTTP获取数据，则建议将其禁用."
 
             ));
             return request;
