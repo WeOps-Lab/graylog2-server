@@ -17,7 +17,8 @@
     <http://www.mongodb.com/licensing/server-side-public-license>.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.graylog</groupId>
@@ -166,7 +167,7 @@
             <artifactId>jackson-module-jsonSchema</artifactId>
         </dependency>
         <dependency>
-	    <!-- Workaround for https://github.com/FasterXML/jackson-bom/pull/38 -->
+            <!-- Workaround for https://github.com/FasterXML/jackson-bom/pull/38 -->
             <groupId>com.fasterxml.jackson.module</groupId>
             <artifactId>jackson-module-scala_2.13</artifactId>
             <version>2.9.10</version>
@@ -232,6 +233,16 @@
             <artifactId>commons-email</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>net.xenqtt</groupId>
+            <artifactId>xenqtt</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.ning</groupId>
+            <artifactId>async-http-client</artifactId>
+            <version>1.9.29</version>
+        </dependency>
         <dependency>
             <groupId>commons-validator</groupId>
             <artifactId>commons-validator</artifactId>
@@ -747,8 +758,10 @@
                 <artifactId>maven-shade-plugin</artifactId>
                 <configuration>
                     <transformers>
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
-                        <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+                        <transformer
+                                implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                             <mainClass>${mainClass}</mainClass>
                         </transformer>
                     </transformers>
@@ -1024,7 +1037,8 @@
                                         https://packages.graylog2.org/releases/graylog-plugin-artifacts/report/chrome/72.0.3583.1/headless_shell
                                     </url>
                                     <unpack>false</unpack>
-                                    <outputDirectory>${project.basedir}/../graylog2-web-interface/test/bin</outputDirectory>
+                                    <outputDirectory>${project.basedir}/../graylog2-web-interface/test/bin
+                                    </outputDirectory>
                                     <md5>22e07d7f108fcf6cb3e296d9802a9897</md5>
                                 </configuration>
                             </execution>

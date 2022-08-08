@@ -20,6 +20,11 @@ import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
+import org.etherfurnace.alerts.scriptalert.ExeCommandAlarmCallBackModule;
+import org.etherfurnace.inputs.httpinput.HttpMonitorInputModule;
+import org.etherfurnace.inputs.jsoninput.JsonInputModule;
+import org.etherfurnace.inputs.mqtt.MQTTInputModule;
+import org.etherfurnace.outputs.kafkaoutput.KafkaOutputModule;
 import org.graylog2.plugin.Plugin;
 import org.graylog2.plugin.PluginMetaData;
 import org.graylog2.plugin.PluginModule;
@@ -42,8 +47,10 @@ public class PluginBindings extends AbstractModule {
 
         // Make sure there is a binding for the plugin rest resource classes to avoid binding errors when running
         // without plugins.
-        MapBinder.newMapBinder(binder(), new TypeLiteral<String>() {},
-                new TypeLiteral<Class<? extends PluginRestResource>>() {})
+        MapBinder.newMapBinder(binder(), new TypeLiteral<String>() {
+                        },
+                        new TypeLiteral<Class<? extends PluginRestResource>>() {
+                        })
                 .permitDuplicates();
 
         // Make sure there is a binding for the PluginUISettingsProvider classes to avoid binding errors when running
@@ -59,5 +66,11 @@ public class PluginBindings extends AbstractModule {
 
             pluginMetaDataBinder.addBinding().toInstance(plugin.metadata());
         }
+
+        install(new ExeCommandAlarmCallBackModule());
+        install(new HttpMonitorInputModule());
+        install(new JsonInputModule());
+        install(new MQTTInputModule());
+        install(new KafkaOutputModule());
     }
 }
