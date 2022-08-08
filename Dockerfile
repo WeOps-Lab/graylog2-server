@@ -36,6 +36,7 @@ RUN mvn -T4 clean  install -Dskip.web.build=true -Dmaven.test.skip=true -Dit.es.
 RUN mv ./target/assembly/*.tar.gz ./datainsight.tar.gz
 
 FROM openjdk:8u342-jre
+WORKDIR /app
 COPY --from=server /workspaces/datainsight.tar.gz  .
 RUN tar -xvf ./datainsight.tar.gz
 RUN rm -Rf datainsight.tar.gz
