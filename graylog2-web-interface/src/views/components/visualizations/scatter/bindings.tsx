@@ -18,7 +18,7 @@ import type { VisualizationType } from 'views/types';
 import ScatterVisualization from 'views/components/visualizations/scatter/ScatterVisualization';
 import { hasAtLeastOneMetric } from 'views/components/visualizations/validations';
 
-const validate = hasAtLeastOneMetric('Scatter plot');
+const validate = hasAtLeastOneMetric('散点图');
 
 const scatterChart: VisualizationType<typeof ScatterVisualization.type> = {
   type: ScatterVisualization.type,

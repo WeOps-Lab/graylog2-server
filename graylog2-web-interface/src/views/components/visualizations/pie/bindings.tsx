@@ -18,7 +18,7 @@ import type { VisualizationType } from 'views/types';
 import PieVisualization from 'views/components/visualizations/pie/PieVisualization';
 import { hasAtLeastOneMetric } from 'views/components/visualizations/validations';
 
-const validate = hasAtLeastOneMetric('Pie chart');
+const validate = hasAtLeastOneMetric('饼图');
 
 const pieChart: VisualizationType<typeof PieVisualization.type> = {
   type: PieVisualization.type,

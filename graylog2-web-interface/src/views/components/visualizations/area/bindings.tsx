@@ -25,7 +25,7 @@ type AreaVisualizationConfigFormValues = {
 
 const DEFAULT_INTERPOLATION = 'linear';
 
-const validate = hasAtLeastOneMetric('Area chart');
+const validate = hasAtLeastOneMetric('面积图');
 
 const areaChart: VisualizationType<typeof AreaVisualization.type, AreaVisualizationConfig, AreaVisualizationConfigFormValues> = {
   type: AreaVisualization.type,

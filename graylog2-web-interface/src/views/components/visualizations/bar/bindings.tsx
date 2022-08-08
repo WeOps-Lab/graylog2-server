@@ -27,7 +27,7 @@ type BarVisualizationConfigFormValues = {
 
 const DEFAULT_BARMODE = 'group';
 
-const validate = hasAtLeastOneMetric('Bar chart');
+const validate = hasAtLeastOneMetric('柱状图');
 
 const barChart: VisualizationType<typeof BarVisualization.type, BarVisualizationConfig, BarVisualizationConfigFormValues> = {
   type: BarVisualization.type,
