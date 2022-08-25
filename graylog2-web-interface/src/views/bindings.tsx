@@ -138,7 +138,7 @@ const exports: PluginExports = {
   enterpriseWidgets: [
     {
       type: 'MESSAGES',
-      displayName: 'Message List',
+      displayName: '消息列表',
       defaultHeight: 5,
       reportStyle: () => ({ width: 800 }),
       defaultWidth: 6,
@@ -152,7 +152,7 @@ const exports: PluginExports = {
     },
     {
       type: 'AGGREGATION',
-      displayName: 'Results',
+      displayName: '结果',
       defaultHeight: 4,
       defaultWidth: 4,
       reportStyle: () => ({ width: 600 }),
@@ -172,11 +172,11 @@ const exports: PluginExports = {
       searchTypes: PivotConfigGenerator,
       titleGenerator: (widget: Widget) => {
         if (widget.config.rowPivots.length > 0) {
-          return `Aggregating ${widget.config.series.map((s) => s.effectiveName).join(', ')} by ${widget.config.rowPivots.map(({ field }) => field).join(', ')}`;
+          return `聚合 ${widget.config.series.map((s) => s.effectiveName).join(', ')} 分组条件为 ${widget.config.rowPivots.map(({ field }) => field).join(', ')}`;
         }
 
         if (widget.config.series.length > 0) {
-          return `Aggregating ${widget.config.series.map((s) => s.effectiveName).join(', ')}`;
+          return `聚合 ${widget.config.series.map((s) => s.effectiveName).join(', ')}`;
         }
 
         return AggregationWidget.defaultTitle;
@@ -213,14 +213,14 @@ const exports: PluginExports = {
   fieldActions: [
     {
       type: 'chart',
-      title: 'Chart',
+      title: '图表',
       handler: ChartActionHandler,
       isEnabled: ({ type }) => type.isNumeric(),
       resetFocus: true,
     },
     {
       type: 'aggregate',
-      title: 'Show top values',
+      title: '显示Top值',
       handler: AggregateActionHandler,
       isEnabled: (({
         field,
@@ -231,7 +231,7 @@ const exports: PluginExports = {
     },
     {
       type: 'statistics',
-      title: 'Statistics',
+      title: '统计分析',
       isEnabled: (({
         field,
         type,
@@ -242,7 +242,7 @@ const exports: PluginExports = {
     },
     {
       type: 'add-to-table',
-      title: 'Add to table',
+      title: '添加到表格',
       handler: AddToTableActionHandler,
       isEnabled: AddToTableActionHandler.isEnabled,
       isHidden: AddToTableActionHandler.isHidden,
@@ -250,7 +250,7 @@ const exports: PluginExports = {
     },
     {
       type: 'remove-from-table',
-      title: 'Remove from table',
+      title: '从表格中移除',
       handler: RemoveFromTableActionHandler,
       isEnabled: RemoveFromTableActionHandler.isEnabled,
       isHidden: RemoveFromTableActionHandler.isHidden,
@@ -258,14 +258,14 @@ const exports: PluginExports = {
     },
     {
       type: 'add-to-all-tables',
-      title: 'Add to all tables',
+      title: '添加到所有表格',
       handler: AddToAllTablesActionHandler,
       isEnabled: ({ field, type }) => (!isFunction(field) && !type.isDecorated()),
       resetFocus: false,
     },
     {
       type: 'remove-from-all-tables',
-      title: 'Remove from all tables',
+      title: '从所有表格移除',
       handler: RemoveFromAllTablesActionHandler,
       isEnabled: ({ field, type }) => (!isFunction(field) && !type.isDecorated()),
       resetFocus: false,
@@ -274,35 +274,35 @@ const exports: PluginExports = {
   valueActions: filterCloudValueActions([
     {
       type: 'exclude',
-      title: 'Exclude from results',
+      title: '从结果中排除',
       handler: new ExcludeFromQueryHandler().handle,
       isEnabled: ({ field, type }: ActionHandlerArguments) => (!isFunction(field) && !type.isDecorated()),
       resetFocus: false,
     },
     {
       type: 'add-to-query',
-      title: 'Add to query',
+      title: '添加到查询语句',
       handler: new AddToQueryHandler().handle,
       isEnabled: ({ field, type }: ActionHandlerArguments) => (!isFunction(field) && !type.isDecorated()),
       resetFocus: false,
     },
     {
       type: 'show-bucket',
-      title: 'Show documents for value',
+      title: '显示词条',
       handler: ShowDocumentsHandler,
       isEnabled: ShowDocumentsHandler.isEnabled,
       resetFocus: true,
     },
     {
       type: 'create-extractor',
-      title: 'Create extractor',
+      title: '创建提取器',
       isEnabled: ({ type, contexts }) => (!!contexts.message && !type.isDecorated() && !!contexts.isLocalNode),
       component: SelectExtractorType,
       resetFocus: false,
     },
     {
       type: 'highlight-value',
-      title: 'Highlight this value',
+      title: '高亮',
       handler: HighlightValueHandler,
       isEnabled: HighlightValueHandler.isEnabled,
       resetFocus: false,

@@ -99,7 +99,7 @@ const _granteesOptions = (grantees: GranteesList) => {
 };
 
 const _initialCapabilityId = (capabilities: CapabilitiesList) => {
-  const initialCapabilityTitle = 'Viewer';
+  const initialCapabilityTitle = '只读';
 
   return capabilities.find((capability) => capability.title === initialCapabilityTitle)?.id;
 };
