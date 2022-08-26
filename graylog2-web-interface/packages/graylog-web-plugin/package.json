@@ -9,7 +9,7 @@
     "preparebuild": "yarn install --ignore-scripts",
     "compile": "yarn run preparebuild && yarn run build",
     "prepublish": "yarn run compile",
-    "preinstall": "test -d src/ && yarn run compile"
+    "preinstall": "yarn run compile"
   },
   "repository": {
     "type": "git",

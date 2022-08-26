@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  elasticsearch:
+    image: elasticsearch:6.8.23
+    container_name: elasticsearch
+    volumes:
+      - elasticsearch:/usr/share/elasticsearch/data
+  mongo:
+    image: mongo:4.4.16
+    container_name: mongodb
+    volumes:
+      - mongo_data:/data/db
+  datainsight:
+    image: ccr.ccs.tencentyun.com/megalab/datainsight:4.3.5
+    container_name: datainsight
+volumes:
+  elasticsearch:
+  mongo_data:
+
