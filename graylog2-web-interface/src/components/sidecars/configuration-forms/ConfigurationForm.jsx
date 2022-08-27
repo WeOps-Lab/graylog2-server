@@ -299,31 +299,31 @@ const ConfigurationForm = createReactClass({
           <fieldset>
             <Input type="text"
                    id="name"
-                   label="Name"
+                   label="名称"
                    onChange={this._onNameChange}
                    bsStyle={this._validationState('name')}
-                   help={this._formatValidationMessage('name', 'Required. Name for this configuration')}
+                   help={this._formatValidationMessage('name', '必填,此配置的名称')}
                    value={formData.name || ''}
                    autoFocus
                    required />
 
             <FormGroup controlId="color">
-              <ControlLabel>Configuration color</ControlLabel>
+              <ControlLabel>配置颜色</ControlLabel>
               <div>
                 <ColorLabel color={formData.color} />
                 <div style={{ display: 'inline-block', marginLeft: 15 }}>
                   <ColorPickerPopover id="color"
                                       placement="right"
                                       color={formData.color}
-                                      triggerNode={<Button bsSize="xsmall">Change color</Button>}
+                                      triggerNode={<Button bsSize="xsmall">选择颜色</Button>}
                                       onChange={this._formDataUpdate('color')} />
                 </div>
               </div>
-              <HelpBlock>Choose a color to use for this configuration.</HelpBlock>
+              <HelpBlock>选择用于此配置的颜色.</HelpBlock>
             </FormGroup>
 
             <FormGroup controlId="collector_id">
-              <ControlLabel>Collector</ControlLabel>
+              <ControlLabel>采集器</ControlLabel>
               {this._renderCollectorTypeField(formData.collector_id, collectors, configurationSidecars)}
             </FormGroup>
 
@@ -338,16 +338,16 @@ const ConfigurationForm = createReactClass({
                       bsStyle="link"
                       bsSize="sm"
                       onClick={this._onShowSource}>
-                Preview
+                预览
               </Button>
               <Button className="pull-right"
                       bsStyle="link"
                       bsSize="sm"
                       onClick={this._onShowImports}>
-                Migrate
+                迁移
               </Button>
               <HelpBlock>
-                {this._formatValidationMessage('template', 'Required. Collector configuration, see quick reference for more information.')}
+                {this._formatValidationMessage('template', '必填,采集器的配置.')}
               </HelpBlock>
             </FormGroup>
           </fieldset>
@@ -357,10 +357,10 @@ const ConfigurationForm = createReactClass({
               <FormGroup>
                 <ButtonToolbar>
                   <Button type="submit" bsStyle="primary" disabled={this._hasErrors()}>
-                    {action === 'create' ? 'Create' : 'Update'}
+                    {action === 'create' ? '创建' : '更新'}
                   </Button>
                   <Button type="button" onClick={this._onCancel}>
-                    {action === 'create' ? 'Cancel' : 'Back'}
+                    {action === 'create' ? '取消' : '返回'}
                   </Button>
                 </ButtonToolbar>
               </FormGroup>
