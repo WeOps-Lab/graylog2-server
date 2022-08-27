@@ -65,7 +65,7 @@ const CollectorRow = createReactClass({
             <LinkContainer to={Routes.SYSTEM.SIDECARS.EDIT_COLLECTOR(collector.id)}>
               <Button bsStyle="info" bsSize="xsmall">编辑</Button>
             </LinkContainer>
-            <DropdownButton id={`more-actions-${collector.id}`} title="More actions" bsSize="xsmall" pullRight>
+            <DropdownButton id={`more-actions-${collector.id}`} title="更多操作" bsSize="xsmall" pullRight>
               <CopyCollectorModal collector={collector}
                                   validateCollector={validateCollector}
                                   copyCollector={onClone} />

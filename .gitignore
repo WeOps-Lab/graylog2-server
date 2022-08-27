@@ -12,11 +12,10 @@ nbproject/*
 coverage
 build.xml
 nbactions.xml
-graylog.conf
 data/*
 .idea
 .DS_Store
-
+graylog.conf
 dependency-reduced-pom.xml
 
 /graylog2-rest-routes/src/main/java/org/graylog2/restroutes/generated

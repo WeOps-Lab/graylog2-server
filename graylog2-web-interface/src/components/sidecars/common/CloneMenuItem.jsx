@@ -46,7 +46,7 @@ const StyledMenuItem = styled(MenuItem)(({ theme }) => css`
 const CloneMenuItem = ({ error, id, modalRef, name, onChange, onSave, onSelect }) => {
   return (
     <span>
-      <StyledMenuItem onSelect={onSelect}>Clone</StyledMenuItem>
+      <StyledMenuItem onSelect={onSelect}>复制</StyledMenuItem>
       <BootstrapModalForm ref={modalRef}
                           title="复制"
                           onSubmitForm={onSave}
