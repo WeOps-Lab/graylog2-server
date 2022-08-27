@@ -163,7 +163,7 @@ const SidecarStatus = createReactClass({
         </Row>
         <Row className="content" hidden={logFileList.length === 0}>
           <Col md={12}>
-            <h2><文件></文件></h2>
+            <h2>日志文件</h2>
             <p className={commonStyles.topMargin}>最近修改的文件将以蓝色高亮显示.</p>
             <div>
               <SidecarStatusFileList files={logFileList} />
