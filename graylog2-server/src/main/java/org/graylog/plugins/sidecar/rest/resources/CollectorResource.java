@@ -285,23 +285,23 @@ public class CollectorResource extends RestResource implements PluginRestResourc
         final ValidationResult validation = new ValidationResult();
 
         if (toValidate.name().isEmpty()) {
-            validation.addError("name", "Collector name cannot be empty.");
+            validation.addError("name", "收集器名称不能为空.");
         } else if (!validateCollectorName(toValidate.name())) {
-                validation.addError("name", "Collector name can only contain the following characters: A-Z,a-z,0-9,_,-,.");
+                validation.addError("name", "收集器名称只能包含以下字符：A-Z、a-z、0-9、_、-、。");
         }
 
         if (toValidate.executablePath().isEmpty()) {
-            validation.addError("executable_path", "Collector binary path cannot be empty.");
+            validation.addError("executable_path", "收集器二进制路径不能为空。");
         } else if (!validatePath(toValidate.executablePath())) {
-                validation.addError("executable_path", "Collector binary path cannot contain the following characters: ; * ? \" < > | &");
+                validation.addError("executable_path", "收集器二进制路径不能包含以下字符：; * ? \" < > | &");
         }
 
         if (toValidate.nodeOperatingSystem() != null) {
             if (!validateOperatingSystem(toValidate.nodeOperatingSystem())) {
-                validation.addError("node_operating_system", "Operating system can only be 'linux' or 'windows'.");
+                validation.addError("node_operating_system", "操作系统只能是“linux”或“windows”.");
             }
             if (!validateServiceType(toValidate.serviceType(), toValidate.nodeOperatingSystem())) {
-                validation.addError("service_type", "Linux collectors only support 'Foreground execution' while Windows collectors additionally support 'Windows service'.");
+                validation.addError("service_type", "Linux 收集器仅支持“前台执行”，而 Windows 收集器还支持“Windows 服务”。");
             }
             collectorOptional = Optional.ofNullable(collectorService.findByNameAndOs(toValidate.name(), toValidate.nodeOperatingSystem()));
         } else {
@@ -311,7 +311,7 @@ public class CollectorResource extends RestResource implements PluginRestResourc
             collector = collectorOptional.get();
             if (!collector.id().equals(toValidate.id())) {
                 // a collector exists with a different id, so the name is already in use, fail validation
-                validation.addError("name", "Collector \"" + toValidate.name() + "\" already exists for the \"" + collector.nodeOperatingSystem() + "\" operating system.");
+                validation.addError("name", "采集器 \"" + toValidate.name() + "\" 已经存在 \"" + collector.nodeOperatingSystem() + "\" 操作系统");
             }
         }
         return validation;

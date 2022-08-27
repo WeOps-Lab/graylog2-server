@@ -118,13 +118,13 @@ public abstract class EmailEventNotificationConfig implements EventNotificationC
         final ValidationResult validation = new ValidationResult();
 
         if (subject().isEmpty()) {
-            validation.addError(FIELD_SUBJECT, "Email Notification subject cannot be empty.");
+            validation.addError(FIELD_SUBJECT, "邮件通知主题不能为空");
         }
         if (bodyTemplate().isEmpty() && htmlBodyTemplate().isEmpty()) {
-            validation.addError("body", "One of Email Notification body template or Email Notification HTML body must not be empty.");
+            validation.addError("body", "电子邮件通知正文模板或电子邮件通知 HTML 正文之一不能为空.");
         }
         if (emailRecipients().isEmpty() && userRecipients().isEmpty()) {
-            validation.addError("recipients", "Email Notification must have email recipients or user recipients.");
+            validation.addError("recipients", "电子邮件通知必须有电子邮件收件人或用户收件人.");
         }
 
         return validation;

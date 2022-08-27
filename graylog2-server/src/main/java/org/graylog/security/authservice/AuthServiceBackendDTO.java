@@ -69,13 +69,13 @@ public abstract class AuthServiceBackendDTO {
         final ValidationResult result = new ValidationResult();
 
         if (isBlank(title())) {
-            result.addError(FIELD_TITLE, "Title cannot be empty.");
+            result.addError(FIELD_TITLE, "标题不能为空.");
         }
 
         try {
             config().validate(result);
         } catch (UnsupportedOperationException e) {
-            result.addError(FIELD_CONFIG, "Config type cannot be empty.");
+            result.addError(FIELD_CONFIG, "配置类型不能为空。");
         }
 
         return result;

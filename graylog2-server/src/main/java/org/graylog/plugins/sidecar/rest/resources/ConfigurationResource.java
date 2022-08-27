@@ -364,32 +364,32 @@ public class ConfigurationResource extends RestResource implements PluginRestRes
             configuration = configurationOptional.get();
             if (!configuration.id().equals(toValidate.id())) {
                 // a configuration exists with a different id, so the name is already in use, fail validation
-                validation.addError("name", "Configuration \"" + toValidate.name() + "\" already exists");
+                validation.addError("name", "配置 \"" + toValidate.name() + "\" 已经存在");
             }
         }
 
         if (toValidate.name().isEmpty()) {
-            validation.addError("name", "Configuration name cannot be empty.");
+            validation.addError("name", "配置名称不能为空.");
         } else if (!VALID_NAME_PATTERN.matcher(toValidate.name()).matches()) {
-                validation.addError("name", "Configuration name can not include the following characters: ; * ? \" < > | &");
+                validation.addError("name", "配置名称不能包含以下字符：; * ? \" < > | &");
         }
 
         if (toValidate.collectorId().isEmpty()) {
-            validation.addError("collector_id", "Associated collector ID cannot be empty.");
+            validation.addError("collector_id", "关联的采集器 ID 不能为空.");
         }
 
         if (toValidate.color().isEmpty()) {
-            validation.addError("color", "Collector color cannot be empty.");
+            validation.addError("color", "采集器颜色不能为空.");
         }
 
         if (toValidate.template().isEmpty()) {
-            validation.addError("template", "Collector template cannot be empty.");
+            validation.addError("template", "收集器模板不能为空.");
         }
 
         try {
             this.configurationService.renderPreview(toValidate.template());
         } catch (RenderTemplateException e) {
-            validation.addError("template", "Template error: " + e.getMessage());
+            validation.addError("template", "模版异常: " + e.getMessage());
         }
 
         return validation;

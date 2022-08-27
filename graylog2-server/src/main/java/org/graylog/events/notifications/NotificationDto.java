@@ -68,13 +68,13 @@ public abstract class NotificationDto implements ContentPackable {
         final ValidationResult validation = new ValidationResult();
 
         if (title().isEmpty()) {
-            validation.addError(FIELD_TITLE, "Notification title cannot be empty.");
+            validation.addError(FIELD_TITLE, "通知标题不能为空。");
         }
 
         try {
             validation.addAll(config().validate());
         } catch (UnsupportedOperationException e) {
-            validation.addError(FIELD_CONFIG, "Notification config type cannot be empty.");
+            validation.addError(FIELD_CONFIG, "通知配置类型不能为空。");
         }
 
         return validation;

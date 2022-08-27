@@ -81,25 +81,25 @@ public abstract class ADAuthServiceBackendConfig implements AuthServiceBackendCo
     @Override
     public void validate(ValidationResult result) {
         if (servers().isEmpty()) {
-            result.addError(FIELD_SERVERS, "Server list cannot be empty.");
+            result.addError(FIELD_SERVERS, "服务器列表不能为空.");
         }
         if (isBlank(userSearchBase())) {
-            result.addError(FIELD_USER_SEARCH_BASE, "User search base cannot be empty.");
+            result.addError(FIELD_USER_SEARCH_BASE, "用户搜索库不能为空.");
         }
         if (isBlank(userSearchPattern())) {
-            result.addError(FIELD_USER_SEARCH_PATTERN, "User search pattern cannot be empty.");
+            result.addError(FIELD_USER_SEARCH_PATTERN, "用户搜索模式不能为空.");
         } else {
             try {
                 Filter.create(userSearchPattern());
             } catch (LDAPException e) {
-                result.addError(FIELD_USER_SEARCH_PATTERN, "User search pattern cannot be parsed. It must be a valid LDAP filter.");
+                result.addError(FIELD_USER_SEARCH_PATTERN, "无法解析用户搜索模式。它必须是有效的 LDAP 过滤器.");
             }
         }
         if (isBlank(userNameAttribute())) {
-            result.addError(FIELD_USER_NAME_ATTRIBUTE, "User name attribute cannot be empty.");
+            result.addError(FIELD_USER_NAME_ATTRIBUTE, "用户名属性不能为空.");
         }
         if (isBlank(userFullNameAttribute())) {
-            result.addError(FIELD_USER_FULL_NAME_ATTRIBUTE, "User full name cannot be empty.");
+            result.addError(FIELD_USER_FULL_NAME_ATTRIBUTE, "用户全名不能为空.");
         }
     }
 

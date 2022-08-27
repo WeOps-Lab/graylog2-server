@@ -157,7 +157,7 @@ public class ConfigurationVariableResource extends RestResource implements Plugi
         final List<Configuration> configurations = this.configurationService.findByConfigurationVariable(configurationVariable);
         if (!configurations.isEmpty()) {
             final ValidationResult validationResult = new ValidationResult();
-            validationResult.addError("name", "Variable is still used in the following configurations: " +
+            validationResult.addError("name", "以下配置中仍然使用变量: " +
                     configurations.stream().map(c -> c.name()).collect(Collectors.joining(", ")));
             return Response.status(Response.Status.BAD_REQUEST).entity(validationResult).build();
         }
@@ -173,19 +173,19 @@ public class ConfigurationVariableResource extends RestResource implements Plugi
     private ValidationResult validateConfigurationVariableHelper(ConfigurationVariable confVar) {
         final ValidationResult validationResult = new ValidationResult();
         if (confVar.name().isEmpty()) {
-            validationResult.addError("name", "Variable name can not be empty.");
+            validationResult.addError("name", "变量名不能为空.");
         } else if (!VALID_NAME_PATTERN.matcher(confVar.name()).matches()) {
-            validationResult.addError("name", "Variable name can only contain the following characters: A-Z,a-z,0-9,_");
+            validationResult.addError("name", "变量名只能包含以下字符：A-Z,a-z,0-9,_");
         } else if (INVALID_NAME_PREFIX.matcher(confVar.name()).matches()) {
-            validationResult.addError("name", "Variable name can not start with numbers.");
+            validationResult.addError("name", "变量名不能以数字开头。");
         }
 
         if (configurationVariableService.hasConflict(confVar)) {
-            validationResult.addError("name", "A variable with that name already exists.");
+            validationResult.addError("name", "已存在具有该名称的变量。");
         }
 
         if (confVar.content().isEmpty()) {
-            validationResult.addError("content", "Variable content can not be empty.");
+            validationResult.addError("content", "变量内容不能为空。");
         }
 
         return validationResult;

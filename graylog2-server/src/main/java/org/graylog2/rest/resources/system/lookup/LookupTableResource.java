@@ -378,7 +378,7 @@ public class LookupTableResource extends RestResource {
             //noinspection ConstantConditions
             if (!tableDto.id().equals(toValidate.id())) {
                 // a table exists with a different id, so the name is already in use, fail validation
-                validation.addError("name", "The lookup table name is already in use.");
+                validation.addError("name", "查找表名称已在使用中.");
             }
         }
 
@@ -602,7 +602,7 @@ public class LookupTableResource extends RestResource {
             //noinspection ConstantConditions
             if (!adapterDto.id().equals(toValidate.id())) {
                 // an adapter exists with a different id, so the name is already in use, fail validation
-                validation.addError("name", "The data adapter name is already in use.");
+                validation.addError("name", "数据适配器名称已在使用中.");
             }
         }
 
@@ -754,7 +754,7 @@ public class LookupTableResource extends RestResource {
             //noinspection ConstantConditions
             if (!cacheDto.id().equals(toValidate.id())) {
                 // a ache exists with a different id, so the name is already in use, fail validation
-                validation.addError("name", "The cache name is already in use.");
+                validation.addError("name", "缓存名称已被使用.");
             }
         }
 

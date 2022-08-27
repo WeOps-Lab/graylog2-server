@@ -282,9 +282,9 @@ const ConfigurationForm = createReactClass({
                 options={this._formatCollectorOptions()}
                 value={collectorId}
                 onChange={this._onCollectorChange}
-                placeholder="Collector"
+                placeholder="采集器"
                 required />
-        <HelpBlock>Choose the log collector this configuration is meant for.</HelpBlock>
+        <HelpBlock>选择此配置适用的收集器.</HelpBlock>
       </span>
     );
   },
@@ -329,7 +329,7 @@ const ConfigurationForm = createReactClass({
 
             <FormGroup controlId="template"
                        validationState={this._validationState('template')}>
-              <ControlLabel>Configuration</ControlLabel>
+              <ControlLabel>配置</ControlLabel>
               <SourceCodeEditor id="template"
                                 height={400}
                                 value={formData.template || ''}

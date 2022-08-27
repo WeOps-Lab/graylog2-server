@@ -176,7 +176,7 @@ public class EventDefinitionsResource extends RestResource implements PluginRest
 
         final ValidationResult result = dto.validate();
         if (!definitionId.equals(dto.id())) {
-            result.addError("id", "Event definition IDs don't match");
+            result.addError("id", "事件定义 ID 不匹配");
         }
 
         if (result.failed()) {

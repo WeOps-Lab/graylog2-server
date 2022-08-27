@@ -63,7 +63,7 @@ public abstract class LegacyAlarmCallbackEventNotificationConfig implements Even
         final ValidationResult validation = new ValidationResult();
 
         if (callbackType().isEmpty()) {
-            validation.addError(FIELD_CALLBACK_TYPE, "Legacy Notification callback type cannot be empty.");
+            validation.addError(FIELD_CALLBACK_TYPE, "旧通知回调类型不能为空.");
         }
 
         return validation;

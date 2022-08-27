@@ -763,14 +763,14 @@ public class PipelineRuleParser {
 
             if (leftDate && rightDate) {
                 if (addExpression.isPlus()) {
-                    parseContext.addError(new InvalidOperation(ctx, addExpression, "Unable to add two dates"));
+                    parseContext.addError(new InvalidOperation(ctx, addExpression, "无法添加两个日期"));
                 }
                 return;
             } else if (leftDate && rightPeriod || leftPeriod && rightDate || leftPeriod && rightPeriod) {
                 return;
             } else if (leftString && rightString) {
                 if (!addExpression.isPlus()) {
-                    parseContext.addError(new InvalidOperation(ctx, addExpression, "Unable to subtract two strings"));
+                    parseContext.addError(new InvalidOperation(ctx, addExpression, "无法减去两个字符串"));
                 }
                 return;
             }
@@ -1002,7 +1002,7 @@ public class PipelineRuleParser {
                             final Token name = ruleRefContext.name;
                             if (name == null) {
                                 final Token symbol = ruleRefContext.Rule().getSymbol();
-                                parseContext.addError(new SyntaxError(symbol, symbol.getLine(), symbol.getCharPositionInLine(), "invalid rule reference", null));
+                                parseContext.addError(new SyntaxError(symbol, symbol.getLine(), symbol.getCharPositionInLine(), "无效的规则参考", null));
                                 return "__illegal_reference";
                             }
                             return unquote(name.getText(), '"');

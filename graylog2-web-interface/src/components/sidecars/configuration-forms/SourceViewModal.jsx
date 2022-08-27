@@ -18,8 +18,8 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import lodash from 'lodash';
 
-import { Modal, Button, BootstrapModalWrapper } from 'components/bootstrap';
-import { CollectorConfigurationsActions } from 'stores/sidecars/CollectorConfigurationsStore';
+import {Modal, Button, BootstrapModalWrapper} from 'components/bootstrap';
+import {CollectorConfigurationsActions} from 'stores/sidecars/CollectorConfigurationsStore';
 
 class SourceViewModal extends React.Component {
   static propTypes = {
@@ -71,20 +71,20 @@ class SourceViewModal extends React.Component {
       CollectorConfigurationsActions.renderPreview(this.props.templateString)
         .then(
           (response) => {
-            this.setState({ source: response.preview, name: 'preview' });
+            this.setState({source: response.preview, name: 'preview'});
           },
           (error) => {
-            this.setState({ source: `预览失败: ${error.responseMessage ? error.responseMessage : error}` });
+            this.setState({source: `预览失败: ${error.responseMessage ? error.responseMessage : error}`});
           },
         );
     } else {
       CollectorConfigurationsActions.getConfiguration(this.props.configurationId)
         .then(
           (configuration) => {
-            this.setState({ source: configuration.template, name: configuration.name });
+            this.setState({source: configuration.template, name: configuration.name});
           },
           (error) => {
-            this.setState({ source: `加载配置失败: ${error.responseMessage || error}` });
+            this.setState({source: `加载配置失败: ${error.responseMessage || error}`});
           },
         );
     }
@@ -92,9 +92,11 @@ class SourceViewModal extends React.Component {
 
   render() {
     return (
-      <BootstrapModalWrapper ref={(c) => { this.sourceModal = c; }}>
+      <BootstrapModalWrapper ref={(c) => {
+        this.sourceModal = c;
+      }}>
         <Modal.Header closeButton>
-          <Modal.Title><span>配置 <em>{this.state.name}</em></span></Modal.Title>
+          <Modal.Title><span>配置 <em>{this.state.name == "preview" ? "预览" : this.state.name}</em></span></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="configuration">

@@ -125,25 +125,25 @@ public abstract class EventDefinitionDto implements EventDefinition, ContentPack
         final ValidationResult validation = new ValidationResult();
 
         if (title().isEmpty()) {
-            validation.addError(FIELD_TITLE, "Event Definition title cannot be empty.");
+            validation.addError(FIELD_TITLE, "事件定义标题不能为空.");
         }
 
         try {
             validation.addAll(config().validate());
         } catch (UnsupportedOperationException e) {
-            validation.addError(FIELD_CONFIG, "Event Definition config type cannot be empty.");
+            validation.addError(FIELD_CONFIG, "事件定义配置类型不能为空.");
         }
 
         for (Map.Entry<String, EventFieldSpec> fieldSpecEntry : fieldSpec().entrySet()) {
             final String fieldName = fieldSpecEntry.getKey();
             if (!Message.validKey(fieldName)) {
                 validation.addError(FIELD_FIELD_SPEC,
-                    "Event Definition field_spec contains invalid message field \"" + fieldName + "\"");
+                    "事件定义 field_spec 包含无效的消息字段 \"" + fieldName + "\"");
             }
         }
 
         if (keySpec().stream().anyMatch(key -> !fieldSpec().containsKey(key))) {
-            validation.addError(FIELD_KEY_SPEC, "Event Definition key_spec can only contain fields defined in field_spec.");
+            validation.addError(FIELD_KEY_SPEC, "事件定义 key_spec 只能包含 field_spec 中定义的字段.");
         }
 
         return validation;
