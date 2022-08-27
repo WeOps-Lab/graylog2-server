@@ -77,7 +77,7 @@ class QueryTitleEditModal extends React.Component<Props, State> {
       <BootstrapModalForm ref={(modal) => { this.modal = modal; }}
                           title="编辑仪表板标题"
                           onSubmitForm={this._onDraftSave}
-                          submitButtonText="Save"
+                          submitButtonText="保存"
                           bsSize="large">
         <Input autoFocus
                help="输入仪表板页面标题,它的最大长度为 40 个字符."

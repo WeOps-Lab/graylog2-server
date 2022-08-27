@@ -66,7 +66,7 @@ const ConfigurationModal = ({ onSave, view, show, onClose }: ConfigurationModalP
     <BootstrapModalForm bsSize="large"
                         onModalClose={onClose}
                         onSubmitForm={_onSave}
-                        submitButtonText="Save"
+                        submitButtonText="保存"
                         title="配置全屏"
                         show={show}>
       <Input autoFocus
