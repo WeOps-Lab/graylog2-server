@@ -17,7 +17,7 @@ data/*
 .DS_Store
 graylog.conf
 dependency-reduced-pom.xml
-
+node-id
 /graylog2-rest-routes/src/main/java/org/graylog2/restroutes/generated
 
 /misc/elasticsearch.yml.2
