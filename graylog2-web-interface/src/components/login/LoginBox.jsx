@@ -16,11 +16,12 @@
  */
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import styled, {css} from 'styled-components';
 
-import { Col, Row } from 'components/bootstrap';
+import {Col, Row} from 'components/bootstrap';
 
 import PublicNotifications from '../common/PublicNotifications';
+import logo from 'assets/loginlogo.png';
 
 const Wrapper = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const LoginCol = styled(Col)(({ theme }) => css`
+const LoginCol = styled(Col)(({theme}) => css`
   padding: 15px;
   background-color: ${theme.colors.global.contentBackground};
   border: 1px solid ${theme.colors.variant.light.default};
@@ -53,20 +54,46 @@ const LoginCol = styled(Col)(({ theme }) => css`
   }
 `);
 
-const LoginBox = ({ children }) => {
+const LoginBox = ({children}) => {
   return (
-    <Wrapper className="container">
-      <Row>
-        <Col md={8} mdOffset={2}>
-          <PublicNotifications readFromConfig />
-        </Col>
-      </Row>
-      <Row>
-        <LoginCol md={4} mdOffset={4} xs={6} xsOffset={3}>
-          {children}
-        </LoginCol>
-      </Row>
-    </Wrapper>
+    <div style={{
+      minHeight: '100vh',
+      position: 'relative',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      padding: '50px 0',
+      minWidth: 1040,
+      background: '#aec4d8'
+    }}>
+      <div style={{
+        width: 1040,
+        boxShadow: '0 6px 50px 0 rgba(0,0,0,.35)',
+      }}>
+        <div style={{
+          display: 'flex',
+          margin: 'auto',
+          background: '#fff'
+        }}>
+          <div style={{
+            width: '35%',
+            padding: '20px 40px 20px 60px',
+            minHeight: 600,
+          }}>
+            <div style={{
+              textAlign: 'center',
+              height: 200,
+              paddingTop: 60,
+            }}>
+              <img src={logo} style={{
+                height: 80, width: 140,
+              }}/>
+              {children}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

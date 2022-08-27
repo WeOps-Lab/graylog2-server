@@ -14,24 +14,26 @@
  * along with this program. If not, see
  * <http://www.mongodb.com/licensing/server-side-public-license>.
  */
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from 'prop-types';
-import { PluginStore } from 'graylog-web-plugin/plugin';
-import styled, { createGlobalStyle } from 'styled-components';
-import { useQuery } from 'react-query';
-import { ErrorBoundary } from 'react-error-boundary';
+import {PluginStore} from 'graylog-web-plugin/plugin';
+import styled, {createGlobalStyle} from 'styled-components';
+import {useQuery} from 'react-query';
+import {ErrorBoundary} from 'react-error-boundary';
 
-import { DocumentTitle, Icon } from 'components/common';
-import { Alert, Button } from 'components/bootstrap';
+import {DocumentTitle, Icon} from 'components/common';
+import {Alert, Button} from 'components/bootstrap';
 import LoginForm from 'components/login/LoginForm';
 import LoginBox from 'components/login/LoginBox';
 import authStyles from 'theme/styles/authStyles';
 import AuthenticationDomain from 'domainActions/authentication/AuthenticationDomain';
 import AppConfig from 'util/AppConfig';
-import { LOGIN_INITIALIZING_STATE, LOGIN_INITIALIZED_STATE } from 'logic/authentication/constants';
-import { SessionActions } from 'stores/sessions/SessionStore';
-
+import {LOGIN_INITIALIZING_STATE, LOGIN_INITIALIZED_STATE} from 'logic/authentication/constants';
+import {SessionActions} from 'stores/sessions/SessionStore';
 import LoadingPage from './LoadingPage';
+
+import logo from 'assets/loginlogo.png';
+import loginBoxImage from 'assets/loginbox.png';
 
 const LoginPageStyles = createGlobalStyle`
   ${authStyles}
@@ -56,12 +58,12 @@ const useActiveBackend = (isCloud) => {
     return AuthenticationDomain.loadActiveBackendType();
   };
 
-  const { data, isSuccess } = useQuery('activeBackendType', cloudBackendLoader);
+  const {data, isSuccess} = useQuery('activeBackendType', cloudBackendLoader);
 
   return [data, isSuccess];
 };
 
-const ErrorFallback = ({ error, resetErrorBoundary }) => {
+const ErrorFallback = ({error, resetErrorBoundary}) => {
   const isCloud = AppConfig.isCloud();
 
   return (
@@ -126,7 +128,8 @@ const LoginPage = () => {
       return (
         <div className="form-group">
           <Alert bsStyle="danger">
-            <button type="button" className="close" onClick={resetLastError}>&times;</button>{lastError}
+            <button type="button" className="close" onClick={resetLastError}>&times;</button>
+            {lastError}
           </Alert>
         </div>
       );
@@ -137,44 +140,89 @@ const LoginPage = () => {
 
   const renderLoginForm = () => {
     if (!useFallback && hasCustomLogin) {
-      const { formComponent: PluginLoginForm } = loginComponent;
+      const {formComponent: PluginLoginForm} = loginComponent;
 
       return (
         <ErrorBoundary FallbackComponent={ErrorFallback}
                        onError={() => setEnableExternalBackend(false)}
                        onReset={() => setUseFallback(true)}>
-          <PluginLoginForm onErrorChange={setLastError} setLoginFormState={setLoginFormState} />
+          <PluginLoginForm onErrorChange={setLastError} setLoginFormState={setLoginFormState}/>
         </ErrorBoundary>
       );
     }
 
-    return <LoginForm onErrorChange={setLastError} />;
+    return <LoginForm onErrorChange={setLastError}/>;
   };
 
   if (!didValidateSession || !isBackendDetermined) {
     return (
-      <LoadingPage />
+      <LoadingPage/>
     );
   }
 
   const shouldDisplayFallbackLink = hasCustomLogin
-  && enableExternalBackend
-  && !isCloud
-  && loginFormState === LOGIN_INITIALIZED_STATE;
+    && enableExternalBackend
+    && !isCloud
+    && loginFormState === LOGIN_INITIALIZED_STATE;
+
 
   return (
-    <DocumentTitle title="登录">
-      <LoginBox>
-        <legend><Icon name="users" /> 欢迎来到DataInsight</legend>
-        <LoginPageStyles />
-        {formatLastError()}
-        {renderLoginForm()}
-        {shouldDisplayFallbackLink && (
-        <StyledButton as="a" onClick={() => setUseFallback(!useFallback)}>
-          {`使用 ${useFallback ? loginComponent.type.replace(/^\w/, (c) => c.toUpperCase()) : '默认登录'}`}
-        </StyledButton>
-        )}
-      </LoginBox>
+    <DocumentTitle >
+      <div style={{
+        minHeight: '100vh',
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '50px 0',
+        minWidth: 1040,
+        background: '#aec4d8'
+      }}>
+        <div style={{
+          width: 1040,
+          boxShadow: '0 6px 50px 0 rgba(0,0,0,.35)',
+        }}>
+          <div style={{
+            display: 'flex',
+            margin: 'auto',
+            background: '#fff'
+          }}>
+            <div style={{
+              width: '35%',
+              padding: '20px 40px 20px 60px',
+              minHeight: 600,
+            }}>
+              <div style={{
+                textAlign: 'center',
+                height: 200,
+                paddingTop: 60,
+              }}>
+                <img src={logo} style={{
+                  height: 80, width: 140,
+                }}/>
+                {/*<div style={{margin: '8px 0', fontSize: 20, fontWeight: 'bold'}}>DataInsight</div>*/}
+              </div>
+              {formatLastError()}
+              {renderLoginForm()}
+              {shouldDisplayFallbackLink && (
+                <StyledButton as="a" onClick={() => setUseFallback(!useFallback)}>
+                  {`使用 ${useFallback ? loginComponent.type.replace(/^\w/, (c) => c.toUpperCase()) : '默认登录'}`}
+                </StyledButton>
+              )}
+            </div>
+            <div style={{
+              width: '65%',
+              padding: 0,
+              minHeight: 600,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+              <img src={loginBoxImage} style={{width: '100%', height: '100%'}}/>
+            </div>
+          </div>
+        </div>
+      </div>
     </DocumentTitle>
   );
 };

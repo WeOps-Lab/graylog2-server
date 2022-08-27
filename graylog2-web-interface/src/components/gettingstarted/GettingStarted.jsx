@@ -159,7 +159,7 @@ class GettingStarted extends React.Component {
             <Col mdPush={3} md={6} className="text-center" style={{ paddingBottom: '15px' }}>
               <span>
                 无法加载{' '}
-                <a target="_blank" rel="noopener noreferrer" href="https://gettingstarted.graylog.org/assets/index.html">DataInsight入门指南</a>.
+                <a target="_blank" rel="noopener noreferrer" href="#">DataInsight入门指南</a>.
                 请用可以直接访问互联网的浏览器打开它.
               </span>
             </Col>

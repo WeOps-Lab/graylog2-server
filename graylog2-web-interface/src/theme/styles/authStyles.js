@@ -16,7 +16,7 @@
  */
 import { css } from 'styled-components';
 
-import bgImage from 'images/auth/loginbg.jpg';
+import bgImage from 'images/auth/loginbox.png';
 
 const authStyles = css(({ theme }) => css`
   body {

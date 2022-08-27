@@ -51,7 +51,7 @@ const SidecarStatus = createReactClass({
         <dt>操作系统</dt>
         <dd>{lodash.defaultTo(details.operating_system, '不可用')}</dd>
         <dt>CPU空闲</dt>
-        <dd>{lodash.isNumber(metrics.cpu_idle) ? `${metrics.cpu_idle}%` : '不可用' }</dd>
+        <dd>{lodash.isNumber(metrics.cpu_idle) ? `${metrics.cpu_idle}%` : '不可用'}</dd>
         <dt>负载</dt>
         <dd>{lodash.defaultTo(metrics.load_1, '不可用')}</dd>
         <dt>容量 &gt; 75% </dt>

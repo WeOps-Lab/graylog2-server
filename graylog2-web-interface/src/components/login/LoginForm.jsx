@@ -20,7 +20,7 @@ import styled from 'styled-components';
 
 import { Button, FormGroup, Input } from 'components/bootstrap';
 import { SessionActions } from 'stores/sessions/SessionStore';
-
+import './login.less';
 const StyledFormGroup = styled(FormGroup)`
   margin-bottom: 0;
 `;
@@ -80,7 +80,7 @@ const LoginForm = ({ onErrorChange }) => {
              required />
 
       <StyledFormGroup>
-        <Button type="submit" bsStyle="info" disabled={isLoading}>
+        <Button className={"login-button"} type="submit" bsStyle="info" disabled={isLoading}>
           {isLoading ? '登录中...' : '登录'}
         </Button>
       </StyledFormGroup>
