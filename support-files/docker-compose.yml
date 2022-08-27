@@ -1,19 +1,18 @@
 version: '3.8'
 services:
-  elasticsearch:
+  datainsight-elasticsearch:
     image: elasticsearch:6.8.23
-    container_name: elasticsearch
-  mongo:
+    container_name: datainsight-elasticsearch
+  datainsight-mongo:
     image: mongo:4.4.16
-    container_name: mongodb
+    container_name: datainsight-mongodb
   datainsight:
     image: ccr.ccs.tencentyun.com/megalab/datainsight:4.3.5
     container_name: datainsight
     volumes:
-      - ${PWD}/graylog.conf:/products/graylog.conf
+      - ${PWD}/graylog.conf:/products/graylog.conf:ro
     depends_on:
-      - mongo
-      - elasticsearch
+      - datainsight-mongo
+      - datainsight-elasticsearch
     command:
       - java -jar /products/graylog.jar server -f /products/graylog.conf
-
