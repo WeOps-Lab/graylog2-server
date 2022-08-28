@@ -158,7 +158,7 @@ const IndexSetsComponent = createReactClass({
 
     return (
       <div>
-        <h4><strong>Total:</strong> {this._formatStatsString(globalIndexSetStats)}</h4>
+        <h4><strong>共:</strong> {this._formatStatsString(globalIndexSetStats)}</h4>
 
         <hr style={{ marginBottom: 0 }} />
 

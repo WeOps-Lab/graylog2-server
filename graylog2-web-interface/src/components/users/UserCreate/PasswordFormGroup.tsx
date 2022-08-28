@@ -44,8 +44,8 @@ type Props = {};
 // eslint-disable-next-line no-empty-pattern
 const PasswordFormGroup = ({}: Props) => (
   <Input id="password-field"
-         label="Password"
-         help={`Passwords must be at least ${PASSWORD_MIN_LENGTH} characters long. We recommend using a strong password.`}
+         label="密码"
+         help={`密码长度必须大于 ${PASSWORD_MIN_LENGTH} .`}
          labelClassName="col-sm-3"
          wrapperClassName="col-sm-9">
     <Row className="no-bm">
@@ -54,7 +54,7 @@ const PasswordFormGroup = ({}: Props) => (
                      id="password"
                      maxLength={100}
                      type="password"
-                     placeholder="Password"
+                     placeholder="密码"
                      required
                      formGroupClassName="form-group no-bm"
                      wrapperClassName="col-xs-12"
@@ -65,7 +65,7 @@ const PasswordFormGroup = ({}: Props) => (
                      id="password_repeat"
                      maxLength={100}
                      type="password"
-                     placeholder="Repeat password"
+                     placeholder="重复密码"
                      formGroupClassName="form-group no-bm"
                      required
                      wrapperClassName="col-xs-12"

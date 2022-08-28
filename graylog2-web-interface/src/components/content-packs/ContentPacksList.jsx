@@ -199,8 +199,8 @@ class ContentPacksList extends React.Component {
     const pageSizeSelect = <PageSizeSelect onChange={this._itemsShownChange} pageSize={pageSize} pageSizes={[10, 25, 50, 100]} />;
 
     const noContentMessage = contentPacks.length <= 0
-      ? 'No content packs found. Please create or upload one'
-      : 'No matching content packs found';
+      ? '暂无数据'
+      : '没有匹配的扩展包';
     const content = filteredContentPacks.length <= 0
       ? (<div>{noContentMessage}</div>)
       : (
@@ -215,7 +215,7 @@ class ContentPacksList extends React.Component {
         <Row className="row-sm">
           <Col md={5}>
             <TypeAheadDataFilter id="content-packs-filter"
-                                 label="Filter"
+                                 label="过滤"
                                  data={contentPacks}
                                  displayKey="name"
                                  onDataFiltered={this._filterContentPacks}

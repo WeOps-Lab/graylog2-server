@@ -104,7 +104,7 @@ class DataTable extends React.Component {
     filterBy: '',
     filterSuggestions: [],
     filterKeys: [],
-    filterLabel: 'Filter',
+    filterLabel: '过滤',
     displayKey: 'value',
     noDataText: '暂无数据.',
     rowClassName: '',
@@ -197,7 +197,7 @@ class DataTable extends React.Component {
     if (rows.length === 0) {
       data = <NoData noDataText={noDataText} />;
     } else if (effectiveRows.length === 0) {
-      data = <p>Filter does not match any data.</p>;
+      data = <p>没有批评任何数据.</p>;
     } else {
       data = (
         <StyledTable className={`table ${className}`}>
