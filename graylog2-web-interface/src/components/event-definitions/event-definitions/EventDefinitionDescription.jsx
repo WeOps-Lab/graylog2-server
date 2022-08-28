@@ -71,12 +71,12 @@ class EventDefinitionDescription extends React.Component {
   };
 
   static renderNotificationsInformation = (definition) => {
-    let notificationsInformation = <span>Does <b>not</b> trigger any Notifications.</span>;
+    let notificationsInformation = <span> <b>未</b> 触发任何通知.</span>;
 
     if (definition.notifications.length > 0) {
       notificationsInformation = (
         <span>
-          Triggers {definition.notifications.length}{' '}
+          触发 {definition.notifications.length}{' '}
           <Pluralize singular="通知" plural="通知" value={definition.notifications.length} />.
         </span>
       );

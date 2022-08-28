@@ -19,29 +19,29 @@ import * as React from 'react';
 import { Popover, Table } from 'components/bootstrap';
 
 const GrokPatternQueryHelper = () => (
-  <Popover id="search-query-help" className="popover-wide" title="Search Syntax Help">
-    <p><strong>Available search fields</strong></p>
+  <Popover id="search-query-help" className="popover-wide" title="搜索语法帮助">
+    <p><strong>可用的搜索字段</strong></p>
     <Table condensed>
       <thead>
         <tr>
-          <th>Field</th>
-          <th>Description</th>
+          <th>字段</th>
+          <th>描述</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>name</td>
-          <td>The grok patterns name</td>
+          <td>扩展包名称</td>
         </tr>
         <tr>
           <td>pattern</td>
-          <td>The pattern of the grok pattern</td>
+          <td>Grok模式</td>
         </tr>
       </tbody>
     </Table>
-    <p><strong>Examples</strong></p>
+    <p><strong>示例</strong></p>
     <p>
-      Find grok patterns containing COMMON in the pattern:<br />
+     查找模式为COMMON的Grok:<br />
       <kbd>pattern:COMMON</kbd><br />
     </p>
   </Popover>

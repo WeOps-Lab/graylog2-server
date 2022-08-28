@@ -82,31 +82,31 @@ const ExtractorUtils = {
   getReadableConverterTypeName(converterType) {
     switch (converterType) {
       case this.ConverterTypes.NUMERIC:
-        return 'Numeric';
+        return '数值';
       case this.ConverterTypes.DATE:
-        return 'Date';
+        return '日期';
       case this.ConverterTypes.FLEXDATE:
-        return 'Flexible Date';
+        return '复杂日期';
       case this.ConverterTypes.HASH:
         return 'Hash';
       case this.ConverterTypes.LOWERCASE:
-        return 'Lowercase';
+        return '小写';
       case this.ConverterTypes.UPPERCASE:
-        return 'Uppercase';
+        return '大写';
       case this.ConverterTypes.TOKENIZER:
-        return 'Key = Value Pairs To Fields';
+        return 'Key = Value键值对';
       case this.ConverterTypes.CSV:
-        return 'CSV To Fields';
+        return 'CSV';
       case this.ConverterTypes.SPLIT_AND_COUNT:
-        return 'Split & Count';
+        return '分割统计';
       case this.ConverterTypes.IP_ANONYMIZER:
-        return 'Anonymize IPv4 Addresses';
+        return 'IPv4地址隐藏';
       case this.ConverterTypes.SYSLOG_PRI_LEVEL:
-        return 'Syslog Level From PRI';
+        return 'Syslog等级';
       case this.ConverterTypes.SYSLOG_PRI_FACILITY:
-        return 'Syslog Facility From PRI';
+        return 'Syslog级别';
       case this.ConverterTypes.LOOKUP_TABLE:
-        return 'Lookup Table';
+        return '数据映射';
       default:
         return converterType;
     }
