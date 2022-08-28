@@ -19,14 +19,14 @@ package org.graylog2.plugin.streams;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public enum StreamRuleType {
-    EXACT(1, "match exactly", "match exactly"),
-    REGEX(2, "match regular expression", "match regular expression"),
-    GREATER(3, "greater than", "be greater than"),
-    SMALLER(4, "smaller than", "be smaller than"),
-    PRESENCE(5, "field presence", "be present"),
-    CONTAINS(6, "contain", "contain"),
-    ALWAYS_MATCH(7, "always match", "always match"),
-    MATCH_INPUT(8, "match input", "match input");
+    EXACT(1,  "完全匹配", "完全匹配"),
+    REGEX(2, "正则匹配", "正则匹配"),
+    GREATER(3,  "大于", "大于"),
+    SMALLER(4, "小于", "小于"),
+    PRESENCE(5, "存在", "存在"),
+    CONTAINS(6, "包含", "包含"),
+    ALWAYS_MATCH(7, "总是匹配", "总是匹配"),
+    MATCH_INPUT(8, "匹配输入", "匹配输入");
 
     private final int value;
     private final String shortDesc;

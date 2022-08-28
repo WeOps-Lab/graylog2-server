@@ -79,7 +79,7 @@ class HumanReadableStreamRule extends React.Component {
   render() {
     const { streamRule, streamRuleTypes } = this.props;
     const streamRuleType = this._getTypeForInteger(streamRule.type, streamRuleTypes);
-    const negation = (streamRule.inverted ? 'not ' : null);
+    const negation = (streamRule.inverted ? '不 ' : null);
     const longDesc = (streamRuleType ? streamRuleType.long_desc : null);
 
     if (String(streamRule.type) === String(this.ALWAYS_MATCH_RULE_TYPE)) {
