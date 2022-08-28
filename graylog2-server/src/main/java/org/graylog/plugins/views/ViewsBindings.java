@@ -162,17 +162,17 @@ public class ViewsBindings extends ViewsModule {
         // pivot specs
         registerJacksonSubtype(Values.class);
         registerJacksonSubtype(Time.class);
-        registerPivotAggregationFunction(Average.NAME, "Average", Average.class);
-        registerPivotAggregationFunction(Cardinality.NAME, "Cardinality", Cardinality.class);
-        registerPivotAggregationFunction(Count.NAME, "Count", Count.class);
-        registerPivotAggregationFunction(Max.NAME, "Maximum", Max.class);
-        registerPivotAggregationFunction(Min.NAME, "Minimum", Min.class);
-        registerPivotAggregationFunction(StdDev.NAME, "Standard Deviation", StdDev.class);
-        registerPivotAggregationFunction(Sum.NAME, "Sum", Sum.class);
-        registerPivotAggregationFunction(SumOfSquares.NAME, "Sum of Squares", SumOfSquares.class);
-        registerPivotAggregationFunction(Variance.NAME, "Variance", Variance.class);
-        registerPivotAggregationFunction(Percentile.NAME, "Percentile", Percentile.class);
-        registerPivotAggregationFunction(Latest.NAME, "Latest Value", Latest.class);
+        registerPivotAggregationFunction(Average.NAME, "平均值", Average.class);
+        registerPivotAggregationFunction(Cardinality.NAME, "基数", Cardinality.class);
+        registerPivotAggregationFunction(Count.NAME, "计数", Count.class);
+        registerPivotAggregationFunction(Max.NAME, "最大值", Max.class);
+        registerPivotAggregationFunction(Min.NAME, "最小值", Min.class);
+        registerPivotAggregationFunction(StdDev.NAME, "标准差", StdDev.class);
+        registerPivotAggregationFunction(Sum.NAME, "求和", Sum.class);
+        registerPivotAggregationFunction(SumOfSquares.NAME, "平方和", SumOfSquares.class);
+        registerPivotAggregationFunction(Variance.NAME, "方差", Variance.class);
+        registerPivotAggregationFunction(Percentile.NAME, "百分位数", Percentile.class);
+        registerPivotAggregationFunction(Latest.NAME, "最新值", Latest.class);
 
         registerJacksonSubtype(TimeUnitInterval.class);
         registerJacksonSubtype(TimeUnitIntervalDTO.class);

@@ -59,21 +59,21 @@ const ExtractorUtils = {
   getReadableExtractorTypeName(extractorType) {
     switch (extractorType) {
       case ExtractorTypes.COPY_INPUT:
-        return 'Copy input';
+        return '复制输入';
       case ExtractorTypes.GROK:
-        return 'Grok pattern';
+        return 'Grok模式';
       case ExtractorTypes.JSON:
         return 'JSON';
       case ExtractorTypes.REGEX:
-        return 'Regular expression';
+        return '正则表达式';
       case ExtractorTypes.REGEX_REPLACE:
-        return 'Replace with regular expression';
+        return '正则表达式替换';
       case ExtractorTypes.SPLIT_AND_INDEX:
-        return 'Split & Index';
+        return '分割';
       case ExtractorTypes.SUBSTRING:
-        return 'Substring';
+        return '子窜捕获';
       case ExtractorTypes.LOOKUP_TABLE:
-        return 'Lookup Table';
+        return '数据映射';
       default:
         return extractorType;
     }

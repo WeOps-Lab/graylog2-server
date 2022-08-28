@@ -75,7 +75,7 @@ public class ProductionIndexHtmlGenerator implements IndexHtmlGenerator {
     public String get(MultivaluedMap<String, String> headers) {
         final URI relativePath = RestTools.buildRelativeExternalUri(headers, httpConfiguration.getHttpExternalUri());
         final Map<String, Object> model = ImmutableMap.<String, Object>builder()
-                .put("title", "Graylog Web Interface")
+                .put("title", "DataInsight")
                 .put("cssFiles", cssFiles)
                 .put("jsFiles", sortedJsFiles)
                 .put("appPrefix", relativePath)

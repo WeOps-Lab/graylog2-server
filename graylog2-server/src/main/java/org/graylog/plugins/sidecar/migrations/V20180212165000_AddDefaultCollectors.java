@@ -76,11 +76,17 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
                         "  paths:\n" +
                         "    - /var/log/*.log\n" +
                         "  type: log\n" +
-                        "output.logstash:\n" +
-                        "   hosts: [\"192.168.1.1:5044\"]\n" +
+                        "output.kafka:\n" +
+                        "   hosts: [\"10.11.25.49:9092\"]\n" +
+                        "   topic: 'filebeat'\n"+
+                        "   partition.round_robin:\n"+
+                        "      reachable_only: false\n"+
+                        "   required_acks: 1\n"+
+                        "      compression: gzip\n"+
+                        "   max_message_bytes: 1000000"+
                         "path:\n" +
-                        "  data: /var/lib/graylog-sidecar/collectors/filebeat/data\n" +
-                        "  logs: /var/lib/graylog-sidecar/collectors/filebeat/log"
+                        "  data: /var/lib/collectors/filebeat/data\n" +
+                        "  logs: /var/lib/collectors/filebeat/log"
         );
         ensureCollector(
                 "winlogbeat",
@@ -90,11 +96,17 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
                 "-c \"%s\"",
                 "test config -c \"%s\"",
                 beatsPreambel +
-                        "output.logstash:\n" +
-                        "   hosts: [\"192.168.1.1:5044\"]\n" +
+                        "output.kafka:\n" +
+                        "   hosts: [\"10.11.25.49:9092\"]\n" +
+                        "   topic: 'filebeat'\n"+
+                        "   partition.round_robin:\n"+
+                        "      reachable_only: false\n"+
+                        "   required_acks: 1\n"+
+                        "      compression: gzip\n"+
+                        "   max_message_bytes: 1000000"+
                         "path:\n" +
-                        "  data: C:\\Program Files\\Graylog\\sidecar\\cache\\winlogbeat\\data\n" +
-                        "  logs: C:\\Program Files\\Graylog\\sidecar\\logs\n" +
+                        "  data: C:\\Program Files\\sidecar\\cache\\winlogbeat\\data\n" +
+                        "  logs: C:\\Program Files\\sidecar\\logs\n" +
                         "tags:\n" +
                         " - windows\n" +
                         "winlogbeat:\n" +
