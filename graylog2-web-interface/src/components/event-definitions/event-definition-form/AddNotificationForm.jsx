@@ -92,7 +92,7 @@ class AddNotificationForm extends React.Component {
 
           <fieldset>
             <FormGroup controlId="notification-select">
-              <ControlLabel>Choose Notification</ControlLabel>
+              <ControlLabel>选择通知</ControlLabel>
               <Select id="notification-select"
                       matchProp="label"
                       placeholder="选择告警通知"

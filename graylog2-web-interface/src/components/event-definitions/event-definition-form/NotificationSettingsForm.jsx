@@ -92,7 +92,7 @@ class NotificationSettingsForm extends React.Component {
 
     return (
       <>
-        <h3 className={commonStyles.title}>Notification Settings</h3>
+        <h3 className={commonStyles.title}>通知设置</h3>
         <fieldset>
           <FormGroup controlId="grace-period">
             <TimeUnitInput label="宽限期"

@@ -203,7 +203,7 @@ class AggregationConditionExpression extends React.Component {
     if (!parent && expression.expr !== 'group') {
       return (
         <>
-          <BooleanOperatorSelector initialText="Messages must meet"
+          <BooleanOperatorSelector initialText="消息必须匹配"
                                    operator={this.getEffectiveGlobalGroupOperator()}
                                    onOperatorChange={this.handleOperatorChange} />
           <Clearfix />

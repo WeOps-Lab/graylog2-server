@@ -47,14 +47,14 @@ const BooleanOperatorSelector = ({ initialText, operator, onOperatorChange }) =>
                   size="small"
                   onChange={onOperatorChange}
                   options={[
-                    { label: 'all', value: '&&' },
-                    { label: 'any', value: '||' },
+                    { label: '所有', value: '&&' },
+                    { label: '任意', value: '||' },
                   ]}
                   value={operator}
                   clearable={false} />
         </BooleanOperatorSelect>
         <FormGroup>
-          <FormControl.Static> of the following rules:</FormControl.Static>
+          <FormControl.Static> 规则:</FormControl.Static>
         </FormGroup>
       </OperatorSelector>
     </Col>
