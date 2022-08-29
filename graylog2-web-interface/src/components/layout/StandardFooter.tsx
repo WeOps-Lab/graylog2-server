@@ -65,7 +65,7 @@ const StandardFooter = ({ system }: Props) => {
 
   return (
     <>
-      Graylog {system.version} on {system.hostname} ({jvm.info})
+      DataInsight {system.version}  {system.hostname} ({jvm.info})
     </>
   );
 };
