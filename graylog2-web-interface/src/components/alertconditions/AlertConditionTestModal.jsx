@@ -138,7 +138,7 @@ class AlertConditionTestModal extends React.Component {
           )}
         </Modal.Body>
         <Modal.Footer>
-          <Button onClick={this.close}>Close</Button>
+          <Button onClick={this.close}>关闭</Button>
           <Button bsStyle="primary" onClick={this.testCondition} disabled={isTesting}>
             {isTesting ? '测试中...' : '测试'}
           </Button>

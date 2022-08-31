@@ -90,7 +90,7 @@ const CopyToDashboardForm = ({ widgetId, onCancel, dashboards: { list = [], pagi
         <Button bsStyle="primary"
                 disabled={selectedDashboard === null}
                 onClick={() => onSubmit(widgetId, selectedDashboard)}>
-          Select
+          选择
         </Button>
         <Button onClick={onCancel}>取消</Button>
       </Modal.Footer>

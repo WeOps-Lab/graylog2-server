@@ -28,7 +28,7 @@ const defaultSettings = {
   extendedTimeOut: 1000,
   escapeHtml: true,
   closeButton: true,
-  closeHtml: '<button>Close</button>',
+  closeHtml: '<button>关闭</button>',
   progressBar: true,
   preventDuplicates: true,
 };
