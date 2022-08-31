@@ -20,6 +20,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.TypeLiteral;
 import com.google.inject.multibindings.MapBinder;
 import com.google.inject.multibindings.Multibinder;
+import org.etherfurnace.alerts.blueking.BlueKingAlarmCallBackModule;
 import org.etherfurnace.alerts.scriptalert.ExeCommandAlarmCallBackModule;
 import org.etherfurnace.inputs.httpinput.HttpMonitorInputModule;
 import org.etherfurnace.inputs.jsoninput.JsonInputModule;
@@ -68,6 +69,7 @@ public class PluginBindings extends AbstractModule {
         }
 
         install(new ExeCommandAlarmCallBackModule());
+        install(new BlueKingAlarmCallBackModule());
         install(new HttpMonitorInputModule());
         install(new JsonInputModule());
         install(new MQTTInputModule());
