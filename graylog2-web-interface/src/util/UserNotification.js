@@ -35,16 +35,16 @@ const defaultSettings = {
 
 const UserNotification = {
   error(message, title) {
-    toastr.error(message, title || 'Error', {
+    toastr.error(message, title || '异常', {
       ...defaultSettings,
       timeOut: 10000,
     });
   },
   warning(message, title) {
-    toastr.warning(message, title || 'Attention', defaultSettings);
+    toastr.warning(message, title || '提醒', defaultSettings);
   },
   success(message, title) {
-    toastr.success(message, title || 'Information', defaultSettings);
+    toastr.success(message, title || '信息', defaultSettings);
   },
 };
 

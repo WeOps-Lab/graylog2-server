@@ -287,7 +287,7 @@ class ContentPackSelection extends React.Component {
       <div>
         <Row>
           <Col smOffset={1} lg={8}>
-            <h2>General Information</h2>
+            <h2>常规信息</h2>
             <br/>
             <form className="content-selection-form" id="content-selection-form" onSubmit={(e) => {
               e.preventDefault();
