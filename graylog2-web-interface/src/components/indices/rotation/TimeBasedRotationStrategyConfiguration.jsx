@@ -34,13 +34,18 @@ class TimeBasedRotationStrategyConfiguration extends React.Component {
 
   constructor(props) {
     super(props);
-    const { config: { rotation_period: rotationPeriod } } = this.props;
-
-    const { config: { max_rotation_period: rotationLimit } } = this.props;
+    const {
+      config: {
+        rotation_period: rotationPeriod,
+        max_rotation_period: rotationLimit,
+        rotate_empty_index_set: rotateEmptyIndexSet,
+      },
+    } = this.props;
 
     this.state = {
       rotation_period: rotationPeriod,
       rotationLimit,
+      rotate_empty_index_set: rotateEmptyIndexSet,
     };
   }
 
@@ -63,6 +68,21 @@ class TimeBasedRotationStrategyConfiguration extends React.Component {
         // Only propagate state if the config is valid.
         updateConfig(update);
       }
+    };
+  };
+
+  _onRotateEmptyIndexSetUpdate = (field) => {
+    const { updateConfig } = this.props;
+
+    return () => {
+      const update = {};
+      const rotateEmptyIndexSet = this.inputs[field].getValue();
+
+      update[field] = rotateEmptyIndexSet;
+
+      this.setState(update);
+
+      updateConfig(update);
     };
   };
 
@@ -92,8 +112,12 @@ class TimeBasedRotationStrategyConfiguration extends React.Component {
   };
 
   render() {
-    const { rotation_period: rotationPeriod, rotationLimit } = this.state;
-    const maxRotationPeriodHelpText = rotationLimit ? ` 最大轮转周期被管理员设置为 ${moment.duration(rotationLimit).humanize()}.` : '';
+    const {
+      rotation_period: rotationPeriod,
+      rotate_empty_index_set: rotateEmptyIndexSet,
+      rotationLimit,
+    } = this.state;
+    const maxRotationPeriodHelpText = rotationLimit ? ` 最大轮转周期被管理员设置为 ${moment.duration(rotationLimit).humanize()} .` : '';
 
     return (
       <div>
@@ -109,6 +133,18 @@ class TimeBasedRotationStrategyConfiguration extends React.Component {
                addonAfter={this._formatDuration()}
                bsStyle={this._validationState()}
                required />
+        <Input id="rotate-empty-index-sets"
+               labelClassName="col-sm-3"
+               wrapperClassName="col-sm-9"
+               label="空索引集">
+          <Input id="rotate-empty-index-sets-checkbox"
+                 type="checkbox"
+                 ref={(rotateEmptyIndexSetRef) => { this.inputs.rotate_empty_index_set = rotateEmptyIndexSetRef; }}
+                 label="轮转空索引集"
+                 onChange={this._onRotateEmptyIndexSetUpdate('rotate_empty_index_set')}
+                 checked={rotateEmptyIndexSet}
+                 help="轮转空索引集." />
+        </Input>
       </div>
     );
   }
