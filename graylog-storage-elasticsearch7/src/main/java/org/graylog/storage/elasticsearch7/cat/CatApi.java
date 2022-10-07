@@ -79,7 +79,9 @@ public class CatApi {
     private JsonNode requestIndices(String indexName, String errorMessage) {
         final Request request = request("GET", "indices/" + indexName);
         request.addParameter("h", "index,status");
-        request.addParameter("expand_wildcards", "all");
+
+        //TODO: 4.3.8版本加了这个，ES7会报错，删除后正常
+//        request.addParameter("expand_wildcards", "all");
         request.addParameter("s", "index,status");
 
         return perform(request, new TypeReference<JsonNode>() {}, errorMessage);
