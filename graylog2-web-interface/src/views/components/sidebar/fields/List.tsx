@@ -68,7 +68,7 @@ const List = ({ viewMetadata: { activeQuery }, filter, activeQueryFields, allFie
     .sortBy((field) => field.name.toLocaleUpperCase());
 
   if (fieldList.isEmpty()) {
-    return <i>No fields to show. Try changing your filter term or select a different field set above.</i>;
+    return <i>没有可显示的字段。尝试更改您的过滤条件或选择上面设置的不同字段。</i>;
   }
 
   return (
