@@ -573,8 +573,9 @@ public class KafkaTransport extends ThrottleableTransport {
                     "Kafka自定义属性. (例如.: \"ssl.keystore.location=/etc/datainsight/server/kafka.keystore.jks\").",
                     ConfigurationField.Optional.OPTIONAL,
                     ConfigurationField.PLACE_AT_END_POSITION,
-                    TextField.Attribute.TEXTAREA
-                    ));
+                    TextField.Attribute.TEXTAREA,
+                    TextField.Attribute.IS_SENSITIVE
+            ));
 
             return cr;
         }
