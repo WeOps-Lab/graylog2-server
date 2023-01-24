@@ -216,10 +216,10 @@ class NotificationsFactory {
 
       case 'no_input_running':
         return {
-          title: '未找到任何主节点.',
+          title: '没有启动任何输入.',
           description: (
             <span>
-              为找到任何主节点
+              没有启动任何输入
             </span>
           ),
         };
@@ -236,12 +236,10 @@ class NotificationsFactory {
 
       case 'outdated_version':
         return {
-          title: '输出被禁用',
+          title: '您运行的是老版本的 DataInsight',
           description: (
             <span>
-              消息流"{notification.details.streamTitle}(id: {notification.details.streamId})"的输出 {notification.details.outputId}
-              由于在{notification.details.faultPenaltySeconds}秒内出现{notification.details.faultCount}次处理失败被禁用
-              (节点: <em>{notification.node_id}</em>, 失败阈值: <em>{notification.details.faultCountThreshold}</em>)
+              最新的稳定 DataInsight 版本是 <em>{notification.details.current_version}</em>。
             </span>
           ),
         };

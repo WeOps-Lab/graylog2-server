@@ -63,7 +63,7 @@ const CapabilitySelect = ({ capabilities, onChange, title, ...rest }: Props) => 
 
 CapabilitySelect.defaultProps = {
   onChange: undefined,
-  title: 'Select a capability',
+  title: '选择一个能力',
 };
 
 export default CapabilitySelect;

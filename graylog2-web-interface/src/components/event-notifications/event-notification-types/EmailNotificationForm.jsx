@@ -162,7 +162,7 @@ class EmailNotificationForm extends React.Component {
           <ControlLabel>收件用户 <small className="text-muted">(可选)</small></ControlLabel>
           <MultiSelect id="notification-user-recipients"
                        value={Array.isArray(config.user_recipients) ? config.user_recipients.join(',') : ''}
-                       placeholder="Select user(s)..."
+                       placeholder="选择用户..."
                        options={this.formatUsers(users)}
                        onChange={this.handleRecipientsChange('user_recipients')} />
           <HelpBlock>

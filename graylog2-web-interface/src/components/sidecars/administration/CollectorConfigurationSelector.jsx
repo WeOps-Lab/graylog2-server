@@ -130,7 +130,7 @@ class CollectorConfigurationSelector extends React.Component {
       return (
         <SelectPopover id="status-filter"
                        title="应用配置"
-                       triggerNode={<Button bsSize="small" bsStyle="link">Configure <span className="caret" /></Button>}
+                       triggerNode={<Button bsSize="small" bsStyle="link">配置 <span className="caret" /></Button>}
                        items={[`不能同时更改 ${selectedLogCollectors.map(collector => collector.name).join(', ')} 采集器的配置`]}
                        displayDataFilter={false}
                        disabled />
@@ -146,7 +146,7 @@ class CollectorConfigurationSelector extends React.Component {
       return (
         <SelectPopover id="status-filter"
                        title="应用配置"
-                       triggerNode={<Button bsSize="small" bsStyle="link">Configure <span className="caret" /></Button>}
+                       triggerNode={<Button bsSize="small" bsStyle="link">配置 <span className="caret" /></Button>}
                        items={['所选日志收集器没有可用的配置']}
                        displayDataFilter={false}
                        disabled />

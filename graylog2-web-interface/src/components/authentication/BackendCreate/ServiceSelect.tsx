@@ -61,7 +61,7 @@ const BackendCreateSelect = () => {
                 {({ field: { name, value, onChange }, meta: { error } }) => (
                   <>
                     <Select clearable={false}
-                            inputProps={{ 'aria-label': 'Select a service' }}
+                            inputProps={{ 'aria-label': '选择一个服务' }}
                             onChange={(authService) => onChange({ target: { value: authService, name } })}
                             options={authServicesOptions}
                             placeholder="选择一个服务"

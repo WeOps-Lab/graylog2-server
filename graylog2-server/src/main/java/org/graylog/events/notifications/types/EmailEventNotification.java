@@ -74,7 +74,7 @@ public class EmailEventNotification implements EventNotification {
                     .addDetail("exception", e.getMessage());
             notificationService.publishIfFirst(systemNotification);
 
-            throw new TemporaryEventNotificationException("Notification has email recipients and is triggered, but email transport is not configured. " +
+            throw new TemporaryEventNotificationException("通知有电子邮件收件人并被触发，但未配置电子邮件. " +
                     e.getMessage());
         } catch (Exception e) {
             String exceptionDetail = e.toString();
@@ -89,7 +89,7 @@ public class EmailEventNotification implements EventNotification {
                     .addDetail("exception", exceptionDetail);
             notificationService.publishIfFirst(systemNotification);
 
-            throw new PermanentEventNotificationException("Notification has email recipients and is triggered, but sending emails failed. " +
+            throw new PermanentEventNotificationException("通知有电子邮件收件人并被触发，但发送电子邮件失败. " +
                     e.getMessage());
         }
 
