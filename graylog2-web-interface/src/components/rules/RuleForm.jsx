@@ -91,7 +91,7 @@ const RuleForm = ({ create }) => {
 
         <PipelinesUsingRule create={create} />
 
-        <Input id="rule-source-editor" label="Rule source" help="规则来源，请参阅快速参考了解更多信息.">
+        <Input id="rule-source-editor" label="规则" help="规则，请参阅快速参考了解更多信息.">
           <SourceCodeEditor id={`source${create ? '-create' : '-edit'}`}
                             mode="pipeline"
                             onLoad={onAceLoaded}
