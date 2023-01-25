@@ -140,7 +140,7 @@ public class QueryValidationServiceImpl implements QueryValidationService {
         final Stream<ValidationMessage> unknownFieldsStream = unknownFields.stream().map(f -> {
             final ValidationMessage.Builder message = ValidationMessage.builder(ValidationType.UNKNOWN_FIELD)
                     .relatedProperty(f.getRealFieldName())
-                    .errorMessage("Query contains unknown field: " + f.getRealFieldName());
+                    .errorMessage("查询条件包含未知字段: " + f.getRealFieldName());
 
             f.keyToken().ifPresent(t -> {
                 message.beginLine(t.beginLine());
@@ -154,7 +154,7 @@ public class QueryValidationServiceImpl implements QueryValidationService {
 
         final Stream<ValidationMessage> invalidOperatorsStream = invalidOperators.stream()
                 .map(term -> {
-                    final String errorMessage = String.format(Locale.ROOT, "Query contains invalid operator \"%s\". All AND / OR / NOT operators have to be written uppercase", term.value());
+                    final String errorMessage = String.format(Locale.ROOT, "查询条件包含不合法的运算符 \"%s\". 所有的 AND / OR / NOT 关键字必须为大写", term.value());
                     final ValidationMessage.Builder message = ValidationMessage.builder(ValidationType.INVALID_OPERATOR)
                             .errorMessage(errorMessage);
                     term.keyToken().ifPresent(t -> {
