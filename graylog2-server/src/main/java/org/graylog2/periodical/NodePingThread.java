@@ -68,6 +68,7 @@ public class NodePingThread extends Periodical {
             Node node = nodeService.byNodeId(serverStatus.getNodeId());
             nodeService.markAsAlive(node, isLeader, httpConfiguration.getHttpPublishUri().resolve(HttpConfiguration.PATH_API));
         } catch (NodeNotFoundException e) {
+            e.printStackTrace();
             LOG.warn("Did not find meta info of this node. Re-registering.");
             nodeService.registerServer(serverStatus.getNodeId().toString(),
                     isLeader,
