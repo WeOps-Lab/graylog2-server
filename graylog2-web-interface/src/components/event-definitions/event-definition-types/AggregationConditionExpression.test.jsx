@@ -16,6 +16,7 @@
  */
 import React from 'react';
 import { mount } from 'wrappedEnzyme';
+import { act } from 'react-dom/test-utils';
 
 import AggregationConditionExpression from './AggregationConditionExpression';
 
@@ -388,7 +389,9 @@ describe('AggregationConditionExpression', () => {
 
       const select = wrapper.find('Select Select.boolean-operator').at(1);
 
-      select.prop('onChange')({ value: '&&' });
+      act(() => {
+        select.prop('onChange')({ value: '&&' });
+      });
 
       expect(onChange.mock.calls.length).toBe(1);
     });
@@ -427,7 +430,9 @@ describe('AggregationConditionExpression', () => {
 
       const select = wrapper.find('Select Select.boolean-operator').at(0);
 
-      select.prop('onChange')({ value: '||' });
+      act(() => {
+        select.prop('onChange')({ value: '||' });
+      });
 
       expect(onChange.mock.calls.length).toBe(1);
     });
