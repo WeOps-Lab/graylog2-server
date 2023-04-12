@@ -67,6 +67,10 @@ public interface IndicesAdapter {
 
     void close(String indexName);
 
+    void restore(String indexName);
+
+    void backup(String indexName, String location);
+
     long numberOfMessages(String indexName);
 
     boolean aliasExists(String alias) throws IOException;

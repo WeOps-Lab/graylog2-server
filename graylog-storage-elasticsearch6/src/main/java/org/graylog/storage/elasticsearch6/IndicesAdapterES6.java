@@ -61,6 +61,7 @@ import io.searchbox.indices.template.GetTemplate;
 import io.searchbox.indices.template.PutTemplate;
 import io.searchbox.params.Parameters;
 import io.searchbox.params.SearchType;
+import io.searchbox.snapshot.*;
 import org.apache.http.client.config.RequestConfig;
 import org.graylog.shaded.elasticsearch6.org.elasticsearch.index.query.QueryBuilders;
 import org.graylog.shaded.elasticsearch6.org.elasticsearch.search.aggregations.AggregationBuilders;
@@ -105,6 +106,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -216,7 +218,7 @@ public class IndicesAdapterES6 implements IndicesAdapter {
             throw new ElasticsearchException("Couldn't create index " + indexName, e);
         }
 
-        if (!jestResult.isSucceeded()){
+        if (!jestResult.isSucceeded()) {
             throw new ElasticsearchException(jestResult.getErrorMessage());
         }
     }
@@ -235,7 +237,7 @@ public class IndicesAdapterES6 implements IndicesAdapter {
             throw new ElasticsearchException("Couldn't update index mapping " + indexName + "/" + mappingType, e);
         }
 
-        if (!jestResult.isSucceeded()){
+        if (!jestResult.isSucceeded()) {
             throw new ElasticsearchException(jestResult.getErrorMessage());
         }
     }
@@ -431,6 +433,73 @@ public class IndicesAdapterES6 implements IndicesAdapter {
     @Override
     public void close(String indexName) {
         JestUtils.execute(jestClient, new CloseIndex.Builder(indexName).build(), () -> "Couldn't close index " + indexName);
+    }
+
+    @Override
+    public void restore(String indexName) {
+        AtomicBoolean hasError = new AtomicBoolean(false);
+        Map<String, Object> registerRepositorySettings = new HashMap<>();
+        registerRepositorySettings.put("indices", indexName);
+        RestoreSnapshot restoreSnapshot = new RestoreSnapshot.Builder("datainsight", indexName)
+                .settings(registerRepositorySettings).build();
+        JestUtils.execute(jestClient, restoreSnapshot, () -> {
+            hasError.set(true);
+            return "存储恢复失败 " + indexName;
+        });
+    }
+
+    @Override
+    public void backup(String indexName, String location) {
+        GetSnapshotRepository getSnapshotRepository = new GetSnapshotRepository.Builder("datainsight")
+                .build();
+        Boolean hasRepository;
+        try {
+            JestUtils.execute(jestClient, getSnapshotRepository, () -> "");
+            hasRepository = true;
+        } catch (Exception e) {
+            hasRepository = false;
+        }
+
+        if (hasRepository == false) {
+            Map<String, Object> registerRepositorySettings = new HashMap<>();
+            registerRepositorySettings.put("type", "fs");
+            final Map<String, Object> settings = new HashMap<>();
+            settings.put("location", location);
+            settings.put("compress", "true");
+            settings.put("chunk_size", "10m");
+            settings.put("max_restore_bytes_per_sec", "40mb");
+            settings.put("max_snapshot_bytes_per_sec", "40mb");
+            settings.put("readonly", "false");
+            registerRepositorySettings.put("settings", settings);
+            CreateSnapshotRepository createSnapshotRepository = new CreateSnapshotRepository
+                    .Builder("datainsight")
+                    .settings(registerRepositorySettings)
+                    .verify(true)
+                    .build();
+            JestUtils.execute(jestClient, createSnapshotRepository, () -> "创建存储仓库失败 ");
+        }
+
+        GetSnapshot getRepository = new GetSnapshot.Builder("datainsight").build();
+        JestResult rs = JestUtils.execute(jestClient, getRepository, () -> "获取归档数据失败");
+        AtomicBoolean hasBackup = new AtomicBoolean(false);
+        rs.getJsonObject().get("snapshots").forEach(e -> {
+            if (e.get("snapshot").asText().equals(indexName)) {
+                hasBackup.set(true);
+            }
+        });
+
+        if (hasBackup.get() == false) {
+            final Map<String, Object> createSnapshotSettings = new HashMap<>();
+            createSnapshotSettings.put("indices", indexName);
+            createSnapshotSettings.put("ignore_unavailable", "true");
+            createSnapshotSettings.put("include_global_state", "false");
+            CreateSnapshot createSnapshot = new CreateSnapshot.Builder("datainsight", indexName)
+                    .settings(createSnapshotSettings)
+                    .waitForCompletion(false).build();
+            JestUtils.execute(jestClient, createSnapshot, () -> "备份索引" + indexName + "失败");
+
+            JestUtils.execute(jestClient, new DeleteIndex.Builder(indexName).build(), () -> "无法删除索引" + indexName);
+        }
     }
 
     @Override

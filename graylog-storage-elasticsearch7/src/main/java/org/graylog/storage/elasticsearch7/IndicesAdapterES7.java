@@ -23,6 +23,13 @@ import com.google.common.collect.ImmutableSet;
 import org.apache.logging.log4j.util.Strings;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.health.ClusterHealthRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.health.ClusterHealthResponse;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.repositories.get.GetRepositoriesAction;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.repositories.get.GetRepositoriesRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.create.CreateSnapshotAction;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.create.CreateSnapshotRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.create.CreateSnapshotRequestBuilder;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.get.GetSnapshotsRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.restore.RestoreSnapshotRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -39,6 +46,8 @@ import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.search.SearchT
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.support.IndicesOptions;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.support.master.AcknowledgedResponse;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.GetAliasesResponse;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.RequestOptions;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.RestHighLevelClient;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.CloseIndexRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.CreateIndexRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.client.indices.DeleteAliasRequest;
@@ -79,6 +88,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -89,6 +99,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
@@ -265,6 +276,23 @@ public class IndicesAdapterES7 implements IndicesAdapter {
 
         client.execute((c, requestOptions) -> c.indices().close(request, requestOptions),
                 "Unable to close index " + index);
+    }
+
+    @Override
+    public void restore(String indexName) {
+        AtomicBoolean hasError = new AtomicBoolean(false);
+        Map<String, Object> registerRepositorySettings = new HashMap<>();
+        registerRepositorySettings.put("indices", indexName);
+        RestoreSnapshotRequest restoreSnapshotRequest = new RestoreSnapshotRequest("datainsight", indexName).indexSettings(registerRepositorySettings);
+        client.execute((restHighLevelClient, requestOptions) -> {
+            hasError.set(true);
+            return "存储恢复失败 " + indexName;
+        });
+    }
+
+    @Override
+    public void backup(String indexName, String location) {
+
     }
 
     @Override

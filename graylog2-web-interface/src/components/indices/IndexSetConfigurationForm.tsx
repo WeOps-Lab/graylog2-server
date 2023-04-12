@@ -17,21 +17,22 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import moment from 'moment';
-moment.locale('zh-cn');
-import { Formik, Form, Field } from 'formik';
-import styled from 'styled-components';
-import { PluginStore } from 'graylog-web-plugin/plugin';
 
-import { FormikFormGroup, FormikInput, Spinner, TimeUnitInput } from 'components/common';
+moment.locale('zh-cn');
+import {Formik, Form, Field} from 'formik';
+import styled from 'styled-components';
+import {PluginStore} from 'graylog-web-plugin/plugin';
+
+import {FormikFormGroup, FormikInput, Spinner, TimeUnitInput} from 'components/common';
 import HideOnCloud from 'util/conditional/HideOnCloud';
-import { LinkContainer } from 'components/common/router';
-import { Col, Row, Button, Input } from 'components/bootstrap';
+import {LinkContainer} from 'components/common/router';
+import {Col, Row, Button, Input} from 'components/bootstrap';
 import IndexMaintenanceStrategiesConfiguration from 'components/indices/IndexMaintenanceStrategiesConfiguration';
 import 'components/indices/rotation';
 import 'components/indices/retention';
-import type { IndexSet } from 'stores/indices/IndexSetsStore';
+import type {IndexSet} from 'stores/indices/IndexSetsStore';
 
-import type { RetentionStrategyContext } from './Types';
+import type {RetentionStrategyContext} from './Types';
 
 type Props = {
   indexSet: IndexSet,
@@ -70,11 +71,11 @@ const _validateIndexPrefix = (value) => {
 };
 
 const _getRotationConfigState = (strategy: string, data: string) => {
-  return { rotation_strategy_class: strategy, rotation_strategy: data };
+  return {rotation_strategy_class: strategy, rotation_strategy: data};
 };
 
 const _getRetentionConfigState = (strategy: string, data: string) => {
-  return { retention_strategy_class: strategy, retention_strategy: data };
+  return {retention_strategy_class: strategy, retention_strategy: data};
 };
 
 class IndexSetConfigurationForm extends React.Component<Props, State> {
@@ -96,7 +97,7 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    const { indexSet } = this.props;
+    const {indexSet} = this.props;
 
     this.state = {
       indexSet: indexSet,
@@ -105,13 +106,13 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
   }
 
   _saveConfiguration = (values) => {
-    const { onUpdate } = this.props;
+    const {onUpdate} = this.props;
 
     onUpdate(values);
   };
 
   render() {
-    const { indexSet, fieldTypeRefreshIntervalUnit } = this.state;
+    const {indexSet, fieldTypeRefreshIntervalUnit} = this.state;
     const {
       rotationStrategies,
       retentionStrategies,
@@ -142,10 +143,10 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                                                  pluginExports={PluginStore.exports('indexRotationConfig')}
                                                  strategies={rotationStrategies}
                                                  activeConfig={activeConfig}
-                                                 getState={_getRotationConfigState} />
+                                                 getState={_getRotationConfigState}/>
       );
     } else {
-      rotationConfig = (<Spinner />);
+      rotationConfig = (<Spinner/>);
     }
 
     let retentionConfig;
@@ -166,10 +167,10 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                                                  strategies={retentionStrategies}
                                                  retentionStrategiesContext={retentionStrategiesContext}
                                                  activeConfig={activeConfig}
-                                                 getState={_getRetentionConfigState} />
+                                                 getState={_getRetentionConfigState}/>
       );
     } else {
-      retentionConfig = (<Spinner />);
+      retentionConfig = (<Spinner/>);
     }
 
     let readOnlyconfig;
@@ -189,12 +190,12 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                            name="index_prefix"
                            help={indexPrefixHelp}
                            validate={_validateIndexPrefix}
-                           required />
+                           required/>
           <FormikFormGroup type="text"
                            label="分词器"
                            name="index_analyzer"
                            help="Elasticsearch分析分词器."
-                           required />
+                           required/>
         </span>
       );
     }
@@ -204,7 +205,7 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
         <Col md={8}>
           <Formik onSubmit={this._saveConfiguration}
                   initialValues={indexSet}>
-            {({ isValid, setFieldValue }) => (
+            {({isValid, setFieldValue}) => (
               <Form>
                 <Row>
                   <Col md={12}>
@@ -212,30 +213,30 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                                      label="标题"
                                      name="title"
                                      help="索引集的标题."
-                                     required />
+                                     required/>
                     <FormikFormGroup type="text"
                                      label="描述"
                                      name="description"
                                      help="索引集的描述."
-                                     required />
+                                     required/>
                     {readOnlyconfig}
                     <HideOnCloud>
                       <FormikFormGroup type="number"
                                        label="索引分片"
                                        name="shards"
                                        help="Elasticsearch分片数."
-                                       required />
+                                       required/>
                       <FormikFormGroup type="number"
                                        label="索引副本"
                                        name="replicas"
                                        help="Elasticsearch副本数."
-                                       required />
+                                       required/>
                       <FormikFormGroup type="number"
                                        label="最大段数量"
                                        name="index_optimization_max_num_segments"
                                        minLength={1}
                                        help="ElasticSearch强制合并的段数量."
-                                       required />
+                                       required/>
                       <Input id="roles-selector-input"
                              labelClassName="col-sm-3"
                              wrapperClassName="col-sm-9"
@@ -244,15 +245,15 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                                      id="index_optimization_disabled"
                                      label="轮转索引后禁用"
                                      name="index_optimization_disabled"
-                                     help="轮转索引后禁用该索引." />
+                                     help="轮转索引后禁用该索引."/>
                       </Input>
                     </HideOnCloud>
                     <Field name="field_type_refresh_interval">
-                      {({ field: { name, value, onChange } }) => {
+                      {({field: {name, value, onChange}}) => {
                         const _onFieldTypeRefreshIntervalChange = (intervalValue: number, unit: Unit) => {
                           onChange(name, moment.duration(intervalValue, unit).asMilliseconds());
                           setFieldValue(name, moment.duration(intervalValue, unit).asMilliseconds());
-                          this.setState({ fieldTypeRefreshIntervalUnit: unit });
+                          this.setState({fieldTypeRefreshIntervalUnit: unit});
                         };
 
                         return (
@@ -267,7 +268,7 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
                                            unit={fieldTypeRefreshIntervalUnit.toUpperCase()}
                                            units={['SECONDS', 'MINUTES']}
                                            required
-                                           update={_onFieldTypeRefreshIntervalChange} />
+                                           update={_onFieldTypeRefreshIntervalChange}/>
                           </Input>
                         );
                       }}
@@ -287,7 +288,8 @@ class IndexSetConfigurationForm extends React.Component<Props, State> {
 
                 <Row>
                   <Col md={12}>
-                    <StyledButton type="submit" bsStyle="primary" disabled={!isValid} style={{ marginRight: 10 }}>保存</StyledButton>
+                    <StyledButton type="submit" bsStyle="primary" disabled={!isValid}
+                                  style={{marginRight: 10}}>保存</StyledButton>
                     <LinkContainer to={cancelLink}>
                       <Button bsStyle="default">取消</Button>
                     </LinkContainer>
