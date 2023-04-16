@@ -121,6 +121,14 @@ public class Indices {
         eventBus.post(IndicesClosedEvent.create(indexName));
     }
 
+    public void restore(String indexName) {
+        indicesAdapter.restore(indexName);
+    }
+
+    public void backup(String indexName, String location) {
+        indicesAdapter.backup(indexName, location);
+    }
+
     public long numberOfMessages(String indexName) throws IndexNotFoundException {
         return indicesAdapter.numberOfMessages(indexName);
     }
@@ -297,8 +305,8 @@ public class Indices {
 
     public Set<String> getReopenedIndices(final Collection<String> indices) {
         return indices.stream()
-            .filter(this::isReopened)
-            .collect(Collectors.toSet());
+                .filter(this::isReopened)
+                .collect(Collectors.toSet());
     }
 
     public Set<String> getReopenedIndices(final IndexSet indexSet) {

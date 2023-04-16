@@ -27,6 +27,8 @@ import org.etherfurnace.inputs.jsoninput.JsonInputModule;
 import org.etherfurnace.inputs.mqtt.MQTTInputModule;
 import org.etherfurnace.inputs.snmp.SnmpPluginModule;
 import org.etherfurnace.outputs.kafkaoutput.KafkaOutputModule;
+import org.etherfurnace.strategy.StrategyModule;
+import org.etherfurnace.strategy.StrategyPlugin;
 import org.graylog2.plugin.Plugin;
 import org.graylog2.plugin.PluginMetaData;
 import org.graylog2.plugin.PluginModule;
@@ -76,5 +78,6 @@ public class PluginBindings extends AbstractModule {
         install(new MQTTInputModule());
         install(new KafkaOutputModule());
         install(new SnmpPluginModule());
+        install(new StrategyModule());
     }
 }

@@ -22,6 +22,8 @@ import ClosingRetentionStrategyConfiguration from './ClosingRetentionStrategyCon
 import ClosingRetentionStrategySummary from './ClosingRetentionStrategySummary';
 import NoopRetentionStrategyConfiguration from './NoopRetentionStrategyConfiguration';
 import NoopRetentionStrategySummary from './NoopRetentionStrategySummary';
+import BackupStrategyConfiguration from './BackupStrategyConfiguration';
+import BackupStrategySummary from './BackupStrategySummary';
 
 PluginStore.register(new PluginManifest({}, {
   indexRetentionConfig: [
@@ -36,6 +38,12 @@ PluginStore.register(new PluginManifest({}, {
       displayName: '关闭索引',
       configComponent: ClosingRetentionStrategyConfiguration,
       summaryComponent: ClosingRetentionStrategySummary,
+    },
+    {
+      type: 'org.etherfurnace.strategy.strategies.DeleteAndBackupRetentionStrategy',
+      displayName: '备份并删除',
+      configComponent: BackupStrategyConfiguration,
+      summaryComponent: BackupStrategySummary,
     },
     {
       type: 'org.graylog2.indexer.retention.strategies.NoopRetentionStrategy',

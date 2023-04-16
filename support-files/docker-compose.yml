@@ -1,34 +1,18 @@
 version: '3.8'
 services:
-  datainsight-elasticsearch:
+  elasticsearch:
     image: elasticsearch:6.8.23
-    container_name: datainsight-elasticsearch
-    healthcheck:
-      test: [ "CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1" ]
-      interval: 10s
-      timeout: 10s
-      retries: 3
-      start_period: 10s
+    ports:
+      - 9200:9200
+    environment:
+      - "discovery.type=single-node"
+      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
     ulimits:
       memlock:
         soft: -1
         hard: -1
-  datainsight-mongo:
+
+  mongo:
     image: mongo:4.4.16
-    container_name: datainsight-mongodb
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongo 127.0.0.1:27017/test --quiet
-      interval: 10s
-      timeout: 10s
-      retries: 5
-      start_period: 10s
-  datainsight:
-    image: ccr.ccs.tencentyun.com/megalab/datainsight:4.3.5
-    container_name: datainsight
-    volumes:
-      - ${PWD}/graylog.conf:/products/graylog.conf:ro
-    depends_on:
-       datainsight-mongo:
-          condition: service_healthy
-       datainsight-elasticsearch:
-         condition: service_healthy
+    ports:
+      - 27017:27017
