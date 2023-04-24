@@ -39,7 +39,7 @@ const MenuItem = ({ children, ...otherProps }: MenuItemButtonProps) => {
 
 // It looks like it is not possible to wrap a `Menu.Item`, since `Menu` is filtering its children.
 // At the moment we can work around this by using this function to get a `Menu.Item`.
-// eslint-disable-next-line import/prefer-default-export
+
 export const menuItemAdapter = ({ key, href, icon, onSelect, label }: Props) => {
   if (href) {
     return (

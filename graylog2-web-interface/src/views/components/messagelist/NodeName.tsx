@@ -30,7 +30,7 @@ type Props = {
 };
 
 const BreakWord = styled.span`
-  wordBreak: 'break-word';
+  wordbreak: 'break-word';
 `;
 
 const NodeName = ({ nodeId }: Props) => {
