@@ -83,9 +83,11 @@ public class MessageSummary {
 
         // strip out common "fields" that we report as individual properties
         for (Map.Entry<String, Object> entry : message.getFieldsEntries()) {
-            if (!RESERVED_FIELDS.contains(entry.getKey())) {
-                genericFields.put(entry.getKey(), entry.getValue());
-            }
+            genericFields.put(entry.getKey(), entry.getValue());
+//
+//            if (!RESERVED_FIELDS.contains(entry.getKey())) {
+//                genericFields.put(entry.getKey(), entry.getValue());
+//            }
 
         }
 
