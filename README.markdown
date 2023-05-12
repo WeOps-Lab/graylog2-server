@@ -29,3 +29,4 @@ Come chat with us in the [`#graylog` channel on freenode IRC](https://webchat.fr
 ## License
 
 _Graylog_ is released under version 1 of the [Server Side Public License (SSPL)](LICENSE).
+
