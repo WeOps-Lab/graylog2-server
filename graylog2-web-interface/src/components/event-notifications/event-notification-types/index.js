@@ -48,6 +48,14 @@ PluginStore.register(new PluginManifest({}, {
       defaultConfig: HttpNotificationForm.defaultConfig,
     },
     {
+      type: 'my-notification-v1',
+      displayName: '蓝鲸告警推送',
+      formComponent: HttpNotificationForm,
+      summaryComponent: HttpNotificationSummary,
+      detailsComponent: HttpNotificationDetails,
+      defaultConfig: HttpNotificationForm.defaultConfig,
+    },
+    {
       type: 'legacy-alarm-callback-notification-v1',
       displayName: '旧版告警回调',
       formComponent: LegacyNotificationFormContainer,

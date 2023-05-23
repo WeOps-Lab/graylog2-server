@@ -18,10 +18,7 @@ package org.graylog.events;
 
 import com.google.inject.assistedinject.FactoryModuleBuilder;
 import org.graylog.events.audit.EventsAuditEventTypes;
-import org.graylog.events.contentpack.entities.AggregationEventProcessorConfigEntity;
-import org.graylog.events.contentpack.entities.EmailEventNotificationConfigEntity;
-import org.graylog.events.contentpack.entities.HttpEventNotificationConfigEntity;
-import org.graylog.events.contentpack.entities.LegacyAlarmCallbackEventNotificationConfigEntity;
+import org.graylog.events.contentpack.entities.*;
 import org.graylog.events.contentpack.facade.EventDefinitionFacade;
 import org.graylog.events.contentpack.facade.NotificationFacade;
 import org.graylog.events.fields.EventFieldSpecEngine;
@@ -34,10 +31,7 @@ import org.graylog.events.legacy.V20190722150700_LegacyAlertConditionMigration;
 import org.graylog.events.notifications.EventNotificationExecutionJob;
 import org.graylog.events.notifications.EventNotificationExecutionMetrics;
 import org.graylog.events.notifications.NotificationGracePeriodService;
-import org.graylog.events.notifications.types.EmailEventNotification;
-import org.graylog.events.notifications.types.EmailEventNotificationConfig;
-import org.graylog.events.notifications.types.HTTPEventNotification;
-import org.graylog.events.notifications.types.HTTPEventNotificationConfig;
+import org.graylog.events.notifications.types.*;
 import org.graylog.events.periodicals.EventNotificationStatusCleanUp;
 import org.graylog.events.processor.EventProcessorEngine;
 import org.graylog.events.processor.EventProcessorExecutionJob;
@@ -61,6 +55,11 @@ import org.graylog2.plugin.PluginModule;
 
 import java.util.Collections;
 import java.util.Set;
+
+// 自定义事件通知插件（蓝鲸告警中心）
+import org.etherfurnace.events.MyEventNotification;
+import org.etherfurnace.events.MyEventNotificationConfig;
+import org.etherfurnace.events.MyEventNotificationConfigEntity;
 
 public class EventsModule extends PluginModule {
     @Override
@@ -143,6 +142,14 @@ public class EventsModule extends PluginModule {
                 LegacyAlarmCallbackEventNotification.Factory.class,
                 LegacyAlarmCallbackEventNotificationConfigEntity.TYPE_NAME,
                 LegacyAlarmCallbackEventNotificationConfigEntity.class);
+
+        // 自定义事件通知插件（蓝鲸告警中心）
+        addNotificationType(MyEventNotificationConfig.TYPE_NAME,
+                MyEventNotificationConfig.class,
+                MyEventNotification.class,
+                MyEventNotification.Factory.class,
+                MyEventNotificationConfigEntity.TYPE_NAME,
+                MyEventNotificationConfigEntity.class);
 
         addJobSchedulerSchedule(IntervalJobSchedule.TYPE_NAME, IntervalJobSchedule.class);
         addJobSchedulerSchedule(OnceJobSchedule.TYPE_NAME, OnceJobSchedule.class);
