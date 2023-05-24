@@ -87,7 +87,7 @@ public class MyEventNotification implements EventNotification {
         String bk_biz_name = ctx.event().fields().get("bk_biz_name");
         String bk_inst_id = ctx.event().fields().get("bk_inst_id");
         String bk_inst_name = ctx.event().fields().get("bk_inst_name");
-        String object = ctx.event().fields().get("bk_inst_name");
+        String object = ctx.event().fields().get("object");
         String ip = ctx.event().fields().get("ip");
         String alarm_name = ctx.event().fields().get("alarm_name");
         String alarm_content = ctx.event().fields().get("alarm_content");
@@ -101,6 +101,11 @@ public class MyEventNotification implements EventNotification {
         jsonObject.putOpt("ip", ip);
         jsonObject.putOpt("alarm_name", alarm_name);
         jsonObject.putOpt("alarm_content", alarm_content);
+
+        if (object==null) {
+            jsonObject.putOpt("object", bk_inst_name);
+        }
+
         JSONObject meta_info = JSONUtil.createObj();
         String show_fields = ctx.event().fields().get("show_fields");
 
@@ -118,7 +123,7 @@ public class MyEventNotification implements EventNotification {
             meta_info.putOpt("show_fields", show_field_arr);
         }
 
-        jsonObject.putOpt("meta_info", meta_info);
+        jsonObject.putOpt("meta_info", meta_info.toString());
 
         HttpResponse response = HttpRequest.post(String.valueOf(httpUrl))
                 .header("X-Secret", httpSecret)
