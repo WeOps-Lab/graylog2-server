@@ -57,9 +57,9 @@ import java.util.Collections;
 import java.util.Set;
 
 // 自定义事件通知插件（蓝鲸告警中心）
-import org.etherfurnace.events.MyEventNotification;
-import org.etherfurnace.events.MyEventNotificationConfig;
-import org.etherfurnace.events.MyEventNotificationConfigEntity;
+import org.etherfurnace.events.BlueKingUacEventNotification;
+import org.etherfurnace.events.BlueKingUacEventNotificationConfig;
+import org.etherfurnace.events.BlueKingUacEventNotificationConfigEntity;
 
 public class EventsModule extends PluginModule {
     @Override
@@ -144,12 +144,12 @@ public class EventsModule extends PluginModule {
                 LegacyAlarmCallbackEventNotificationConfigEntity.class);
 
         // 自定义事件通知插件（蓝鲸告警中心）
-        addNotificationType(MyEventNotificationConfig.TYPE_NAME,
-                MyEventNotificationConfig.class,
-                MyEventNotification.class,
-                MyEventNotification.Factory.class,
-                MyEventNotificationConfigEntity.TYPE_NAME,
-                MyEventNotificationConfigEntity.class);
+        addNotificationType(BlueKingUacEventNotificationConfig.TYPE_NAME,
+                BlueKingUacEventNotificationConfig.class,
+                BlueKingUacEventNotification.class,
+                BlueKingUacEventNotification.Factory.class,
+                BlueKingUacEventNotificationConfigEntity.TYPE_NAME,
+                BlueKingUacEventNotificationConfigEntity.class);
 
         addJobSchedulerSchedule(IntervalJobSchedule.TYPE_NAME, IntervalJobSchedule.class);
         addJobSchedulerSchedule(OnceJobSchedule.TYPE_NAME, OnceJobSchedule.class);
