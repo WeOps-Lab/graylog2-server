@@ -48,7 +48,7 @@ PluginStore.register(new PluginManifest({}, {
       defaultConfig: HttpNotificationForm.defaultConfig,
     },
     {
-      type: 'my-notification-v1',
+      type: 'bk_uac-notification-v1',
       displayName: '蓝鲸告警推送',
       formComponent: HttpNotificationForm,
       summaryComponent: HttpNotificationSummary,

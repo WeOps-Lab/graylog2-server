@@ -20,14 +20,14 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MyEventNotification implements EventNotification {
+public class BlueKingUacEventNotification implements EventNotification {
 
     public interface Factory extends EventNotification.Factory {
         @Override
-        MyEventNotification create();
+        BlueKingUacEventNotification create();
     }
 
-    private static final Logger LOG = LoggerFactory.getLogger(MyEventNotification.class);
+    private static final Logger LOG = LoggerFactory.getLogger(BlueKingUacEventNotification.class);
 
     private final EventNotificationService notificationCallbackService;
 
@@ -37,7 +37,7 @@ public class MyEventNotification implements EventNotification {
 
 
     @Inject
-    public MyEventNotification(EventNotificationService notificationCallbackService,
+    public BlueKingUacEventNotification(EventNotificationService notificationCallbackService,
                                  UrlWhitelistService whitelistService,
                                  UrlWhitelistNotificationService urlWhitelistNotificationService) {
         this.notificationCallbackService = notificationCallbackService;
@@ -56,7 +56,7 @@ public class MyEventNotification implements EventNotification {
 
     @Override
     public void execute(EventNotificationContext ctx) throws TemporaryEventNotificationException, PermanentEventNotificationException {
-        final MyEventNotificationConfig config = (MyEventNotificationConfig) ctx.notificationConfig();
+        final BlueKingUacEventNotificationConfig config = (BlueKingUacEventNotificationConfig) ctx.notificationConfig();
         final HttpUrl httpUrl = HttpUrl.parse(config.url());
         String httpSecret = config.secret();
 
@@ -129,7 +129,7 @@ public class MyEventNotification implements EventNotification {
                 .header("X-Secret", httpSecret)
                 .body(jsonObject.toString())
                 .execute();
-        LOG.info(response.body());
+        LOG.info("告警推送结果：" + response.body());
 
     }
 

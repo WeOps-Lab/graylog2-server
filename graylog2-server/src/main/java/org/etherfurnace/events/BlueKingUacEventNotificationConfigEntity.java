@@ -14,11 +14,11 @@ import org.graylog2.contentpacks.model.entities.references.ValueReference;
 import java.util.Map;
 
 @AutoValue
-@JsonTypeName(MyEventNotificationConfigEntity.TYPE_NAME)
-@JsonDeserialize(builder = MyEventNotificationConfigEntity.Builder.class)
-public abstract class MyEventNotificationConfigEntity implements EventNotificationConfigEntity {
+@JsonTypeName(BlueKingUacEventNotificationConfigEntity.TYPE_NAME)
+@JsonDeserialize(builder = BlueKingUacEventNotificationConfigEntity.Builder.class)
+public abstract class BlueKingUacEventNotificationConfigEntity implements EventNotificationConfigEntity {
 
-    public static final String TYPE_NAME = "my-notification-v1";
+    public static final String TYPE_NAME = "bk_uac-notification-v1";
 
     private static final String FIELD_URL = "url";
     private static final String FIELD_SECRET = "secret";
@@ -41,7 +41,7 @@ public abstract class MyEventNotificationConfigEntity implements EventNotificati
 
         @JsonCreator
         public static Builder create() {
-            return new AutoValue_MyEventNotificationConfigEntity.Builder()
+            return new AutoValue_BlueKingUacEventNotificationConfigEntity.Builder()
                     .type(TYPE_NAME);
         }
 
@@ -51,12 +51,12 @@ public abstract class MyEventNotificationConfigEntity implements EventNotificati
         @JsonProperty(FIELD_SECRET)
         public abstract Builder secret(ValueReference url);
 
-        public abstract MyEventNotificationConfigEntity build();
+        public abstract BlueKingUacEventNotificationConfigEntity build();
     }
 
     @Override
     public EventNotificationConfig toNativeEntity(Map<String, ValueReference> parameters, Map<EntityDescriptor, Object> nativeEntities) {
-        return MyEventNotificationConfig.builder()
+        return BlueKingUacEventNotificationConfig.builder()
                 .url(url().asString(parameters))
                 .build();
     }
