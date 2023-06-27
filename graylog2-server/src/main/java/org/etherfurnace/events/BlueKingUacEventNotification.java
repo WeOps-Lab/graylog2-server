@@ -38,14 +38,15 @@ public class BlueKingUacEventNotification implements EventNotification {
 
     @Inject
     public BlueKingUacEventNotification(EventNotificationService notificationCallbackService,
-                                 UrlWhitelistService whitelistService,
-                                 UrlWhitelistNotificationService urlWhitelistNotificationService) {
+                                        UrlWhitelistService whitelistService,
+                                        UrlWhitelistNotificationService urlWhitelistNotificationService) {
         this.notificationCallbackService = notificationCallbackService;
 
         this.whitelistService = whitelistService;
         this.urlWhitelistNotificationService = urlWhitelistNotificationService;
     }
-    public static String getAlarmLevel (Integer priority) {
+
+    public static String getAlarmLevel(Integer priority) {
         Map<Integer, String> levelMap = new HashMap<>();
         levelMap.put(1, "remain");
         levelMap.put(2, "warning");
@@ -102,7 +103,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         jsonObject.putOpt("alarm_name", alarm_name);
         jsonObject.putOpt("alarm_content", alarm_content);
 
-        if (object==null) {
+        if (object == null) {
             jsonObject.putOpt("object", bk_inst_name);
         }
 
@@ -129,13 +130,13 @@ public class BlueKingUacEventNotification implements EventNotification {
                 .header("X-Secret", httpSecret)
                 .body(jsonObject.toString())
                 .execute();
-        LOG.info("告警推送结果：" + response.body());
+        LOG.info("告警名称:" + alarm_name + ",告警推送结果：" + response.body());
 
     }
 
     private void publishSystemNotificationForWhitelistFailure(String url, String eventNotificationTitle) {
-        final String description = "The alert notification \"" + eventNotificationTitle +
-                "\" is trying to access a URL which is not whitelisted. Please check your configuration. [url: \"" +
+        final String description = "告警通知 \"" + eventNotificationTitle +
+                "\" 不在白名单内，请检查配置. [url: \"" +
                 url + "\"]";
         urlWhitelistNotificationService.publishWhitelistFailure(description);
     }
