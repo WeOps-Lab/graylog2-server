@@ -7,6 +7,7 @@ import cn.hutool.json.JSONUtil;
 import com.google.common.collect.ImmutableList;
 import okhttp3.HttpUrl;
 import org.graylog.events.notifications.*;
+import org.graylog.events.processor.aggregation.AggregationEventProcessorConfig;
 import org.graylog2.plugin.MessageSummary;
 import org.graylog2.system.urlwhitelist.UrlWhitelistNotificationService;
 import org.graylog2.system.urlwhitelist.UrlWhitelistService;
@@ -106,23 +107,19 @@ public class BlueKingUacEventNotification implements EventNotification {
             jsonObject.putOpt("object", bk_inst_name);
         }
 
-        JSONObject meta_info = JSONUtil.createObj();
-        String show_fields = ctx.event().fields().get("show_fields");
-
-        if (show_fields != null) {
-            JSONObject show_data = JSONUtil.createObj();
-            String[] show_field_arr = show_fields.split(",");
-            for (Object field : show_field_arr) {
-                String fieldValue = (String) field;
-                show_data.putOpt(fieldValue, ctx.event().fields().get(fieldValue));
-            }
-            Object[] array = new Object[5];
-            array[0] = show_data;
-
-            meta_info.putOpt("show_data", array);
-            meta_info.putOpt("show_fields", show_field_arr);
+        JSONObject condition = JSONUtil.createObj();
+        AggregationEventProcessorConfig conf = (AggregationEventProcessorConfig) ctx.eventDefinition().get().config();
+        condition.putOpt("query", conf.query());
+        condition.putOpt("gl2_message_id", ctx.event().fields().get("gl2_message_id"));
+        if (ctx.event().timerangeStart().isPresent()){
+            condition.putOpt("timerangeStart", ctx.event().timerangeStart().get().toString("yyyy-MM-dd HH:mm:ss"));
         }
-
+        if (ctx.event().timerangeEnd().isPresent()) {
+            condition.putOpt("timerangeEnd", ctx.event().timerangeEnd().get().toString("yyyy-MM-dd HH:mm:ss"));
+        }
+        JSONObject meta_info = JSONUtil.createObj();
+        meta_info.putOpt("condition", condition);
+        meta_info.putOpt("show_fields", ctx.event().fields().get("show_fields"));
         jsonObject.putOpt("meta_info", meta_info.toString());
 
         HttpResponse response = HttpRequest.post(String.valueOf(httpUrl))
