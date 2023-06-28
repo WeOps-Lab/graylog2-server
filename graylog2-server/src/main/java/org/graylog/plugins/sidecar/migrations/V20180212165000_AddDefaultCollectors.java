@@ -56,235 +56,68 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
     public void upgrade() {
 
         removeConfigPath();
-
-        final String beatsPreambel =
-                "# 必填字段\n" +
-                "fields_under_root: true\n" +
-                "fields.collector_node_id: ${sidecar.nodeName}\n" +
-                "fields.gl2_source_collector: ${sidecar.nodeId}\n\n";
-
         ensureCollector(
                 "filebeat",
                 "exec",
                 "linux",
-                "/usr/share/filebeat/bin/filebeat",
+                "/usr/local/gse/sidecar/bin/filebeat",
                 "-c  %s",
                 "test config -c %s",
-                beatsPreambel +
-                        "filebeat.inputs:\n" +
-                        "- input_type: log\n" +
-                        "  paths:\n" +
-                        "    - /var/log/*.log\n" +
-                        "  type: log\n" +
-                        "output.kafka:\n" +
-                        "   hosts: [\"10.11.25.49:9092\"]\n" +
-                        "   topic: 'filebeat'\n"+
-                        "   partition.round_robin:\n"+
-                        "      reachable_only: false\n"+
-                        "   required_acks: 1\n"+
-                        "      compression: gzip\n"+
-                        "   max_message_bytes: 1000000"+
-                        "path:\n" +
-                        "  data: /var/lib/collectors/filebeat/data\n" +
-                        "  logs: /var/lib/collectors/filebeat/log"
+                ""
+        );
+        ensureCollector(
+                "filebeat",
+                "svc",
+                "windows",
+                "C:\\gse\\sidecar\\filebeat.exe",
+                "-c \"%s\"",
+                "test config -c \"%s\"",
+                ""
         );
         ensureCollector(
                 "winlogbeat",
                 "svc",
                 "windows",
-                "C:\\Program Files\\Graylog\\sidecar\\winlogbeat.exe",
+                "C:\\gse\\sidecar\\winlogbeat.exe",
                 "-c \"%s\"",
                 "test config -c \"%s\"",
-                beatsPreambel +
-                        "output.kafka:\n" +
-                        "   hosts: [\"10.11.25.49:9092\"]\n" +
-                        "   topic: 'filebeat'\n"+
-                        "   partition.round_robin:\n"+
-                        "      reachable_only: false\n"+
-                        "   required_acks: 1\n"+
-                        "      compression: gzip\n"+
-                        "   max_message_bytes: 1000000"+
-                        "path:\n" +
-                        "  data: C:\\Program Files\\sidecar\\cache\\winlogbeat\\data\n" +
-                        "  logs: C:\\Program Files\\sidecar\\logs\n" +
-                        "tags:\n" +
-                        " - windows\n" +
-                        "winlogbeat:\n" +
-                        "  event_logs:\n" +
-                        "   - name: Application\n" +
-                        "   - name: System\n" +
-                        "   - name: Security"
+                ""
         );
         ensureCollector(
-                "nxlog",
+                "uniprobe",
                 "exec",
                 "linux",
-                "/usr/bin/nxlog",
-                "-f -c %s",
-                "-v -c %s",
-                "define ROOT /usr/bin\n" +
-                        "\n" +
-                        "<Extension gelfExt>\n" +
-                        "  Module xm_gelf\n" +
-                        "  # Avoid truncation of the short_message field to 64 characters.\n" +
-                        "  ShortMessageLength 65536\n" +
-                        "</Extension>\n" +
-                        "\n" +
-                        "<Extension syslogExt>\n" +
-                        "  Module xm_syslog\n" +
-                        "</Extension>\n" +
-                        "\n" +
-                        "User nxlog\n" +
-                        "Group nxlog\n" +
-                        "\n" +
-                        "Moduledir /usr/lib/nxlog/modules\n" +
-                        "CacheDir /var/spool/nxlog/data\n" +
-                        "PidFile /var/run/nxlog/nxlog.pid\n" +
-                        "LogFile /var/log/nxlog/nxlog.log\n" +
-                        "LogLevel INFO\n" +
-                        "\n" +
-                        "\n" +
-                        "<Input file>\n" +
-                        "\tModule im_file\n" +
-                        "\tFile '/var/log/*.log'\n" +
-                        "\tPollInterval 1\n" +
-                        "\tSavePos\tTrue\n" +
-                        "\tReadFromLast True\n" +
-                        "\tRecursive False\n" +
-                        "\tRenameCheck False\n" +
-                        "\tExec $FileName = file_name(); # Send file name with each message\n" +
-                        "</Input>\n" +
-                        "\n" +
-                        "#<Input syslog-udp>\n" +
-                        "#\tModule im_udp\n" +
-                        "#\tHost 127.0.0.1\n" +
-                        "#\tPort 514\n" +
-                        "#\tExec parse_syslog_bsd();\n" +
-                        "#</Input>\n" +
-                        "\n" +
-                        "<Output gelf>\n" +
-                        "\tModule om_tcp\n" +
-                        "\tHost 192.168.1.1\n" +
-                        "\tPort 12201\n" +
-                        "\tOutputType  GELF_TCP\n" +
-                        "\t<Exec>\n" +
-                        "\t  # These fields are needed for Graylog\n" +
-                        "\t  $gl2_source_collector = '${sidecar.nodeId}';\n" +
-                        "\t  $collector_node_id = '${sidecar.nodeName}';\n" +
-                        "\t</Exec>\n" +
-                        "</Output>\n" +
-                        "\n" +
-                        "\n" +
-                        "<Route route-1>\n" +
-                        "  Path file => gelf\n" +
-                        "</Route>\n" +
-                        "#<Route route-2>\n" +
-                        "#  Path syslog-udp => gelf\n" +
-                        "#</Route>\n" +
-                        "\n" +
-                        "\n"
+                "/usr/local/gse/sidecar/bin/uniprobe",
+                "",
+                "",
+                ""
         );
         ensureCollector(
-                "nxlog",
-                "svc",
-                "windows",
-                "C:\\Program Files (x86)\\nxlog\\nxlog.exe",
-                "-c \"%s\"",
-                "-v -f -c \"%s\"",
-                "define ROOT C:\\Program Files (x86)\\nxlog\n" +
-                        "\n" +
-                        "Moduledir %ROOT%\\modules\n" +
-                        "CacheDir %ROOT%\\data\n" +
-                        "Pidfile %ROOT%\\data\\nxlog.pid\n" +
-                        "SpoolDir %ROOT%\\data\n" +
-                        "LogFile %ROOT%\\data\\nxlog.log\n" +
-                        "LogLevel INFO\n" +
-                        "\n" +
-                        "<Extension logrotate>\n" +
-                        "    Module  xm_fileop\n" +
-                        "    <Schedule>\n" +
-                        "        When    @daily\n" +
-                        "        Exec    file_cycle('%ROOT%\\data\\nxlog.log', 7);\n" +
-                        "     </Schedule>\n" +
-                        "</Extension>\n" +
-                        "\n" +
-                        "\n" +
-                        "<Extension gelfExt>\n" +
-                        "  Module xm_gelf\n" +
-                        "  # Avoid truncation of the short_message field to 64 characters.\n" +
-                        "  ShortMessageLength 65536\n" +
-                        "</Extension>\n" +
-                        "\n" +
-                        "<Input eventlog>\n" +
-                        "        Module im_msvistalog\n" +
-                        "        PollInterval 1\n" +
-                        "        SavePos True\n" +
-                        "        ReadFromLast True\n" +
-                        "        \n" +
-                        "        #Channel System\n" +
-                        "        #<QueryXML>\n" +
-                        "        #  <QueryList>\n" +
-                        "        #   <Query Id='1'>\n" +
-                        "        #    <Select Path='Security'>*[System/Level=4]</Select>\n" +
-                        "        #    </Query>\n" +
-                        "        #  </QueryList>\n" +
-                        "        #</QueryXML>\n" +
-                        "</Input>\n" +
-                        "\n" +
-                        "\n" +
-                        "<Input file>\n" +
-                        "\tModule im_file\n" +
-                        "\tFile 'C:\\Windows\\MyLogDir\\\\*.log'\n" +
-                        "\tPollInterval 1\n" +
-                        "\tSavePos\tTrue\n" +
-                        "\tReadFromLast True\n" +
-                        "\tRecursive False\n" +
-                        "\tRenameCheck False\n" +
-                        "\tExec $FileName = file_name(); # Send file name with each message\n" +
-                        "</Input>\n" +
-                        "\n" +
-                        "\n" +
-                        "<Output gelf>\n" +
-                        "\tModule om_tcp\n" +
-                        "\tHost 192.168.1.1\n" +
-                        "\tPort 12201\n" +
-                        "\tOutputType  GELF_TCP\n" +
-                        "\t<Exec>\n" +
-                        "\t  # These fields are needed for Graylog\n" +
-                        "\t  $gl2_source_collector = '${sidecar.nodeId}';\n" +
-                        "\t  $collector_node_id = '${sidecar.nodeName}';\n" +
-                        "\t</Exec>\n" +
-                        "</Output>\n" +
-                        "\n" +
-                        "\n" +
-                        "<Route route-1>\n" +
-                        "  Path eventlog => gelf\n" +
-                        "</Route>\n" +
-                        "<Route route-2>\n" +
-                        "  Path file => gelf\n" +
-                        "</Route>\n" +
-                        "\n"
+                "auditbeat",
+                "exec",
+                "linux",
+                "/usr/local/gse/sidecar/bin/auditbeat",
+                "-c  %s",
+                "test config -c %s",
+                ""
         );
         ensureCollector(
-                "filebeat",
+                "packetbeat",
+                "exec",
+                "linux",
+                "/usr/local/gse/sidecar/bin/packetbeat",
+                "-c  %s",
+                "test config -c %s",
+                ""
+        );
+        ensureCollector(
+                "packetbeat",
                 "svc",
                 "windows",
-                "C:\\Program Files\\Graylog\\sidecar\\filebeat.exe",
-                "-c \"%s\"",
-                "test config -c \"%s\"",
-                beatsPreambel +
-                        "output.logstash:\n" +
-                        "   hosts: [\"192.168.1.1:5044\"]\n" +
-                        "path:\n" +
-                        "  data: C:\\Program Files\\Graylog\\sidecar\\cache\\filebeat\\data\n" +
-                        "  logs: C:\\Program Files\\Graylog\\sidecar\\logs\n" +
-                        "tags:\n" +
-                        " - windows\n" +
-                        "filebeat.inputs:\n" +
-                        "- type: log\n" +
-                        "  enabled: true\n" +
-                        "  paths:\n" +
-                        "    - C:\\logs\\log.log\n"
+                "C:\\gse\\sidecar\\packetbeat.exe",
+                "-c %s",
+                "test config -c %s",
+                ""
         );
     }
 
