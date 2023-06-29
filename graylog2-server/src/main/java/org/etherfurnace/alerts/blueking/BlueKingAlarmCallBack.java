@@ -2,14 +2,8 @@ package org.etherfurnace.alerts.blueking;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
-import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
-import cn.hutool.json.JSON;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import net.minidev.json.parser.JSONParser;
-import net.minidev.json.parser.ParseException;
 import org.apache.log4j.Logger;
 import org.graylog2.plugin.alarms.AlertCondition.CheckResult;
 import org.graylog2.plugin.alarms.callbacks.AlarmCallback;
@@ -114,33 +108,18 @@ public class BlueKingAlarmCallBack implements AlarmCallback {
             jsonObject.putOpt("action", "firing");
             jsonObject.putOpt("alarm_type", "api_default");
 
-            JSONObject show_data = JSONUtil.createObj();
-
-            JSON json = JSONUtil.parse(meta_info);
-            JSONObject meta = (JSONObject) json;
-
-            // 获取键对应的值
-            Object showFieldsValue = meta.get("show_fields");
-            if (showFieldsValue instanceof JSONArray) {
-                JSONArray showFieldsArray = (JSONArray) showFieldsValue;
-                for (Object field : showFieldsArray) {
-                    String fieldValue = (String) field;
-                    show_data.putOpt(fieldValue, checkResult.getMatchingMessages().get(0).getFields().get(fieldValue));
-                }
-            }
-            meta.putOpt("show_data", show_data);
-            jsonObject.putOpt("meta_info", meta);
-
             if (checkResult.getMatchingMessages().size() == 0) {
                 jsonObject.putOpt("ip", ip);
                 jsonObject.putOpt("level", level);
                 jsonObject.putOpt("alarm_name", alarm_name);
                 jsonObject.putOpt("alarm_content", alarm_content);
+                jsonObject.putOpt("meta_info", meta_info);
             } else {
                 jsonObject.putOpt("ip", getPropertyValue(checkResult.getMatchingMessages().get(0).getFields(), ip));
                 jsonObject.putOpt("level", getPropertyValue(checkResult.getMatchingMessages().get(0).getFields(), level));
                 jsonObject.putOpt("alarm_name", getPropertyValue(checkResult.getMatchingMessages().get(0).getFields(), alarm_name));
                 jsonObject.putOpt("alarm_content", getPropertyValue(checkResult.getMatchingMessages().get(0).getFields(), alarm_content));
+                jsonObject.putOpt("meta_info", getPropertyValue(checkResult.getMatchingMessages().get(0).getFields(), meta_info));
             }
 
             HttpResponse response = HttpRequest.post(blueKingUrl)

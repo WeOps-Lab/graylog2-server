@@ -18,8 +18,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import lodash from 'lodash';
 
-import { URLWhiteListInput } from 'components/common';
+import {URLWhiteListInput} from 'components/common';
 import * as FormsUtils from 'util/FormsUtils';
+import {ControlLabel, Input} from "../../bootstrap";
 
 class HttpNotificationForm extends React.Component {
   static propTypes = {
@@ -31,10 +32,11 @@ class HttpNotificationForm extends React.Component {
 
   static defaultConfig = {
     url: '',
+    secret: '',
   };
 
   propagateChange = (key, value) => {
-    const { config, onChange } = this.props;
+    const {config, onChange} = this.props;
     const nextConfig = lodash.cloneDeep(config);
 
     nextConfig[key] = value;
@@ -42,33 +44,45 @@ class HttpNotificationForm extends React.Component {
   };
 
   handleChange = (event) => {
-    const { name } = event.target;
-
+    const {name} = event.target;
     this.propagateChange(name, FormsUtils.getValueFromInput(event.target));
   };
 
   onValidationChange = (validationState) => {
-    const { setIsSubmitEnabled } = this.props;
+    const {setIsSubmitEnabled} = this.props;
 
     setIsSubmitEnabled(validationState !== 'error');
   };
 
   render() {
-    const { config, validation } = this.props;
+    const {config, validation} = this.props;
 
     return (
-      <URLWhiteListInput label="URL"
-                         onChange={this.handleChange}
-                         validationState={validation.errors.url ? 'error' : null}
-                         validationMessage={lodash.get(validation, 'errors.url[0]', '当事件发生时触发的URL.')}
-                         onValidationChange={this.onValidationChange}
-                         url={config.url} />
+      <div>
+        <URLWhiteListInput label="URL"
+                           onChange={this.handleChange}
+                           validationState={validation.errors.url ? 'error' : null}
+                           validationMessage={lodash.get(validation, 'errors.url[0]', '当事件发生时触发的URL.')}
+                           onValidationChange={this.onValidationChange}
+                           url={config.url}/>
+        <Input id="notification-secret"
+               name="secret"
+               label="告警中心秘钥"
+               type="text"
+               bsStyle={validation.errors.secret ? 'error' : null}
+               help={lodash.get(validation, 'errors.secret[0]', '告警中心秘钥')}
+               value={config.secret || ''}
+               onChange={this.handleChange}
+               required/>
+      </div>
+
     );
   }
 }
 
 HttpNotificationForm.defaultProps = {
-  setIsSubmitEnabled: () => {},
+  setIsSubmitEnabled: () => {
+  },
 };
 
 export default HttpNotificationForm;
