@@ -7,12 +7,13 @@ import cn.hutool.json.JSONUtil;
 import com.google.common.collect.ImmutableList;
 import okhttp3.HttpUrl;
 import org.graylog.events.notifications.*;
+import org.graylog.events.processor.aggregation.AggregationEventProcessorConfig;
 import org.graylog2.plugin.MessageSummary;
 import org.graylog2.system.urlwhitelist.UrlWhitelistNotificationService;
 import org.graylog2.system.urlwhitelist.UrlWhitelistService;
-import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+//import org.joda.time.LocalDateTime;
+//import org.joda.time.format.DateTimeFormat;
+//import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -33,19 +34,20 @@ public class BlueKingUacEventNotification implements EventNotification {
 
     private final UrlWhitelistService whitelistService;
     private final UrlWhitelistNotificationService urlWhitelistNotificationService;
-    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+//    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
 
     @Inject
     public BlueKingUacEventNotification(EventNotificationService notificationCallbackService,
-                                 UrlWhitelistService whitelistService,
-                                 UrlWhitelistNotificationService urlWhitelistNotificationService) {
+                                        UrlWhitelistService whitelistService,
+                                        UrlWhitelistNotificationService urlWhitelistNotificationService) {
         this.notificationCallbackService = notificationCallbackService;
 
         this.whitelistService = whitelistService;
         this.urlWhitelistNotificationService = urlWhitelistNotificationService;
     }
-    public static String getAlarmLevel (Integer priority) {
+
+    public static String getAlarmLevel(Integer priority) {
         Map<Integer, String> levelMap = new HashMap<>();
         levelMap.put(1, "remain");
         levelMap.put(2, "warning");
@@ -77,7 +79,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         }
 
         JSONObject jsonObject = JSONUtil.createObj();
-        jsonObject.putOpt("source_time", dateTimeFormatter.print(LocalDateTime.now()));
+        jsonObject.putOpt("source_time", ctx.event().eventTimestamp().toString("yyyy-MM-dd HH:mm:ss"));
         jsonObject.putOpt("action", "firing");
         jsonObject.putOpt("alarm_type", "api_default");
         jsonObject.putOpt("level", getAlarmLevel((int) ctx.event().priority()));
@@ -102,40 +104,36 @@ public class BlueKingUacEventNotification implements EventNotification {
         jsonObject.putOpt("alarm_name", alarm_name);
         jsonObject.putOpt("alarm_content", alarm_content);
 
-        if (object==null) {
+        if (object == null) {
             jsonObject.putOpt("object", bk_inst_name);
         }
 
-        JSONObject meta_info = JSONUtil.createObj();
-        String show_fields = ctx.event().fields().get("show_fields");
-
-        if (show_fields != null) {
-            JSONObject show_data = JSONUtil.createObj();
-            String[] show_field_arr = show_fields.split(",");
-            for (Object field : show_field_arr) {
-                String fieldValue = (String) field;
-                show_data.putOpt(fieldValue, ctx.event().fields().get(fieldValue));
-            }
-            Object[] array = new Object[5];
-            array[0] = show_data;
-
-            meta_info.putOpt("show_data", array);
-            meta_info.putOpt("show_fields", show_field_arr);
+        JSONObject condition = JSONUtil.createObj();
+        AggregationEventProcessorConfig conf = (AggregationEventProcessorConfig) ctx.eventDefinition().get().config();
+        condition.putOpt("query", conf.query());
+        condition.putOpt("gl2_message_id", ctx.event().fields().get("gl2_message_id"));
+        if (ctx.event().timerangeStart().isPresent()){
+            condition.putOpt("timerangeStart", ctx.event().timerangeStart().get().toString("yyyy-MM-dd HH:mm:ss"));
         }
-
+        if (ctx.event().timerangeEnd().isPresent()) {
+            condition.putOpt("timerangeEnd", ctx.event().timerangeEnd().get().toString("yyyy-MM-dd HH:mm:ss"));
+        }
+        JSONObject meta_info = JSONUtil.createObj();
+        meta_info.putOpt("condition", condition);
+        meta_info.putOpt("show_fields", ctx.event().fields().get("show_fields"));
         jsonObject.putOpt("meta_info", meta_info.toString());
 
         HttpResponse response = HttpRequest.post(String.valueOf(httpUrl))
                 .header("X-Secret", httpSecret)
                 .body(jsonObject.toString())
                 .execute();
-        LOG.info("告警推送结果：" + response.body());
+        LOG.info("告警名称:" + alarm_name + ",告警推送结果：" + response.body());
 
     }
 
     private void publishSystemNotificationForWhitelistFailure(String url, String eventNotificationTitle) {
-        final String description = "The alert notification \"" + eventNotificationTitle +
-                "\" is trying to access a URL which is not whitelisted. Please check your configuration. [url: \"" +
+        final String description = "告警通知 \"" + eventNotificationTitle +
+                "\" 不在白名单内，请检查配置. [url: \"" +
                 url + "\"]";
         urlWhitelistNotificationService.publishWhitelistFailure(description);
     }
