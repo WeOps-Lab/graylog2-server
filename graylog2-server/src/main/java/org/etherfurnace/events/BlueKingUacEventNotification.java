@@ -11,9 +11,9 @@ import org.graylog.events.processor.aggregation.AggregationEventProcessorConfig;
 import org.graylog2.plugin.MessageSummary;
 import org.graylog2.system.urlwhitelist.UrlWhitelistNotificationService;
 import org.graylog2.system.urlwhitelist.UrlWhitelistService;
-import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+//import org.joda.time.LocalDateTime;
+//import org.joda.time.format.DateTimeFormat;
+//import org.joda.time.format.DateTimeFormatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,7 +34,7 @@ public class BlueKingUacEventNotification implements EventNotification {
 
     private final UrlWhitelistService whitelistService;
     private final UrlWhitelistNotificationService urlWhitelistNotificationService;
-    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+//    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
 
 
     @Inject
@@ -79,7 +79,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         }
 
         JSONObject jsonObject = JSONUtil.createObj();
-        jsonObject.putOpt("source_time", dateTimeFormatter.print(LocalDateTime.now()));
+        jsonObject.putOpt("source_time", ctx.event().eventTimestamp().toString("yyyy-MM-dd HH:mm:ss"));
         jsonObject.putOpt("action", "firing");
         jsonObject.putOpt("alarm_type", "api_default");
         jsonObject.putOpt("level", getAlarmLevel((int) ctx.event().priority()));
