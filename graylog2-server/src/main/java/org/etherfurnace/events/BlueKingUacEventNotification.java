@@ -11,15 +11,14 @@ import org.graylog.events.processor.aggregation.AggregationEventProcessorConfig;
 import org.graylog2.plugin.MessageSummary;
 import org.graylog2.system.urlwhitelist.UrlWhitelistNotificationService;
 import org.graylog2.system.urlwhitelist.UrlWhitelistService;
-//import org.joda.time.LocalDateTime;
-//import org.joda.time.format.DateTimeFormat;
-//import org.joda.time.format.DateTimeFormatter;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class BlueKingUacEventNotification implements EventNotification {
 
@@ -29,20 +28,15 @@ public class BlueKingUacEventNotification implements EventNotification {
     }
 
     private static final Logger LOG = LoggerFactory.getLogger(BlueKingUacEventNotification.class);
-
     private final EventNotificationService notificationCallbackService;
-
     private final UrlWhitelistService whitelistService;
     private final UrlWhitelistNotificationService urlWhitelistNotificationService;
-//    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-
 
     @Inject
     public BlueKingUacEventNotification(EventNotificationService notificationCallbackService,
                                         UrlWhitelistService whitelistService,
                                         UrlWhitelistNotificationService urlWhitelistNotificationService) {
         this.notificationCallbackService = notificationCallbackService;
-
         this.whitelistService = whitelistService;
         this.urlWhitelistNotificationService = urlWhitelistNotificationService;
     }
@@ -61,7 +55,6 @@ public class BlueKingUacEventNotification implements EventNotification {
         final BlueKingUacEventNotificationConfig config = (BlueKingUacEventNotificationConfig) ctx.notificationConfig();
         final HttpUrl httpUrl = HttpUrl.parse(config.url());
         String httpSecret = config.secret();
-
 
         if (httpUrl == null) {
             throw new TemporaryEventNotificationException(
@@ -103,6 +96,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         jsonObject.putOpt("ip", ip);
         jsonObject.putOpt("alarm_name", alarm_name);
         jsonObject.putOpt("alarm_content", alarm_content);
+        jsonObject.putOpt("alarm_id", UUID.randomUUID());
 
         if (object == null) {
             jsonObject.putOpt("object", bk_inst_name);
@@ -121,6 +115,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         JSONObject meta_info = JSONUtil.createObj();
         meta_info.putOpt("condition", condition);
         meta_info.putOpt("show_fields", ctx.event().fields().get("show_fields"));
+        meta_info.putOpt("title", ctx.eventDefinition().get().title());
         jsonObject.putOpt("meta_info", meta_info.toString());
 
         HttpResponse response = HttpRequest.post(String.valueOf(httpUrl))
