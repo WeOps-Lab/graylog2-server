@@ -96,7 +96,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         jsonObject.putOpt("ip", ip);
         jsonObject.putOpt("alarm_name", alarm_name);
         jsonObject.putOpt("alarm_content", alarm_content);
-        jsonObject.putOpt("alarm_id", UUID.randomUUID());
+        jsonObject.putOpt("id", UUID.randomUUID());
 
         if (object == null) {
             jsonObject.putOpt("object", bk_inst_name);
@@ -104,14 +104,24 @@ public class BlueKingUacEventNotification implements EventNotification {
 
         JSONObject condition = JSONUtil.createObj();
         AggregationEventProcessorConfig conf = (AggregationEventProcessorConfig) ctx.eventDefinition().get().config();
-        condition.putOpt("query", conf.query());
-        condition.putOpt("gl2_message_id", ctx.event().fields().get("gl2_message_id"));
-        if (ctx.event().timerangeStart().isPresent()){
+
+        // 获取原始日志查询参数
+        if (ctx.event().fields().get("gl2_message_id").isEmpty()){
+            condition.putOpt("query", conf.query());
+        } else {
+            condition.putOpt("query", "gl2_message_id:" + ctx.event().fields().get("gl2_message_id"));
+        }
+
+        // 获取原始日志查询时间范围
+        if (ctx.event().timerangeStart().isPresent() && ctx.event().timerangeEnd().isPresent()){
             condition.putOpt("timerangeStart", ctx.event().timerangeStart().get().toString("yyyy-MM-dd HH:mm:ss"));
-        }
-        if (ctx.event().timerangeEnd().isPresent()) {
             condition.putOpt("timerangeEnd", ctx.event().timerangeEnd().get().toString("yyyy-MM-dd HH:mm:ss"));
+        } else {
+            condition.putOpt("timerangeStart", ctx.event().eventTimestamp().minus(
+                    conf.searchWithinMs() + 300000).toString("yyyy-MM-dd HH:mm:ss"));
+            condition.putOpt("timerangeEnd", ctx.event().eventTimestamp().toString("yyyy-MM-dd HH:mm:ss"));
         }
+
         JSONObject meta_info = JSONUtil.createObj();
         meta_info.putOpt("condition", condition);
         meta_info.putOpt("show_fields", ctx.event().fields().get("show_fields"));
