@@ -12,6 +12,7 @@ import org.graylog2.plugin.MessageSummary;
 import org.graylog2.system.urlwhitelist.UrlWhitelistNotificationService;
 import org.graylog2.system.urlwhitelist.UrlWhitelistService;
 
+import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,6 +56,8 @@ public class BlueKingUacEventNotification implements EventNotification {
         final BlueKingUacEventNotificationConfig config = (BlueKingUacEventNotificationConfig) ctx.notificationConfig();
         final HttpUrl httpUrl = HttpUrl.parse(config.url());
         String httpSecret = config.secret();
+        DateTimeZone useZone = DateTimeZone.forID("Asia/Shanghai");
+        String timeStr = "yyyy-MM-dd HH:mm:ss.SSS";
 
         if (httpUrl == null) {
             throw new TemporaryEventNotificationException(
@@ -72,7 +75,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         }
 
         JSONObject jsonObject = JSONUtil.createObj();
-        jsonObject.putOpt("source_time", ctx.event().eventTimestamp().toString("yyyy-MM-dd HH:mm:ss"));
+        jsonObject.putOpt("source_time", ctx.event().eventTimestamp().toDateTime(useZone).toString(timeStr));
         jsonObject.putOpt("action", "firing");
         jsonObject.putOpt("alarm_type", "api_default");
         jsonObject.putOpt("level", getAlarmLevel((int) ctx.event().priority()));
@@ -114,12 +117,12 @@ public class BlueKingUacEventNotification implements EventNotification {
 
         // 获取原始日志查询时间范围
         if (ctx.event().timerangeStart().isPresent() && ctx.event().timerangeEnd().isPresent()){
-            condition.putOpt("timerangeStart", ctx.event().timerangeStart().get().toString("yyyy-MM-dd HH:mm:ss"));
-            condition.putOpt("timerangeEnd", ctx.event().timerangeEnd().get().toString("yyyy-MM-dd HH:mm:ss"));
+            condition.putOpt("timerangeStart", ctx.event().timerangeStart().get().toDateTime(useZone).toString(timeStr));
+            condition.putOpt("timerangeEnd", ctx.event().timerangeEnd().get().toDateTime(useZone).toString(timeStr));
         } else {
             condition.putOpt("timerangeStart", ctx.event().eventTimestamp().minus(
-                    conf.searchWithinMs() + 300000).toString("yyyy-MM-dd HH:mm:ss"));
-            condition.putOpt("timerangeEnd", ctx.event().eventTimestamp().toString("yyyy-MM-dd HH:mm:ss"));
+                    conf.searchWithinMs() + 300000).toDateTime(useZone).toString(timeStr));
+            condition.putOpt("timerangeEnd", ctx.event().eventTimestamp().toDateTime(useZone).toString(timeStr));
         }
 
         JSONObject meta_info = JSONUtil.createObj();
