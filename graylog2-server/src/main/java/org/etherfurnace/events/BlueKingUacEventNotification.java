@@ -75,7 +75,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         }
 
         JSONObject jsonObject = JSONUtil.createObj();
-        jsonObject.putOpt("source_time", ctx.event().eventTimestamp().toDateTime(useZone).toString(timeStr));
+        jsonObject.putOpt("source_time", ctx.event().eventTimestamp().toDateTime(useZone).toString("yyyy-MM-dd HH:mm:ss"));
         jsonObject.putOpt("action", "firing");
         jsonObject.putOpt("alarm_type", "api_default");
         jsonObject.putOpt("level", getAlarmLevel((int) ctx.event().priority()));
