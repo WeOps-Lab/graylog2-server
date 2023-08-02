@@ -68,7 +68,7 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
                 "exec",
                 "linux",
                 "/usr/local/gse/sidecar/bin/filebeat",
-                "-c  %s",
+                "-c  %s  --path.home /usr/local/gse/sidecar",
                 "test config -c %s",
                 ""
         );
@@ -76,7 +76,7 @@ public class V20180212165000_AddDefaultCollectors extends Migration {
                 "filebeat",
                 "svc",
                 "windows",
-                "C:\\gse\\sidecar\\bin\\filebeat.exe",
+                "C:\\gse\\sidecar\\bin\\filebeat.exe  --path.home C:\\gse\\sidecar",
                 "-c \"%s\"",
                 "test config -c \"%s\"",
                 ""
