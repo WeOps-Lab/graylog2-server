@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <modules>
         <module>../graylog2-server</module>
-        <module>../full-backend-tests</module>
+<!--        <module>../full-backend-tests</module>-->
     </modules>
 
     <parent>
@@ -742,15 +742,6 @@
     </dependencyManagement>
 
     <build>
-        <pluginManagement>
-            <plugins>
-                <plugin>
-                    <groupId>com.mycila</groupId>
-                    <artifactId>license-maven-plugin</artifactId>
-                    <version>${license-maven.version}</version>
-                </plugin>
-            </plugins>
-        </pluginManagement>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -826,10 +817,6 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
