@@ -280,19 +280,40 @@ public class IndicesAdapterES7 implements IndicesAdapter {
 
     @Override
     public void restore(String indexName) {
-        AtomicBoolean hasError = new AtomicBoolean(false);
-        Map<String, Object> registerRepositorySettings = new HashMap<>();
-        registerRepositorySettings.put("indices", indexName);
-        RestoreSnapshotRequest restoreSnapshotRequest = new RestoreSnapshotRequest("datainsight", indexName).indexSettings(registerRepositorySettings);
-        client.execute((restHighLevelClient, requestOptions) -> {
-            hasError.set(true);
-            return "存储恢复失败 " + indexName;
-        });
+        RestoreSnapshotRequest request = new RestoreSnapshotRequest();
+        request.repository("datainsight");
+        request.snapshot(indexName);
+        request.indices(indexName);
+        request.includeGlobalState(false);
+        request.indicesOptions(IndicesOptions.fromOptions(false, false, true, true));
+        request.waitForCompletion(true);
+        try {
+            client.execute((restHighLevelClient, requestOptions) -> restHighLevelClient.snapshot().restore(request, requestOptions));
+            //打印成功恢复的索引
+            LOG.info("恢复成功 " + indexName);
+        } catch (Exception e) {
+            //打印恢复失败的索引,并记录异常
+            LOG.error("恢复失败 " + indexName, e);
+        }
     }
 
     @Override
     public void backup(String indexName, String location) {
-
+        CreateSnapshotRequest request = new CreateSnapshotRequest();
+        request.repository("datainsight");
+        request.snapshot(location);
+        request.indices(indexName);
+        request.includeGlobalState(false);
+        request.indicesOptions(IndicesOptions.fromOptions(false, false, true, true));
+        request.waitForCompletion(true);
+        try {
+            client.execute((restHighLevelClient, requestOptions) -> restHighLevelClient.snapshot().create(request, requestOptions));
+            //打印成功备份的索引
+            LOG.info("备份成功 " + indexName);
+        } catch (Exception e) {
+            //打印备份失败的索引,并记录异常
+            LOG.error("备份失败 " + indexName, e);
+        }
     }
 
     @Override
