@@ -37,6 +37,7 @@
     <properties>
         <elasticsearch.version>7.9.1-0</elasticsearch.version>
         <maven.deploy.skip>true</maven.deploy.skip>
+        <jest.version>2.4.15+jackson</jest.version>
     </properties>
 
     <dependencies>
@@ -93,6 +94,7 @@
             <version>${assertj-joda-time.version}</version>
             <scope>test</scope>
         </dependency>
+
         <dependency>
             <groupId>org.testcontainers</groupId>
             <artifactId>elasticsearch</artifactId>

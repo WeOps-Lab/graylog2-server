@@ -399,6 +399,8 @@ public class StreamResource extends RestResource {
         @ApiResponse(code = 404, message = "Stream not found."),
         @ApiResponse(code = 400, message = "Invalid or missing Stream id.")
     })
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @NoAuditEvent("only used for testing stream matches")
     public TestMatchResponse testMatch(@ApiParam(name = "streamId", required = true)
                                        @PathParam("streamId") String streamId,

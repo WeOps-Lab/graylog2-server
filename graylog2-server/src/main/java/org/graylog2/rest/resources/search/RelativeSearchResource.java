@@ -106,15 +106,15 @@ public class RelativeSearchResource extends SearchResource {
         return search(query, limit, offset, filter, decorate, searchUser, fieldList, sorting, timeRange);
     }
 
-    @GET
-    @Timed
-    @ApiOperation(value = "Message search with relative timerange.",
-            notes = "Search for messages in a relative timerange, specified as seconds from now. " +
-                    "Example: 300 means search from 5 minutes ago to now.")
-    @Produces(MoreMediaTypes.TEXT_CSV)
-    @ApiResponses(value = {
-            @ApiResponse(code = 400, message = "Invalid timerange parameters provided.")
-    })
+//    @GET
+//    @Timed
+//    @ApiOperation(value = "Message search with relative timerange.",
+//            notes = "Search for messages in a relative timerange, specified as seconds from now. " +
+//                    "Example: 300 means search from 5 minutes ago to now.")
+//    @Produces(MoreMediaTypes.TEXT_CSV)
+//    @ApiResponses(value = {
+//            @ApiResponse(code = 400, message = "Invalid timerange parameters provided.")
+//    })
     public ChunkedOutput<ScrollResult.ScrollChunk> searchRelativeChunked(
             @ApiParam(name = "query", value = "Query (Lucene syntax)", required = true)
             @QueryParam("query") @NotEmpty String query,

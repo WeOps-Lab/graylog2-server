@@ -50,15 +50,16 @@ public abstract class AbstractIndexCountBasedRetentionStrategy implements Retent
     }
 
     protected abstract Optional<Integer> getMaxNumberOfIndices(IndexSet indexSet);
+
     protected abstract void retain(List<String> indexNames, IndexSet indexSet);
 
     @Override
     public void retain(IndexSet indexSet) {
         final Map<String, Set<String>> deflectorIndices = indexSet.getAllIndexAliases();
-        final int indexCount = (int)deflectorIndices.keySet()
-            .stream()
-            .filter(indexName -> !indices.isReopened(indexName))
-            .count();
+        final int indexCount = (int) deflectorIndices.keySet()
+                .stream()
+                .filter(indexName -> !indices.isReopened(indexName))
+                .count();
 
         final Optional<Integer> maxIndices = getMaxNumberOfIndices(indexSet);
 
@@ -86,16 +87,16 @@ public abstract class AbstractIndexCountBasedRetentionStrategy implements Retent
 
     private void runRetention(IndexSet indexSet, Map<String, Set<String>> deflectorIndices, int removeCount) {
         final Set<String> orderedIndices = Arrays.stream(indexSet.getManagedIndices())
-            .filter(indexName -> !indices.isReopened(indexName))
-            .filter(indexName -> !(deflectorIndices.getOrDefault(indexName, Collections.emptySet()).contains(indexSet.getWriteIndexAlias())))
-            .sorted((indexName1, indexName2) -> indexSet.extractIndexNumber(indexName2).orElse(0).compareTo(indexSet.extractIndexNumber(indexName1).orElse(0)))
-            .collect(Collectors.toCollection(LinkedHashSet::new));
+                .filter(indexName -> !indices.isReopened(indexName))
+                .filter(indexName -> !(deflectorIndices.getOrDefault(indexName, Collections.emptySet()).contains(indexSet.getWriteIndexAlias())))
+                .sorted((indexName1, indexName2) -> indexSet.extractIndexNumber(indexName2).orElse(0).compareTo(indexSet.extractIndexNumber(indexName1).orElse(0)))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
 
         LinkedList<String> orderedIndicesDescending = new LinkedList<>();
 
         orderedIndices
                 .stream()
-                .skip(orderedIndices.size() - removeCount)
+                .skip(orderedIndices.size() - removeCount + 1)
                 // reverse order to archive oldest index first
                 .collect(Collectors.toCollection(LinkedList::new)).descendingIterator().
                 forEachRemaining(orderedIndicesDescending::add);

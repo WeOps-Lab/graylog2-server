@@ -11,15 +11,15 @@ import org.graylog.events.processor.aggregation.AggregationEventProcessorConfig;
 import org.graylog2.plugin.MessageSummary;
 import org.graylog2.system.urlwhitelist.UrlWhitelistNotificationService;
 import org.graylog2.system.urlwhitelist.UrlWhitelistService;
-import org.joda.time.LocalDateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
+
+import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 public class BlueKingUacEventNotification implements EventNotification {
 
@@ -29,20 +29,15 @@ public class BlueKingUacEventNotification implements EventNotification {
     }
 
     private static final Logger LOG = LoggerFactory.getLogger(BlueKingUacEventNotification.class);
-
     private final EventNotificationService notificationCallbackService;
-
     private final UrlWhitelistService whitelistService;
     private final UrlWhitelistNotificationService urlWhitelistNotificationService;
-    DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
-
 
     @Inject
     public BlueKingUacEventNotification(EventNotificationService notificationCallbackService,
                                         UrlWhitelistService whitelistService,
                                         UrlWhitelistNotificationService urlWhitelistNotificationService) {
         this.notificationCallbackService = notificationCallbackService;
-
         this.whitelistService = whitelistService;
         this.urlWhitelistNotificationService = urlWhitelistNotificationService;
     }
@@ -61,7 +56,8 @@ public class BlueKingUacEventNotification implements EventNotification {
         final BlueKingUacEventNotificationConfig config = (BlueKingUacEventNotificationConfig) ctx.notificationConfig();
         final HttpUrl httpUrl = HttpUrl.parse(config.url());
         String httpSecret = config.secret();
-
+        DateTimeZone useZone = DateTimeZone.forID("Asia/Shanghai");
+        String timeStr = "yyyy-MM-dd HH:mm:ss.SSS";
 
         if (httpUrl == null) {
             throw new TemporaryEventNotificationException(
@@ -79,7 +75,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         }
 
         JSONObject jsonObject = JSONUtil.createObj();
-        jsonObject.putOpt("source_time", dateTimeFormatter.print(LocalDateTime.now()));
+        jsonObject.putOpt("source_time", ctx.event().eventTimestamp().toDateTime(useZone).toString("yyyy-MM-dd HH:mm:ss"));
         jsonObject.putOpt("action", "firing");
         jsonObject.putOpt("alarm_type", "api_default");
         jsonObject.putOpt("level", getAlarmLevel((int) ctx.event().priority()));
@@ -103,6 +99,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         jsonObject.putOpt("ip", ip);
         jsonObject.putOpt("alarm_name", alarm_name);
         jsonObject.putOpt("alarm_content", alarm_content);
+        jsonObject.putOpt("id", UUID.randomUUID());
 
         if (object == null) {
             jsonObject.putOpt("object", bk_inst_name);
@@ -110,17 +107,28 @@ public class BlueKingUacEventNotification implements EventNotification {
 
         JSONObject condition = JSONUtil.createObj();
         AggregationEventProcessorConfig conf = (AggregationEventProcessorConfig) ctx.eventDefinition().get().config();
-        condition.putOpt("query", conf.query());
-        condition.putOpt("gl2_message_id", ctx.event().fields().get("gl2_message_id"));
-        if (ctx.event().timerangeStart().isPresent()){
-            condition.putOpt("timerangeStart", ctx.event().timerangeStart().get().toString("yyyy-MM-dd HH:mm:ss"));
+
+        // 获取原始日志查询参数
+        if (ctx.event().fields().get("gl2_message_id").isEmpty()){
+            condition.putOpt("query", conf.query());
+        } else {
+            condition.putOpt("query", "gl2_message_id:" + ctx.event().fields().get("gl2_message_id"));
         }
-        if (ctx.event().timerangeEnd().isPresent()) {
-            condition.putOpt("timerangeEnd", ctx.event().timerangeEnd().get().toString("yyyy-MM-dd HH:mm:ss"));
+
+        // 获取原始日志查询时间范围
+        if (ctx.event().timerangeStart().isPresent() && ctx.event().timerangeEnd().isPresent()){
+            condition.putOpt("timerangeStart", ctx.event().timerangeStart().get().toDateTime(useZone).toString(timeStr));
+            condition.putOpt("timerangeEnd", ctx.event().timerangeEnd().get().toDateTime(useZone).toString(timeStr));
+        } else {
+            condition.putOpt("timerangeStart", ctx.event().eventTimestamp().minus(
+                    conf.searchWithinMs() + 300000).toDateTime(useZone).toString(timeStr));
+            condition.putOpt("timerangeEnd", ctx.event().eventTimestamp().toDateTime(useZone).toString(timeStr));
         }
+
         JSONObject meta_info = JSONUtil.createObj();
         meta_info.putOpt("condition", condition);
         meta_info.putOpt("show_fields", ctx.event().fields().get("show_fields"));
+        meta_info.putOpt("title", ctx.eventDefinition().get().title());
         jsonObject.putOpt("meta_info", meta_info.toString());
 
         HttpResponse response = HttpRequest.post(String.valueOf(httpUrl))
