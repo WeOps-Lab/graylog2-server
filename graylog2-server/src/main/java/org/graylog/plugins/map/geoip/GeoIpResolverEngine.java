@@ -114,6 +114,10 @@ public class GeoIpResolverEngine {
             message.addField(key + "_geolocation", locationInformation.latitude() + "," + locationInformation.longitude());
             message.addField(key + "_country_code", locationInformation.countryIsoCode());
             message.addField(key + "_city_name", locationInformation.cityName());
+            // 添加省份、国家全称
+            message.addField(key + "_region", locationInformation.region());
+            message.addField(key + "_country", locationInformation.countryName());
+
         });
     }
 
