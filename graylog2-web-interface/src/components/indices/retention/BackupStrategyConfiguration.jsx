@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import {Input} from 'components/bootstrap';
+import {getValueFromInput} from "../../../util/FormsUtils";
 
 class BackupStrategyConfiguration extends React.Component {
   static propTypes = {
@@ -17,10 +18,11 @@ class BackupStrategyConfiguration extends React.Component {
   _onInputUpdate = (field) => {
     return (e) => {
       const update = {};
-      update[field] = e.target.value;
+      const value = getValueFromInput(e.target);
+      update[field] = value;
 
-      this.setState(update);
-      this.props.updateConfig(update);
+      setMaxNumberOfIndices(value);
+      updateConfig(update);
     };
   };
 
