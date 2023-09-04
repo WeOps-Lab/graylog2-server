@@ -21,6 +21,9 @@ import com.codahale.metrics.Timer;
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.net.InetAddresses;
+import com.maxmind.geoip2.DatabaseReader;
+import com.maxmind.geoip2.model.CityResponse;
+import com.maxmind.geoip2.record.Location;
 import org.apache.commons.lang3.StringUtils;
 import org.graylog.plugins.map.config.GeoIpResolverConfig;
 import org.graylog2.plugin.Message;
@@ -29,10 +32,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.Nullable;
+import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.codahale.metrics.MetricRegistry.name;
@@ -61,10 +67,13 @@ public class GeoIpResolverEngine {
     private final GeoIpResolver<GeoAsnInformation> ipAsnResolver;
     private final boolean enabled;
     private final boolean enforceGraylogSchema;
+    private DatabaseReader databaseReader;
+    private final Timer resolveTime;
+
 
 
     public GeoIpResolverEngine(GeoIpVendorResolverService resolverService, GeoIpResolverConfig config, MetricRegistry metricRegistry) {
-        Timer resolveTime = metricRegistry.timer(name(GeoIpResolverEngine.class, "resolveTime"));
+        this.resolveTime = metricRegistry.timer(name(GeoIpResolverEngine.class, "resolveTime"));
 
         enforceGraylogSchema = config.enforceGraylogSchema();
         ipLocationResolver = resolverService.createCityResolver(config, resolveTime);
@@ -76,6 +85,13 @@ public class GeoIpResolverEngine {
 
         this.enabled = ipLocationResolver.isEnabled() || ipAsnResolver.isEnabled();
 
+        // 解析citydb
+        final File database = new File(config.cityDbPath());
+        try {
+            this.databaseReader = new DatabaseReader.Builder(database).build();
+        } catch (IOException e) {
+            LOG.error("GeoIpResolverEngine construction error = ", e.getMessage());
+        }
     }
 
     public boolean filter(Message message) {
@@ -100,7 +116,7 @@ public class GeoIpResolverEngine {
             } else if (enforceGraylogSchema) {
                 addGIMGeoIpDataIfPresent(message, address, prefix);
             } else {
-                addLegacyGeoIpDataIfPresent(message, address, prefix);
+                addLegacyGeoIpDataIfPresentCN(message, address, prefix);
             }
         }
 
@@ -118,6 +134,20 @@ public class GeoIpResolverEngine {
             message.addField(key + "_region", locationInformation.region());
             message.addField(key + "_country", locationInformation.countryName());
 
+        });
+    }
+
+    private void addLegacyGeoIpDataIfPresentCN(Message message, InetAddress address, String key) {
+        final Optional<GeoLocationInformation> geoLocationInformation = extractGeoLocationInformation(address, databaseReader);
+        geoLocationInformation.ifPresent(locationInformation -> {
+            // We will store the coordinates as a "lat,long" string
+            message.addField(key + "_geolocation", locationInformation.latitude() + "," + locationInformation.longitude());
+            message.addField(key + "_country_code", locationInformation.countryIsoCode());
+            message.addField(key + "_city_name", locationInformation.cityName());
+            // 添加省份、国家、时区
+            message.addField(key + "_region", locationInformation.region());
+            message.addField(key + "_country", locationInformation.countryName());
+            message.addField(key + "_timezone", locationInformation.timeZone());
         });
     }
 
@@ -145,6 +175,64 @@ public class GeoIpResolverEngine {
             message.addField(newFieldPrefix + "_as_number", info.asn());
         });
     }
+
+    @VisibleForTesting
+    Optional<GeoLocationInformation> extractGeoLocationInformation(Object fieldValue, DatabaseReader databaseReader) {
+        final InetAddress ipAddress;
+        if (fieldValue instanceof InetAddress) {
+            ipAddress = (InetAddress) fieldValue;
+        } else if (fieldValue instanceof String) {
+            ipAddress = getIpFromFieldValue((String) fieldValue);
+        } else {
+            ipAddress = null;
+        }
+
+        GeoLocationInformation geoLocationInformation = null;
+        if (ipAddress != null) {
+            try (Timer.Context ignored = resolveTime.time()) {
+                if (databaseReader != null) {
+                    final CityResponse response = databaseReader.city(ipAddress);
+                    final Location location = response.getLocation();
+                    final String countryIso = response.getCountry().getIsoCode() == null ? "N/A" : response.getCountry().getIsoCode();
+                    final String countryName = response.getCountry().getNames().get("zh-CN") == null ? "N/A" : response.getCountry().getNames().get("zh-CN");
+                    String subdivisions;
+                    try {
+                        subdivisions = response.getSubdivisions().get(0).getNames().get("zh-CN") == null ? "N/A" : response.getSubdivisions().get(0).getNames().get("zh-CN");
+                    } catch (Exception e) {
+                        subdivisions = "N/A";
+                    }
+                    final String cityName = response.getCity().getNames().get("zh-CN") == null ? "N/A" : response.getCity().getNames().get("zh-CN");
+
+                    geoLocationInformation = GeoLocationInformation.create(
+                            location.getLatitude(),
+                            location.getLongitude(),
+                            countryIso,
+                            countryName,
+                            cityName,
+                            subdivisions,
+                            response.getLocation().getTimeZone()
+                            // 获取大陆
+//                            response.getContinent().getNames().get("zh-CN")
+
+                    );
+                } else {
+                    String[] datas = IP.find(String.valueOf(fieldValue));
+                    geoLocationInformation = GeoLocationInformation.create(
+                            0d, 0d,
+                            "N/A",
+                            datas[2],
+                            datas[1],
+                            "",
+                            datas[0].equals("美国") ? "United States" : datas[0]);
+                }
+            } catch (Exception e) {
+                LOG.debug("Could not get location from IP {}", ipAddress.getHostAddress(), e);
+            }
+        }
+
+        return Optional.ofNullable(geoLocationInformation);
+    }
+
 
     /**
      * Get the message fields that will be checked for IP addresses.
