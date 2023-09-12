@@ -96,7 +96,7 @@ public abstract class AbstractIndexCountBasedRetentionStrategy implements Retent
 
         orderedIndices
                 .stream()
-                .skip(orderedIndices.size() - removeCount + 1)
+                .skip(orderedIndices.size() - removeCount)
                 // reverse order to archive oldest index first
                 .collect(Collectors.toCollection(LinkedList::new)).descendingIterator().
                 forEachRemaining(orderedIndicesDescending::add);
