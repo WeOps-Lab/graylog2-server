@@ -109,7 +109,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         AggregationEventProcessorConfig conf = (AggregationEventProcessorConfig) ctx.eventDefinition().get().config();
 
         // 获取原始日志查询参数
-        if (ctx.event().fields().get("gl2_message_id").isEmpty()){
+        if (ctx.event().fields().get("gl2_message_id") == null || ctx.event().fields().get("gl2_message_id").isEmpty()){
             condition.putOpt("query", conf.query());
         } else {
             condition.putOpt("query", "gl2_message_id:" + ctx.event().fields().get("gl2_message_id"));
