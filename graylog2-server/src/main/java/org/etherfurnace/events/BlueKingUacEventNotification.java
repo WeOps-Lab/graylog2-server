@@ -126,6 +126,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         }
 
         JSONObject meta_info = JSONUtil.createObj();
+        meta_info.putOpt("streams", conf.streams());
         meta_info.putOpt("condition", condition);
         meta_info.putOpt("show_fields", ctx.event().fields().get("show_fields"));
         meta_info.putOpt("title", ctx.eventDefinition().get().title());
