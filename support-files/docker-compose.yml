@@ -5,12 +5,12 @@ services:
     image: "mongo:4.2"
     ports:
       - "27017:27017"
-    volumes:
-      - "mongoconfigdb:/data/configdb"
-      - "mongodb:/data/db"
+#    volumes:
+#      - "mongoconfigdb:/data/configdb"
+#      - "mongodb:/data/db"
 
   opensearch:
-    image: "opensearchproject/opensearch:1.1.0"
+    image: "docker-bkrepo.cwoa.net/ce1b09/weops-docker/opeanserch:1.1.0-ik"
     environment:
       - plugins.security.disabled=true
       - discovery.type=single-node
@@ -18,11 +18,8 @@ services:
       - action.auto_create_index=false
       - "OPENSEARCH_JAVA_OPTS=-Xms512m -Xmx512m"
     ports:
-      - "9200:9200"
-    volumes:
-      - "opensearch:/usr/share/opensearch/data"
+      - "19200:9200"
 
-volumes:
-  mongoconfigdb:
-  mongodb:
-  opensearch:
+#volumes:
+#  mongodb:
+#  opensearch:
