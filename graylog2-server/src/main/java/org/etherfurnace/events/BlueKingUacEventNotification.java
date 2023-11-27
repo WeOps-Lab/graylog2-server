@@ -85,6 +85,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         String bk_biz_name = ctx.event().fields().get("bk_biz_name");
         String bk_inst_id = ctx.event().fields().get("bk_inst_id");
         String bk_inst_name = ctx.event().fields().get("bk_inst_name");
+        String rule = ctx.event().fields().get("rule");
         String object = ctx.event().fields().get("object");
         String ip = ctx.event().fields().get("ip");
         String alarm_name = ctx.event().fields().get("alarm_name");
@@ -95,6 +96,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         jsonObject.putOpt("bk_biz_name", bk_biz_name);
         jsonObject.putOpt("bk_inst_id", bk_inst_id);
         jsonObject.putOpt("bk_inst_name", bk_inst_name);
+        jsonObject.putOpt("expansion_field_1", rule);
         jsonObject.putOpt("object", object);
         jsonObject.putOpt("ip", ip);
         jsonObject.putOpt("alarm_name", alarm_name);
