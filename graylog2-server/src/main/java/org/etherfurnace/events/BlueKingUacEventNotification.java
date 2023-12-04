@@ -2,6 +2,7 @@ package org.etherfurnace.events;
 
 import cn.hutool.http.HttpRequest;
 import cn.hutool.http.HttpResponse;
+import cn.hutool.json.JSONArray;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import com.google.common.collect.ImmutableList;
@@ -11,7 +12,6 @@ import org.graylog.events.processor.aggregation.AggregationEventProcessorConfig;
 import org.graylog2.plugin.MessageSummary;
 import org.graylog2.system.urlwhitelist.UrlWhitelistNotificationService;
 import org.graylog2.system.urlwhitelist.UrlWhitelistService;
-
 import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +20,8 @@ import javax.inject.Inject;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class BlueKingUacEventNotification implements EventNotification {
 
@@ -50,6 +52,22 @@ public class BlueKingUacEventNotification implements EventNotification {
         String level = levelMap.getOrDefault(priority, "remain");
         return level;
     }
+
+    public static JSONArray extractData (String eventMessage) {
+
+        JSONArray extractedData = JSONUtil.createArray();
+
+        // 使用正则表达式匹配提取 x(y)=num 的值
+        String regex = "\\w+\\(\\w+\\)=\\d+\\.\\d+";
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(eventMessage);
+        while (matcher.find()) {
+            extractedData.add(matcher.group());
+        }
+        return extractedData;
+    }
+
 
     @Override
     public void execute(EventNotificationContext ctx) throws TemporaryEventNotificationException, PermanentEventNotificationException {
@@ -132,6 +150,27 @@ public class BlueKingUacEventNotification implements EventNotification {
         meta_info.putOpt("condition", condition);
         meta_info.putOpt("show_fields", ctx.event().fields().get("show_fields"));
         meta_info.putOpt("title", ctx.eventDefinition().get().title());
+
+        JSONArray aggregatedData = extractData(ctx.event().message());
+
+        if (! aggregatedData.isEmpty()) {
+            JSONObject groupAggregationTable = JSONUtil.createObj();
+            for (Object element : aggregatedData) {
+                String[] splitResult = element.toString().split("=");
+                try {
+                    groupAggregationTable.putOpt(splitResult[0], splitResult[1]);
+                }catch (Exception e) {
+                    LOG.error("获取告警聚合数据失败！数据详情："+ element.toString());
+                }
+            }
+            for (Map.Entry<String, String> entry : ctx.event().groupByFields().entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                groupAggregationTable.putOpt(key, value);
+            }
+            meta_info.putOpt("group_aggregation_table", groupAggregationTable);
+        }
+
         jsonObject.putOpt("meta_info", meta_info.toString());
 
         HttpResponse response = HttpRequest.post(String.valueOf(httpUrl))
