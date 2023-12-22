@@ -119,7 +119,7 @@ public class BlueKingUacEventNotification implements EventNotification {
         jsonObject.putOpt("ip", ip);
         jsonObject.putOpt("alarm_name", alarm_name);
         jsonObject.putOpt("alarm_content", alarm_content);
-        jsonObject.putOpt("id", UUID.randomUUID());
+        jsonObject.putOpt("event_id", UUID.randomUUID());
 
         if (object == null) {
             jsonObject.putOpt("object", bk_inst_name);
