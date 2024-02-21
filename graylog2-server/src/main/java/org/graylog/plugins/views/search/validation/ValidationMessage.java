@@ -19,12 +19,10 @@ package org.graylog.plugins.views.search.validation;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
-import org.apache.lucene.queryparser.classic.ParseException;
 import org.graylog2.shared.utilities.ExceptionUtils;
 
 import javax.annotation.Nullable;
 import java.util.Locale;
-import java.util.Optional;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -68,7 +66,7 @@ public abstract class ValidationMessage {
         final ValidationMessage.Builder errorBuilder = builder(ValidationType.QUERY_PARSING_ERROR);
 
         final String rootCause = getErrorMessage(exception);
-        errorBuilder.errorMessage(String.format(Locale.ROOT, "Cannot parse query, cause: %s", rootCause));
+        errorBuilder.errorMessage(String.format(Locale.ROOT, "查询语句错误，原因是: %s", rootCause));
 
         final Matcher positionMatcher = regexPosition.matcher(input);
         if (positionMatcher.find()) {
@@ -86,7 +84,7 @@ public abstract class ValidationMessage {
         final String rootCause = ExceptionUtils.getRootCauseMessage(exception);
 
         if (rootCause.contains("Encountered \"<EOF>\"")) {
-            return "incomplete query, query ended unexpectedly";
+            return "查询语句不完整!";
         }
 
         return rootCause;
