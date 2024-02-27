@@ -4,9 +4,12 @@ import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableMap;
 import org.graylog2.audit.AuditActor;
 import org.graylog2.audit.AuditEventSender;
+import org.graylog2.database.NotFoundException;
 import org.graylog2.indexer.IndexSet;
 import org.graylog2.indexer.indexset.IndexSetConfig;
 import org.graylog2.indexer.indices.Indices;
+import org.graylog2.indexer.ranges.IndexRange;
+import org.graylog2.indexer.ranges.IndexRangeService;
 import org.graylog2.indexer.retention.strategies.AbstractIndexCountBasedRetentionStrategy;
 import org.graylog2.plugin.indexer.retention.RetentionStrategyConfig;
 import org.graylog2.plugin.system.NodeId;
@@ -28,16 +31,19 @@ public class DeleteAndBackupRetentionStrategy extends AbstractIndexCountBasedRet
     private final Indices indices;
     private final NodeId nodeId;
     private final AuditEventSender auditEventSender;
+    private final IndexRangeService indexRangeService;
 
     @Inject
     public DeleteAndBackupRetentionStrategy(Indices indices,
                                             ActivityWriter activityWriter,
                                             NodeId nodeId,
-                                            AuditEventSender auditEventSender) {
+                                            AuditEventSender auditEventSender,
+                                            IndexRangeService indexRangeService) {
         super(indices, activityWriter);
         this.indices = indices;
         this.nodeId = nodeId;
         this.auditEventSender = auditEventSender;
+        this.indexRangeService = indexRangeService;
     }
 
     @Override
@@ -51,13 +57,27 @@ public class DeleteAndBackupRetentionStrategy extends AbstractIndexCountBasedRet
     @Override
     protected void retain(List<String> indexNames, IndexSet indexSet) {
         for (String indexName : indexNames) {
-            LOG.info("backup Index:" + indexName);
+            // 过滤恢复的索引
+            if(indices.isReopened(indexName)){
+                continue;
+            }
+            // 获取索引的统计信息
+            String newIndexName = indexName;
+            try {
+                final IndexRange indexRange = indexRangeService.get(indexName);
+                newIndexName = newIndexName + "_" + indexRange.begin().getMillis() + "_" + indexRange.end().getMillis();
+
+            } catch (NotFoundException e) {
+                LOG.info("无法生成newIndexName！");
+            }
+
+            LOG.info("backup Index:" + newIndexName);
             final Stopwatch sw = Stopwatch.createStarted();
 
             IndexSetConfig indexSetConfig = indexSet.getConfig();
             RetentionStrategyConfig strategyConfig = indexSetConfig.retentionStrategy();
             DeleteAndBackupRetentionStrategyConfig config = (DeleteAndBackupRetentionStrategyConfig) strategyConfig;
-            indices.backup(indexName, config.backupPath());
+            indices.backup(newIndexName, config.backupPath());
 
             auditEventSender.success(AuditActor.system(nodeId), ES_INDEX_RETENTION_DELETE, ImmutableMap.of(
                     "index_name", indexName,
