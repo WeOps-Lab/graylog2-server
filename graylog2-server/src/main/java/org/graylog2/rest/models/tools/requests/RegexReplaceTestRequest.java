@@ -25,6 +25,8 @@ import org.graylog.autovalue.WithBeanGetter;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import static org.graylog2.utilities.ConvertString.convertToString;
+
 @JsonAutoDetect
 @AutoValue
 @WithBeanGetter
@@ -49,6 +51,7 @@ public abstract class RegexReplaceTestRequest {
                                                  @JsonProperty("regex") @NotEmpty String regex,
                                                  @JsonProperty("replacement") @NotNull String replacement,
                                                  @JsonProperty("replace_all") boolean replaceAll) {
-        return new AutoValue_RegexReplaceTestRequest(string, regex, replacement, replaceAll);
+        String stringData = convertToString(string);
+        return new AutoValue_RegexReplaceTestRequest(stringData, regex, replacement, replaceAll);
     }
 }

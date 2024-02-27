@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 import org.graylog.autovalue.WithBeanGetter;
 
+import static org.graylog2.utilities.ConvertString.convertToString;
+
 @JsonAutoDetect
 @AutoValue
 @WithBeanGetter
@@ -35,6 +37,7 @@ public abstract class RegexTestRequest {
     @JsonCreator
     public static RegexTestRequest create(@JsonProperty("string") String string,
                                           @JsonProperty("regex") String regex) {
-        return new AutoValue_RegexTestRequest(string, regex);
+        String stringData = convertToString(string);
+        return new AutoValue_RegexTestRequest(stringData, regex);
     }
 }

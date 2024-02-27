@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 import org.graylog.autovalue.WithBeanGetter;
 
+import static org.graylog2.utilities.ConvertString.convertToString;
+
 @JsonAutoDetect
 @AutoValue
 @WithBeanGetter
@@ -39,6 +41,7 @@ public abstract class SplitAndIndexTestRequest {
     public static SplitAndIndexTestRequest create(@JsonProperty("string") String string,
                                                   @JsonProperty("split_by") String splitBy,
                                                   @JsonProperty("index") int index) {
-        return new AutoValue_SplitAndIndexTestRequest(string, splitBy, index);
+        String stringData = convertToString(string);
+        return new AutoValue_SplitAndIndexTestRequest(stringData, splitBy, index);
     }
 }

@@ -39,6 +39,7 @@ public abstract class LookupTableTestRequest {
     @JsonCreator
     public static LookupTableTestRequest create(@JsonProperty("string") String string,
                                                 @JsonProperty("lookup_table_name") String lookupTableName) {
+
         return new AutoValue_LookupTableTestRequest(string, lookupTableName);
     }
 }

@@ -21,6 +21,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 
+import static org.graylog2.utilities.ConvertString.convertToString;
+
 @JsonAutoDetect
 @AutoValue
 public abstract class ContainsStringTestRequest {
@@ -33,6 +35,7 @@ public abstract class ContainsStringTestRequest {
     @JsonCreator
     public static ContainsStringTestRequest create(@JsonProperty("search_string") String searchString,
                                                    @JsonProperty("string") String string) {
-        return new AutoValue_ContainsStringTestRequest(searchString, string);
+        String stringData = convertToString(string);
+        return new AutoValue_ContainsStringTestRequest(searchString, stringData);
     }
 }

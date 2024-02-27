@@ -42,6 +42,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static com.codahale.metrics.MetricRegistry.name;
+import static org.graylog2.utilities.ConvertString.convertToString;
 
 public abstract class Extractor implements EmbeddedPersistable {
     private static final Logger LOG = LoggerFactory.getLogger(Extractor.class);
@@ -195,12 +196,13 @@ public abstract class Extractor implements EmbeddedPersistable {
             final String field;
             try (final Timer.Context ignored2 = conditionTimer.time()) {
                 // We can only work on Strings.
-                if (!(msg.getField(sourceField) instanceof String)) {
-                    conditionMissesCounter.inc();
-                    return;
-                }
+//                if (!(msg.getField(sourceField) instanceof String)) {
+//                    conditionMissesCounter.inc();
+//                    return;
+//                }
 
-                field = (String) msg.getField(sourceField);
+                Object fieldValue = msg.getField(sourceField);
+                field = convertToString(fieldValue);
 
                 // Decide if to extract at all.
                 if (conditionType.equals(ConditionType.STRING)) {

@@ -22,6 +22,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 import org.graylog.autovalue.WithBeanGetter;
 
+import static org.graylog2.utilities.ConvertString.convertToString;
+
+
 @JsonAutoDetect
 @AutoValue
 @WithBeanGetter
@@ -39,6 +42,7 @@ public abstract class SubstringTestRequest {
     public static SubstringTestRequest create(@JsonProperty("string") String string,
                                               @JsonProperty("start") int start,
                                               @JsonProperty("end") int end) {
-        return new AutoValue_SubstringTestRequest(string, start, end);
+        String stringData = convertToString(string);
+        return new AutoValue_SubstringTestRequest(stringData, start, end);
     }
 }

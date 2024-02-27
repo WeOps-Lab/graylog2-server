@@ -24,6 +24,8 @@ import org.graylog.autovalue.WithBeanGetter;
 
 import javax.validation.constraints.NotEmpty;
 
+import static org.graylog2.utilities.ConvertString.convertToString;
+
 @JsonAutoDetect
 @AutoValue
 @WithBeanGetter
@@ -64,7 +66,8 @@ public abstract class JsonTestRequest {
                                          @JsonProperty("replace_key_whitespace") boolean replaceKeyWhitespace,
                                          @JsonProperty("key_whitespace_replacement") String keyWhitespaceReplacement,
                                          @JsonProperty("key_prefix") String keyPrefix,
-                                         @JsonProperty("string") @NotEmpty String string) {
-        return new AutoValue_JsonTestRequest(flatten, listSeparator, keySeparator, kvSeparator, replaceKeyWhitespace, keyWhitespaceReplacement, keyPrefix, string);
+                                         @JsonProperty("string") @NotEmpty Object string) {
+        String stringData = convertToString(string);
+        return new AutoValue_JsonTestRequest(flatten, listSeparator, keySeparator, kvSeparator, replaceKeyWhitespace, keyWhitespaceReplacement, keyPrefix, stringData);
     }
 }

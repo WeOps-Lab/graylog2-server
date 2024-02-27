@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 import org.graylog.autovalue.WithBeanGetter;
 
+import static org.graylog2.utilities.ConvertString.convertToString;
+
 @JsonAutoDetect
 @AutoValue
 @WithBeanGetter
@@ -36,9 +38,11 @@ public abstract class GrokTestRequest {
     public abstract boolean namedCapturesOnly();
 
     @JsonCreator
-    public static GrokTestRequest create(@JsonProperty("string") String string,
+    public static GrokTestRequest create(@JsonProperty("string") Object string,
                                          @JsonProperty("pattern") String pattern,
                                          @JsonProperty("named_captures_only") boolean namedCapturesOnly) {
-        return new AutoValue_GrokTestRequest(string, pattern, namedCapturesOnly);
+
+        String stringData = convertToString(string);
+        return new AutoValue_GrokTestRequest(stringData, pattern, namedCapturesOnly);
     }
 }
