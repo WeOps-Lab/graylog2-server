@@ -4,9 +4,11 @@ import com.google.common.base.Stopwatch;
 import com.google.common.collect.ImmutableMap;
 import org.graylog2.audit.AuditActor;
 import org.graylog2.audit.AuditEventSender;
+import org.graylog2.database.NotFoundException;
 import org.graylog2.indexer.IndexSet;
 import org.graylog2.indexer.indexset.IndexSetConfig;
 import org.graylog2.indexer.indices.Indices;
+import org.graylog2.indexer.ranges.IndexRange;
 import org.graylog2.indexer.ranges.IndexRangeService;
 import org.graylog2.indexer.retention.strategies.AbstractIndexCountBasedRetentionStrategy;
 import org.graylog2.plugin.indexer.retention.RetentionStrategyConfig;
@@ -59,15 +61,15 @@ public class DeleteAndBackupRetentionStrategy extends AbstractIndexCountBasedRet
             if(indices.isReopened(indexName)){
                 continue;
             }
-//            // 获取索引的统计信息
-//            String newIndexName = indexName;
-//            try {
-//                final IndexRange indexRange = indexRangeService.get(indexName);
-//                newIndexName = newIndexName + "_" + indexRange.begin().getMillis() + "_" + indexRange.end().getMillis();
-//
-//            } catch (NotFoundException e) {
-//                LOG.info("无法生成newIndexName！");
-//            }
+            // 获取索引的统计信息
+            String newIndexName = indexName;
+            try {
+                final IndexRange indexRange = indexRangeService.get(indexName);
+                newIndexName = newIndexName + "_" + indexRange.begin().getMillis() + "_" + indexRange.end().getMillis();
+
+            } catch (NotFoundException e) {
+                LOG.info("无法生成newIndexName！");
+            }
 
             LOG.info("backup Index:" + indexName);
             final Stopwatch sw = Stopwatch.createStarted();
@@ -75,7 +77,7 @@ public class DeleteAndBackupRetentionStrategy extends AbstractIndexCountBasedRet
             IndexSetConfig indexSetConfig = indexSet.getConfig();
             RetentionStrategyConfig strategyConfig = indexSetConfig.retentionStrategy();
             DeleteAndBackupRetentionStrategyConfig config = (DeleteAndBackupRetentionStrategyConfig) strategyConfig;
-            indices.backup(indexName, config.backupPath());
+            indices.backup(indexName, newIndexName);
 
             auditEventSender.success(AuditActor.system(nodeId), ES_INDEX_RETENTION_DELETE, ImmutableMap.of(
                     "index_name", indexName,
