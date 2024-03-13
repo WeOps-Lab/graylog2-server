@@ -134,9 +134,10 @@ public class Indices {
     public void backup(String indexName, String location) {
         try {
             indicesAdapter.backup(indexName, location);
+            indicesAdapter.delete(indexName);
             eventBus.post(IndicesDeletedEvent.create(indexName));
         } catch (Exception e) {
-            LOG.error("Failed to backup index {}", indexName, e);
+            LOG.error("Failed to delete and backup index {}", indexName, e);
         }
     }
 

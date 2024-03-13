@@ -58,12 +58,13 @@ public class DeleteAndBackupRetentionStrategy extends AbstractIndexCountBasedRet
     protected void retain(List<String> indexNames, IndexSet indexSet) {
         for (String indexName : indexNames) {
             // 过滤恢复的索引
-            if(indices.isReopened(indexName)){
+            if (indices.isReopened(indexName)) {
                 continue;
             }
             // 获取索引的统计信息
             String newIndexName = indexName;
             try {
+                indexRangeService.calculateRange(indexName);
                 final IndexRange indexRange = indexRangeService.get(indexName);
                 newIndexName = newIndexName + "_" + indexRange.begin().getMillis() + "_" + indexRange.end().getMillis();
 
@@ -74,9 +75,9 @@ public class DeleteAndBackupRetentionStrategy extends AbstractIndexCountBasedRet
             LOG.info("backup Index:" + indexName);
             final Stopwatch sw = Stopwatch.createStarted();
 
-            IndexSetConfig indexSetConfig = indexSet.getConfig();
-            RetentionStrategyConfig strategyConfig = indexSetConfig.retentionStrategy();
-            DeleteAndBackupRetentionStrategyConfig config = (DeleteAndBackupRetentionStrategyConfig) strategyConfig;
+//            IndexSetConfig indexSetConfig = indexSet.getConfig();
+//            RetentionStrategyConfig strategyConfig = indexSetConfig.retentionStrategy();
+//            DeleteAndBackupRetentionStrategyConfig config = (DeleteAndBackupRetentionStrategyConfig) strategyConfig;
             indices.backup(indexName, newIndexName);
 
             auditEventSender.success(AuditActor.system(nodeId), ES_INDEX_RETENTION_DELETE, ImmutableMap.of(
