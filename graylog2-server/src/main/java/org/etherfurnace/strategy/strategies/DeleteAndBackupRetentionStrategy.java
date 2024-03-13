@@ -71,13 +71,13 @@ public class DeleteAndBackupRetentionStrategy extends AbstractIndexCountBasedRet
                 LOG.info("无法生成newIndexName！");
             }
 
-            LOG.info("backup Index:" + newIndexName);
+            LOG.info("backup Index:" + indexName);
             final Stopwatch sw = Stopwatch.createStarted();
 
             IndexSetConfig indexSetConfig = indexSet.getConfig();
             RetentionStrategyConfig strategyConfig = indexSetConfig.retentionStrategy();
             DeleteAndBackupRetentionStrategyConfig config = (DeleteAndBackupRetentionStrategyConfig) strategyConfig;
-            indices.backup(newIndexName, config.backupPath());
+            indices.backup(indexName, newIndexName);
 
             auditEventSender.success(AuditActor.system(nodeId), ES_INDEX_RETENTION_DELETE, ImmutableMap.of(
                     "index_name", indexName,
