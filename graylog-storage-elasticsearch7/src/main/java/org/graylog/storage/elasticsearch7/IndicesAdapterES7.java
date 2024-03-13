@@ -293,7 +293,7 @@ public class IndicesAdapterES7 implements IndicesAdapter {
             LOG.info("恢复成功 " + indexName);
         } catch (Exception e) {
             //打印恢复失败的索引,并记录异常
-            LOG.error("恢复失败 " + indexName, e);
+            throw new RuntimeException("恢复失败 " + indexName, e);
         }
     }
 
@@ -311,8 +311,7 @@ public class IndicesAdapterES7 implements IndicesAdapter {
             //打印成功备份的索引
             LOG.info("备份成功 " + indexName);
         } catch (Exception e) {
-            //打印备份失败的索引,并记录异常
-            LOG.error("备份失败 " + indexName, e);
+            throw new RuntimeException("备份失败 " + indexName, e);
         }
     }
 

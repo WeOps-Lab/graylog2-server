@@ -63,8 +63,8 @@ public abstract class AbstractIndexCountBasedRetentionStrategy implements Retent
 
         final Optional<Integer> maxIndices = getMaxNumberOfIndices(indexSet);
 
-        if (!maxIndices.isPresent()) {
-            LOG.warn("No retention strategy configuration found, not running index retention!");
+        if (!maxIndices.isPresent() || maxIndices.get() <= 0) {
+            LOG.warn("No retention strategy configuration found, not running index retention!IndexSet ({})", indexSet.getIndexPrefix());
             return;
         }
 
@@ -78,8 +78,9 @@ public abstract class AbstractIndexCountBasedRetentionStrategy implements Retent
         // We have more indices than the configured maximum! Remove as many as needed.
         final int removeCount = indexCount - maxIndices.get();
         final String msg = "Number of indices (" + indexCount + ") higher than limit (" + maxIndices.get() + "). " +
-                "Running retention for " + removeCount + " indices.";
+                "Running retention for " + removeCount + " indices.IndexSet (" + indexSet.getIndexPrefix() + ")";
         LOG.info(msg);
+
         activityWriter.write(new Activity(msg, IndexRetentionThread.class));
 
         runRetention(indexSet, deflectorIndices, removeCount);

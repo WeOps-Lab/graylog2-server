@@ -122,11 +122,22 @@ public class Indices {
     }
 
     public void restore(String indexName) {
-        indicesAdapter.restore(indexName);
+        try {
+            indicesAdapter.restore(indexName);
+            eventBus.post(IndicesReopenedEvent.create(indexName));
+        } catch (Exception e) {
+            LOG.error("Failed to restore index {}", indexName, e);
+        }
+
     }
 
     public void backup(String indexName, String location) {
-        indicesAdapter.backup(indexName, location);
+        try {
+            indicesAdapter.backup(indexName, location);
+            eventBus.post(IndicesDeletedEvent.create(indexName));
+        } catch (Exception e) {
+            LOG.error("Failed to backup index {}", indexName, e);
+        }
     }
 
     public long numberOfMessages(String indexName) throws IndexNotFoundException {
