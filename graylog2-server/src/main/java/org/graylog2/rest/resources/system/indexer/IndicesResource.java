@@ -203,16 +203,17 @@ public class IndicesResource extends RestResource {
     @ApiOperation(value = "Close an index. This will also trigger an index ranges rebuild job.")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiResponses(value = {
-        @ApiResponse(code = 403, message = "You cannot close the current deflector target index.")
+            @ApiResponse(code = 403, message = "You cannot close the current deflector target index.")
     })
     @AuditEvent(type = AuditEventTypes.ES_INDEX_CLOSE)
     public void close(@ApiParam(name = "index") @PathParam("index") @NotNull String index) throws TooManyAliasesException {
         checkPermission(RestPermissions.INDICES_CHANGESTATE, index);
-
-        if (!indexSetRegistry.isManagedIndex(index)) {
-            final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
-            LOG.info(msg);
-            throw new NotFoundException(msg);
+        if (!indices.isReopened(index)) {
+            if (!indexSetRegistry.isManagedIndex(index)) {
+                final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
+                LOG.info(msg);
+                throw new NotFoundException(msg);
+            }
         }
 
         if (indexSetRegistry.isCurrentWriteIndex(index)) {
@@ -228,16 +229,18 @@ public class IndicesResource extends RestResource {
     @ApiOperation(value = "Delete an index. This will also trigger an index ranges rebuild job.")
     @Produces(MediaType.APPLICATION_JSON)
     @ApiResponses(value = {
-        @ApiResponse(code = 403, message = "You cannot delete the current deflector target index.")
+            @ApiResponse(code = 403, message = "You cannot delete the current deflector target index.")
     })
     @AuditEvent(type = AuditEventTypes.ES_INDEX_DELETE)
     public void delete(@ApiParam(name = "index") @PathParam("index") @NotNull String index) throws TooManyAliasesException {
         checkPermission(RestPermissions.INDICES_DELETE, index);
 
-        if (!indexSetRegistry.isManagedIndex(index)) {
-            final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
-            LOG.info(msg);
-            throw new NotFoundException(msg);
+        if (!indices.isReopened(index)) {
+            if (!indexSetRegistry.isManagedIndex(index)) {
+                final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
+                LOG.info(msg);
+                throw new NotFoundException(msg);
+            }
         }
 
         if (indexSetRegistry.isCurrentWriteIndex(index)) {

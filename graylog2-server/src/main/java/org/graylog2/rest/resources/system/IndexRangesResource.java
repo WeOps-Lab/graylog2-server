@@ -18,11 +18,7 @@ package org.graylog2.rest.resources.system;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.common.collect.Lists;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.*;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.graylog2.audit.AuditEventTypes;
@@ -30,6 +26,7 @@ import org.graylog2.audit.jersey.AuditEvent;
 import org.graylog2.database.NotFoundException;
 import org.graylog2.indexer.IndexSet;
 import org.graylog2.indexer.IndexSetRegistry;
+import org.graylog2.indexer.indices.Indices;
 import org.graylog2.indexer.ranges.CreateNewSingleIndexRangeJob;
 import org.graylog2.indexer.ranges.IndexRange;
 import org.graylog2.indexer.ranges.IndexRangeService;
@@ -47,13 +44,7 @@ import org.slf4j.LoggerFactory;
 import javax.inject.Inject;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.ForbiddenException;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Collections;
@@ -74,9 +65,11 @@ public class IndexRangesResource extends RestResource {
     private final CreateNewSingleIndexRangeJob.Factory singleIndexRangeJobFactory;
     private final IndexSetRegistry indexSetRegistry;
     private final SystemJobManager systemJobManager;
+    private final Indices indices;
 
     @Inject
-    public IndexRangesResource(IndexRangeService indexRangeService,
+    public IndexRangesResource(Indices indices,
+                               IndexRangeService indexRangeService,
                                RebuildIndexRangesJob.Factory rebuildIndexRangesJobFactory,
                                CreateNewSingleIndexRangeJob.Factory singleIndexRangeJobFactory,
                                IndexSetRegistry indexSetRegistry,
@@ -86,6 +79,8 @@ public class IndexRangesResource extends RestResource {
         this.singleIndexRangeJobFactory = singleIndexRangeJobFactory;
         this.indexSetRegistry = indexSetRegistry;
         this.systemJobManager = systemJobManager;
+        this.indices = indices;
+
     }
 
     @GET
@@ -191,8 +186,10 @@ public class IndexRangesResource extends RestResource {
     public Response rebuildIndex(
             @ApiParam(name = "index", value = "The name of the Graylog-managed Elasticsearch index", required = true)
             @PathParam("index") @NotEmpty String index) {
-        if (!indexSetRegistry.isManagedIndex(index)) {
-            throw new BadRequestException(index + " is not a Graylog-managed Elasticsearch index.");
+        if (!indices.isReopened(index)) {
+            if (!indexSetRegistry.isManagedIndex(index)) {
+                throw new BadRequestException(index + " is not a Graylog-managed Elasticsearch index.");
+            }
         }
         checkPermission(RestPermissions.INDEXRANGES_REBUILD, index);
 
