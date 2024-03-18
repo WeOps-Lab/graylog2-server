@@ -208,13 +208,13 @@ public class IndicesResource extends RestResource {
     @AuditEvent(type = AuditEventTypes.ES_INDEX_CLOSE)
     public void close(@ApiParam(name = "index") @PathParam("index") @NotNull String index) throws TooManyAliasesException {
         checkPermission(RestPermissions.INDICES_CHANGESTATE, index);
-        if (!indices.isReopened(index)) {
-            if (!indexSetRegistry.isManagedIndex(index)) {
-                final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
-                LOG.info(msg);
-                throw new NotFoundException(msg);
-            }
-        }
+//        if (!indices.isReopened(index)) {
+//            if (!indexSetRegistry.isManagedIndex(index)) {
+//                final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
+//                LOG.info(msg);
+//                throw new NotFoundException(msg);
+//            }
+//        }
 
         if (indexSetRegistry.isCurrentWriteIndex(index)) {
             throw new ForbiddenException("The current deflector target index (" + index + ") cannot be closed");
@@ -235,13 +235,13 @@ public class IndicesResource extends RestResource {
     public void delete(@ApiParam(name = "index") @PathParam("index") @NotNull String index) throws TooManyAliasesException {
         checkPermission(RestPermissions.INDICES_DELETE, index);
 
-        if (!indices.isReopened(index)) {
-            if (!indexSetRegistry.isManagedIndex(index)) {
-                final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
-                LOG.info(msg);
-                throw new NotFoundException(msg);
-            }
-        }
+//        if (!indices.isReopened(index)) {
+//            if (!indexSetRegistry.isManagedIndex(index)) {
+//                final String msg = "Index [" + index + "] doesn't look like an index managed by Graylog.";
+//                LOG.info(msg);
+//                throw new NotFoundException(msg);
+//            }
+//        }
 
         if (indexSetRegistry.isCurrentWriteIndex(index)) {
             throw new ForbiddenException("The current deflector target index (" + index + ") cannot be deleted");

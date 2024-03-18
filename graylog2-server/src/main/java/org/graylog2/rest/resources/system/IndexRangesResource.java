@@ -186,11 +186,11 @@ public class IndexRangesResource extends RestResource {
     public Response rebuildIndex(
             @ApiParam(name = "index", value = "The name of the Graylog-managed Elasticsearch index", required = true)
             @PathParam("index") @NotEmpty String index) {
-        if (!indices.isReopened(index)) {
-            if (!indexSetRegistry.isManagedIndex(index)) {
-                throw new BadRequestException(index + " is not a Graylog-managed Elasticsearch index.");
-            }
-        }
+//        if (!indices.isReopened(index)) {
+//            if (!indexSetRegistry.isManagedIndex(index)) {
+//                throw new BadRequestException(index + " is not a Graylog-managed Elasticsearch index.");
+//            }
+//        }
         checkPermission(RestPermissions.INDEXRANGES_REBUILD, index);
 
         final SystemJob rebuildJob = singleIndexRangeJobFactory.create(indexSetRegistry.getAll(), index);
