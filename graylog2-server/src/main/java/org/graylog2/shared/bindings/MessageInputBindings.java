@@ -29,6 +29,7 @@ import org.graylog2.inputs.random.FakeHttpMessageInput;
 import org.graylog2.inputs.raw.amqp.RawAMQPInput;
 import org.graylog2.inputs.raw.kafka.KafkaBeatsInput;
 import org.graylog2.inputs.raw.kafka.KafkaJsonInput;
+import org.graylog2.inputs.raw.kafka.KafkaTelegrafInput;
 import org.graylog2.inputs.raw.kafka.RawKafkaInput;
 import org.graylog2.inputs.raw.tcp.RawTCPInput;
 import org.graylog2.inputs.raw.udp.RawUDPInput;
@@ -65,6 +66,7 @@ public class MessageInputBindings extends Graylog2Module {
         installInput(inputMapBinder, JsonPathInput.class, JsonPathInput.Factory.class);
         installInput(inputMapBinder, KafkaJsonInput.class, KafkaJsonInput.Factory.class);
         installInput(inputMapBinder, KafkaBeatsInput.class, KafkaBeatsInput.Factory.class);
+        installInput(inputMapBinder, KafkaTelegrafInput.class, KafkaTelegrafInput.Factory.class);
         install(new BeatsInputPluginModule());
     }
 }
