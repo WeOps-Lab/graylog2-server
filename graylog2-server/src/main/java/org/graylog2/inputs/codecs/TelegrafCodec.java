@@ -43,12 +43,13 @@ public class TelegrafCodec extends AbstractCodec {
         try {
             Map<String, Object> telegrafData = objectMapper.readValue(payload, Map.class);
             long timestamp = ((Number) telegrafData.get("timestamp")).longValue();
+            String name = telegrafData.get("name").toString();
             DateTime dateTime = new DateTime(timestamp * 1000); // Convert seconds to milliseconds
             Message message = new Message("-", null, dateTime);
 
             // Add telegraf_ prefix to all fields
             Map<String, Object> prefixedTelegrafData = new LinkedHashMap<>();
-            addPrefixToFields("telegraf_", telegrafData, prefixedTelegrafData);
+            addPrefixToFields("telegraf_" + name + "_", telegrafData, prefixedTelegrafData);
             message.addFields(prefixedTelegrafData);
 
             return message;
@@ -59,12 +60,16 @@ public class TelegrafCodec extends AbstractCodec {
 
     private void addPrefixToFields(String prefix, Map<String, Object> original, Map<String, Object> result) {
         for (Map.Entry<String, Object> entry : original.entrySet()) {
-            String newKey = prefix + entry.getKey();
+            StringBuilder newKey = new StringBuilder(prefix).append(entry.getKey());
             if (entry.getValue() instanceof Map) {
                 @SuppressWarnings("unchecked") Map<String, Object> nestedMap = (Map<String, Object>) entry.getValue();
-                addPrefixToFields(newKey + "_", nestedMap, result);
+                addPrefixToFields(newKey.append("_").toString(), nestedMap, result);
             } else {
-                result.put(newKey, entry.getValue());
+                if (entry.getValue() instanceof Number) {
+                    result.put(newKey.toString(), ((Number) entry.getValue()).doubleValue());
+                } else {
+                    result.put(newKey.toString(), entry.getValue());
+                }
             }
         }
     }
