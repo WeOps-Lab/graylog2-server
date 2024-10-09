@@ -19,6 +19,7 @@ package org.graylog.events.context;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.auto.value.AutoValue;
 import com.google.common.collect.ImmutableMap;
+import org.graylog.events.configuration.EventsConfigurationProvider;
 import org.graylog.events.notifications.EventNotificationExecutionJob;
 import org.graylog.events.processor.EventDefinitionDto;
 import org.graylog.events.processor.EventProcessorExecutionJob;
@@ -30,6 +31,8 @@ import org.graylog.scheduler.JobTriggerDto;
 import org.graylog.scheduler.JobTriggerStatus;
 import org.joda.time.DateTime;
 import org.mongojack.DBQuery;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import java.util.Collection;
@@ -48,6 +51,7 @@ import java.util.stream.Collectors;
 public class EventDefinitionContextService {
     private final DBJobDefinitionService jobDefinitionService;
     private final DBJobTriggerService jobTriggerService;
+    private static final Logger LOG = LoggerFactory.getLogger(EventDefinitionContextService.class);
 
     @Inject
     public EventDefinitionContextService(DBJobDefinitionService jobDefinitionService, DBJobTriggerService jobTriggerService) {
@@ -104,6 +108,7 @@ public class EventDefinitionContextService {
                 continue;
             }
             if (jobDefinitions.get(eventDefinition.id()).size() > 1) {
+                LOG.error("Multiple job definitions for event definition [{}]: {}", eventDefinition.id(), jobDefinitions.get(eventDefinition.id()));
                 throw new IllegalStateException("Cannot handle multiple job definitions for a single event definition");
             }
 
