@@ -100,6 +100,7 @@ import org.graylog2.rest.resources.tools.RegexTesterResource;
 import org.graylog2.rest.resources.tools.SplitAndIndexTesterResource;
 import org.graylog2.rest.resources.tools.SubstringTesterResource;
 import org.graylog2.rest.resources.users.UsersResource;
+import org.graylog2.rest.resources.tools.XMLTesterResource;
 
 public class RestResourcesModule extends Graylog2Module {
     @Override
@@ -215,6 +216,7 @@ public class RestResourcesModule extends Graylog2Module {
         addSystemRestResource(RegexTesterResource.class);
         addSystemRestResource(SplitAndIndexTesterResource.class);
         addSystemRestResource(SubstringTesterResource.class);
+        addSystemRestResource(XMLTesterResource.class);
     }
 
     private void addStreamsResources() {

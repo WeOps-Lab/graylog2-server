@@ -70,8 +70,8 @@ public abstract class Extractor implements EmbeddedPersistable {
         COPY_INPUT,
         GROK,
         JSON,
-        LOOKUP_TABLE;
-
+        LOOKUP_TABLE,
+        XML;
         /**
          * Just like {@link #valueOf(String)} but uses the upper case string and doesn't throw exceptions.
          *
