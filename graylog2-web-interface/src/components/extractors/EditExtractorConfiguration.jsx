@@ -27,6 +27,7 @@ import {
   SplitAndIndexExtractorConfiguration,
   SubstringExtractorConfiguration,
   LookupTableExtractorConfiguration,
+  XmlExtractorConfiguration
 } from 'components/extractors/extractors_configuration';
 import ExtractorUtils from 'util/ExtractorUtils';
 
@@ -115,6 +116,14 @@ class EditExtractorConfiguration extends React.Component {
                                              onExtractorPreviewLoad={this._onExtractorPreviewLoad} />
         );
 
+        break;
+      case ExtractorUtils.ExtractorTypes.XML:
+        extractorConfiguration = (
+          <XmlExtractorConfiguration configuration={this.props.configuration}
+                                     exampleMessage={this.props.exampleMessage}
+                                     onChange={this.props.onChange}
+                                     onExtractorPreviewLoad={this._onExtractorPreviewLoad} />
+        );
         break;
       default:
         console.warn(`不支持的提取器类型 ${this.props.extractorType}`);

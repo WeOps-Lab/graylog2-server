@@ -25,6 +25,7 @@ const ExtractorTypes = Object.freeze({
   SPLIT_AND_INDEX: 'split_and_index',
   SUBSTRING: 'substring',
   LOOKUP_TABLE: 'lookup_table',
+  XML: 'xml', // 新增 XML 类型
 });
 
 const ExtractorUtils = {
