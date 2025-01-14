@@ -1,44 +1,34 @@
 package org.graylog2.rest.models.tools.responses;
 
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.google.auto.value.AutoValue;
-import org.graylog.autovalue.WithBeanGetter;
 
-import javax.annotation.Nullable;
 import java.util.Map;
 
-@JsonAutoDetect
-@AutoValue
-@WithBeanGetter
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public abstract class XmlTesterResponse {
+public class XmlTesterResponse {
     @JsonProperty
-    public abstract boolean result();
+    private boolean result;
 
     @JsonProperty
-    @Nullable
-    public abstract Map<String, String> match();
+    private Map<String, String> matches;
 
     @JsonProperty
-    public abstract String xpath();
+    private String xpath;
 
     @JsonProperty
-    public abstract String xml();
+    private String xml;
 
     @JsonProperty
-    @Nullable
-    public abstract String errorMessage();
+    private String error_message;
 
-    @JsonCreator
-    public static XmlTesterResponse create(
-            @JsonProperty("result") boolean result,
-            @JsonProperty("match") @Nullable Map<String, String> match,
-            @JsonProperty("xpath") String xpath,
-            @JsonProperty("xml") String xml,
-            @JsonProperty("error_message") @Nullable String errorMessage) {
-        return new AutoValue_XmlTesterResponse(result, match, xpath, xml, errorMessage);
+    public static XmlTesterResponse create(boolean result, Map<String, String> matches, String xpath, String xml, String error) {
+        XmlTesterResponse response = new XmlTesterResponse();
+        response.result = result;
+        response.matches = matches;
+        response.xpath = xpath;
+        response.xml = xml;
+        response.error_message = error;
+        return response;
     }
+
+    // Getters and setters if required
 }
