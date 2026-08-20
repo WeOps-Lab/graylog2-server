@@ -75,18 +75,20 @@ public class DeleteAndBackupRetentionStrategy extends AbstractIndexCountBasedRet
             LOG.info("backup Index:" + indexName);
             final Stopwatch sw = Stopwatch.createStarted();
 
-//            IndexSetConfig indexSetConfig = indexSet.getConfig();
-//            RetentionStrategyConfig strategyConfig = indexSetConfig.retentionStrategy();
-//            DeleteAndBackupRetentionStrategyConfig config = (DeleteAndBackupRetentionStrategyConfig) strategyConfig;
-            indices.backup(indexName, newIndexName);
+            try {
+                indices.backup(indexName, newIndexName);
 
-            auditEventSender.success(AuditActor.system(nodeId), ES_INDEX_RETENTION_DELETE, ImmutableMap.of(
-                    "index_name", indexName,
-                    "retention_strategy", this.getClass().getCanonicalName()
-            ));
+                auditEventSender.success(AuditActor.system(nodeId), ES_INDEX_RETENTION_DELETE, ImmutableMap.of(
+                        "index_name", indexName,
+                        "retention_strategy", this.getClass().getCanonicalName()
+                ));
 
-            LOG.info("Finished index retention strategy [delete] for index <{}> in {}ms.", indexName,
-                    sw.stop().elapsed(TimeUnit.MILLISECONDS));
+                LOG.info("Finished index retention strategy [delete] for index <{}> in {}ms.", indexName,
+                        sw.stop().elapsed(TimeUnit.MILLISECONDS));
+            } catch (Exception e) {
+                LOG.error("Index retention strategy [delete] failed for index <{}> after {}ms.",
+                        indexName, sw.stop().elapsed(TimeUnit.MILLISECONDS), e);
+            }
         }
     }
 

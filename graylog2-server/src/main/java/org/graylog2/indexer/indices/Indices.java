@@ -138,6 +138,7 @@ public class Indices {
             eventBus.post(IndicesDeletedEvent.create(indexName));
         } catch (Exception e) {
             LOG.error("Failed to delete and backup index {}", indexName, e);
+            throw new ElasticsearchException("Failed to delete and backup index " + indexName, e);
         }
     }
 

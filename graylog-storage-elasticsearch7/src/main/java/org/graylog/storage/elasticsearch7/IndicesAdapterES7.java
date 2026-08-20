@@ -29,7 +29,10 @@ import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.create.CreateSnapshotRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.create.CreateSnapshotRequestBuilder;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.get.GetSnapshotsRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.get.GetSnapshotsResponse;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.cluster.snapshots.restore.RestoreSnapshotRequest;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.snapshots.SnapshotInfo;
+import org.graylog.shaded.elasticsearch7.org.elasticsearch.snapshots.SnapshotState;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.indices.alias.IndicesAliasesRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.indices.alias.get.GetAliasesRequest;
 import org.graylog.shaded.elasticsearch7.org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -299,8 +302,13 @@ public class IndicesAdapterES7 implements IndicesAdapter {
 
     @Override
     public void backup(String indexName, String location) {
+        final String repository = "datainsight";
+        if (hasReusableSuccessfulSnapshot(repository, indexName, location)) {
+            return;
+        }
+
         CreateSnapshotRequest request = new CreateSnapshotRequest();
-        request.repository("datainsight");
+        request.repository(repository);
         request.snapshot(location);
         request.indices(indexName);
         request.includeGlobalState(false);
@@ -308,11 +316,43 @@ public class IndicesAdapterES7 implements IndicesAdapter {
         request.waitForCompletion(true);
         try {
             client.execute((restHighLevelClient, requestOptions) -> restHighLevelClient.snapshot().create(request, requestOptions));
-            //打印成功备份的索引
             LOG.info("备份成功 " + indexName);
         } catch (Exception e) {
             throw new RuntimeException("备份失败 " + indexName, e);
         }
+    }
+
+    /**
+     * Returns true when an existing snapshot can be reused (skip create).
+     * Throws when a same-named snapshot exists but is not safe to reuse (do not delete source index).
+     */
+    private boolean hasReusableSuccessfulSnapshot(String repository, String indexName, String snapshotName) {
+        final GetSnapshotsRequest getRequest = new GetSnapshotsRequest(repository, new String[]{snapshotName});
+        getRequest.ignoreUnavailable(true);
+
+        final GetSnapshotsResponse getResponse = client.execute(
+                (restHighLevelClient, requestOptions) -> restHighLevelClient.snapshot().get(getRequest, requestOptions),
+                "Unable to check existing snapshot " + snapshotName);
+
+        final List<SnapshotInfo> snapshots = getResponse.getSnapshots();
+        if (snapshots.isEmpty()) {
+            return false;
+        }
+
+        final SnapshotInfo snapshot = snapshots.get(0);
+        final SnapshotState state = snapshot.state();
+        if (state == SnapshotState.SUCCESS
+                && snapshot.indices().contains(indexName)
+                && snapshot.failedShards() == 0) {
+            LOG.info("复用已有成功快照 {} for index {}", snapshotName, indexName);
+            return true;
+        }
+        if (state == SnapshotState.IN_PROGRESS) {
+            throw new RuntimeException("Snapshot <" + snapshotName + "> is still in progress; retry later");
+        }
+        throw new RuntimeException("Snapshot <" + snapshotName + "> is incomplete (state=" + state
+                + ", failedShards=" + snapshot.failedShards()
+                + "); source index will not be deleted");
     }
 
     @Override
